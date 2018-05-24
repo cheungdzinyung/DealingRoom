@@ -3,6 +3,9 @@
  
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/google/skia/infra/config.svg?style=plastic)
 
+![GitHub issues](https://img.shields.io/github/issues-raw/badges/shields.svg)
+
+
 
 ## May 23, 2018 
 ## v0.1 
