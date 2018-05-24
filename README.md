@@ -1,11 +1,7 @@
  # BarExchange
  Capstone project (Cohort 6) Ivan, Judith, Harrison, Andrew
  
-![GitHub last commit (branch)](https://img.shields.io/github/last-commit/google/skia/infra/config.svg?style=plastic)
-
-![GitHub issues](https://img.shields.io/github/issues-raw/badges/shields.svg)
-
-
+![Frontend Framework](https://img.shields.io/badge/Frontend%20Framework-React-blue.svg)
 
 ## May 23, 2018 
 ## v0.1 
