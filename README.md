@@ -45,6 +45,7 @@ May 24 | database | migration, seeding files
 May 25 | Tasks List (spreadsheet)
 May 28 | Tasks List added in trello
 May 28 | READme update
+May 29 | Split folders into frontend and backend
 
 
 ## Deployment
