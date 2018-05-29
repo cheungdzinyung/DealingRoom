@@ -37,16 +37,12 @@ exports.up = function(knex, Promise) {
       });
     })
     .then(() => {
-      return knex.schema.createTable("items", items => {
-        items
+      return knex.schema.createTable("categories", categories => {
+        categories
           .increments()
           .unsigned()
           .primary();
-        items.string("itemName");
-        items.integer("itemStock");
-        items.decimal("minimumPrice");
-        items.decimal("currentPrice");
-        items.enum("category", [
+        categories.enum("categoryName", [
           "beer",
           "cocktail",
           "redWine",
@@ -56,14 +52,34 @@ exports.up = function(knex, Promise) {
           "whiskey",
           "gin",
           "rum",
-          "brandy", 
+          "brandy",
           "non-alcoholic",
           "snack",
           "main",
           "dessert"
         ]);
+        categories.text("categoryPhoto");
+        categories.boolean("isActive");
+      });
+    })
+    .then(() => {
+      return knex.schema.createTable("items", items => {
+        items
+          .increments()
+          .unsigned()
+          .primary();
+        items.string("itemName");
+        items.integer("itemStock").notNull();
+        items
+          .integer("categories_id")
+          .unsigned()
+          .notNull();
+        items.foreign("categories_id").references("categories.id");
+        items.decimal("minimumPrice");
+        items.decimal("currentPrice");
         items.text("itemPhoto");
         items.text("itemDescription");
+        items.boolean("isSpecial");
         items.boolean("isActive");
       });
     })
@@ -116,6 +132,7 @@ exports.down = function(knex, Promise) {
     .dropTable("itemsLog")
     .then(() => knex.schema.dropTable("orders_items"))
     .then(() => knex.schema.dropTable("items"))
+    .then(() => knex.schema.dropTable("categories"))
     .then(() => knex.schema.dropTable("orders"))
     .then(() => knex.schema.dropTable("users"));
 };
