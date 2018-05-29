@@ -9,15 +9,13 @@ State the mission of the web app here!
 
  CAPSTONE PROJECT (Cohort 6) : ![GitHub Contributor](https://img.shields.io/badge/GitHub%20Contributor-4-green.svg)
 
-<div style="text-align:center">
-    <img src ="img/Ivan.png" alt-text="ivan"/> 
-    <img src ="img/Andrew.png" alt-text="andrew"/> 
-    <img src ="img/Harrison.png" alt-text="harisson"/> 
-    <img src ="img/Judith.png" alt-text="judith"/> 
-</div>
+  [Ivan Oung](https://github.com/ivanoung) 
 
+  [Andrew Cheung](https://github.com/cheungdzinyung) 
 
- : Ivan, Andrew, Harrison, Judith (personal link to be added)
+  [Harisson Chan](https://github.com/harrixon) 
+
+  [Judith Curtit](https://github.com/judithcurtit)
 
 
 ## Tools
@@ -33,7 +31,10 @@ There are things you need to install for the project. Follow below instructions 
 ```
 yarn install
 ```
+## Project at a glance
 
+
+![UI flow](img/UI-flow.png) 
 
 ## Project Update Log
 
