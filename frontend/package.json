@@ -1,16 +1,8 @@
 {
-  "name": "barexchange",
+  "name": "dealingroom-frontend",
   "version": "0.1.0",
-  "repository": "git@github.com:cheungdzinyung/BarExchange.git",
-  "author": "Andrew Cheung, Harrison Chan, Ivan Oung, Judith Curtit",
-  "license": "MIT",
   "private": true,
   "dependencies": {
-    "@types/knex": "^0.14.14",
-    "@types/pg": "^7.4.9",
-    "dotenv": "^5.0.1",
-    "knex": "^0.14.6",
-    "pg": "^7.4.3",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-scripts": "1.1.4"
@@ -20,5 +12,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "main": "index.js",
+  "license": "MIT"
 }
