@@ -79,6 +79,7 @@ exports.up = function(knex, Promise) {
         items.decimal("currentPrice");
         items.text("itemPhoto");
         items.text("itemDescription");
+        items.boolean("isSpecial");
         items.boolean("isActive");
       });
     })
