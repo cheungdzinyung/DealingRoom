@@ -10,10 +10,10 @@ State the mission of the web app here!
  CAPSTONE PROJECT (Cohort 6) : ![GitHub Contributor](https://img.shields.io/badge/GitHub%20Contributor-4-green.svg)
 
 <div style="text-align:center">
-    <img src ="public/img/Ivan.png" alt-text="ivan"/> 
-    <img src ="public/img/Andrew.png" alt-text="andrew"/> 
-    <img src ="public/img/Harrison.png" alt-text="harisson"/> 
-    <img src ="public/img/Judith.png" alt-text="judith"/> 
+    <img src ="img/Ivan.png" alt-text="ivan"/> 
+    <img src ="img/Andrew.png" alt-text="andrew"/> 
+    <img src ="img/Harrison.png" alt-text="harisson"/> 
+    <img src ="img/Judith.png" alt-text="judith"/> 
 </div>
 
 
