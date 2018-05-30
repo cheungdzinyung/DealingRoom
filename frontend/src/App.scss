@@ -16,9 +16,26 @@ $bgc-tinted: hsla(255, 4%, 18%, .5  );
     position: absolute;
     top: 60%;
     width: 80%;
+    display: grid;
+
     
     input{
       width: 40%;
+    }
+    #id{
+      grid-area: id;
+    }
+    #password{
+      grid-area: password;
+    }
+    #submit{
+      grid-area: submit;
+    }
+    #google{
+
+    }
+    #facebook{
+      
     }
   }
 }
