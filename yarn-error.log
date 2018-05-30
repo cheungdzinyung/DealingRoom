@@ -1,0 +1,36 @@
+Arguments: 
+  /usr/bin/node /home/ivanoung/.yarn/bin/yarn.js init
+
+PATH: 
+  /home/ivanoung/bin:/home/ivanoung/.local/bin:/home/ivanoung/.yarn/bin:/home/ivanoung/.config/yarn/global/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Windows/System32:/mnt/c/Windows:/mnt/c/Windows/System32/wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0:/mnt/c/Program Files/nodejs:/mnt/c/Program Files (x86)/Yarn/bin:/mnt/c/Users/People/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/People/AppData/Local/Programs/Git/cmd:/mnt/c/Users/People/AppData/Roaming/npm:/mnt/c/Users/People/AppData/Local/GitHubDesktop/bin:/mnt/c/Users/People/AppData/Local/Yarn/bin:/mnt/c/Users/People/AppData/Local/hyper/app-2.0.0/resources/bin:/snap/bin
+
+Yarn version: 
+  1.6.0
+
+Node version: 
+  9.9.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (/home/ivanoung/.yarn/lib/cli.js:129516:13)
+      at Interface.emit (events.js:180:13)
+      at Interface._ttyWrite (readline.js:783:16)
+      at ReadStream.onkeypress (readline.js:163:10)
+      at ReadStream.emit (events.js:180:13)
+      at emitKeys (internal/readline.js:420:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1019:36)
+      at ReadStream.emit (events.js:180:13)
+      at addChunk (_stream_readable.js:269:12)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

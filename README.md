@@ -1,5 +1,11 @@
+<span style="display:block;text-align:center">
+
+![DealingRoom Temporary Logo](img/DealingRoom.png)   
+
+</span>
+  
   <div style="text-align:center">
-DEALING ROOM LOGO
+DEALING ROOM TEMP LOGO
  </div> 
  
  
@@ -9,15 +15,13 @@ State the mission of the web app here!
 
  CAPSTONE PROJECT (Cohort 6) : ![GitHub Contributor](https://img.shields.io/badge/GitHub%20Contributor-4-green.svg)
 
-<div style="text-align:center">
-    <img src ="img/Ivan.png" alt-text="ivan"/> 
-    <img src ="img/Andrew.png" alt-text="andrew"/> 
-    <img src ="img/Harrison.png" alt-text="harisson"/> 
-    <img src ="img/Judith.png" alt-text="judith"/> 
-</div>
+  [Ivan Oung](https://github.com/ivanoung) 
 
+  [Andrew Cheung](https://github.com/cheungdzinyung) 
 
- : Ivan, Andrew, Harrison, Judith (personal link to be added)
+  [Harisson Chan](https://github.com/harrixon) 
+
+  [Judith Curtit](https://github.com/judithcurtit)
 
 
 ## Tools
@@ -33,7 +37,10 @@ There are things you need to install for the project. Follow below instructions 
 ```
 yarn install
 ```
+## Project at a glance
 
+
+![UI flow](img/UI-flow.png) 
 
 ## Project Update Log
 
@@ -46,6 +53,10 @@ May 25 | Tasks List (spreadsheet)
 May 28 | Tasks List added in trello
 May 28 | READme update
 May 29 | Split folders into frontend and backend
+May 29 | React Routers
+May 29 | API routes | definition
+May 30 | README update | front-end flow
+May 30 | Routes | Description
 
 
 ## Deployment
@@ -64,4 +75,6 @@ Please feel free to contact us if you're interested in contributing!
 
 ### Pending Features
 * Additional payment methods
+* Facebook Login
+* Tests case
 
