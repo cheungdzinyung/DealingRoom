@@ -1,41 +1,57 @@
-$bgc-tinted: hsla(255, 4%, 18%, .5  );
+$bgc-tinted: hsla(255, 4%, 18%, .5);
 .container {
-  h1{
+  h1 {
     margin: 0;
   }
   text-align: center;
   width: 100vw;
   height: 100vh;
-  background-image: linear-gradient($bgc-tinted, $bgc-tinted), url("./images/landingpage.jpg");
+  background-image: linear-gradient($bgc-tinted, $bgc-tinted),
+  url("./images/landingpage.jpg");
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-attachment: fixed;
   position: relative;
-  .login-grid{
+  .login-grid {
     position: absolute;
-    top: 60%;
-    width: 80%;
+    top: 55%;
+    left: 7.5%;
+    width: 70%;
+    height: 22%;
     display: grid;
-
+    grid-template-columns: repeat(5, 20%);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas: "id id id id submit" "pw pw pw pw submit" "google google google facebook facebook";
+    grid-gap: 5%;
     
-    input{
-      width: 40%;
+    input {
+      border-radius: 5px;
+      width: 100%;
+      background-color: rgba(141, 141, 141, 0.95);
+      color: #E9DBCC;
     }
-    #id{
+
+    div{
+      border-radius: 5px;
+    }
+    #id {
       grid-area: id;
     }
-    #password{
-      grid-area: password;
+    #password {
+      grid-area: pw;
     }
-    #submit{
+    #submit {
       grid-area: submit;
+      background-color: rgba(252, 178, 75, 0.97);
     }
-    #google{
-
+    #google {
+      grid-area: google;
+      background-color: white;
     }
-    #facebook{
-      
+    #facebook {
+      grid-area: facebook;
+      background-color: blue;
     }
   }
 }
