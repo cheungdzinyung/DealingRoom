@@ -11,7 +11,7 @@ exports.up = function(knex, Promise) {
       users.text("userPhoto");
       users.text("facebookToken");
       users.enum("role", ["bartedner", "server", "manager", "customer"]).notNull();
-      users.boolean("isActive").notNull();
+      users.boolean("isActive").defaultTo(true).notNull();
     })
     .then(() => {
       return knex.schema.createTable("orders", orders => {
@@ -59,7 +59,7 @@ exports.up = function(knex, Promise) {
           "dessert"
         ]);
         categories.text("categoryPhoto");
-        categories.boolean("isActive"), notNull();
+        categories.boolean("isActive").defaultTo(true).notNull();
       });
     })
     .then(() => {
@@ -79,8 +79,8 @@ exports.up = function(knex, Promise) {
         items.decimal("currentPrice");
         items.text("itemPhoto");
         items.text("itemDescription");
-        items.boolean("isSpecial").notNull();
-        items.boolean("isActive").notNull();
+        items.boolean("isSpecial").defaultTo(false).notNull();
+        items.boolean("isActive").defaultTo(true).notNull();
       });
     })
     .then(() => {
