@@ -5,13 +5,13 @@ exports.up = function(knex, Promise) {
         .increments("id")
         .unsigned()
         .primary();
-      users.string("username").notNull();
-      users.string("password").notNull();
+      users.string("username");
+      users.string("password");
       users.string("displayName");
       users.text("userPhoto");
-      users.text("facebookId");
-      users.enum("role", ["bartedner", "server", "manager", "customer"]);
-      users.boolean("isActive");
+      users.text("facebookToken");
+      users.enum("role", ["bartedner", "server", "manager", "customer"]).notNull();
+      users.boolean("isActive").defaultTo(true).notNull();
     })
     .then(() => {
       return knex.schema.createTable("orders", orders => {
@@ -59,7 +59,7 @@ exports.up = function(knex, Promise) {
           "dessert"
         ]);
         categories.text("categoryPhoto");
-        categories.boolean("isActive");
+        categories.boolean("isActive").defaultTo(true).notNull();
       });
     })
     .then(() => {
@@ -79,8 +79,8 @@ exports.up = function(knex, Promise) {
         items.decimal("currentPrice");
         items.text("itemPhoto");
         items.text("itemDescription");
-        items.boolean("isSpecial");
-        items.boolean("isActive");
+        items.boolean("isSpecial").defaultTo(false).notNull();
+        items.boolean("isActive").defaultTo(true).notNull();
       });
     })
     .then(() => {
@@ -99,6 +99,7 @@ exports.up = function(knex, Promise) {
           .unsigned()
           .notNull();
         ordersItems.foreign("items_id").references("items.id");
+        ordersItems.decimal("purchasePrice")
         ordersItems
           .enum("ice", ["extra", "normal", "without"])
           .defaultTo("normal");
