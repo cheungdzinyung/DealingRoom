@@ -1,5 +1,11 @@
+<span style="display:block;text-align:center">
+
+![DealingRoom Temporary Logo](img/DealingRoom.png)   
+
+</span>
+  
   <div style="text-align:center">
-DEALING ROOM LOGO
+DEALING ROOM TEMP LOGO
  </div> 
  
  
@@ -34,7 +40,7 @@ yarn install
 ## Project at a glance
 
 
-![UI flow](../img/UI-flow.png) 
+![UI flow](img/UI-flow.png) 
 
 ## Project Update Log
 
@@ -47,6 +53,10 @@ May 25 | Tasks List (spreadsheet)
 May 28 | Tasks List added in trello
 May 28 | READme update
 May 29 | Split folders into frontend and backend
+May 29 | React Routers
+May 29 | API routes | definition
+May 30 | README update | front-end flow
+May 30 | Routes | Description
 
 
 ## Deployment
@@ -65,4 +75,6 @@ Please feel free to contact us if you're interested in contributing!
 
 ### Pending Features
 * Additional payment methods
+* Facebook Login
+* Tests case
 
