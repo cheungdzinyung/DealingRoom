@@ -2,10 +2,11 @@ FORMAT: 1A
 HOST: http://www.dealingroom.live
 
 # Dealing Room
-Dealing Room is a simple API allowing users to obtain information from the Dealing Room database.
+Dealing Room is a simple RESTful API allowing users to obtain information from the Dealing Room database.
 
 ## %5B/api/users/:userid%5D [/api/users/:userid]
 ### Obtaining single user's information  [GET]
+A single user's information can be obtained through this route using the user's id. The response is returned in JSON format along with a 200 status code. 
 + Response 200 (application/json)
 
         {
@@ -17,6 +18,7 @@ Dealing Room is a simple API allowing users to obtain information from the Deali
         }
         
 ### Editing single user's information  [PUT]
+User's infromation can be edited through this route using the user's id. Users cannot be deleted but can be made inactive. A 201 status will be returned if changes were successful. 
 + Request (application/json)
 
         {
@@ -32,14 +34,16 @@ Dealing Room is a simple API allowing users to obtain information from the Deali
 
 ## %5B/api/users%5D [/api/users]
 ### Adding new user [POST]
-You can add additional users into the database using this action. It takes a JSON
-object containing:
-- username
-- password
-- displayName (optional)
-- userPhoto (optional)
-- FB accessToken (if Facebook login is used)
-- role (bartender, server, manager or customer)
+Additional users can be added into the database using this action. It takes a JSON
+object containing: 
+>- username
+>- password
+>- displayName (optional)
+>- userPhoto (optional)
+>- FB accessToken (if Facebook login is used)
+>- role (bartender, server, manager or customer)
+
+A status of 201 is returned upon successful insertion along with a JSON containing the user's id and username. 
 
 + Request (application/json)
 
@@ -60,6 +64,7 @@ object containing:
 
 ## %5B/api/items/:itemid%5D [/api/items/:itemid]
 ### Obtaining single item's information  [GET]
+A single item's information can be obtained through this route using the item id. The response is returned in JSON format along with a 200 status code. 
 + Response 200 (application/json)
 
         {
@@ -74,6 +79,7 @@ object containing:
         }
         
 ### Editing single item's information  [PUT]
+Item's infromation can be edited through this route using the item's id. Items cannot be deleted but can be made inactive. A 201 status will be returned if changes were successful. 
 + Request (application/json)
 
         {
@@ -92,6 +98,7 @@ object containing:
 
 ## %5Bapi/items%5D [/api/items]
 ### Obtaining all item's information  [GET]
+All items information can be obtained through this route. The response is returned in JSON format along with a 200 status code. 
 + Response 200 (application/json)
 
         [
@@ -190,13 +197,15 @@ object containing:
         ]
 
 ### Adding new item [POST]
-You can add additional items into the database using this action. It takes a JSON
+Additional items can be added into the database using this action. It takes a JSON
 object containing:
-- itemName
-- itemStock
-- minimumPrice
-- itemPhoto
-- itemDescription
+>- itemName
+>- itemStock
+>- minimumPrice
+>- itemPhoto (optional)
+>- itemDescription (optional)
+
+A status of 201 is returned upon successful insertion along with a JSON containing the item's id and itemName. 
 
 + Request (application/json)
 
@@ -208,10 +217,16 @@ object containing:
             "itemDescription": "100% Barley malt, choice hops and pure water give this brew unsurpassed clarity."
         }
 
-+ Response 201
++ Response 201 (application/json)
+
+        {
+            "itemName": "Heineken"
+            "items.id": 2
+        }
 
 ## %5Bapi/items/?categories=""%5D [/api/items/?categories=""]
 ### Obtaining all item's information within a category [GET]
+All items information within a category can be obtained through this route. The response is returned in JSON format along with a 200 status code. 
 + Response 200 (application/json)
 
         [
@@ -261,6 +276,7 @@ object containing:
     
 ## %5Bapi/orders/:orderid%5D [/api/orders/:orderid]
 ### Retreiving order information by order id [GET]
+A single order's information can be obtained through this route using the order's id. The response is returned in JSON format along with a 200 status code. 
 + Response 200 (application/json)
 
         {
@@ -300,6 +316,7 @@ Currently reserved for updating status of orders or to delete orders.
 
 ## %5Bapi/orders/:userid%5D [/api/orders/:userid]
 ### Retreiving order information by user id [GET]
+ALL orders information by one user can be obtained through this route using the user's id. The response is returned in JSON format along with a 200 status code. 
 + Response 200 (application/json)
 
         {
@@ -340,6 +357,20 @@ Currently reserved for updating status of orders or to delete orders.
         }
 
 ### Adding order by user id [POST]
+Additional order can be added into the database using this action. It takes a JSON
+object containing: 
+>- users.id
+>- userName (optional)
+>- displayName (optional)
+>- table 
+>- status
+>- itemName
+>- ice (optional)
+>- sweetness (optional)
+>- garnish (optional)
+
+A status of 201 is returned upon successful insertion along with a JSON containing the user's id and order id. 
+
 + Request (application/json)
 
         {
