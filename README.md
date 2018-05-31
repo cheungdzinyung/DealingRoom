@@ -57,6 +57,7 @@ May 29 | React Routers
 May 29 | API routes | definition
 May 30 | README update | front-end flow
 May 30 | Routes | Description
+May 31 | Blueprint UI | Scss implementation
 
 
 ## Deployment

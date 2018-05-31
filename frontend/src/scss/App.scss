@@ -1,0 +1,52 @@
+$bgc-tinted: hsla(255, 4%, 18%, .5);
+@import "~@blueprintjs/core/lib/css/blueprint.css";
+@import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,500|Proza+Libre:400,500');
+
+
+
+$font-color-dark : rgba(22, 25, 23, .85);
+$font-color-light: #E9DBCC;
+html {font-size: 1em;}
+
+body {
+  background-color: white;
+
+  font-weight: 400;
+  line-height: 1.45;
+  color: $font-color-light;
+}
+
+p {margin-bottom: 1.3em;}
+
+h1, h2, h3, h4 {
+  margin: 1.414em 0 0.5em;
+  font-weight: inherit;
+  line-height: 1.2;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 3.998em;
+}
+
+h2 {font-size: 2.827em;}
+
+h3 {font-size: 1.999em;}
+
+h4 {font-size: 1.414em;}
+
+span{
+  font-family: 'Proza Libre', sans-serif;
+  font-weight: 400;
+  font-size: 1em;
+  color: $font-color-dark;
+}
+
+small, .font_small {font-size: 0.707em;}
+
+
+@import 'login';
+@import 'profile';
