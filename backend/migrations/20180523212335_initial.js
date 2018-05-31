@@ -47,6 +47,7 @@ exports.up = function(knex, Promise) {
           "cocktail",
           "redWine",
           "whiteWine",
+          "champange",
           "vodka",
           "tequila",
           "whiskey",
