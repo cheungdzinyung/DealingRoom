@@ -1,6 +1,6 @@
 import * as React from 'react';
-import './App.scss';
 import Login from './components/login';
+import './scss/App.scss';
 
 class App extends React.Component {
   public render() {
