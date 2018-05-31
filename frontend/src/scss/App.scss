@@ -4,6 +4,9 @@ $bgc-tinted: hsla(255, 4%, 18%, .5);
 @import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,500|Proza+Libre:400,500');
 
 
+
+$font-color-dark : rgba(22, 25, 23, .85);
+$font-color-light: #E9DBCC;
 html {font-size: 1em;}
 
 body {
@@ -11,7 +14,7 @@ body {
 
   font-weight: 400;
   line-height: 1.45;
-  color: #333;
+  color: $font-color-light;
 }
 
 p {margin-bottom: 1.3em;}
@@ -35,23 +38,15 @@ h3 {font-size: 1.999em;}
 
 h4 {font-size: 1.414em;}
 
+span{
+  font-family: 'Proza Libre', sans-serif;
+  font-weight: 400;
+  font-size: 1em;
+  color: $font-color-dark;
+}
+
 small, .font_small {font-size: 0.707em;}
 
 
-
-.container {
-
-
-
-  text-align: center;
-  width: 100vw;
-  height: 100vh;
-  background-image: linear-gradient($bgc-tinted, $bgc-tinted),
-  url("../images/landingpage.jpg");
-  background-size: cover;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  position: relative;
-  @import 'login';
-}
+@import 'login';
+@import 'profile';
