@@ -1,13 +1,16 @@
 import * as React from "react";
 import Usermenu from "../components/usermenu";
+import Banner from './topbanner'
 
-export default class Profile extends React.Component {
+export default class Profile extends React.Component<{ header: string }> {
+  constructor(props:{header: string}){
+    super(props);
+  }
   public render() {
     return (
+
       <div className="userInterface">
-        <div className="top-content">
-          <h1>Hi</h1>
-        </div>
+        <Banner header="Profile" />
         <Usermenu />
       </div>
     );
