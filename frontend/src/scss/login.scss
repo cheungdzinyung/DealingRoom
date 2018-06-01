@@ -1,0 +1,51 @@
+.login-container {
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient($bgc-tinted, $bgc-tinted), url("../images/landingpage.jpg");
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+    .login-grid {
+        position: absolute;
+        top: 55%;
+        left: 7.5%;
+        width: 70%;
+        height: 22%;
+        display: grid;
+        grid-template-columns: repeat(5, 20%);
+        grid-template-rows: repeat(3, 1fr);
+        grid-template-areas: "un un un un submit" "pw pw pw pw submit" "google google google facebook facebook";
+        grid-gap: 5%;
+        input {
+            border-radius: 5px;
+            width: 100%;
+            background-color: rgba(141, 141, 141, 0.95);
+            color: #E9DBCC;
+        }
+        div {
+            border-radius: 5px;
+        }
+        button {
+            border-radius: 5px;
+        }
+        .username {
+            grid-area: un;
+        }
+        .password {
+            grid-area: pw;
+        }
+        .submit {
+            grid-area: submit;
+            background-color: rgba(252, 178, 75, 0.97);
+        }
+        .google {
+            grid-area: google; //   background-color: white;
+        }
+        .facebook {
+            grid-area: facebook;
+        }
+    }
+}
