@@ -9,8 +9,9 @@ exports.up = function(knex, Promise) {
       users.string("password");
       users.string("displayName");
       users.text("userPhoto");
+      users.text("token");
       users.text("facebookToken");
-      users.enum("role", ["bartedner", "server", "manager", "customer"]).notNull();
+      users.enum("role", ["bartender", "server", "manager", "customer"]).notNull();
       users.boolean("isActive").defaultTo(true).notNull();
     })
     .then(() => {
@@ -47,7 +48,7 @@ exports.up = function(knex, Promise) {
           "cocktail",
           "redWine",
           "whiteWine",
-          "champange",
+          "champagne",
           "vodka",
           "tequila",
           "whiskey",
