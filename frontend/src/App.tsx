@@ -12,7 +12,7 @@ class App extends React.Component {
       <Router>
         <div className="full-page">
           <Switch>
-            <Route path="/login" component={Login} />
+            <Route exact={true} path="/" component={Login} />
             <Route path="/profile" component={Profile} />
           </Switch>
         </div>

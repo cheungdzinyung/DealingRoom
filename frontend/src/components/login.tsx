@@ -6,6 +6,10 @@ export default class Login extends React.Component {
   public facebook = <span>Facebook</span>;
   public submit = <span>Sb</span>;
 
+  public toProfile = () => {
+    return <div>Hi</div>;
+  };
+
   public render() {
     return (
       <div className="login-container">
@@ -24,6 +28,7 @@ export default class Login extends React.Component {
             fill={true}
             className="submit"
             type="submit"
+            onClick={this.toProfile}
             text={this.submit}
           />
           <Button
