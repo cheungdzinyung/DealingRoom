@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: http://www.dealingroom.live
+HOST: https://www.dealingroom.live
 
 # Dealing Room
 Dealing Room is a simple RESTful API allowing users to obtain information from the Dealing Room database.
@@ -13,7 +13,7 @@ A single user's information can be obtained through this route using the user's 
             "username": "johndoe@gmail.com",
             "password": "*********",
             "displayName": "John Doe",
-            "userPhoto": "www.dealingroom.com/user/01/img/photo.jpeg",
+            "userPhoto": "/api/users/:userid/img/profilePhoto.jpeg",
             "role": "customer"
         }
         
@@ -25,17 +25,21 @@ User's infromation can be edited through this route using the user's id. Users c
             "username": "johndoe@gmail.com",
             "password": "*********",
             "displayName": "Johnny",
-            "userPhoto": "www.dealingroom.com/user/01/img/photo1.jpeg"
+            "userPhoto": "/api/users/:userid/img/profilePhoto.jpeg",
             "role": "customer",
             "isActive": true
         }
 
-+ Response 201
++ Response 201 (application/json)
+
+        {
+            "displayName": "Johnny",
+            "userPhoto": "/api/users/:userid/img/profilePhoto.jpeg"
+        }
 
 ## %5B/api/users%5D [/api/users]
 ### Adding new user [POST]
-Additional users can be added into the database using this action. It takes a JSON
-object containing: 
+Additional users can be added into the database using this action. It takes a JSON object containing: 
 >- username
 >- password
 >- displayName (optional)
@@ -51,7 +55,14 @@ A status of 201 is returned upon successful insertion along with a JSON containi
             "username": "janedoe@gmail.com",
             "password": "********",
             "displayName": "Jane Doe",
-            "userPhoto": "www.dealingroom.com/user/02/img/photo.jpeg",
+            "userPhoto": "profilePhoto.jpeg",
+            "role": "customer"
+        }
+        
+        or
+        
+        {
+            "facebookToken": "**********",
             "role": "customer"
         }
 
@@ -59,7 +70,8 @@ A status of 201 is returned upon successful insertion along with a JSON containi
 
         {
             "users.id": 2,
-            "username": "janedoe@gmail.com"
+            "displayName": "janedoe@gmail.com",
+            "userPhoto": "profilePhoto.jpeg"
         }
 
 ## %5B/api/items/:itemid%5D [/api/items/:itemid]
@@ -72,9 +84,9 @@ A single item's information can be obtained through this route using the item id
             "itemName": "Asahi",
             "itemStock": 100,
             "categoryName": "Beer",
-            "minimumPrice": 50.00,
+            "minimumPrice": 15.00,
             "currentPrice": 105.00,
-            "itemPhoto": "www.dealingroom.com/public/img/asahi.jpeg",
+            "itemPhoto": "/public/img/asahi.jpeg",
             "itemDescription": "Asahi Super Dry was a direct result of extensive market research which indicated a consumer preference for a more palatable beer with less maltiness, relatively high alcohol content and a light aftertaste, that paired well with the changing Japanese diet. With this insight Asahi used its brewing knowledge to develop a beer with a crisp bite, refreshing taste and clear finish to satisfied this requirement."
         }
         
@@ -83,18 +95,30 @@ Item's infromation can be edited through this route using the item's id. Items c
 + Request (application/json)
 
         {
-        "id": 1,
+            "id": 1,
             "itemName": "Asahi",
             "itemStock": 100,
             "categoryName": "Beer",
-            "minimumPrice": 50.00,
+            "minimumPrice": 15.00,
             "currentPrice": 110.00,
-            "itemPhoto": "www.dealingroom.com/public/img/asahi.jpeg",
+            "itemPhoto": "/public/img/asahi.jpeg",
             "itemDescription": "Asahi Super Dry was a direct result of extensive market research which indicated a consumer preference for a more palatable beer with less maltiness, relatively high alcohol content and a light aftertaste, that paired well with the changing Japanese diet. With this insight Asahi used its brewing knowledge to develop a beer with a crisp bite, refreshing taste and clear finish to satisfied this requirement.",
             "isActive": true
         }
 
-+ Response 201
++ Response 201 (application/json)
+
+        {
+            "id": 1,
+            "itemName": "Asahi",
+            "itemStock": 100,
+            "categoryName": "Beer",
+            "minimumPrice": 15.00,
+            "currentPrice": 110.00,
+            "itemPhoto": "/public/img/asahi.jpeg",
+            "itemDescription": "Asahi Super Dry was a direct result of extensive market research which indicated a consumer preference for a more palatable beer with less maltiness, relatively high alcohol content and a light aftertaste, that paired well with the changing Japanese diet. With this insight Asahi used its brewing knowledge to develop a beer with a crisp bite, refreshing taste and clear finish to satisfied this requirement.",
+            "isActive": true
+        }
 
 ## %5Bapi/items%5D [/api/items]
 ### Obtaining all item's information  [GET]
@@ -105,103 +129,106 @@ All items information can be obtained through this route. The response is return
             {
                 "categoryName": "Beer"
                 "categoryPhoto": "www.dealingroom.com/public/img/beer.jpeg"
-                {
-                    "id": 1,
-                    "itemName": "Asahi",
-                    "itemStock": 100,
-                    "categoryName": "Beer",
-                    "minimumPrice": 50.00,
-                    "currentPrice": 105.00,
-                    "itemPhoto": "www.dealingroom.com/public/img/asahi.jpeg",
-                    "itemDescription": "Asahi Super Dry was a direct result of extensive market research which indicated a consumer preference for a more palatable beer with less maltiness, relatively high alcohol content and a light aftertaste, that paired well with the changing Japanese diet. With this insight Asahi used its brewing knowledge to develop a beer with a crisp bite, refreshing taste and clear finish to satisfied this requirement."
-                },
-                {
-                    "id": 2,
-                    "itemName": "Heineken",
-                    "itemStock": 100,
-                    "categoryName": "Beer",
-                    "minimumPrice": 45.00,
-                    "currentPrice": 90.00,
-                    "itemPhoto": "www.dealingroom.com/public/img/heineken.jpeg",
-                    "itemDescription": "100% Barley malt, choice hops and pure water give this brew unsurpassed clarity."
-                },
+                "items":
                     {
-                    "id": 3,
-                    "itemName": "Peroni",
-                    "itemStock": 100,
-                    "categoryName": "Beer",
-                    "minimumPrice": 55.00,
-                    "currentPrice": 10.00,
-                    "itemPhoto": "www.dealingroom.com/public/img/Peroni.jpeg",
-                    "itemDescription": "The original Italian lager. Peroni is the number one lager brand in Italy and has been for over one and a half centuries. This premium, clear, golden-yellow lager, with 4.7 ABV, is the result of the dedication to brewing of generations of the most qualified braumeisters."
-                },
-                {
-                    "id": 4,
-                    "itemName": "Stella Artois",
-                    "itemStock": 100,
-                    "categoryName": "Beer",
-                    "minimumPrice": 60.00,
-                    "currentPrice": 100.00,
-                    "itemPhoto": "www.dealingroom.com/public/img/stellaartois.jpeg",
-                    "itemDescription": "Stella Artois is one of the world’s best-selling beers and is enjoyed in more than 80 countries. Its full, characteristic flavour and high quality is assured through a superior brewing process and by using the finest ingredients available."
-                }
+                        "id": 1,
+                        "itemName": "Asahi",
+                        "itemStock": 100,
+                        "categoryName": "Beer",
+                        "minimumPrice": 50.00,
+                        "currentPrice": 105.00,
+                        "itemPhoto": "www.dealingroom.com/public/img/asahi.jpeg",
+                        "itemDescription": "Asahi Super Dry was a direct result of extensive market research which indicated a consumer preference for a more palatable beer with less maltiness, relatively high alcohol content and a light aftertaste, that paired well with the changing Japanese diet. With this insight Asahi used its brewing knowledge to develop a beer with a crisp bite, refreshing taste and clear finish to satisfied this requirement."
+                    },
+                    {
+                        "id": 2,
+                        "itemName": "Heineken",
+                        "itemStock": 100,
+                        "categoryName": "Beer",
+                        "minimumPrice": 45.00,
+                        "currentPrice": 90.00,
+                        "itemPhoto": "www.dealingroom.com/public/img/heineken.jpeg",
+                        "itemDescription": "100% Barley malt, choice hops and pure water give this brew unsurpassed clarity."
+                    },
+                        {
+                        "id": 3,
+                        "itemName": "Peroni",
+                        "itemStock": 100,
+                        "categoryName": "Beer",
+                        "minimumPrice": 55.00,
+                        "currentPrice": 10.00,
+                        "itemPhoto": "www.dealingroom.com/public/img/Peroni.jpeg",
+                        "itemDescription": "The original Italian lager. Peroni is the number one lager brand in Italy and has been for over one and a half centuries. This premium, clear, golden-yellow lager, with 4.7 ABV, is the result of the dedication to brewing of generations of the most qualified braumeisters."
+                    },
+                    {
+                        "id": 4,
+                        "itemName": "Stella Artois",
+                        "itemStock": 100,
+                        "categoryName": "Beer",
+                        "minimumPrice": 60.00,
+                        "currentPrice": 100.00,
+                        "itemPhoto": "www.dealingroom.com/public/img/stellaartois.jpeg",
+                        "itemDescription": "Stella Artois is one of the world’s best-selling beers and is enjoyed in more than 80 countries. Its full, characteristic flavour and high quality is assured through a superior brewing process and by using the finest ingredients available."
+                    }
             },
             {
                 "categoryName": "Vodka"
                 "categoryPhoto": "www.dealingroom.com/public/img/vodka.jpeg"
-                {
-                    "id": 51
-                    "itemName" : "Grey Goose",
-                    "itemStock" : 100,
-                    "categoryName" : "Vodka",
-                    "minimumPrice" : 100.00
-                    "currentPrice" : 150.00,
-                    "itemPhoto" : "www.dealingroom.com/public/img/greygoose.jpeg",
-                    "itemDescription" : "From Cognac in France, this breakthrough wheat-based small-batch ultra-premium vodka has achieved global success and won a Platinum medal at the World Spirits Championship. Clean and fresh, with a smooth, creamy texture."
-                },        
-                {
-                    "id": 52,
-                    "itemName" : "Ketel One",
-                    "itemStock" : 100,
-                    "categoryName" : "Vodka",
-                    "minimumPrice" : 95.00,
-                    "currentPrice" : 120.00,
-                    "itemPhoto" : "www.dealingroom.com/public/img/ketelone.jpeg",
-                    "itemDescription" : "A meticulously crafted vodka from a Dutch distillery that has remained a family business for 10 generations since 1691. Introduced in the UK in 1999 after massive US success."
-                }            
+                "items":
+                    {
+                        "id": 51
+                        "itemName" : "Grey Goose",
+                        "itemStock" : 100,
+                        "categoryName" : "Vodka",
+                        "minimumPrice" : 100.00
+                        "currentPrice" : 150.00,
+                        "itemPhoto" : "www.dealingroom.com/public/img/greygoose.jpeg",
+                        "itemDescription" : "From Cognac in France, this breakthrough wheat-based small-batch ultra-premium vodka has achieved global success and won a Platinum medal at the World Spirits Championship. Clean and fresh, with a smooth, creamy texture."
+                    },        
+                    {
+                        "id": 52,
+                        "itemName" : "Ketel One",
+                        "itemStock" : 100,
+                        "categoryName" : "Vodka",
+                        "minimumPrice" : 95.00,
+                        "currentPrice" : 120.00,
+                        "itemPhoto" : "www.dealingroom.com/public/img/ketelone.jpeg",
+                        "itemDescription" : "A meticulously crafted vodka from a Dutch distillery that has remained a family business for 10 generations since 1691. Introduced in the UK in 1999 after massive US success."
+                    }            
             },
             {
                 "categoryName": "Gin"
                 "categoryPhoto": "www.dealingroom.com/public/img/gin.jpeg"
-                {
-                    "id": 61
-                    "itemName" : "Bombay Sapphire",
-                    "itemStock" : 100,
-                    "categoryName" : "Gin",
-                    "minimumPrice" : 90.00
-                    "currentPrice" : 130.00,
-                    "itemPhoto" : "www.dealingroom.com/public/img/bombaysapphire.jpeg",
-                    "itemDescription" : "Trendy younger sibling to Bombay Original, on whose recipe it is based (with a couple of extra botanicals). Credited with kickstarting gin's fashionability since its launch in 1987, Bombay Sapphire has become a truly iconic brand, with its distinctive blue bottle recognisable in bars the world over."
-                },        
-                {
-                    "id": 52,
-                    "itemName" : "Hendricks",
-                    "itemStock" : 100,
-                    "categoryName" : "Gin",
-                    "minimumPrice" : 100.00,
-                    "currentPrice" : 150.00,
-                    "itemPhoto" : "www.dealingroom.com/public/img/hendricks.jpeg",
-                    "itemDescription" : "A superb, and utterly unique, pink-tinged gin from William Grant's. Infused with rose petals and cucumber as well as the normal botanicals, this is a must for all gin-lovers. In the summertime, Hendrick's makes a fantastically refreshing gin and tonic: serve in a tall glass with plenty of ice and garnish with thinly-sliced cucumber – delicious!"
-                }            
+                "items":
+                    {
+                        "id": 61
+                        "itemName" : "Bombay Sapphire",
+                        "itemStock" : 100,
+                        "categoryName" : "Gin",
+                        "minimumPrice" : 90.00
+                        "currentPrice" : 130.00,
+                        "itemPhoto" : "www.dealingroom.com/public/img/bombaysapphire.jpeg",
+                        "itemDescription" : "Trendy younger sibling to Bombay Original, on whose recipe it is based (with a couple of extra botanicals). Credited with kickstarting gin's fashionability since its launch in 1987, Bombay Sapphire has become a truly iconic brand, with its distinctive blue bottle recognisable in bars the world over."
+                    },        
+                    {
+                        "id": 52,
+                        "itemName" : "Hendricks",
+                        "itemStock" : 100,
+                        "categoryName" : "Gin",
+                        "minimumPrice" : 100.00,
+                        "currentPrice" : 150.00,
+                        "itemPhoto" : "www.dealingroom.com/public/img/hendricks.jpeg",
+                        "itemDescription" : "A superb, and utterly unique, pink-tinged gin from William Grant's. Infused with rose petals and cucumber as well as the normal botanicals, this is a must for all gin-lovers. In the summertime, Hendrick's makes a fantastically refreshing gin and tonic: serve in a tall glass with plenty of ice and garnish with thinly-sliced cucumber – delicious!"
+                    }            
             }
         ]
 
 ### Adding new item [POST]
-Additional items can be added into the database using this action. It takes a JSON
-object containing:
+Additional items can be added into the database using this action. It takes a JSON object containing:
 >- itemName
 >- itemStock
 >- minimumPrice
+>- currentPrice
 >- itemPhoto (optional)
 >- itemDescription (optional)
 
@@ -212,7 +239,8 @@ A status of 201 is returned upon successful insertion along with a JSON containi
         {
             "itemName": "Heineken",
             "itemStock": 100,
-            "minimumPrice": 45.00,
+            "minimumPrice": 15.00,
+            "currentPrice": 60.00,
             "itemPhoto": "www.dealingroom.com/public/02/img/heineken.jpeg",
             "itemDescription": "100% Barley malt, choice hops and pure water give this brew unsurpassed clarity."
         }
@@ -222,6 +250,11 @@ A status of 201 is returned upon successful insertion along with a JSON containi
         {
             "itemName": "Heineken"
             "items.id": 2
+            "categoryName": "Beer",
+            "minimumPrice": 15.00,
+            "currentPrice": 60.00
+            "itemStock": 100
+            "isActive": true
         }
 
 ## %5Bapi/items/?categories=""%5D [/api/items/?categories=""]
@@ -229,50 +262,51 @@ A status of 201 is returned upon successful insertion along with a JSON containi
 All items information within a category can be obtained through this route. The response is returned in JSON format along with a 200 status code. 
 + Response 200 (application/json)
 
-        [
+        {
             "categoryName": "Beer"
             "categoryPhoto": "categoryPhoto":"www.dealingroom.com/public/img/beer.jpeg"
-            {
-                "id": 1,
-                "itemName": "Asahi",
-                "itemStock": 100,
-                "categoryName": "Beer",
-                "minimumPrice": 50.00,
-                "currentPrice": 105.00,
-                "itemPhoto": "www.dealingroom.com/public/img/asahi.jpeg",
-                "itemDescription": "Asahi Super Dry was a direct result of extensive market research which indicated a consumer preference for a more palatable beer with less maltiness, relatively high alcohol content and a light aftertaste, that paired well with the changing Japanese diet. With this insight Asahi used its brewing knowledge to develop a beer with a crisp bite, refreshing taste and clear finish to satisfied this requirement."
-            },
-            {
-                "id": 2,
-                "itemName": "Heineken",
-                "itemStock": 100,
-                "categoryName": "Beer",
-                "minimumPrice": 45.00,
-                "currentPrice": 90.00,
-                "itemPhoto": "www.dealingroom.com/public/img/heineken.jpeg",
-                "itemDescription": "100% Barley malt, choice hops and pure water give this brew unsurpassed clarity."
-            },
-            {
-                "id": 3,
-                "itemName": "Peroni",
-                "itemStock": 100,
-                "categoryName": "Beer",
-                "minimumPrice": 55.00,
-                "currentPrice": 10.00,
-                "itemPhoto": "www.dealingroom.com/public/img/Peroni.jpeg",
-                "itemDescription": "The original Italian lager. Peroni is the number one lager brand in Italy and has been for over one and a half centuries. This premium, clear, golden-yellow lager, with 4.7 ABV, is the result of the dedication to brewing of generations of the most qualified braumeisters."
-            },
-            {
-                "id": 4,
-                "itemName": "Stella Artois",
-                "itemStock": 100,
-                "categoryName": "Beer",
-                "minimumPrice": 60.00,
-                "currentPrice": 100.00,
-                "itemPhoto": "www.dealingroom.com/public/img/stellaartois.jpeg",
-                "itemDescription": "Stella Artois is one of the world’s best-selling beers and is enjoyed in more than 80 countries. Its full, characteristic flavour and high quality is assured through a superior brewing process and by using the finest ingredients available."
-            }
-        ]
+            "items":
+                {
+                    "id": 1,
+                    "itemName": "Asahi",
+                    "itemStock": 100,
+                    "minimumPrice": 15.00,
+                    "currentPrice": 105.00,
+                    "itemPhoto": "www.dealingroom.com/public/img/asahi.jpeg",
+                    "itemDescription": "Asahi Super Dry was a direct result of extensive market research which indicated a consumer preference for a more palatable beer with less maltiness, relatively high alcohol content and a light aftertaste, that paired well with the changing Japanese diet. With this insight Asahi used its brewing knowledge to develop a beer with a crisp bite, refreshing taste and clear finish to satisfied this requirement.",
+                    "isActive": true
+                },
+                {
+                    "id": 2,
+                    "itemName": "Heineken",
+                    "itemStock": 100,
+                    "minimumPrice": 15.00,
+                    "currentPrice": 90.00,
+                    "itemPhoto": "www.dealingroom.com/public/img/heineken.jpeg",
+                    "itemDescription": "100% Barley malt, choice hops and pure water give this brew unsurpassed clarity."
+                    "isActive": true
+                },
+                {
+                    "id": 3,
+                    "itemName": "Peroni",
+                    "itemStock": 100,
+                    "minimumPrice": 15.00,
+                    "currentPrice": 80.00,
+                    "itemPhoto": "www.dealingroom.com/public/img/Peroni.jpeg",
+                    "itemDescription": "The original Italian lager. Peroni is the number one lager brand in Italy and has been for over one and a half centuries. This premium, clear, golden-yellow lager, with 4.7 ABV, is the result of the dedication to brewing of generations of the most qualified braumeisters."
+                    "isActive": true
+                },
+                {
+                    "id": 4,
+                    "itemName": "Stella Artois",
+                    "itemStock": 100,
+                    "minimumPrice": 15.00,
+                    "currentPrice": 100.00,
+                    "itemPhoto": "www.dealingroom.com/public/img/stellaartois.jpeg",
+                    "itemDescription": "Stella Artois is one of the world’s best-selling beers and is enjoyed in more than 80 countries. Its full, characteristic flavour and high quality is assured through a superior brewing process and by using the finest ingredients available."
+                    "isActive": true
+                }
+        }
     
 ## %5Bapi/orders/:orderid%5D [/api/orders/:orderid]
 ### Retreiving order information by order id [GET]
@@ -286,47 +320,8 @@ A single order's information can be obtained through this route using the order'
             "orders.id" : 1,
             "table": 11,
             "status": "confirmed",
-            {
-                "itemName": "Asahi",
-                "ice": "normal",
-                "sweetness": "normal",
-                "garnish" : "normal",
-                "purchasePrice" : 105.00
-            },
-            {
-                "itemName": "Grey Goose",
-                "ice": "extra",
-                "sweetness": "normal",
-                "garnish" : "normal",
-                "purchasePrice" : 150.00
-            }
-        }
-
-### Amending order information by id [PUT]
-Currently reserved for updating status of orders or to delete orders.
-+ Request (application/json)
-
-        {
-            "orders.id": 1,
-            "status": "made",
-            "isActive": true
-        }
-
-+ Response 201
-
-## %5Bapi/orders/:userid%5D [/api/orders/:userid]
-### Retreiving order information by user id [GET]
-ALL orders information by one user can be obtained through this route using the user's id. The response is returned in JSON format along with a 200 status code. 
-+ Response 200 (application/json)
-
-        {
-            "users.id": 1,
-            "userName": "John Doe",
-            "displayName": "Johnny",
-            {
-                "orders.id" : 1,
-                "table": 11,
-                "status": "confirmed",
+            "isPaid": false,
+            "orderItems":
                 {
                     "itemName": "Asahi",
                     "ice": "normal",
@@ -341,27 +336,78 @@ ALL orders information by one user can be obtained through this route using the 
                     "garnish" : "normal",
                     "purchasePrice" : 150.00
                 }
-            },
-            {
-                "orders.id": 2,
-                "table": 11,
-                "status": "confirmed",
+        }
+
+### Amending order information by id [PUT]
+Currently reserved for updating status of orders or to delete orders.
++ Request (application/json)
+
+        {
+            "orders.id": 1,
+            "status": "made",
+            "isPaid": false,
+            "isActive": true
+        }
+
++ Response 201 (application/json)
+
+        {
+            "orders.id": 1,
+            "status": "made",
+            "isPaid": false,
+            "isActive": true
+        }
+
+## %5Bapi/orders/:userid%5D [/api/orders/:userid]
+### Retreiving orders information by user id [GET]
+ALL orders information by one user can be obtained through this route using the user's id. The response is returned in JSON format along with a 200 status code. 
++ Response 200 (application/json)
+
+        {
+            "users.id": 1,
+            "userName": "John Doe",
+            "displayName": "Johnny",
+            "orders":
                 {
-                    "itemName": "Asahi",
-                    "ice": "normal",
-                    "sweetness": "normal",
-                    "garnish" : "normal",
-                    "purchasePrice" : 105.00
+                    "orders.id" : 1,
+                    "table": 11,
+                    "status": "confirmed",
+                    "isPaid": false,
+                    "orderItems":
+                        {
+                            "itemName": "Asahi",
+                            "ice": "normal",
+                            "sweetness": "normal",
+                            "garnish" : "normal",
+                            "purchasePrice" : 105.00
+                        },
+                        {
+                            "itemName": "Grey Goose",
+                            "ice": "extra",
+                            "sweetness": "normal",
+                            "garnish" : "normal",
+                            "purchasePrice" : 150.00
+                        }
+                },
+                {
+                    "orders.id": 2,
+                    "table": 11,
+                    "status": "confirmed",
+                    "isPaid": false,
+                    "orderItems":
+                        {
+                            "itemName": "Asahi",
+                            "ice": "normal",
+                            "sweetness": "normal",
+                            "garnish" : "normal",
+                            "purchasePrice" : 105.00
+                        }
                 }
-            }
         }
 
 ### Adding order by user id [POST]
-Additional order can be added into the database using this action. It takes a JSON
-object containing: 
+Additional order can be added into the database using this action. It takes a JSON object containing: 
 >- users.id
->- userName (optional)
->- displayName (optional)
 >- table 
 >- status
 >- itemName
@@ -375,71 +421,233 @@ A status of 201 is returned upon successful insertion along with a JSON containi
 
         {
             "users.id": 1,
-            "userName": "John Doe",
-            "displayName": "Johnny",
             "table": 11,
-            "status": "ordered",
-            {
-                "itemName": "Asahi",
-                "ice": "normal",
-                "sweetness": "normal",
-                "garnish" : "normal",
-                "purchasePrice" : 105.00
-            },
-            {
-                "itemName": "Grey Goose",
-                "ice": "extra",
-                "sweetness": "normal",
-                "garnish" : "normal",
-                "purchasePrice" : 150.00
-            }
+            "status": "confirmed",
+            "item":
+                {
+                    "itemName": "Asahi",
+                    "ice": "normal",
+                    "sweetness": "normal",
+                    "garnish" : "normal",
+                    "purchasePrice" : 105.00
+                },
+                {
+                    "itemName": "Grey Goose",
+                    "ice": "extra",
+                    "sweetness": "normal",
+                    "garnish" : "normal",
+                    "purchasePrice" : 150.00
+                }
         }
 
 + Response 201 (application/json)
 
         {
-            "users.id": 1
+            "users.id": 1,
+            "status": "confirmed",
             "orders.id": 1
         }
 
-## %5Bapi/ordersPrices%5D [/api/ordersPrices/]
+## %5Bapi/ordersprices%5D [/api/ordersprices/]
 ### Retreiving all order price information that day [GET]
 Used to compile comparison charts for consumptions
 + Response 200 (application/json)
 
         {
+            "user":
+                {
+                    "beer": 105.00,
+                    "cocktail": 0,
+                    "redWine": 0,
+                    "whiteWine": 0,
+                    "champagne": 0,
+                    "vodka": 150.00,
+                    "tequila": 0,
+                    "whiskey": 0,
+                    "gin": 0,
+                    "rum": 0,
+                    "brandy": 0,
+                },
+            "all":
+                {
+                    "beer": 130.50,
+                    "cocktail": 158.50,
+                    "redWine": 103.00,
+                    "whiteWine": 90.50,
+                    "champagne": 121.00,
+                    "vodka": 160.50,
+                    "tequila": 92.00,
+                    "whiskey": 143.00,
+                    "gin": 102.50,
+                    "rum": 89.50,
+                    "brandy": 104.50,
+                },
+        }
+
+## %5Bapi/ordersquantities%5D [/api/ordersquantities/]
+### Retreiving all order quantity information that day [GET]
+Used to compile comparison charts for consumptions
++ Response 200 (application/json)
+
+        {
+            "user":
+                {
+                    "beer": 2,
+                    "cocktail": 0,
+                    "redWine": 0,
+                    "whiteWine": 0,
+                    "champagne": 0,
+                    "vodka": 1,
+                    "tequila": 0,
+                    "whiskey": 0,
+                    "gin": 0,
+                    "rum": 0,
+                    "brandy": 0
+                },
+            "all":
+                {
+                    "beer": 130,
+                    "cocktail": 58,
+                    "redWine": 10,
+                    "whiteWine": 25,
+                    "champagne": 1,
+                    "vodka": 50,
+                    "tequila": 56,
+                    "whiskey": 83,
+                    "gin": 77,
+                    "rum": 48,
+                    "brandy": 82
+                },
+        }
+
+## %5Bapi/prices/?categories=""%5D [/api/prices/?categories=""]
+### Retrieving the price of items within one category from Redis [GET]
+Used to retrieve the fluctuating prices of items within one category from Redis.
++ Response 200 (application/json)
+
+        {
+            "categoryName": "Beer"
+            "categoryPhoto": "categoryPhoto":"www.dealingroom.com/public/img/beer.jpeg"
+            "items":
+                {
+                    "id": 1,
+                    "minimumPrice": 15.00,
+                    "currentPrice": 105.00
+                },
+                {
+                    "id": 2,
+                    "minimumPrice": 15.00,
+                    "currentPrice": 90.00
+                },
+                {
+                    "id": 3,
+                    "minimumPrice": 15.00,
+                    "currentPrice": 80.00
+                },
+                {
+                    "id": 4,
+                    "minimumPrice": 15.00,
+                    "currentPrice": 100.00
+                }
+        }
+
+## %5Bapi/prices/%5D [/api/prices/]
+### Retrieving the price of items within all categories from Redis [GET]
+Used to retrieve the fluctuating prices all items within all categories from Redis.
+
++ Response 200 (application/json)
+
+          [
             {
-                "beer": 105.00,
-                "cocktail": 0,
-                "redWine": 0,
-                "whiteWine": 0,
-                "champagne": 0,
-                "vodka": 150.00,
-                "tequila": 0,
-                "whiskey": 0,
-                "gin": 0,
-                "rum": 0,
-                "brandy": 0,
-                "non-alcoholic": 0,
-                "snack": 0,
-                "main": 0,
-                "dessert": 0
+                "categoryName": "Beer"
+                "items":
+                    {
+                        "id": 1,
+                        "minimumPrice": 15.00,
+                        "currentPrice": 105.00,
+                    },
+                    {
+                        "id": 2,
+                        "minimumPrice": 15.00,
+                        "currentPrice": 90.00,
+                    },
+                        {
+                        "id": 3,
+                        "minimumPrice": 15.00,
+                        "currentPrice": 100.00,
+                    },
+                    {
+                        "id": 4,
+                        "minimumPrice": 15.00,
+                        "currentPrice": 100.00,
+                    }
+                },
+            {
+                "categoryName": "Vodka"
+                "items":
+                    {
+                        "id": 51,
+                        "minimumPrice" : 100.00,
+                        "currentPrice" : 150.00
+                    },        
+                    {
+                        "id": 52,
+                        "categoryName" : "Vodka",
+                        "minimumPrice" : 95.00,
+                    }            
             },
             {
-                "beer": 130.50,
-                "cocktail": 158.50,
-                "redWine": 103.00,
-                "whiteWine": 90.50,
-                "champagne": 121.00,
-                "vodka": 160.50,
-                "tequila": 92.00,
-                "whiskey": 143.00,
-                "gin": 102.50,
-                "rum": 89.50,
-                "brandy": 104.50,
-                "non-alcoholic": 36.50,
-                "snack": 85.00,
-                "main": 104.50,
-                "dessert": 48.50
-            },
+                "categoryName": "Gin"
+                "items":
+                    {
+                        "id": 61
+                        "minimumPrice" : 90.00
+                        "currentPrice" : 130.00,
+                    },        
+                    {
+                        "id": 62,
+                        "minimumPrice" : 100.00,
+                        "currentPrice" : 150.00,
+                    }            
+            }
+        ]
+
+### Updating the prices of a single item to Redis [PUT]
+Used to update the fluctuating prices of a single item to Redis. A status of 201 is returned upon successful insertion along with a JSON containing all the new prices of the category. 
++ Request (application/json)
+
+        {
+            "itemName": "Asahi",
+            "currentPrice": 105.00
+        }
+
++ Response 201 (application/json)
+
+        {
+            "categoryName": "beer"
+            "items":
+                {
+                    "itemName": "Asahi"
+                    "items.id": 1
+                    "currentPrice": 105.00
+                    "miniumPrice": 15.00
+                },
+                {
+                    "itemName": "Heineken"
+                    "items.id": 2
+                    "currentPrice": 90.00
+                    "miniumPrice": 15.00
+                },
+                {
+                    "itemName": "Peroni"
+                    "items.id": 3
+                    "currentPrice": 80.00
+                    "miniumPrice": 15.00
+                },
+                {
+                    "itemName": "Stella Artois"
+                    "items.id": 4
+                    "currentPrice": 100.00
+                    "miniumPrice": 15.00
+                }
         }
