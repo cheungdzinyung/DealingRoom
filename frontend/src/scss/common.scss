@@ -1,4 +1,10 @@
 .page-container{
+    background-color: $bgc;
     width: 100%;
-    padding: 5% 10%;
+    padding: 2% 10% 17vh 10%;
+    img{
+        border-radius: 5px;
+        margin-bottom: 3%;
+        width: 100%;
+    }
 }

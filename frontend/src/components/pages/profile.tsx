@@ -1,6 +1,8 @@
 import * as React from "react";
-import Usermenu from "../components/usermenu";
-import Banner from './topbanner'
+import Banner from '../share/topbanner'
+import Usermenu from "../share/usermenu";
+
+import tempImg from '../../images/circle-head.png';
 
 export default class Profile extends React.Component<{ header: string }> {
   constructor(props:{header: string}){
@@ -10,7 +12,7 @@ export default class Profile extends React.Component<{ header: string }> {
     return (
 
       <div className="userInterface">
-        <Banner header="Profile" />
+        <Banner header="Profile" image={tempImg}/>
         <Usermenu />
       </div>
     );

@@ -1,8 +1,8 @@
 import * as React from "react";
-import tempImg from '../images/circle-head.png';
 
 interface IBannerProps{
     header: string;
+    image: any;
 }
 
 export default class Banner extends React.Component<IBannerProps>{
@@ -12,7 +12,7 @@ export default class Banner extends React.Component<IBannerProps>{
     public render() {
         return (
             <div className="topbanner">
-                <img src={tempImg} alt="" />
+                <img src={this.props.image} alt="" />
                 <h2>{this.props.header}</h2>
             </div>
         );

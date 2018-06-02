@@ -9,13 +9,12 @@ $font-color-light: #E9DBCC;
 $bgc: #2D2C30;
 
 html {
-  font-size: 1em;
   background-color: $bgc;
+  font-size: 1em;
 }
 
 body {
-  background-color: white;
-
+  background-color: $bgc;
   font-weight: 400;
   line-height: 1.45;
   color: $font-color-light;
@@ -56,3 +55,4 @@ small, .font_small {font-size: 0.707em;}
 @import 'profile';
 @import 'usermenu';
 @import 'topbanner';
+@import 'common';

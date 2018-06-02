@@ -1,9 +1,9 @@
 import * as React from "react";
-import creditCard from "../icons/credit.svg";
-import menu from '../icons/menu.svg';
-import receipt from '../icons/orders.svg';
-import screwDriver from '../icons/setting.svg';
-import icon from '../images/circle-head.png';
+import creditCard from "../../icons/credit.svg";
+import menu from '../../icons/menu.svg';
+import receipt from '../../icons/orders.svg';
+import screwDriver from '../../icons/setting.svg';
+import icon from '../../images/circle-head.png';
 
 import { withRouter } from "react-router";
 
