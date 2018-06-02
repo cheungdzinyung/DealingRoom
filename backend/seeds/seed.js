@@ -2,20 +2,27 @@ const fs = require("fs-extra");
 const path = require("path");
 
 exports.seed = function(knex, Promise) {
-  let Categories = fs.readJsonSync(
+  let categoriesData = fs.readJsonSync(
     path.join(__dirname, "/categoriesData.json")
   );
-  let Items = fs.readJsonSync(path.join(__dirname, "/itemsData.json"));
+  let itemsData = fs.readJsonSync(path.join(__dirname, "/itemsData.json"));
 
-  return knex("categories")
-    .insert(Categories)
+  return knex("items")
+    .del()
     .then(() => {
-      let itemArray = [];
-      Items.forEach(item => {
-        let category = item.category;
-        itemArray.push(createProduct(knex, item, category));
-      });
-      return Promise.all(itemArray);
+      return knex("categories").del();
+    })
+    .then(() => {
+      return knex("categories")
+        .insert(categoriesData)
+        .then(() => {
+          let itemsPromises = [];
+          itemsData.forEach(item => {
+            let category = item.category;
+            itemsPromises.push(createProduct(knex, item, category));
+          });
+          return Promise.all(itemsPromises);
+        });
     });
 };
 
