@@ -1,6 +1,6 @@
 import * as React from "react";
-import Usermenu from "../components/usermenu";
-import Banner from './topbanner'
+import Banner from '../share/topbanner'
+import Usermenu from "../share/usermenu";
 
 import Paypal from '../images/payment/stripe.png'
 
@@ -18,7 +18,9 @@ export default class Profile extends React.Component<IProfileProps> {
         return (
             <div className="userInterface">
                 <Banner header="Payment" />
-                <img src={Paypal} alt=""/>
+                <div className="page-container">
+                <img src="" alt="" className="payment"/>
+                </div>
                 <Usermenu />
             </div>
         );
