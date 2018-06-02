@@ -1,6 +1,6 @@
 import * as React from "react";
-import Usermenu from "../components/usermenu";
-import Banner from './topbanner'
+import Banner from '../share/topbanner'
+import Usermenu from "../share/usermenu";
 
 export default class Profile extends React.Component<{ header: string }> {
     constructor(props: { header: string }) {
@@ -11,6 +11,9 @@ export default class Profile extends React.Component<{ header: string }> {
 
             <div className="userInterface">
                 <Banner header="Payment" />
+                <div className="page-container">
+                <img src="" alt="" className="payment"/>
+                </div>
                 <Usermenu />
             </div>
         );
