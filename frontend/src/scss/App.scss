@@ -50,9 +50,9 @@ span{
 
 small, .font_small {font-size: 0.707em;}
 
-
+@import 'common';
 @import 'login';
 @import 'profile';
 @import 'usermenu';
 @import 'topbanner';
-@import 'common';
+@import 'setting';
