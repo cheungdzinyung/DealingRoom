@@ -1,13 +1,14 @@
 import { Button, InputGroup } from "@blueprintjs/core";
+import * as History from 'history';
 import * as React from "react";
 
-export default class Login extends React.Component {
+export default class Login extends React.Component<{history: History.History}> {
   public google = <span>Google</span>;
   public facebook = <span>Facebook</span>;
-  public submit = <span>Sb</span>;
+  public submit = <span>S</span>;
 
   public toProfile = () => {
-    return <div>Hi</div>;
+    this.props.history.push('/profile');
   };
 
   public render() {
