@@ -1,77 +1,77 @@
 [
   {
     "categoryName": "beer",
-    "categoryPhoto": "../../img/beer.jpeg",
+    "categoryPhoto": "../../frontend/public/img/beer.jpeg",
     "isActive": true
   },
   {
     "categoryName": "cocktail",
-    "categoryPhoto": "../../img/cocktail.jpeg",
+    "categoryPhoto": "../../frontend/public/img/cocktail.jpeg",
     "isActive": true
   },
   {
     "categoryName": "redWine",
-    "categoryPhoto": "../../img/redwine.jpeg",
+    "categoryPhoto": "../../frontend/public/img/redwine.jpeg",
     "isActive": true
   },
   {
     "categoryName": "whiteWine",
-    "categoryPhoto": "../../img/whitewine.jpeg",
+    "categoryPhoto": "../../frontend/public/img/whitewine.jpeg",
     "isActive": true
   },
   {
     "categoryName": "champagne",
-    "categoryPhoto": "../../img/champagne.jpeg",
+    "categoryPhoto": "../../frontend/public/img/champagne.jpeg",
     "isActive": true
   },
   {
     "categoryName": "vodka",
-    "categoryPhoto": "../../img/vodka.jpeg",
+    "categoryPhoto": "../../frontend/public/img/vodka.jpeg",
     "isActive": true
   },
   {
     "categoryName": "tequila",
-    "categoryPhoto": "../../img/tequila.jpeg",
+    "categoryPhoto": "../../frontend/public/img/tequila.jpeg",
     "isActive": true
   },
   {
     "categoryName": "whiskey",
-    "categoryPhoto": "../../img/whiskey.jpeg",
+    "categoryPhoto": "../../frontend/public/img/whiskey.jpeg",
     "isActive": true
   },
   {
     "categoryName": "gin",
-    "categoryPhoto": "../../img/gin.jpeg",
+    "categoryPhoto": "../../frontend/public/img/gin.jpeg",
     "isActive": true
   },
   {
     "categoryName": "rum",
-    "categoryPhoto": "../../img/rum.jpeg",
+    "categoryPhoto": "../../frontend/public/img/rum.jpeg",
     "isActive": true
   },
   {
     "categoryName": "brandy",
-    "categoryPhoto": "../../img/brandy.jpeg",
+    "categoryPhoto": "../../frontend/public/img/brandy.jpeg",
     "isActive": true
   },
   {
     "categoryName": "non-alcoholic",
-    "categoryPhoto": "../../img/nonalcoholic.jpeg",
+    "categoryPhoto": "../../frontend/public/img/nonalcoholic.jpeg",
     "isActive": true
   },
   {
     "categoryName": "snack",
-    "categoryPhoto": "../../img/snack.jpeg",
+    "categoryPhoto": "../../frontend/public/img/snack.jpeg",
     "isActive": true
   },
   {
     "categoryName": "main",
-    "categoryPhoto": "../../img/main.jpeg",
+    "categoryPhoto": "../../frontend/public/img/main.jpeg",
     "isActive": true
   },
   {
     "categoryName": "dessert",
-    "categoryPhoto": "../../img/dessert.jpeg",
+    "categoryPhoto": "../../frontend/public/img/dessert.jpeg",
     "isActive": true
   }
 ]

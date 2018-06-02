@@ -8,7 +8,7 @@ exports.up = function(knex, Promise) {
       users.string("username");
       users.string("password");
       users.string("displayName");
-      users.text("userPhoto");
+      users.text("userPhoto").defaultTo("");
       users.text("token");
       users.text("facebookToken");
       users.enum("role", ["bartender", "server", "manager", "customer"]).notNull();
@@ -31,9 +31,9 @@ exports.up = function(knex, Promise) {
           "confirmed",
           "made",
           "served",
-          "paid",
           "cancelled"
         ]);
+        orders.boolean("isPaid").defaultTo(false);
         orders.timestamps(false, true);
       });
     })
@@ -79,8 +79,8 @@ exports.up = function(knex, Promise) {
         items.foreign("categories_id").references("categories.id");
         items.decimal("minimumPrice");
         items.decimal("currentPrice");
-        items.text("itemPhoto");
-        items.text("itemDescription");
+        items.text("itemPhoto").defaultTo("");
+        items.text("itemDescription").defaultTo("");
         items.boolean("isSpecial").defaultTo(false).notNull();
         items.boolean("isActive").defaultTo(true).notNull();
       });
