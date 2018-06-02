@@ -13,6 +13,7 @@ class App extends React.Component {
     return (
       <Router>
         <div className="full-page">
+        {/* TODO: To move each page container into common space */}
           <Switch>
             <Route exact={true} path="/" component={Login} />
             <Route path="/profile" component={Profile} />
