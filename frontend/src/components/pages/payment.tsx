@@ -1,28 +1,34 @@
 import * as React from "react";
-import Banner from '../share/topbanner'
+import Banner from "../share/topbanner";
 import Usermenu from "../share/usermenu";
 
-import Paypal from '../images/payment/stripe.png'
+import Alipay from "../../images/payment/alipay.png";
+import Paypal from "../../images/payment/paypal.png";
+import Stripe from "../../images/payment/stripe.png";
+import Wechatpay from "../../images/payment/wechatpay.png";
 
 interface IProfileProps {
-    paymentMethods: string[];
+  paymentMethods: string[];
 }
 
-export default class Profile extends React.Component<IProfileProps> {
-    constructor(props: IProfileProps) {
-        super(props);
+import headerImg from "../../icons/credit.svg";
 
-        this.state = {  }
-    }
-    public render() {
-        return (
-            <div className="userInterface">
-                <Banner header="Payment" />
-                <div className="page-container">
-                <img src="" alt="" className="payment"/>
-                </div>
-                <Usermenu />
-            </div>
-        );
-    }
+export default class Profile extends React.Component<IProfileProps> {
+  constructor(props: IProfileProps) {
+    super(props);
+
+    this.state = {};
+  }
+  public render() {
+    return (
+      <div className="page-content-container">
+        <Banner header="Payment" image={headerImg} />
+        <img src={Stripe} alt="" className="payment" />
+        <img src={Paypal} alt="" className="payment" />
+        <img src={Alipay} alt="" className="payment" />
+        <img src={Wechatpay} alt="" className="payment" />
+        <Usermenu />
+      </div>
+    );
+  }
 }
