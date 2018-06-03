@@ -6,10 +6,9 @@ exports.up = function(knex, Promise) {
         .unsigned()
         .primary();
       users.string("username");
-      users.string("password");
+      users.text("passwordHash");
       users.string("displayName");
       users.text("userPhoto").defaultTo("");
-      users.text("token");
       users.text("facebookToken");
       users.enum("role", ["bartender", "server", "manager", "customer"]).notNull();
       users.boolean("isActive").defaultTo(true).notNull();
