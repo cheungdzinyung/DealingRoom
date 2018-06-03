@@ -65,9 +65,12 @@ export default class Profile extends React.Component<
   }
   public render() {
     return (
-      <div className="userInterface">
+      <div className="page-content-container">
         <Banner header="Profile" image={tempImg} />
         <Bar data={this.state.dataaa} />
+        <Card interactive={true} elevation={Elevation.FOUR}>
+          <Bar data={this.state.dataaa} />
+        </Card>
         <Card interactive={true} elevation={Elevation.FOUR}>
           <Bar data={this.state.dataaa} />
         </Card>

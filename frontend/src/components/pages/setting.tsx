@@ -14,33 +14,29 @@ export default class Setting extends React.Component {
   }
   public render() {
     return (
-      <div className="userInterface">
+      <div className="page-content-container">
         <Banner header="Setting" image={headerImg} />
-        <div className="page-container">
-          <div className="setting-container">
-            <InputGroup
-              placeholder="Display Name"
-              type="text"
-              className="pt-large setting-input"
-            />
-            <InputGroup
-              placeholder="Email"
-              type="text"
-              className="pt-large setting-input"
-            />
-            <InputGroup
-              placeholder="Password"
-              type="text"
-              className="pt-large setting-input"
-            />
-            <InputGroup
-              placeholder="Confirm Password"
-              type="text"
-              className="pt-large setting-input"
-            />
-            <Button fill={true} className="" type="button" text="Confirm" />
-          </div>
-        </div>
+        <InputGroup
+          placeholder="Display Name"
+          type="text"
+          className="pt-large setting-input"
+        />
+        <InputGroup
+          placeholder="Email"
+          type="text"
+          className="pt-large setting-input"
+        />
+        <InputGroup
+          placeholder="Password"
+          type="text"
+          className="pt-large setting-input"
+        />
+        <InputGroup
+          placeholder="Confirm Password"
+          type="text"
+          className="pt-large setting-input"
+        />
+        <Button fill={true} className="" type="button" text="Confirm" />
         <Usermenu />
       </div>
     );

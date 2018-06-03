@@ -21,7 +21,7 @@ export default class Profile extends React.Component<IProfileProps> {
   }
   public render() {
     return (
-      <div className="userInterface">
+      <div className="page-content-container">
         <Banner header="Payment" image={headerImg} />
         <img src={Stripe} alt="" className="payment" />
         <img src={Paypal} alt="" className="payment" />

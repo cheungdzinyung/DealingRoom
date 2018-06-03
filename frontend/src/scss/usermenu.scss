@@ -12,12 +12,30 @@
     background-color: $bgc;
     
     .menu-item{
-        
+        position: relative;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         width: 100%;
+        .count{
+            position: absolute;
+            top: 8%;
+            right: 15%;
+            width: 5vw;
+            height: 5vw;
+            text-align: center;
+            background-color: red;
+            color: white;
+            border-radius:50%;
+            // border: pink solid 1px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .count-digit{
+                font-size: .7rem;
+            }
+        }
         .user-icon{
             border-radius:50%;
         }
