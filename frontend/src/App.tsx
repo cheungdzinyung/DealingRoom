@@ -5,6 +5,7 @@ import "./scss/App.scss";
 
 import Login from "./components/pages/login";
 import Menu from "./components/pages/menu";
+import Order from "./components/pages/orders";
 import Payment from "./components/pages/payment";
 import Profile from "./components/pages/profile";
 import Setting from "./components/pages/setting";
@@ -18,7 +19,7 @@ class App extends React.Component {
           <Switch>
             <Route exact={true} path="/" component={Login} />
             <Route path="/profile" component={Profile} />
-            <Route path="/order" component={Profile} />
+            <Route path="/order" component={Order} />
             <Route path="/menu" component={Menu} />
             <Route path="/payment" component={Payment} />
             <Route path="/setting" component={Setting} />
