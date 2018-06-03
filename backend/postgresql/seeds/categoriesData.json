@@ -1,0 +1,77 @@
+[
+  {
+    "categoryName": "beer",
+    "categoryPhoto": "../../../frontend/public/img/beer.jpeg",
+    "isActive": true
+  },
+  {
+    "categoryName": "cocktail",
+    "categoryPhoto": "../../../frontend/public/img/cocktail.jpeg",
+    "isActive": true
+  },
+  {
+    "categoryName": "redWine",
+    "categoryPhoto": "../../../frontend/public/img/redwine.jpeg",
+    "isActive": true
+  },
+  {
+    "categoryName": "whiteWine",
+    "categoryPhoto": "../../../frontend/public/img/whitewine.jpeg",
+    "isActive": true
+  },
+  {
+    "categoryName": "champagne",
+    "categoryPhoto": "../../../frontend/public/img/champagne.jpeg",
+    "isActive": true
+  },
+  {
+    "categoryName": "vodka",
+    "categoryPhoto": "../../../frontend/public/img/vodka.jpeg",
+    "isActive": true
+  },
+  {
+    "categoryName": "tequila",
+    "categoryPhoto": "../../../frontend/public/img/tequila.jpeg",
+    "isActive": true
+  },
+  {
+    "categoryName": "whiskey",
+    "categoryPhoto": "../../../frontend/public/img/whiskey.jpeg",
+    "isActive": true
+  },
+  {
+    "categoryName": "gin",
+    "categoryPhoto": "../../../frontend/public/img/gin.jpeg",
+    "isActive": true
+  },
+  {
+    "categoryName": "rum",
+    "categoryPhoto": "../../../frontend/public/img/rum.jpeg",
+    "isActive": true
+  },
+  {
+    "categoryName": "brandy",
+    "categoryPhoto": "../../../frontend/public/img/brandy.jpeg",
+    "isActive": true
+  },
+  {
+    "categoryName": "non-alcoholic",
+    "categoryPhoto": "../../../frontend/public/img/nonalcoholic.jpeg",
+    "isActive": true
+  },
+  {
+    "categoryName": "snack",
+    "categoryPhoto": "../../../frontend/public/img/snack.jpeg",
+    "isActive": true
+  },
+  {
+    "categoryName": "main",
+    "categoryPhoto": "../../../frontend/public/img/main.jpeg",
+    "isActive": true
+  },
+  {
+    "categoryName": "dessert",
+    "categoryPhoto": "../../../frontend/public/img/dessert.jpeg",
+    "isActive": true
+  }
+]
