@@ -38,7 +38,7 @@ export default class Profile extends React.Component<
           {
             label: "My First dataset",
             // tslint:disable-next-line:object-literal-sort-keys
-            fillColor: "rgba(220,220,220,1)",
+            backgroundColor: "rgba(220,220,220,1)",
             strokeColor: "rgba(220,220,220,1)",
             // tslint:disable-next-line:object-literal-sort-keys
             pointColor: "rgba(220,220,220,1)",
@@ -50,7 +50,7 @@ export default class Profile extends React.Component<
           {
             label: "My Second dataset",
             // tslint:disable-next-line:object-literal-sort-keys
-            fillColor: "rgba(151,187,205,1)",
+            backgroundColor: "rgba(151,187,205,1)",
             strokeColor: "rgba(151,187,205,1)",
             // tslint:disable-next-line:object-literal-sort-keys
             pointColor: "rgba(234,60,90,1)",

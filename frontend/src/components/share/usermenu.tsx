@@ -21,6 +21,9 @@ class PureUsermenu extends React.Component<{ history: History.History }> {
   public toSetting = () => {
     this.props.history.push(`/setting`);
   };
+  public toMenu = () => {
+    this.props.history.push(`/menu`);
+  };
 
   public render() {
     return (
@@ -37,7 +40,8 @@ class PureUsermenu extends React.Component<{ history: History.History }> {
           <span>Orders</span>
         </div>
         <div className="menu-item">
-          <img src={menu} alt="" />
+          <img src={menu} alt="" onClick={this.toMenu} />
+          
         </div>
         <div className="menu-item" onClick={this.toPayment}>
           <img src={creditCard} alt="" />
