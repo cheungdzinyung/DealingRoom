@@ -1,8 +1,11 @@
-.page-content-container{
+.page-content-container {
     background-color: $bgc;
     width: 100%;
     padding: 5vh 10% 17vh 10%;
-    img{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    img {
         border-radius: 5px;
         margin-bottom: 3%;
         width: 100%;
