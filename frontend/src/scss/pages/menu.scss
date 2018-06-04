@@ -10,25 +10,24 @@
     margin-bottom: .5vh;
     .item-cards {
         width: 100%;
-        background-color: #3D3D3D;
+        background-color: $item-card-bgc;
         display: grid;
-        
         span {
-            color: rgba(233, 219, 204, 1);
+            color: $item-card-text;
         }
     }
     .item-price-up {
-        border-bottom: 3px solid #6FCF97;
+        border-bottom: 3px solid $up;
     }
     .item-price-down {
-        border-bottom: 1% solid #EB5757;
+        border-bottom: 1% solid $down;
     }
     .item-details {
         // padding-top: 2vh;
-        background-color: rgba(66, 66, 66, .4);
+        background-color: $item-detail-bgc;
         width: 98%;
         span {
-            color: rgba(233, 219, 204, .7);
+            color: $item-detail-text;
         }
     }
     .item-detail-onflex {
