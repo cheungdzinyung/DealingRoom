@@ -1,3 +1,9 @@
+const multer = require("multer");
+const fs = require("fs");
+const path = require("path");
+const storage = multer.memoryStorage();
+const upload = multer({ dest: "../users", storage: storage });
+
 module.exports = class UsersService {
   constructor(knex) {
     this.knex = knex;

@@ -37,6 +37,13 @@ There are things you need to install for the project. Follow below instructions 
 ```
 yarn install
 ```
+
+Please also add an .env file in the root folder with the following sentence in order for https to work properly. 
+```
+HTTPS=true
+```
+
+
 ## Project at a glance
 
 
