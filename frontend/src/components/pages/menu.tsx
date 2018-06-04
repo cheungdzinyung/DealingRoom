@@ -13,7 +13,7 @@ interface IMenuItem {
 
 interface IMenuState {
   items: IMenuItem[];
-  isOpen: boolean;
+  isItemDetailsOpen: boolean[];
 }
 
 export default class Menu extends React.Component<{}, IMenuState> {
@@ -21,16 +21,25 @@ export default class Menu extends React.Component<{}, IMenuState> {
     super(props);
 
     this.state = {
-      isOpen: false,
+      isItemDetailsOpen: items.map((data) => false),
       items
     };
+
+    
   }
 
-  public onOff = () => {
+  // public onOff = (e) => {
+  //   this.setState({
+  //     isItemDetailsOpen[e]:  !isItemDetailsOpen[e]
+  //   });
+  // };
+
+  public isOpen = (i: number) => {
+    // const temp = e.target.index;
     this.setState({
-      isOpen: !this.state.isOpen
+      isItemDetailsOpen: items.map((data, index) => (i === index) ? !this.state.isItemDetailsOpen[index] : this.state.isItemDetailsOpen[index])
     });
-  };
+  }
 
   public render() {
     return (
@@ -47,24 +56,14 @@ export default class Menu extends React.Component<{}, IMenuState> {
               className="item-cards item-price-up"
               interactive={true}
               elevation={Elevation.FOUR}
-              onClick={this.onOff}
+              onClick={this.isOpen.bind(this, i)}
               key={i}
             >
               <span>{item.name}</span>
               <span>${item.currentPrice}</span>
               <span>{item.percentage}%</span>
-              {/* <svg className="testicon" viewBox="0 0 100 100" height="100mm" width="100mm" >
-                <path
-                  d="M50 12.533L94.027 88.79H5.973z"
-                  fill="none"
-                  stroke="#000"
-                  strokeWidth={2.646}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg> */}
             </Card>
-            <Collapse key={i} className={"item-details" + " " + (this.state.isOpen ? "item-detail-onflex" : '')} isOpen={this.state.isOpen} >
+            <Collapse key={i} className={"item-details" + " " + (this.state.isItemDetailsOpen[i] ? "item-detail-onflex" : '')} isOpen={this.state.isItemDetailsOpen[i]} >
               <span>{item.description}</span>
             </Collapse>
           </div>
