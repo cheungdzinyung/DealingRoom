@@ -68,3 +68,22 @@ export const chartData = {
     }
   ]
 }
+  export const categories = {
+        name: [
+          "beer",
+          "cocktail",
+          "redWine",
+          "whiteWine",
+          "champagne",
+          "vodka",
+          "tequila",
+          "whiskey",
+          "gin",
+          "rum",
+          "brandy",
+          "non-alcoholic",
+          "snack",
+          "main",
+          "dessert"
+        ]
+  }

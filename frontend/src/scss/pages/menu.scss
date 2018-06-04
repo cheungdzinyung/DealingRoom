@@ -8,6 +8,10 @@
     flex-direction: column;
     align-items: center;
     margin-bottom: .5vh;
+    .pt-card.pt-interactive.pt-elevation-4.item-cards.item-price-up {
+        display: flex;
+        justify-content: space-around;
+    }
     .item-cards {
         width: 100%;
         background-color: $item-card-bgc;
@@ -17,8 +21,10 @@
         }
         .testicon{
             width: 30%;
-            
         }
+    }
+    .pt-collapse-body {
+        max-width: 60%;
     }
     .item-price-up {
         border-bottom: 3px solid $up;
