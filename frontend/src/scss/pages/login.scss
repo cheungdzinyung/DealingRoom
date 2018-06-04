@@ -39,10 +39,10 @@
         }
         .submit {
             grid-area: submit;
-            background-color: rgba(252, 178, 75, 0.97);
+            background-color: $theme-orange;
         }
         .google {
-            grid-area: google; //   background-color: white;
+            grid-area: google;
         }
         .facebook {
             grid-area: facebook;

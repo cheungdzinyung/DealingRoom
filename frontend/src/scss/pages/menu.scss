@@ -1,0 +1,40 @@
+.searchbar {
+    width: 100%;
+    margin-bottom: 1vh;
+}
+
+.item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: .5vh;
+    .item-cards {
+        width: 100%;
+        background-color: $item-card-bgc;
+        display: grid;
+        span {
+            color: $item-card-text;
+        }
+        .testicon{
+            width: 30%;
+            
+        }
+    }
+    .item-price-up {
+        border-bottom: 3px solid $up;
+    }
+    .item-price-down {
+        border-bottom: 1% solid $down;
+    }
+    .item-details {
+        // padding-top: 2vh;
+        background-color: $item-detail-bgc;
+        width: 98%;
+        span {
+            color: $item-detail-text;
+        }
+    }
+    .item-detail-onflex {
+        padding: 10% 5%;
+    }
+}

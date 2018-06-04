@@ -1,75 +1,26 @@
+// Templates
+$bgc-tinted: hsla(255, 4%, 18%, .5);
+$font-color-dark: rgba(22, 25, 23, .85);
+$font-color-light: #E9DBCC;
+$bgc: #2D2C30;
+
+$theme-orange: rgba(252, 178, 75, 0.97);
+$notification-alert: red;
+$up: #6FCF97;
+$down: #EB5757;
+$item-card-bgc: #3D3D3D;
+$item-card-text: rgba(233, 219, 204, 1);
+$item-detail-bgc: rgba(66, 66, 66, .4);
+$item-detail-text: rgba(233, 219, 204, .7);
+// Imports, external
 @import "~@blueprintjs/core/lib/css/blueprint.css";
 @import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
 @import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,500|Proza+Libre:400,500');
-$bgc-tinted: hsla(255,
-4%,
-18%,
-.5);
-$font-color-dark: rgba(22,
-25,
-23,
-.85);
-$font-color-light: #E9DBCC;
-$bgc: #2D2C30;
-html {
-  background-color: $bgc;
-  font-size: 1em;
-}
-
-body {
-  background-color: $bgc;
-  font-weight: 400;
-  line-height: 1.45;
-  color: $font-color-light;
-}
-
-p {
-  margin-bottom: 1.3em;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  margin: 1.414em 0 0.5em;
-  font-weight: inherit;
-  line-height: 1.2;
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 500;
-}
-
-h1 {
-  margin-top: 0;
-  font-size: 3.998em;
-}
-
-h2 {
-  font-size: 2.827em;
-}
-
-h3 {
-  font-size: 1.999em;
-}
-
-h4 {
-  font-size: 1.414em;
-}
-
-span {
-  font-family: 'Proza Libre', sans-serif;
-  font-weight: 400;
-  font-size: 1em;
-  color: $font-color-dark;
-}
-
-small,
-.font_small {
-  font-size: 0.707em;
-}
-
-@import 'common';
-@import 'login';
-@import 'profile';
-@import 'usermenu';
-@import 'topbanner';
-@import 'setting';
+// Imports, internal
+@import './share/common';
+@import './share/usermenu';
+@import './share/topbanner';
+@import './pages/login';
+@import './pages/profile';
+@import './pages/setting';
+@import './pages/menu';
