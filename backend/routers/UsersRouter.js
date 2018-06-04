@@ -7,7 +7,7 @@ module.exports = class UsersRouter {
 
   route() {
     let router = express.Router();
-    router.post("/", this.post.bind(this));
+    router.post("/", upload.single("profile"), this.add.bind(this));
     return router;
   }
 
@@ -15,6 +15,9 @@ module.exports = class UsersRouter {
       // console.log (req.body);
     return this.usersService
       .create(req.body)
+      .then (()=>{
+        this.usersService.profile(req.file);
+      })
       .then(arr => {
         res.json({ status: "success" }, arr);
       })

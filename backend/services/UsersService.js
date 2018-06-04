@@ -6,6 +6,7 @@ const upload = multer({ dest: "../users", storage: storage });
 
 module.exports = class UsersService {
   constructor(knex) {
+    this.uploadDirectory = path.join(__dirname, "../", "users")
     this.knex = knex;
   }
 
@@ -25,5 +26,9 @@ module.exports = class UsersService {
           .select("id", "displayName", "userPhoto")
           .where("id", id);
       });
+  }
+
+  upload(file){
+    
   }
 };
