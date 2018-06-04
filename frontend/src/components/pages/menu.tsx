@@ -48,12 +48,23 @@ export default class Menu extends React.Component<{}, IMenuState> {
               interactive={true}
               elevation={Elevation.FOUR}
               onClick={this.onOff}
+              key={i}
             >
               <span>{item.name}</span>
               <span>${item.currentPrice}</span>
               <span>{item.percentage}%</span>
+              {/* <svg className="testicon" viewBox="0 0 100 100" height="100mm" width="100mm" >
+                <path
+                  d="M50 12.533L94.027 88.79H5.973z"
+                  fill="none"
+                  stroke="#000"
+                  strokeWidth={2.646}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg> */}
             </Card>
-            <Collapse className={"item-details"+ " " + (this.state.isOpen ? "item-detail-onflex" : '')} isOpen={this.state.isOpen}>
+            <Collapse key={i} className={"item-details" + " " + (this.state.isOpen ? "item-detail-onflex" : '')} isOpen={this.state.isOpen} >
               <span>{item.description}</span>
             </Collapse>
           </div>
