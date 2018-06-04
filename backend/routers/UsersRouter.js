@@ -12,15 +12,15 @@ module.exports = class UsersRouter {
   }
 
   post(req, res) {
-      console.log (req.body);
-    // return this.usersService
-    //   .create(req.body)
-    //   .then(arr => {
-    //     res.json({ status: "success" }, arr);
-    //   })
-    //   .catch(err => {
-    //     console.log("Post Error", err);
-    //     res.status(500).json({ status: "failed" });
-    //   });
+      // console.log (req.body);
+    return this.usersService
+      .create(req.body)
+      .then(arr => {
+        res.json({ status: "success" }, arr);
+      })
+      .catch(err => {
+        console.log("Post Error", err);
+        res.status(500).json({ status: "failed" });
+      });
   }
 };
