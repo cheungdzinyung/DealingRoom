@@ -1,6 +1,7 @@
-import * as express from "express";
 import * as Knex from "knex";
-import * as fs from "fs-extra";
+// import * as fs from "fs-extra";
+
+import { IUserData } from "../interfaces"
 
 export default class UsersService {
   private knex: Knex;
@@ -9,12 +10,13 @@ export default class UsersService {
     this.knex = knex;
   }
 
-  create(data: any,  file: any) {
+  create(data: IUserData, file: any) {
     return this.knex("users")
       .insert({
         username: data.username,
-        passwordHash: data.password,
+        password: data.password,
         displayName: data.displayName,
+        facebookToken: data.facebookToken,
         role: data.role,
         isActive: true
       })
@@ -22,14 +24,39 @@ export default class UsersService {
       .then(id => {
         return this.knex("users")
           .where("id", parseInt(id))
-          .select("id");
+          .select("id", "displayName", "userPhoto");
+      });
+    // .then(() => {
+    //   fs.writeFile(file.originalname, file.buffer)
+    //   .then(fileName => {
+    //     console.log("The file name is:", fileName);
+    //     return fileName;
+    //   })
+    // });
+  }
+
+  get(req: number) {
+    return this.knex("users")
+      .where({ id: req, isActive: true })
+      .select("username", "password", "displayName", "userPhoto", "role");
+  }
+
+  update(id: number, data: IUserData) {
+    return this.knex("users")
+      .where("id", id)
+      .update({
+        username: data.username,
+        password: data.password,
+        displayName: data.displayName,
+        facebookToken: data.facebookToken,
+        role: data.role,
+        isActive: data.isActive
       })
-      .then(() => {
-        fs.writeFile(file.originalname, file.buffer)
-        .then(fileName => {
-          console.log("The file name is:", fileName);
-          return fileName;
-        })
+      .returning("id")
+      .then(id => {
+        return this.knex("users")
+          .where("id", parseInt(id))
+          .select("displayName", "userPhoto");
       });
   }
 }

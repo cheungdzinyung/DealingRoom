@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
         .unsigned()
         .primary();
       users.string("username");
-      users.text("passwordHash");
+      users.text("password");
       users.string("displayName");
       users.text("userPhoto").defaultTo("");
       users.text("facebookToken");
