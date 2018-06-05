@@ -8,8 +8,7 @@ let categoriesData = fs.readJsonSync(
 let itemsData = fs.readJsonSync(path.join(__dirname, "/itemsData.json"));
 
 exports.seed = (knex: Knex) => {
-    return knex("items")
-    .del()
+  return knex("items").del()
     .then(() => {
       return knex("categories").del();
     })
@@ -17,17 +16,17 @@ exports.seed = (knex: Knex) => {
       return knex("categories")
         .insert(categoriesData)
         .then(() => {
-          let itemsPromises = [];
+          let itemsPromises: {}[] = [];
           itemsData.forEach(item => {
             let category = item.category;
-            itemsPromises.push(createProduct(knex, item, category));
+            itemsPromises.push(createItems(knex, item, category));
           });
           return Promise.all(itemsPromises);
         });
     });
 };
 
-const createProduct = (knex: Knex, item, category) => {
+const createItems = (knex: Knex, item, category) => {
   return knex("categories")
     .where("categoryName", category)
     .first()
