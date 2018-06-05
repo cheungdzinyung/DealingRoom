@@ -5,28 +5,70 @@ export const items = [
       "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake."
       ,
     name: "Asahi",
+    percentage: 1.12
+  },
+  {
+    currentPrice: 60,
+    description:
+      "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
+    name: "Pinot Blanc",
     percentage: -10
   },
   {
     currentPrice: 60,
     description:
       "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
-    name: "Asahi",
+    name: "Taittinger",
+    percentage: 32.15
+  },
+  {
+    currentPrice: 60,
+    description:
+      "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
+    name: "Hennessy Paradis Imperial",
+    percentage: -31
+  },
+  {
+    currentPrice: 60,
+    description:
+      "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
+    name: "Pinot Blanc",
     percentage: -10
   },
   {
     currentPrice: 60,
     description:
       "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
-    name: "Asahi",
+    name: "Taittinger",
+    percentage: 32.15
+  },
+  {
+    currentPrice: 60,
+    description:
+      "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
+    name: "Hennessy Paradis Imperial",
+    percentage: -31
+  },
+  {
+    currentPrice: 60,
+    description:
+      "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
+    name: "Pinot Blanc",
     percentage: -10
   },
   {
     currentPrice: 60,
     description:
       "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
-    name: "Asahi",
-    percentage: -10
+    name: "Taittinger",
+    percentage: 32.15
+  },
+  {
+    currentPrice: 60,
+    description:
+      "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
+    name: "Hennessy Paradis Imperial",
+    percentage: -31
   }
 ];
 
