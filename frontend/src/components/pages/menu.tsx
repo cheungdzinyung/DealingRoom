@@ -2,8 +2,9 @@ import { Card, Collapse, Elevation } from "@blueprintjs/core";
 import * as React from "react";
 import Usermenu from "../share/usermenu";
 
-import { items } from "../fakedata";
+import { chartData, items } from "../fakedata";
 
+import { Line } from "react-chartjs-2";
 import down from "../../icons/down.svg";
 import up from "../../icons/up.svg";
 
@@ -46,7 +47,7 @@ export default class Menu extends React.Component<{}, IMenuState> {
       <div className="page-content-container">
         <input
           className="pt-input searchbar"
-          type="search"
+          type="text"
           placeholder="Search input"
           dir="auto"
         />
@@ -70,7 +71,11 @@ export default class Menu extends React.Component<{}, IMenuState> {
                 <span>${item.currentPrice}</span>
               </div>
               <div className="arrow-container">
-                <img className='arrow' src={item.percentage > 0 ? up : down} alt="" />
+                <img
+                  className="arrow"
+                  src={item.percentage > 0 ? up : down}
+                  alt=""
+                />
               </div>
             </Card>
             {/* ------------Seperate card and card details */}
@@ -83,7 +88,22 @@ export default class Menu extends React.Component<{}, IMenuState> {
               }
               isOpen={this.state.isItemDetailsOpen[i]}
             >
-              <span>{item.description}</span>
+              <div className="description">
+                <span>{item.description}</span>
+              </div>
+              <div className="chartVar">
+                <div className="variables">
+                  <img
+                    className="detail-arrow"
+                    src={item.percentage > 0 ? up : down}
+                    alt=""
+                  />
+                  <span className="detail-percentage">{item.percentage}%</span>
+                </div>
+                <div className="chart">
+                  <Line width={100} data={chartData} />
+                </div>
+              </div>
             </Collapse>
           </div>
         ))}
