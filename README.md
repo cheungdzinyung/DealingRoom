@@ -70,6 +70,7 @@ May 30 | Routes | Description
 May 31 | Blueprint UI | Scss implementation
 Jun 4  | Frontend development
 Jun 4  | Backend development
+Jun 5  | Display page | in progress
 
 
 
