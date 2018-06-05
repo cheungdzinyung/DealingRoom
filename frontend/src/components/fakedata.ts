@@ -25,7 +25,7 @@ export const items = [
     currentPrice: 60,
     description:
       "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
-    name: "Hennessy Paradis Imperial",
+    name: "Hennessy Paradis",
     percentage: -31
   },
   {
@@ -46,7 +46,7 @@ export const items = [
     currentPrice: 60,
     description:
       "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
-    name: "Hennessy Paradis Imperial",
+    name: "Hennessy Paradis",
     percentage: -31
   },
   {
@@ -67,7 +67,7 @@ export const items = [
     currentPrice: 60,
     description:
       "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
-    name: "Hennessy Paradis Imperial",
+    name: "Hennessy Paradis",
     percentage: -31
   }
 ];
