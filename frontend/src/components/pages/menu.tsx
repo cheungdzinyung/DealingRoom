@@ -73,6 +73,7 @@ export default class Menu extends React.Component<{}, IMenuState> {
                 <img className='arrow' src={item.percentage > 0 ? up : down} alt="" />
               </div>
             </Card>
+            {/* ------------Seperate card and card details */}
             <Collapse
               key={i}
               className={
