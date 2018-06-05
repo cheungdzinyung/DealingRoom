@@ -1,23 +1,34 @@
-import * as Knex from "knex";
-import * as fs from "fs-extra";
-import * as path from "path";
+import * as Knex from 'knex';
+import * as fs from 'fs-extra';
+import * as path from 'path';
 
-let categoriesData = fs.readJsonSync(
-  path.join(__dirname, "/categoriesData.json")
-);
-let itemsData = fs.readJsonSync(path.join(__dirname, "/itemsData.json"));
+interface IItemsType {
+  id: number,
+  itemName: string,
+  itemStock: number,
+  minimumPrice: number,
+  currentPrice: number,
+  itemPhoto: string,
+  itemDescription: string,
+  isSpecial: boolean,
+  isActive: boolean,
+  category: string
+}
 
 exports.seed = (knex: Knex) => {
-  return knex("items").del()
+  return knex("items")
+    .del()
     .then(() => {
       return knex("categories").del();
     })
     .then(() => {
+      let categoriesData = fs.readJsonSync(path.join(__dirname, "/categoriesData.json"));
       return knex("categories")
         .insert(categoriesData)
         .then(() => {
+          let itemsData = fs.readJsonSync(path.join(__dirname, "/itemsData.json"));
           let itemsPromises: {}[] = [];
-          itemsData.forEach(item => {
+          itemsData.forEach((item: IItemsType) => {
             let category = item.category;
             itemsPromises.push(createItems(knex, item, category));
           });
@@ -26,7 +37,7 @@ exports.seed = (knex: Knex) => {
     });
 };
 
-const createItems = (knex: Knex, item, category) => {
+const createItems = (knex: Knex, item: IItemsType, category: string) => {
   return knex("categories")
     .where("categoryName", category)
     .first()
