@@ -7,33 +7,54 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: .5vh;
-    .pt-card.pt-interactive.pt-elevation-4.item-cards.item-price-up {
-        display: flex;
-        justify-content: space-around;
-    }
+    margin-bottom: 1.2vh;
     .item-cards {
         width: 100%;
+        height: 100%;
         background-color: $item-card-bgc;
         display: grid;
+        padding: 0;
+        grid-template-columns: 1fr 15vmin;
+        grid-template-rows: auto;
+        .pricetag {
+            padding: 0 5%;  
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            
+            span{
+                font-size: 150%;
+            }
+        }
+        .arrow-container {
+            border-radius: 5px;
+            width: 15vmin;
+            height: 15vmin;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            
+            background: rgba(110, 108, 108, .5);
+            .arrow{
+                width: 42%;
+            }
+        }
         span {
             color: $item-card-text;
         }
-        .testicon{
-            width: 30%;
-        }
-    }
-    .pt-collapse-body {
-        max-width: 60%;
     }
     .item-price-up {
-        border-bottom: 3px solid $up;
+        border-bottom: 3px solid $up-dim;
     }
     .item-price-down {
-        border-bottom: 1% solid $down;
+        border-bottom: 3px solid $down-dim;
     }
     .item-details {
         // padding-top: 2vh;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
         background-color: $item-detail-bgc;
         width: 98%;
         span {
