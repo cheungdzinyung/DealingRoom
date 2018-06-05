@@ -1,14 +1,18 @@
 import { Button, InputGroup } from "@blueprintjs/core";
-import * as History from 'history';
+import * as History from "history";
 import * as React from "react";
 
-export default class Login extends React.Component<{history: History.History}> {
+import google from "../../icons/googleSignup.svg";
+
+export default class Login extends React.Component<{
+  history: History.History;
+}> {
   public google = <span>Google</span>;
   public facebook = <span>Facebook</span>;
   public submit = <span>S</span>;
 
   public toProfile = () => {
-    this.props.history.push('/profile');
+    this.props.history.push("/profile");
   };
 
   public render() {
@@ -26,24 +30,22 @@ export default class Login extends React.Component<{history: History.History}> {
             className="pt-large password"
           />
           <Button
-            fill={true}
-            className="submit"
-            type="submit"
-            onClick={this.toProfile}
-            text={this.submit}
-          />
-          <Button
-            fill={true}
-            className="google"
-            type="button"
-            text={this.google}
-          />
-          <Button
-            fill={true}
-            className="facebook"
-            type="button"
-            text={this.facebook}
-          />
+              fill={true}
+              className="submit"
+              type="submit"
+              onClick={this.toProfile}
+              text={this.submit}
+            />
+          <div className="social-login">
+            <img className="google" src={google} alt="" />
+            {/* <Button
+              fill={true}
+              className="google"
+              type="button"
+              
+            /> */}
+            <Button fill={true} className="facebook" type="button" />
+          </div>
         </div>
       </div>
     );

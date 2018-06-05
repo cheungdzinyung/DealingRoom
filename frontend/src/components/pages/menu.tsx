@@ -2,7 +2,11 @@ import { Card, Collapse, Elevation } from "@blueprintjs/core";
 import * as React from "react";
 import Usermenu from "../share/usermenu";
 
-import { items } from "../fakedata";
+import { chartData, items } from "../fakedata";
+
+import { Line } from "react-chartjs-2";
+import down from "../../icons/down.svg";
+import up from "../../icons/up.svg";
 
 interface IMenuItem {
   name: string;
@@ -21,50 +25,85 @@ export default class Menu extends React.Component<{}, IMenuState> {
     super(props);
 
     this.state = {
-      isItemDetailsOpen: items.map((data) => false),
+      isItemDetailsOpen: items.map(data => false),
       items
     };
-
-    
   }
-
-  // public onOff = (e) => {
-  //   this.setState({
-  //     isItemDetailsOpen[e]:  !isItemDetailsOpen[e]
-  //   });
-  // };
 
   public isOpen = (i: number) => {
     // const temp = e.target.index;
     this.setState({
-      isItemDetailsOpen: items.map((data, index) => (i === index) ? !this.state.isItemDetailsOpen[index] : this.state.isItemDetailsOpen[index])
+      isItemDetailsOpen: items.map(
+        (data, index) =>
+          i === index
+            ? !this.state.isItemDetailsOpen[index]
+            : this.state.isItemDetailsOpen[index]
+      )
     });
-  }
+  };
 
   public render() {
     return (
       <div className="page-content-container">
         <input
           className="pt-input searchbar"
-          type="search"
+          type="text"
           placeholder="Search input"
           dir="auto"
         />
         {this.state.items.map((item, i) => (
           <div className="item-container">
             <Card
-              className="item-cards item-price-up"
+              className={
+                !this.state.isItemDetailsOpen[i]
+                  ? "item-cards"
+                  : item.percentage > 0
+                    ? "item-cards item-price-up"
+                    : "item-cards item-price-down"
+              }
               interactive={true}
               elevation={Elevation.FOUR}
               onClick={this.isOpen.bind(this, i)}
               key={i}
             >
-              <span>{item.name}</span>
-              <span>${item.currentPrice}</span>
-              <span>{item.percentage}%</span>
+              <div className="pricetag">
+                <span>{item.name}</span>
+                <span>${item.currentPrice}</span>
+              </div>
+              <div className="arrow-container">
+                <img
+                  className="arrow"
+                  src={item.percentage > 0 ? up : down}
+                  alt=""
+                />
+              </div>
             </Card>
-            <Collapse key={i} className={"item-details" + " " + (this.state.isItemDetailsOpen[i] ? "item-detail-onflex" : '')} isOpen={this.state.isItemDetailsOpen[i]} >
-              <span>{item.description}</span>
+            {/* ------------Seperate card and card details */}
+            <Collapse
+              key={i}
+              className={
+                "item-details" +
+                " " +
+                (this.state.isItemDetailsOpen[i] ? "item-detail-onflex" : "")
+              }
+              isOpen={this.state.isItemDetailsOpen[i]}
+            >
+              <div className="description">
+                <span>{item.description}</span>
+              </div>
+              <div className="chartVar">
+                <div className="variables">
+                  <img
+                    className="detail-arrow"
+                    src={item.percentage > 0 ? up : down}
+                    alt=""
+                  />
+                  <span className="detail-percentage">{item.percentage}%</span>
+                </div>
+                <div className="chart">
+                  <Line width={100} data={chartData} />
+                </div>
+              </div>
             </Collapse>
           </div>
         ))}

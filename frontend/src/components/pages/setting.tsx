@@ -8,6 +8,8 @@ import Usermenu from "../share/usermenu";
 // Media asset import
 import headerImg from "../../icons/setting.svg";
 
+import profilePic from "../../images/circle-head.png"
+
 export default class Setting extends React.Component {
   constructor(props: {}) {
     super(props);
@@ -16,27 +18,29 @@ export default class Setting extends React.Component {
     return (
       <div className="page-content-container">
         <Banner header="Setting" image={headerImg} />
+        <img className="setting-img" src={profilePic} alt=""/>
         <InputGroup
+          leftIcon="person"
           placeholder="Display Name"
           type="text"
-          className="pt-large setting-input"
+          className="pt-large input-field"
         />
         <InputGroup
           placeholder="Email"
           type="text"
-          className="pt-large setting-input"
+          className="pt-large input-field"
         />
         <InputGroup
           placeholder="Password"
           type="text"
-          className="pt-large setting-input"
+          className="pt-large input-field"
         />
         <InputGroup
           placeholder="Confirm Password"
           type="text"
-          className="pt-large setting-input"
+          className="pt-large input-field"
         />
-        <Button fill={true} className="" type="button" text="Confirm" />
+        <Button fill={true} large={true} className="confirm" type="button" text="Confirm" />
         <Usermenu />
       </div>
     );

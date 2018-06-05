@@ -28,6 +28,9 @@ State the mission of the web app here!
 ![Frontend Framework](https://img.shields.io/badge/Frontend%20Framework-React-blue.svg) 
 ![Database design](https://img.shields.io/badge/database%20design-lucidchart-green.svg)
 ![Wireframe](https://img.shields.io/badge/wireframe-draw.io-yellow.svg)
+![UI toolkit](https://img.shields.io/badge/UI%20toolkit-Blueprint-green.svg)
+![Apiary API documentation](https://img.shields.io/badge/API%20documentation-Apiary-brightgreen.svg)
+
 
 ## Prerequisites: 
 ![GitHub](https://img.shields.io/badge/github--brightgreen.svg)
@@ -65,6 +68,10 @@ May 29 | API routes | definition
 May 30 | README update | front-end flow
 May 30 | Routes | Description
 May 31 | Blueprint UI | Scss implementation
+Jun 4  | Frontend development
+Jun 4  | Backend development
+Jun 5  | Display page | in progress
+
 
 
 ## Deployment

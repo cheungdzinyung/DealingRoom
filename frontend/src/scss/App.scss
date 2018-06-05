@@ -4,10 +4,15 @@ $font-color-dark: rgba(22, 25, 23, .85);
 $font-color-light: #E9DBCC;
 $bgc: #2D2C30;
 
+$search-bar-bgc: rgba(141,141,141, .8);
+$search-bar-font: rgba(233,219,204, 1);
+
 $theme-orange: rgba(252, 178, 75, 0.97);
 $notification-alert: red;
 $up: #6FCF97;
+$up-dim: rgba(111,207,151, .24);
 $down: #EB5757;
+$down-dim: rgba(235,87,87, .24);
 $item-card-bgc: #3D3D3D;
 $item-card-text: rgba(233, 219, 204, 1);
 $item-detail-bgc: rgba(66, 66, 66, .4);
@@ -24,3 +29,5 @@ $item-detail-text: rgba(233, 219, 204, .7);
 @import './pages/profile';
 @import './pages/setting';
 @import './pages/menu';
+@import './pages/display';
+@import './pages/payment';

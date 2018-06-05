@@ -1,0 +1,57 @@
+.display-content-container {
+    width: 100vw;
+    height: 100vh;
+    padding: 5vh 10% 17vh 10%;
+    position: relative;
+    .display-banner {
+        display: flex;
+        justify-content: start;
+        h2 {
+            margin: 0;
+            padding-left: 10%;
+            color: #E9DBCC;
+            font-size: 3.2em;
+
+        }
+    }
+    .display-container {
+        padding-top: 15px;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1.2vh;
+        .display-grid {
+            height: 15vmin;
+            background-color: $item-card-bgc;
+            display: grid;
+            grid-template-columns: 1fr 15vmin;
+            grid-template-rows: auto;
+            .item-arrow-display {
+                border-radius: 5px;
+                width: 15vmin;
+                height: 15vmin;
+                display: flex;
+                justify-content: center;
+                background: rgba(110, 108, 108, .5);
+
+                .arrow-img {
+                    width: 30px;
+                }
+            }
+            .item-name-display {
+                position: relative;
+                top: 25px;
+                left: 20px;
+            }
+        }
+        span { 
+            font-size: 150%;
+            color: $item-card-text;
+        }
+    }
+    .display-img {
+        max-height: 10vh;
+    }
+    div {
+        border-radius: 5px;
+    }
+}

@@ -2,6 +2,7 @@ import * as React from "react";
 import { Route, Switch } from "react-router-dom";
 import "./scss/App.scss";
 
+import Display from "./components/pages/display"
 import Login from "./components/pages/login";
 import Menu from "./components/pages/menu";
 import Order from "./components/pages/orders";
@@ -22,6 +23,7 @@ class App extends React.Component {
           <Route path="/menu" component={Menu} />
           <Route path="/payment" component={Payment} />
           <Route path="/setting" component={Setting} />
+          <Route path="/display" component={Display} />
         </Switch>
       </div>
 
