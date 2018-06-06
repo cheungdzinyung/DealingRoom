@@ -1,4 +1,5 @@
 import * as Knex from "knex";
+// **** Will use for fileupload ****
 // import * as fs from "fs-extra";
 
 import { IUserData } from "../interfaces"
@@ -26,6 +27,7 @@ export default class UsersService {
           .where("id", parseInt(id))
           .select("id", "displayName", "userPhoto");
       });
+    // **** Need to fix to upload photos ****
     // .then(() => {
     //   fs.writeFile(file.originalname, file.buffer)
     //   .then(fileName => {
