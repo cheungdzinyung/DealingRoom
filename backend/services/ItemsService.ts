@@ -11,7 +11,8 @@ export default class UsersService {
     this.knex = knex;
   }
 
-  create(data: IItemData, file: Express.Multer.File) {
+  // Working except file upload 06/06/18
+  add(data: IItemData, file: Express.Multer.File) {
     return this.knex("categories")
       .where("categoryName", data.categoryName)
       .select("id")
@@ -57,6 +58,7 @@ export default class UsersService {
     // });
   }
 
+  // Working 06/06/18
   get(req: number) {
     return this.knex("categories")
       .join("items", "categories.id", "=", "items.categories_id")
@@ -75,6 +77,7 @@ export default class UsersService {
       );
   }
 
+  // Working 06/06/18
   getAll() {
     return this.knex("categories")
       .join("items", "categories.id", "=", "items.categories_id")
@@ -92,17 +95,18 @@ export default class UsersService {
       );
   }
 
+  // Working except file upload 06/06/18
   update(id: number, data: IItemData) {
     return this.knex("categories")
+      .select("id")
       .where("categoryName", data.categoryName)
-      .returning("id")
       .then(catId => {
         return this.knex("items")
-          .where("id", id)
+          .where("items.id", id)
           .update({
             itemName: data.itemName,
             itemStock: data.itemStock,
-            categories_id: catId,
+            categories_id: catId[0].id,
             minimumPrice: data.minimumPrice,
             currentPrice: data.currentPrice,
             itemPhoto: data.itemPhoto,
@@ -110,23 +114,24 @@ export default class UsersService {
             isSpecial: data.isSpecial,
             isActive: data.isActive
           })
-          .returning("id")
-          .then(id => {
-            return this.knex("items")
-              .where("id", parseInt(id))
-              .select(
-                "id",
-                "itemName",
-                "itemStock",
-                "categoryName",
-                "minimumPrice",
-                "currentPrice",
-                "itemPhoto",
-                "itemDescription",
-                "isSpecial",
-                "isActive"
-              );
-          });
+          .returning("id");
+      })
+      .then(itemId => {
+        return this.knex("categories")
+          .join("items", "categories.id", "=", "items.categories_id")
+          .where("items.id", itemId[0])
+          .select(
+            "items.id",
+            "items.itemName",
+            "items.itemStock",
+            "categories.categoryName",
+            "items.minimumPrice",
+            "items.currentPrice",
+            "items.itemPhoto",
+            "items.itemDescription",
+            "items.isSpecial",
+            "items.isActive"
+          );
       });
   }
 }

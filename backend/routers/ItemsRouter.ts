@@ -28,15 +28,15 @@ export default class ItemsRouter {
 
   addItem(req: express.Request, res: express.Response) {
     return this.itemsService
-      .create(req.body, req.file)
+      .add(req.body, req.file)
       .then((result: IItemData) => {
         res.status(201).json(result);
         console.log(result);
       })
-    //   .catch((err: express.Errback) => {
-    //     console.log("Post Error", err);
-    //     res.status(500).json({ status: "failed" });
-    //   });
+      .catch((err: express.Errback) => {
+        console.log("Post Error", err);
+        res.status(500).json({ status: "failed" });
+      });
   }
 
   getItem(req: express.Request, res: express.Response) {
@@ -62,13 +62,12 @@ export default class ItemsRouter {
         res.status(500).json({ status: "failed" });
       });
   }
+  
   updateItem(req: express.Request, res: express.Response) {
-    console.log(req.params.id, req.body);
     return this.itemsService
       .update(req.params.id, req.body)
-      .then((result: IItemData) => {
+      .then((result:IItemData) => {
         res.status(201).json(result);
-        console.log(result);
       })
       .catch((err: express.Errback) => {
         console.log("Post Error", err);
