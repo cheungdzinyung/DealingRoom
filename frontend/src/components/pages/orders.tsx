@@ -1,5 +1,5 @@
 import * as React from "react";
-import Banner from "../share/topbanner";
+import OrderBanner from "../share/orderBanner";
 import Usermenu from "../share/usermenu";
 
 import headerImg from "../../icons/orders.svg";
@@ -11,8 +11,8 @@ export default class Orders extends React.Component {
   public render() {
     return (
       <div className="page-content-container">
-        <Banner header="Orders" image={headerImg} />
-        <h1>OMG</h1>
+        <OrderBanner displayName="Ivan" tableNumber={3} image={headerImg} status="Order" statusNumber={1326} />
+        
         <Usermenu />
       </div>
     );

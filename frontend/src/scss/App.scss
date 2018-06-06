@@ -1,7 +1,7 @@
 // Templates
 $bgc-tinted: hsla(255, 4%, 18%, .5);
 $font-color-dark: rgba(22, 25, 23, .85);
-$font-color-light: #E9DBCC;
+$font-color-light: rgba(233,219,204, 1);
 $bgc: #2D2C30;
 
 $search-bar-bgc: rgba(141,141,141, .8);
@@ -25,6 +25,7 @@ $item-detail-text: rgba(233, 219, 204, .7);
 @import './share/common';
 @import './share/usermenu';
 @import './share/topbanner';
+@import './share/OrderBanner';
 @import './pages/login';
 @import './pages/profile';
 @import './pages/setting';
