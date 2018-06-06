@@ -33,10 +33,10 @@ export default class ItemsRouter {
         res.status(201).json(result);
         console.log(result);
       })
-      .catch((err: express.Errback) => {
-        console.log("Post Error", err);
-        res.status(500).json({ status: "failed" });
-      });
+    //   .catch((err: express.Errback) => {
+    //     console.log("Post Error", err);
+    //     res.status(500).json({ status: "failed" });
+    //   });
   }
 
   getItem(req: express.Request, res: express.Response) {
