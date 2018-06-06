@@ -26,7 +26,7 @@ export default class UsersService {
             itemPhoto: data.itemPhoto,
             itemDescription: data.itemDescription,
             isSpecial: data.isSpecial,
-            isActive: data.isActive
+            isActive: true
           })
           .returning("id")
           .then(id => {
@@ -46,14 +46,26 @@ export default class UsersService {
   }
 
   get(req: number) {
-    return this.knex("items")
-      .where({ id: req, isActive: true })
-      .select("id", "itemName", "itemStock", "categoryName", "minimumPrice", "currentPrice", "itemPhoto", "itemDescription", "isSpecial");
+    return this.knex("categories")
+    .join("items", "categories.id", "=", "items.categories_id")
+    .where("items.id", req)
+    .select (
+        "items.id",
+        "items.itemName",
+        "items.itemStock",
+        "categories.categoryName",
+        "items.minimumPrice",
+        "items.currentPrice",
+        "items.itemPhoto",
+        "items.itemDescription",
+        "items.isSpecial",
+        "items.isActive"
+    )
   }
 
   getAll() {
     // **** To do ****
-    return null;
+    return;
   }
 
   update(id: number, data: IItemData) {
@@ -78,7 +90,18 @@ export default class UsersService {
           .then(id => {
             return this.knex("items")
               .where("id", parseInt(id))
-              .select("id", "itemName", "itemStock", "categoryName", "minimumPrice", "currentPrice", "itemPhoto", "itemDescription", "isSpecial", "isActive");
+              .select(
+                "id",
+                "itemName",
+                "itemStock",
+                "categoryName",
+                "minimumPrice",
+                "currentPrice",
+                "itemPhoto",
+                "itemDescription",
+                "isSpecial",
+                "isActive"
+              );
           });
       });
   }
