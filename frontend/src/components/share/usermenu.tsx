@@ -41,7 +41,7 @@ class PureUsermenu extends React.Component<{ history: History.History }> {
         </div>
         <div className="menu-item">
           <img src={menu} alt="" onClick={this.toMenu} />
-          
+          <span>Menu  </span>
         </div>
         <div className="menu-item" onClick={this.toPayment}>
           <img src={creditCard} alt="" />

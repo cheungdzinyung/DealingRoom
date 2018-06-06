@@ -1,6 +1,6 @@
 html {
     background-color: $bgc;
-    font-size: 1em;
+    font-size: 16px;
   }
   
   body {
@@ -8,54 +8,50 @@ html {
     font-weight: 400;
     line-height: 1.45;
     color: $font-color-light;
-  }
-  
-  p {
-    margin-bottom: 1.3em;
-    font-family: 'Proza Libre', sans-serif;
-    font-weight: 400;
-    font-size: 1em;
-    color: $font-color-dark;
-  }
+  } 
   
   h1,
   h2,
   h3,
   h4 {
-    margin: 1.414em 0 0.5em;
+    // margin: 1.414em 0 0.5em;
     font-weight: inherit;
     line-height: 1.2;
     font-family: 'Cormorant Garamond', serif;
     font-weight: 500;
+    color: $font-color-light;
   }
   
   h1 {
     margin-top: 0;
-    font-size: 3.998em;
+    font-size: 3.998rem;
   }
   
   h2 {
-    font-size: 2.827em;
+    font-size: 2.827rem;
   }
   
   h3 {
-    font-size: 1.999em;
+    font-size: 1.999rem;
   }
   
   h4 {
-    font-size: 1.414em;
+    font-size: 1.414rem;
+  }
+  p {
+    margin-bottom: 1.3em;
   }
   
-  span {
+  span, p {
     font-family: 'Proza Libre', sans-serif;
     font-weight: 400;
-    font-size: 1em;
+    font-size: 1rem;
     color: $font-color-dark;
   }
   
   small,
   .font_small {
-    font-size: 0.707em;
+    font-size: 0.707rem;
   }
 
 .page-content-container {

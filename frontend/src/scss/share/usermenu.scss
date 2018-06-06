@@ -5,6 +5,7 @@
     left: 0;
     width: 100vw;
     height: 15vh;
+    padding: 0 2%;
 
     display: flex;
     flex-direction: row;
@@ -41,10 +42,11 @@
         }
         span{
             padding-top: 10%;
+            font-size: 1rem;
             color: $font-color-light;
         }
         img{
-            width: 60%;
+            width: 50%;
         }
     }
     
