@@ -113,7 +113,7 @@ export const chartData = {
   export const categories = {
         name: [
           "beer",
-          "cocktail",
+          "Cocktails",
           "redWine",
           "whiteWine",
           "champagne",
