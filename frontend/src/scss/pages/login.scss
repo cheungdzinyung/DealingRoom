@@ -43,6 +43,9 @@
         }
         .google {
             grid-area: google;
+            width: 100%;
+            background-color: white;
+            border-radius: 5px;
         }
         .facebook {
             grid-area: facebook;

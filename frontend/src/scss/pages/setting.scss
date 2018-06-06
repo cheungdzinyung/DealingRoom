@@ -1,3 +1,15 @@
-.setting-container{
-    width: 75%;
+.setting-img {
+    width: 45%;
+}
+
+.input-field {
+    width: 80%;
+    margin: .5vmin 0;
+    background-color: $search-bar-bgc;
+    color: $search-bar-font;
+}
+
+.confirm {
+    background-color: red;
+    width: 80%;
 }
