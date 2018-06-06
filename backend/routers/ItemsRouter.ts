@@ -52,15 +52,15 @@ export default class ItemsRouter {
   }
 
   getAllItem(req: express.Request, res: express.Response) {
-    // return this.itemsService
-    //   .getAll()
-    //   .then((allData: any) => {
-    //     res.status(200).json(allData);
-    //   })
-    //   .catch((err: express.Errback) => {
-    //     console.log("Post Error", err);
-    //     res.status(500).json({ status: "failed" });
-    //   });
+    return this.itemsService
+      .getAll()
+      .then((allData: any) => {
+        res.status(200).json(allData);
+      })
+      .catch((err: express.Errback) => {
+        console.log("Post Error", err);
+        res.status(500).json({ status: "failed" });
+      });
   }
   updateItem(req: express.Request, res: express.Response) {
     console.log(req.params.id, req.body);

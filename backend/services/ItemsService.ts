@@ -64,8 +64,20 @@ export default class UsersService {
   }
 
   getAll() {
-    // **** To do ****
-    return;
+    return this.knex("categories")
+    .join("items", "categories.id", "=", "items.categories_id")
+    .select (
+        "items.id",
+        "items.itemName",
+        "items.itemStock",
+        "categories.categoryName",
+        "items.minimumPrice",
+        "items.currentPrice",
+        "items.itemPhoto",
+        "items.itemDescription",
+        "items.isSpecial",
+        "items.isActive"
+    )
   }
 
   update(id: number, data: IItemData) {
