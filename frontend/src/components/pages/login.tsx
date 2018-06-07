@@ -1,8 +1,9 @@
-import { Button, InputGroup } from "@blueprintjs/core";
 import * as History from "history";
 import * as React from "react";
 
+import facebook from "../../icons/facebookSignup.svg";
 import google from "../../icons/googleSignup.svg";
+import Key from "../../icons/key.svg";
 
 export default class Login extends React.Component<{
   history: History.History;
@@ -19,32 +20,22 @@ export default class Login extends React.Component<{
     return (
       <div className="login-container">
         <div className="login-grid">
-          <InputGroup
-            placeholder="Username"
-            type="text"
-            className="pt-large username"
-          />
-          <InputGroup
-            placeholder="Password"
-            type="password"
-            className="pt-large password"
-          />
-          <Button
-              fill={true}
-              className="submit"
-              type="submit"
-              onClick={this.toProfile}
-              text={this.submit}
-            />
+
+          <input type="text" placeholder="Username" className="pt-large username" />
+
+          <input type="password" placeholder="Password" className="pt-large password" />
+
+          <button type="submit" className="login-button-hp" onClick={this.toProfile}>
+            <img src={Key} alt="" />
+          </button>
           <div className="social-login">
-            <img className="google" src={google} alt="" />
-            {/* <Button
-              fill={true}
-              className="google"
-              type="button"
-              
-            /> */}
-            <Button fill={true} className="facebook" type="button" />
+            <button className="social-button google">
+              <img src={google} alt="" />
+            </button>
+            <button className="social-button facebook">
+              <img src={facebook} alt="" />
+            </button>
+
           </div>
         </div>
       </div>
