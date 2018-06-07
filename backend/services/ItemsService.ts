@@ -35,7 +35,7 @@ export default class UsersService {
               .join("items", "categories.id", "=", "items.categories_id")
               .where("items.id", itemId[0])
               .select(
-                "items.id",
+                "items.id as items_id",
                 "items.itemName",
                 "items.itemStock",
                 "categories.categoryName",

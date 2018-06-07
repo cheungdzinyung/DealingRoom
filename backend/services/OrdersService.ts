@@ -39,29 +39,56 @@ export default class OrdersService {
                 })
                 .then(() => {
                   return this.knex("orders")
-                    .select("users_id", "status", "id")
+                    .select("users_id", "status", "id as orders_id")
                     .where("id", orderId[0]);
                 })
             );
           });
       });
   }
-
+  
+  // able to get all items within array but unable to insert into result object
+  // 07-06-18
   getOrderByOrderId(req: number) {
-    console.log(req);
+    let orderItemsList = this.knex("orders_items")
+      .join("orders", "orders.id", "=", "orders_items.orders_id")
+      .join("items", "items.id", "=", "orders_items.items_id")
+      .select(
+        "items.itemName as itemName",
+        "orders_items.purchasePrice as purchasePrice",
+        "orders_items.ice as ice",
+        "orders_items.sweetness as sweetness",
+        "orders_items.garnish as garnish"
+      )
+      .where("orders.id", req);
 
     return this.knex("users")
       .join("orders", "users.id", "=", "users_id")
       .where("orders.id", req)
       .select(
-        "users.id",
-        "users.username as username",
-        "users.displayName as displayName",
+        "users.id as usersId",
+        "users.username",
+        "users.displayName",
         "orders.id",
-        "orders.table as table",
-        "orders.status as status",
-        "orders.isPaid as isPaid",
-      );
+        "orders.table",
+        "orders.status",
+        "orders.isPaid"
+      )
+      .then((order: Object) => {
+        let entireOrder = [
+          {
+            user_id: order[0].usersId,
+            userName: order[0].username,
+            displayName: order[0].displayName,
+            orders_id: order[0].id,
+            table: order[0].table,
+            status: order[0].status,
+            isPaid: order[0].isPaid,
+            orderItems: orderItemsList
+          }
+        ];
+        return entireOrder;
+      });
   }
 
   // update(id: number, data: IOrderData) {

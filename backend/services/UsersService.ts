@@ -25,7 +25,7 @@ export default class UsersService {
       .then((id: Object) => {
         return this.knex("users")
           .where("id", id[0])
-          .select("id", "displayName", "userPhoto");
+          .select("id as user_id", "displayName", "userPhoto");
       });
 
     // fs.writeFile(file.filename, file.buffer, ()=>{

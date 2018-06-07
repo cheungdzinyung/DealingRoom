@@ -41,7 +41,7 @@ export default class UsersRouter {
   getOrderByOrderId(req: express.Request, res: express.Response) {
     return this.ordersService
       .getOrderByOrderId(req.params.id)
-      .then((result: IOrderData) => {
+      .then((result: any) => {
         res.status(200).json(result);
       })
       .catch((err: express.Errback) => {
