@@ -16,7 +16,7 @@ export default class UsersService {
     return this.knex("categories")
       .where("categoryName", data.categoryName)
       .select("id")
-      .then(catId => {
+      .then((catId: Object) => {
         return this.knex("items")
           .insert({
             itemName: data.itemName,
@@ -30,7 +30,7 @@ export default class UsersService {
             isActive: true
           })
           .returning("id")
-          .then(itemId => {
+          .then((itemId: Object) => {
             return this.knex("categories")
               .join("items", "categories.id", "=", "items.categories_id")
               .where("items.id", itemId[0])
@@ -95,12 +95,49 @@ export default class UsersService {
       );
   }
 
+  // Working 07/06/18
+  getAllInCategory(catName: string) {
+    let catPhoto: string;
+    this.knex("categories")
+      .select("categoryPhoto")
+      .where("categoryName", catName)
+      .then((photos: Object) => {
+        return (catPhoto = photos[0].categoryPhoto);
+      });
+
+    return this.knex("categories")
+      .select("id")
+      .where("categoryName", catName)
+      .then((catId: Object) => {
+        return this.knex("items")
+          .select(
+            "id",
+            "itemName",
+            "itemStock",
+            "minimumPrice",
+            "currentPrice",
+            "itemPhoto",
+            "itemDescription",
+            "isActive"
+          )
+          .where("categories_id", catId[0].id)
+          .then((itemList: Object) => {
+            let result = [{
+              categoryName: catName,
+              categoryPhoto: catPhoto,
+              items: itemList
+            }];
+            return result;
+          });
+      });
+  }
+
   // Working except file upload 06/06/18
   update(id: number, data: IItemData) {
     return this.knex("categories")
       .select("id")
       .where("categoryName", data.categoryName)
-      .then(catId => {
+      .then((catId: Object) => {
         return this.knex("items")
           .where("items.id", id)
           .update({
@@ -116,7 +153,7 @@ export default class UsersService {
           })
           .returning("id");
       })
-      .then(itemId => {
+      .then((itemId: Object) => {
         return this.knex("categories")
           .join("items", "categories.id", "=", "items.categories_id")
           .where("items.id", itemId[0])

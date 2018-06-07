@@ -21,7 +21,7 @@ export default class ItemsRouter {
     let router = express.Router();
     router.put("/:id", upload.single("itemPhoto"), this.updateItem.bind(this));
     router.get("/:id", this.getItem.bind(this));
-    router.get("/", this.getAllItem.bind(this));
+    router.get("/", this.getAllItems.bind(this));
     router.post("/", upload.single("itemPhoto"), this.addItem.bind(this));
     return router;
   }
@@ -42,8 +42,8 @@ export default class ItemsRouter {
   getItem(req: express.Request, res: express.Response) {
     return this.itemsService
       .get(req.params.id)
-      .then((data: IItemData) => {
-        res.status(200).json(data);
+      .then((result: IItemData) => {
+        res.status(200).json(result);
       })
       .catch((err: express.Errback) => {
         console.log("Post Error", err);
@@ -51,22 +51,34 @@ export default class ItemsRouter {
       });
   }
 
-  getAllItem(req: express.Request, res: express.Response) {
-    return this.itemsService
-      .getAll()
-      .then((allData: any) => {
-        res.status(200).json(allData);
-      })
-      .catch((err: express.Errback) => {
-        console.log("Post Error", err);
-        res.status(500).json({ status: "failed" });
-      });
+  getAllItems(req: express.Request, res: express.Response) {
+    if (req.query.category !== undefined) {
+      return this.itemsService
+        .getAllInCategory(req.query.category)
+        .then((result: any) => {
+          res.status(200).json(result);
+        })
+        .catch((err: express.Errback) => {
+          console.log("Post Error", err);
+          res.status(500).json({ status: "failed" });
+        });
+    } else {
+      return this.itemsService
+        .getAll()
+        .then((result: IItemData) => {
+          res.status(200).json(result);
+        })
+        .catch((err: express.Errback) => {
+          console.log("Post Error", err);
+          res.status(500).json({ status: "failed" });
+        });
+    }
   }
-  
+
   updateItem(req: express.Request, res: express.Response) {
     return this.itemsService
       .update(req.params.id, req.body)
-      .then((result:IItemData) => {
+      .then((result: IItemData) => {
         res.status(201).json(result);
       })
       .catch((err: express.Errback) => {

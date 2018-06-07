@@ -21,3 +21,13 @@ export interface IItemData{
   isSpecial: boolean,
   isActive: boolean
 }
+
+export interface IOrderData{
+  id: number,
+  users_id: number,
+  table: number,
+  status: string,
+  isPaid: string,
+  created_at: number,
+  updated_at: number
+}

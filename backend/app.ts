@@ -12,6 +12,9 @@ import UsersService from "./services/UsersService";
 import ItemsRouter from "./routers/ItemsRouter";
 import ItemsService from "./services/ItemsService";
 
+import OrdersRouter from "./routers/OrdersRouter";
+import OrdersService from "./services/OrdersService";
+
 dotenv.config();
 
 const PORT = process.env.PORT || '8080';
@@ -26,6 +29,9 @@ let usersRouter = new UsersRouter(usersService);
 let itemsService = new ItemsService(knex);
 let itemsRouter = new ItemsRouter(itemsService);
 
+let ordersService = new OrdersService(knex);
+let ordersRouter = new OrdersRouter(ordersService);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -33,6 +39,7 @@ app.use(cors());
 
 app.use("/api/users", usersRouter.router());
 app.use("/api/items", itemsRouter.router());
+app.use("/api/orders", ordersRouter.router());
 
 app.listen(PORT,() => {
     console.log(`Application started at port: ${PORT}`);

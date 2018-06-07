@@ -2,7 +2,9 @@ import * as express from "express";
 // ***** May use in future ****
 // import * as bodyParser from "body-parser";
 // import * as path from "path";
+// import * as fs from "fs-extra";
 import * as multer from "multer";
+
 
 import { IUserData } from "../interfaces";
 import UsersService from "../services/UsersService";
@@ -41,8 +43,8 @@ export default class UsersRouter {
   getUser(req: express.Request, res: express.Response) {
     return this.usersService
       .get(req.params.id)
-      .then((data: IUserData) => {
-        res.status(200).json(data);
+      .then((result: IUserData) => {
+        res.status(200).json(result);
       })
       .catch((err: express.Errback) => {
         console.log("Post Error", err);

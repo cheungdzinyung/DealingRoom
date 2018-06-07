@@ -1,8 +1,8 @@
 import * as Knex from "knex";
-// **** Will use for fileupload ****
+// **** Will use for file upload ****
 // import * as fs from "fs-extra";
 
-import { IUserData } from "../interfaces"
+import { IUserData } from "../interfaces";
 
 export default class UsersService {
   private knex: Knex;
@@ -22,11 +22,16 @@ export default class UsersService {
         isActive: true
       })
       .returning("id")
-      .then(id => {
+      .then((id: Object) => {
         return this.knex("users")
-          .where("id", parseInt(id))
+          .where("id", id[0])
           .select("id", "displayName", "userPhoto");
       });
+
+    // fs.writeFile(file.filename, file.buffer, ()=>{
+    //   console.log("The file name is:", __filename);
+    //   return __filename;
+    // });
     // **** Need to fix to upload photos ****
     // .then(() => {
     //   fs.writeFile(file.originalname, file.buffer)
@@ -55,9 +60,9 @@ export default class UsersService {
         isActive: data.isActive
       })
       .returning("id")
-      .then(id => {
+      .then((id: Object) => {
         return this.knex("users")
-          .where("id", parseInt(id))
+          .where("id", id[0])
           .select("displayName", "userPhoto");
       });
   }

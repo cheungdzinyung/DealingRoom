@@ -104,13 +104,13 @@ exports.up = function (knex: Knex) {
         ordersItems.foreign("items_id").references("items.id");
         ordersItems.decimal("purchasePrice")
         ordersItems
-          .enum("ice", ["extra", "normal", "without"])
+          .enum("ice", ["extra", "normal", "less", "without"])
           .defaultTo("normal");
         ordersItems
-          .enum("sweetness", ["extra", "normal", "without"])
+          .enum("sweetness", ["extra", "normal", "less", "without"])
           .defaultTo("normal");
         ordersItems
-          .enum("garnish", ["extra", "normal", "without"])
+          .enum("garnish", ["extra", "normal", "less", "without"])
           .defaultTo("normal");
       });
     })
