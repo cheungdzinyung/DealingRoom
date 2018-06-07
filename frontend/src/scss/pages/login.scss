@@ -17,11 +17,14 @@
         display: grid;
         grid-template-columns: repeat(5, 20%);
         grid-template-rows: repeat(3, 1fr);
-        grid-template-areas: "un un un un submit" "pw pw pw pw submit" "google google google facebook facebook";
+        grid-template-areas: "un un un un submit" "pw pw pw pw submit" "so so so so so";
         grid-gap: 5%;
         input {
+            border: 0;
             border-radius: 5px;
+            padding: 5%;
             width: 100%;
+            font-size: 120%;
             background-color: rgba(141, 141, 141, 0.95);
             color: #E9DBCC;
         }
@@ -29,6 +32,7 @@
             border-radius: 5px;
         }
         button {
+            border: 0;
             border-radius: 5px;
         }
         .username {
@@ -37,18 +41,32 @@
         .password {
             grid-area: pw;
         }
-        .submit {
+        .login-button-hp {
             grid-area: submit;
             background-color: $theme-orange;
         }
-        .google {
-            grid-area: google;
-            width: 100%;
-            background-color: white;
-            border-radius: 5px;
+        .social-login{
+            grid-area: so;
+            display: flex;
+            justify-content: space-between;
+            height: 100%;
+            .google{
+                background-color: white;
+            }
+            .facebook{
+                background-color: #4267b2;
+            }
+            .social-button{
+                width: 48%;
+                height: 100%;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;  
+                img{
+                    margin: 0;
+                }  
+            }
         }
-        .facebook {
-            grid-area: facebook;
-        }
+
     }
 }
