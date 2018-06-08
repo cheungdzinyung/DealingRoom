@@ -2,7 +2,7 @@ import { Card, Collapse, Elevation } from "@blueprintjs/core";
 import * as React from "react";
 import Usermenu from "../share/usermenu";
 
-import { chartData, items } from "../fakedata";
+import { chartData, chartOption, items } from "../fakedata";
 
 import { Line } from "react-chartjs-2";
 import down from "../../icons/down.svg";
@@ -101,7 +101,7 @@ export default class Menu extends React.Component<{}, IMenuState> {
                   <span className="detail-percentage">{item.percentage}%</span>
                 </div>
                 <div className="chart">
-                  <Line width={100} data={chartData} />
+                  <Line width={100} data={chartData} options={chartOption} />
                 </div>
               </div>
             </Collapse>

@@ -59,13 +59,13 @@
         width: 98%;
         .pt-collapse-body {
             display: grid;
-            grid-template-columns: 55% 45%;
+            grid-template-columns: 60% 40%;
             grid-template-areas: "desc charV";
             .description {
                 grid-area: desc;
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+                justify-content: flex-start;
                 span{
                     font-size: 120%;
                     text-justify: auto;
@@ -73,9 +73,8 @@
             }
             .chartVar {
                 grid-area: charV;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
+                display: grid;
+                grid-template-rows: 60% 40%;
                 .variables {
                     display: flex;
                     flex-direction: row;
@@ -87,6 +86,9 @@
                     .detail-percentage {
                         font-size: 130%;
                     }
+                }
+                .chart{
+                    height: 100%;
                 }
             }
             span {
