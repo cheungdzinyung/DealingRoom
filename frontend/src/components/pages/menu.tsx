@@ -8,6 +8,8 @@ import { Line } from "react-chartjs-2";
 import down from "../../icons/down.svg";
 import up from "../../icons/up.svg";
 
+import beer from "../../images/categories/beer.jpg";
+
 interface IMenuItem {
   name: string;
   currentPrice: number;
@@ -45,6 +47,7 @@ export default class Menu extends React.Component<{}, IMenuState> {
   public render() {
     return (
       <div className="page-content-container">
+      <img className="menu-banner" src={beer} alt=""/>
         <input
           className="pt-input searchbar"
           type="text"

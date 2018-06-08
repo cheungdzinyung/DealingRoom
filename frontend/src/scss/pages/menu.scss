@@ -1,3 +1,7 @@
+.menu-banner {
+    margin-bottom: 5vmin;
+}
+
 .searchbar {
     width: 100%;
     margin-bottom: 5vmin;
@@ -66,7 +70,7 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
-                span{
+                span {
                     font-size: 120%;
                     text-justify: auto;
                 }
@@ -87,7 +91,7 @@
                         font-size: 130%;
                     }
                 }
-                .chart{
+                .chart {
                     height: 100%;
                 }
             }

@@ -9,6 +9,8 @@ import headerImg from "../../icons/orders.svg";
 
 import { orderList } from "../fakedata";
 
+
+
 interface IOrder {
   orderNumber: number
   amount: number
@@ -38,6 +40,8 @@ export default class Orders extends React.Component<IOrdersProps, IOrdersStates>
       <div className="page-content-container">
         <OrderBanner displayName="Ivan" tableNumber={3} image={headerImg} status="Order" statusNumber={1326} />
 
+        
+
         {
           this.state.listOfOrder.map((indOrd, index) => (<Card className="order-cards" interactive={true} elevation={Elevation.TWO}>
             <div className="top">
@@ -51,9 +55,12 @@ export default class Orders extends React.Component<IOrdersProps, IOrdersStates>
               {indOrd.isPaid ? <img src={checkIcon} className="order-icon" alt="" /> : <br />}
 
             </div>
-            <hr />
-            {indOrd.isPaid ? <br /> :
-              <button className="paynow-button"><span>Pay Now</span></button>
+            {!indOrd.isPaid &&
+              <div>
+                <hr />
+                <button className="paynow-button"><span>Pay Now</span></button>
+              </div>
+
             }
 
           </Card>))
