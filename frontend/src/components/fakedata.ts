@@ -74,41 +74,36 @@ export const items = [
 
 export const chartData = {
   labels: [
-    "Vodka",
-    "Spirit",
-    "Gin",
-    "Beer",
-    "Something",
-    "Onething",
-    "Nothing"
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
   ],
   // tslint:disable-next-line:object-literal-sort-keys
   datasets: [
     {
-      label: "User",
+      label: "You",
       // tslint:disable-next-line:object-literal-sort-keys
-      backgroundColor: "rgba(220,220,220,.5)",
-      strokeColor: "rgba(220,220,220,1)",
+      backgroundColor: "rgba(111, 207, 151, 1)",
+      strokeColor: "rgb(235, 87, 87, 1)",
       // tslint:disable-next-line:object-literal-sort-keys
-      pointColor: "rgba(220,220,220,1)",
+      pointColor: "rgba(233, 219, 204, 1)",
       pointStrokeColor: "#fff",
       pointHighlightFill: "#fff",
       pointHighlightStroke: "rgba(220,220,220,1)",
       data: [65, 59, 90, 81, 56, 55, 0]
-    },
-    {
-      label: "Insert bar's name",
-      // tslint:disable-next-line:object-literal-sort-keys
-      backgroundColor: "rgba(151,187,205,.5)",
-      strokeColor: "rgba(151,187,205,1)",
-      // tslint:disable-next-line:object-literal-sort-keys
-      pointColor: "rgba(234,60,90,1)",
-      pointStrokeColor: "#fff",
-      pointHighlightFill: "#fff",
-      pointHighlightStroke: "rgba(151,187,205,1)",
-      data: [28, 48, 40, 19, 96, 27, 100]
     }
   ]
+}
+
+export const chartOption = {
+  legend: {
+    display: false
+    // position: "bottom"
+  }
 }
 export const categories = {
   name: [
@@ -130,74 +125,73 @@ export const categories = {
   ]
 }
 
-export const orderList ={
-  listOfOrder:[
+export const orderList = {
+  listOfOrder: [
     {
-      amount: 360, 
+      amount: 360,
       isPaid: true,
       orderNumber: 1,
       orderTime: 1543
     },
     {
-      amount: 1230, 
+      amount: 1230,
       isPaid: false,
       orderNumber: 2,
       orderTime: 1543
     },
     {
-      amount: 1120, 
+      amount: 1120,
       isPaid: false,
       orderNumber: 3,
       orderTime: 1543
     },
     {
-      amount: 500, 
+      amount: 500,
       isPaid: true,
       orderNumber: 4,
       orderTime: 1543
     },
     {
-      amount: 360, 
+      amount: 360,
       isPaid: true,
       orderNumber: 5,
       orderTime: 1543
     },
     {
-      amount: 360, 
+      amount: 360,
       isPaid: false,
       orderNumber: 191,
       orderTime: 1543
     },
     {
-      amount: 349, 
+      amount: 349,
       isPaid: true,
       orderNumber: 30,
       orderTime: 1543
     },
     {
-      amount: 261, 
+      amount: 261,
       isPaid: true,
       orderNumber: 70,
       orderTime: 1543
     },
     {
-      amount: 180, 
+      amount: 180,
       isPaid: false,
       orderNumber: 88,
       orderTime: 1543
     },
     {
-      amount: 213, 
+      amount: 213,
       isPaid: true,
       orderNumber: 1,
       orderTime: 1543
     },
     {
-      amount: 360, 
+      amount: 360,
       isPaid: false,
       orderNumber: 121,
       orderTime: 1543
     }
   ]
 }
-  

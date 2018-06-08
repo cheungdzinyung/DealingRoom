@@ -1,4 +1,4 @@
-import { Button, InputGroup } from "@blueprintjs/core";
+import { Button, FormGroup } from "@blueprintjs/core";
 import * as React from "react";
 
 // Component import
@@ -18,29 +18,36 @@ export default class Setting extends React.Component {
     return (
       <div className="page-content-container">
         <Banner header="Setting" image={headerImg} />
-        <img className="setting-img" src={profilePic} alt=""/>
-        <InputGroup
-          leftIcon="person"
-          placeholder="Display Name"
-          type="text"
-          className="pt-large input-field"
-        />
-        <InputGroup
-          placeholder="Email"
-          type="text"
-          className="pt-large input-field"
-        />
-        <InputGroup
-          placeholder="Password"
-          type="text"
-          className="pt-large input-field"
-        />
-        <InputGroup
-          placeholder="Confirm Password"
-          type="text"
-          className="pt-large input-field"
-        />
-        <Button fill={true} large={true} className="confirm" type="button" text="Confirm" />
+        <img className="setting-img" src={profilePic} alt="" />
+        <FormGroup
+          className="user-info-form"
+          helperText="User login information"
+          label="Your login information"
+          labelFor="login"
+          requiredLabel={true}  >
+          <input
+            placeholder="Display Name"
+            type="text"
+            className="pt-large input-field"
+            dir="auto"
+          />
+          <input
+            placeholder="Email"
+            type="text"
+            className="pt-large input-field"
+          />
+          <input
+            placeholder="Password"
+            type="password"
+            className="pt-large input-field"
+          />
+          <input
+            placeholder="Confirm Password"
+            type="password"
+            className="pt-large input-field"
+          />
+        </ FormGroup>
+        <Button large={true} className="conf-button" type="button" text="Confirm" />
         <Usermenu />
       </div>
     );
