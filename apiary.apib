@@ -69,7 +69,7 @@ A status of 201 is returned upon successful insertion along with a JSON containi
 + Response 201 (application/json)
 
         {
-            "users.id": 2,
+            "users_id": 2,
             "displayName": "janedoe@gmail.com",
             "userPhoto": "profilePhoto.jpeg"
         }
@@ -230,6 +230,7 @@ All items information can be obtained through this route. The response is return
 Additional items can be added into the database using this action. It takes a JSON object containing:
 >- itemName
 >- itemStock
+>- categoryName
 >- minimumPrice
 >- currentPrice
 >- itemPhoto (optional)
@@ -242,6 +243,7 @@ A status of 201 is returned upon successful insertion along with a JSON containi
         {
             "itemName": "Heineken",
             "itemStock": 100,
+            "categoryName": "beer",
             "minimumPrice": 15.00,
             "currentPrice": 60.00,
             "itemPhoto": "www.dealingroom.com/public/02/img/heineken.jpeg",
@@ -252,7 +254,7 @@ A status of 201 is returned upon successful insertion along with a JSON containi
 
         {
             "itemName": "Heineken"
-            "items.id": 2
+            "items_id": 2
             "categoryName": "Beer",
             "minimumPrice": 15.00,
             "currentPrice": 60.00
@@ -260,15 +262,15 @@ A status of 201 is returned upon successful insertion along with a JSON containi
             "isActive": true
         }
 
-## %5Bapi/items/?categories=""%5D [/api/items/?categories=""]
+## %5Bapi/items/?category=%5D [/api/items/?category=]
 ### Obtaining all item's information within a category [GET]
 All items information within a category can be obtained through this route. The response is returned in JSON format along with a 200 status code. 
 + Response 200 (application/json)
 
         {
             "categoryName": "Beer"
-            "categoryPhoto": "categoryPhoto":"www.dealingroom.com/public/img/beer.jpeg"
-            "items":
+            "categoryPhoto": "www.dealingroom.com/public/img/beer.jpeg"
+            "items":[
                 {
                     "id": 1,
                     "itemName": "Asahi",
@@ -309,6 +311,7 @@ All items information within a category can be obtained through this route. The 
                     "itemDescription": "Stella Artois is one of the world’s best-selling beers and is enjoyed in more than 80 countries. Its full, characteristic flavour and high quality is assured through a superior brewing process and by using the finest ingredients available."
                     "isActive": true
                 }
+            ]
         }
     
 ## %5Bapi/orders/:orderid%5D [/api/orders/:orderid]
@@ -317,14 +320,14 @@ A single order's information can be obtained through this route using the order'
 + Response 200 (application/json)
 
         {
-            "users.id": 1,
+            "users_id": 1,
             "userName": "John Doe",
             "displayName": "Johnny",
-            "orders.id" : 1,
+            "orders_id" : 1,
             "table": 11,
             "status": "confirmed",
             "isPaid": false,
-            "orderItems":
+            "orderItems":[
                 {
                     "itemName": "Asahi",
                     "ice": "normal",
@@ -339,6 +342,7 @@ A single order's information can be obtained through this route using the order'
                     "garnish" : "normal",
                     "purchasePrice" : 150.00
                 }
+            ]
         }
 
 ### Amending order information by id [PUT]
@@ -346,22 +350,19 @@ Currently reserved for updating status of orders or to delete orders.
 + Request (application/json)
 
         {
-            "orders.id": 1,
             "status": "made",
-            "isPaid": false,
-            "isActive": true
+            "isPaid": false
         }
 
 + Response 201 (application/json)
 
         {
-            "orders.id": 1,
+            "orders_id": 1,
             "status": "made",
-            "isPaid": false,
-            "isActive": true
+            "isPaid": false
         }
 
-## %5Bapi/orders/:userid%5D [/api/orders/:userid]
+## %5Bapi/orders/user/:userid%5D [/api/orders/user/:userid]
 ### Retreiving orders information by user id [GET]
 ALL orders information by one user can be obtained through this route using the user's id. The response is returned in JSON format along with a 200 status code. 
 + Response 200 (application/json)
@@ -371,12 +372,14 @@ ALL orders information by one user can be obtained through this route using the 
             "userName": "John Doe",
             "displayName": "Johnny",
             "orders":
+            [
                 {
                     "orders.id" : 1,
                     "table": 11,
                     "status": "confirmed",
                     "isPaid": false,
                     "orderItems":
+                    [
                         {
                             "itemName": "Asahi",
                             "ice": "normal",
@@ -391,6 +394,7 @@ ALL orders information by one user can be obtained through this route using the 
                             "garnish" : "normal",
                             "purchasePrice" : 150.00
                         }
+                    ]
                 },
                 {
                     "orders.id": 2,
@@ -398,6 +402,7 @@ ALL orders information by one user can be obtained through this route using the 
                     "status": "confirmed",
                     "isPaid": false,
                     "orderItems":
+                    [
                         {
                             "itemName": "Asahi",
                             "ice": "normal",
@@ -405,9 +410,12 @@ ALL orders information by one user can be obtained through this route using the 
                             "garnish" : "normal",
                             "purchasePrice" : 105.00
                         }
+                    ]
                 }
+            ]
         }
 
+## %5Bapi/orders/:userid%5D [/api/orders/:userid]
 ### Adding order by user id [POST]
 Additional order can be added into the database using this action. It takes a JSON object containing: 
 >- users.id
@@ -427,6 +435,7 @@ A status of 201 is returned upon successful insertion along with a JSON containi
             "table": 11,
             "status": "confirmed",
             "item":
+            [
                 {
                     "itemName": "Asahi",
                     "ice": "normal",
@@ -441,14 +450,15 @@ A status of 201 is returned upon successful insertion along with a JSON containi
                     "garnish" : "normal",
                     "purchasePrice" : 150.00
                 }
+            ]
         }
 
 + Response 201 (application/json)
 
         {
-            "users.id": 1,
+            "users_id": 1,
             "status": "confirmed",
-            "orders.id": 1
+            "orders_id": 1
         }
 
 ## %5Bapi/ordersprices%5D [/api/ordersprices/]
