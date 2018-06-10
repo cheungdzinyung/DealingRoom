@@ -43,41 +43,64 @@ export default class Orders extends React.Component<
   public render() {
     return (
       <div className="page-content-container">
-        <OrderBanner
-          displayName="Ivan"
-          tableNumber={3}
-          image={headerImg}
-          status="Order"
-          statusNumber={1326}
-        />
-        {this.state.listOfOrder.map((indOrd, index) => (
-          <Card
-            className="order-cards"
-            interactive={true}
-            elevation={Elevation.TWO}
-          >
-            <div className="top">
-              <div className="order-details">
-                <h3>Order #{indOrd.orderNumber}</h3>
-                <p>Total Amount: ${indOrd.amount}</p>
-                <p>Ordering time: {indOrd.orderTime}</p>
+        <OrderBanner displayName="Ivan" tableNumber={3} image={headerImg} />
+        {/* Dynamic content, TODO: refactorize it */}
+        {this.state.listOfOrder.filter(each => !each.isPaid).length > 0 && (
+          <div className="order-header-container">
+            <h3 className="order-header">To be paid</h3>
+          </div>
+        )}
+        {this.state.listOfOrder
+          .filter(each => !each.isPaid)
+          .map((indOrd, index) => (
+            <Card
+              className="order-cards"
+              interactive={true}
+              elevation={Elevation.TWO}
+            >
+              <div className="top">
+                <div className="order-details">
+                  <h3 className="order-number">Order #{indOrd.orderNumber}</h3>
+                  <p className="order-amount">Total Amount: ${indOrd.amount}</p>
+                  <p className="order-time">
+                    Ordering time: {indOrd.orderTime}
+                  </p>
+                </div>
               </div>
-              {indOrd.isPaid ? (
+              <hr />
+              <button className="paynow-button">
+                <span>Pay Now</span>
+              </button>
+            </Card>
+          ))}
+        {/* Split into two parts */}
+        {this.state.listOfOrder.filter(each => each.isPaid === true).length >
+          0 && (
+          <div className="order-header-container">
+            <h3 className="order-header">Paid</h3>
+          </div>
+        )}
+        {this.state.listOfOrder
+          .filter(each => each.isPaid === true)
+          .map((indOrd, index) => (
+            <Card
+              className="order-cards"
+              interactive={true}
+              elevation={Elevation.TWO}
+            >
+              <div className="top">
+                <div className="order-details">
+                  <h3 className="order-number">Order #{indOrd.orderNumber}</h3>
+                  <p className="order-amount">Total Amount: ${indOrd.amount}</p>
+                  <p className="order-time">
+                    Ordering time: {indOrd.orderTime}
+                  </p>
+                </div>
                 <img src={checkIcon} className="order-icon" alt="" />
-              ) : (
-                <br />
-              )}
-            </div>
-            {!indOrd.isPaid && (
-              <div>
-                <hr />
-                <button className="paynow-button">
-                  <span>Pay Now</span>
-                </button>
               </div>
-            )}
-          </Card>
-        ))}
+            </Card>
+          ))}
+        {/* End of Dynamic content*/}
         <Usermenu />
       </div>
     );
