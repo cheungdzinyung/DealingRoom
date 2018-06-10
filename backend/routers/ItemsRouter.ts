@@ -1,7 +1,4 @@
 import * as express from "express";
-// ***** May use in future ****
-// import * as bodyParser from "body-parser";
-// import * as path from "path";
 import * as multer from "multer";
 
 import { IItemData } from "../interfaces";
@@ -19,14 +16,18 @@ export default class ItemsRouter {
 
   router() {
     let router = express.Router();
-    router.put("/:id", upload.single("itemPhoto"), this.updateItem.bind(this));
-    router.get("/:id", this.getItem.bind(this));
-    router.get("/", this.getAllItems.bind(this));
-    router.post("/", upload.single("itemPhoto"), this.addItem.bind(this));
+    
+    router.post("/", upload.single("itemPhoto"), this.add.bind(this));
+
+    router.get("/:id", this.get.bind(this));
+    router.get("/", this.getAll.bind(this));
+
+    router.put("/:id", upload.single("itemPhoto"), this.update.bind(this));
+    
     return router;
   }
 
-  addItem(req: express.Request, res: express.Response) {
+  add(req: express.Request, res: express.Response) {
     return this.itemsService
       .add(req.body, req.file)
       .then((result: IItemData) => {
@@ -39,7 +40,7 @@ export default class ItemsRouter {
       });
   }
 
-  getItem(req: express.Request, res: express.Response) {
+  get(req: express.Request, res: express.Response) {
     return this.itemsService
       .get(req.params.id)
       .then((result: IItemData) => {
@@ -51,10 +52,10 @@ export default class ItemsRouter {
       });
   }
 
-  getAllItems(req: express.Request, res: express.Response) {
+  getAll(req: express.Request, res: express.Response) {
     if (req.query.category !== undefined) {
       return this.itemsService
-        .getAllInCategory(req.query.category)
+        .getAllInCat(req.query.category)
         .then((result: any) => {
           res.status(200).json(result);
         })
@@ -75,7 +76,7 @@ export default class ItemsRouter {
     }
   }
 
-  updateItem(req: express.Request, res: express.Response) {
+  update(req: express.Request, res: express.Response) {
     return this.itemsService
       .update(req.params.id, req.body, req.file)
       .then((result: IItemData) => {

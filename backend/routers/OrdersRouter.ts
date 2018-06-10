@@ -1,5 +1,4 @@
 import * as express from "express";
-
 import OrdersService from "../services/OrdersService";
 
 export default class UsersRouter {
@@ -11,16 +10,22 @@ export default class UsersRouter {
 
   router() {
     let router = express.Router();
-    router.put("/:id", this.updateOrder.bind(this));
-    router.get("/:id", this.getOrderByOrderId.bind(this));
-    router.get("/user/:id", this.getOrderByUserId.bind(this));
-    router.post("/:id", this.addOrder.bind(this));
+
+    router.post("/:id", this.add.bind(this));
+
+    router.get("/:id", this.getByOrderId.bind(this));
+    router.get("/user/:id", this.getByUserId.bind(this));
+    router.get("/prices/:id", this.getAllPrice.bind(this));
+    router.get("/categories/:id", this.getAllQuantity.bind(this));
+
+    router.put("/:id", this.update.bind(this));
+
     return router;
   }
 
-  addOrder(req: express.Request, res: express.Response) {
+  add(req: express.Request, res: express.Response) {
     return this.ordersService
-      .create(req.params.id, req.body)
+      .add(req.params.id, req.body)
       .then((result: any) => {
         res.status(201).json(result);
       })
@@ -30,9 +35,9 @@ export default class UsersRouter {
       });
   }
 
-  getOrderByOrderId(req: express.Request, res: express.Response) {
+  getByOrderId(req: express.Request, res: express.Response) {
     return this.ordersService
-      .getOrderByOrderId(req.params.id)
+      .getByOrderId(req.params.id)
       .then((result: any) => {
         res.status(200).json(result);
       })
@@ -42,9 +47,9 @@ export default class UsersRouter {
       });
   }
 
-  getOrderByUserId(req: express.Request, res: express.Response) {
+  getByUserId(req: express.Request, res: express.Response) {
     return this.ordersService
-      .getOrderByUserId(req.params.id)
+      .getByUserId(req.params.id)
       .then((result: any) => {
         res.status(200).json(result);
       })
@@ -53,8 +58,32 @@ export default class UsersRouter {
         res.status(500).json({ status: "failed" });
       });
   }
-  
-  updateOrder(req: express.Request, res: express.Response) {
+
+  getAllPrice(req: express.Request, res: express.Response) {
+    return this.ordersService
+      .getAllPrice(req.params.id)
+      .then((result: any) => {
+        res.status(200).json(result);
+      })
+      .catch((err: express.Errback) => {
+        console.log("Post Error", err);
+        res.status(500).json({ status: "failed" });
+      });
+  }
+
+  getAllQuantity(req: express.Request, res: express.Response) {
+    return this.ordersService
+      .getAllQuantity(req.params.id)
+      .then((result: any) => {
+        res.status(200).json(result);
+      })
+      .catch((err: express.Errback) => {
+        console.log("Post Error", err);
+        res.status(500).json({ status: "failed" });
+      });
+  }
+
+  update(req: express.Request, res: express.Response) {
     console.log(req.params.id, req.body);
     return this.ordersService
       .update(req.params.id, req.body)
