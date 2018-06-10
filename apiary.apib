@@ -368,13 +368,13 @@ ALL orders information by one user can be obtained through this route using the 
 + Response 200 (application/json)
 
         {
-            "users.id": 1,
-            "userName": "John Doe",
+            "users_id": 1,
+            "username": "John Doe",
             "displayName": "Johnny",
             "orders":
             [
                 {
-                    "orders.id" : 1,
+                    "orders_id" : 1,
                     "table": 11,
                     "status": "confirmed",
                     "isPaid": false,
@@ -463,7 +463,7 @@ A status of 201 is returned upon successful insertion along with a JSON containi
             "orders_id": 1
         }
 
-## %5Bapi/ordersprices%5D [/api/ordersprices/]
+## %5Bapi/orders/prices/:userid%5D [/api/orders/prices/:userid]
 ### Retreiving all order price information that day [GET]
 Used to compile comparison charts for consumptions
 + Response 200 (application/json)
@@ -499,7 +499,7 @@ Used to compile comparison charts for consumptions
                 },
         }
 
-## %5Bapi/ordersquantities%5D [/api/ordersquantities/]
+## %5Bapi/orders/quantities/:userid%5D [/api/orders/quantities/:userid]
 ### Retreiving all order quantity information that day [GET]
 Used to compile comparison charts for consumptions
 + Response 200 (application/json)
@@ -536,8 +536,8 @@ Used to compile comparison charts for consumptions
         }
 
 ## %5Bapi/prices/?categories=""%5D [/api/prices/?categories=""]
-### Retrieving the price of items within one category from Redis [GET]
-Used to retrieve the fluctuating prices of items within one category from Redis.
+### Retrieving the price of items within one category [GET]
+Used to retrieve the fluctuating prices of items within one category.
 + Response 200 (application/json)
 
         {
@@ -567,8 +567,8 @@ Used to retrieve the fluctuating prices of items within one category from Redis.
         }
 
 ## %5Bapi/prices/%5D [/api/prices/]
-### Retrieving the price of items within all categories from Redis [GET]
-Used to retrieve the fluctuating prices all items within all categories from Redis.
+### Retrieving the price of items within all categories [GET]
+Used to retrieve the fluctuating prices all items within all categories.
 
 + Response 200 (application/json)
 
@@ -627,8 +627,9 @@ Used to retrieve the fluctuating prices all items within all categories from Red
             }
         ]
 
-### Updating the prices of a single item to Redis [PUT]
-Used to update the fluctuating prices of a single item to Redis. A status of 201 is returned upon successful insertion along with a JSON containing all the new prices of the category. 
+## %5Bapi/prices/:itemsid%5D [/api/prices/:itemsid]
+### Updating the prices of a single item [PUT]
+Used to update the fluctuating prices of a single item. A status of 201 is returned upon successful insertion along with a JSON containing all the new prices of the category. 
 + Request (application/json)
 
         {
