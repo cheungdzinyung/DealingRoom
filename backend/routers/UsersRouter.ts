@@ -55,7 +55,7 @@ export default class UsersRouter {
   updateUser(req: express.Request, res: express.Response) {
     console.log(req.params.id, req.body);
     return this.usersService
-      .update(req.params.id, req.body)
+      .update(req.params.id, req.body, req.file)
       .then((result: IUserData) => {
         res.status(201).json(result);
         console.log(result);

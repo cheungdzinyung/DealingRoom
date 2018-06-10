@@ -77,7 +77,7 @@ export default class ItemsRouter {
 
   updateItem(req: express.Request, res: express.Response) {
     return this.itemsService
-      .update(req.params.id, req.body)
+      .update(req.params.id, req.body, req.file)
       .then((result: IItemData) => {
         res.status(201).json(result);
       })

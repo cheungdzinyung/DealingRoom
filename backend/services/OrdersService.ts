@@ -18,7 +18,7 @@ export default class OrdersService {
         users_id: id
       })
       .returning("id")
-      .then((orderId: object) => {
+      .then((orderId: Knex.QueryCallback) => {
         Promise.all(
           data.item.map((item: object, i: number) => {
             return this.knex("items")
@@ -38,7 +38,7 @@ export default class OrdersService {
         );
         return orderId;
       })
-      .then((orderId: object) => {
+      .then((orderId: Knex.QueryCallback) => {
         return this.knex("orders")
           .select("users_id", "status", "id as orders_id")
           .where("id", orderId[0]);
@@ -57,9 +57,10 @@ export default class OrdersService {
         "orders.id",
         "orders.table",
         "orders.status",
-        "orders.isPaid"
+        "orders.isPaid",
+        "orders.created_at as orderingTime"
       )
-      .then((order: object) => {
+      .then((order: Knex.QueryCallback) => {
         return this.knex("orders_items")
           .join("orders", "orders.id", "=", "orders_items.orders_id")
           .join("items", "items.id", "=", "orders_items.items_id")
@@ -71,7 +72,7 @@ export default class OrdersService {
             "orders_items.garnish as garnish"
           )
           .where("orders.id", id)
-          .then((orderItemsList: object) => {
+          .then((orderItemsList: Knex.QueryCallback) => {
             let entireOrder = [
               {
                 user_id: order[0].usersId,
@@ -81,6 +82,7 @@ export default class OrdersService {
                 table: order[0].table,
                 status: order[0].status,
                 isPaid: order[0].isPaid,
+                orderingTime: order[0].orderingTime,
                 orderItems: orderItemsList
               }
             ];
@@ -89,35 +91,28 @@ export default class OrdersService {
       });
   }
 
-  // 08-06-18
-  getOrderByUserId(id: number) {
-    return this.knex("orders")
+  // 10-06-18
+  async getOrderByUserId(id: number) {
+    let [user] = await this.knex("users")
+      .where("id", id)
+      .select("users.id as user_id", "username", "displayName"); // user should be first element of array (Destructuring_assignment)
+
+    const orderList = await this.knex("orders")
       .where("users_id", id)
-      .select("orders.id")
-      .orderBy("created_at", "asc")
-      .then((orderList:object) => {
-        console.log (orderList)
-        return orderList;
-      });
-      //   console.log (typeof(orderList));
-        // Promise.all(
-        //   data.item.map((item: object, i: number) => {
-        //     return this.knex("items")
-        //       .select("id")
-        //       .where("itemName", data.item[i].itemName)
-        //       .then((itemId: object) => {
-        //         return this.knex("orders_items").insert({
-        //           orders_id: orderId[0],
-        //           items_id: itemId[0].id,
-        //           purchasePrice: data.item[i].purchasePrice,
-        //           ice: data.item[i].ice,
-        //           sweetness: data.item[i].sweetness,
-        //           garnish: data.item[i].garnish
-        //         });
-        //       });
-        //   })
-        // );
-      // });
+      .select("id");
+
+    const orders = await Promise.all(
+      orderList.map(async (_order: object, i: number) => {
+        console.log(orderList[i].id);
+        let [order] = await this.getOrderByOrderId(id);
+        delete order.user_id;
+        delete order.userName;
+        delete order.displayName;
+        return order;
+      })
+    );
+    user["orders"] = orders;
+    return user;
   }
 
   // 08-06-18
@@ -129,7 +124,7 @@ export default class OrdersService {
         isPaid: data.isPaid
       })
       .returning("id")
-      .then(id => {
+      .then((id: number) => {
         return this.knex("orders")
           .where("id", id[0])
           .select("id as order_id", "status", "isPaid");
