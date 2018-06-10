@@ -157,3 +157,20 @@ export const orderList = {
     }
   ]
 };
+
+export const requestList = [
+  {
+    garnish: "normal",
+    ice: "normal",
+    itemName: "Asahi",
+    purchasePrice: 105,
+    sweetness: "normal"
+  },
+  {
+    garnish: "normal",
+    ice: "extra",
+    itemName: "Grey Goose",
+    purchasePrice: 150,
+    sweetness: "normal"
+  }
+];
