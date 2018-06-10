@@ -20,24 +20,23 @@ interface IPureOrder {
   isPaid: boolean;
 }
 
-interface IPureOrdersProps {
-  listOfOrder: IPureOrder[];
-}
-
 interface IPureOrdersStates {
   listOfOrder: IPureOrder[];
 }
 
-export default class Orders extends React.Component<
-  IPureOrdersProps,
-  IPureOrdersStates
-> {
-  constructor(props: IPureOrdersProps) {
+export default class Orders extends React.Component<{}, IPureOrdersStates> {
+  constructor(props: {}) {
     super(props);
 
     this.state = {
-      listOfOrder: orderList.listOfOrder
+      listOfOrder: []
     };
+  }
+
+  public componentDidMount() {
+    this.setState({
+      listOfOrder: orderList.listOfOrder
+    })
   }
 
   public render() {
