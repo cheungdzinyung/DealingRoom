@@ -100,10 +100,25 @@ export const chartData = {
 }
 
 export const chartOption = {
+  layout: {
+    // padding: 10
+  },
   legend: {
     display: false
     // position: "bottom"
+  },
+  scales:{
+    display: false,
+    gridLines: {
+      color: "#ffffff", 
+      display: true
+      
+    }
+  },
+  title: {
+    display: false
   }
+  
 }
 export const categories = {
   name: [

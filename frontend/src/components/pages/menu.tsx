@@ -47,7 +47,7 @@ export default class Menu extends React.Component<{}, IMenuState> {
   public render() {
     return (
       <div className="page-content-container">
-      <img className="menu-banner" src={beer} alt=""/>
+        <img className="menu-banner" src={beer} alt="" />
         <input
           className="pt-input searchbar"
           type="text"
@@ -103,9 +103,13 @@ export default class Menu extends React.Component<{}, IMenuState> {
                   />
                   <span className="detail-percentage">{item.percentage}%</span>
                 </div>
-                <div className="chart">
-                  <Line width={100} data={chartData} options={chartOption} />
-                </div>
+
+                <Line
+                  width={80}
+                  height={60}
+                  data={chartData}
+                  options={chartOption}
+                />
               </div>
             </Collapse>
           </div>

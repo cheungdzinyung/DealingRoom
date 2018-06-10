@@ -1,20 +1,17 @@
 // Templates
 $bgc-tinted: hsla(255, 4%, 18%, .5);
 $font-color-dark: rgba(22, 25, 23, .85);
-$font-color-light: rgba(233,219,204, 1);
+$font-color-light: rgba(233, 219, 204, 1);
 $bgc: rgb(45, 44, 48);
-
-$search-bar-bgc: rgba(141,141,141, .8);
-$search-bar-font: rgba(233,219,204, 1);
-
-$placebolder-color:rgba(233,219,204, .55); 
-
+$search-bar-bgc: rgba(141, 141, 141, .8);
+$search-bar-font: rgba(233, 219, 204, 1);
+$placebolder-color:rgba(233, 219, 204, .55);
 $theme-orange: rgba(252, 178, 75, 0.97);
 $notification-alert: red;
 $up: rgba(111, 207, 151, 1);
-$up-dim: rgba(111,207,151, .24);
+$up-dim: rgba(111, 207, 151, .24);
 $down: rgba(235, 87, 87, 1);
-$down-dim: rgba(235,87,87, .24);
+$down-dim: rgba(235, 87, 87, .24);
 $item-card-bgc: rgb(61, 61, 61);
 $item-card-text: rgba(233, 219, 204, 1);
 $item-detail-bgc: rgba(66, 66, 66, .4);
@@ -22,8 +19,7 @@ $item-detail-text: rgba(233, 219, 204, .7);
 // Imports, external
 @import "~@blueprintjs/core/lib/css/blueprint.css";
 @import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
-@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,500|Proza+Libre:400,500');
-// Imports, internal
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,500|Proza+Libre:400,500|IBM+Plex+Mono');
 @import './share/common';
 @import './share/usermenu';
 @import './share/topbanner';
@@ -35,3 +31,57 @@ $item-detail-text: rgba(233, 219, 204, .7);
 @import './pages/display';
 @import './pages/payment';
 @import './pages/orders';
+// Top level reset
+html,
+body {
+    background-color: $bgc;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    // margin: 1.414em 0 0.5em;
+    font-weight: inherit;
+    line-height: 1.2;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    color: $font-color-light;
+}
+
+h1 {
+    font-size: 3.998rem;
+}
+
+h2 {
+    font-size: 2.827rem;
+}
+
+h3 {
+    font-size: 1.999rem;
+}
+
+h4 {
+    font-size: 1.414rem;
+}
+
+span,
+p {
+    font-family: 'Proza Libre', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.45;
+    color: $font-color-light;
+    vertical-align: middle;
+}
+
+small,
+.font_small {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.707rem;
+    color: $font-color-light;
+}

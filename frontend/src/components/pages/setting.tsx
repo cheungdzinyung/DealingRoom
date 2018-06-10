@@ -8,7 +8,7 @@ import Usermenu from "../share/usermenu";
 // Media asset import
 import headerImg from "../../icons/setting.svg";
 
-import profilePic from "../../images/circle-head.png"
+import profilePic from "../../images/profiles/circle-head.png"
 
 export default class Setting extends React.Component {
   constructor(props: {}) {
