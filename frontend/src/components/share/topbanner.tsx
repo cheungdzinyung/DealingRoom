@@ -5,15 +5,15 @@ interface IBannerProps{
     image: any;
 }
 
-export default class Banner extends React.Component<IBannerProps>{
+export default class TopBanner extends React.Component<IBannerProps>{
     constructor(props: IBannerProps){
     super(props);
   }
     public render() {
         return (
             <div className="topbanner">
-                <img src={this.props.image} alt="" />
-                <h2>{this.props.header}</h2>
+                <img className="banner-icon" src={this.props.image} alt="" />
+                <h2 className="banner-header">{this.props.header}</h2>
             </div>
         );
     }

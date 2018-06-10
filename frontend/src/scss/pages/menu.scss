@@ -17,12 +17,15 @@
     width: 100%;
     .item-cards {
         width: 100%;
-        height: 100%;
+        height: 15vmin;
         background-color: $item-card-bgc;
         display: grid;
         padding: 0;
         grid-template-columns: 1fr 15vmin;
         grid-template-rows: auto;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
         .pricetag {
             padding: 0 5%;
             display: flex;
@@ -88,7 +91,7 @@
                     }
                 }
             }
-            span {
+            .description-text {
                 color: $item-detail-text;
             }
         }

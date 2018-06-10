@@ -10,19 +10,19 @@ import tempImg from "../../images/profiles/circle-head.png";
 import { categories, items } from "../fakedata";
 
 
-interface IMenuItem {
+interface IPureMenuItem {
     name: string;
     percentage: number;
     description: string;
     currentPrice: number;
 }
 
-interface IMenuCategory {
+interface IPureMenuCategory {
     name: string[];
 }
 interface IDisplayState {
-    items : IMenuItem[];
-    categories : IMenuCategory;
+    items : IPureMenuItem[];
+    categories : IPureMenuCategory;
     categoryName: string;
   }
 
