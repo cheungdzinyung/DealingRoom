@@ -5,7 +5,7 @@ import Usermenu from "../share/usermenu";
 import { Radar } from "react-chartjs-2";
 
 import { Card, Elevation } from "@blueprintjs/core";
-import tempImg from "../../images/circle-head.png";
+import tempImg from "../../images/profiles/circle-head.png";
 
 import { chartData } from "../fakedata";
 

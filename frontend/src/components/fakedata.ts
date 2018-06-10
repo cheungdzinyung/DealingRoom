@@ -2,8 +2,7 @@ export const items = [
   {
     currentPrice: 60,
     description:
-      "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake."
-    ,
+      "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
     name: "Asahi",
     percentage: 1.12
   },
@@ -73,15 +72,7 @@ export const items = [
 ];
 
 export const chartData = {
-  labels: [
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    ""
-  ],
+  labels: ["", "", "", "", "", "", ""],
   // tslint:disable-next-line:object-literal-sort-keys
   datasets: [
     {
@@ -97,14 +88,27 @@ export const chartData = {
       data: [65, 59, 90, 81, 56, 55, 0]
     }
   ]
-}
+};
 
 export const chartOption = {
+  layout: {
+    // padding: 10
+  },
   legend: {
     display: false
     // position: "bottom"
+  },
+  scales: {
+    display: false,
+    gridLines: {
+      color: "#ffffff",
+      display: true
+    }
+  },
+  title: {
+    display: false
   }
-}
+};
 export const categories = {
   name: [
     "beer",
@@ -123,12 +127,12 @@ export const categories = {
     "main",
     "dessert"
   ]
-}
+};
 
 export const orderList = {
   listOfOrder: [
     {
-      amount: 360,
+      amount: 1024,
       isPaid: true,
       orderNumber: 1,
       orderTime: 1543
@@ -140,58 +144,16 @@ export const orderList = {
       orderTime: 1543
     },
     {
-      amount: 1120,
+      amount: 169,
       isPaid: false,
-      orderNumber: 3,
-      orderTime: 1543
-    },
-    {
-      amount: 500,
-      isPaid: true,
-      orderNumber: 4,
-      orderTime: 1543
+      orderNumber: 69,
+      orderTime: 2107
     },
     {
       amount: 360,
       isPaid: true,
       orderNumber: 5,
       orderTime: 1543
-    },
-    {
-      amount: 360,
-      isPaid: false,
-      orderNumber: 191,
-      orderTime: 1543
-    },
-    {
-      amount: 349,
-      isPaid: true,
-      orderNumber: 30,
-      orderTime: 1543
-    },
-    {
-      amount: 261,
-      isPaid: true,
-      orderNumber: 70,
-      orderTime: 1543
-    },
-    {
-      amount: 180,
-      isPaid: false,
-      orderNumber: 88,
-      orderTime: 1543
-    },
-    {
-      amount: 213,
-      isPaid: true,
-      orderNumber: 1,
-      orderTime: 1543
-    },
-    {
-      amount: 360,
-      isPaid: false,
-      orderNumber: 121,
-      orderTime: 1543
     }
   ]
-}
+};

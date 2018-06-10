@@ -1,16 +1,20 @@
+// Importing modules from library
 import * as History from "history";
 import * as React from "react";
 
+// Importing static assets
 import facebook from "../../icons/facebookSignup.svg";
 import google from "../../icons/googleSignup.svg";
 import Key from "../../icons/key.svg";
 
-export default class Login extends React.Component<{
+interface ILoginProps {
   history: History.History;
-}> {
-  public google = <span>Google</span>;
-  public facebook = <span>Facebook</span>;
-  public submit = <span>S</span>;
+}
+
+export default class Login extends React.Component<ILoginProps> {
+  constructor(props: ILoginProps) {
+    super(props);
+  }
 
   public toProfile = () => {
     this.props.history.push("/profile");
@@ -20,12 +24,23 @@ export default class Login extends React.Component<{
     return (
       <div className="login-container">
         <div className="login-grid">
+          <input
+            type="text"
+            placeholder="Username"
+            className="pt-large username"
+          />
 
-          <input type="text" placeholder="Username" className="pt-large username" />
+          <input
+            type="password"
+            placeholder="Password"
+            className="pt-large password"
+          />
 
-          <input type="password" placeholder="Password" className="pt-large password" />
-
-          <button type="submit" className="login-button-hp" onClick={this.toProfile}>
+          <button
+            type="submit"
+            className="login-button-hp"
+            onClick={this.toProfile}
+          >
             <img src={Key} alt="" />
           </button>
           <div className="social-login">
@@ -35,7 +50,6 @@ export default class Login extends React.Component<{
             <button className="social-button facebook">
               <img src={facebook} alt="" />
             </button>
-
           </div>
         </div>
       </div>

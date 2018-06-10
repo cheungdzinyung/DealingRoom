@@ -1,5 +1,5 @@
 
-.bot-menu {
+.user-menu {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -38,14 +38,14 @@
             }
         }
         .user-icon{
+            width: 50%;
             border-radius:50%;
         }
-        span{
+        .menu-name{
             padding-top: 10%;
-            font-size: 1rem;
-            color: $font-color-light;
+            // font-size: 1rem; 
         }
-        img{
+        .user-menu-icon{
             width: 50%;
         }
     }

@@ -1,25 +1,28 @@
+// Importing modules from library
 import * as React from "react";
-// import { TextArea } from "@blueprintjs/core";
-import tempImg from "../../images/circle-head.png";
 
-import { categories, items } from "../fakedata";
-
+// Importing static assets
 import downWhite from "../../icons/down-white.svg";
 import upWhite from "../../icons/up-white.svg";
+import tempImg from "../../images/profiles/circle-head.png";
 
-interface IMenuItem {
+// Importing temperary data
+import { categories, items } from "../fakedata";
+
+
+interface IPureMenuItem {
     name: string;
     percentage: number;
     description: string;
     currentPrice: number;
 }
 
-interface IMenuCategory {
+interface IPureMenuCategory {
     name: string[];
 }
 interface IDisplayState {
-    items : IMenuItem[];
-    categories : IMenuCategory;
+    items : IPureMenuItem[];
+    categories : IPureMenuCategory;
     categoryName: string;
   }
 

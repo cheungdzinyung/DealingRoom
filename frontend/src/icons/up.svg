@@ -27,9 +27,9 @@
      inkscape:window-height="1057"
      id="namedview7"
      showgrid="false"
-     inkscape:zoom="1.0124263"
-     inkscape:cx="-203.958"
-     inkscape:cy="-8.0919557"
+     inkscape:zoom="1.2695924"
+     inkscape:cx="66.698189"
+     inkscape:cy="116.79066"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -52,9 +52,9 @@
      transform="translate(0,-197)"
      id="up-triangle-group">
     <path
-       d="m 50.000001,209.53312 44.02682,76.25669 H 5.9731772 Z"
+       d="M 50.000001,213.74224 88.565883,280.2567 H 11.434115 Z"
        id="up-triangle-path"
-       style="fill:#73eda6;fill-opacity:1;stroke:#73eda6;stroke-width:2.64583325;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#73eda6;fill-opacity:1;stroke:#73eda6;stroke-width:13.22916657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        inkscape:connector-curvature="0" />
   </g>
 </svg>
