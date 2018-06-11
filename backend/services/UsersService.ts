@@ -21,7 +21,7 @@ export default class UsersService {
   }
 
   // Working 10/06/18
-  create(data: IUserData, file: Express.Multer.File) {
+  add(data: IUserData, file: Express.Multer.File) {
     return this.knex("users")
       .insert({
         username: data.username,

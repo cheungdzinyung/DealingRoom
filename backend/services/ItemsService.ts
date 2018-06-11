@@ -98,7 +98,7 @@ export default class UsersService {
   }
 
   // Working 07/06/18
-  getAllInCategory(catName: string) {
+  getAllInCat(catName: string) {
     let catPhoto: string;
     this.knex("categories")
       .select("categoryPhoto")

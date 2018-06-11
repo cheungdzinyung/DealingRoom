@@ -1,10 +1,5 @@
 import * as express from "express";
-// ***** May use in future ****
-// import * as bodyParser from "body-parser";
-// import * as path from "path";
-// import * as fs from "fs-extra";
 import * as multer from "multer";
-
 
 import { IUserData } from "../interfaces";
 import UsersService from "../services/UsersService";
@@ -21,15 +16,19 @@ export default class UsersRouter {
 
   router() {
     let router = express.Router();
-    router.put("/:id", upload.single("userPhoto"), this.updateUser.bind(this));
-    router.get("/:id", this.getUser.bind(this));
-    router.post("/", upload.single("userPhoto"), this.addUser.bind(this));
+
+    router.post("/", upload.single("userPhoto"), this.add.bind(this));
+
+    router.get("/:id", this.get.bind(this));
+
+    router.put("/:id", upload.single("userPhoto"), this.update.bind(this));
+
     return router;
   }
 
-  addUser(req: express.Request, res: express.Response) {
+  add(req: express.Request, res: express.Response) {
     return this.usersService
-      .create(req.body, req.file)
+      .add(req.body, req.file)
       .then((result: IUserData) => {
         res.status(201).json(result);
         console.log(result);
@@ -40,7 +39,7 @@ export default class UsersRouter {
       });
   }
 
-  getUser(req: express.Request, res: express.Response) {
+  get(req: express.Request, res: express.Response) {
     return this.usersService
       .get(req.params.id)
       .then((result: IUserData) => {
@@ -52,7 +51,7 @@ export default class UsersRouter {
       });
   }
 
-  updateUser(req: express.Request, res: express.Response) {
+  update(req: express.Request, res: express.Response) {
     console.log(req.params.id, req.body);
     return this.usersService
       .update(req.params.id, req.body, req.file)

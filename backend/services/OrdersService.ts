@@ -8,8 +8,8 @@ export default class OrdersService {
     this.knex = knex;
   }
 
-  // 07-06-18
-  create(id: number, data: any) {
+  // Working 07/06/18
+  add(id: number, data: any) {
     return this.knex("orders")
       .insert({
         table: data.table,
@@ -45,8 +45,8 @@ export default class OrdersService {
       });
   }
 
-  // 07-06-18
-  getOrderByOrderId(id: number) {
+  // Working 07/06/18
+  getByOrderId(id: number) {
     return this.knex("users")
       .join("orders", "users.id", "=", "users_id")
       .where("orders.id", id)
@@ -91,31 +91,78 @@ export default class OrdersService {
       });
   }
 
-  // 10-06-18
-  async getOrderByUserId(id: number) {
-    let [user] = await this.knex("users")
-      .where("id", id)
-      .select("users.id as user_id", "username", "displayName"); // user should be first element of array (Destructuring_assignment)
-
-    const orderList = await this.knex("orders")
+  //*****TODO*****// 10/06/18
+  getByUserId(id: number) {
+    return this.knex("users")
+      .join("orders", "users.id", "=", "users_id")
       .where("users_id", id)
-      .select("id");
+      .select("users_id", "username", "displayName", "orders.id as orders_id")
+      .then((orderList: any) => {
+        Promise.all(
+          orderList.map((order: any, i: number) => {
+            return this.knex("orders_items")
+              .select(
+                "items_id",
+                "purchasePrice",
+                "ice",
+                "sweetness",
+                "garnish"
+              )
+              .where("orders_id", order.orders_id)
+              .then(itemList => {
+                Promise.all(
+                  itemList.map((item: any, j: number) => {
+                    return this.knex("items")
+                      .select("itemName")
+                      .where("items.id", item.items_id)
+                      .then((result: any) => {
+                        console.log(result[0].itemName);
+                      });
+                  })
+                );
+              });
+          })
+        );
+      });
+    ////////AF///////////////
+    // async getOrderByUserId(id: number) {
+    //   let [user] = await this.knex("users")
+    //     .where("id", id)
+    //     .select("users.id as user_id", "username", "displayName"); // user should be first element of array (Destructuring_assignment)
 
-    const orders = await Promise.all(
-      orderList.map(async (_order: object, i: number) => {
-        console.log(orderList[i].id);
-        let [order] = await this.getOrderByOrderId(id);
-        delete order.user_id;
-        delete order.userName;
-        delete order.displayName;
-        return order;
-      })
-    );
-    user["orders"] = orders;
-    return user;
+    //   const orderList = await this.knex("orders")
+    //     .where("users_id", id)
+    //     .select("id");
+
+    //   const orders = await Promise.all(
+    //     orderList.map(async (_order: object, i: number) => {
+    //       console.log(orderList[i].id);
+    //       let [order] = await this.getOrderByOrderId(id);
+    //       delete order.user_id;
+    //       delete order.userName;
+    //       delete order.displayName;
+    //       return order;
+    //     })
+    //   );
+    //   user["orders"] = orders;
+    //   return user;
   }
 
-  // 08-06-18
+  //*****TODO*****//
+  getAllPrice(id: number) {
+    return this.knex("users")
+      .select("id")
+      .where("id", id);
+  }
+
+  //*****TODO******//
+  getAllQuantity(id: number) {
+    return this.knex("users")
+      .select("id")
+      .where("id", id);
+  }
+
+  // Working 08/06/18
   update(id: number, data: any) {
     return this.knex("orders")
       .where("id", id)
