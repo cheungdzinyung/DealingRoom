@@ -52,6 +52,7 @@ export default class Request extends React.Component<{}, IPureRequestState> {
             elevation={Elevation.TWO}
           >
             <h3 className="line-item">{line.itemName}</h3>
+            {/* TODO: Add more items. */}
             
           </Card>
         ))}
