@@ -45,10 +45,10 @@ export default class Login extends React.Component<ILoginProps> {
           </button>
           <div className="social-login">
             <button className="social-button google">
-              <img src={google} alt="" />
+              <img className="social-img" src={google} alt="" />
             </button>
             <button className="social-button facebook">
-              <img src={facebook} alt="" />
+              <img className="social-img" src={facebook} alt="" />
             </button>
           </div>
         </div>
