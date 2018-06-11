@@ -5,6 +5,7 @@
   "dependencies": {
     "@blueprintjs/core": "^2.3.1",
     "@types/chart.js": "^2.7.20",
+    "@types/nuka-carousel": "^4.2.0",
     "@types/react-chartjs-2": "^2.5.7",
     "@types/react-router-dom": "^4.2.6",
     "@types/react-transition-group": "^2.0.9",
@@ -25,6 +26,7 @@
     "html-webpack-plugin": "2.29.0",
     "jest": "22.4.2",
     "node-sass": "^4.9.0",
+    "nuka-carousel": "^4.2.1",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",

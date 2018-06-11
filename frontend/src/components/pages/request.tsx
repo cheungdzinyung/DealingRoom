@@ -50,7 +50,6 @@ export default class Request extends React.Component<{}, IPureRequestState> {
     });
   }
 
-
   public render() {
     return (
       <div className="page-content-container">
@@ -62,32 +61,22 @@ export default class Request extends React.Component<{}, IPureRequestState> {
             elevation={Elevation.TWO}
           >
             <span className="line-item">{line.itemName}</span>
-            {/* <button className="extra-mod">
-              extra
-            </button> */}
             <Button icon="menu" intent={Intent.DANGER} className="extra-mod" minimal={true} />
-   
           </Card>
         ))}
-
         <Card
           className="request-summary"
-          
           elevation={Elevation.TWO}
         >
           <div className="request-top">
-
             <h3 className="request-header">Total Amount:</h3>
             <span className="request-amount">${this.state.total}</span>
-
-
           </div>
           <hr />
           <button className="confirm-button">
             <span>Confirm Order</span>
           </button>
         </Card>
-
         <Usermenu />
       </div>
     );
