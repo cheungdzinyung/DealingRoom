@@ -1,0 +1,53 @@
+
+.user-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 15vh;
+    padding: 0 2%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: $bgc;
+    
+    .menu-item{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        .count{
+            position: absolute;
+            top: 8%;
+            right: 15%;
+            width: 5vw;
+            height: 5vw;
+            text-align: center;
+            background-color: $notification-alert;
+            color: white;
+            border-radius:50%;
+            // border: pink solid 1px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .count-digit{
+                font-size: .7rem;
+            }
+        }
+        .user-icon{
+            width: 50%;
+            border-radius:50%;
+        }
+        .menu-name{
+            padding-top: 10%;
+            // font-size: 1rem; 
+        }
+        .user-menu-icon{
+            width: 50%;
+        }
+    }
+    
+}

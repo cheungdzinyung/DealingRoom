@@ -1,0 +1,49 @@
+.order-header-container {
+    width: 100%;
+    .order-header {
+        text-decoration: underline;
+        text-align: left;
+        margin-top: 5%;
+    }
+}
+
+.order-cards {
+    width: 100%;
+    padding: 5%;
+    margin-bottom: 5%;
+    background-color: rgba(141, 141, 141, .75);
+    .top {
+        display: grid;
+        align-items: center;
+        grid-template-columns: 80% 20%;
+        .order-details {
+            .order-number {
+                margin-bottom: 1%;
+            }
+            .order-amount,
+            .order-time {
+                margin: 0;
+            }
+        }
+        .order-icon {
+            justify-self: center;
+            width: 70%;
+        }
+    }
+    hr {
+        width: 100%;
+        border: 1px solid rgba(233, 219, 204, .2);
+        margin-bottom: 0;
+    }
+    .paynow-button {
+        width: 100%;
+        background-color: #EE5353;
+        border-radius: 5px;
+        color: white;
+        padding: 3% 0%;
+        margin-top: 5%;
+        span {
+            color: white;
+        }
+    }
+}
