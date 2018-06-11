@@ -7,7 +7,7 @@ import OrderBanner from "../share/orderbanner";
 import Usermenu from "../share/usermenu";
 
 // Importing static assets
-import checkIcon from "../../icons/check.svg";
+// import checkIcon from "../../icons/check.svg";
 import headerImg from "../../icons/orders.svg";
 
 // Importing fake data
@@ -52,6 +52,7 @@ export default class Request extends React.Component<{}, IPureRequestState> {
             elevation={Elevation.TWO}
           >
             <h3 className="line-item">{line.itemName}</h3>
+            
           </Card>
         ))}
 
