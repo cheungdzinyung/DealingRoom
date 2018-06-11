@@ -46,12 +46,12 @@ export default class Request extends React.Component<{}, IPureRequestState> {
       <div className="page-content-container">
         <OrderBanner displayName="Ivan" tableNumber={3} image={headerImg} />
         {this.state.request.map((line, i) => (
-          <Card
+          <Card key={i}
             className="request-line"
             interactive={true}
             elevation={Elevation.TWO}
           >
-            Testing
+            <h3 className="line-item">{line.itemName}</h3>
           </Card>
         ))}
 
