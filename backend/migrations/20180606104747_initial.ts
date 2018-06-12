@@ -34,6 +34,7 @@ exports.up = function (knex: Knex) {
           "served",
           "cancelled"
         ]);
+        orders.decimal("orderTotal");
         orders.boolean("isPaid").defaultTo(false);
         orders.timestamps(false, true);
       });

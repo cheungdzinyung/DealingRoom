@@ -5,8 +5,8 @@
 		"category": "beer",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
-		"itemPhoto": "../../../frontend/public/img/beer.jpeg", 
-		"itemDescription": "Ice cold beer",
+		"itemPhoto": "../storage/items/asahi.jpeg", 
+		"itemDescription": "ASAHI SUPER DRY’s uses carefully selected strains of yeast that not only facilitate outstanding fermentation, but also enhance the beer’s sophisticated aroma and refreshingly dry taste. Karakuchi means dry, and it is the word that best describes the sophisticated yet congenial character of ASAHI SUPER DRY. Its refreshingly crisp, clear taste makes it an excellent match for any cuisine.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -16,8 +16,8 @@
 		"category": "beer",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
-		"itemPhoto": "../../../frontend/public/img/beer.jpeg",
-		"itemDescription": "Ice cold beer",
+		"itemPhoto": "../storage/items/carlsberg.jpeg",
+		"itemDescription": "Brewed for the first time in 1904, Carlsberg pilsner is, in fact, part of the Danish cultural heritage and the Danish thirst. You will experience a harmonious balance between bitterness and the sweetness of apples, while enjoying the bright golden color with the nice looking foam. The aroma is dominated by pine, straws, hazelnut and sorrel.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -27,8 +27,8 @@
 		"category": "beer",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
-		"itemPhoto": "../../../frontend/public/img/beer.jpeg",
-		"itemDescription": "Ice cold beer",
+		"itemPhoto": "../storage/items/corona.jpeg",
+		"itemDescription": "With a refreshing, smooth taste balanced between heavier European imports and lighter domestic beer, Corona is an even-keeled cerveza with fruity-honey aromas and a touch of malt. The flavor is crisp, clean and well balanced between hops and malt, a superior taste profile from superior ingredients—the finest-quality blend of filtered water, malted barley, hops, corn and yeast.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -38,8 +38,8 @@
 		"category": "beer",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/beer.jpeg",
-		"itemDescription": "Ice cold beer",
+		"itemPhoto": "../storage/items/guinness.jpeg",
+		"itemDescription": "Sweet smelling with a coffee and malty nose. Perfect balance of bitter and sweet with malt and roast character. Smooth, creamy and balanced. Distinctively dark, with a rich creamy head. ",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -49,8 +49,8 @@
 		"category": "beer",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
-		"itemPhoto": "../../../frontend/public/img/beer.jpeg",
-		"itemDescription": "Ice cold beer",
+		"itemPhoto": "../storage/items/gweilo.jpeg",
+		"itemDescription": "With our Pale Ale, we have combined the crisp and refreshing characteristics of a lager, the citrusy aromas of tropical Asian fruits and the flavour of a light ale. Gweilo believes this Pale Ale could be the catalyst to help the people of Hong Kong upgrade from tasteless big brand beer, to fine craft ales.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -60,8 +60,8 @@
 		"category": "beer",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
-		"itemPhoto": "../../../frontend/public/img/beer.jpeg",
-		"itemDescription": "Ice cold beer",
+		"itemPhoto": "../storage/items/heineken.jpeg",
+		"itemDescription": "Smooth, nicely blended bitterness, clean finish with a shade of fruitiness. Yeast is an important part of the brewing process, but it's not an ingredient! Our natural A-Yeast produces a fruity flavor that is key in making the Heineken you know and love, and is filtered out after fermentation.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -71,8 +71,8 @@
 		"category": "beer",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/beer.jpeg",
-		"itemDescription": "Ice cold beer",
+		"itemPhoto": "../storage/items/hoegaarden.jpeg",
+		"itemDescription": "Top fermented white beer spiced with coriander and curacao orange peels. It has a heady, spicy nose with a soft and delightful sour/sweet taste.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -82,8 +82,8 @@
 		"category": "beer",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
-		"itemPhoto": "../../../frontend/public/img/beer.jpeg",
-		"itemDescription": "Ice cold beer",
+		"itemPhoto": "../storage/items/peroni.jpeg",
+		"itemDescription": "PERONI NASTRO AZZURRO has a clear, bright, golden colour; creamy, yeasty, malty aromas; a refreshing palate with a light bitterness.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -93,8 +93,8 @@
 		"category": "beer",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
-		"itemPhoto": "../../../frontend/public/img/beer.jpeg",
-		"itemDescription": "Ice cold beer",
+		"itemPhoto": "../storage/items/stellaartois.jpeg",
+		"itemDescription": "Stella Artois is a premium European lager of noble traditions, that truly symbolizes European style and sophistication. It traces its' roots to 1366, has a full distinctive taste and is brewed with the finest barley and hops.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -104,8 +104,8 @@
 		"category": "beer",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
-		"itemPhoto": "../../../frontend/public/img/beer.jpeg",
-		"itemDescription": "Ice cold beer",
+		"itemPhoto": "../storage/items/tsingtao.jpeg",
+		"itemDescription": "TSINGTAO (pronounced ching dow), China's premier brand, brewed from the finest ingredients including spring water from Laoshan Mountain and Canadian malting barley. Founded in 1903 by German brewers, this beer is softer than German pilsner with a high malty flavor and well-hopped character, with its fine quality ingredients.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -115,8 +115,8 @@
 		"category": "cocktail",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
-		"itemPhoto": "../../../frontend/public/img/cocktail.jpeg",
-		"itemDescription": "Funky cocktail",
+		"itemPhoto": "../storage/items/bloodymary.jpeg",
+		"itemDescription": "Cocktail containing vodka, tomato juice, and combinations of other spices and flavorings including Worcestershire sauce, hot sauces, garlic, herbs, horseradish, celery, olives, salt, black pepper, lemon juice, lime juice and/or celery salt.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -126,8 +126,8 @@
 		"category": "cocktail",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
-		"itemPhoto": "../../../frontend/public/img/cocktail.jpeg",
-		"itemDescription": "Funky cocktail",
+		"itemPhoto": "../storage/items/cosmopolitan.jpeg",
+		"itemDescription": "Cocktail made with vodka, triple sec, cranberry juice, and freshly squeezed or sweetened lime juice.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -137,8 +137,8 @@
 		"category": "cocktail",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
-		"itemPhoto": "../../../frontend/public/img/cocktail.jpeg",
-		"itemDescription": "Funky cocktail",
+		"itemPhoto": "../storage/items/daiquiri.jpeg",
+		"itemDescription": "Family of cocktails whose main ingredients are rum, citrus juice (typically lime juice), and sugar or other sweetener.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -148,8 +148,8 @@
 		"category": "cocktail",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
-		"itemPhoto": "../../../frontend/public/img/cocktail.jpeg",
-		"itemDescription": "Funky cocktail",
+		"itemPhoto": "../storage/items/longislandicetea.jpeg",
+		"itemDescription": "Cocktail made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, which gives the drink the same amber hue as its namesake.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -159,8 +159,8 @@
 		"category": "cocktail",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
-		"itemPhoto": "../../../frontend/public/img/cocktail.jpeg",
-		"itemDescription": "Funky cocktail",
+		"itemPhoto": "../storage/items/manhattan.jpeg",
+		"itemDescription": "Cocktail made with whiskey, sweet vermouth and bitters. While rye is the traditional whiskey of choice, other commonly used whiskeys include Canadian whisky, bourbon, blended whiskey and Tennessee whiskey. The cocktail is usually stirred then strained into a cocktail glass and garnished with a Maraschino cherry. cocktail made with whiskey, sweet vermouth and bitters. While rye is the traditional whiskey of choice, other commonly used whiskeys include Canadian whisky, bourbon, blended whiskey and Tennessee whiskey. The cocktail is usually stirred then strained into a cocktail glass and garnished with a Maraschino cherry.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -170,8 +170,8 @@
 		"category": "cocktail",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
-		"itemPhoto": "../../../frontend/public/img/cocktail.jpeg",
-		"itemDescription": "Funky cocktail",
+		"itemPhoto": "../storage/items/margarita.jpeg",
+		"itemDescription": "Cocktail consisting of tequila, orange liqueur, and lime juice often served with salt on the rim of the glass. The drink is served shaken with ice (on the rocks), blended with ice (frozen margarita), or without ice (straight up).",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -181,8 +181,8 @@
 		"category": "cocktail",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
-		"itemPhoto": "../../../frontend/public/img/cocktail.jpeg",
-		"itemDescription": "Funky cocktail",
+		"itemPhoto": "../storage/items/mojito.jpeg",
+		"itemDescription": "Cocktail that consists of five ingredients: white rum, sugar (traditionally sugar cane juice), lime juice, soda water, and mint. Its combination of sweetness, citrus, and mint flavors is intended to complement the rum, and has made the mojito a popular summer drink.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -192,7 +192,7 @@
 		"category": "cocktail",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
-		"itemPhoto": "../../../frontend/public/img/cocktail.jpeg",
+		"itemPhoto": "../storage/items/negroni.jpeg",
 		"itemDescription": "Funky cocktail",
 		"isSpecial": false,
 		"isActive": true
@@ -203,7 +203,7 @@
 		"category": "cocktail",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
-		"itemPhoto": "../../../frontend/public/img/cocktail.jpeg",
+		"itemPhoto": "../storage/items/oldfashion.jpeg",
 		"itemDescription": "Funky cocktail",
 		"isSpecial": false,
 		"isActive": true
@@ -214,7 +214,7 @@
 		"category": "cocktail",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
-		"itemPhoto": "../../../frontend/public/img/cocktail.jpeg",
+		"itemPhoto": "../storage/items/sexonthebeach.jpeg",
 		"itemDescription": "Funky cocktail",
 		"isSpecial": false,
 		"isActive": true
@@ -225,7 +225,7 @@
 		"category": "redWine",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/redwine.jpeg",
+		"itemPhoto": "../storage/items/cabernetsauvignon.jpeg",
 		"itemDescription": "Full bodied red",
 		"isSpecial": false,
 		"isActive": true
@@ -236,7 +236,7 @@
 		"category": "redWine",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/redwine.jpeg",
+		"itemPhoto": "../storage/items/pinotnoir.jpeg",
 		"itemDescription": "Full bodied red",
 		"isSpecial": false,
 		"isActive": true
@@ -247,7 +247,7 @@
 		"category": "redWine",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/redwine.jpeg",
+		"itemPhoto": "../storage/items/shiraz.jpeg",
 		"itemDescription": "Full bodied red",
 		"isSpecial": false,
 		"isActive": true
@@ -258,7 +258,7 @@
 		"category": "redWine",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/redwine.jpeg",
+		"itemPhoto": "../storage/items/malbec.jpeg",
 		"itemDescription": "Full bodied red",
 		"isSpecial": false,
 		"isActive": true
@@ -269,7 +269,7 @@
 		"category": "redWine",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/redwine.jpeg",
+		"itemPhoto": "../storage/items/merlot.jpeg",
 		"itemDescription": "Full bodied red",
 		"isSpecial": false,
 		"isActive": true
@@ -280,7 +280,7 @@
 		"category": "whiteWine",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/whitewine.jpeg",
+		"itemPhoto": "../storage/items/sauvignonblanc.jpeg",
 		"itemDescription": "Dry white",
 		"isSpecial": false,
 		"isActive": true
@@ -291,7 +291,7 @@
 		"category": "whiteWine",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/whitewine.jpeg",
+		"itemPhoto": "../storage/items/chardonnay.jpeg",
 		"itemDescription": "Dry white",
 		"isSpecial": false,
 		"isActive": true
@@ -302,7 +302,7 @@
 		"category": "whiteWine",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/whitewine.jpeg",
+		"itemPhoto": "../storage/items/chablis.jpeg",
 		"itemDescription": "Dry white",
 		"isSpecial": false,
 		"isActive": true
@@ -313,7 +313,7 @@
 		"category": "whiteWine",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/whitewine.jpeg",
+		"itemPhoto": "../storage/items/riesling.jpeg",
 		"itemDescription": "Dry white",
 		"isSpecial": false,
 		"isActive": true
@@ -324,7 +324,7 @@
 		"category": "whiteWine",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/whitewine.jpeg",
+		"itemPhoto": "../storage/items/pinotblanc.jpeg",
 		"itemDescription": "Dry white",
 		"isSpecial": false,
 		"isActive": true
@@ -335,7 +335,7 @@
 		"category": "champagne",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
-		"itemPhoto": "../../../frontend/public/img/champagne.jpeg",
+		"itemPhoto": "../storage/items/moetchandon.jpeg",
 		"itemDescription": "Bubbly champagne",
 		"isSpecial": false,
 		"isActive": true
@@ -346,7 +346,7 @@
 		"category": "champagne",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
-		"itemPhoto": "../../../frontend/public/img/champagne.jpeg",
+		"itemPhoto": "../storage/items/veuveclicquot.jpeg",
 		"itemDescription": "Bubbly champagne",
 		"isSpecial": false,
 		"isActive": true
@@ -357,7 +357,7 @@
 		"category": "champagne",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
-		"itemPhoto": "../../../frontend/public/img/champagne.jpeg",
+		"itemPhoto": "../storage/items/krug.jpeg",
 		"itemDescription": "Bubbly champagne",
 		"isSpecial": false,
 		"isActive": true
@@ -368,7 +368,7 @@
 		"category": "champagne",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
-		"itemPhoto": "../../../frontend/public/img/champagne.jpeg",
+		"itemPhoto": "../storage/items/perrierjouet.jpeg",
 		"itemDescription": "Bubbly champagne",
 		"isSpecial": false,
 		"isActive": true
@@ -379,7 +379,7 @@
 		"category": "champagne",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
-		"itemPhoto": "../../../frontend/public/img/champagne.jpeg",
+		"itemPhoto": "../storage/items/taittinger.jpeg",
 		"itemDescription": "Bubbly champagne",
 		"isSpecial": false,
 		"isActive": true
@@ -390,7 +390,7 @@
 		"category": "vodka",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
-		"itemPhoto": "../../../frontend/public/img/vodka.jpeg",
+		"itemPhoto": "../storage/items/greygoose.jpeg",
 		"itemDescription": "Russian water",
 		"isSpecial": false,
 		"isActive": true
@@ -401,7 +401,7 @@
 		"category": "vodka",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
-		"itemPhoto": "../../../frontend/public/img/vodka.jpeg",
+		"itemPhoto": "../storage/items/ketelone.jpeg",
 		"itemDescription": "Russian water",
 		"isSpecial": false,
 		"isActive": true
@@ -412,7 +412,7 @@
 		"category": "vodka",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
-		"itemPhoto": "../../../frontend/public/img/vodka.jpeg",
+		"itemPhoto": "../storage/items/belvedere.jpeg",
 		"itemDescription": "Russian water",
 		"isSpecial": false,
 		"isActive": true
@@ -423,7 +423,7 @@
 		"category": "vodka",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/vodka.jpeg",
+		"itemPhoto": "../storage/items/absolut.jpeg",
 		"itemDescription": "Russian water",
 		"isSpecial": false,
 		"isActive": true
@@ -434,7 +434,7 @@
 		"category": "vodka",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/vodka.jpeg",
+		"itemPhoto": "../storage/items/smirnoff.jpeg",
 		"itemDescription": "Russian water",
 		"isSpecial": false,
 		"isActive": true
@@ -445,7 +445,7 @@
 		"category": "tequila",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/tequila.jpeg",
+		"itemPhoto": "../storage/items/partonsilver.jpeg",
 		"itemDescription": "Mexican water",
 		"isSpecial": false,
 		"isActive": true
@@ -456,7 +456,7 @@
 		"category": "tequila",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/tequila.jpeg",
+		"itemPhoto": "../storage/items/donjulioblanco.jpeg",
 		"itemDescription": "Mexican water",
 		"isSpecial": false,
 		"isActive": true
@@ -467,7 +467,7 @@
 		"category": "tequila",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
-		"itemPhoto": "../../../frontend/public/img/tequila.jpeg",
+		"itemPhoto": "../storage/items/donjulioreposado.jpeg",
 		"itemDescription": "Mexican water",
 		"isSpecial": false,
 		"isActive": true
@@ -478,7 +478,7 @@
 		"category": "tequila",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
-		"itemPhoto": "../../../frontend/public/img/tequila.jpeg",
+		"itemPhoto": "../storage/items/donjulioanejo.jpeg",
 		"itemDescription": "Mexican water",
 		"isSpecial": false,
 		"isActive": true
@@ -489,7 +489,7 @@
 		"category": "tequila",
 		"minimumPrice": 50.00,
 		"currentPrice": 200.00,
-		"itemPhoto": "../../../frontend/public/img/tequila.jpeg",
+		"itemPhoto": "../storage/items/donjulio1942.jpeg",
 		"itemDescription": "Mexican water",
 		"isSpecial": false,
 		"isActive": true
@@ -500,7 +500,7 @@
 		"category": "whiskey",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/whiskey.jpeg",
+		"itemPhoto": "../storage/items/glenfiddich15.jpeg",
 		"itemDescription": "Irish water",
 		"isSpecial": false,
 		"isActive": true
@@ -511,7 +511,7 @@
 		"category": "whiskey",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
-		"itemPhoto": "../../../frontend/public/img/whiskey.jpeg",
+		"itemPhoto": "../storage/items/glenfiddich18.jpeg",
 		"itemDescription": "Irish water",
 		"isSpecial": false,
 		"isActive": true
@@ -522,7 +522,7 @@
 		"category": "whiskey",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
-		"itemPhoto": "../../../frontend/public/img/whiskey.jpeg",
+		"itemPhoto": "../storage/items/glenfiddich21.jpeg",
 		"itemDescription": "Irish water",
 		"isSpecial": false,
 		"isActive": true
@@ -533,7 +533,7 @@
 		"category": "whiskey",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/whiskey.jpeg",
+		"itemPhoto": "../storage/items/jameson.jpeg",
 		"itemDescription": "Irish water",
 		"isSpecial": false,
 		"isActive": true
@@ -544,7 +544,7 @@
 		"category": "whiskey",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/whiskey.jpeg",
+		"itemPhoto": "../storage/items/jackdaniels.jpeg",
 		"itemDescription": "Irish water",
 		"isSpecial": false,
 		"isActive": true
@@ -555,7 +555,7 @@
 		"category": "gin",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/gin.jpeg",
+		"itemPhoto": "../storage/items/tanqueray.jpeg",
 		"itemDescription": "English water",
 		"isSpecial": false,
 		"isActive": true
@@ -566,7 +566,7 @@
 		"category": "gin",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/gin.jpeg",
+		"itemPhoto": "../storage/items/bombaysapphire.jpeg",
 		"itemDescription": "English water",
 		"isSpecial": false,
 		"isActive": true
@@ -577,7 +577,7 @@
 		"category": "gin",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/gin.jpeg",
+		"itemPhoto": "../storage/items/hendricks.jpeg",
 		"itemDescription": "English water",
 		"isSpecial": false,
 		"isActive": true
@@ -588,7 +588,7 @@
 		"category": "gin",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
-		"itemPhoto": "../../../frontend/public/img/gin.jpeg",
+		"itemPhoto": "../storage/items/botanist.jpeg",
 		"itemDescription": "English water",
 		"isSpecial": false,
 		"isActive": true
@@ -599,7 +599,7 @@
 		"category": "gin",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
-		"itemPhoto": "../../../frontend/public/img/gin.jpeg",
+		"itemPhoto": "../storage/items/monkey47.jpeg",
 		"itemDescription": "English water",
 		"isSpecial": false,
 		"isActive": true
@@ -610,7 +610,7 @@
 		"category": "rum",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/rum.jpeg",
+		"itemPhoto": "../storage/items/havanaclub.jpeg",
 		"itemDescription": "Caribbean water",
 		"isSpecial": false,
 		"isActive": true
@@ -621,7 +621,7 @@
 		"category": "rum",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/rum.jpeg",
+		"itemPhoto": "../storage/items/captainmorgan.jpeg",
 		"itemDescription": "Caribbean water",
 		"isSpecial": false,
 		"isActive": true
@@ -632,7 +632,7 @@
 		"category": "rum",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/rum.jpeg",
+		"itemPhoto": "../storage/items/bacardi.jpeg",
 		"itemDescription": "Caribbean water",
 		"isSpecial": false,
 		"isActive": true
@@ -643,7 +643,7 @@
 		"category": "rum",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
-		"itemPhoto": "../../../frontend/public/img/rum.jpeg",
+		"itemPhoto": "../storage/items/foursquare.jpeg",
 		"itemDescription": "Caribbean water",
 		"isSpecial": false,
 		"isActive": true
@@ -654,7 +654,7 @@
 		"category": "rum",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
-		"itemPhoto": "../../../frontend/public/img/rum.jpeg",
+		"itemPhoto": "../storage/items/bacardi151.jpeg",
 		"itemDescription": "Caribbean water",
 		"isSpecial": false,
 		"isActive": true
@@ -665,7 +665,7 @@
 		"category": "brandy",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
-		"itemPhoto": "../../../frontend/public/img/brandy.jpeg",
+		"itemPhoto": "../storage/items/hennessyvs.jpeg",
 		"itemDescription": "French water",
 		"isSpecial": false,
 		"isActive": true
@@ -676,7 +676,7 @@
 		"category": "brandy",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
-		"itemPhoto": "../../../frontend/public/img/brandy.jpeg",
+		"itemPhoto": "../storage/items/hennessyvsop.jpeg",
 		"itemDescription": "French water",
 		"isSpecial": false,
 		"isActive": true
@@ -687,7 +687,7 @@
 		"category": "brandy",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
-		"itemPhoto": "../../../frontend/public/img/brandy.jpeg",
+		"itemPhoto": "../storage/items/hennessyxo.jpeg",
 		"itemDescription": "French water",
 		"isSpecial": false,
 		"isActive": true
@@ -698,7 +698,7 @@
 		"category": "brandy",
 		"minimumPrice": 50.00,
 		"currentPrice": 200.00,
-		"itemPhoto": "../../../frontend/public/img/brandy.jpeg",
+		"itemPhoto": "../storage/items/hennessyparadis.jpeg",
 		"itemDescription": "French water",
 		"isSpecial": false,
 		"isActive": true
@@ -709,7 +709,7 @@
 		"category": "brandy",
 		"minimumPrice": 100.00,
 		"currentPrice": "400.00",
-		"itemPhoto": "../../../frontend/public/img/brandy.jpeg",
+		"itemPhoto": "../storage/items/hennessyparadisimperial.jpeg",
 		"itemDescription": "French water",
 		"isSpecial": false,
 		"isActive": true
@@ -720,7 +720,7 @@
 		"category": "non-alcoholic",
 		"minimumPrice": 10.00,
 		"currentPrice": 40.00,
-		"itemPhoto": "../../../frontend/public/img/nonalcoholic.jpeg",
+		"itemPhoto": "../storage/items/evian.jpeg",
 		"itemDescription": "Just water",
 		"isSpecial": false,
 		"isActive": true
@@ -731,7 +731,7 @@
 		"category": "non-alcoholic",
 		"minimumPrice": 10.00,
 		"currentPrice": 40.00,
-		"itemPhoto": "../../../frontend/public/img/nonalcoholic.jpeg",
+		"itemPhoto": "../storage/items/sanpellegrino.jpeg",
 		"itemDescription": "Just water",
 		"isSpecial": false,
 		"isActive": true
@@ -742,7 +742,7 @@
 		"category": "non-alcoholic",
 		"minimumPrice": 10.00,
 		"currentPrice": 40.00,
-		"itemPhoto": "../../../frontend/public/img/nonalcoholic.jpeg",
+		"itemPhoto": "../storage/items/cocacola.jpeg",
 		"itemDescription": "Just water",
 		"isSpecial": false,
 		"isActive": true
@@ -753,7 +753,7 @@
 		"category": "non-alcoholic",
 		"minimumPrice": 10.00,
 		"currentPrice": 40.00,
-		"itemPhoto": "../../../frontend/public/img/nonalcoholic.jpeg",
+		"itemPhoto": "../storage/items/dietcoke.jpeg",
 		"itemDescription": "Just water",
 		"isSpecial": false,
 		"isActive": true
@@ -764,7 +764,7 @@
 		"category": "non-alcoholic",
 		"minimumPrice": 10.00,
 		"currentPrice": 40.00,
-		"itemPhoto": "../../../frontend/public/img/nonalcoholic.jpeg",
+		"itemPhoto": "../storage/items/sprite.jpeg",
 		"itemDescription": "Just water",
 		"isSpecial": false,
 		"isActive": true
@@ -775,7 +775,7 @@
 		"category": "non-alcoholic",
 		"minimumPrice": 10.00,
 		"currentPrice": 40.00,
-		"itemPhoto": "../../../frontend/public/img/nonalcoholic.jpeg",
+		"itemPhoto": "../storage/items/orangejuice.jpeg",
 		"itemDescription": "Just water",
 		"isSpecial": false,
 		"isActive": true
@@ -786,7 +786,7 @@
 		"category": "non-alcoholic",
 		"minimumPrice": 10.00,
 		"currentPrice": 40.00,
-		"itemPhoto": "../../../frontend/public/img/nonalcoholic.jpeg",
+		"itemPhoto": "../storage/items/cranberryjuice.jpeg",
 		"itemDescription": "Just water",
 		"isSpecial": false,
 		"isActive": true
@@ -797,7 +797,7 @@
 		"category": "non-alcoholic",
 		"minimumPrice": 10.00,
 		"currentPrice": 40.00,
-		"itemPhoto": "../../../frontend/public/img/nonalcoholic.jpeg",
+		"itemPhoto": "../storage/items/sodawater.jpeg",
 		"itemDescription": "Just water",
 		"isSpecial": false,
 		"isActive": true
@@ -808,7 +808,7 @@
 		"category": "non-alcoholic",
 		"minimumPrice": 10.00,
 		"currentPrice": 40.00,
-		"itemPhoto": "../../../frontend/public/img/nonalcoholic.jpeg",
+		"itemPhoto": "../storage/items/tonicwater.jpeg",
 		"itemDescription": "Just water",
 		"isSpecial": false,
 		"isActive": true
@@ -819,7 +819,7 @@
 		"category": "non-alcoholic",
 		"minimumPrice": 10.00,
 		"currentPrice": 40.00,
-		"itemPhoto": "../../../frontend/public/img/nonalcoholic.jpeg",
+		"itemPhoto": "../storage/items/redbull.jpeg",
 		"itemDescription": "Just water",
 		"isSpecial": false,
 		"isActive": true
@@ -830,7 +830,7 @@
 		"category": "snack",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
-		"itemPhoto": "../../../frontend/public/img/snack.jpeg",
+		"itemPhoto": "../storage/items/frenchfries.jpeg",
 		"itemDescription": "Light meal",
 		"isSpecial": false,
 		"isActive": true
@@ -841,7 +841,7 @@
 		"category": "snack",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
-		"itemPhoto": "../../../frontend/public/img/snack.jpeg",
+		"itemPhoto": "../storage/items/onionrings.jpeg",
 		"itemDescription": "Light meal",
 		"isSpecial": false,
 		"isActive": true
@@ -852,7 +852,7 @@
 		"category": "snack",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
-		"itemPhoto": "../../../frontend/public/img/snack.jpeg",
+		"itemPhoto": "../storage/items/friedcalamaries.jpeg",
 		"itemDescription": "Light meal",
 		"isSpecial": false,
 		"isActive": true
@@ -863,7 +863,7 @@
 		"category": "snack",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
-		"itemPhoto": "../../../frontend/public/img/snack.jpeg",
+		"itemPhoto": "../storage/items/spinachdip.jpeg",
 		"itemDescription": "Light meal",
 		"isSpecial": false,
 		"isActive": true
@@ -874,7 +874,7 @@
 		"category": "snack",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
-		"itemPhoto": "../../../frontend/public/img/snack.jpeg",
+		"itemPhoto": "../storage/items/mixedolives.jpeg",
 		"itemDescription": "Light meal",
 		"isSpecial": false,
 		"isActive": true
@@ -885,7 +885,7 @@
 		"category": "main",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
-		"itemPhoto": "../../../frontend/public/img/main.jpeg",
+		"itemPhoto": "../storage/items/buffalowings.jpeg",
 		"itemDescription": "Main meal",
 		"isSpecial": false,
 		"isActive": true
@@ -896,7 +896,7 @@
 		"category": "main",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
-		"itemPhoto": "../../../frontend/public/img/main.jpeg",
+		"itemPhoto": "../storage/items/beefburger.jpeg",
 		"itemDescription": "Main meal",
 		"isSpecial": false,
 		"isActive": true
@@ -907,7 +907,7 @@
 		"category": "main",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
-		"itemPhoto": "../../../frontend/public/img/main.jpeg",
+		"itemPhoto": "../storage/items/tacoplatter.jpeg",
 		"itemDescription": "Main meal",
 		"isSpecial": false,
 		"isActive": true
@@ -918,7 +918,7 @@
 		"category": "main",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
-		"itemPhoto": "../../../frontend/public/img/main.jpeg",
+		"itemPhoto": "../storage/items/beefsliderplatter.jpeg",
 		"itemDescription": "Main meal",
 		"isSpecial": false,
 		"isActive": true
@@ -929,7 +929,7 @@
 		"category": "main",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
-		"itemPhoto": "../../../frontend/public/img/main.jpeg",
+		"itemPhoto": "../storage/items/fishandchips.jpeg",
 		"itemDescription": "Main meal",
 		"isSpecial": false,
 		"isActive": true
@@ -940,7 +940,7 @@
 		"category": "dessert",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
-		"itemPhoto": "../../../frontend/public/img/dessert.jpeg",
+		"itemPhoto": "../storage/items/applepie.jpeg",
 		"itemDescription": "After meal",
 		"isSpecial": false,
 		"isActive": true
@@ -951,7 +951,7 @@
 		"category": "dessert",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
-		"itemPhoto": "../../../frontend/public/img/dessert.jpeg",
+		"itemPhoto": "../storage/items/chocolatecake.jpeg",
 		"itemDescription": "After meal",
 		"isSpecial": false,
 		"isActive": true
@@ -962,7 +962,7 @@
 		"category": "dessert",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
-		"itemPhoto": "../../../frontend/public/img/dessert.jpeg",
+		"itemPhoto": "../storage/items/cheesecake.jpeg",
 		"itemDescription": "After meal",
 		"isSpecial": false,
 		"isActive": true
@@ -973,7 +973,7 @@
 		"category": "dessert",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
-		"itemPhoto": "../../../frontend/public/img/dessert.jpeg",
+		"itemPhoto": "../storage/items/brownies.jpeg",
 		"itemDescription": "After meal",
 		"isSpecial": false,
 		"isActive": true
@@ -984,7 +984,7 @@
 		"category": "dessert",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
-		"itemPhoto": "../../../frontend/public/img/dessert.jpeg",
+		"itemPhoto": "../storage/items/cheeseplatter.jpeg",
 		"itemDescription": "After meal",
 		"isSpecial": false,
 		"isActive": true
