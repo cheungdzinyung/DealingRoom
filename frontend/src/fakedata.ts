@@ -1,4 +1,4 @@
-import { IPureUsersOrderList } from "src/modules";
+import { IPureOrder, IPureUsersOrderList } from "src/modules";
 
 export const items = [
   {
@@ -205,6 +205,32 @@ export const orderList: IPureUsersOrderList = {
       }
     ]
 };
+
+export const singleOrder: IPureOrder = {
+  displayName: "Sabrina",
+  isPaid: false,
+  orderTotal: 155,
+  orders_id: 1,
+  status: "confirmed",
+  table: 11,
+  userName: "sabrina_phy",
+  users_id: 1,
+  // tslint:disable-next-line:object-literal-sort-keys
+  orderItems: [{
+    garnish: "normal",
+    ice: "normal",
+    itemName: "Asahi",
+    purchasePrice: 105.00,
+    sweetness: "normal"
+  },
+  {
+    garnish: "normal",
+    ice: "extra",
+    itemName: "Grey Goose",
+    purchasePrice: 150.00,
+    sweetness: "normal"
+  }]
+}
 
 export const requestList = [
   {

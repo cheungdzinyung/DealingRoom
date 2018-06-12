@@ -43,6 +43,7 @@ export interface IPureOrder {
     table: number
     status: OrderStatus
     isPaid: boolean
+    orderTotal: number;
     orderItems: IPureItemLine[]
 }
 
