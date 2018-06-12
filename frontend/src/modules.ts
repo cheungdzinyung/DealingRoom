@@ -52,6 +52,7 @@ export interface IPureUserOrder {
     status: OrderStatus
     isPaid: boolean
     orderingTime: number
+    orderTotal: number
     orderItems: IPureItemLine[]
 }
 

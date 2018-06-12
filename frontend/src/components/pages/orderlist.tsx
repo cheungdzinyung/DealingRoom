@@ -29,15 +29,10 @@ export default class OrderList extends React.Component<IPureOrdersProps, IPureOr
     super(props);
 
     this.state = {
-      listOfOrder:  
+      userOrders:  orderList
     };
   }
 
-  public componentDidMount() {
-    this.setState({
-      listOfOrder: orderList.listOfOrder
-    })
-  }
   public openSingleOrder = (orderNumber: number) => {
     this.props.history.push(`/order/${orderNumber}`);
   }
@@ -47,26 +42,26 @@ export default class OrderList extends React.Component<IPureOrdersProps, IPureOr
       
       <div className="page-content-container">
         <OrderBanner displayName="Ivan" tableNumber={3} image={headerImg} />
-        {this.state.listOfOrder.filter(each => !each.isPaid).length > 0 && (
+        {this.state.userOrders.orders.filter(each => !each.isPaid).length > 0 && (
           <div className="order-header-container">
             <h3 className="order-header">To be paid</h3>
           </div>
         )}
-        {this.state.listOfOrder
+        {this.state.userOrders.orders
           .filter(each => !each.isPaid)
           .map((indOrd, index) => (
             <Card
               className="order-cards"
               interactive={true}
               elevation={Elevation.TWO}
-              onClick={this.openSingleOrder.bind(this, indOrd.orderNumber)}
+              onClick={this.openSingleOrder.bind(this, indOrd.orders_id)}
             >
               <div className="top">
                 <div className="order-details">
-                  <h3 className="order-number">Order #{indOrd.orderNumber}</h3>
-                  <p className="order-amount">Total Amount: ${indOrd.amount}</p>
+                  <h3 className="order-number">Order #{indOrd.orders_id}</h3>
+                  <p className="order-amount">Total Amount: ${indOrd.orderTotal}</p>
                   <p className="order-time">
-                    Ordering time: {indOrd.orderTime}
+                    Ordering time: {indOrd.orderingTime}
                   </p>
                 </div>
               </div>
@@ -77,13 +72,13 @@ export default class OrderList extends React.Component<IPureOrdersProps, IPureOr
             </Card>
           ))}
         {/* Split into two parts */}
-        {this.state.listOfOrder.filter(each => each.isPaid === true).length >
+        {this.state.userOrders.orders.filter(each => each.isPaid === true).length >
           0 && (
             <div className="order-header-container">
               <h3 className="order-header">Paid</h3>
             </div>
           )}
-        {this.state.listOfOrder
+        {this.state.userOrders.orders
           .filter(each => each.isPaid === true)
           .map((indOrd, index) => (
             <Card
@@ -93,10 +88,10 @@ export default class OrderList extends React.Component<IPureOrdersProps, IPureOr
             >
               <div className="top">
                 <div className="order-details">
-                  <h3 className="order-number">Order #{indOrd.orderNumber}</h3>
-                  <p className="order-amount">Total Amount: ${indOrd.amount}</p>
+                  <h3 className="order-number">Order #{indOrd.orders_id}</h3>
+                  <p className="order-amount">Total Amount: ${indOrd.orderTotal}</p>
                   <p className="order-time">
-                    Ordering time: {indOrd.orderTime}
+                    Ordering time: {indOrd.orderingTime}
                   </p>
                 </div>
                 <img src={checkIcon} className="order-icon" alt="" />
