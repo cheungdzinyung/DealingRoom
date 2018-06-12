@@ -1,3 +1,5 @@
+import { IPureUsersOrderList } from "src/modules";
+
 export const items = [
   {
     currentPrice: 60,
@@ -129,33 +131,54 @@ export const categories = {
   ]
 };
 
-export const orderList = {
-  listOfOrder: [
-    {
-      amount: 1024,
-      isPaid: true,
-      orderNumber: 1,
-      orderTime: 1543
-    },
-    {
-      amount: 1230,
-      isPaid: false,
-      orderNumber: 2,
-      orderTime: 1543
-    },
-    {
-      amount: 169,
-      isPaid: false,
-      orderNumber: 69,
-      orderTime: 2107
-    },
-    {
-      amount: 360,
-      isPaid: true,
-      orderNumber: 5,
-      orderTime: 1543
-    }
-  ]
+export const orderList:IPureUsersOrderList = {
+  users_id: 1,
+  username: "John Doe",
+  displayName: "Johnny",
+  orders:
+    [
+      {
+        "orders_id": 1,
+        "table": 11,
+        "status": "confirmed",
+        "isPaid": false,
+        "orderingTime": 2018 - 06 - 08 15: 17: 24.406432+08,
+        "orderItems":
+          [
+            {
+              "itemName": "Asahi",
+              "ice": "normal",
+              "sweetness": "normal",
+              "garnish": "normal",
+              "purchasePrice": 105.00
+            },
+            {
+              "itemName": "Grey Goose",
+              "ice": "extra",
+              "sweetness": "normal",
+              "garnish": "normal",
+              "purchasePrice": 150.00
+            }
+          ]
+      },
+      {
+        "orders.id": 2,
+        "table": 11,
+        "status": "confirmed",
+        "isPaid": false,
+        "orderingTime": 2018 - 06 - 08 15: 20: 14.888501+08,
+        "orderItems":
+          [
+            {
+              "itemName": "Asahi",
+              "ice": "normal",
+              "sweetness": "normal",
+              "garnish": "normal",
+              "purchasePrice": 105.00
+            }
+          ]
+      }
+    ]
 };
 
 export const requestList = [
