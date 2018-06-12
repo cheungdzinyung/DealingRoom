@@ -62,7 +62,8 @@
                 display: flex;
                 justify-content: space-around;
                 align-items: center;  
-                img{
+                .social-img{
+                    width: 100%;
                     margin: 0;
                 }  
             }

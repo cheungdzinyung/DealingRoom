@@ -3,6 +3,8 @@ import { Card, Collapse, Elevation } from "@blueprintjs/core";
 import * as React from "react";
 import { Line } from "react-chartjs-2";
 
+import Carousel from 'nuka-carousel';
+
 // Importing components from src
 import Usermenu from "../share/usermenu";
 
@@ -13,6 +15,8 @@ import { chartData, chartOption, items } from "../fakedata";
 import down from "../../icons/down.svg";
 import up from "../../icons/up.svg";
 import beer from "../../images/categories/beer.jpg";
+import cocktail from "../../images/categories/cocktails.jpg";
+import whiskie from "../../images/categories/whiskie.jpg";
 
 interface IPureMenuItem {
   name: string;
@@ -47,10 +51,25 @@ export default class PureMenu extends React.Component<{}, IPureMenuState> {
     });
   };
 
+
+
+  // TODO: to fix the next and Previous of the carousel
+
   public render() {
     return (
       <div className="page-content-container">
-        <img className="menu-banner" src={beer} alt="" />
+        {/* FIXME: the carousel won't load image when rendering other element first and coming back with it */}
+
+        <Carousel initialSlideHeight={166} slideIndex={0} className="image-roll" wrapAround={true}>
+        <img src={beer} alt="" />
+        <img src={whiskie} alt="" />
+        <img src={cocktail} alt="" />
+        <img src={beer} alt="" />
+        <img src={whiskie} alt="" />
+        <img src={cocktail} alt="" />
+      </ Carousel>
+
+
         <input
           className="pt-input searchbar"
           type="text"
@@ -76,8 +95,8 @@ export default class PureMenu extends React.Component<{}, IPureMenuState> {
                 <span>{item.name}</span>
                 {!this.state.isItemDetailsOpen[i] && <span>${item.currentPrice}</span>}
               </div>
-              
-              { !this.state.isItemDetailsOpen[i] ? <div className="arrow-container">
+
+              {!this.state.isItemDetailsOpen[i] ? <div className="arrow-container">
                 <img
                   className="arrow"
                   src={item.percentage > 0 ? up : down}
