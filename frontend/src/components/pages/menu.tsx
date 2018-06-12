@@ -3,6 +3,11 @@ import { Card, Collapse, Elevation } from "@blueprintjs/core";
 import * as React from "react";
 import { Line } from "react-chartjs-2";
 
+// redux
+import { connect } from "react-redux";
+import { IRootState } from "../reducers/index";
+import { addToCurrentOrder } from "../actions/actions_orders";
+
 import Carousel from 'nuka-carousel';
 
 // Importing components from src
@@ -18,25 +23,49 @@ import beer from "../../images/categories/beer.jpg";
 import cocktail from "../../images/categories/cocktails.jpg";
 import whiskie from "../../images/categories/whiskie.jpg";
 
+interface IItem {
+  uniqueID: string,
+  name: string,
+  ice: string,
+  sweetness: string,
+  garnish: string,
+  purchasePrice: number,
+}
+
+// interface IOrder {
+//   userID: string,
+//   table: string,
+//   status: string,
+//   item: IItem[],
+// }
+
 interface IPureMenuItem {
+  uniqueID: string;
   name: string;
   currentPrice: number;
   percentage: number;
   description: string;
 }
 
-interface IPureMenuState {
+interface IMenuState {
   items: IPureMenuItem[];
   isItemDetailsOpen: boolean[];
+  searchBoxEntry: string;
 }
 
-export default class PureMenu extends React.Component<{}, IPureMenuState> {
-  constructor(props: {}) {
+interface IMenuProps {
+  currentOrder: IItem[];
+  addToCurrentOrder: (uniqueID: string, name: string) => void;
+}
+
+class PureMenu extends React.Component<IMenuProps, IMenuState> {
+  constructor(props: IMenuProps) {
     super(props);
 
     this.state = {
+      items,
       isItemDetailsOpen: items.map(data => false),
-      items
+      searchBoxEntry: "",
     };
   }
 
@@ -51,8 +80,18 @@ export default class PureMenu extends React.Component<{}, IPureMenuState> {
     });
   };
 
+  public searching = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({searchBoxEntry: e.target.value.toLowerCase()});
+  }
 
-
+  public addToCurrentOrder = (e: React.MouseEvent<HTMLDivElement>) => {
+    const uniqueID = e.currentTarget.dataset.uniqueid;
+    const name = e.currentTarget.dataset.name;
+        if (uniqueID !== undefined && name !== undefined) {
+            this.props.addToCurrentOrder(uniqueID, name);
+        }
+  }
+  
   // TODO: to fix the next and Previous of the carousel
 
   public render() {
@@ -75,8 +114,14 @@ export default class PureMenu extends React.Component<{}, IPureMenuState> {
           type="text"
           placeholder="Search input"
           dir="auto"
+          value={this.state.searchBoxEntry}
+          onChange={this.searching}
         />
+
+        {/* v cat filter for later use */}
+        {/* {this.state.items.filter(item => item.category === this.state.category).map((item, i) => ( */}
         {this.state.items.map((item, i) => (
+          (item.name.toLowerCase().search(this.state.searchBoxEntry) !== -1) ?
           <div className="item-container">
             <Card
               className={
@@ -89,9 +134,12 @@ export default class PureMenu extends React.Component<{}, IPureMenuState> {
               interactive={true}
               elevation={Elevation.FOUR}
               onClick={this.isOpen.bind(this, i)}
-              key={i}
+              key={`Card_${i}`}
             >
-              <div className="pricetag">
+              <div className="pricetag"
+                onClick={ this.addToCurrentOrder }
+                data-uniqueid={item.uniqueID}
+                data-name={item.name}>
                 <span>{item.name}</span>
                 {!this.state.isItemDetailsOpen[i] && <span>${item.currentPrice}</span>}
               </div>
@@ -106,7 +154,7 @@ export default class PureMenu extends React.Component<{}, IPureMenuState> {
             </Card>
             {/* ------------Seperate card and card details */}
             <Collapse
-              key={i}
+              key={`Collapse_${i}`}
               className={
                 "item-details" +
                 " " +
@@ -135,10 +183,29 @@ export default class PureMenu extends React.Component<{}, IPureMenuState> {
                 />
               </div>
             </Collapse>
-          </div>
+          </div> :
+          <div />
         ))}
         <Usermenu />
       </div>
     );
   }
 }
+
+const mapStateToProps = (state: IRootState) => {
+  return {
+    currentOrder: state.orders.currentOrder,
+  }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    addToCurrentOrder: (uniqueID: string, name: string) => {
+      dispatch(addToCurrentOrder(uniqueID, name));
+    }
+  }
+}
+
+const Menu = connect(mapStateToProps, mapDispatchToProps)(PureMenu);
+
+export default Menu

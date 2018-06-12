@@ -1,5 +1,6 @@
 export const items = [
   {
+    uniqueID: "111", 
     currentPrice: 60,
     description:
       "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
@@ -7,6 +8,7 @@ export const items = [
     percentage: 1.12
   },
   {
+    uniqueID: "222", 
     currentPrice: 60,
     description:
       "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
@@ -14,6 +16,7 @@ export const items = [
     percentage: -10
   },
   {
+    uniqueID: "333", 
     currentPrice: 60,
     description:
       "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
@@ -21,6 +24,7 @@ export const items = [
     percentage: 32.15
   },
   {
+    uniqueID: "444", 
     currentPrice: 60,
     description:
       "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
@@ -28,6 +32,7 @@ export const items = [
     percentage: -31
   },
   {
+    uniqueID: "555", 
     currentPrice: 60,
     description:
       "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
@@ -35,6 +40,7 @@ export const items = [
     percentage: -10
   },
   {
+    uniqueID: "666", 
     currentPrice: 60,
     description:
       "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
@@ -42,6 +48,7 @@ export const items = [
     percentage: 32.15
   },
   {
+    uniqueID: "777", 
     currentPrice: 60,
     description:
       "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
@@ -49,6 +56,7 @@ export const items = [
     percentage: -31
   },
   {
+    uniqueID: "888", 
     currentPrice: 60,
     description:
       "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
@@ -56,6 +64,7 @@ export const items = [
     percentage: -10
   },
   {
+    uniqueID: "999", 
     currentPrice: 60,
     description:
       "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
@@ -63,6 +72,7 @@ export const items = [
     percentage: 32.15
   },
   {
+    uniqueID: "123", 
     currentPrice: 60,
     description:
       "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
