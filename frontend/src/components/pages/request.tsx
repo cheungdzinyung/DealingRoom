@@ -7,7 +7,7 @@ import OrderBanner from "../share/orderbanner";
 import Usermenu from "../share/usermenu";
 
 // Importing static assets
-import checkIcon from "../../icons/check.svg";
+// import checkIcon from "../../icons/check.svg";
 import headerImg from "../../icons/orders.svg";
 
 // Importing fake data

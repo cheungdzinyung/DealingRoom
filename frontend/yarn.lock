@@ -2899,6 +2899,10 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
+"freckle@>= 0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/freckle/-/freckle-0.0.1.tgz#766dab2ebc63221262b751bb070dbc634c186121"
+
 fresh@0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
@@ -5182,7 +5186,7 @@ opn@^5.1.0:
   dependencies:
     is-wsl "^1.1.0"
 
-optimist@^0.6.1:
+"optimist@>= 0.1.5", optimist@^0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/optimist/-/optimist-0.6.1.tgz#da3ea74686fa21a19a111c326e90eb15a0196686"
   dependencies:
@@ -5426,6 +5430,13 @@ pinkie-promise@^2.0.0:
 pinkie@^2.0.0:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
+
+pip@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/pip/-/pip-0.0.1.tgz#cf0b55a81ecbbf47f85045ccb5fe9afa05a7269e"
+  dependencies:
+    freckle ">= 0.0.1"
+    optimist ">= 0.1.5"
 
 pkg-dir@^2.0.0:
   version "2.0.0"
