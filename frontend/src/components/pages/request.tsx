@@ -1,6 +1,9 @@
 // Importing modules
-import { Card, Elevation } from "@blueprintjs/core";
+import { Button, Card, Elevation, Intent } from "@blueprintjs/core";
+
+// import { Example, handleStringChange, IExampleProps } from "@blueprintjs/docs-theme";
 import * as React from "react";
+
 
 // Importing components
 import OrderBanner from "../share/orderbanner";
@@ -23,7 +26,8 @@ interface IPureItem {
 }
 
 interface IPureRequestState {
-  request: IPureItem[];
+  request: IPureItem[],
+  total: number
 }
 
 export default class Request extends React.Component<{}, IPureRequestState> {
@@ -31,13 +35,18 @@ export default class Request extends React.Component<{}, IPureRequestState> {
     super(props);
 
     this.state = {
-      request: []
+      request: [],
+      total: 0
     };
   }
 
   public componentDidMount() {
+    let totalAmount = 0;
+    requestList.forEach((item) => totalAmount += item.purchasePrice)
+
     this.setState({
-      request: requestList
+      request: requestList,
+      total: totalAmount
     });
   }
 
@@ -51,12 +60,23 @@ export default class Request extends React.Component<{}, IPureRequestState> {
             interactive={true}
             elevation={Elevation.TWO}
           >
-            <h3 className="line-item">{line.itemName}</h3>
-            {/* TODO: Add more items. */}
-            
+            <span className="line-item">{line.itemName}</span>
+            <Button icon="menu" intent={Intent.DANGER} className="extra-mod" minimal={true} />
           </Card>
         ))}
-
+        <Card
+          className="request-summary"
+          elevation={Elevation.TWO}
+        >
+          <div className="request-top">
+            <h3 className="request-header">Total Amount:</h3>
+            <span className="request-amount">${this.state.total}</span>
+          </div>
+          <hr />
+          <button className="confirm-button">
+            <span>Confirm Order</span>
+          </button>
+        </Card>
         <Usermenu />
       </div>
     );
