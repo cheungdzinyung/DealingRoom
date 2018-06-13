@@ -1,9 +1,9 @@
 import {
   IGraphDataCombiner,
+  IPureItemLine,
   IPureMenuItemWithFluctuation,
   IPureOrder,
-  IPureUsersOrderList,
-  IPureItemLine
+  IPureUsersOrderList
 } from "src/modules";
 
 export const menuItems: IPureMenuItemWithFluctuation[] = [
