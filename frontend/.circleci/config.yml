@@ -29,3 +29,37 @@ jobs:
         
       # run tests!
       - run: yarn build
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
+	        # taken to be the root directory of the workspace.
+          root: .
+          # Must be relative path from root
+          paths:
+            - /build/*
+  deploy-job:
+    docker:
+      - image: circleci/python:3.6
+    working_directory: /tmp/my-project
+    steps:
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: /tmp/my-project
+
+      - run:
+          name: Install AWS CLI
+          command: pip install awscli
+
+      - run:
+          name: Deploy to S3 if tests pass and branch is Master
+          command: aws s3 sync --acl public-read build/ s3://dealing-room-build --delete
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy-job:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
