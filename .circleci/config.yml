@@ -8,7 +8,7 @@ jobs:
     docker:
       - image: circleci/node:8
 
-    working_directory: ~/repo
+    working_directory: ~/repo/frontend
 
     steps:
       - checkout
@@ -28,6 +28,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
         
       # run tests!
+      - run: yarn test
       - run: yarn build
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
