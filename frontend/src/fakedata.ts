@@ -1,80 +1,92 @@
-import { IPureOrder, IPureUsersOrderList } from "src/modules";
+import { IGraphDataCombiner, IPureMenuItemWithFluctuation, IPureOrder, IPureUsersOrderList } from "src/modules";
 
-export const items = [
+export const menuItems: IPureMenuItemWithFluctuation[] = [
   {
-    currentPrice: 60,
-    description:
-      "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
-    name: "Asahi",
-    percentage: 1.12
+    category: "beer",
+    chartData: {
+      datasets: [
+        {
+          backgroundColor: "rgba(0,0,0,0)",
+          data: [12, 13, 8, 16, 3, 46],
+          label: "hey",
+          pointColor: "rgba(111, 207, 151, 1)",
+          pointHighlightFill: "rgba(235, 87, 87, 1)",
+          pointHighlightStroke: "rgba(255, 205, 68, .9)",
+          pointStrokeColor: "rgba(235, 87, 87, .24)",
+          strokeColor: "rgba(66, 66, 66, .4)"
+        }
+      ],
+      labels: ["09:00", "", "", "", "", "Now"]
+    },
+    currentPrice: 60.00,
+    isActive: true,
+    isSpecial: false,
+    itemDescription: "ASAHI SUPER DRY’s uses carefully selected strains of yeast that not only facilitate outstanding fermentation, but also enhance the beer’s sophisticated aroma and refreshingly dry taste. Karakuchi means dry, and it is the word that best describes the sophisticated yet congenial character of ASAHI SUPER DRY. Its refreshingly crisp, clear taste makes it an excellent match for any cuisine.",
+    itemName: "Asahi",
+    itemPhoto: "../storage/items/asahi.jpeg",
+    itemStock: 100,
+    item_id: 1,
+    minimumPrice: 15.00
   },
   {
-    currentPrice: 60,
-    description:
-      "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
-    name: "Pinot Blanc",
-    percentage: -10
+    category: "beer",
+    chartData: {
+      datasets: [
+        {
+          backgroundColor: "rgba(0,0,0,0)",
+          data: [100, 13, 8, 16, 3, 46],
+          label: "hey",
+          pointColor: "rgba(111, 207, 151, 1)",
+          pointHighlightFill: "rgba(235, 87, 87, 1)",
+          pointHighlightStroke: "rgba(255, 205, 68, .9)",
+          pointStrokeColor: "rgba(235, 87, 87, .24)",
+          strokeColor: "rgba(66, 66, 66, .4)"
+        }
+      ],
+      labels: ["09:00", "", "", "", "", "Now"]
+    },
+    currentPrice: 60.00,
+    isActive: true,
+    isSpecial: false,
+    itemDescription: "Brewed for the first time in 1904, Carlsberg pilsner is, in fact, part of the Danish cultural heritage and the Danish thirst. You will experience a harmonious balance between bitterness and the sweetness of apples, while enjoying the bright golden color with the nice looking foam. The aroma is dominated by pine, straws, hazelnut and sorrel.",
+    itemName: "Carlsberg",
+    itemPhoto: "../storage/items/carlsberg.jpeg",
+    itemStock: 100,
+    item_id: 2,
+    minimumPrice: 15.00
   },
   {
-    currentPrice: 60,
-    description:
-      "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
-    name: "Taittinger",
-    percentage: 32.15
-  },
-  {
-    currentPrice: 60,
-    description:
-      "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
-    name: "Hennessy Paradis",
-    percentage: -31
-  },
-  {
-    currentPrice: 60,
-    description:
-      "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
-    name: "Pinot Blanc",
-    percentage: -10
-  },
-  {
-    currentPrice: 60,
-    description:
-      "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
-    name: "Taittinger",
-    percentage: 32.15
-  },
-  {
-    currentPrice: 60,
-    description:
-      "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
-    name: "Hennessy Paradis",
-    percentage: -31
-  },
-  {
-    currentPrice: 60,
-    description:
-      "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
-    name: "Pinot Blanc",
-    percentage: -10
-  },
-  {
-    currentPrice: 60,
-    description:
-      "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
-    name: "Taittinger",
-    percentage: 32.15
-  },
-  {
-    currentPrice: 60,
-    description:
-      "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, , which gives the drink the same amber hue as its namesake.",
-    name: "Hennessy Paradis",
-    percentage: -31
+    category: "beer",
+    chartData: {
+      datasets: [
+        {
+          backgroundColor: "rgba(0,0,0,0)",
+          data: [25, 13, 8, 16, 3, 46],
+          label: "hey",
+          pointColor: "rgba(111, 207, 151, 1)",
+          pointHighlightFill: "rgba(235, 87, 87, 1)",
+          pointHighlightStroke: "rgba(255, 205, 68, .9)",
+          pointStrokeColor: "rgba(235, 87, 87, .24)",
+          strokeColor: "rgba(66, 66, 66, .4)"
+        }
+      ],
+      labels: ["09:00", "", "", "", "", "Now"]
+    },
+    currentPrice: 80.00,
+    isActive: true,
+    isSpecial: false,
+    itemDescription: "Sweet smelling with a coffee and malty nose. Perfect balance of bitter and sweet with malt and roast character. Smooth, creamy and balanced. Distinctively dark, with a rich creamy head.",
+    itemName: "Guinness",
+    itemPhoto: "../storage/items/guinness.jpeg",
+    itemStock: 100,
+    item_id: 1,
+    minimumPrice: 20.00
   }
+
 ];
 
-export const chartData = {
-  labels: ["", "", "", "", "", "", ""],
+export const comparisonData: IGraphDataCombiner = {
+  labels: ["beer", "one", "two", "ha", "omg", "lol", "lmfao"],
   // tslint:disable-next-line:object-literal-sort-keys
   datasets: [
     {
@@ -88,6 +100,18 @@ export const chartData = {
       pointHighlightFill: "#fff",
       pointHighlightStroke: "rgba(220,220,220,1)",
       data: [65, 59, 90, 81, 56, 55, 0]
+    },
+    {
+      label: "Bar",
+      // tslint:disable-next-line:object-literal-sort-keys
+      backgroundColor: "rgba(111, 207, 151, 1)",
+      strokeColor: "rgb(235, 87, 87, 1)",
+      // tslint:disable-next-line:object-literal-sort-keys
+      pointColor: "rgba(233, 219, 204, 1)",
+      pointStrokeColor: "#fff",
+      pointHighlightFill: "#fff",
+      pointHighlightStroke: "rgba(220,220,220,1)",
+      data: [30, 29, 41, 23, 5, 155, 10]
     }
   ]
 };
@@ -111,6 +135,7 @@ export const chartOption = {
     display: false
   }
 };
+
 export const categories = {
   name: [
     "beer",

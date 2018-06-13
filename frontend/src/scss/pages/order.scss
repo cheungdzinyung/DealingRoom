@@ -9,18 +9,17 @@
         align-items: center;
     }
 }
-
+.payment-method{
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
 .order-summary {
     width: 100%;
     padding: 5%;
     margin-bottom: 5%;
     background-color: rgba(141, 141, 141, .75);
 
-    .payment-method{
-        width: 100%;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-    }
     .payment-button {
         width: 100%;
         background-color: #EE5353;

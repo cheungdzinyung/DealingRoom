@@ -64,3 +64,33 @@ export interface IPureUsersOrderList {
     orders: IPureUserOrder[]
 
 }
+
+export interface IGraphSingleDataSet {
+    label: string;
+    backgroundColor: string;
+    strokeColor: string;
+    pointColor: string;
+    pointStrokeColor: string;
+    pointHighlightFill: string;
+    pointHighlightStroke: string;
+    data: number[];
+}
+
+export interface IGraphDataCombiner {
+    labels: string[],
+    datasets: IGraphSingleDataSet[];
+}
+
+export interface IPureMenuItemWithFluctuation {
+    item_id: number
+    itemName: string
+    itemStock: number
+    category: string
+    minimumPrice: number
+    currentPrice: number
+    itemPhoto: any
+    itemDescription: string
+    isSpecial: boolean
+    isActive: boolean
+    chartData: IGraphDataCombiner
+}
