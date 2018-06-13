@@ -15,18 +15,12 @@ import headerImg from "../../icons/orders.svg";
 
 // Importing fake data
 import { requestList } from "../../fakedata";
+import { IPureItemLine } from "../../modules";
 
-interface IPureItem {
-  itemName: string;
-  // TODO: change type into custom type
-  ice: string;
-  sweetness: string;
-  garnish: string;
-  purchasePrice: number;
-}
+
 
 interface IPureRequestState {
-  request: IPureItem[],
+  request: IPureItemLine[],
   total: number
 }
 

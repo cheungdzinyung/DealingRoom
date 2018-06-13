@@ -8,7 +8,7 @@ import { Line } from "react-chartjs-2";
 import Usermenu from "../share/usermenu";
 
 // Importing interfaces
-import { IPureMenuItemWithFluctuation } from "../../modules";
+import { IPureCategoryWithItem } from "../../modules";
 
 // Importing helper function
 import { percentageChange } from "../../util/utility"
@@ -25,7 +25,7 @@ import whiskie from "../../images/categories/whiskie.jpg";
 
 
 interface IPureMenuState {
-  items: IPureMenuItemWithFluctuation[];
+  items: IPureCategoryWithItem[];
   isItemDetailsOpen: boolean[];
 }
 

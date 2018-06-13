@@ -1,95 +1,47 @@
 import {
   IGraphDataCombiner,
+  IPureCategoryWithItem,
   IPureItemLine,
-  IPureMenuItemWithFluctuation,
   IPureOrder,
   IPureUsersOrderList
 } from "src/modules";
 
-export const menuItems: IPureMenuItemWithFluctuation[] = [
+//
+export const menuItems: IPureCategoryWithItem[] = [
   {
-    category: "beer",
-    chartData: {
-      datasets: [
-        {
-          backgroundColor: "rgba(0,0,0,0)",
-          data: [12, 13, 8, 16, 3, 46],
-          label: "hey",
-          pointColor: "rgba(111, 207, 151, 1)",
-          pointHighlightFill: "rgba(235, 87, 87, 1)",
-          pointHighlightStroke: "rgba(255, 205, 68, .9)",
-          pointStrokeColor: "rgba(235, 87, 87, .24)",
-          strokeColor: "rgba(66, 66, 66, .4)"
-        }
-      ],
-      labels: ["09:00", "", "", "", "", "Now"]
-    },
-    currentPrice: 60.0,
-    isActive: true,
-    isSpecial: false,
-    itemDescription:
-      "ASAHI SUPER DRY’s uses carefully selected strains of yeast that not only facilitate outstanding fermentation.",
-    itemName: "Asahi",
-    itemPhoto: "../storage/items/asahi.jpeg",
-    itemStock: 100,
-    item_id: 1,
-    minimumPrice: 15.0
-  },
-  {
-    category: "beer",
-    chartData: {
-      datasets: [
-        {
-          backgroundColor: "rgba(0,0,0,0)",
-          data: [100, 13, 8, 16, 3, 46],
-          label: "hey",
-          pointColor: "rgba(111, 207, 151, 1)",
-          pointHighlightFill: "rgba(235, 87, 87, 1)",
-          pointHighlightStroke: "rgba(255, 205, 68, .9)",
-          pointStrokeColor: "rgba(235, 87, 87, .24)",
-          strokeColor: "rgba(66, 66, 66, .4)"
-        }
-      ],
-      labels: ["09:00", "", "", "", "", "Now"]
-    },
-    currentPrice: 60.0,
-    isActive: true,
-    isSpecial: false,
-    itemDescription:
-      "Brewed for the first time in 1904, Carlsberg pilsner is, in fact, part of the Danish cultural heritage and the Danish thirst.",
-    itemName: "Carlsberg",
-    itemPhoto: "../storage/items/carlsberg.jpeg",
-    itemStock: 100,
-    item_id: 2,
-    minimumPrice: 15.0
-  },
-  {
-    category: "beer",
-    chartData: {
-      datasets: [
-        {
-          backgroundColor: "rgba(0,0,0,0)",
-          data: [25, 13, 8, 16, 3, 46],
-          label: "hey",
-          pointColor: "rgba(111, 207, 151, 1)",
-          pointHighlightFill: "rgba(235, 87, 87, 1)",
-          pointHighlightStroke: "rgba(255, 205, 68, .9)",
-          pointStrokeColor: "rgba(235, 87, 87, .24)",
-          strokeColor: "rgba(66, 66, 66, .4)"
-        }
-      ],
-      labels: ["09:00", "", "", "", "", "Now"]
-    },
-    currentPrice: 80.0,
-    isActive: true,
-    isSpecial: false,
-    itemDescription:
-      "Sweet smelling with a coffee and malty nose. Perfect balance of bitter and sweet with malt and roast character. ",
-    itemName: "Guinness",
-    itemPhoto: "../storage/items/guinness.jpeg",
-    itemStock: 100,
-    item_id: 1,
-    minimumPrice: 20.0
+    categoryName: "beer",
+    categoryPhoto: "www.dealingroom.com/public/img/beer.jpeg",
+    items: {
+      currentPrice: 60.0,
+      isActive: true,
+      isSpecial: false,
+      itemDescription:
+        "ASAHI SUPER DRY’s uses carefully selected strains of yeast that not only facilitate outstanding fermentation.",
+      itemName: "Asahi",
+      itemPhoto: "../storage/items/asahi.jpeg",
+      itemStock: 100,
+      item_id: 1,
+      minimumPrice: 15.0,
+      // tslint:disable-next-line:object-literal-sort-keys
+      chartData: {
+        datasets: [
+          {
+            backgroundColor: "rgba(0,0,0,0)",
+            borderColor: "rgba(235,87,87,1)",
+            borderJoinStyle: "miter",
+            data: [12, 13, 8, 16, 3, 46],
+            fill: true,
+            label: "hey",
+            pointBackgroundColor: "rgba(111, 207, 151, 1)",
+            pointBorderColor: "rgba(235, 87, 87, 1)",
+            pointBorderWidth: 2,
+            pointRadius: 3,
+            strokeColor: "rgba(66, 66, 66, .4)"
+          }
+        ],
+        labels: ["09:00", "", "", "", "", "Now"]
+      }
+    }
   }
 ];
 
