@@ -34,7 +34,7 @@ jobs:
           root: .
           # Must be relative path from root
           paths:
-            - /frontend/build/*
+            - build/*
   deploy-job:
     docker:
       - image: circleci/python:3.6
