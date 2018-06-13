@@ -4,11 +4,11 @@ import * as React from "react";
 import { withRouter } from "react-router";
 
 // Importing static assets
-import creditCard from "../../icons/credit.svg";
+import creditCard from "../../icons/credit-card-bare.svg";
 import menu from "../../icons/menu.svg";
-import receipt from "../../icons/orders.svg";
-import wrench from "../../icons/setting.svg";
-import icon from "../../images/profiles/circle-head.png";
+import receipt from "../../icons/orders-bare.svg";
+import wrench from "../../icons/setting-bare.svg";
+import icon from "../../images/profiles/judith-test.png";
 
 interface IPureUserMenuProps {
   history: History.History;

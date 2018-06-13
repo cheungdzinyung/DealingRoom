@@ -119,7 +119,7 @@ export default class PureMenu extends React.Component<{}, IPureMenuState> {
                   <img
                     className="detail-arrow"
                     src={percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0 ? up : down}
-                    alt=""
+                    alt=""  
                   />
                   <span className="detail-percentage">{percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0])}%</span>
                 </div>
