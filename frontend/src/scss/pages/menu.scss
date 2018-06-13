@@ -78,8 +78,9 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
-                span {
+                .description-text {
                     text-justify: auto;
+                    font-size: 90%;
                 }
             }
             .chartVar {

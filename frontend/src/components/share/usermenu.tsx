@@ -5,7 +5,7 @@ import { withRouter } from "react-router";
 
 // Importing static assets
 import creditCard from "../../icons/credit-card-bare.svg";
-import menu from "../../icons/menu.svg";
+import menu from "../../icons/menu-bare.svg";
 import receipt from "../../icons/orders-bare.svg";
 import wrench from "../../icons/setting-bare.svg";
 import icon from "../../images/profiles/judith-test.png";
@@ -51,26 +51,26 @@ class PureUsermenu extends React.Component<
       <div className="user-menu">
         <div className="menu-item" onClick={this.toProfile}>
           <img className="user-icon" src={icon} alt="" />
-          <small className="menu-name">Profile</small>
+          {/* <small className="menu-name">Profile</small> */}
         </div>
         <div className="menu-item" onClick={this.toOrder}>
           <div className="count">
             <span className="count-digit">{this.state.unpaidOrders}</span>
           </div>
           <img className="user-menu-icon" src={receipt} alt="receipt icon" />
-          <small className="menu-name">Orders</small>
+          {/* <small className="menu-name">Orders</small> */}
         </div>
         <div className="menu-item">
           <img className="user-menu-icon" src={menu} alt="menu icon" onClick={this.toMenu} />
-          <small className="menu-name">Menu</small>
+          {/* <small className="menu-name">Menu</small> */}
         </div>
         <div className="menu-item" onClick={this.toPayment}>
           <img className="user-menu-icon" src={creditCard} alt="credit card icon" />
-          <small className="menu-name">Payment</small>
+          {/* <small className="menu-name">Payment</small> */}
         </div>
         <div className="menu-item" onClick={this.toSetting}>
           <img className="user-menu-icon" src={wrench} alt="wrench icon" />
-          <small className="menu-name">Setting</small>
+          {/* <small className="menu-name">Setting</small> */}
         </div>
       </div>
     );
