@@ -43,6 +43,7 @@ export interface IPureOrder {
     table: number
     status: OrderStatus
     isPaid: boolean
+    orderTotal: number;
     orderItems: IPureItemLine[]
 }
 
@@ -52,6 +53,7 @@ export interface IPureUserOrder {
     status: OrderStatus
     isPaid: boolean
     orderingTime: number
+    orderTotal: number
     orderItems: IPureItemLine[]
 }
 

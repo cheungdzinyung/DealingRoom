@@ -14,7 +14,7 @@ import Usermenu from "../share/usermenu";
 import headerImg from "../../icons/orders.svg";
 
 // Importing fake data
-import { requestList } from "../fakedata";
+import { requestList } from "../../fakedata";
 
 interface IPureItem {
   itemName: string;

@@ -1,4 +1,4 @@
-import { IPureUsersOrderList } from "src/modules";
+import { IPureOrder, IPureUsersOrderList } from "src/modules";
 
 export const items = [
   {
@@ -131,55 +131,106 @@ export const categories = {
   ]
 };
 
-export const orderList:IPureUsersOrderList = {
-  users_id: 1,
-  username: "John Doe",
+export const orderList: IPureUsersOrderList = {
   displayName: "Johnny",
+  userName: "John Doe",
+  users_id: 1,
+  // tslint:disable-next-line:object-literal-sort-keys
   orders:
     [
       {
-        "orders_id": 1,
-        "table": 11,
-        "status": "confirmed",
-        "isPaid": false,
-        "orderingTime": 2018 - 06 - 08 15: 17: 24.406432+08,
-        "orderItems":
+        isPaid: false,
+        orderTotal: 155,
+        orderingTime: 20180608151724.40643208,
+        orders_id: 1,
+        status: "confirmed",
+        table: 11,
+        // tslint:disable-next-line:object-literal-sort-keys
+        orderItems:
           [
             {
-              "itemName": "Asahi",
-              "ice": "normal",
-              "sweetness": "normal",
-              "garnish": "normal",
-              "purchasePrice": 105.00
+              garnish: "normal",
+              ice: "normal",
+              itemName: "Asahi",
+              purchasePrice: 105.00,
+              sweetness: "normal"
             },
             {
-              "itemName": "Grey Goose",
-              "ice": "extra",
-              "sweetness": "normal",
-              "garnish": "normal",
-              "purchasePrice": 150.00
+              garnish: "normal",
+              ice: "extra",
+              itemName: "Grey Goose",
+              purchasePrice: 150.00,
+              sweetness: "normal"
             }
           ]
       },
       {
-        "orders.id": 2,
-        "table": 11,
-        "status": "confirmed",
-        "isPaid": false,
-        "orderingTime": 2018 - 06 - 08 15: 20: 14.888501+08,
-        "orderItems":
+        isPaid: false,
+        orderTotal: 105.00,
+        orderingTime: 20180608152014.88850108,
+        orders_id: 2,
+        status: "confirmed",
+        table: 11,
+        // tslint:disable-next-line:object-literal-sort-keys
+        orderItems:
           [
             {
-              "itemName": "Asahi",
-              "ice": "normal",
-              "sweetness": "normal",
-              "garnish": "normal",
-              "purchasePrice": 105.00
+              garnish: "normal",
+              ice: "normal",
+              itemName: "Asahi",
+              purchasePrice: 105.00,
+              sweetness: "normal"
+            }
+          ]
+      }
+      ,
+      {
+        isPaid: true,
+        orderTotal: 105.00,
+        orderingTime: 20180608152014.88850108,
+        orders_id: 3,
+        status: "ordered",
+        table: 11,
+        // tslint:disable-next-line:object-literal-sort-keys
+        orderItems:
+          [
+            {
+              garnish: "normal",
+              ice: "normal",
+              itemName: "Screwdriver",
+              purchasePrice: 105.00,
+              sweetness: "extra"
             }
           ]
       }
     ]
 };
+
+export const singleOrder: IPureOrder = {
+  displayName: "Sabrina",
+  isPaid: false,
+  orderTotal: 155,
+  orders_id: 1,
+  status: "confirmed",
+  table: 11,
+  userName: "sabrina_phy",
+  users_id: 1,
+  // tslint:disable-next-line:object-literal-sort-keys
+  orderItems: [{
+    garnish: "normal",
+    ice: "normal",
+    itemName: "Asahi",
+    purchasePrice: 105.00,
+    sweetness: "normal"
+  },
+  {
+    garnish: "normal",
+    ice: "extra",
+    itemName: "Grey Goose",
+    purchasePrice: 150.00,
+    sweetness: "normal"
+  }]
+}
 
 export const requestList = [
   {

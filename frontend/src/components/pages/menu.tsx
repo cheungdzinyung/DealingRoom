@@ -9,7 +9,7 @@ import Carousel from 'nuka-carousel';
 import Usermenu from "../share/usermenu";
 
 // Importing replacable fake data
-import { chartData, chartOption, items } from "../fakedata";
+import { chartData, chartOption, items } from "../../fakedata";
 
 // Importing static assets
 import down from "../../icons/down.svg";
