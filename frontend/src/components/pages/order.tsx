@@ -22,23 +22,25 @@ import { IPureOrder } from "../../modules";
 import { singleOrder } from "../../fakedata";
 
 interface IPureOrderProps {
-  history: History.History;
-  match: match<{ orderId: number }>;
+  history: History.History
+  match: match<{ orderId: number }>
 }
 
 interface IPureOrdersStates {
-  order: IPureOrder;
+  paymentMethod: string
+  order: IPureOrder
 }
 
 export default class Order extends React.Component<
   IPureOrderProps,
   IPureOrdersStates
-> {
+  > {
   constructor(props: IPureOrderProps) {
     super(props);
 
     this.state = {
-      order: singleOrder
+      order: singleOrder,
+      paymentMethod: paymentTest
     };
   }
   public render() {
@@ -62,8 +64,8 @@ export default class Order extends React.Component<
             <span className="order-item">{line.itemName}</span>
           </Card>
         ))}
+        <img className="payment-method" src={this.state.paymentMethod} alt="" />
         <Card className="order-summary" elevation={Elevation.TWO}>
-          <img className="payment-method" src={paymentTest} alt="" />
           <button className="payment-button">
             <span className="payment-header">Pay Now</span>
             <span className="payment-amount">&#36;360</span>

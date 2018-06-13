@@ -6,22 +6,19 @@ import downWhite from "../../icons/down-white.svg";
 import upWhite from "../../icons/up-white.svg";
 import tempImg from "../../images/profiles/circle-head.png";
 
-// Importing temperary data
-import { categories, items } from "../../fakedata";
+// Importing temporary data
+import { categories, menuItems } from "../../fakedata";
 
+// Importing utility function and classes
+import { IPureMenuItemWithFluctuation } from "src/modules";
+import { percentageChange } from '../../util/utility';
 
-interface IPureMenuItem {
-    name: string;
-    percentage: number;
-    description: string;
-    currentPrice: number;
-}
 
 interface IPureMenuCategory {
     name: string[];
 }
 interface IDisplayState {
-    items : IPureMenuItem[];
+    items : IPureMenuItemWithFluctuation[];
     categories : IPureMenuCategory;
     categoryName: string;
   }
@@ -36,7 +33,7 @@ export default class Display extends React.Component<{}, IDisplayState> {
 
           categoryName: '',
           // tslint:disable-next-line:object-literal-shorthand
-          items: items
+          items: menuItems
       }
     }
 
@@ -63,16 +60,16 @@ export default class Display extends React.Component<{}, IDisplayState> {
                         return (
                             <div className="display-grid" key={i}>
                                 <div className="item-name-display">
-                                    <span>{item.name}</span>
+                                    <span>{item.itemName}</span>
                                 </div>
                                 <div className={
                                     this.state.items.map[i]
                                         ? "item-arrow-display"
-                                        : item.percentage > 0
+                                        : percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0
                                             ? "item-arrow-display item-price-up"
                                             : "item-arrow-display item-price-down"
                                 }>
-                                    <img className='arrow' src={item.percentage > 0 ? upWhite : downWhite} alt="" />
+                                    <img className='arrow' src={percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0 ? upWhite : downWhite} alt="" />
                                 </div>
                             </div>
                         )

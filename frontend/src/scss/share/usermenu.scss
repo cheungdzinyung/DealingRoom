@@ -1,12 +1,10 @@
-
 .user-menu {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100vw;
-    height: 15vh;
+    height: 13vh;
     padding: 0 2%;
-
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -38,7 +36,7 @@
             }
         }
         .user-icon{
-            width: 50%;
+            width: 45%;
             border-radius:50%;
         }
         .menu-name{
@@ -46,7 +44,7 @@
             // font-size: 1rem; 
         }
         .user-menu-icon{
-            width: 50%;
+            width: 45%;
         }
     }
     
