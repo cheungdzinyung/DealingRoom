@@ -65,6 +65,7 @@ export default class OrdersService {
           .join("orders", "orders.id", "=", "orders_items.orders_id")
           .join("items", "items.id", "=", "orders_items.items_id")
           .select(
+            "items.id as item_id",
             "items.itemName as itemName",
             "orders_items.purchasePrice as purchasePrice",
             "orders_items.ice as ice",
@@ -93,38 +94,57 @@ export default class OrdersService {
 
   //*****TODO*****// 10/06/18
   getByUserId(id: number) {
+    // let allOrder: {}[];
     return this.knex("users")
       .join("orders", "users.id", "=", "users_id")
       .where("users_id", id)
       .select("users_id", "username", "displayName", "orders.id as orders_id")
       .then((orderList: any) => {
+        // console.log(orderList[1].users_id);
+
+        // allOrder = [
+        //   {
+        //     users_id: orderList[0].users_id,
+        //     userName: orderList[0].username,
+        //     displayName: orderList[0].displayName,
+        //     orders: this.getByOrderId(orderList[0][0].items_id)
+        //   }
+        // ];
+        // return allOrder;
+
         Promise.all(
           orderList.map((order: any, i: number) => {
             return this.knex("orders_items")
+              .join("items", "orders_items.items_id", "=", "items.id")
               .select(
-                "items_id",
-                "purchasePrice",
-                "ice",
-                "sweetness",
-                "garnish"
+                "items.itemName",
+                "orders_items.items_id",
+                "orders_items.purchasePrice",
+                "orders_items.ice",
+                "orders_items.sweetness",
+                "orders_items.garnish"
               )
               .where("orders_id", order.orders_id)
-              .then(itemList => {
-                Promise.all(
-                  itemList.map((item: any, j: number) => {
-                    return this.knex("items")
-                      .select("itemName")
-                      .where("items.id", item.items_id)
-                      .then((result: any) => {
-                        console.log(result[0].itemName);
-                      });
-                  })
-                );
+              .then((result: any) => {
+                console.log(result);
               });
           })
         );
+        // .then(itemList => {
+        //   Promise.all(
+        //     itemList.map((item: any, j: number) => {
+        //       return this.knex("items")
+        //         .select("itemName")
+        //         .where("items.id", item.items_id)
+        //         .then((result: any) => {
+        //           console.log(result[0].itemName);
+        //         });
+        //     })
+        //   );
+        // });
       });
-    ////////AF///////////////
+
+    ////////Allen F///////////////
     // async getOrderByUserId(id: number) {
     //   let [user] = await this.knex("users")
     //     .where("id", id)
@@ -150,9 +170,36 @@ export default class OrdersService {
 
   //*****TODO*****//
   getAllPrice(id: number) {
-    return this.knex("users")
-      .select("id")
-      .where("id", id);
+    return this.knex("orders")
+      .join("users", "users.id", "=", "orders.users_id")
+      .join("orders_items", "orders_items.orders_id", "=", "orders.id")
+      .join("items", "items.id", "=", "orders_items.items_id")
+      .join("categories", "categories.id", "=", "items.categories_id")
+      .select("categories.categoryName")
+      .sumDistinct("orders_items.purchasePrice")
+      .whereNot("users.id", id)
+      .groupBy("categories.categoryName")
+      .then(result => {
+        let obj = {
+          [result.categoryName]: [result.sum]
+        };
+        console.log(obj);
+        return obj;
+
+        // Promise.all(
+        //   result
+        //     .map((category: any, i: number) => {
+        //       let sum = result[i].sum;
+        //       let obj = {
+        //         [result[i].categoryName]: sum
+        //       };
+        //       return obj;
+        //     })
+        //     .then((results: any) => {
+        //       return results;
+        //     })
+        // );
+      });
   }
 
   //*****TODO******//

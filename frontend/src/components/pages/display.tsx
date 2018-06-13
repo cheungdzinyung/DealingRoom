@@ -7,7 +7,7 @@ import upWhite from "../../icons/up-white.svg";
 import tempImg from "../../images/profiles/circle-head.png";
 
 // Importing temperary data
-import { categories, items } from "../fakedata";
+import { categories, items } from "../../fakedata";
 
 
 interface IPureMenuItem {

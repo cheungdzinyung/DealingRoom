@@ -1,0 +1,42 @@
+.order-line {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3%;
+    background-color: rgba(141, 141, 141, .75);
+    .order-item {
+        display: inline-flex;
+        align-items: center;
+    }
+}
+
+.order-summary {
+    width: 100%;
+    padding: 5%;
+    margin-bottom: 5%;
+    background-color: rgba(141, 141, 141, .75);
+
+    .payment-method{
+        width: 100%;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    .payment-button {
+        width: 100%;
+        background-color: #EE5353;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        color: white;
+        padding: 3% 0%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .payment-header{
+            color: $font-color-light;
+        }
+        .payment-amount{
+            color: $warning-orange;
+        }
+    }
+}
