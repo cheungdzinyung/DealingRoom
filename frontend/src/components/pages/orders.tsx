@@ -56,6 +56,7 @@ export default class Orders extends React.Component<{}, IPureOrdersStates> {
               className="order-cards"
               interactive={true}
               elevation={Elevation.TWO}
+              key={`unpaid_${index}`}
             >
               <div className="top">
                 <div className="order-details">
@@ -86,6 +87,7 @@ export default class Orders extends React.Component<{}, IPureOrdersStates> {
               className="order-cards"
               interactive={true}
               elevation={Elevation.TWO}
+              key={`paid_${index}`}
             >
               <div className="top">
                 <div className="order-details">

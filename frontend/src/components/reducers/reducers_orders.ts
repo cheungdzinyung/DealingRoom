@@ -1,10 +1,11 @@
 import {
     OrdersActions,
     ADD_ITEM,
-    // REMOVE_ITEM,
+    REMOVE_ITEM,
 } from "../actions/actions_orders";
 
 interface IItem {
+    thisItemID: string,
     uniqueID: string,
     name: string,
     ice: string,
@@ -23,30 +24,35 @@ interface IOrder {
 export interface IOrdersState {
     ordersArray: IOrder[],
     currentOrder: IItem[],
+    currentTotal: number,
 }
 
 const initialState = {
     ordersArray: [],
     currentOrder: [],
+    currentTotal: 0,
 }
 
 export const ordersReducer = (state: IOrdersState = initialState, action: OrdersActions): IOrdersState => {
-    switch(action.type) {
+    switch (action.type) {
         case ADD_ITEM: {
             const newItem = {
+                thisItemID: `${Date.now()}`,
                 uniqueID: action.uniqueID,
                 name: action.name,
                 ice: "normal",
                 sweetness: "normal",
                 garnish: "normal",
-                purchasePrice: 99.99, // need a redux store for all items' live price
+                purchasePrice: 11.11, // need a redux store for all items' live price
             }
-            return {...state, currentOrder: state.currentOrder.concat([newItem])}
+            const newTotal = (state.currentTotal*1000 + newItem.purchasePrice*1000)/1000;
+            return { ...state, currentOrder: state.currentOrder.concat([newItem]), currentTotal: newTotal }
         }
-        // case REMOVE_ITEM: {
-        //     // TODO
-        //     return state
-        // }
+        case REMOVE_ITEM: {
+            const newArray = state.currentOrder.filter((e: IItem) => (e.thisItemID !== action.thisItemID));
+            const newTotal = newArray.reduce((accu, e: IItem) => (accu + e.purchasePrice*1000), 0) / 1000;
+            return { ...state, currentOrder: newArray, currentTotal: newTotal };
+        }
         default: {
             return state
         }

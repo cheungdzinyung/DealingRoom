@@ -24,15 +24,16 @@ export interface IAddItemAction extends Action {
     name: string,
 }
 
-// export const REMOVE_ITEM = "REMOVE_ITEM";
-// export type REMOVE_ITEM = typeof REMOVE_ITEM;
-// export interface IRemoveItemAction extends Action {
-//     type: REMOVE_ITEM,
-//     uniqueID: string,
-// }
+export const REMOVE_ITEM = "REMOVE_ITEM";
+export type REMOVE_ITEM = typeof REMOVE_ITEM;
+export interface IRemoveItemAction extends Action {
+    type: REMOVE_ITEM,
+    thisItemID: string,
+}
 
 export type OrdersActions =
-    IAddItemAction;
+    IAddItemAction |
+    IRemoveItemAction;
 
 export function addToCurrentOrder(uniqueID: string, name: string): IAddItemAction {
     return {
@@ -42,9 +43,9 @@ export function addToCurrentOrder(uniqueID: string, name: string): IAddItemActio
     }
 }
 
-// export function removeFromCurrentOrder(uniqueID: string): IRemoveItemAction {
-//     return {
-//         type: REMOVE_ITEM,
-//         uniqueID,
-//     }
-// }
+export function removeFromCurrentOrder(thisItemID: string): IRemoveItemAction {
+    return {
+        type: REMOVE_ITEM,
+        thisItemID,
+    }
+}

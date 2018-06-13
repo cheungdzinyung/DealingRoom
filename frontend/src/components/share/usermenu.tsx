@@ -45,6 +45,9 @@ class PureUsermenu extends React.Component<
   public toMenu = () => {
     this.props.history.push(`/menu`);
   };
+  public toRequest = () => {
+    this.props.history.push(`/request`);
+  };
 
   public render() {
     return (
@@ -63,6 +66,10 @@ class PureUsermenu extends React.Component<
         <div className="menu-item">
           <img className="user-menu-icon" src={menu} alt="menu icon" onClick={this.toMenu} />
           <small className="menu-name">Menu</small>
+        </div>
+        <div className="menu-item">
+          <img className="user-menu-icon" src={menu} alt="menu icon" onClick={this.toRequest} />
+          <small className="menu-name">Request</small>
         </div>
         <div className="menu-item" onClick={this.toPayment}>
           <img className="user-menu-icon" src={creditCard} alt="credit card icon" />

@@ -24,6 +24,7 @@ import cocktail from "../../images/categories/cocktails.jpg";
 import whiskie from "../../images/categories/whiskie.jpg";
 
 interface IItem {
+  thisItemID: string,
   uniqueID: string,
   name: string,
   ice: string,
@@ -81,17 +82,17 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
   };
 
   public searching = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({searchBoxEntry: e.target.value.toLowerCase()});
+    this.setState({ searchBoxEntry: e.target.value.toLowerCase() });
   }
 
   public addToCurrentOrder = (e: React.MouseEvent<HTMLDivElement>) => {
     const uniqueID = e.currentTarget.dataset.uniqueid;
     const name = e.currentTarget.dataset.name;
-        if (uniqueID !== undefined && name !== undefined) {
-            this.props.addToCurrentOrder(uniqueID, name);
-        }
+    if (uniqueID !== undefined && name !== undefined) {
+      this.props.addToCurrentOrder(uniqueID, name);
+    }
   }
-  
+
   // TODO: to fix the next and Previous of the carousel
 
   public render() {
@@ -100,13 +101,13 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
         {/* FIXME: the carousel won't load image when rendering other element first and coming back with it */}
 
         <Carousel initialSlideHeight={166} slideIndex={0} className="image-roll" wrapAround={true}>
-        <img src={beer} alt="" />
-        <img src={whiskie} alt="" />
-        <img src={cocktail} alt="" />
-        <img src={beer} alt="" />
-        <img src={whiskie} alt="" />
-        <img src={cocktail} alt="" />
-      </ Carousel>
+          <img src={beer} alt="" />
+          <img src={whiskie} alt="" />
+          <img src={cocktail} alt="" />
+          <img src={beer} alt="" />
+          <img src={whiskie} alt="" />
+          <img src={cocktail} alt="" />
+        </ Carousel>
 
 
         <input
@@ -122,69 +123,69 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
         {/* {this.state.items.filter(item => item.category === this.state.category).map((item, i) => ( */}
         {this.state.items.map((item, i) => (
           (item.name.toLowerCase().search(this.state.searchBoxEntry) !== -1) ?
-          <div className="item-container">
-            <Card
-              className={
-                !this.state.isItemDetailsOpen[i]
-                  ? "item-cards"
-                  : item.percentage > 0
-                    ? "item-cards item-price-up"
-                    : "item-cards item-price-down"
-              }
-              interactive={true}
-              elevation={Elevation.FOUR}
-              onClick={this.isOpen.bind(this, i)}
-              key={`Card_${i}`}
-            >
-              <div className="pricetag"
-                onClick={ this.addToCurrentOrder }
-                data-uniqueid={item.uniqueID}
-                data-name={item.name}>
-                <span>{item.name}</span>
-                {!this.state.isItemDetailsOpen[i] && <span>${item.currentPrice}</span>}
-              </div>
+            <div className="item-container">
+              <Card
+                className={
+                  !this.state.isItemDetailsOpen[i]
+                    ? "item-cards"
+                    : item.percentage > 0
+                      ? "item-cards item-price-up"
+                      : "item-cards item-price-down"
+                }
+                interactive={true}
+                elevation={Elevation.FOUR}
+                onClick={this.isOpen.bind(this, i)}
+                key={`Card_${i}`}
+              >
+                <div className="pricetag"
+                  onClick={this.addToCurrentOrder}
+                  data-uniqueid={item.uniqueID}
+                  data-name={item.name}>
+                  <span>{item.name}</span>
+                  {!this.state.isItemDetailsOpen[i] && <span>${item.currentPrice}</span>}
+                </div>
 
-              {!this.state.isItemDetailsOpen[i] ? <div className="arrow-container">
-                <img
-                  className="arrow"
-                  src={item.percentage > 0 ? up : down}
-                  alt=""
-                />
-              </div> : <span>${item.currentPrice}</span>}
-            </Card>
-            {/* ------------Seperate card and card details */}
-            <Collapse
-              key={`Collapse_${i}`}
-              className={
-                "item-details" +
-                " " +
-                (this.state.isItemDetailsOpen[i] ? "item-detail-onflex" : "")
-              }
-              isOpen={this.state.isItemDetailsOpen[i]}
-            >
-              <div className="description">
-                <p className="description-text">{item.description}</p>
-              </div>
-              <div className="chartVar">
-                <div className="variables">
+                {!this.state.isItemDetailsOpen[i] ? <div className="arrow-container">
                   <img
-                    className="detail-arrow"
+                    className="arrow"
                     src={item.percentage > 0 ? up : down}
                     alt=""
                   />
-                  <span className="detail-percentage">{item.percentage}%</span>
+                </div> : <span>${item.currentPrice}</span>}
+              </Card>
+              {/* ------------Seperate card and card details */}
+              <Collapse
+                key={`Collapse_${i}`}
+                className={
+                  "item-details" +
+                  " " +
+                  (this.state.isItemDetailsOpen[i] ? "item-detail-onflex" : "")
+                }
+                isOpen={this.state.isItemDetailsOpen[i]}
+              >
+                <div className="description">
+                  <p className="description-text">{item.description}</p>
                 </div>
+                <div className="chartVar">
+                  <div className="variables">
+                    <img
+                      className="detail-arrow"
+                      src={item.percentage > 0 ? up : down}
+                      alt=""
+                    />
+                    <span className="detail-percentage">{item.percentage}%</span>
+                  </div>
 
-                <Line
-                  width={80}
-                  height={60}
-                  data={chartData}
-                  options={chartOption}
-                />
-              </div>
-            </Collapse>
-          </div> :
-          <div />
+                  <Line
+                    width={80}
+                    height={60}
+                    data={chartData}
+                    options={chartOption}
+                  />
+                </div>
+              </Collapse>
+            </div> :
+            <div />
         ))}
         <Usermenu />
       </div>
