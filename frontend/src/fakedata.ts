@@ -177,6 +177,7 @@ export const orderList: IPureUsersOrderList = {
               garnish: "normal",
               ice: "normal",
               itemName: "Asahi",
+              item_id: 1,
               purchasePrice: 105.00,
               sweetness: "normal"
             },
@@ -184,6 +185,7 @@ export const orderList: IPureUsersOrderList = {
               garnish: "normal",
               ice: "extra",
               itemName: "Grey Goose",
+              item_id: 2,
               purchasePrice: 150.00,
               sweetness: "normal"
             }
@@ -203,6 +205,7 @@ export const orderList: IPureUsersOrderList = {
               garnish: "normal",
               ice: "normal",
               itemName: "Asahi",
+              item_id: 1,
               purchasePrice: 105.00,
               sweetness: "normal"
             }
@@ -223,6 +226,7 @@ export const orderList: IPureUsersOrderList = {
               garnish: "normal",
               ice: "normal",
               itemName: "Screwdriver",
+              item_id: 3,
               purchasePrice: 105.00,
               sweetness: "extra"
             }
@@ -245,6 +249,7 @@ export const singleOrder: IPureOrder = {
     garnish: "normal",
     ice: "normal",
     itemName: "Asahi",
+    item_id: 1,
     purchasePrice: 105.00,
     sweetness: "normal"
   },
@@ -252,6 +257,7 @@ export const singleOrder: IPureOrder = {
     garnish: "normal",
     ice: "extra",
     itemName: "Grey Goose",
+    item_id: 2,
     purchasePrice: 150.00,
     sweetness: "normal"
   }]

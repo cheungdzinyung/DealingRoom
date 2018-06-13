@@ -10,7 +10,6 @@ type EXTRA = typeof EXTRA;
 
 export type ItemModification = NORMAL | LESS | WITHOUT | EXTRA;
 
-
 const ORDERED = "ordered";
 type ORDERED = typeof ORDERED;
 const CONFIRMED = "confirmed";
@@ -24,17 +23,23 @@ type CANCELLED = typeof CANCELLED;
 
 export type OrderStatus = ORDERED | CONFIRMED | MADE | SERVED | CANCELLED;
 
-
-
+/*
+Corresponding API path: api/order/:orderid
+URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiordersorderid5d/retreiving-order-information-by-order-id
+ */
 export interface IPureItemLine {
     itemName: string
     ice: ItemModification
     sweetness: ItemModification
     garnish: ItemModification
     purchasePrice: number
-
+    item_id: number
 }
 
+/*
+Corresponding API path: api/order/:orderid
+URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiordersorderid5d/retreiving-order-information-by-order-id
+ */
 export interface IPureOrder {
     users_id: number
     userName: string
@@ -47,6 +52,10 @@ export interface IPureOrder {
     orderItems: IPureItemLine[]
 }
 
+/*
+Corresponding API path: api/orders/user/:userid
+URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiordersuseruserid5d/retreiving-orders-information-by-user-id
+ */
 export interface IPureUserOrder {
     orders_id: number
     table: number
@@ -57,6 +66,10 @@ export interface IPureUserOrder {
     orderItems: IPureItemLine[]
 }
 
+/*
+Corresponding API path: api/orders/user/:userid
+URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiordersuseruserid5d/retreiving-orders-information-by-user-id
+ */
 export interface IPureUsersOrderList {
     users_id: number
     userName: string
@@ -65,6 +78,10 @@ export interface IPureUsersOrderList {
 
 }
 
+/*
+Corresponding API path: api/order/:orderid
+URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiordersorderid5d/retreiving-order-information-by-order-id
+ */
 export interface IGraphSingleDataSet {
     label: string;
     backgroundColor: string;
@@ -76,11 +93,19 @@ export interface IGraphSingleDataSet {
     data: number[];
 }
 
+/*
+Corresponding API path: api/order/:orderid
+URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiordersorderid5d/retreiving-order-information-by-order-id
+ */
 export interface IGraphDataCombiner {
     labels: string[],
     datasets: IGraphSingleDataSet[];
 }
 
+/*
+Corresponding API path: api/order/:orderid
+URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiordersorderid5d/retreiving-order-information-by-order-id
+ */
 export interface IPureMenuItemWithFluctuation {
     item_id: number
     itemName: string
