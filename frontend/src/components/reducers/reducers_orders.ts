@@ -2,6 +2,8 @@ import {
     OrdersActions,
     ADD_ITEM,
     REMOVE_ITEM,
+    CONFIRM_ORDER_SUCCESS,
+    CONFIRM_ORDER_FAIL,
 } from "../actions/actions_orders";
 
 interface IItem {
@@ -52,6 +54,17 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
             const newArray = state.currentOrder.filter((e: IItem) => (e.thisItemID !== action.thisItemID));
             const newTotal = newArray.reduce((accu, e: IItem) => (accu + e.purchasePrice*1000), 0) / 1000;
             return { ...state, currentOrder: newArray, currentTotal: newTotal };
+        }
+        case CONFIRM_ORDER_SUCCESS: {
+            const confirmedOrder = {
+                userID: action.orderToConfirm.userID,
+                table: action.orderToConfirm.table,
+                status: "confirmed",
+                item: action.orderToConfirm.item};
+            return { ...state, ordersArray: state.ordersArray.concat([confirmedOrder]) }
+        }
+        case CONFIRM_ORDER_FAIL: {
+            return state
         }
         default: {
             return state

@@ -7,7 +7,7 @@ import * as React from "react";
 // import redux and friends
 import { connect } from "react-redux";
 import { IRootState } from "../reducers/index";
-import { removeFromCurrentOrder } from "../actions/actions_orders";
+import { removeFromCurrentOrder, confirmOrder } from "../actions/actions_orders";
 
 // Importing components
 import OrderBanner from "../share/orderbanner";
@@ -31,10 +31,18 @@ interface IItem {
   purchasePrice: number,
 }
 
+interface IOrder {
+  userID: string,
+  table: string,
+  status: string,
+  item: IItem[],
+}
+
 interface IRequestProps {
   currentOrder: IItem[],
   currentTotal: number,
   removeFromCurrentOrder: (thisItemID: string) => void,
+  confirmOrder: (orderToConfirm: IOrder) => void,
 }
 
 class PureRequest extends React.Component<IRequestProps, {}> {
@@ -50,8 +58,13 @@ class PureRequest extends React.Component<IRequestProps, {}> {
   }
 
   public confirmOrder = () => {
-    // TODO : post current order to server
-    return null;
+    const orderToConfirm = {
+      userID: "1",  // get from root state
+      table: "1",
+      status: "ordered",
+      item: this.props.currentOrder,
+    }
+    this.props.confirmOrder(orderToConfirm);
   }
 
   public render() {
@@ -106,6 +119,9 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     removeFromCurrentOrder: (thisItemID: string) => {
       dispatch(removeFromCurrentOrder(thisItemID));
+    },
+    confirmOrder: (orderToConfirm: IOrder) => {
+      dispatch(confirmOrder(orderToConfirm));
     }
   }
 }
