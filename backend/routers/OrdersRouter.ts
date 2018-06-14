@@ -8,8 +8,8 @@ export default class UsersRouter {
     this.ordersService = ordersService;
   }
 
-  router() {
-    let router = express.Router();
+  public router() {
+    const router = express.Router();
 
     router.post("/:id", this.add.bind(this));
 
@@ -23,76 +23,68 @@ export default class UsersRouter {
     return router;
   }
 
-  add(req: express.Request, res: express.Response) {
+  public add(req: express.Request, res: express.Response) {
     return this.ordersService
       .add(req.params.id, req.body)
       .then((result: any) => {
         res.status(201).json(result);
       })
       .catch((err: express.Errback) => {
-        console.log("Post Error", err);
         res.status(500).json({ status: "failed" });
       });
   }
 
-  getByOrderId(req: express.Request, res: express.Response) {
+  public getByOrderId(req: express.Request, res: express.Response) {
     return this.ordersService
       .getByOrderId(req.params.id)
       .then((result: any) => {
         res.status(200).json(result);
       })
       .catch((err: express.Errback) => {
-        console.log("Post Error", err);
         res.status(500).json({ status: "failed" });
       });
   }
 
-  getByUserId(req: express.Request, res: express.Response) {
+  public getByUserId(req: express.Request, res: express.Response) {
     return this.ordersService
       .getByUserId(req.params.id)
       .then((result: any) => {
         res.status(200).json(result);
       })
       .catch((err: express.Errback) => {
-        console.log("Post Error", err);
         res.status(500).json({ status: "failed" });
       });
   }
 
-  getAllPrice(req: express.Request, res: express.Response) {
+  public getAllPrice(req: express.Request, res: express.Response) {
     return this.ordersService
       .getAllPrice(req.params.id)
       .then((result: any) => {
         res.status(200).json(result);
       })
       .catch((err: express.Errback) => {
-        console.log("Post Error", err);
         res.status(500).json({ status: "failed" });
       });
   }
 
-  getAllQuantity(req: express.Request, res: express.Response) {
+  public getAllQuantity(req: express.Request, res: express.Response) {
     return this.ordersService
       .getAllQuantity(req.params.id)
       .then((result: any) => {
         res.status(200).json(result);
       })
       .catch((err: express.Errback) => {
-        console.log("Post Error", err);
         res.status(500).json({ status: "failed" });
       });
   }
 
-  update(req: express.Request, res: express.Response) {
-    console.log(req.params.id, req.body);
+  public update(req: express.Request, res: express.Response) {
     return this.ordersService
       .update(req.params.id, req.body)
       .then((result: any) => {
         res.status(201).json(result);
-        console.log(result);
       })
       .catch((err: express.Errback) => {
-        console.log("Post Error", err);
         res.status(500).json({ status: "failed" });
       });
   }

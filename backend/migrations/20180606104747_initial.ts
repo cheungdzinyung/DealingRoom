@@ -1,6 +1,6 @@
 import * as Knex from "knex";
 
-exports.up = function (knex: Knex) {
+exports.up = (knex: Knex) => {
     return knex.schema
     .createTable("users", users => {
       users
@@ -132,7 +132,7 @@ exports.up = function (knex: Knex) {
     });
 };
 
-exports.down = function (knex: Knex) {
+exports.down = (knex: Knex) => {
     return knex.schema
     .dropTable("itemsLog")
     .then(() => knex.schema.dropTable("orders_items"))

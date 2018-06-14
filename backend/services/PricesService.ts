@@ -7,22 +7,22 @@ export default class PricesService {
     this.knex = knex;
   }
 
-  //****TODO*****//
-  getAllByCat(req: string) {
+  // ****TODO***** //
+  public getAllByCat(req: string) {
     return this.knex("users")
       .select("id")
       .where("id", req);
   }
 
-  //****TODO*****//
-  getAll() {
+  // ****TODO***** //
+  public getAll() {
     return this.knex("users")
       .select("id")
       .where("id", 1);
   }
 
-  //****TODO*****//
-  update(id: number) {
+  // ****TODO***** //
+  public update(id: number) {
     return this.knex("users")
       .select("id")
       .where("id", id);
