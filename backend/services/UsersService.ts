@@ -1,5 +1,5 @@
-import * as Knex from "knex";
 import * as fs from "fs-extra";
+import * as Knex from "knex";
 
 import { IUserData } from "../interfaces";
 
@@ -10,7 +10,7 @@ export default class UsersService {
     this.knex = knex;
   }
 
-  saveUpdateUserImage(id: number, file: Express.Multer.File) {
+  public saveUpdateUserImage(id: number, file: Express.Multer.File) {
     const imagePath = `./storage/users/${id}/profile.jpg`;
     fs.outputFile(imagePath, file.buffer);
     return this.knex("users")
@@ -21,7 +21,7 @@ export default class UsersService {
   }
 
   // Working 10/06/18
-  add(data: IUserData, file: Express.Multer.File) {
+  public add(data: IUserData, file: Express.Multer.File) {
     return this.knex("users")
       .insert({
         username: data.username,

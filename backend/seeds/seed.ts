@@ -1,5 +1,5 @@
-import * as Knex from "knex";
 import * as fs from "fs-extra";
+import * as Knex from "knex";
 import * as path from "path";
 
 interface IItemsType {
@@ -22,28 +22,28 @@ exports.seed = (knex: Knex) => {
       return knex("users")
         .insert([
           {
-            username: "Andrew",
             displayName: "ACDY",
+            role: "manager",
             userPhoto: "",
-            role: "manager"
+            username: "Andrew"
           },
           {
-            username: "Ivan",
             displayName: "Longspeach",
+            role: "manager",
             userPhoto: "",
-            role: "manager"
+            username: "Ivan"
           },
           {
-            username: "Judith",
             displayName: "Curtit",
+            role: "manager",
             userPhoto: "",
-            role: "manager"
+            username: "Judith"
           },
           {
-            username: "Harrison",
             displayName: "Harrixxon",
+            role: "manager",
             userPhoto: "",
-            role: "manager"
+            username: "Harrison"
           }
         ])
         .then(() => {
