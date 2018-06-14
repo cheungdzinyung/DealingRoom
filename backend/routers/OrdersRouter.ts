@@ -57,6 +57,98 @@ export default class UsersRouter {
         console.log("Post Error", err);
         res.status(500).json({ status: "failed" });
       });
+    // console.log("get")
+    // const test = [{
+    //   "users_id": 1,
+    //   "username": "John Doe",
+    //   "displayName": "Johnny",
+    //   "orders":
+    //     [
+    //       {
+    //         "orders_id": 1,
+    //         "table": 123,
+    //         "status": "confirmed",
+    //         "isPaid": false,
+    //         "orderingTime": "2018 - 06 - 08 15: 17: 24.406432+08",
+    //         "orderItems":
+    //           [
+    //             {
+    //               "itemName": "Asahi",
+    //               "ice": "normal",
+    //               "sweetness": "normal",
+    //               "garnish": "normal",
+    //               "purchasePrice": 105.00
+    //             },
+    //             {
+    //               "itemName": "Grey Goose",
+    //               "ice": "extra",
+    //               "sweetness": "normal",
+    //               "garnish": "normal",
+    //               "purchasePrice": 150.00
+    //             }
+    //           ]
+    //       },
+    //       {
+    //         "orders_id": 2,
+    //         "table":321,
+    //         "status": "confirmed",
+    //         "isPaid": false,
+    //         "orderingTime": "2018 - 06 - 08 15: 20: 14.888501+08",
+    //         "orderItems":
+    //           [
+    //             {
+    //               "itemName": "Asahi",
+    //               "ice": "normal",
+    //               "sweetness": "normal",
+    //               "garnish": "normal",
+    //               "purchasePrice": 105.00
+    //             }
+    //           ]
+    //       },
+    //       {
+    //         "orders_id": 3,
+    //         "table":444,
+    //         "status": "made",
+    //         "isPaid": true,
+    //         "orderingTime": "2018 - 06 - 09 15: 20: 14.888501+08",
+    //         "orderItems":
+    //           [
+    //             {
+    //               "itemName": "Pinot Blanc",
+    //               "ice": "normal",
+    //               "sweetness": "normal",
+    //               "garnish": "normal",
+    //               "purchasePrice": 205.00
+    //             }
+    //           ]
+    //       },
+    //       {
+    //         "orders_id": 4,
+    //         "table":666,
+    //         "status": "confirmed",
+    //         "isPaid": false,
+    //         "orderingTime": "2018 - 06 - 19 15: 20: 14.888501+08",
+    //         "orderItems":
+    //           [
+    //             {
+    //               "itemName": "Asahi",
+    //               "ice": "normal",
+    //               "sweetness": "normal",
+    //               "garnish": "normal",
+    //               "purchasePrice": 105.00
+    //             },
+    //             {
+    //               "itemName": "Pinot Blanc",
+    //               "ice": "normal",
+    //               "sweetness": "normal",
+    //               "garnish": "normal",
+    //               "purchasePrice": 205.00
+    //             }
+    //           ]
+    //       },
+    //     ]
+    // }];
+    // res.status(200).json(test);
   }
 
   getAllPrice(req: express.Request, res: express.Response) {

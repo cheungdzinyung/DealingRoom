@@ -94,55 +94,58 @@ export default class OrdersService {
 
   //*****TODO*****// 10/06/18
   getByUserId(id: number) {
-    // let allOrder: {}[];
     return this.knex("users")
-      .join("orders", "users.id", "=", "users_id")
-      .where("users_id", id)
-      .select("users_id", "username", "displayName", "orders.id as orders_id")
-      .then((orderList: any) => {
-        // console.log(orderList[1].users_id);
-
-        // allOrder = [
-        //   {
-        //     users_id: orderList[0].users_id,
-        //     userName: orderList[0].username,
-        //     displayName: orderList[0].displayName,
-        //     orders: this.getByOrderId(orderList[0][0].items_id)
-        //   }
-        // ];
-        // return allOrder;
-
-        Promise.all(
-          orderList.map((order: any, i: number) => {
-            return this.knex("orders_items")
-              .join("items", "orders_items.items_id", "=", "items.id")
-              .select(
-                "items.itemName",
-                "orders_items.items_id",
-                "orders_items.purchasePrice",
-                "orders_items.ice",
-                "orders_items.sweetness",
-                "orders_items.garnish"
-              )
-              .where("orders_id", order.orders_id)
-              .then((result: any) => {
-                console.log(result);
-              });
-          })
-        );
-        // .then(itemList => {
-        //   Promise.all(
-        //     itemList.map((item: any, j: number) => {
-        //       return this.knex("items")
-        //         .select("itemName")
-        //         .where("items.id", item.items_id)
-        //         .then((result: any) => {
-        //           console.log(result[0].itemName);
-        //         });
-        //     })
-        //   );
-        // });
+      .select("username", "displayName")
+      .where("id", id)
+      .then((userInfo: any) => {
+        return this.knex("users")
+          .join("orders", "users.id", "=", "users_id")
+          .where("users.id", id)
+          .select(
+            "orders.id as orders_id",
+            "orders.table",
+            "orders.status",
+            "orders.isPaid",
+            "orders.created_at as orderingTime"
+          )
+          .then((orderList: any) => {
+            return Promise.all(
+              orderList.map((item: object, i: number) => {
+                return this.knex("orders")
+                  .join(
+                    "orders_items",
+                    "orders.id",
+                    "=",
+                    "orders_items.orders_id"
+                  )
+                  .join("items", "items.id", "=", "orders_items.items_id")
+                  .select(
+                    "items.itemName",
+                    "orders_items.items_id",
+                    "orders_items.ice",
+                    "orders_items.sweetness",
+                    "orders_items.garnish",
+                    "orders_items.purchasePrice"
+                  )
+                  .where("orders.id", orderList[i].orders_id);
+              })
+            ).then((orderItems: any) => {
+              for (var i = 0; i < orderList.length; i++) {
+                orderList[i].orderItems = orderItems[i];
+              }
+              let entireOrder = [
+                {
+                  users_id: id,
+                  userName: userInfo[0].username,
+                  displayName: userInfo[0].displayName,
+                  orders: orderList
+                }
+              ];
+              return entireOrder;
+            });
+          });
       });
+      
 
     ////////Allen F///////////////
     // async getOrderByUserId(id: number) {

@@ -4,7 +4,7 @@ import axios from "axios";
 interface IItem {
     thisItemID: string,
     uniqueID: string,
-    name: string,
+    itemName: string,
     ice: string,
     sweetness: string,
     garnish: string,
@@ -12,18 +12,18 @@ interface IItem {
 }
 
 interface IOrder {
-    userID: string,
-    table: string,
+    userID: number,
+    table: number,
     status: string,
     item: IItem[],
 }
-
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const ADD_ITEM = "ADD_ITEM";
 export type ADD_ITEM = typeof ADD_ITEM;
 export interface IAddItemAction extends Action {
     type: ADD_ITEM,
     uniqueID: string,
-    name: string,
+    itemName: string,
 }
 
 export const REMOVE_ITEM = "REMOVE_ITEM";
@@ -32,7 +32,7 @@ export interface IRemoveItemAction extends Action {
     type: REMOVE_ITEM,
     thisItemID: string,
 }
-
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const CONFIRM_ORDER_SUCCESS = "CONFIRM_ORDER_SUCCESS";
 export type CONFIRM_ORDER_SUCCESS = typeof CONFIRM_ORDER_SUCCESS;
 export interface IConfirmOrderSuccessAction extends Action {
@@ -47,18 +47,36 @@ export interface IConfirmOrderFailAction extends Action {
     type: CONFIRM_ORDER_FAIL,
     result: any,
 }
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export const GET_ORDERS_BY_USERID_SUCCESS = "GET_ORDERS_BY_USERID_SUCCESS";
+export type GET_ORDERS_BY_USERID_SUCCESS = typeof GET_ORDERS_BY_USERID_SUCCESS;
+export interface IGetOrdersByUseridSuccessAction extends Action {
+    type: GET_ORDERS_BY_USERID_SUCCESS,
+    allOrdersByOneUser: any,
+}
+
+export const GET_ORDERS_BY_USERID_FAIL = "GET_ORDERS_BY_USERID_FAIL";
+export type GET_ORDERS_BY_USERID_FAIL = typeof GET_ORDERS_BY_USERID_FAIL;
+export interface IGetOrdersByUseridFailAction extends Action {
+    type: GET_ORDERS_BY_USERID_FAIL,
+    // result: any,
+}
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 
 export type OrdersActions =
     IAddItemAction |
     IRemoveItemAction |
     IConfirmOrderSuccessAction |
-    IConfirmOrderFailAction;
+    IConfirmOrderFailAction |
+    IGetOrdersByUseridSuccessAction |
+    IGetOrdersByUseridFailAction;
 
-export function addToCurrentOrder(uniqueID: string, name: string): IAddItemAction {
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export function addToCurrentOrder(uniqueID: string, itemName: string): IAddItemAction {
     return {
         type: ADD_ITEM,
         uniqueID,
-        name,
+        itemName,
     }
 }
 
@@ -68,7 +86,7 @@ export function removeFromCurrentOrder(thisItemID: string): IRemoveItemAction {
         thisItemID,
     }
 }
-
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function confirmOrderSuccess(result: any, orderToConfirm: IOrder): IConfirmOrderSuccessAction {
     return {
         type: CONFIRM_ORDER_SUCCESS,
@@ -88,16 +106,53 @@ export function confirmOrder(orderToConfirm: IOrder) {
     return (dispatch: Dispatch<IConfirmOrderSuccessAction | IConfirmOrderFailAction>) => {
         axios.post(`http://localhost:8080/api/orders/${orderToConfirm.userID}`, orderToConfirm)
             .then((res: any) => {
-                if (res.body.status === 201) {
-                    dispatch(confirmOrderSuccess(res.body, orderToConfirm))
+                if (res.status === 201) {
+                    alert(res.data[0].status);
+                    dispatch(confirmOrderSuccess(res.body, orderToConfirm));
+                    // auto redir to order list page
+                    // dispatch(changePage(OrderList));
                 } else {
-                    alert("ERR: " + res.body);
-                    dispatch(confirmOrderFail(res.body))
+                    alert("error, try again");
+                    dispatch(confirmOrderFail(res.body));
                 }
             })
             .catch((err: any) => {
-                alert("ERR: " + err.body);
-                dispatch(confirmOrderFail(err.body))
+                alert(err);
+                dispatch(confirmOrderFail(err))
             });
     }
 }
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export function getOrdersByUseridSuccess(allOrdersByOneUser: any): IGetOrdersByUseridSuccessAction {
+    return {
+        type: GET_ORDERS_BY_USERID_SUCCESS,
+        allOrdersByOneUser,
+    }
+}
+
+export function getOrdersByUseridFail(): IGetOrdersByUseridFailAction {
+    return {
+        type: GET_ORDERS_BY_USERID_FAIL,
+    }
+}
+
+export function getOrdersByUserid(userID: number) {
+    return (dispatch: Dispatch<IGetOrdersByUseridSuccessAction | IGetOrdersByUseridFailAction>) => {
+        axios.get(`http://localhost:8080/api/orders/user/${userID}`)
+            .then((res: any) => {
+                if (res.status === 200) {
+                    dispatch(getOrdersByUseridSuccess(res.data[0]));
+                    // auto redir to order list page
+                    // dispatch(changePage(OrderList));
+                } else {
+                    alert("status: " + res.status);
+                    dispatch(getOrdersByUseridFail());
+                }
+            })
+            .catch((err: any) => {
+                alert(err);
+                dispatch(getOrdersByUseridFail())
+            });
+    }
+}
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */

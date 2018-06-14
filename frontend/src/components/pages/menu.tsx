@@ -26,7 +26,7 @@ import whiskie from "../../images/categories/whiskie.jpg";
 interface IItem {
   thisItemID: string,
   uniqueID: string,
-  name: string,
+  itemName: string,
   ice: string,
   sweetness: string,
   garnish: string,
@@ -56,7 +56,7 @@ interface IMenuState {
 
 interface IMenuProps {
   currentOrder: IItem[];
-  addToCurrentOrder: (uniqueID: string, name: string) => void;
+  addToCurrentOrder: (uniqueID: string, itemName: string) => void;
 }
 
 class PureMenu extends React.Component<IMenuProps, IMenuState> {

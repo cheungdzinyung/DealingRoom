@@ -35,6 +35,7 @@ export interface IPureItemLine {
 
 }
 
+// single order
 export interface IPureOrder {
     users_id: number
     userName: string

@@ -9,6 +9,11 @@ import { connect } from "react-redux";
 import { IRootState } from "../reducers/index";
 import { removeFromCurrentOrder, confirmOrder } from "../actions/actions_orders";
 
+// for redir
+import * as History from "history";
+import { withRouter } from "react-router";
+import { redirectPage, resetTargetPage } from "../actions/actions_user";
+
 // Importing components
 import OrderBanner from "../share/orderbanner";
 import Usermenu from "../share/usermenu";
@@ -24,16 +29,26 @@ import headerImg from "../../icons/orders.svg";
 interface IItem {
   thisItemID: string,
   uniqueID: string,
-  name: string,
+  itemName: string,
   ice: string,
   sweetness: string,
   garnish: string,
   purchasePrice: number,
 }
 
+// interface ICartItem {
+//   thisItemID: string,
+//   uniqueID: string,
+//   itemName: string,
+//   ice: string,
+//   sweetness: string,
+//   garnish: string,
+//   purchasePrice: number,
+// }
+
 interface IOrder {
-  userID: string,
-  table: string,
+  userID: number,
+  table: number,
   status: string,
   item: IItem[],
 }
@@ -43,11 +58,31 @@ interface IRequestProps {
   currentTotal: number,
   removeFromCurrentOrder: (thisItemID: string) => void,
   confirmOrder: (orderToConfirm: IOrder) => void,
+
+  history: History.History,
+  // redirectTarget: string,
+  // changePage: (currentPage: string) => void;
+  redirectPage: (redirectTarget: string, history: any) => void,
+  resetTargetPage: () => void,
 }
 
 class PureRequest extends React.Component<IRequestProps, {}> {
   constructor(props: IRequestProps) {
     super(props);
+  }
+
+  public componentWillMount () {
+    if (this.props.currentOrder.length === 0) {
+      this.props.redirectPage("/order", this.props.history);
+      this.props.resetTargetPage();
+    }
+  }
+
+  public componentDidUpdate() {
+    if (this.props.currentOrder.length === 0) {
+      this.props.redirectPage("/order", this.props.history);
+      this.props.resetTargetPage();
+    }
   }
 
   public removeFromCurrentOrder = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -59,9 +94,9 @@ class PureRequest extends React.Component<IRequestProps, {}> {
 
   public confirmOrder = () => {
     const orderToConfirm = {
-      userID: "1",  // get from root state
-      table: "1",
-      status: "ordered",
+      userID: 1,  // get from root state
+      table: 1,   // get from root state
+      status: "confirmed", // change to confirmed
       item: this.props.currentOrder,
     }
     this.props.confirmOrder(orderToConfirm);
@@ -79,7 +114,7 @@ class PureRequest extends React.Component<IRequestProps, {}> {
             onClick={this.removeFromCurrentOrder}
             data-thisitemid={item.thisItemID}
           >
-            <span className="line-item">{item.name}</span>
+            <span className="line-item">{item.itemName}</span>
             <Button icon="menu" intent={Intent.DANGER} className="extra-mod" minimal={true} />
           </Card>
         ))}
@@ -91,7 +126,7 @@ class PureRequest extends React.Component<IRequestProps, {}> {
             <h3 className="request-header">Total Amount:</h3>
             <span className="request-amount">${this.props.currentTotal}</span>
           </div>
-          
+
           {/*hide button when list is empty*/}
           {(this.props.currentOrder.length === 0) ? <div /> :
             <div>
@@ -112,6 +147,7 @@ const mapStateToProps = (state: IRootState) => {
   return {
     currentOrder: state.orders.currentOrder,
     currentTotal: state.orders.currentTotal,
+    // redirectTarget: state.user.redirectTarget,
   }
 }
 
@@ -122,10 +158,16 @@ const mapDispatchToProps = (dispatch: any) => {
     },
     confirmOrder: (orderToConfirm: IOrder) => {
       dispatch(confirmOrder(orderToConfirm));
-    }
+    },
+    redirectPage: (redirectTarget: string, history: any) => {
+      dispatch(redirectPage(redirectTarget, history));
+    },
+    resetTargetPage: () => {
+      dispatch(resetTargetPage());
+    },
   }
 }
 
-const Request = connect(mapStateToProps, mapDispatchToProps)(PureRequest);
+  const Request = connect(mapStateToProps, mapDispatchToProps)(PureRequest);
 
-export default Request
+  export default withRouter(Request as any);
