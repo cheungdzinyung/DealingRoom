@@ -11,8 +11,6 @@ import Alipay from "../../images/payment/alipay.png";
 import Paypal from "../../images/payment/paypal.png";
 import Stripe from "../../images/payment/stripe.png";
 import Wechatpay from "../../images/payment/wechatpay.png";
-
-
 import profilePic from "../../images/profiles/circle-head.png";
 
 export default class Setting extends React.Component {
@@ -26,10 +24,7 @@ export default class Setting extends React.Component {
         <img className="setting-img" src={profilePic} alt="" />
         <FormGroup
           className="user-info-form"
-          // helperText="User login information"
-          // label="Your login information"
           labelFor="login"
-        // requiredLabel={true}
         >
           <input
             placeholder="Display Name"
