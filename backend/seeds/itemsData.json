@@ -6,7 +6,7 @@
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
 		"itemPhoto": "../storage/items/asahi.jpeg", 
-		"itemDescription": "ASAHI SUPER DRY’s uses carefully selected strains of yeast that not only facilitate outstanding fermentation, but also enhance the beer’s sophisticated aroma and refreshingly dry taste. Karakuchi means dry, and it is the word that best describes the sophisticated yet congenial character of ASAHI SUPER DRY. Its refreshingly crisp, clear taste makes it an excellent match for any cuisine.",
+		"itemDescription": "ASAHI is a Japanese Rice Lager style beer with a sophisticated aroma and refreshingly dry taste. Its refreshingly crisp, clear taste makes it an excellent match for any cuisine.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -17,7 +17,7 @@
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
 		"itemPhoto": "../storage/items/carlsberg.jpeg",
-		"itemDescription": "Brewed for the first time in 1904, Carlsberg pilsner is, in fact, part of the Danish cultural heritage and the Danish thirst. You will experience a harmonious balance between bitterness and the sweetness of apples, while enjoying the bright golden color with the nice looking foam. The aroma is dominated by pine, straws, hazelnut and sorrel.",
+		"itemDescription": "Well-proportioned bottom-fermented lager beer with a flavour of hops, grains, pine needles, sorrel and Danish summer apples, which provides a harmoniously balanced taste",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -28,7 +28,7 @@
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
 		"itemPhoto": "../storage/items/corona.jpeg",
-		"itemDescription": "With a refreshing, smooth taste balanced between heavier European imports and lighter domestic beer, Corona is an even-keeled cerveza with fruity-honey aromas and a touch of malt. The flavor is crisp, clean and well balanced between hops and malt, a superior taste profile from superior ingredients—the finest-quality blend of filtered water, malted barley, hops, corn and yeast.",
+		"itemDescription": "Even-keeled cerveza with fruity-honey aromas and a touch of malt. It is commonly served with a wedge of lime or lemon in the neck of the bottle to add tartness and flavor.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -39,7 +39,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/guinness.jpeg",
-		"itemDescription": "Sweet smelling with a coffee and malty nose. Perfect balance of bitter and sweet with malt and roast character. Smooth, creamy and balanced. Distinctively dark, with a rich creamy head. ",
+		"itemDescription": "Sweet smelling with a coffee and malty nose. Perfect balance of bitter and sweet with malt and roast character. Distinctively dark, with a rich creamy head. ",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -50,7 +50,7 @@
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
 		"itemPhoto": "../storage/items/gweilo.jpeg",
-		"itemDescription": "With our Pale Ale, we have combined the crisp and refreshing characteristics of a lager, the citrusy aromas of tropical Asian fruits and the flavour of a light ale. Gweilo believes this Pale Ale could be the catalyst to help the people of Hong Kong upgrade from tasteless big brand beer, to fine craft ales.",
+		"itemDescription": "Combining the citrusy aromas of tropical Asian fruits and the flavour of a light ale. Gweilo is the catalyst to help the people of HK upgrade from tasteless big brand beer, to fine craft ales.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -61,7 +61,7 @@
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
 		"itemPhoto": "../storage/items/heineken.jpeg",
-		"itemDescription": "Smooth, nicely blended bitterness, clean finish with a shade of fruitiness. Yeast is an important part of the brewing process, but it's not an ingredient! Our natural A-Yeast produces a fruity flavor that is key in making the Heineken you know and love, and is filtered out after fermentation.",
+		"itemDescription": "Smooth, nicely blended bitterness, clean finish with a shade of fruitiness. Our natural A-Yeast produces a fruity flavor that is key in making the Heineken you know and love!",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -94,7 +94,7 @@
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
 		"itemPhoto": "../storage/items/stellaartois.jpeg",
-		"itemDescription": "Stella Artois is a premium European lager of noble traditions, that truly symbolizes European style and sophistication. It traces its' roots to 1366, has a full distinctive taste and is brewed with the finest barley and hops.",
+		"itemDescription": "Premium European lager of noble traditions. It traces its' roots to 1366, has a full distinctive taste and is brewed with the finest barley and hops.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -105,7 +105,7 @@
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
 		"itemPhoto": "../storage/items/tsingtao.jpeg",
-		"itemDescription": "TSINGTAO (pronounced ching dow), China's premier brand, brewed from the finest ingredients including spring water from Laoshan Mountain and Canadian malting barley. Founded in 1903 by German brewers, this beer is softer than German pilsner with a high malty flavor and well-hopped character, with its fine quality ingredients.",
+		"itemDescription": "TSINGTAO (pronounced ching dow), China's premier brand, brewed from the finest ingredients including spring water from Laoshan Mountain and Canadian malting barley.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -116,7 +116,7 @@
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
 		"itemPhoto": "../storage/items/bloodymary.jpeg",
-		"itemDescription": "Cocktail containing vodka, tomato juice, and combinations of other spices and flavorings including Worcestershire sauce, hot sauces, garlic, herbs, horseradish, celery, olives, salt, black pepper, lemon juice, lime juice and/or celery salt.",
+		"itemDescription": "Cocktail containing vodka, tomato juice, and other spices. Flavorings including Worcestershire sauce, hot sauces, garlic, horseradish, herbs, celery, olives, salt, pepper, and lemon juice.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -127,7 +127,7 @@
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
 		"itemPhoto": "../storage/items/cosmopolitan.jpeg",
-		"itemDescription": "Cocktail made with vodka, triple sec, cranberry juice, and freshly squeezed or sweetened lime juice.",
+		"itemDescription": "A 'Cosmo' is a stylish pink concoction in a martini glass! Made with vodka, triple sec, cranberry juice, and freshly squeezed or sweetened lime juice.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -138,7 +138,7 @@
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
 		"itemPhoto": "../storage/items/daiquiri.jpeg",
-		"itemDescription": "Family of cocktails whose main ingredients are rum, citrus juice (typically lime juice), and sugar or other sweetener.",
+		"itemDescription": "Simple, elegant, and refreshing summer cocktail whose main ingredients are rum, citrus juice (typically lime juice), and sugar or other sweetener.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -160,7 +160,7 @@
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
 		"itemPhoto": "../storage/items/manhattan.jpeg",
-		"itemDescription": "Cocktail made with whiskey, sweet vermouth and bitters. While rye is the traditional whiskey of choice, other commonly used whiskeys include Canadian whisky, bourbon, blended whiskey and Tennessee whiskey. The cocktail is usually stirred then strained into a cocktail glass and garnished with a Maraschino cherry. cocktail made with whiskey, sweet vermouth and bitters. While rye is the traditional whiskey of choice, other commonly used whiskeys include Canadian whisky, bourbon, blended whiskey and Tennessee whiskey. The cocktail is usually stirred then strained into a cocktail glass and garnished with a Maraschino cherry.",
+		"itemDescription": "Cocktail made with whiskey, sweet vermouth and bitters. The cocktail is usually stirred then strained into a cocktail glass and garnished with a Maraschino cherry.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -171,7 +171,7 @@
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
 		"itemPhoto": "../storage/items/margarita.jpeg",
-		"itemDescription": "Cocktail consisting of tequila, orange liqueur, and lime juice often served with salt on the rim of the glass. The drink is served shaken with ice (on the rocks), blended with ice (frozen margarita), or without ice (straight up).",
+		"itemDescription": "Cocktail consisting of tequila, orange liqueur, and lime juice; served with salt on the rim of the glass. Served shaken with ice, blended with ice (frozen margarita), or without ice.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -182,7 +182,7 @@
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
 		"itemPhoto": "../storage/items/mojito.jpeg",
-		"itemDescription": "Cocktail that consists of five ingredients: white rum, sugar (traditionally sugar cane juice), lime juice, soda water, and mint. Its combination of sweetness, citrus, and mint flavors is intended to complement the rum, and has made the mojito a popular summer drink.",
+		"itemDescription": "Consists of five ingredients: white rum, sugar, lime juice, soda water, and mint. Its combination of sweetness, citrus, and mint flavors has made the mojito a popular summer drink.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -193,7 +193,7 @@
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
 		"itemPhoto": "../storage/items/negroni.jpeg",
-		"itemDescription": "Funky cocktail",
+		"itemDescription": "Negroni is the very definition of balance and simplicity. It combines gin, vermouth and Campari with ice. Served into a rocks glass and garnished with an orange peel.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -204,7 +204,7 @@
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
 		"itemPhoto": "../storage/items/oldfashion.jpeg",
-		"itemDescription": "Funky cocktail",
+		"itemDescription": "Cocktail made by muddling sugar with bitters and alcohol, originally whiskey but sometimes brandy, and a twist of citrus rind. Served in a short, round, tumbler-like glass.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -215,7 +215,7 @@
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
 		"itemPhoto": "../storage/items/sexonthebeach.jpeg",
-		"itemDescription": "Funky cocktail",
+		"itemDescription": "Cocktail containing vodka, peach schnapps, orange juice and cranberry juice. Built over ice in a highball glass and garnished with an orange slice. Can be served as a shooter.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -226,7 +226,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/cabernetsauvignon.jpeg",
-		"itemDescription": "Full bodied red",
+		"itemDescription": "The flavors and aromas of Cabernet Sauvignon wines include vanilla, currants, and even green bell pepper. it has high alcohol levels and strong tannins. Served by the glass.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -237,7 +237,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/pinotnoir.jpeg",
-		"itemDescription": "Full bodied red",
+		"itemDescription": "Pale in color, translucent and its flavors are very subtle. Its acidity and full aromatic flavors will perfectly match with roasted vegetable or an earthy-fatty dish using mushrooms.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -248,7 +248,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/shiraz.jpeg",
-		"itemDescription": "Full bodied red",
+		"itemDescription": "Full-bodied, long-lived and fruity! Its flavors and aromas include peppers, berries, currants, and even chocolate. It has the strongest, most distinctive flavors and aromas of any red wine.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -259,7 +259,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/malbec.jpeg",
-		"itemDescription": "Full bodied red",
+		"itemDescription": "Malbec has an inky dark color and robust tannins with a particular plum-like flavor, and savory bitterness. The wine does extremely well with blue cheese and rustic flavors and cumin spice.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -270,7 +270,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/merlot.jpeg",
-		"itemDescription": "Full bodied red",
+		"itemDescription": "Merlot has flavors of black cherry, berries, plum, chocolate, and some herbs. Low tannins makes it easier to drink and well-suited to lighter foods that won't overwhelm its flavors.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -281,7 +281,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/sauvignonblanc.jpeg",
-		"itemDescription": "Dry white",
+		"itemDescription": "Sauvignon Blanc is crisp, dry, and refreshing white wine. It has noticeable acidity and green flavors of grass, green bell peppers and nettles with some tropical fruit and floral notes.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -292,7 +292,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/chardonnay.jpeg",
-		"itemDescription": "Dry white",
+		"itemDescription": "Chardonnay tends to be medium to light body with noticeable acidity and flavors of green plum, apple, and pear. It has high acidity, golden colors, and a velvety feel in the mouth.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -303,7 +303,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/chablis.jpeg",
-		"itemDescription": "Dry white",
+		"itemDescription": "Chablis has a flinty note, described as 'goût de pierre à fusil' (tasting of gunflint), and sometimes as steely. It is a dry white wine renowned for the purity of its aroma and taste.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -314,7 +314,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/riesling.jpeg",
-		"itemDescription": "Dry white",
+		"itemDescription": "Usually crisp, due to its high levels of acidity, Riesling is known for its strong floral aromas. This refreshing wine tastes like the nectar of apples, apricots, peaches and pears. ",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -325,7 +325,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/pinotblanc.jpeg",
-		"itemDescription": "Dry white",
+		"itemDescription": "Pinot Blanc has a medium to full body and light flavor. It's quite a lively wine! It has flavors of citrus, melon, pear, apricot, and perhaps smokey or mineral undertones.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -336,7 +336,7 @@
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
 		"itemPhoto": "../storage/items/moetchandon.jpeg",
-		"itemDescription": "Bubbly champagne",
+		"itemDescription": "Moet & Chandon has a very pale straw color with small, active bubbles, with a subtle suggestion of flowers, vanilla, grapefruit, bread. This is a light and delicate champagne.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -347,7 +347,7 @@
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
 		"itemPhoto": "../storage/items/veuveclicquot.jpeg",
-		"itemDescription": "Bubbly champagne",
+		"itemDescription": "The layers of citrus and minerality from the Chardonnay, brambly berry from the Pinot Meunier, and the refined full structure from the Pinot Noir, makes this an outstanding Champagne.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -358,7 +358,7 @@
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
 		"itemPhoto": "../storage/items/krug.jpeg",
-		"itemDescription": "Bubbly champagne",
+		"itemDescription": "On the nose, Krug is characterized by toasted, grilled, pastry or almond notes born from at least 6 years of ageing sur lies. On the palate, Krug is characterized by notes of fresh fruit.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -369,7 +369,7 @@
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
 		"itemPhoto": "../storage/items/perrierjouet.jpeg",
-		"itemDescription": "Bubbly champagne",
+		"itemDescription": "Perrier Jouet has lovely aromas of tropical fruit, citrus, spice and yeast. This elegant, complex, crisp and balanced wine features lingering flavors of fresh apples and lemons.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -380,7 +380,7 @@
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
 		"itemPhoto": "../storage/items/taittinger.jpeg",
-		"itemDescription": "Bubbly champagne",
+		"itemDescription": "Taittinger has hints of smoke and spice underscore flavors of poached pear and white raspberry. It is Crisp and lightly citrusy with a lacy mousse.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -391,7 +391,7 @@
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
 		"itemPhoto": "../storage/items/greygoose.jpeg",
-		"itemDescription": "Russian water",
+		"itemDescription": "GREY GOOSE is crafted with the finest French ingredients: soft winter wheat and Gensac spring water. The unique once distilled production process brings out the characteristics of these ingredients.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -402,7 +402,7 @@
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
 		"itemPhoto": "../storage/items/ketelone.jpeg",
-		"itemDescription": "Russian water",
+		"itemDescription": "Nosing the aroma of Ketel One, you’ll immediately detect its freshness with hints of citrus and honey. Let the signature lively tingle and silky softness coat your tongue.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -413,7 +413,7 @@
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
 		"itemPhoto": "../storage/items/belvedere.jpeg",
-		"itemDescription": "Russian water",
+		"itemDescription": "Created exclusively from Polish Dankowskie Rye and quadruple-distilled to create the perfect balance of character and purity; it is completely free of additives, including sugar or glycerin.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -424,7 +424,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/absolut.jpeg",
-		"itemDescription": "Russian water",
+		"itemDescription": "Absolut Vodka is a Swedish vodka made exclusively from natural ingredients, and unlike some other vodkas, it doesn’t contain any added sugar. Rich, full-bodied and complex, yet smooth and mellow.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -435,7 +435,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/smirnoff.jpeg",
-		"itemDescription": "Russian water",
+		"itemDescription": "Smirnoff is filtered 10 times and gluten free, and today it's enjoyed in a whole range of classic cocktails, from Mules to Cosmopolitans. Most-awarded vodka of the past decade!",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -446,7 +446,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/partonsilver.jpeg",
-		"itemDescription": "Mexican water",
+		"itemDescription": "Patrón Silver has delicate aroma of fruits and citrus as well as sweet and smooth taste with a light pepper finish. It has a perfect balance of fresh agave flavor with baked agave undertones.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -457,7 +457,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/donjulioblanco.jpeg",
-		"itemDescription": "Mexican water",
+		"itemDescription": "Don Julio Blanco has a lightly sweet and pure agave flavor with notes of citrus lemon, lime and grapefruit. The finish is clean and fresh, rounded out with black pepper and grassy undertones.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -468,7 +468,7 @@
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
 		"itemPhoto": "../storage/items/donjulioreposado.jpeg",
-		"itemDescription": "Mexican water",
+		"itemDescription": "Don Julio Reposado is 100% Blue Weber Agave, double distilled, and rested in charred oak bourbon barrels for up to 11 months. Each agave is hand selected at maturity.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -479,7 +479,7 @@
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
 		"itemPhoto": "../storage/items/donjulioanejo.jpeg",
-		"itemDescription": "Mexican water",
+		"itemDescription": "Don Julio Anejo is distinctive and wonderfully complex. Its flavor strikes the perfect balance between agave, wood and hints of vanilla. Best experienced simply on the rocks.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -490,7 +490,7 @@
 		"minimumPrice": 50.00,
 		"currentPrice": 200.00,
 		"itemPhoto": "../storage/items/donjulio1942.jpeg",
-		"itemDescription": "Mexican water",
+		"itemDescription": "Don Julio 1942 tequila has flavors of warm oak, pepper, and cinnamon. It has a smooth character that coats the palate with roasted agave, vanilla, and spiced undertones.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -501,7 +501,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/glenfiddich15.jpeg",
-		"itemDescription": "Irish water",
+		"itemDescription": "Glenfiddich 15 is created using a technique pioneered by our Malt Master and its warm, spicy flavours are transformed with the alchemy of the Solera Vat.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -512,7 +512,7 @@
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
 		"itemPhoto": "../storage/items/glenfiddich18.jpeg",
-		"itemDescription": "Irish water",
+		"itemDescription": "Glenfiddich 18 is a complex and mellow single malt Scotch whisky from years of patient maturation in casks of the finest ex-Oloroso sherry and ex-American bourbon.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -523,7 +523,7 @@
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
 		"itemPhoto": "../storage/items/glenfiddich21.jpeg",
-		"itemDescription": "Irish water",
+		"itemDescription": "Glenfiddich 21 is a single malt Scotch whiskey. Double matured in first fill bourbon barrels that once contained rum from the Caribbean. Formally labelled as Havana Reserva and Cuban Rum.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -534,7 +534,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/jameson.jpeg",
-		"itemDescription": "Irish water",
+		"itemDescription": "Jameson is a crisp, sippable drink. Offering hints of vanilla, cream and freshly cut grass. It is aged for a minimum of four years, resulting in a smooth and versatile drink.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -545,7 +545,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/jackdaniels.jpeg",
-		"itemDescription": "Irish water",
+		"itemDescription": "Mellowed drop by drop through 10-feet of sugar maple charcoal, then matured in handcrafted barrels of our own making. It has a good balance of sweet and oaky flavor.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -556,7 +556,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/tanqueray.jpeg",
-		"itemDescription": "English water",
+		"itemDescription": "Tanqueray is a smooth and well balanced gin. The lack of citrus botanical makes it slightly drier than some other gins, but coriander adds both piquancy and lemon on the nose.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -567,7 +567,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/bombaysapphire.jpeg",
-		"itemDescription": "English water",
+		"itemDescription": "Bombay Sapphire is made using ten sustainably sourced botanicals chosen for their unique flavour, brought to life in our Vapour Infusion process has created the world’s number one premium gin.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -578,7 +578,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/hendricks.jpeg",
-		"itemDescription": "English water",
+		"itemDescription": "Hendrick's nose certainly has juniper, with musky hint of rose, sweet orange, and lime zest. Flavorwise, The pine notes give it structure, but the floral notes give it a unique character.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -589,7 +589,7 @@
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
 		"itemPhoto": "../storage/items/botanist.jpeg",
-		"itemDescription": "English water",
+		"itemDescription": "Still distilled at low pressure in one of the few remaining copper Lomond Stills, Botanist Gin is clearly a labour of love. It is a masterfully well balanced complex, herbal and floral gin.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -600,7 +600,7 @@
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
 		"itemPhoto": "../storage/items/monkey47.jpeg",
-		"itemDescription": "English water",
+		"itemDescription": "Monkey 47 is complex, vibrant and not a traditional gin! Every time you try it you'll pick up new flavour notes and aromas, from berry fruits and citrus to floral and herbal characteristics.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -611,7 +611,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/havanaclub.jpeg",
-		"itemDescription": "Caribbean water",
+		"itemDescription": "Havana Club is dry on the entrance, sweetens towards the mid-palate and becomes much drier and gingerbread spiced with a whisper of lime.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -622,7 +622,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/captainmorgan.jpeg",
-		"itemDescription": "Caribbean water",
+		"itemDescription": "Captain Morgan is the original party spirit, a spiced rum that was born and blended to have a good time. It is a smooth, medium bodied rum; and a blast at parties!",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -633,7 +633,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/bacardi.jpeg",
-		"itemDescription": "Caribbean water",
+		"itemDescription": "Bacardi's flavours are extremely light and fleeting. It has a brief sweet entry that rapidly dries to open into vegetal and nutty notes with an edge of blue cheese.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -644,7 +644,7 @@
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
 		"itemPhoto": "../storage/items/foursquare.jpeg",
-		"itemDescription": "Caribbean water",
+		"itemDescription": "Foursquare's entry has molasses and oak flavor building to a vanilla and cinnamon peak. It fades with a warm sting with cinnamon, nutmeg, oak, caramel and cardamom taste.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -655,7 +655,7 @@
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
 		"itemPhoto": "../storage/items/bacardi151.jpeg",
-		"itemDescription": "Caribbean water",
+		"itemDescription": "Bacardi 151 hits you like a freight train and burns like sweet napalm. It’s a unique flavor, and if you can get past that early burn you’ll taste that subtle sweetness hidden beneath.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -666,7 +666,7 @@
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
 		"itemPhoto": "../storage/items/hennessyvs.jpeg",
-		"itemDescription": "French water",
+		"itemDescription": "Hennessy VS has a basically sharp taste, with some woody notes and a subtle spiciness with hints of vanilla and oak. It has a golden color and the finish is is strong and long.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -677,7 +677,7 @@
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
 		"itemPhoto": "../storage/items/hennessyvsop.jpeg",
-		"itemDescription": "French water",
+		"itemDescription": "Hennessy VSOP is ambre. On the nose, you will find flower notes, some yellow fruit, an idea of sweetness. Its tastes are fruit, honey, spicy, and cinnamon.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -688,7 +688,7 @@
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
 		"itemPhoto": "../storage/items/hennessyxo.jpeg",
-		"itemDescription": "French water",
+		"itemDescription": "Hennessy XO has a deep amber color. Its aroma reminds you of spices, ripe grapes, cinnamon. Its palate combines Oak, vanilla and toffee with a smooth and intense finish.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -699,7 +699,7 @@
 		"minimumPrice": 50.00,
 		"currentPrice": 200.00,
 		"itemPhoto": "../storage/items/hennessyparadis.jpeg",
-		"itemDescription": "French water",
+		"itemDescription": "Hennessy Paradis has a dark copper appearance with a nose composed of dark fruits, roses, and spice. It has rich flavors, with rancio, juicy plum, honeysuckle, and wood.",
 		"isSpecial": false,
 		"isActive": true
 	},
@@ -710,7 +710,7 @@
 		"minimumPrice": 100.00,
 		"currentPrice": "400.00",
 		"itemPhoto": "../storage/items/hennessyparadisimperial.jpeg",
-		"itemDescription": "French water",
+		"itemDescription": "Hennesey Paradis Imperial has a soft, rich and creamy smell, with woodspice, cinnamon and dried fruit. Its palate is rich and decadent, with spice like cinnamon, clove and toasty oak.",
 		"isSpecial": false,
 		"isActive": true
 	},
