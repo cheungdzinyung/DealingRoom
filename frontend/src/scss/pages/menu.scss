@@ -86,14 +86,14 @@
             .chartVar {
                 grid-area: charV;
                 display: grid;
-                grid-template-rows: 35% 65%;
+                grid-template-rows: 15% 1fr;
                 width: 100%;
                 .variables {
                     width: 100%;
                     display: flex;
                     flex-direction: row;
                     justify-content: space-evenly;
-                    align-items: center;
+                    align-items: flex-start;
                     .detail-arrow {
                         width: 20%;
                     }
