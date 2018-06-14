@@ -1,0 +1,6 @@
+{
+  "watch": ["/DealingRoom/backend/"],
+  "ext": "ts",
+  "ignore": ["/**/*.spec.ts"],
+  "exec": "ts-node ./app.ts"
+}

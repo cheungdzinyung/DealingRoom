@@ -22,46 +22,19 @@ import Usermenu from "../share/usermenu";
 // import checkIcon from "../../icons/check.svg";
 import headerImg from "../../icons/orders.svg";
 
-// Importing fake data
-// import { requestList } from "../fakedata";
+// import { IPureItemLine } from "../../modules";
+// import { IPureOrder } from "../../modules";
 
-// TODO?: change type into custom type
-interface IItem {
-  thisItemID: string,
-  uniqueID: string,
-  itemName: string,
-  ice: string,
-  sweetness: string,
-  garnish: string,
-  purchasePrice: number,
-}
-
-// interface ICartItem {
-//   thisItemID: string,
-//   uniqueID: string,
-//   itemName: string,
-//   ice: string,
-//   sweetness: string,
-//   garnish: string,
-//   purchasePrice: number,
-// }
-
-interface IOrder {
-  userID: number,
-  table: number,
-  status: string,
-  item: IItem[],
-}
+import { IRequestItem, ICurrentOrder } from "../../modules";
 
 interface IRequestProps {
-  currentOrder: IItem[],
+  // handling orders
+  currentOrder: IRequestItem[],
   currentTotal: number,
   removeFromCurrentOrder: (thisItemID: string) => void,
-  confirmOrder: (orderToConfirm: IOrder) => void,
-
+  confirmOrder: (orderToConfirm: ICurrentOrder) => void,
+  // handling redirect
   history: History.History,
-  // redirectTarget: string,
-  // changePage: (currentPage: string) => void;
   redirectPage: (redirectTarget: string, history: any) => void,
   resetTargetPage: () => void,
 }
@@ -93,8 +66,8 @@ class PureRequest extends React.Component<IRequestProps, {}> {
   }
 
   public confirmOrder = () => {
-    const orderToConfirm = {
-      userID: 1,  // get from root state
+    const orderToConfirm: ICurrentOrder = {
+      users_id: 1,  // get from root state
       table: 1,   // get from root state
       status: "confirmed", // change to confirmed
       item: this.props.currentOrder,
@@ -147,7 +120,6 @@ const mapStateToProps = (state: IRootState) => {
   return {
     currentOrder: state.orders.currentOrder,
     currentTotal: state.orders.currentTotal,
-    // redirectTarget: state.user.redirectTarget,
   }
 }
 
@@ -156,7 +128,7 @@ const mapDispatchToProps = (dispatch: any) => {
     removeFromCurrentOrder: (thisItemID: string) => {
       dispatch(removeFromCurrentOrder(thisItemID));
     },
-    confirmOrder: (orderToConfirm: IOrder) => {
+    confirmOrder: (orderToConfirm: ICurrentOrder) => {
       dispatch(confirmOrder(orderToConfirm));
     },
     redirectPage: (redirectTarget: string, history: any) => {

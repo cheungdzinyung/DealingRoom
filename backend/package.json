@@ -18,7 +18,9 @@
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "passport-jwt": "^4.0.0",
-    "pg": "^7.4.3"
+    "pg": "^7.4.3",
+    "tslint": "^5.10.0",
+    "tslint-config-prettier": "^1.13.0"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
@@ -34,6 +36,7 @@
     "@types/passport": "^0.4.5",
     "@types/passport-jwt": "^3.0.1",
     "@types/pg": "^7.4.9",
+    "nodemon": "^1.17.5",
     "ts-node": "^6.1.0",
     "typescript": "^2.9.1"
   }

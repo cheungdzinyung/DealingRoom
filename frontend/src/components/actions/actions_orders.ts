@@ -1,28 +1,16 @@
 import { Action, Dispatch } from "redux";
 import axios from "axios";
 
-interface IItem {
-    thisItemID: string,
-    uniqueID: string,
-    itemName: string,
-    ice: string,
-    sweetness: string,
-    garnish: string,
-    purchasePrice: number,
-}
+import {
+    ICurrentOrder,
+} from "../../modules";
 
-interface IOrder {
-    userID: number,
-    table: number,
-    status: string,
-    item: IItem[],
-}
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const ADD_ITEM = "ADD_ITEM";
 export type ADD_ITEM = typeof ADD_ITEM;
 export interface IAddItemAction extends Action {
     type: ADD_ITEM,
-    uniqueID: string,
+    itemid: string,
     itemName: string,
 }
 
@@ -38,7 +26,7 @@ export type CONFIRM_ORDER_SUCCESS = typeof CONFIRM_ORDER_SUCCESS;
 export interface IConfirmOrderSuccessAction extends Action {
     type: CONFIRM_ORDER_SUCCESS,
     result: any,
-    orderToConfirm: IOrder,
+    orderToConfirm: ICurrentOrder,
 }
 
 export const CONFIRM_ORDER_FAIL = "CONFIRM_ORDER_FAIL";
@@ -72,10 +60,10 @@ export type OrdersActions =
     IGetOrdersByUseridFailAction;
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export function addToCurrentOrder(uniqueID: string, itemName: string): IAddItemAction {
+export function addToCurrentOrder(itemid: string, itemName: string): IAddItemAction {
     return {
         type: ADD_ITEM,
-        uniqueID,
+        itemid,
         itemName,
     }
 }
@@ -87,7 +75,7 @@ export function removeFromCurrentOrder(thisItemID: string): IRemoveItemAction {
     }
 }
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export function confirmOrderSuccess(result: any, orderToConfirm: IOrder): IConfirmOrderSuccessAction {
+export function confirmOrderSuccess(result: any, orderToConfirm: ICurrentOrder): IConfirmOrderSuccessAction {
     return {
         type: CONFIRM_ORDER_SUCCESS,
         result,
@@ -102,15 +90,13 @@ export function confirmOrderFail(result: any): IConfirmOrderFailAction {
     }
 }
 
-export function confirmOrder(orderToConfirm: IOrder) {
+export function confirmOrder(orderToConfirm: ICurrentOrder) {
     return (dispatch: Dispatch<IConfirmOrderSuccessAction | IConfirmOrderFailAction>) => {
-        axios.post(`http://localhost:8080/api/orders/${orderToConfirm.userID}`, orderToConfirm)
+        axios.post(`http://localhost:8080/api/orders/${orderToConfirm.users_id}`, orderToConfirm)
             .then((res: any) => {
                 if (res.status === 201) {
                     alert(res.data[0].status);
                     dispatch(confirmOrderSuccess(res.body, orderToConfirm));
-                    // auto redir to order list page
-                    // dispatch(changePage(OrderList));
                 } else {
                     alert("error, try again");
                     dispatch(confirmOrderFail(res.body));

@@ -1,20 +1,25 @@
 // Importing modules from library
-import { Card, Collapse, Elevation } from "@blueprintjs/core";
 import * as React from "react";
-import { Line } from "react-chartjs-2";
 
 // redux
 import { connect } from "react-redux";
 import { IRootState } from "../reducers/index";
 import { addToCurrentOrder } from "../actions/actions_orders";
 
+// Import UI elements
+import { Card, Collapse, Elevation } from "@blueprintjs/core";
 import Carousel from 'nuka-carousel';
-
-// Importing components from src
+import { Line } from "react-chartjs-2";
 import Usermenu from "../share/usermenu";
 
+// Importing interfaces
+import { IPureCategoryWithItem } from "../../modules";
+
+// Importing helper function
+import { percentageChange } from "../../util/utility"
+
 // Importing replacable fake data
-import { chartData, chartOption, items } from "../../fakedata";
+import { chartOption, menuItems } from "../../fakedata";
 
 // Importing static assets
 import down from "../../icons/down.svg";
@@ -23,68 +28,62 @@ import beer from "../../images/categories/beer.jpg";
 import cocktail from "../../images/categories/cocktails.jpg";
 import whiskie from "../../images/categories/whiskie.jpg";
 
-interface IItem {
-  thisItemID: string,
-  uniqueID: string,
-  itemName: string,
-  ice: string,
-  sweetness: string,
-  garnish: string,
-  purchasePrice: number,
-}
+import { IRequestItem } from "../../modules";
 
-// interface IOrder {
-//   userID: string,
-//   table: string,
-//   status: string,
-//   item: IItem[],
-// }
-
-interface IPureMenuItem {
-  uniqueID: string;
-  name: string;
-  currentPrice: number;
-  percentage: number;
-  description: string;
+interface IMenuProps {
+  currentOrder: IRequestItem[];
+  addToCurrentOrder: (itemid: string, itemName: string) => void;
 }
 
 interface IMenuState {
-  items: IPureMenuItem[];
-  isItemDetailsOpen: boolean[];
   searchBoxEntry: string;
-}
-
-interface IMenuProps {
-  currentOrder: IItem[];
-  addToCurrentOrder: (uniqueID: string, itemName: string) => void;
+  // displayCategory: string
+  // displayMenu: IPureCategoryWithItem[]
+  entireMenu: IPureCategoryWithItem[];
+  isItemDetailsOpen: { [key: string]: boolean };
 }
 
 class PureMenu extends React.Component<IMenuProps, IMenuState> {
   constructor(props: IMenuProps) {
     super(props);
 
+    const tempisItemDetailsOpen = {};
+    menuItems.map((category, categoryIndex) => {
+      category.items.map((item, itemIndex) => {
+        const currentLoc = category.categoryName.toString().concat(itemIndex.toString());
+        tempisItemDetailsOpen[`${currentLoc}`] = false;
+      })
+    })
+
     this.state = {
-      items,
-      isItemDetailsOpen: items.map(data => false),
       searchBoxEntry: "",
+      // displayCategory: "beer",
+      // displayMenu: menuItems.filter((category, index) => category.categoryName === this.state.displayCategory),
+      entireMenu: menuItems,
+      isItemDetailsOpen: tempisItemDetailsOpen
+
     };
   }
+  // public switchCategory = () ={
 
-  public isOpen = (i: number) => {
+  // }
+
+  // toggle description box
+  public isOpen = (locKey: string) => {
+    const newMenuState = { ... this.state.isItemDetailsOpen };
+    newMenuState[locKey] = !newMenuState[locKey];
+
     this.setState({
-      isItemDetailsOpen: items.map(
-        (data, index) =>
-          i === index
-            ? !this.state.isItemDetailsOpen[index]
-            : this.state.isItemDetailsOpen[index]
-      )
+      isItemDetailsOpen: newMenuState
     });
   };
 
+  // search box
   public searching = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ searchBoxEntry: e.target.value.toLowerCase() });
   }
 
+  // add to cart
   public addToCurrentOrder = (e: React.MouseEvent<HTMLDivElement>) => {
     const uniqueID = e.currentTarget.dataset.uniqueid;
     const name = e.currentTarget.dataset.name;
@@ -109,7 +108,6 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
           <img src={cocktail} alt="" />
         </ Carousel>
 
-
         <input
           className="pt-input searchbar"
           type="text"
@@ -119,74 +117,75 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
           onChange={this.searching}
         />
 
-        {/* v cat filter for later use */}
-        {/* {this.state.items.filter(item => item.category === this.state.category).map((item, i) => ( */}
-        {this.state.items.map((item, i) => (
-          (item.name.toLowerCase().search(this.state.searchBoxEntry) !== -1) ?
-            <div className="item-container">
-              <Card
-                className={
-                  !this.state.isItemDetailsOpen[i]
-                    ? "item-cards"
-                    : item.percentage > 0
-                      ? "item-cards item-price-up"
-                      : "item-cards item-price-down"
-                }
-                interactive={true}
-                elevation={Elevation.FOUR}
-                onClick={this.isOpen.bind(this, i)}
-                key={`Card_${i}`}
-              >
-                <div className="pricetag"
-                  onClick={this.addToCurrentOrder}
-                  data-uniqueid={item.uniqueID}
-                  data-name={item.name}>
-                  <span>{item.name}</span>
-                  {!this.state.isItemDetailsOpen[i] && <span>${item.currentPrice}</span>}
-                </div>
+        {/* render display from all > cat > search */}
+        {this.state.entireMenu.map((category: any, categoryIndex: any) => (
+          category.items.map((item: any, itemIndex: any) => (
+            (item.name.toLowerCase().search(this.state.searchBoxEntry) !== -1) ?
+              <div className="item-container">
+                <Card
+                  className={
+                    !this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())]
+                      ? "item-cards"
+                      : percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0
 
-                {!this.state.isItemDetailsOpen[i] ? <div className="arrow-container">
-                  <img
-                    className="arrow"
-                    src={item.percentage > 0 ? up : down}
-                    alt=""
-                  />
-                </div> : <span>${item.currentPrice}</span>}
-              </Card>
-              {/* ------------Seperate card and card details */}
-              <Collapse
-                key={`Collapse_${i}`}
-                className={
-                  "item-details" +
-                  " " +
-                  (this.state.isItemDetailsOpen[i] ? "item-detail-onflex" : "")
-                }
-                isOpen={this.state.isItemDetailsOpen[i]}
-              >
-                <div className="description">
-                  <p className="description-text">{item.description}</p>
-                </div>
-                <div className="chartVar">
-                  <div className="variables">
-                    <img
-                      className="detail-arrow"
-                      src={item.percentage > 0 ? up : down}
-                      alt=""
-                    />
-                    <span className="detail-percentage">{item.percentage}%</span>
+                        ? "item-cards item-price-up"
+                        : "item-cards item-price-down"
+                  }
+                  interactive={true}
+                  elevation={Elevation.FOUR}
+                  onClick={this.isOpen.bind(this, category.categoryName.concat(itemIndex.toString()))}
+                  key={category.categoryName.concat(itemIndex.toString())}
+                >
+                  <div className="pricetag"
+                    onClick={this.addToCurrentOrder}
+                    data-itemid={item.itemid}
+                    data-itemName={item.itemName}>
+                    <span>{item.itemName}</span>
+                    {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] && <span>${item.currentPrice}</span>}
                   </div>
 
-                  <Line
-                    width={80}
-                    height={60}
-                    data={chartData}
-                    options={chartOption}
-                  />
-                </div>
-              </Collapse>
-            </div> :
-            <div />
+                  {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] ? <div className="arrow-container">
+                    <img
+                      className="arrow"
+                      src={percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0 ? up : down}
+                      alt=""
+                    />
+                  </div> : <span>${item.currentPrice}</span>}
+                </Card>
+                {/* ------------Seperate card and card details */}
+                <Collapse
+                  key={category.categoryName.concat(itemIndex.toString())}
+                  className={
+                    "item-details" +
+                    " " +
+                    (this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] ? "item-detail-onflex" : "")
+                  }
+                  isOpen={this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())]}
+                >
+                  <div className="description">
+                    <p className="description-text">{item.itemDescription}</p>
+                  </div>
+                  <div className="chartVar">
+                    <div className="variables">
+                      <img
+                        className="detail-arrow"
+                        src={percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0 ? up : down}
+                        alt=""
+                      />
+                      <span className="detail-percentage">{percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0])}%</span>
+                    </div>
+
+                    <Line
+                      width={80}
+                      height={60}
+                      data={item.chartData}
+                      options={chartOption}
+                    />
+                  </div>
+                </Collapse>
+              </div> : <div />))
         ))}
+
         <Usermenu />
       </div>
     );

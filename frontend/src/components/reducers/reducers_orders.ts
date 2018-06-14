@@ -8,31 +8,18 @@ import {
     GET_ORDERS_BY_USERID_FAIL,
 } from "../actions/actions_orders";
 
-interface IItem {
-    thisItemID: string,
-    uniqueID: string,
-    itemName: string,
-    ice: string,
-    sweetness: string,
-    garnish: string,
-    purchasePrice: number,
-}
-
-// interface IOrder {
-//     userID: number,
-//     table: number,
-//     status: string,
-//     item: IItem[],
-// }
+import { 
+    IRequestItem,
+} from "../../modules";
 
 export interface IOrdersState {
     ordersList: any,
     unpaidOrders: number,
-    currentOrder: IItem[],
+    currentOrder: IRequestItem[],
     currentTotal: number,
 }
 
-const initialState = {
+const initialState: IOrdersState = {
     ordersList: {
         "users_id": 0,
         "username": "John Doe",
@@ -44,7 +31,7 @@ const initialState = {
               "table": 12,
               "status": "confirmed",
               "isPaid": false,
-              "orderingTime": "2017 - 06 - 08 15: 17: 24.406432+08",
+              "orderingTime": 20170101,
               "orderItems":
                 [
                   {
@@ -65,13 +52,13 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
     switch (action.type) {
         case ADD_ITEM: {
             // onclick: add item to current order []
-            const newItem = {
+            const newItem: IRequestItem = {
                 thisItemID: `${Date.now()}`,    // only for current order
-                uniqueID: action.uniqueID,      // from db
+                item_id: action.itemid,      // from db
                 itemName: action.itemName,      // from db
                 ice: "normal",                  // allow mods when btn is ready
-                sweetness: "normal",
-                garnish: "normal",
+                sweetness: "less",
+                garnish: "extra",
                 purchasePrice: 11.11,           // from db
             }
             // new total price: x1000 to avoid overflow
@@ -79,9 +66,9 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
             return { ...state, currentOrder: state.currentOrder.concat([newItem]), currentTotal: newTotal }
         }
         case REMOVE_ITEM: {
-            const newArray = state.currentOrder.filter((e: IItem) => (e.thisItemID !== action.thisItemID));
+            const newArray = state.currentOrder.filter((e: IRequestItem) => (e.thisItemID !== action.thisItemID));
             // new total price: x1000 to avoid overflow
-            const newTotal = newArray.reduce((accu, e: IItem) => (accu + e.purchasePrice*1000), 0) / 1000;
+            const newTotal = newArray.reduce((accu, e: IRequestItem) => (accu + e.purchasePrice*1000), 0) / 1000;
             return { ...state, currentOrder: newArray, currentTotal: newTotal };
         }
         case CONFIRM_ORDER_SUCCESS: {

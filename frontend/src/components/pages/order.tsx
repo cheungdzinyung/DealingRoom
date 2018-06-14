@@ -20,6 +20,7 @@ import paymentTest from "../../images/payment/stripe.png"
 // Importing fake data
 // import { singleOrder } from "../../fakedata";
 
+<<<<<<< HEAD
 // import redux and friends
 import { connect } from "react-redux";
 import { IRootState } from "../reducers/index";
@@ -82,6 +83,29 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
   public payment = () => {
     // TODO: stripe, this.state
     return null;
+=======
+interface IPureOrderProps {
+  history: History.History
+  match: match<{ orderId: number }>
+}
+
+interface IPureOrdersStates {
+  paymentMethod: string
+  order: IPureOrder
+}
+
+export default class Order extends React.Component<
+  IPureOrderProps,
+  IPureOrdersStates
+  > {
+  constructor(props: IPureOrderProps) {
+    super(props);
+
+    this.state = {
+      order: singleOrder,
+      paymentMethod: paymentTest
+    };
+>>>>>>> f962ce2f5699348587d97099f32f6d1d83290fef
   }
 
   public render() {
@@ -95,6 +119,7 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
           statusNumber={this.state.orderID}
         />
 
+<<<<<<< HEAD
         {
           this.state.thisOrder.orderItems !== "empty" ?
             <div>
@@ -118,6 +143,26 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
             </div>
             : <div />
         }
+=======
+        {this.state.order.orderItems.map((line, i) => (
+          <Card
+            key={i}
+            className="order-line"
+            interactive={true}
+            elevation={Elevation.TWO}
+          >
+            <span className="order-item">{line.itemName}</span>
+          </Card>
+        ))}
+        <img className="payment-method" src={this.state.paymentMethod} alt="" />
+        <Card className="order-summary" elevation={Elevation.TWO}>
+          <button className="payment-button">
+            <span className="payment-header">Pay Now</span>
+            <span className="payment-amount">&#36;360</span>
+          </button>
+        </Card>
+
+>>>>>>> f962ce2f5699348587d97099f32f6d1d83290fef
         <Usermenu />
       </div>
     );

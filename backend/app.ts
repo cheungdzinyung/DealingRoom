@@ -1,8 +1,8 @@
-import * as express from "express";
 import * as bodyParser from "body-parser";
-import * as dotenv from "dotenv";
-import * as Knex from "knex";
 import * as cors from "cors";
+import * as dotenv from "dotenv";
+import * as express from "express";
+import * as Knex from "knex";
 
 import * as KnexConfig from "./knexfile";
 
@@ -26,17 +26,17 @@ const knex = Knex(KnexConfig[NODE_ENV]);
 
 const app = express();
 
-let usersService = new UsersService(knex);
-let usersRouter = new UsersRouter(usersService);
+const usersService = new UsersService(knex);
+const usersRouter = new UsersRouter(usersService);
 
-let itemsService = new ItemsService(knex);
-let itemsRouter = new ItemsRouter(itemsService);
+const itemsService = new ItemsService(knex);
+const itemsRouter = new ItemsRouter(itemsService);
 
-let ordersService = new OrdersService(knex);
-let ordersRouter = new OrdersRouter(ordersService);
+const ordersService = new OrdersService(knex);
+const ordersRouter = new OrdersRouter(ordersService);
 
-let pricesService = new PricesService(knex);
-let pricesRouter = new PricesRouter(pricesService);
+const pricesService = new PricesService(knex);
+const pricesRouter = new PricesRouter(pricesService);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -49,6 +49,7 @@ app.use("/api/orders", ordersRouter.router());
 app.use("/api/orders", pricesRouter.router());
 
 app.listen(PORT,() => {
+    // tslint:disable-next-line:no-console
     console.log(`Application started at port: ${PORT}`);
 });
 
