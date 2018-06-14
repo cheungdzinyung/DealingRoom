@@ -7,6 +7,11 @@ import Usermenu from "../share/usermenu";
 
 // Media asset import
 import headerImg from "../../icons/setting.svg";
+import Alipay from "../../images/payment/alipay.png";
+import Paypal from "../../images/payment/paypal.png";
+import Stripe from "../../images/payment/stripe.png";
+import Wechatpay from "../../images/payment/wechatpay.png";
+
 
 import profilePic from "../../images/profiles/circle-head.png";
 
@@ -24,7 +29,7 @@ export default class Setting extends React.Component {
           // helperText="User login information"
           // label="Your login information"
           labelFor="login"
-          // requiredLabel={true}
+        // requiredLabel={true}
         >
           <input
             placeholder="Display Name"
@@ -48,6 +53,10 @@ export default class Setting extends React.Component {
             className="pt-large input-field"
           />
         </FormGroup>
+        <img src={Stripe} alt="" className="payment-banner" />
+        <img src={Paypal} alt="" className="payment-banner" />
+        <img src={Alipay} alt="" className="payment-banner" />
+        <img src={Wechatpay} alt="" className="payment-banner" />
         <button className="conf-button" type="submit">
           <span>Confirm</span>
         </button>

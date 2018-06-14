@@ -23,38 +23,43 @@ import beer from "../../images/categories/beer.jpg";
 import cocktail from "../../images/categories/cocktails.jpg";
 import whiskie from "../../images/categories/whiskie.jpg";
 
-
 interface IPureMenuState {
   // displayCategory: string
   // displayMenu: IPureCategoryWithItem[]
   entireMenu: IPureCategoryWithItem[];
-  isItemDetailsOpen: boolean[];
+  isItemDetailsOpen: { [key: string]: boolean };
 }
 
 export default class PureMenu extends React.Component<{}, IPureMenuState> {
   constructor(props: {}) {
     super(props);
 
+    const tempisItemDetailsOpen = {};
+    menuItems.map((category, categoryIndex) => {
+      category.items.map((item, itemIndex) => {
+        const currentLoc = category.categoryName.toString().concat(itemIndex.toString());
+        tempisItemDetailsOpen[`${currentLoc}`] = false;
+      })
+    })
+
     this.state = {
       // displayCategory: "beer",
       // displayMenu: menuItems.filter((category, index) => category.categoryName === this.state.displayCategory),
       entireMenu: menuItems,
-      isItemDetailsOpen: menuItems.map(data => false)
-
+      isItemDetailsOpen: tempisItemDetailsOpen
+      
     };
   }
   // public switchCategory = () ={
 
   // }
 
-  public isOpen = (i: number) => {
+  public isOpen = (locKey: string) => {
+    const newMenuState = { ... this.state.isItemDetailsOpen };
+    newMenuState[locKey] = !newMenuState[locKey];
+
     this.setState({
-      isItemDetailsOpen: menuItems.map(
-        (data, index) =>
-          i === index
-            ? !this.state.isItemDetailsOpen[index]
-            : this.state.isItemDetailsOpen[index]
-      )
+      isItemDetailsOpen: newMenuState
     });
   };
 
@@ -82,11 +87,11 @@ export default class PureMenu extends React.Component<{}, IPureMenuState> {
         />
 
         {this.state.entireMenu.map((category, categoryIndex) => (
-          category.items.map((item, i) => (
+          category.items.map((item, itemIndex) => (
             <div className="item-container">
               <Card
                 className={
-                  !this.state.isItemDetailsOpen[i]
+                  !this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())]
                     ? "item-cards"
                     : percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0
 
@@ -95,15 +100,15 @@ export default class PureMenu extends React.Component<{}, IPureMenuState> {
                 }
                 interactive={true}
                 elevation={Elevation.FOUR}
-                onClick={this.isOpen.bind(this, i)}
-                key={i}
+                onClick={this.isOpen.bind(this, category.categoryName.concat(itemIndex.toString()))}
+                key={category.categoryName.concat(itemIndex.toString())}
               >
                 <div className="pricetag">
                   <span>{item.itemName}</span>
-                  {!this.state.isItemDetailsOpen[i] && <span>${item.currentPrice}</span>}
+                  {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] && <span>${item.currentPrice}</span>}
                 </div>
 
-                {!this.state.isItemDetailsOpen[i] ? <div className="arrow-container">
+                {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] ? <div className="arrow-container">
                   <img
                     className="arrow"
                     src={percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0 ? up : down}
@@ -113,13 +118,13 @@ export default class PureMenu extends React.Component<{}, IPureMenuState> {
               </Card>
               {/* ------------Seperate card and card details */}
               <Collapse
-                key={i}
+                key={category.categoryName.concat(itemIndex.toString())}
                 className={
                   "item-details" +
                   " " +
-                  (this.state.isItemDetailsOpen[i] ? "item-detail-onflex" : "")
+                  (this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] ? "item-detail-onflex" : "")
                 }
-                isOpen={this.state.isItemDetailsOpen[i]}
+                isOpen={this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())]}
               >
                 <div className="description">
                   <p className="description-text">{item.itemDescription}</p>

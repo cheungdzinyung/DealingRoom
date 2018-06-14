@@ -7,7 +7,6 @@ import Login from "./components/pages/login";
 import Menu from "./components/pages/menu";
 import Order from "./components/pages/order";
 import OrderList from "./components/pages/orderlist";
-import Payment from "./components/pages/payment";
 import Profile from "./components/pages/profile";
 import Request from "./components/pages/request";
 import Setting from "./components/pages/setting";
@@ -23,7 +22,7 @@ class App extends React.Component {
           <Route exact={true} path="/order" component={OrderList} />
           <Route path="/order/:orderId" component={Order} />
           <Route path="/menu" component={Menu} />
-          <Route path="/payment" component={Payment} />
+          <Route path="/request" component={Request} />
           <Route path="/setting" component={Setting} />
           <Route path="/display" component={Display} />
           <Route path="/request" component={Request} />
