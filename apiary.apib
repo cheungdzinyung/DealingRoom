@@ -132,7 +132,7 @@ All items information can be obtained through this route. The response is return
             {
                 "categoryName": "Beer"
                 "categoryPhoto": "www.dealingroom.com/public/img/beer.jpeg"
-                "items":
+                "items":[
                     {
                         "id": 1,
                         "itemName": "Asahi",
@@ -142,6 +142,9 @@ All items information can be obtained through this route. The response is return
                         "currentPrice": 105.00,
                         "itemPhoto": "www.dealingroom.com/public/img/asahi.jpeg",
                         "itemDescription": "Asahi Super Dry was a direct result of extensive market research which indicated a consumer preference for a more palatable beer with less maltiness, relatively high alcohol content and a light aftertaste, that paired well with the changing Japanese diet. With this insight Asahi used its brewing knowledge to develop a beer with a crisp bite, refreshing taste and clear finish to satisfied this requirement."
+                        "isSpecial":
+                        "isActive":
+                    "charData":{datasets:[{data:number[]}]}//fluctuating prices per hour ********* TO DO 
                     },
                     {
                         "id": 2,
@@ -222,7 +225,8 @@ All items information can be obtained through this route. The response is return
                         "currentPrice" : 150.00,
                         "itemPhoto" : "www.dealingroom.com/public/img/hendricks.jpeg",
                         "itemDescription" : "A superb, and utterly unique, pink-tinged gin from William Grant's. Infused with rose petals and cucumber as well as the normal botanicals, this is a must for all gin-lovers. In the summertime, Hendrick's makes a fantastically refreshing gin and tonic: serve in a tall glass with plenty of ice and garnish with thinly-sliced cucumber – delicious!"
-                    }            
+                    }     
+                ]
             }
         ]
 
@@ -280,6 +284,7 @@ All items information within a category can be obtained through this route. The 
                     "itemPhoto": "www.dealingroom.com/public/img/asahi.jpeg",
                     "itemDescription": "Asahi Super Dry was a direct result of extensive market research which indicated a consumer preference for a more palatable beer with less maltiness, relatively high alcohol content and a light aftertaste, that paired well with the changing Japanese diet. With this insight Asahi used its brewing knowledge to develop a beer with a crisp bite, refreshing taste and clear finish to satisfied this requirement.",
                     "isActive": true
+                    "charData":{datasets:[{data:number[]}]}//fluctuating prices per hour ********* TO DO 
                 },
                 {
                     "id": 2,
@@ -330,6 +335,7 @@ A single order's information can be obtained through this route using the order'
             "orderItems":[
                 {
                     "itemName": "Asahi",
+                    "item_id": 1,
                     "ice": "normal",
                     "sweetness": "normal",
                     "garnish" : "normal",
@@ -337,6 +343,7 @@ A single order's information can be obtained through this route using the order'
                 },
                 {
                     "itemName": "Grey Goose",
+                    "item_id": 31,
                     "ice": "extra",
                     "sweetness": "normal",
                     "garnish" : "normal",
@@ -369,7 +376,7 @@ ALL orders information by one user can be obtained through this route using the 
 
         {
             "users_id": 1,
-            "username": "John Doe",
+            "userName": "John Doe",
             "displayName": "Johnny",
             "orders":
             [
@@ -383,6 +390,7 @@ ALL orders information by one user can be obtained through this route using the 
                     [
                         {
                             "itemName": "Asahi",
+                            "item_id": 1,
                             "ice": "normal",
                             "sweetness": "normal",
                             "garnish" : "normal",
@@ -390,6 +398,7 @@ ALL orders information by one user can be obtained through this route using the 
                         },
                         {
                             "itemName": "Grey Goose",
+                            "item_id": 31,
                             "ice": "extra",
                             "sweetness": "normal",
                             "garnish" : "normal",
@@ -407,6 +416,7 @@ ALL orders information by one user can be obtained through this route using the 
                     [
                         {
                             "itemName": "Asahi",
+                            "item_id": 1,
                             "ice": "normal",
                             "sweetness": "normal",
                             "garnish" : "normal",
