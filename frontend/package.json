@@ -109,7 +109,7 @@
     ],
     "globals": {
       "ts-jest": {
-        "tsConfigFile": "/mnt/d/Programming projects/DealingRoom/frontend/tsconfig.test.json"
+        "tsConfigFile": "tsconfig.test.json"
       }
     }
   },
