@@ -7,7 +7,7 @@ $search-bar-bgc: rgba(141, 141, 141, .8);
 $search-bar-font: rgba(233, 219, 204, 1);
 $placebolder-color:rgba(233, 219, 204, .55);
 $theme-orange: rgba(252, 178, 75, 0.97);
-$notification-alert: red;
+$notification-alert: rgb(255, 0, 0);
 $up: rgba(111, 207, 151, 1);
 $up-dim: rgba(111, 207, 151, .24);
 $down: rgba(235, 87, 87, 1);
@@ -16,6 +16,7 @@ $item-card-bgc: rgb(61, 61, 61);
 $item-card-text: rgba(233, 219, 204, 1);
 $item-detail-bgc: rgba(66, 66, 66, .4);
 $item-detail-text: rgba(233, 219, 204, .7);
+$warning-orange: rgba(255, 205, 68, .9);
 // Imports, external
 @import "~@blueprintjs/core/lib/css/blueprint.css";
 @import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
@@ -30,7 +31,8 @@ $item-detail-text: rgba(233, 219, 204, .7);
 @import './pages/menu';
 @import './pages/display';
 @import './pages/payment';
-@import './pages/orders';
+@import './pages/order';
+@import './pages/orderlist';
 @import './pages/request';
 // Top level reset
 html,

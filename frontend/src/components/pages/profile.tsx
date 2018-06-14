@@ -1,42 +1,43 @@
+// Importing modules
 import * as React from "react";
+import { Radar } from "react-chartjs-2";
+
+// Importing UI elements
+import { Card, Elevation } from "@blueprintjs/core";
 import Banner from "../share/topbanner";
 import Usermenu from "../share/usermenu";
 
-import { Radar } from "react-chartjs-2";
-
-import { Card, Elevation } from "@blueprintjs/core";
+// Importing static 
 import tempImg from "../../images/profiles/circle-head.png";
 
-import { chartData } from "../fakedata";
+// Importing types
+import { IGraphDataCombiner } from "src/modules";
 
-interface IDatasetConfig {
-  dataset: {
-    label: string;
-    backgroundColor: string;
-    strokeColor: string;
-    pointColor: string;
-    pointStrokeColor: string;
-    pointHighlightFill: string;
-    pointHighlightStroke: string;
-    data: [number];
-  };
+// Importing fake data
+import { comparisonData } from "../../fakedata";
+
+interface IPureProfileState {
+    chartData: IGraphDataCombiner
+    profilePicture: "*.png" | "*.jpg"
 }
 
-interface IProfileProps {
-  lables: string[];
-  datasets: IDatasetConfig[];
-}
 
-export default class Profile extends React.Component<IProfileProps> {
-  constructor(props: IProfileProps) {
+export default class PureProfile extends React.Component<{}, IPureProfileState> {
+  constructor(props: {}) {
     super(props);
+
+    this.state = {
+      chartData: comparisonData,
+      profilePicture: tempImg
+    }
   }
+
   public render() {
     return (
       <div className="page-content-container">
-        <Banner header="Profile" image={tempImg} />
+        <Banner header="Profile" image={this.state.profilePicture} />
         <Card className="comparison-chart" interactive={true} elevation={Elevation.FOUR}>
-          <Radar height={200}  data={chartData} />
+          <Radar height={200} data={this.state.chartData} />
         </Card>
         <Usermenu />
       </div>

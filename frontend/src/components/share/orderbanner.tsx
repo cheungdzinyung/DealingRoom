@@ -20,7 +20,7 @@ export default class OrderBanner extends React.Component<
         <img className="banner-profile-img" src={this.props.image} alt="" />
         <div className="contain-info">
           <h4 className="info-text">Table #{this.props.tableNumber}</h4>
-          <h3 className="info-text">Welcome, {this.props.displayName}.</h3>
+          <h3 className="info-text">Hi, {this.props.displayName}.</h3>
         </div>
         {this.props.status !== undefined && (
           <h2 className="status">

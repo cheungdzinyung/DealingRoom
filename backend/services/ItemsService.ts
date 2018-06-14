@@ -1,5 +1,5 @@
-import * as Knex from "knex";
 import * as fs from "fs-extra";
+import * as Knex from "knex";
 
 import { IItemData } from "../interfaces";
 
@@ -10,7 +10,7 @@ export default class UsersService {
     this.knex = knex;
   }
 
-  saveUpdateItemImage(id: number, file: Express.Multer.File) {
+  public saveUpdateItemImage(id: number, file: Express.Multer.File) {
     const imagePath = `./storage/items/${file.originalname}`;
     fs.outputFile(imagePath, file.buffer);
     return this.knex("items")
@@ -21,22 +21,22 @@ export default class UsersService {
   }
 
   // Working 10/06/18
-  add(data: IItemData, file: Express.Multer.File) {
+  public add(data: IItemData, file: Express.Multer.File) {
     return this.knex("categories")
       .where("categoryName", data.categoryName)
       .select("id")
       .then((catId: Knex.QueryCallback) => {
         return this.knex("items")
           .insert({
-            itemName: data.itemName,
-            itemStock: data.itemStock,
             categories_id: catId[0].id,
-            minimumPrice: data.minimumPrice,
             currentPrice: data.currentPrice,
-            itemPhoto: data.itemPhoto,
-            itemDescription: data.itemDescription,
+            isActive: true,
             isSpecial: data.isSpecial,
-            isActive: true
+            itemDescription: data.itemDescription,
+            itemName: data.itemName,
+            itemPhoto: data.itemPhoto,
+            itemStock: data.itemStock,
+            minimumPrice: data.minimumPrice
           })
           .returning("id")
           .then(async (itemId: Knex.QueryCallback) => {
@@ -61,7 +61,7 @@ export default class UsersService {
   }
 
   // Working 06/06/18
-  get(req: number) {
+  public get(req: number) {
     return this.knex("categories")
       .join("items", "categories.id", "=", "items.categories_id")
       .where("items.id", req)
@@ -80,7 +80,7 @@ export default class UsersService {
   }
 
   // Working 06/06/18
-  getAll() {
+  public getAll() {
     return this.knex("categories")
       .join("items", "categories.id", "=", "items.categories_id")
       .select(
@@ -98,7 +98,7 @@ export default class UsersService {
   }
 
   // Working 07/06/18
-  getAllInCat(catName: string) {
+  public getAllInCat(catName: string) {
     let catPhoto: string;
     this.knex("categories")
       .select("categoryPhoto")
@@ -119,11 +119,12 @@ export default class UsersService {
             "currentPrice",
             "itemPhoto",
             "itemDescription",
-            "isActive"
+            "isActive",
+            "isSpecial"
           )
           .where("categories_id", catId[0].id)
           .then((itemList: Knex.QueryCallback) => {
-            let result = [
+            const result = [
               {
                 categoryName: catName,
                 categoryPhoto: catPhoto,
@@ -136,7 +137,7 @@ export default class UsersService {
   }
 
   // Working 10/06/18
-  update(id: number, data: IItemData, file: Express.Multer.File) {
+  public update(id: number, data: IItemData, file: Express.Multer.File) {
     return this.knex("categories")
       .select("id")
       .where("categoryName", data.categoryName)
@@ -144,15 +145,15 @@ export default class UsersService {
         return this.knex("items")
           .where("items.id", id)
           .update({
-            itemName: data.itemName,
-            itemStock: data.itemStock,
             categories_id: catId[0].id,
-            minimumPrice: data.minimumPrice,
             currentPrice: data.currentPrice,
-            itemPhoto: data.itemPhoto,
-            itemDescription: data.itemDescription,
+            isActive: data.isActive,
             isSpecial: data.isSpecial,
-            isActive: data.isActive
+            itemDescription: data.itemDescription,
+            itemName: data.itemName,
+            itemPhoto: data.itemPhoto,
+            itemStock: data.itemStock,
+            minimumPrice: data.minimumPrice
           })
           .returning("id");
       })

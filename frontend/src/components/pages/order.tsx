@@ -1,96 +1,79 @@
-// // Importing modules
-// import { Card, Elevation } from "@blueprintjs/core";
-// import * as React from "react";
-// import { IPureOrder } from "../../modules"
+// Importing modules
+import * as History from "history";
+import * as React from "react";
+import { match } from "react-router-dom";
 
-// // Importing components
-// import OrderBanner from "../share/orderbanner";
-// import Usermenu from "../share/usermenu";
+// Importing UI elements
+import { Card, Elevation } from "@blueprintjs/core";
 
-// // Importing static assets
+// Importing components
+import OrderBanner from "../share/orderbanner";
+import Usermenu from "../share/usermenu";
+
+// Importing static assets
 // import checkIcon from "../../icons/check.svg";
-// import headerImg from "../../icons/orders.svg";
+import headerImg from "../../icons/orders.svg";
+import paymentTest from "../../images/payment/stripe.png"
 
-// // Importing fake data
-// import { orderList } from "../fakedata";
+// Importing types
+import { IPureOrder } from "../../modules";
 
-// interface IPureOrdersStates {
-//     listOfOrder: IPureOrder[];
-// }
+// Importing fake data
+import { singleOrder } from "../../fakedata";
 
-// export default class Order extends React.Component<{}, IPureOrdersStates> {
-//     constructor(props: {}) {
-//         super(props);
+interface IPureOrderProps {
+  history: History.History
+  match: match<{ orderId: number }>
+}
 
-//         this.state = {
-//             listOfOrder: []
-//         };
-        
-//     }
-//     public render() {
-//         return (
-//             <div className="page-content-container">
-//                 <OrderBanner displayName="Ivan" tableNumber={3} image={headerImg} />
-//                 {/* Dynamic content, TODO: refactorize it */}
-//                 {this.state.listOfOrder.filter(each => !each.isPaid).length > 0 && (
-//                     <div className="order-header-container">
-//                         <h3 className="order-header">To be paid</h3>
-//                     </div>
-//                 )}
-//                 {this.state.listOfOrder
-//                     .filter(each => !each.isPaid)
-//                     .map((indOrd, index) => (
-//                         <Card
-                            
-//                             className="order-cards"
-//                             interactive={true}
-//                             elevation={Elevation.TWO}
-//                         >
-//                             <div className="top">
-//                                 <div className="order-details">
-//                                     <h3 className="order-number">Order #{indOrd.orderNumber}</h3>
-//                                     <p className="order-amount">Total Amount: ${indOrd.amount}</p>
-//                                     <p className="order-time">
-//                                         Ordering time: {indOrd.orderTime}
-//                                     </p>
-//                                 </div>
-//                             </div>
-//                             <hr />
-//                             <button className="paynow-button">
-//                                 <span>Pay Now</span>
-//                             </button>
-//                         </Card>
-//                     ))}
-//                 {/* Split into two parts */}
-//                 {this.state.listOfOrder.filter(each => each.isPaid === true).length >
-//                     0 && (
-//                         <div className="order-header-container">
-//                             <h3 className="order-header">Paid</h3>
-//                         </div>
-//                     )}
-//                 {this.state.listOfOrder
-//                     .filter(each => each.isPaid === true)
-//                     .map((indOrd, index) => (
-//                         <Card
-//                             className="order-cards"
-//                             interactive={true}
-//                             elevation={Elevation.TWO}
-//                         >
-//                             <div className="top">
-//                                 <div className="order-details">
-//                                     <h3 className="order-number">Order #{indOrd.orderNumber}</h3>
-//                                     <p className="order-amount">Total Amount: ${indOrd.amount}</p>
-//                                     <p className="order-time">
-//                                         Ordering time: {indOrd.orderTime}
-//                                     </p>
-//                                 </div>
-//                                 <img src={checkIcon} className="order-icon" alt="" />
-//                             </div>
-//                         </Card>
-//                     ))}
-//                 {/* End of Dynamic content*/}
-//                 <Usermenu />
-//             </div>
-//         );
-//     }
-// }
+interface IPureOrdersStates {
+  paymentMethod: string
+  order: IPureOrder
+}
+
+export default class Order extends React.Component<
+  IPureOrderProps,
+  IPureOrdersStates
+  > {
+  constructor(props: IPureOrderProps) {
+    super(props);
+
+    this.state = {
+      order: singleOrder,
+      paymentMethod: paymentTest
+    };
+  }
+  public render() {
+    return (
+      <div className="page-content-container">
+        <OrderBanner
+          displayName={this.state.order.displayName}
+          tableNumber={this.state.order.table}
+          image={headerImg}
+          status="Order"
+          statusNumber={this.props.match.params.orderId}
+        />
+
+        {this.state.order.orderItems.map((line, i) => (
+          <Card
+            key={i}
+            className="order-line"
+            interactive={true}
+            elevation={Elevation.TWO}
+          >
+            <span className="order-item">{line.itemName}</span>
+          </Card>
+        ))}
+        <img className="payment-method" src={this.state.paymentMethod} alt="" />
+        <Card className="order-summary" elevation={Elevation.TWO}>
+          <button className="payment-button">
+            <span className="payment-header">Pay Now</span>
+            <span className="payment-amount">&#36;360</span>
+          </button>
+        </Card>
+
+        <Usermenu />
+      </div>
+    );
+  }
+}

@@ -9,8 +9,8 @@ export default class PricesRouter {
     this.pricesService = pricesService;
   }
 
-  router() {
-    let router = express.Router();
+  public router() {
+    const router = express.Router();
 
     router.get("/", this.getAll.bind(this));
  
@@ -19,7 +19,7 @@ export default class PricesRouter {
     return router;
   }
 
-  getAll(req: express.Request, res: express.Response) {
+  public getAll(req: express.Request, res: express.Response) {
     if (req.query.category !== undefined) {
       return this.pricesService
         .getAllByCat(req.query)
@@ -27,7 +27,6 @@ export default class PricesRouter {
           res.status(200).json(result);
         })
         .catch((err: express.Errback) => {
-          console.log("Post Error", err);
           res.status(500).json({ status: "failed" });
         });
     } else {
@@ -37,20 +36,19 @@ export default class PricesRouter {
           res.status(200).json(result);
         })
         .catch((err: express.Errback) => {
-          console.log("Post Error", err);
+
           res.status(500).json({ status: "failed" });
         });
     }
   }
 
-  update(req: express.Request, res: express.Response) {
+  public update(req: express.Request, res: express.Response) {
     return this.pricesService
     .update(req.params.id)
     .then((result: any) => {
       res.status(200).json(result);
     })
     .catch((err: express.Errback) => {
-      console.log("Post Error", err);
       res.status(500).json({ status: "failed" });
     });
   }

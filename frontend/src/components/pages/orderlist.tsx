@@ -13,7 +13,7 @@ import checkIcon from "../../icons/check.svg";
 import headerImg from "../../icons/orders.svg";
 
 // Importing fake data
-import { orderList } from "../fakedata";
+import { orderList } from "../../fakedata";
 
 
 interface IPureOrdersProps {
