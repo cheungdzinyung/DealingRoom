@@ -85,10 +85,10 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
 
   // add to cart
   public addToCurrentOrder = (e: React.MouseEvent<HTMLDivElement>) => {
-    const uniqueID = e.currentTarget.dataset.uniqueid;
-    const name = e.currentTarget.dataset.name;
-    if (uniqueID !== undefined && name !== undefined) {
-      this.props.addToCurrentOrder(uniqueID, name);
+    const itemid = e.currentTarget.dataset.itemid;
+    const itemName = e.currentTarget.dataset.itemname;    // dataset attr are all lowercase
+    if (itemid !== undefined && itemName !== undefined) {
+      this.props.addToCurrentOrder(itemid, itemName);
     }
   }
 
@@ -120,7 +120,7 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
         {/* render display from all > cat > search */}
         {this.state.entireMenu.map((category: any, categoryIndex: any) => (
           category.items.map((item: any, itemIndex: any) => (
-            (item.name.toLowerCase().search(this.state.searchBoxEntry) !== -1) ?
+            (item.itemName.toLowerCase().search(this.state.searchBoxEntry) !== -1) ?
               <div className="item-container">
                 <Card
                   className={
@@ -134,12 +134,12 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
                   interactive={true}
                   elevation={Elevation.FOUR}
                   onClick={this.isOpen.bind(this, category.categoryName.concat(itemIndex.toString()))}
-                  key={category.categoryName.concat(itemIndex.toString())}
+                  key={`Card_${category.categoryName.concat(itemIndex.toString())}`}
                 >
                   <div className="pricetag"
-                    onClick={this.addToCurrentOrder}
-                    data-itemid={item.itemid}
-                    data-itemName={item.itemName}>
+                    onClick={this.addToCurrentOrder} 
+                    data-itemid={item.item_id}
+                    data-itemname={item.itemName}>
                     <span>{item.itemName}</span>
                     {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] && <span>${item.currentPrice}</span>}
                   </div>
@@ -154,7 +154,7 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
                 </Card>
                 {/* ------------Seperate card and card details */}
                 <Collapse
-                  key={category.categoryName.concat(itemIndex.toString())}
+                  key={`Collapse_${category.categoryName.concat(itemIndex.toString())}`}
                   className={
                     "item-details" +
                     " " +

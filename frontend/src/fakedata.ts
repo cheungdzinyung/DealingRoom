@@ -82,15 +82,15 @@ export const menuItems: IPureCategoryWithItem[] = [
         }
       },
       {
-        categoryName: "Gin",
+        categoryName: "Not Gin",
         currentPrice: 150.00,
         isActive: true,
         isSpecial: false,
         itemDescription: "A superb, and utterly unique, pink-tinged gin from William Grant's. Infused with rose petals and cucumber as well as the normal botanicals, this is a must for all gin-lovers. In the summertime, Hendrick's makes a fantastically refreshing gin and tonic: serve in a tall glass with plenty of ice and garnish with thinly-sliced cucumber – delicious!",
-        itemName: "Hendricks",
+        itemName: "Hendrick's",
         itemPhoto: "www.dealingroom.com/public/img/hendricks.jpeg",
         itemStock: 100,
-        item_id: 52,
+        item_id: 53,
         minimumPrice: 100.00,
         // tslint:disable-next-line:object-literal-sort-keys
         chartData: {

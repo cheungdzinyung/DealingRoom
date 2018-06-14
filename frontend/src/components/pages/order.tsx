@@ -17,21 +17,13 @@ import paymentTest from "../../images/payment/stripe.png"
 // Importing types
 // import { IPureOrder } from "../../modules";
 
-// Importing fake data
-// import { singleOrder } from "../../fakedata";
-
-<<<<<<< HEAD
 // import redux and friends
 import { connect } from "react-redux";
 import { IRootState } from "../reducers/index";
-// import { resetTargetPage } from "../actions/actions_user";
 
 interface IOrderProps {
   match: match<{ orderId: number }>;
   ordersList: any;
-
-  // redirectTarget: string,
-  // resetTargetPage: () => void,
 }
 
 interface IOrderState {
@@ -40,6 +32,9 @@ interface IOrderState {
   tableNumber: number,
   thisOrder: any,
   amount: number,
+
+  paymentMethod: string
+  // order: IPureOrder
 }
 
 class PureOrder extends React.Component<IOrderProps, IOrderState> {
@@ -52,6 +47,8 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
       tableNumber: 1,
       thisOrder: { orderItems: "empty" },
       amount: 0,
+
+      paymentMethod: paymentTest,
     }
   }
 
@@ -60,52 +57,29 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
     //   this.props.resetTargetPage();
     // }
 
-      const displayName = this.props.ordersList.displayName;
-      const orderID = this.props.match.params.orderId;
-      const thisOrder = (this.props.ordersList.orders.find((e: any) => {
-        // alert(`${e.orders_id} :${orderID} : ${typeof(e.orders_id)} : ${typeof(orderID)}`)
-        // 1 : 1 : num : str
-        // alert(`${e.orders_id}` === `${orderID}`)
-        // true
-        return (`${e.orders_id}` === `${orderID}`);
-      }));
+    const displayName = this.props.ordersList.displayName;
+    const orderID = this.props.match.params.orderId;
+    const thisOrder = (this.props.ordersList.orders.find((e: any) => {
+      // alert(`${e.orders_id} :${orderID} : ${typeof(e.orders_id)} : ${typeof(orderID)}`)
+      // 1 : 1 : num : str
+      // alert(`${e.orders_id}` === `${orderID}`)
+      // true
+      return (`${e.orders_id}` === `${orderID}`);
+    }));
 
-      if (thisOrder !== undefined) {
-        const tableNumber = thisOrder.table;
-        const amount = thisOrder.orderItems.reduce((accu: number, curr: any) => (accu + parseFloat(curr.purchasePrice)), 0);
-        this.setState({
-          displayName, orderID, tableNumber, thisOrder, amount
-        })
-      
+    if (thisOrder !== undefined) {
+      const tableNumber = thisOrder.table;
+      const amount = thisOrder.orderItems.reduce((accu: number, curr: any) => (accu + parseFloat(curr.purchasePrice)), 0);
+      this.setState({
+        displayName, orderID, tableNumber, thisOrder, amount
+      })
+
     }
   }
 
   public payment = () => {
     // TODO: stripe, this.state
     return null;
-=======
-interface IPureOrderProps {
-  history: History.History
-  match: match<{ orderId: number }>
-}
-
-interface IPureOrdersStates {
-  paymentMethod: string
-  order: IPureOrder
-}
-
-export default class Order extends React.Component<
-  IPureOrderProps,
-  IPureOrdersStates
-  > {
-  constructor(props: IPureOrderProps) {
-    super(props);
-
-    this.state = {
-      order: singleOrder,
-      paymentMethod: paymentTest
-    };
->>>>>>> f962ce2f5699348587d97099f32f6d1d83290fef
   }
 
   public render() {
@@ -119,7 +93,6 @@ export default class Order extends React.Component<
           statusNumber={this.state.orderID}
         />
 
-<<<<<<< HEAD
         {
           this.state.thisOrder.orderItems !== "empty" ?
             <div>
@@ -133,36 +106,15 @@ export default class Order extends React.Component<
                   <span className="order-item">{line.itemName}</span>
                 </Card>
               ))}
+              <img className="payment-method" src={this.state.paymentMethod} alt="" />
               <Card className="order-summary" elevation={Elevation.TWO}>
-                <img className="payment-method" src={paymentTest} alt="" />
                 <button className="payment-button" onClick={this.payment}>
                   <span className="payment-header">Pay Now</span>
                   <span className="payment-amount">HK&#36; {this.state.amount}</span>
                 </button>
               </Card>
-            </div>
-            : <div />
+            </div>  : <div />
         }
-=======
-        {this.state.order.orderItems.map((line, i) => (
-          <Card
-            key={i}
-            className="order-line"
-            interactive={true}
-            elevation={Elevation.TWO}
-          >
-            <span className="order-item">{line.itemName}</span>
-          </Card>
-        ))}
-        <img className="payment-method" src={this.state.paymentMethod} alt="" />
-        <Card className="order-summary" elevation={Elevation.TWO}>
-          <button className="payment-button">
-            <span className="payment-header">Pay Now</span>
-            <span className="payment-amount">&#36;360</span>
-          </button>
-        </Card>
-
->>>>>>> f962ce2f5699348587d97099f32f6d1d83290fef
         <Usermenu />
       </div>
     );
@@ -172,14 +124,11 @@ export default class Order extends React.Component<
 const mapStateToProps = (state: IRootState) => {
   return {
     ordersList: state.orders.ordersList,
-    // redirectTarget: state.user.redirectTarget,
   }
 }
 
 // const mapDispatchToProps = (dispatch: any) => {
 //   return {
-//     resetTargetPage: () => {
-//       dispatch(resetTargetPage());
 //     }
 //   }
 // }
