@@ -1,0 +1,69 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8
+
+    working_directory: ~/repo/frontend
+
+    steps:
+      - checkout:
+          path: ~/repo
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+        
+      # run tests!
+      # - run: yarn test
+      - run: yarn build
+      - persist_to_workspace:
+          root: .
+          # Must be relative path from root
+          paths:
+            - build/*
+  deploy-job:
+    docker:
+      - image: circleci/python:3.6
+    working_directory: /tmp/my-project
+    steps:
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: /tmp/my-project
+
+      - run:
+          name: Install AWS CLI
+          command: pip install awscli --user
+
+      - run:
+          name: Deploy to S3 if tests pass and branch is Master
+          command: ~/.local/bin/aws s3 sync --acl public-read build/ s3://dealing-room-build --delete
+
+      - run:
+          name: Invalidate Cloudfront distribution
+          command: ~/.local/bin/aws cloudfront create-invalidation --distribution-id E35K2TT99KS9OY --paths "/*"
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy-job:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master

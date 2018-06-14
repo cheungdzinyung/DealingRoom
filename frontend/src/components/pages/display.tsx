@@ -79,7 +79,7 @@ export default class Display extends React.Component<{}, IDisplayState> {
                     }
                 )}
             </div>
-                <div className="rssFeed">This round of discount is brought to you by...</div>
+                <div className="rssFeed">This round of discount is brought to you by dealingroom!</div>
             </div>
               );
     }
