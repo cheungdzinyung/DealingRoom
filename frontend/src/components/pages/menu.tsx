@@ -25,7 +25,9 @@ import whiskie from "../../images/categories/whiskie.jpg";
 
 
 interface IPureMenuState {
-  items: IPureCategoryWithItem[];
+  // displayCategory: string
+  // displayMenu: IPureCategoryWithItem[]
+  entireMenu: IPureCategoryWithItem[];
   isItemDetailsOpen: boolean[];
 }
 
@@ -34,10 +36,16 @@ export default class PureMenu extends React.Component<{}, IPureMenuState> {
     super(props);
 
     this.state = {
-      isItemDetailsOpen: menuItems.map(data => false),
-      items: menuItems
+      // displayCategory: "beer",
+      // displayMenu: menuItems.filter((category, index) => category.categoryName === this.state.displayCategory),
+      entireMenu: menuItems,
+      isItemDetailsOpen: menuItems.map(data => false)
+
     };
   }
+  // public switchCategory = () ={
+
+  // }
 
   public isOpen = (i: number) => {
     this.setState({
@@ -73,67 +81,68 @@ export default class PureMenu extends React.Component<{}, IPureMenuState> {
           dir="auto"
         />
 
-        {this.state.items.map((item, i) => (
-          <div className="item-container">
-            <Card
-              className={
-                !this.state.isItemDetailsOpen[i]
-                  ? "item-cards"
-                  : percentageChange(item.items.chartData.datasets[0].data[item.items.chartData.datasets[0].data.length - 1], item.items.chartData.datasets[0].data[0]) > 0
+        {this.state.entireMenu.map((category, categoryIndex) => (
+          category.items.map((item, i) => (
+            <div className="item-container">
+              <Card
+                className={
+                  !this.state.isItemDetailsOpen[i]
+                    ? "item-cards"
+                    : percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0
 
-                    ? "item-cards item-price-up"
-                    : "item-cards item-price-down"
-              }
-              interactive={true}
-              elevation={Elevation.FOUR}
-              onClick={this.isOpen.bind(this, i)}
-              key={i}
-            >
-              <div className="pricetag">
-                <span>{item.items.itemName}</span>
-                {!this.state.isItemDetailsOpen[i] && <span>${item.items.currentPrice}</span>}
-              </div>
-
-              {!this.state.isItemDetailsOpen[i] ? <div className="arrow-container">
-                <img
-                  className="arrow"
-                  src={percentageChange(item.items.chartData.datasets[0].data[item.items.chartData.datasets[0].data.length - 1], item.items.chartData.datasets[0].data[0]) > 0 ? up : down}
-                  alt=""
-                />
-              </div> : <span>${item.items.currentPrice}</span>}
-            </Card>
-            {/* ------------Seperate card and card details */}
-            <Collapse
-              key={i}
-              className={
-                "item-details" +
-                " " +
-                (this.state.isItemDetailsOpen[i] ? "item-detail-onflex" : "")
-              }
-              isOpen={this.state.isItemDetailsOpen[i]}
-            >
-              <div className="description">
-                <p className="description-text">{item.items.itemDescription}</p>
-              </div>
-              <div className="chartVar">
-                <div className="variables">
-                  <img
-                    className="detail-arrow"
-                    src={percentageChange(item.items.chartData.datasets[0].data[item.items.chartData.datasets[0].data.length - 1], item.items.chartData.datasets[0].data[0]) > 0 ? up : down}
-                    alt=""
-                  />
-                  <span className="detail-percentage">{percentageChange(item.items.chartData.datasets[0].data[item.items.chartData.datasets[0].data.length - 1], item.items.chartData.datasets[0].data[0])}%</span>
+                      ? "item-cards item-price-up"
+                      : "item-cards item-price-down"
+                }
+                interactive={true}
+                elevation={Elevation.FOUR}
+                onClick={this.isOpen.bind(this, i)}
+                key={i}
+              >
+                <div className="pricetag">
+                  <span>{item.itemName}</span>
+                  {!this.state.isItemDetailsOpen[i] && <span>${item.currentPrice}</span>}
                 </div>
 
-                <Line
-                  width={80}
-                  height={60}
-                  data={item.items.chartData}
-                  options={chartOption}
-                />
-              </div>
-            </Collapse>
-          </div>
+                {!this.state.isItemDetailsOpen[i] ? <div className="arrow-container">
+                  <img
+                    className="arrow"
+                    src={percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0 ? up : down}
+                    alt=""
+                  />
+                </div> : <span>${item.currentPrice}</span>}
+              </Card>
+              {/* ------------Seperate card and card details */}
+              <Collapse
+                key={i}
+                className={
+                  "item-details" +
+                  " " +
+                  (this.state.isItemDetailsOpen[i] ? "item-detail-onflex" : "")
+                }
+                isOpen={this.state.isItemDetailsOpen[i]}
+              >
+                <div className="description">
+                  <p className="description-text">{item.itemDescription}</p>
+                </div>
+                <div className="chartVar">
+                  <div className="variables">
+                    <img
+                      className="detail-arrow"
+                      src={percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0 ? up : down}
+                      alt=""
+                    />
+                    <span className="detail-percentage">{percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0])}%</span>
+                  </div>
+
+                  <Line
+                    width={80}
+                    height={60}
+                    data={item.chartData}
+                    options={chartOption}
+                  />
+                </div>
+              </Collapse>
+            </div>))
         ))}
 
         <Usermenu />

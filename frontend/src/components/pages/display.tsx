@@ -7,20 +7,20 @@ import upWhite from "../../icons/up-white.svg";
 import tempImg from "../../images/profiles/circle-head.png";
 
 // Importing temporary data
-import { categories, menuItems } from "../../fakedata";
+import { singleCategoryMenuItems } from "../../fakedata";
 
 // Importing utility function and classes
-import { IPureMenuItemWithFluctuation } from "src/modules";
+import { IPureCategoryWithItem } from "src/modules";
 import { percentageChange } from '../../util/utility';
 
 
-interface IPureMenuCategory {
-    name: string[];
-}
+
 interface IDisplayState {
-    items : IPureMenuItemWithFluctuation[];
-    categories : IPureMenuCategory;
-    categoryName: string;
+    // items : IPureMenuItemWithFluctuation[];
+    // categories : IPureMenuCategory;
+    // categoryName: string;
+
+    singleCategory: IPureCategoryWithItem
   }
 
 export default class Display extends React.Component<{}, IDisplayState> {
@@ -28,42 +28,39 @@ export default class Display extends React.Component<{}, IDisplayState> {
       super(props);
 
       this.state = {
-          // tslint:disable-next-line:object-literal-shorthand
-          categories: categories,
-
-          categoryName: '',
-          // tslint:disable-next-line:object-literal-shorthand
-          items: menuItems
+        //   Sorry Judith, I depleted the original fake data structure, this is the newest one
+        singleCategory: singleCategoryMenuItems
       }
     }
 
     // public componentWillMount(){} // use it for calling backend
 
-    public componentDidMount() {
-        // the category name should be either from previous page or from the backend
-        const categoryName = this.state.categories.name.find((name) => name === 'Cocktails');
-        if (categoryName) {
-            this.setState({categoryName});
-        }
-    }
+    // Sorry for the following method is depleted becuase the data structure is now changed to the exact format that we will be receiving from the backend, which the category will also come with the path, hence it is no longer necessary to create just a state for just the item category.
+
+    // public componentDidMount() {
+    //     // the category name should be either from previous page or from the backend
+    //     const categoryName = this.state.categories.name.find((name) => name === 'Cocktails');
+    //     if (categoryName) {
+    //         this.setState({categoryName});
+    //     }
+    // }
 
     public render() {
-       
         return (
             <div className="display-content-container">
                 <div className="display-banner">
                     <img className="display-img" src={tempImg} alt="display-pic" />
-                    <h2>{this.state.categoryName}</h2>
+                    <h2>{this.state.singleCategory.categoryName}</h2>
                 </div>
                 <div className="display-container">
-                {this.state.items.map((item, i) => {
+                {this.state.singleCategory.items.map((item, i) => {
                         return (
                             <div className="display-grid" key={i}>
                                 <div className="item-name-display">
                                     <span>{item.itemName}</span>
                                 </div>
                                 <div className={
-                                    this.state.items.map[i]
+                                    this.state.singleCategory.items.map[i]
                                         ? "item-arrow-display"
                                         : percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0
                                             ? "item-arrow-display item-price-up"
