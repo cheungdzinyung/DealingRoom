@@ -41,6 +41,9 @@ interface IMenuState {
   searchBoxEntry: string,
   displayCategoryIndex: number,
   isItemDetailsOpen: { [key: string]: boolean },
+
+  // chart data route?
+  chartData: any;
 }
 
 class PureMenu extends React.Component<IMenuProps, IMenuState> {
@@ -59,23 +62,43 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
       searchBoxEntry: "",
       displayCategoryIndex: 0,
       isItemDetailsOpen: tempisItemDetailsOpen,
+
+      chartData:
+      {
+        datasets: [
+          {
+            backgroundColor: "rgba(0,0,0,0)",
+            borderColor: "rgba(235,87,87,1)",
+            borderJoinStyle: "miter",
+            data: [12, 13, 8, 16, 3, 46],
+            fill: true,
+            label: "hey",
+            pointBackgroundColor: "rgba(111, 207, 151, 1)",
+            pointBorderColor: "rgba(235, 87, 87, 1)",
+            pointBorderWidth: 2,
+            pointRadius: 3,
+            strokeColor: "rgba(66, 66, 66, .4)"
+          }
+        ],
+        labels: ["09:00", "", "", "", "", "Now"]
+      }
     };
   }
 
   // switch category
   public previousCategory = () => {
     if (this.state.displayCategoryIndex - 1 < 0) {
-      this.setState({displayCategoryIndex: this.props.categories.length - 1});
+      this.setState({ displayCategoryIndex: this.props.categories.length - 1 });
     } else {
-      this.setState({displayCategoryIndex: this.state.displayCategoryIndex - 1});
+      this.setState({ displayCategoryIndex: this.state.displayCategoryIndex - 1 });
     }
   }
 
   public nextCategory = () => {
     if (this.state.displayCategoryIndex + 1 >= this.props.categories.length) {
-      this.setState({displayCategoryIndex: 0});
+      this.setState({ displayCategoryIndex: 0 });
     } else {
-      this.setState({displayCategoryIndex: this.state.displayCategoryIndex + 1});
+      this.setState({ displayCategoryIndex: this.state.displayCategoryIndex + 1 });
     }
   }
 
@@ -137,13 +160,13 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
         {this.props.entireMenu.map((category: any, categoryIndex: any) => (
           category.items.map((item: any, itemIndex: any) => (
             (item.itemName.toLowerCase().search(this.state.searchBoxEntry) !== -1
-              && item.categoryName === this.props.categories[this.state.displayCategoryIndex]) ?
+              && category.categoryName === this.props.categories[this.state.displayCategoryIndex]) ?
               <div className="item-container">
                 <Card
                   className={
                     !this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())]
                       ? "item-cards"
-                      : percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0
+                      : percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0]) > 0
 
                         ? "item-cards item-price-up"
                         : "item-cards item-price-down"
@@ -155,8 +178,8 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
                 >
                   <div className="pricetag"
                     onClick={this.addToCurrentOrder}
-                    // data-itemid={item.item_id}
-                    data-itemid={item.id}
+                    data-itemid={item.items_id}
+                    // data-itemid={item.id}
                     data-itemname={item.itemName}>
                     <span>{item.itemName}</span>
                     {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] && <span>${item.currentPrice}</span>}
@@ -165,7 +188,7 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
                   {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] ? <div className="arrow-container">
                     <img
                       className="arrow"
-                      src={percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0 ? up : down}
+                      src={percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0]) > 0 ? up : down}
                       alt=""
                     />
                   </div> : <span>${item.currentPrice}</span>}
@@ -187,10 +210,10 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
                     <div className="variables">
                       <img
                         className="detail-arrow"
-                        src={percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0 ? up : down}
+                        src={percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0]) > 0 ? up : down}
                         alt=""
                       />
-                      <span className="detail-percentage">{percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0])}%</span>
+                      <span className="detail-percentage">{percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0])}%</span>
                     </div>
 
                     <Line

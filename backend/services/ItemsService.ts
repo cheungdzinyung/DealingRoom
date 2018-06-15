@@ -127,7 +127,7 @@ export default class UsersService {
           categoryList.map((item: object, i: number) => {
             return this.knex("items")
               .select(
-                "id as item_id",
+                "id as items_id",
                 "itemName",
                 "itemStock",
                 "minimumPrice",
@@ -169,7 +169,7 @@ export default class UsersService {
       .then((catId: Knex.QueryCallback) => {
         return this.knex("items")
           .select(
-            "id as item_id",
+            "id as items_id",
             "itemName",
             "itemStock",
             "minimumPrice",
@@ -220,7 +220,7 @@ export default class UsersService {
           .join("items", "categories.id", "=", "items.categories_id")
           .where("items.id", itemId[0])
           .select(
-            "items.id as item_id",
+            "items.id as items_id",
             "items.itemName",
             "items.itemStock",
             "categories.categoryName",

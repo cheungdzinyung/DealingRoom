@@ -162,7 +162,7 @@ Corresponding API path POST: api/orders/user/:id
 // each item in shopping cart
 export interface IRequestItem {
   thisItemID: string,
-  item_id: string,
+  items_id: string,
   itemName: string,
   ice: ModificationType,
   sweetness: ModificationType,

@@ -2,64 +2,52 @@ import {
     InitializeActions,
     GET_ENTIRE_MENU_SUCCESS,
     GET_ENTIRE_MENU_FAIL,
+    GET_USER_PROFILE_BY_USERID_SUCCESS,
+    GET_USER_PROFILE_BY_USERID_FAIL,
+    GET_ORDERS_BY_USERID_SUCCESS,
+    GET_ORDERS_BY_USERID_FAIL,
 } from "../actions/actions_initialize";
 
 export interface IInitializeState {
     entireMenu: string[],
     categories: string[],
     readyMenu: boolean,
-    readyProfile: boolean,
+    ordersList: any,
+    readyOrderList: boolean,
+    userProfile: any,
+    readyUserProfile: boolean,
 }
 
 const initialState: IInitializeState = {
     entireMenu: [],
     categories: [],
     readyMenu: false,
-    readyProfile: false,
+    ordersList: [],
+    readyOrderList: false,
+    userProfile: [],
+    readyUserProfile: false,
 }
 
 export const initializeReducer = (state: IInitializeState = initialState, action: InitializeActions) => {
     switch (action.type) {
         case GET_ENTIRE_MENU_SUCCESS: {
-            const temp: any = [];
-            action.entireMenu.forEach((item: any) => {
-                const findCat = temp.find((e: any) => (e.categoryName === item.categoryName));
-                const newItem = item;
-                newItem.chartData = {
-                    datasets: [
-                      {
-                        backgroundColor: "rgba(0,0,0,0)",
-                        borderColor: "rgba(235,87,87,1)",
-                        borderJoinStyle: "miter",
-                        data: [12, 13, 8, 16, 3, 46],
-                        fill: true,
-                        label: "hey",
-                        pointBackgroundColor: "rgba(111, 207, 151, 1)",
-                        pointBorderColor: "rgba(235, 87, 87, 1)",
-                        pointBorderWidth: 2,
-                        pointRadius: 3,
-                        strokeColor: "rgba(66, 66, 66, .4)"
-                      }
-                    ],
-                    labels: ["09:00", "", "", "", "", "Now"]
-                  }
-                if (findCat === undefined) {
-                    temp.push({ 
-                        categoryName: item.categoryName,
-                        items: [],
-                        categoryPhoto: item.categoryPhoto
-                     });
-                    temp[temp.length-1].items.push(item);
-                } else {
-                    const i = temp.indexOf(findCat);
-                    temp[i].items.push(item);
-                }
-
-            });
-            const categories = temp.map((e: any) => (e.categoryName));
-            return { ...state, entireMenu: temp, categories, readyMenu: true };
+            const categories = action.entireMenu.map((category: any) => (category.categoryName));
+            return { ...state, entireMenu: action.entireMenu, categories, readyMenu: true };
         }
         case GET_ENTIRE_MENU_FAIL: {
+            return state;
+        }
+        case GET_USER_PROFILE_BY_USERID_SUCCESS: {
+            return { ...state, userProfile: action.userProfile, readyUserProfile: true };
+        }
+        case GET_USER_PROFILE_BY_USERID_FAIL: {
+            return state;
+        }
+        case GET_ORDERS_BY_USERID_SUCCESS: {
+            const unpaidOrders = action.allOrdersByOneUser.orders.filter((e: any) => (e.isPaid === false)).length;
+            return { ...state, ordersList: action.allOrdersByOneUser, unpaidOrders, readyOrderList: true };
+        }
+        case GET_ORDERS_BY_USERID_FAIL: {
             return state;
         }
         default: {

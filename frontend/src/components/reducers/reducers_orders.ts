@@ -13,8 +13,6 @@ import {
 } from "../../modules";
 
 export interface IOrdersState {
-    entireMenu: string[],
-    categories: string[],
     ordersList: any,
     unpaidOrders: number,
     currentOrder: IRequestItem[],
@@ -22,8 +20,6 @@ export interface IOrdersState {
 }
 
 const initialState: IOrdersState = {
-    entireMenu: [],
-    categories: [],
     ordersList: {
         "users_id": 0,
         "username": "John Doe",
@@ -40,6 +36,7 @@ const initialState: IOrdersState = {
                         [
                             {
                                 "itemName": "Asahi",
+                                "items_id" : 1,
                                 "ice": "normal",
                                 "sweetness": "normal",
                                 "garnish": "normal",
@@ -59,7 +56,7 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
             // onclick: add item to current order []
             const newItem: IRequestItem = {
                 thisItemID: `${Date.now()}`,    // only for current order
-                item_id: action.itemid,      // from db
+                items_id: action.itemid,      // from db
                 itemName: action.itemName,      // from db
                 ice: "normal",                  // allow mods when btn is ready
                 sweetness: "less",
