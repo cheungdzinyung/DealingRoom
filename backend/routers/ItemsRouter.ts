@@ -16,14 +16,14 @@ export default class ItemsRouter {
 
   public router() {
     const router = express.Router();
-    
+
     router.post("/", upload.single("itemPhoto"), this.add.bind(this));
 
     router.get("/:id", this.get.bind(this));
     router.get("/", this.getAll.bind(this));
 
     router.put("/:id", upload.single("itemPhoto"), this.update.bind(this));
-    
+
     return router;
   }
 
@@ -51,23 +51,45 @@ export default class ItemsRouter {
 
   public getAll(req: express.Request, res: express.Response) {
     if (req.query.category !== undefined) {
-      return this.itemsService
-        .getAllInCat(req.query.category)
+      if (req.query.fluctuatingPrices !== undefined) {
+        return this.itemsService
+          .getAllInCatWithFluctuatingPrices(req.query.category, req.query.fluctuatingPrices)
+          .then((result: any) => {
+            res.status(200).json(result);
+          })
+          .catch((err: express.Errback) => {
+            res.status(500).json({ status: "failed" });
+          });
+      } else {
+        return this.itemsService
+          .getAllInCat(req.query.category)
+          .then((result: any) => {
+            res.status(200).json(result);
+          })
+          .catch((err: express.Errback) => {
+            res.status(500).json({ status: "failed" });
+          });
+      }
+    } else {
+      if (req.query.fluctuatingPrices !== undefined) {
+        return this.itemsService
+          .getAllWithFluctuatingPrices(req.query.fluctuatingPrices)
+          .then((result: any) => {
+            res.status(200).json(result);
+          })
+          .catch((err: express.Errback) => {
+            res.status(500).json({ status: "failed" });
+          });
+      }else{
+        return this.itemsService
+        .getAll()
         .then((result: any) => {
           res.status(200).json(result);
         })
         .catch((err: express.Errback) => {
           res.status(500).json({ status: "failed" });
         });
-    } else {
-      return this.itemsService
-        .getAll()
-        .then((result: IItemData) => {
-          res.status(200).json(result);
-        })
-        .catch((err: express.Errback) => {
-          res.status(500).json({ status: "failed" });
-        });
+      }
     }
   }
 
