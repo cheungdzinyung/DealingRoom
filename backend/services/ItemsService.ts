@@ -79,7 +79,7 @@ export default class UsersService {
       );
   }
 
-  // testing with fluctuating prices
+  // testing with fluctuating prices ******TODO******
   public getAllWithFluctuatingPrices(dateOfQuery: string) {
     return this.knex("categories")
       .join("items", "items.categories_id", "=", "categories.id")
@@ -102,7 +102,7 @@ export default class UsersService {
         );
       });
   }
-
+  // testing with fluctuating prices ******TODO******
   public getAllInCatWithFluctuatingPrices(
     catName: string,
     dateOfQuery: string
@@ -142,12 +142,12 @@ export default class UsersService {
         ).then(itemList => {
           return Promise.all(
             categoryList.map((category: object, j: number) => {
-              const obj = {
+              const result = {
                 categoryName: categoryList[j].categoryName,
                 categoryPhoto: categoryList[j].categoryPhoto,
                 items: itemList[j]
               };
-              return obj;
+              return result;
             })
           );
         });

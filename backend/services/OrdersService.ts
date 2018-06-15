@@ -144,7 +144,7 @@ export default class OrdersService {
       });
   }
 
-  // *****TODO*****//
+  // Working 15-06-2018//
   public getAllPrice(id: number, dateOfQuery: string) {
     return this.knex("categories")
       .join("items", "items.categories_id", "=", "categories.id")
@@ -183,24 +183,73 @@ export default class OrdersService {
                   };
                   return obj;
                 })
-              ).then((otherOrderList)=>{
-                const finalResult = [{
-                  user: userOrderList,
-                  // tslint:disable-next-line:object-literal-sort-keys
-                  all: otherOrderList
-                }]
+              ).then(otherOrderList => {
+                const finalResult = [
+                  {
+                    user: userOrderList,
+                    // tslint:disable-next-line:object-literal-sort-keys
+                    all: otherOrderList
+                  }
+                ];
                 return finalResult;
-              })
+              });
             });
         });
       });
   }
 
   // *****TODO******//
-  public getAllQuantity(id: number) {
-    return this.knex("users")
-      .select("id")
-      .where("id", id);
+  public getAllQuantity(id: number, dateOfQuery: string) {
+    return this.knex("categories")
+      .join("items", "items.categories_id", "=", "categories.id")
+      .join("orders_items", "items.id", "=", "orders_items.items_id")
+      .join("orders", "orders.id", "=", "orders_items.orders_id")
+      .join("users", "users.id", "=", "orders.users_id")
+      .select("categories.categoryName")
+      .count("orders_items.id")
+      .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+      .where("users.id", id)
+      .groupBy("categoryName")
+      .then((result: any) => {
+        return Promise.all(
+          result.map((order: object, i: number) => {
+            const obj = {
+              [result[i].categoryName]: result[i].count
+            };
+            return obj;
+          })
+        ).then(userOrderList => {
+          return this.knex("categories")
+            .join("items", "items.categories_id", "=", "categories.id")
+            .join("orders_items", "items.id", "=", "orders_items.items_id")
+            .join("orders", "orders.id", "=", "orders_items.orders_id")
+            .join("users", "users.id", "=", "orders.users_id")
+            .select("categories.categoryName")
+            .count("orders_items.id")
+            .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+            .whereNot("users.id", id)
+            .groupBy("categoryName")
+            .then((result2: any) => {
+              return Promise.all(
+                result2.map((order: object, i: number) => {
+                  const obj = {
+                    [result2[i].categoryName]: result2[i].count
+                  };
+                  return obj;
+                })
+              ).then(otherOrderList => {
+                const finalResult = [
+                  {
+                    user: userOrderList,
+                    // tslint:disable-next-line:object-literal-sort-keys
+                    all: otherOrderList
+                  }
+                ];
+                return finalResult;
+              });
+            });
+        });
+      });
   }
 
   // Working 08/06/18
