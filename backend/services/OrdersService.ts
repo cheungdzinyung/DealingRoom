@@ -35,15 +35,8 @@ export default class OrdersService {
       })
       .then((orderId: Knex.QueryCallback) => {
         return this.knex("orders")
-          .join("orders_items", "orders.id", "=", "orders_items.orders_id")
-          .join("items", "items.id", "=", "orders_items.items_id")
-          .join("categories", "categories.id", "=", "items.categories_id ")
-          .where("orders.id", orderId[0])
-          .select("categories.id");
-
-        // return this.knex("orders")
-        //   .select("users_id", "status", "id as orders_id")
-        //   .where("id", orderId[0]);
+          .select("users_id", "status", "id as orders_id")
+          .where("id", orderId[0]);
       });
   }
 
