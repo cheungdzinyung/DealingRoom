@@ -235,8 +235,8 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
 
 const mapStateToProps = (state: IRootState) => {
   return {
-    entireMenu: state.initialize.entireMenu,
-    categories: state.initialize.categories,
+    entireMenu: state.orders.entireMenu,
+    categories: state.orders.categories,
     currentOrder: state.orders.currentOrder,
   }
 }

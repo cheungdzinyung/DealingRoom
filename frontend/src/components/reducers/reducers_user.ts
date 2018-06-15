@@ -3,32 +3,28 @@ import {
     CHANGE_PAGE,
     REDIRECT_PAGE,
     RESET_TARGET_PAGE,
+    GET_USER_PROFILE_BY_USERID_SUCCESS,
+    GET_USER_PROFILE_BY_USERID_FAIL,
 } from "../actions/actions_user";
 
-// interface IUser {
-//     thisItemID: string,
-//     uniqueID: string,
-//     itemName: string,
-//     ice: string,
-//     sweetness: string,
-//     garnish: string,
-//     purchasePrice: number,
-// }
-
 export interface IUserState {
-    role: string,
-    isAuth: boolean,
+    // role: string,
+    // isAuth: boolean,
     currentPage: string,
     redirectTarget: string,
-    settings: string,
+    // settings: string,
+    userProfile: any,
+    userProfileReady: boolean,
 }
 
 const initialState = {
-    role: "customer",
-    isAuth: true,
+    // role: "customer",
+    // isAuth: false,
     currentPage: "profile",
     redirectTarget: "none",     // for redir
-    settings: "nth yet",
+    // settings: "nth yet",
+    userProfile: {},
+    userProfileReady: false,
 }
 
 export const userReducer = (state: IUserState = initialState, action: UserActions): IUserState => {
@@ -43,6 +39,12 @@ export const userReducer = (state: IUserState = initialState, action: UserAction
         }
         case RESET_TARGET_PAGE: {
             return { ...state, redirectTarget: "none"}
+        }
+        case GET_USER_PROFILE_BY_USERID_SUCCESS: {
+            return { ...state, userProfile: action.userProfile, userProfileReady: true };
+        }
+        case GET_USER_PROFILE_BY_USERID_FAIL: {
+            return state;
         }
         default: {
             return state

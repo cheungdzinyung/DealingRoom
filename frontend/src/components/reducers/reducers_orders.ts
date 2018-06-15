@@ -1,5 +1,7 @@
 import {
     OrdersActions,
+    GET_ENTIRE_MENU_SUCCESS,
+    GET_ENTIRE_MENU_FAIL,
     ADD_ITEM,
     REMOVE_ITEM,
     CONFIRM_ORDER_SUCCESS,
@@ -13,45 +15,57 @@ import {
 } from "../../modules";
 
 export interface IOrdersState {
+    entireMenu: string[],
+    categories: string[],
     ordersList: any,
     unpaidOrders: number,
     currentOrder: IRequestItem[],
     currentTotal: number,
+    menuReady: boolean,
+    orderListReady: boolean,
 }
 
 const initialState: IOrdersState = {
+    entireMenu: [],
+    categories: [],
     ordersList: {
         "users_id": 0,
         "username": "John Doe",
         "displayName": "J.Doe",
         "orders":
-            [
-                {
-                    "orders_id": 1,
-                    "table": 12,
-                    "status": "confirmed",
-                    "isPaid": false,
-                    "orderingTime": 20170101,
-                    "orderItems":
-                        [
-                            {
-                                "itemName": "Asahi",
-                                "items_id" : 1,
-                                "ice": "normal",
-                                "sweetness": "normal",
-                                "garnish": "normal",
-                                "purchasePrice": 105.00
-                            }
-                        ]
-                }]
+            [{
+                "orders_id": 1,
+                "table": 12,
+                "status": "confirmed",
+                "isPaid": false,
+                "orderingTime": 20170101,
+                "orderItems":
+                    [{
+                        "itemName": "Asahi",
+                        "items_id": 1,
+                        "ice": "normal",
+                        "sweetness": "normal",
+                        "garnish": "normal",
+                        "purchasePrice": 105.00
+                    }]
+            }]
     },
     unpaidOrders: 0,
     currentOrder: [],
     currentTotal: 0,
+    menuReady: false,
+    orderListReady: false,
 }
 
 export const ordersReducer = (state: IOrdersState = initialState, action: OrdersActions): IOrdersState => {
     switch (action.type) {
+        case GET_ENTIRE_MENU_SUCCESS: {
+            const categories = action.entireMenu.map((category: any) => (category.categoryName));
+            return { ...state, entireMenu: action.entireMenu, categories, menuReady: true };
+        }
+        case GET_ENTIRE_MENU_FAIL: {
+            return state;
+        }
         case ADD_ITEM: {
             // onclick: add item to current order []
             const newItem: IRequestItem = {
@@ -84,7 +98,7 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
         case GET_ORDERS_BY_USERID_SUCCESS: {
             // need to change data type
             const unpaidOrders = action.allOrdersByOneUser.orders.filter((e: any) => (e.isPaid === false)).length;
-            return { ...state, ordersList: action.allOrdersByOneUser, unpaidOrders };
+            return { ...state, ordersList: action.allOrdersByOneUser, unpaidOrders, orderListReady: true };
         }
         case GET_ORDERS_BY_USERID_FAIL: {
             // get fail, F5?

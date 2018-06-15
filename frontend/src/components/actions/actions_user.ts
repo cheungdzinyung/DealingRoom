@@ -1,5 +1,5 @@
-import { Action } from "redux";
-
+import { Action, Dispatch } from "redux";
+import axios from "axios";
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const CHANGE_PAGE = "CHANGE_PAGE";
@@ -22,13 +22,28 @@ export type RESET_TARGET_PAGE = typeof RESET_TARGET_PAGE;
 export interface IRestTargetPageAction extends Action {
     type: RESET_TARGET_PAGE,
 }
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export const GET_USER_PROFILE_BY_USERID_SUCCESS = "GET_USER_PROFILE_BY_USERID_SUCCESS";
+export type GET_USER_PROFILE_BY_USERID_SUCCESS = typeof GET_USER_PROFILE_BY_USERID_SUCCESS;
+export interface IGetUserProfileByUseridSuccessAction extends Action {
+    type: GET_USER_PROFILE_BY_USERID_SUCCESS,
+    userProfile: any,
+}
 
+export const GET_USER_PROFILE_BY_USERID_FAIL = "GET_USER_PROFILE_BY_USERID_FAIL";
+export type GET_USER_PROFILE_BY_USERID_FAIL = typeof GET_USER_PROFILE_BY_USERID_FAIL;
+export interface IGetUserProfileByUseridFailAction extends Action {
+    type: GET_USER_PROFILE_BY_USERID_FAIL,
+    // result: any,
+}
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export type UserActions =
     IChangePageAction |
     IRedirectPageAction |
-    IRestTargetPageAction;
+    IRestTargetPageAction |
+    IGetUserProfileByUseridSuccessAction |
+    IGetUserProfileByUseridFailAction;
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function changePage(currentPage: string): IChangePageAction {
@@ -49,5 +64,39 @@ export function redirectPage(redirectTarget: string, history: any): IRedirectPag
 export function resetTargetPage(): IRestTargetPageAction {
     return {
         type: RESET_TARGET_PAGE,
+    }
+}
+
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export function getUserProfileByUseridSuccess(userProfile: any): IGetUserProfileByUseridSuccessAction {
+    return {
+        type: GET_USER_PROFILE_BY_USERID_SUCCESS,
+        userProfile,
+    }
+}
+
+export function getUserProfileByUseridFail(): IGetUserProfileByUseridFailAction {
+    return {
+        type: GET_USER_PROFILE_BY_USERID_FAIL,
+    }
+}
+
+export function getUserProfileByUserid(userID: number) {
+    return (dispatch: Dispatch<IGetUserProfileByUseridSuccessAction | IGetUserProfileByUseridFailAction>) => {
+        axios.get(`http://localhost:8080/api/users/${userID}`)
+            .then((res: any) => {
+                if (res.status === 200) {
+                    dispatch(getUserProfileByUseridSuccess(res.data[0]));
+                    // auto redir to order list page
+                    // dispatch(changePage(OrderList));
+                } else {
+                    alert("status: " + res.status);
+                    dispatch(getUserProfileByUseridFail());
+                }
+            })
+            .catch((err: any) => {
+                alert(err);
+                dispatch(getUserProfileByUseridFail())
+            });
     }
 }

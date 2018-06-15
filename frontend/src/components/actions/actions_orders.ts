@@ -6,6 +6,19 @@ import {
 } from "../../modules";
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export const GET_ENTIRE_MENU_SUCCESS = "GET_ENTIRE_MENU_SUCCESS";
+export type GET_ENTIRE_MENU_SUCCESS = typeof GET_ENTIRE_MENU_SUCCESS;
+export interface IGetEntireMenuSuccessAction extends Action {
+    type: GET_ENTIRE_MENU_SUCCESS,
+    entireMenu: any,
+}
+
+export const GET_ENTIRE_MENU_FAIL = "GET_ENTIRE_MENU_FAIL";
+export type GET_ENTIRE_MENU_FAIL = typeof GET_ENTIRE_MENU_FAIL;
+export interface IGetEntireMenuFailAction extends Action {
+    type: GET_ENTIRE_MENU_FAIL,
+}
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const ADD_ITEM = "ADD_ITEM";
 export type ADD_ITEM = typeof ADD_ITEM;
 export interface IAddItemAction extends Action {
@@ -47,11 +60,12 @@ export const GET_ORDERS_BY_USERID_FAIL = "GET_ORDERS_BY_USERID_FAIL";
 export type GET_ORDERS_BY_USERID_FAIL = typeof GET_ORDERS_BY_USERID_FAIL;
 export interface IGetOrdersByUseridFailAction extends Action {
     type: GET_ORDERS_BY_USERID_FAIL,
-    // result: any,
 }
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 
 export type OrdersActions =
+    IGetEntireMenuSuccessAction |
+    IGetEntireMenuFailAction |
     IAddItemAction |
     IRemoveItemAction |
     IConfirmOrderSuccessAction |
@@ -59,6 +73,38 @@ export type OrdersActions =
     IGetOrdersByUseridSuccessAction |
     IGetOrdersByUseridFailAction;
 
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export function getEntireMenuSuccess(entireMenu: any): IGetEntireMenuSuccessAction {
+    return {
+        type: GET_ENTIRE_MENU_SUCCESS,
+        entireMenu,
+    }
+}
+
+export function getEntireMenuFail(): IGetEntireMenuFailAction {
+    return {
+        type: GET_ENTIRE_MENU_FAIL,
+    }
+}
+
+export function getEntireMenu() {
+    return (dispatch: Dispatch<IGetEntireMenuSuccessAction | IGetEntireMenuFailAction>) => {
+        axios.get("http://localhost:8080/api/items")
+            .then((res: any) => {
+                if (res.status === 200) {
+                    // alert(Object.keys(res.data));
+                    dispatch(getEntireMenuSuccess(res.data));
+                } else {
+                    alert("error not 200");
+                    dispatch(getEntireMenuFail());
+                }
+            })
+            .catch((err:any) => {
+                alert(err);
+                dispatch(getEntireMenuFail());
+            });
+    }
+}
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function addToCurrentOrder(itemid: string, itemName: string): IAddItemAction {
     return {
