@@ -69,13 +69,13 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
         case ADD_ITEM: {
             // onclick: add item to current order []
             const newItem: IRequestItem = {
-                thisItemID: `${Date.now()}`,    // only for current order
-                items_id: action.itemid,      // from db
-                itemName: action.itemName,      // from db
-                ice: "normal",                  // allow mods when btn is ready
+                thisItemID: `${Date.now()}`,            // only for current order
+                items_id: action.itemid,                // from db
+                itemName: action.itemName,              // from db
+                ice: "normal",                          // allow mods when btn is ready
                 sweetness: "less",
                 garnish: "extra",
-                purchasePrice: 11.11,           // from db
+                purchasePrice: action.currentPrice,     // from db
             };
             // new total price: x1000 to avoid overflow
             const newTotal = (state.currentTotal * 1000 + newItem.purchasePrice * 1000) / 1000;

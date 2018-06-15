@@ -25,6 +25,7 @@ export interface IAddItemAction extends Action {
     type: ADD_ITEM,
     itemid: string,
     itemName: string,
+    currentPrice: number,
 }
 
 export const REMOVE_ITEM = "REMOVE_ITEM";
@@ -106,11 +107,12 @@ export function getEntireMenu() {
     }
 }
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export function addToCurrentOrder(itemid: string, itemName: string): IAddItemAction {
+export function addToCurrentOrder(itemid: string, itemName: string, currentPrice: number): IAddItemAction {
     return {
         type: ADD_ITEM,
         itemid,
         itemName,
+        currentPrice,
     }
 }
 

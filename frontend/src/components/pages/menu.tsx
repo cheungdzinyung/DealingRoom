@@ -34,7 +34,7 @@ interface IMenuProps {
   entireMenu: any,
   categories: any[],
   currentOrder: IRequestItem[],
-  addToCurrentOrder: (itemid: string, itemName: string) => void,
+  addToCurrentOrder: (itemid: string, itemName: string, currentPrice: number) => void,
 }
 
 interface IMenuState {
@@ -122,7 +122,8 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
     const itemid = e.currentTarget.dataset.itemid;
     const itemName = e.currentTarget.dataset.itemname;    // dataset attr are all lowercase
     if (itemid !== undefined && itemName !== undefined) {
-      this.props.addToCurrentOrder(itemid, itemName);
+      const currentPrice = this.props.entireMenu[this.state.displayCategoryIndex].items.find((element:any) => ( parseFloat(itemid) === element.items_id )).currentPrice;
+      this.props.addToCurrentOrder(itemid, itemName, currentPrice);
     }
   }
 
@@ -179,7 +180,7 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
                   <div className="pricetag"
                     onClick={this.addToCurrentOrder}
                     data-itemid={item.items_id}
-                    // data-itemid={item.id}
+                    // data-currentPrice={item.currentPrice}
                     data-itemname={item.itemName}>
                     <span>{item.itemName}</span>
                     {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] && <span>${item.currentPrice}</span>}
@@ -243,8 +244,8 @@ const mapStateToProps = (state: IRootState) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    addToCurrentOrder: (uniqueID: string, name: string) => {
-      dispatch(addToCurrentOrder(uniqueID, name));
+    addToCurrentOrder: (uniqueID: string, name: string, currentPrice: number) => {
+      dispatch(addToCurrentOrder(uniqueID, name, currentPrice));
     }
   }
 }
