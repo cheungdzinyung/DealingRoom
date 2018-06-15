@@ -13,13 +13,13 @@ import { Line } from "react-chartjs-2";
 import Usermenu from "../share/usermenu";
 
 // Importing interfaces
-import { IPureCategoryWithItem } from "../../modules";
+// import { IPureCategoryWithItem } from "../../modules";
 
 // Importing helper function
 import { percentageChange } from "../../util/utility"
 
 // Importing replacable fake data
-import { chartOption, menuItems } from "../../fakedata";
+import { chartOption } from "../../fakedata";
 
 // Importing static assets
 import down from "../../icons/down.svg";
@@ -31,16 +31,16 @@ import whiskie from "../../images/categories/whiskie.jpg";
 import { IRequestItem } from "../../modules";
 
 interface IMenuProps {
-  currentOrder: IRequestItem[];
-  addToCurrentOrder: (itemid: string, itemName: string) => void;
+  entireMenu: any,
+  categories: any[],
+  currentOrder: IRequestItem[],
+  addToCurrentOrder: (itemid: string, itemName: string) => void,
 }
 
 interface IMenuState {
-  searchBoxEntry: string;
-  // displayCategory: string
-  // displayMenu: IPureCategoryWithItem[]
-  entireMenu: IPureCategoryWithItem[];
-  isItemDetailsOpen: { [key: string]: boolean };
+  searchBoxEntry: string,
+  displayCategoryIndex: number,
+  isItemDetailsOpen: { [key: string]: boolean },
 }
 
 class PureMenu extends React.Component<IMenuProps, IMenuState> {
@@ -48,25 +48,36 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
     super(props);
 
     const tempisItemDetailsOpen = {};
-    menuItems.map((category, categoryIndex) => {
-      category.items.map((item, itemIndex) => {
+    this.props.entireMenu.forEach((category: any, categoryIndex: any) => {
+      category.items.forEach((item: any, itemIndex: any) => {
         const currentLoc = category.categoryName.toString().concat(itemIndex.toString());
         tempisItemDetailsOpen[`${currentLoc}`] = false;
       })
-    })
+    });
 
     this.state = {
       searchBoxEntry: "",
-      // displayCategory: "beer",
-      // displayMenu: menuItems.filter((category, index) => category.categoryName === this.state.displayCategory),
-      entireMenu: menuItems,
-      isItemDetailsOpen: tempisItemDetailsOpen
-
+      displayCategoryIndex: 0,
+      isItemDetailsOpen: tempisItemDetailsOpen,
     };
   }
-  // public switchCategory = () ={
 
-  // }
+  // switch category
+  public previousCategory = () => {
+    if (this.state.displayCategoryIndex - 1 < 0) {
+      this.setState({displayCategoryIndex: this.props.categories.length - 1});
+    } else {
+      this.setState({displayCategoryIndex: this.state.displayCategoryIndex - 1});
+    }
+  }
+
+  public nextCategory = () => {
+    if (this.state.displayCategoryIndex + 1 >= this.props.categories.length) {
+      this.setState({displayCategoryIndex: 0});
+    } else {
+      this.setState({displayCategoryIndex: this.state.displayCategoryIndex + 1});
+    }
+  }
 
   // toggle description box
   public isOpen = (locKey: string) => {
@@ -74,7 +85,7 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
     newMenuState[locKey] = !newMenuState[locKey];
 
     this.setState({
-      isItemDetailsOpen: newMenuState
+      isItemDetailsOpen: newMenuState,
     });
   };
 
@@ -108,6 +119,11 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
           <img src={cocktail} alt="" />
         </ Carousel>
 
+        {/* for test */}
+        <input type="button" className="btn" value="<<" onClick={this.previousCategory} />
+        <div />
+        <input type="button" className="btn" value=">>" onClick={this.nextCategory} />
+
         <input
           className="pt-input searchbar"
           type="text"
@@ -118,9 +134,10 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
         />
 
         {/* render display from all > cat > search */}
-        {this.state.entireMenu.map((category: any, categoryIndex: any) => (
+        {this.props.entireMenu.map((category: any, categoryIndex: any) => (
           category.items.map((item: any, itemIndex: any) => (
-            (item.itemName.toLowerCase().search(this.state.searchBoxEntry) !== -1) ?
+            (item.itemName.toLowerCase().search(this.state.searchBoxEntry) !== -1
+              && item.categoryName === this.props.categories[this.state.displayCategoryIndex]) ?
               <div className="item-container">
                 <Card
                   className={
@@ -137,8 +154,9 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
                   key={`Card_${category.categoryName.concat(itemIndex.toString())}`}
                 >
                   <div className="pricetag"
-                    onClick={this.addToCurrentOrder} 
-                    data-itemid={item.item_id}
+                    onClick={this.addToCurrentOrder}
+                    // data-itemid={item.item_id}
+                    data-itemid={item.id}
                     data-itemname={item.itemName}>
                     <span>{item.itemName}</span>
                     {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] && <span>${item.currentPrice}</span>}
@@ -194,6 +212,8 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
 
 const mapStateToProps = (state: IRootState) => {
   return {
+    entireMenu: state.orders.entireMenu,
+    categories: state.orders.categories,
     currentOrder: state.orders.currentOrder,
   }
 }

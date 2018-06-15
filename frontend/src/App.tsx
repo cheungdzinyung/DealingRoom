@@ -11,7 +11,25 @@ import Profile from "./components/pages/profile";
 import Request from "./components/pages/request";
 import Setting from "./components/pages/setting";
 
-class App extends React.Component {
+// import redux and friends
+import { connect } from "react-redux";
+import { IRootState } from "src/components/reducers/index";
+import { getentireMenu } from "src/components/actions/actions_orders";
+
+interface IAppProps {
+  getentireMenu: () => void,
+}
+
+class PureApp extends React.Component<IAppProps, {}> {
+  constructor(props: IAppProps) {
+    super(props);
+  }
+
+  // will mount get all items
+  public componentDidMount(){
+    this.props.getentireMenu();
+  }
+
   public render() {
     return (
       <div className="full-page">
@@ -31,5 +49,19 @@ class App extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state: IRootState) => {
+  return {};
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    getentireMenu: () => {
+      dispatch(getentireMenu());
+    },
+  }
+}
+
+const App = connect(mapStateToProps, mapDispatchToProps)(PureApp);
 
 export default App;
