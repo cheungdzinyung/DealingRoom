@@ -83,7 +83,7 @@ export default class ItemsRouter {
       }else{
         return this.itemsService
         .getAll()
-        .then((result: IItemData) => {
+        .then((result: any) => {
           res.status(200).json(result);
         })
         .catch((err: express.Errback) => {

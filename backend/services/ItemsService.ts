@@ -117,22 +117,41 @@ export default class UsersService {
       });
   }
 
-  // Working 06/06/18
+  // Working 15/06/18
   public getAll() {
     return this.knex("categories")
-      .join("items", "categories.id", "=", "items.categories_id")
-      .select(
-        "items.id as item_id",
-        "items.itemName",
-        "items.itemStock",
-        "categories.categoryName",
-        "items.minimumPrice",
-        "items.currentPrice",
-        "items.itemPhoto",
-        "items.itemDescription",
-        "items.isSpecial",
-        "items.isActive"
-      );
+      .select("id", "categoryName", "categoryPhoto")
+      .then(categoryList => {
+        // return categoryList;
+        return Promise.all(
+          categoryList.map((item: object, i: number) => {
+            return this.knex("items")
+              .select(
+                "id as item_id",
+                "itemName",
+                "itemStock",
+                "minimumPrice",
+                "currentPrice",
+                "itemPhoto",
+                "itemDescription",
+                "isSpecial",
+                "isActive"
+              )
+              .where("items.categories_id", categoryList[i].id);
+          })
+        ).then(itemList => {
+          return Promise.all(
+            categoryList.map((category: object, j: number) => {
+              const obj = {
+                categoryName: categoryList[j].categoryName,
+                categoryPhoto: categoryList[j].categoryPhoto,
+                items: itemList[j]
+              };
+              return obj;
+            })
+          );
+        });
+      });
   }
 
   // Working 07/06/18
@@ -201,7 +220,7 @@ export default class UsersService {
           .join("items", "categories.id", "=", "items.categories_id")
           .where("items.id", itemId[0])
           .select(
-            "items.id",
+            "items.id as item_id",
             "items.itemName",
             "items.itemStock",
             "categories.categoryName",
