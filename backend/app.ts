@@ -46,7 +46,7 @@ app.use(cors());
 app.use("/api/users", usersRouter.router());
 app.use("/api/items", itemsRouter.router());
 app.use("/api/orders", ordersRouter.router());
-app.use("/api/orders", pricesRouter.router());
+app.use("/api/prices", pricesRouter.router());
 
 app.listen(PORT,() => {
     // tslint:disable-next-line:no-console

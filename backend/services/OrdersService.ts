@@ -21,19 +21,14 @@ export default class OrdersService {
       .then((orderId: Knex.QueryCallback) => {
         Promise.all(
           data.item.map((item: object, i: number) => {
-            return this.knex("items")
-              .select("id")
-              .where("itemName", data.item[i].itemName)
-              .then((itemId: object) => {
-                return this.knex("orders_items").insert({
-                  garnish: data.item[i].garnish,
-                  ice: data.item[i].ice,
-                  items_id: itemId[0].id,
-                  orders_id: orderId[0],
-                  purchasePrice: data.item[i].purchasePrice,
-                  sweetness: data.item[i].sweetness
-                });
-              });
+            return this.knex("orders_items").insert({
+              garnish: data.item[i].garnish,
+              ice: data.item[i].ice,
+              items_id: data.item[i].items_id,
+              orders_id: orderId[0],
+              purchasePrice: data.item[i].purchasePrice,
+              sweetness: data.item[i].sweetness
+            });
           })
         );
         return orderId;
@@ -149,67 +144,83 @@ export default class OrdersService {
       });
   }
 
-  //*****TODO*****//
-  getAllPrice(id: number) {
-    return this.knex("orders")
+  // *****TODO*****//
+  public getAllPrice(id: number, dateOfQuery: string) {
+    return this.knex("categories")
+      .join("items", "items.categories_id", "=", "categories.id")
+      .join("orders_items", "items.id", "=", "orders_items.items_id")
+      .join("orders", "orders.id", "=", "orders_items.orders_id")
       .join("users", "users.id", "=", "orders.users_id")
-      .join("orders_items", "orders_items.orders_id", "=", "orders.id")
-      .join("items", "items.id", "=", "orders_items.items_id")
-      .join("categories", "categories.id", "=", "items.categories_id")
       .select("categories.categoryName")
-      .sumDistinct("orders_items.purchasePrice")
+      .avg("orders_items.purchasePrice")
+      .whereRaw("??::date = ?", ["created_at", dateOfQuery])
       .where("users.id", id)
-      .groupBy("categories.categoryName")
-      .then((userResult: any) => {
-        // console.log (result[0].categoryName, result[0].sum);
-        // console.log (result[1].categoryName, result[1].sum);
-        // console.log (result.length)
-        return this.knex("orders")
-          .join("users", "users.id", "=", "orders.users_id")
-          .join("orders_items", "orders_items.orders_id", "=", "orders.id")
-          .join("items", "items.id", "=", "orders_items.items_id")
-          .join("categories", "categories.id", "=", "items.categories_id")
-          .select("categories.categoryName")
-          .sumDistinct("orders_items.purchasePrice")
-          .whereNot("users.id", id)
-          .groupBy("categories.categoryName");
-      })
-      .then((allResult: any) => {
-        let obj = [
-          {
-            // user: userResult[0],
-            other: allResult[0]
-          }
-        ];
-        return obj;
+      .groupBy("categoryName")
+      .then((result: any) => {
+        return Promise.all(
+          result.map((order: object, i: number) => {
+            const obj = {
+              [result[i].categoryName]: result[i].avg
+            };
+            return obj;
+          })
+        ).then(userOrderList => {
+          return this.knex("categories")
+            .join("items", "items.categories_id", "=", "categories.id")
+            .join("orders_items", "items.id", "=", "orders_items.items_id")
+            .join("orders", "orders.id", "=", "orders_items.orders_id")
+            .join("users", "users.id", "=", "orders.users_id")
+            .select("categories.categoryName")
+            .avg("orders_items.purchasePrice")
+            .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+            .whereNot("users.id", id)
+            .groupBy("categoryName")
+            .then((result2: any) => {
+              return Promise.all(
+                result2.map((order: object, i: number) => {
+                  const obj = {
+                    [result2[i].categoryName]: result2[i].avg
+                  };
+                  return obj;
+                })
+              ).then((otherOrderList)=>{
+                const finalResult = [{
+                  user: userOrderList,
+                  // tslint:disable-next-line:object-literal-sort-keys
+                  all: otherOrderList
+                }]
+                return finalResult;
+              })
+            });
+        });
       });
   }
 
-  //*****TODO******//
-  getAllQuantity(id: number) {
+  // *****TODO******//
+  public getAllQuantity(id: number) {
     return this.knex("users")
       .select("id")
       .where("id", id);
   }
 
   // Working 08/06/18
-  update(id: number, data: any) {
+  public update(id: number, data: any) {
     return this.knex("orders")
       .where("id", id)
       .update({
-        status: data.status,
-        isPaid: data.isPaid
+        isPaid: data.isPaid,
+        status: data.status
       })
       .returning("id")
-      .then((id: number) => {
+      .then((orderId: number) => {
         return this.knex("orders")
-          .where("id", id[0])
+          .where("id", orderId[0])
           .select("id as order_id", "status", "isPaid");
       });
   }
 }
 
-////////Allen F///////////////
+//////// Allen F///////////////
 // async getOrderByUserId(id: number) {
 //   let [user] = await this.knex("users")
 //     .where("id", id)

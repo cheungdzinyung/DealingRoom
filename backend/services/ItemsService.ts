@@ -66,7 +66,7 @@ export default class UsersService {
       .join("items", "categories.id", "=", "items.categories_id")
       .where("items.id", req)
       .select(
-        "items.id",
+        "items.id as items_id",
         "items.itemName",
         "items.itemStock",
         "categories.categoryName",
@@ -79,12 +79,50 @@ export default class UsersService {
       );
   }
 
+  // testing with fluctuating prices
+  public getAllWithFluctuatingPrices(dateOfQuery: string) {
+    return this.knex("categories")
+      .join("items", "items.categories_id", "=", "categories.id")
+      .join("orders_items", "items.id", "=", "orders_items.items_id")
+      .join("orders", "orders.id", "=", "orders_items.orders_id")
+      .select("categories.categoryName")
+      .avg("orders_items.purchasePrice")
+      .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+      .groupBy("categoryName")
+      .then((orderIdList: any) => {
+        // tslint:disable-next-line:no-console
+        // return orderIdList;
+        return Promise.all(
+          orderIdList.map((order: object, i: number) => {
+            const obj = {
+              [orderIdList[i].categoryName]: orderIdList[i].avg
+            };
+            return obj;
+          })
+        );
+      });
+  }
+
+  public getAllInCatWithFluctuatingPrices(
+    catName: string,
+    dateOfQuery: string
+  ) {
+    return this.knex("orders")
+      .select("id")
+      .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+      .then(result => {
+        // tslint:disable-next-line:no-console
+        console.log(result);
+        return result;
+      });
+  }
+
   // Working 06/06/18
   public getAll() {
     return this.knex("categories")
       .join("items", "categories.id", "=", "items.categories_id")
       .select(
-        "items.id",
+        "items.id as item_id",
         "items.itemName",
         "items.itemStock",
         "categories.categoryName",
@@ -112,7 +150,7 @@ export default class UsersService {
       .then((catId: Knex.QueryCallback) => {
         return this.knex("items")
           .select(
-            "id",
+            "id as item_id",
             "itemName",
             "itemStock",
             "minimumPrice",
