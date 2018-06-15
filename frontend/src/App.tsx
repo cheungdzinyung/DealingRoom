@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import "./scss/App.scss";
 
 import Display from "./components/pages/display";
+import Initialize from "./components/pages/initialize";
 import Login from "./components/pages/login";
 import Menu from "./components/pages/menu";
 import Order from "./components/pages/order";
@@ -14,20 +15,12 @@ import Setting from "./components/pages/setting";
 // import redux and friends
 import { connect } from "react-redux";
 import { IRootState } from "src/components/reducers/index";
-import { getentireMenu } from "src/components/actions/actions_orders";
 
-interface IAppProps {
-  getentireMenu: () => void,
-}
+// interface IAppProps {}
 
-class PureApp extends React.Component<IAppProps, {}> {
-  constructor(props: IAppProps) {
+class PureApp extends React.Component<{}, {}> {
+  constructor(props: {}) {
     super(props);
-  }
-
-  // will mount get all items
-  public componentDidMount(){
-    this.props.getentireMenu();
   }
 
   public render() {
@@ -44,6 +37,7 @@ class PureApp extends React.Component<IAppProps, {}> {
           <Route path="/setting" component={Setting} />
           <Route path="/display" component={Display} />
           <Route path="/request" component={Request} />
+          <Route path="/initialize" component={Initialize} />
         </Switch>
       </div>
     );
@@ -55,11 +49,7 @@ const mapStateToProps = (state: IRootState) => {
 }
 
 const mapDispatchToProps = (dispatch: any) => {
-  return {
-    getentireMenu: () => {
-      dispatch(getentireMenu());
-    },
-  }
+  return {}
 }
 
 const App = connect(mapStateToProps, mapDispatchToProps)(PureApp);

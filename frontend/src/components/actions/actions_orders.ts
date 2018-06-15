@@ -6,20 +6,6 @@ import {
 } from "../../modules";
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export const GET_ENTIRE_MENU_SUCCESS = "GET_ENTIRE_MENU_SUCCESS";
-export type GET_ENTIRE_MENU_SUCCESS = typeof GET_ENTIRE_MENU_SUCCESS;
-export interface IGetentireMenuSuccessAction extends Action {
-    type: GET_ENTIRE_MENU_SUCCESS,
-    entireMenu: any,
-}
-
-export const GET_ENTIRE_MENU_FAIL = "GET_ENTIRE_MENU_FAIL";
-export type GET_ENTIRE_MENU_FAIL = typeof GET_ENTIRE_MENU_FAIL;
-export interface IGetentireMenuFailAction extends Action {
-    type: GET_ENTIRE_MENU_FAIL,
-    // result: any,
-}
-/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const ADD_ITEM = "ADD_ITEM";
 export type ADD_ITEM = typeof ADD_ITEM;
 export interface IAddItemAction extends Action {
@@ -66,8 +52,6 @@ export interface IGetOrdersByUseridFailAction extends Action {
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 
 export type OrdersActions =
-    IGetentireMenuSuccessAction |
-    IGetentireMenuFailAction |
     IAddItemAction |
     IRemoveItemAction |
     IConfirmOrderSuccessAction |
@@ -75,38 +59,6 @@ export type OrdersActions =
     IGetOrdersByUseridSuccessAction |
     IGetOrdersByUseridFailAction;
 
-/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export function getentireMenuSuccess(entireMenu: any): IGetentireMenuSuccessAction {
-    return {
-        type: GET_ENTIRE_MENU_SUCCESS,
-        entireMenu,
-    }
-}
-
-export function getentireMenuFail(): IGetentireMenuFailAction {
-    return {
-        type: GET_ENTIRE_MENU_FAIL,
-    }
-}
-
-export function getentireMenu() {
-    return (dispatch: Dispatch<IGetentireMenuSuccessAction | IGetentireMenuFailAction>) => {
-        axios.get("http://localhost:8080/api/items")
-            .then((res: any) => {
-                if (res.status === 200) {
-                    // alert(Object.keys(res.data));
-                    dispatch(getentireMenuSuccess(res.data));
-                } else {
-                    alert("error not 200");
-                    dispatch(getentireMenuFail());
-                }
-            })
-            .catch((err:any) => {
-                alert(err);
-                dispatch(getentireMenuFail());
-            });
-    }
-}
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function addToCurrentOrder(itemid: string, itemName: string): IAddItemAction {
     return {
