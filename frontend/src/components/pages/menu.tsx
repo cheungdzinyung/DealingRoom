@@ -1,6 +1,11 @@
 // Importing modules from library
 import * as React from "react";
 
+// redux
+import { connect } from "react-redux";
+import { IRootState } from "../reducers/index";
+import { addToCurrentOrder } from "../actions/actions_orders";
+
 // Import UI elements
 import { Card, Collapse, Elevation } from "@blueprintjs/core";
 import Carousel from 'nuka-carousel';
@@ -23,23 +28,39 @@ import beer from "../../images/categories/beer.jpg";
 import cocktail from "../../images/categories/cocktails.jpg";
 import whiskie from "../../images/categories/whiskie.jpg";
 
+import { IRequestItem } from "../../modules";
 
-interface IPureMenuState {
+interface IMenuProps {
+  currentOrder: IRequestItem[];
+  addToCurrentOrder: (itemid: string, itemName: string) => void;
+}
+
+interface IMenuState {
+  searchBoxEntry: string;
   // displayCategory: string
   // displayMenu: IPureCategoryWithItem[]
   entireMenu: IPureCategoryWithItem[];
-  isItemDetailsOpen: boolean[];
+  isItemDetailsOpen: { [key: string]: boolean };
 }
 
-export default class PureMenu extends React.Component<{}, IPureMenuState> {
-  constructor(props: {}) {
+class PureMenu extends React.Component<IMenuProps, IMenuState> {
+  constructor(props: IMenuProps) {
     super(props);
 
+    const tempisItemDetailsOpen = {};
+    menuItems.map((category, categoryIndex) => {
+      category.items.map((item, itemIndex) => {
+        const currentLoc = category.categoryName.toString().concat(itemIndex.toString());
+        tempisItemDetailsOpen[`${currentLoc}`] = false;
+      })
+    })
+
     this.state = {
+      searchBoxEntry: "",
       // displayCategory: "beer",
       // displayMenu: menuItems.filter((category, index) => category.categoryName === this.state.displayCategory),
       entireMenu: menuItems,
-      isItemDetailsOpen: menuItems.map(data => false)
+      isItemDetailsOpen: tempisItemDetailsOpen
 
     };
   }
@@ -47,16 +68,29 @@ export default class PureMenu extends React.Component<{}, IPureMenuState> {
 
   // }
 
-  public isOpen = (i: number) => {
+  // toggle description box
+  public isOpen = (locKey: string) => {
+    const newMenuState = { ... this.state.isItemDetailsOpen };
+    newMenuState[locKey] = !newMenuState[locKey];
+
     this.setState({
-      isItemDetailsOpen: menuItems.map(
-        (data, index) =>
-          i === index
-            ? !this.state.isItemDetailsOpen[index]
-            : this.state.isItemDetailsOpen[index]
-      )
+      isItemDetailsOpen: newMenuState
     });
   };
+
+  // search box
+  public searching = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ searchBoxEntry: e.target.value.toLowerCase() });
+  }
+
+  // add to cart
+  public addToCurrentOrder = (e: React.MouseEvent<HTMLDivElement>) => {
+    const itemid = e.currentTarget.dataset.itemid;
+    const itemName = e.currentTarget.dataset.itemname;    // dataset attr are all lowercase
+    if (itemid !== undefined && itemName !== undefined) {
+      this.props.addToCurrentOrder(itemid, itemName);
+    }
+  }
 
   // TODO: to fix the next and Previous of the carousel
 
@@ -79,70 +113,77 @@ export default class PureMenu extends React.Component<{}, IPureMenuState> {
           type="text"
           placeholder="Search input"
           dir="auto"
+          value={this.state.searchBoxEntry}
+          onChange={this.searching}
         />
 
-        {this.state.entireMenu.map((category, categoryIndex) => (
-          category.items.map((item, i) => (
-            <div className="item-container">
-              <Card
-                className={
-                  !this.state.isItemDetailsOpen[i]
-                    ? "item-cards"
-                    : percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0
+        {/* render display from all > cat > search */}
+        {this.state.entireMenu.map((category: any, categoryIndex: any) => (
+          category.items.map((item: any, itemIndex: any) => (
+            (item.itemName.toLowerCase().search(this.state.searchBoxEntry) !== -1) ?
+              <div className="item-container">
+                <Card
+                  className={
+                    !this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())]
+                      ? "item-cards"
+                      : percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0
 
-                      ? "item-cards item-price-up"
-                      : "item-cards item-price-down"
-                }
-                interactive={true}
-                elevation={Elevation.FOUR}
-                onClick={this.isOpen.bind(this, i)}
-                key={i}
-              >
-                <div className="pricetag">
-                  <span>{item.itemName}</span>
-                  {!this.state.isItemDetailsOpen[i] && <span>${item.currentPrice}</span>}
-                </div>
+                        ? "item-cards item-price-up"
+                        : "item-cards item-price-down"
+                  }
+                  interactive={true}
+                  elevation={Elevation.FOUR}
+                  onClick={this.isOpen.bind(this, category.categoryName.concat(itemIndex.toString()))}
+                  key={`Card_${category.categoryName.concat(itemIndex.toString())}`}
+                >
+                  <div className="pricetag"
+                    onClick={this.addToCurrentOrder} 
+                    data-itemid={item.item_id}
+                    data-itemname={item.itemName}>
+                    <span>{item.itemName}</span>
+                    {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] && <span>${item.currentPrice}</span>}
+                  </div>
 
-                {!this.state.isItemDetailsOpen[i] ? <div className="arrow-container">
-                  <img
-                    className="arrow"
-                    src={percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0 ? up : down}
-                    alt=""
-                  />
-                </div> : <span>${item.currentPrice}</span>}
-              </Card>
-              {/* ------------Seperate card and card details */}
-              <Collapse
-                key={i}
-                className={
-                  "item-details" +
-                  " " +
-                  (this.state.isItemDetailsOpen[i] ? "item-detail-onflex" : "")
-                }
-                isOpen={this.state.isItemDetailsOpen[i]}
-              >
-                <div className="description">
-                  <p className="description-text">{item.itemDescription}</p>
-                </div>
-                <div className="chartVar">
-                  <div className="variables">
+                  {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] ? <div className="arrow-container">
                     <img
-                      className="detail-arrow"
+                      className="arrow"
                       src={percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0 ? up : down}
                       alt=""
                     />
-                    <span className="detail-percentage">{percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0])}%</span>
+                  </div> : <span>${item.currentPrice}</span>}
+                </Card>
+                {/* ------------Seperate card and card details */}
+                <Collapse
+                  key={`Collapse_${category.categoryName.concat(itemIndex.toString())}`}
+                  className={
+                    "item-details" +
+                    " " +
+                    (this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] ? "item-detail-onflex" : "")
+                  }
+                  isOpen={this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())]}
+                >
+                  <div className="description">
+                    <p className="description-text">{item.itemDescription}</p>
                   </div>
+                  <div className="chartVar">
+                    <div className="variables">
+                      <img
+                        className="detail-arrow"
+                        src={percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0 ? up : down}
+                        alt=""
+                      />
+                      <span className="detail-percentage">{percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0])}%</span>
+                    </div>
 
-                  <Line
-                    width={80}
-                    height={60}
-                    data={item.chartData}
-                    options={chartOption}
-                  />
-                </div>
-              </Collapse>
-            </div>))
+                    <Line
+                      width={80}
+                      height={60}
+                      data={item.chartData}
+                      options={chartOption}
+                    />
+                  </div>
+                </Collapse>
+              </div> : <div />))
         ))}
 
         <Usermenu />
@@ -150,3 +191,21 @@ export default class PureMenu extends React.Component<{}, IPureMenuState> {
     );
   }
 }
+
+const mapStateToProps = (state: IRootState) => {
+  return {
+    currentOrder: state.orders.currentOrder,
+  }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    addToCurrentOrder: (uniqueID: string, name: string) => {
+      dispatch(addToCurrentOrder(uniqueID, name));
+    }
+  }
+}
+
+const Menu = connect(mapStateToProps, mapDispatchToProps)(PureMenu);
+
+export default Menu

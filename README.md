@@ -73,6 +73,9 @@ Jun 4  | Backend development
 Jun 5  | Display page | in progress
 Jun 5  | Routes/Service (Users/Items) | in progress
 Jun 5  | Converted all backend files to Typescript
+Jun 12 | redux, react-redux, axios, redux-thunk | yarn add
+Jun 12 | order menu searchBox | basic
+Jun 12 | add/remove item from cart
 
 
 
