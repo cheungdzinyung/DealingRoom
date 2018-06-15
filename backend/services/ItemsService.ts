@@ -122,7 +122,6 @@ export default class UsersService {
     return this.knex("categories")
       .select("id", "categoryName", "categoryPhoto")
       .then(categoryList => {
-        // return categoryList;
         return Promise.all(
           categoryList.map((item: object, i: number) => {
             return this.knex("items")

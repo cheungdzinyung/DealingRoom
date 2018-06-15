@@ -22,7 +22,7 @@ export default class PricesRouter {
   public getAll(req: express.Request, res: express.Response) {
     if (req.query.category !== undefined) {
       return this.pricesService
-        .getAllByCat(req.query)
+        .getAllByCat(req.query.category)
         .then((result: any) => {
           res.status(200).json(result);
         })
@@ -44,7 +44,7 @@ export default class PricesRouter {
 
   public update(req: express.Request, res: express.Response) {
     return this.pricesService
-    .update(req.params.id)
+    .update(req.params.id, req.body)
     .then((result: any) => {
       res.status(200).json(result);
     })
