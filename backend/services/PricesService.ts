@@ -108,10 +108,10 @@ export default class PricesService {
                     .where("id", orderListId[i].id)
                     .then(catIdList => {
                       catIdList.map((cat: object, j: number) => {
-                        // return this.knex("items")
-                        // .whereNot("id", orderListId[j].id)
-                        // .decrement("currentPrice", 1);
-                        console.log(catIdList[0].categories_id);
+                        return this.knex("items")
+                        .whereNot("id", orderListId[j].id)
+                        .decrement("currentPrice", 1);
+                        // console.log(catIdList[0].categories_id);
                       });
                       return catIdList[0];
                     });

@@ -54,13 +54,18 @@ export default class UsersRouter {
   }
 
   public update(req: express.Request, res: express.Response) {
-    return this.usersService
-      .update(req.params.id, req.body, req.file)
-      .then((result: IUserData) => {
-        res.status(201).json(result);
-      })
-      .catch((err: express.Errback) => {
-        res.status(500).json({ status: "failed" });
-      });
+    if (req.user !== undefined && req.user.id === parseInt(req.params.id, 10)) {
+      return this.usersService
+        .update(req.params.id, req.body, req.file)
+        .then((result: IUserData) => {
+          res.status(201).json(result);
+        })
+        .catch((err: express.Errback) => {
+          res.status(500).json({ status: "failed" });
+        });
+    } else {
+      res.status(401).json({ status: "unauthorized" });
+      return {};
+    }
   }
 }

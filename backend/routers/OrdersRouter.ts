@@ -18,21 +18,26 @@ export default class UsersRouter {
     router.get("/user/:id", this.getByUserId.bind(this));
     router.get("/categories/:id", this.getAllQuantity.bind(this));
     router.get("/:id", this.getByOrderId.bind(this));
-    
+
     router.put("/:id", this.update.bind(this));
 
     return router;
   }
 
   public add(req: express.Request, res: express.Response) {
-    return this.ordersService
-      .add(req.params.id, req.body)
-      .then((result: any) => {
-        res.status(201).json(result);
-      })
-      .catch((err: express.Errback) => {
-        res.status(500).json({ status: "failed" });
-      });
+    if (req.user !== undefined && req.user.id === parseInt(req.params.id, 10)) {
+      return this.ordersService
+        .add(req.params.id, req.body)
+        .then((result: any) => {
+          res.status(201).json(result);
+        })
+        .catch((err: express.Errback) => {
+          res.status(500).json({ status: "failed" });
+        });
+    } else {
+      res.status(401).json({ status: "unauthorized" });
+      return {};
+    }
   }
 
   public getByOrderId(req: express.Request, res: express.Response) {
@@ -47,46 +52,66 @@ export default class UsersRouter {
   }
 
   public getByUserId(req: express.Request, res: express.Response) {
-    return this.ordersService
-      .getByUserId(req.params.id)
-      .then((result: any) => {
-        res.status(200).json(result);
-      })
-      .catch((err: express.Errback) => {
-        res.status(500).json({ status: "failed" });
-      });
+    if (req.user !== undefined && req.user.id === parseInt(req.params.id, 10)) {
+      return this.ordersService
+        .getByUserId(req.params.id)
+        .then((result: any) => {
+          res.status(200).json(result);
+        })
+        .catch((err: express.Errback) => {
+          res.status(500).json({ status: "failed" });
+        });
+    } else {
+      res.status(401).json({ status: "unauthorized" });
+      return {};
+    }
   }
 
   public getAllPrice(req: express.Request, res: express.Response) {
-    return this.ordersService
-      .getAllPrice(req.params.id, req.query.dateOfQuery)
-      .then((result: any) => {
-        res.status(200).json(result);
-      })
-      .catch((err: express.Errback) => {
-        res.status(500).json({ status: "failed" });
-      });
+    if (req.user !== undefined && req.user.id === parseInt(req.params.id, 10)) {
+      return this.ordersService
+        .getAllPrice(req.params.id, req.query.dateOfQuery)
+        .then((result: any) => {
+          res.status(200).json(result);
+        })
+        .catch((err: express.Errback) => {
+          res.status(500).json({ status: "failed" });
+        });
+    } else {
+      res.status(401).json({ status: "unauthorized" });
+      return {};
+    }
   }
 
   public getAllQuantity(req: express.Request, res: express.Response) {
-    return this.ordersService
-      .getAllQuantity(req.params.id, req.query.dateOfQuery)
-      .then((result: any) => {
-        res.status(200).json(result);
-      })
-      .catch((err: express.Errback) => {
-        res.status(500).json({ status: "failed" });
-      });
+    if (req.user !== undefined && req.user.id === parseInt(req.params.id, 10)) {
+      return this.ordersService
+        .getAllQuantity(req.params.id, req.query.dateOfQuery)
+        .then((result: any) => {
+          res.status(200).json(result);
+        })
+        .catch((err: express.Errback) => {
+          res.status(500).json({ status: "failed" });
+        });
+    } else {
+      res.status(401).json({ status: "unauthorized" });
+      return {};
+    }
   }
 
   public update(req: express.Request, res: express.Response) {
-    return this.ordersService
-      .update(req.params.id, req.body)
-      .then((result: any) => {
-        res.status(201).json(result);
-      })
-      .catch((err: express.Errback) => {
-        res.status(500).json({ status: "failed" });
-      });
+    if (req.user !== undefined && req.user.id === parseInt(req.params.id, 10)) {
+      return this.ordersService
+        .update(req.params.id, req.body)
+        .then((result: any) => {
+          res.status(201).json(result);
+        })
+        .catch((err: express.Errback) => {
+          res.status(500).json({ status: "failed" });
+        });
+    } else {
+      res.status(401).json({ status: "unauthorized" });
+      return {};
+    }
   }
 }
