@@ -63,19 +63,66 @@ export default class PricesService {
   }
 
   // ****TODO***** //
-  public update(id: number, data: any) {
-    return this.knex("items")
-      .where("items.id", id)
-      .update({
-        currentPrice: data.currentPrice,
-        isActive: data.isActive,
-        isSpecial: data.isSpecial,
-        itemDescription: data.itemDescription,
-        itemName: data.itemName,
-        itemPhoto: data.itemPhoto,
-        itemStock: data.itemStock,
-        minimumPrice: data.minimumPrice
+  public add(id: number, data: any) {
+    return this.knex("orders")
+      .insert({
+        isPaid: false,
+        status: data.status,
+        table: data.table,
+        users_id: id
       })
-      .returning("id");
+      .returning("id")
+      .then((orderId: Knex.QueryCallback) => {
+        return Promise.all(
+          data.item.map((item: object, i: number) => {
+            return this.knex("orders_items").insert({
+              garnish: data.item[i].garnish,
+              ice: data.item[i].ice,
+              items_id: data.item[i].items_id,
+              orders_id: orderId[0],
+              purchasePrice: data.item[i].purchasePrice,
+              sweetness: data.item[i].sweetness
+            });
+          })
+        )
+          .then(() => {
+            return this.knex("orders")
+              .join("orders_items", "orders.id", "=", "orders_items.orders_id")
+              .join("items", "items.id", "=", "orders_items.items_id")
+              .select("items.id")
+              .where("orders.id", orderId[0]);
+          })
+          .then(orderListId => {
+            return Promise.all(
+              orderListId.map((order: object, j: number) => {
+                return this.knex("items")
+                  .where("id", orderListId[j].id)
+                  .increment("currentPrice", 1)
+                  .select("categories_id");
+              })
+            ).then(() => {
+              return Promise.all(
+                orderListId.map((order: object, i: number) => {
+                  return this.knex("items")
+                    .select("categories_id")
+                    .where("id", orderListId[i].id)
+                    .then(catIdList => {
+                      catIdList.map((cat: object, j: number) => {
+                        // return this.knex("items")
+                        // .whereNot("id", orderListId[j].id)
+                        // .decrement("currentPrice", 1);
+                        console.log(catIdList[0].categories_id);
+                      });
+                      return catIdList[0];
+                    });
+                })
+              );
+            });
+          });
+      });
+  }
+
+  public update(data: any) {
+    return data;
   }
 }

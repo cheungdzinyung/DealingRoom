@@ -13,9 +13,9 @@ export default class PricesRouter {
     const router = express.Router();
 
     router.get("/", this.getAll.bind(this));
- 
-    router.put("/:id", this.update.bind(this));
-    
+
+    router.post("/:id", this.add.bind(this));
+
     return router;
   }
 
@@ -36,20 +36,19 @@ export default class PricesRouter {
           res.status(200).json(result);
         })
         .catch((err: express.Errback) => {
-
           res.status(500).json({ status: "failed" });
         });
     }
   }
 
-  public update(req: express.Request, res: express.Response) {
+  public add(req: express.Request, res: express.Response) {
     return this.pricesService
-    .update(req.params.id, req.body)
-    .then((result: any) => {
-      res.status(200).json(result);
-    })
-    .catch((err: express.Errback) => {
-      res.status(500).json({ status: "failed" });
-    });
+      .add(req.params.id, req.body)
+      .then((result: any) => {
+        res.status(200).json(result);
+      })
+      .catch((err: express.Errback) => {
+        res.status(500).json({ status: "failed" });
+      });
   }
 }

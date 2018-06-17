@@ -67,4 +67,8 @@ export default class UsersService {
           .select("displayName", "userPhoto");
       });
   }
+
+  public findByEmail(email: string) {
+    return this.knex("users").where("username", email);
+  }
 }
