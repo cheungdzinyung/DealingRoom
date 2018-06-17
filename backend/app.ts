@@ -29,7 +29,7 @@ const ordersService = new OrdersService(knex);
 const pricesService = new PricesService(knex);
 
 const jwtAuth = jwtStrategy(usersService);
-const apiRouter = new ApiRouter(jwtAuth, usersService, itemsService, ordersService, pricesService);
+const apiRouter = new ApiRouter(jwtAuth, usersService, itemsService, ordersService, pricesService, knex);
 
 // const usersRouter = new UsersRouter(usersService);
 // const itemsRouter = new ItemsRouter(itemsService);

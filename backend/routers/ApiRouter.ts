@@ -1,4 +1,5 @@
 import * as express from "express";
+import * as Knex from "knex";
 
 import AuthRouter from "./AuthRouter";
 
@@ -20,6 +21,7 @@ export default class ApiRouter {
   private itemsService: ItemsService;
   private ordersService: OrdersService;
   private pricesService: PricesService;
+  private knex: Knex;
 
 
   constructor(
@@ -28,19 +30,19 @@ export default class ApiRouter {
     itemsService: ItemsService,
     ordersService: OrdersService,
     pricesService: PricesService,
-
+    knex: Knex
   ) {
     this.jwtAuth = jwtAuth;
     this.usersService = usersService;
     this.itemsService = itemsService;
     this.ordersService = ordersService;
     this.pricesService = pricesService;
-
+    this.knex = knex
   }
 
   public getRouter() {
     const router = express.Router();
-    const authRouter = new AuthRouter();
+    const authRouter = new AuthRouter(this.knex);
     const usersRouter = new UsersRouter(this.usersService);
     const itemsRouter = new ItemsRouter(this.itemsService);
     const ordersRouter = new OrdersRouter(this.ordersService);
