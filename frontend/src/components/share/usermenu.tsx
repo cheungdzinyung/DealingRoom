@@ -4,11 +4,11 @@ import * as React from "react";
 import { withRouter } from "react-router";
 
 // Importing static assets
-import creditCard from "../../icons/credit-card-bare.svg";
-import menu from "../../icons/menu-bare.svg";
-import receipt from "../../icons/orders-bare.svg";
-import wrench from "../../icons/setting-bare.svg";
-import icon from "../../images/profiles/judith-test.png";
+import creditCard from "../icons/credit-card-bare.svg";
+import menu from "../icons/menu-bare.svg";
+import receipt from "../icons/orders-bare.svg";
+import wrench from "../icons/setting-bare.svg";
+import icon from "../images/profiles/judith-test.png";
 
 // import redux and friends
 import { connect } from "react-redux";

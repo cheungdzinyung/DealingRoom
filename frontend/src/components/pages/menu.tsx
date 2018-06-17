@@ -22,11 +22,11 @@ import { percentageChange } from "../../util/utility"
 import { chartOption } from "../../fakedata";
 
 // Importing static assets
-import down from "../../icons/down.svg";
-import up from "../../icons/up.svg";
-import beer from "../../images/categories/beer.jpg";
-import cocktail from "../../images/categories/cocktails.jpg";
-import whiskie from "../../images/categories/whiskie.jpg";
+import down from "../icons/down.svg";
+import up from "../icons/up.svg";
+import beer from "../images/categories/beer.jpg";
+import cocktail from "../images/categories/cocktails.jpg";
+import whiskie from "../images/categories/whiskie.jpg";
 
 import { IRequestItem } from "../../modules";
 

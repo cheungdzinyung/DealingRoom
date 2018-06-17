@@ -6,7 +6,7 @@ import * as React from "react";
 import Usermenu from "../share/usermenu";
 
 // Importing static assets
-// import headerImg from "../../icons/credit.svg";
+// import headerImg from "../icons/credit.svg";
 
 interface IProfileProps {
   paymentMethods: string[];

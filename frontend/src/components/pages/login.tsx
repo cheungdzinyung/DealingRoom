@@ -3,9 +3,9 @@ import * as History from "history";
 import * as React from "react";
 
 // Importing static assets
-import facebook from "../../icons/facebookSignup.svg";
-import google from "../../icons/googleSignup.svg";
-import Key from "../../icons/key.svg";
+import facebook from "../icons/facebookSignup.svg";
+import google from "../icons/googleSignup.svg";
+import Key from "../icons/key.svg";
 
 interface ILoginProps {
   history: History.History;

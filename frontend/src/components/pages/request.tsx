@@ -19,8 +19,8 @@ import OrderBanner from "../share/orderbanner";
 import Usermenu from "../share/usermenu";
 
 // Importing static assets
-// import checkIcon from "../../icons/check.svg";
-import headerImg from "../../icons/orders.svg";
+// import checkIcon from "../icons/check.svg";
+import headerImg from "../icons/orders.svg";
 
 // import { IPureItemLine } from "../../modules";
 // import { IPureOrder } from "../../modules";
