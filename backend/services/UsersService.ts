@@ -33,7 +33,9 @@ export default class UsersService {
       })
       .returning("id")
       .then(async (id: Knex.QueryCallback) => {
-        await this.saveUpdateUserImage(id[0], file);
+        if (file !== undefined) {
+          await this.saveUpdateUserImage(id[0], file);
+        }
         return this.knex("users")
           .where("id", id[0])
           .select("id as user_id", "displayName", "userPhoto");
@@ -61,7 +63,9 @@ export default class UsersService {
       })
       .returning("id")
       .then(async (userId: Knex.QueryCallback) => {
-        await this.saveUpdateUserImage(id[0], file);
+        if (file !== undefined) {
+          await this.saveUpdateUserImage(id[0], file);
+        }
         return this.knex("users")
           .where("id", userId[0])
           .select("displayName", "userPhoto");
