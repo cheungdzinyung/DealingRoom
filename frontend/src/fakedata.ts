@@ -82,7 +82,7 @@ export const menuItems: IPureCategoryWithItem[] = [
         }
       },
       {
-        categoryName: "Not Gin",
+        categoryName: "Gin",
         currentPrice: 150.00,
         isActive: true,
         isSpecial: false,

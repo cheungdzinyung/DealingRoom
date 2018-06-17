@@ -17,7 +17,7 @@ export default class Login extends React.Component<ILoginProps> {
   }
 
   public toProfile = () => {
-    this.props.history.push("/menu");
+    this.props.history.push("/initialize");
   };
 
   public render() {
