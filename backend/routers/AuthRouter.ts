@@ -19,21 +19,17 @@ export default class AuthRouter {
   }
 
   public async localLogin(req: express.Request, res: express.Response) {
-    console.log(req.body);
-    console.log(req.body.email);
-    console.log(req.body.password);
     if (req.body.email && req.body.password) {
       const email = req.body.email;
       const password = req.body.password;
       const userId = await this.knex("users")
-        .select("id")
+        .select("id", "username")
         .where("username", email)
         .where("password", password);
-      console.log(JSON.stringify(userId));
-      console.log(typeof userId);
       if (userId.length >= 1) {
         const payload = {
-          id: userId[0].id
+          id: userId[0].id,
+          email: userId[0].username
         };
         const token = jwtSimple.encode(payload, config.jwtSecret);
         res.json({

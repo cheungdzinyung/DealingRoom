@@ -46,7 +46,7 @@ export default class UsersService {
   public get(req: number) {
     return this.knex("users")
       .where({ id: req, isActive: true })
-      .select("username", "password", "displayName", "userPhoto", "role");
+      .select("id as users_id", "username", "password", "displayName", "userPhoto", "role");
   }
 
   // Working 10/06/18
@@ -70,9 +70,5 @@ export default class UsersService {
           .where("id", userId[0])
           .select("displayName", "userPhoto");
       });
-  }
-
-  public findByEmail(email: string) {
-    return this.knex("users").where("username", email);
   }
 }
