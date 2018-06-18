@@ -5,7 +5,7 @@ import { IItemData } from "../interfaces";
 import ItemsService from "../services/ItemsService";
 
 const storage = multer.memoryStorage();
-const upload = multer({ dest: "../../frontend/public/img/", storage });
+const upload = multer({ dest: "../storage/items", storage });
 
 export default class ItemsRouter {
   private itemsService: ItemsService;

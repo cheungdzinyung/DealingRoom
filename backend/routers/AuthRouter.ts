@@ -2,7 +2,10 @@ import axios from "axios";
 import * as express from "express";
 import * as jwtSimple from "jwt-simple";
 import * as Knex from "knex";
+import * as multer from "multer";
 import config from "../config";
+
+const upload = multer();
 
 export default class AuthRouter {
   private knex: Knex;
@@ -14,7 +17,7 @@ export default class AuthRouter {
   public getRouter() {
     const router = express.Router();
     router.post("/google", this.loginWithGoogle.bind(this));
-    router.post("/login", this.localLogin.bind(this));
+    router.post("/login", upload.single(), this.localLogin.bind(this));
     return router;
   }
 
