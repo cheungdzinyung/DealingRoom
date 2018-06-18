@@ -7,6 +7,10 @@
   align-items: center;
 }
 
+.rd-corner{
+  border-radius: 5px;
+}
+
 #up-triangle-path,
 #up-triangle-group {
   fill: $up;

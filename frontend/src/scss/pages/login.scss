@@ -1,73 +1,124 @@
 .login-container {
+    padding: 5%;
     text-align: center;
     width: 100vw;
     height: 100vh;
-    background-image: linear-gradient($bgc-tinted, $bgc-tinted), url("../components/images/landingpage.jpg");
+    background-image: linear-gradient($bgc-shaded, $bgc-shaded), url("../components/images/landingpage.jpg");
     background-size: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-attachment: fixed;
     position: relative;
-    .login-grid {
-        position: absolute;
-        top: 55%;
-        left: 7.5%;
-        width: 70%;
-        height: 22%;
+    display: grid;
+    grid-template-rows: 50% 50%;
+    .login-top {
+        width: 100%;
         display: grid;
-        grid-template-columns: repeat(5, 20%);
-        grid-template-rows: repeat(3, 1fr);
-        grid-template-areas: "un un un un submit" "pw pw pw pw submit" "so so so so so";
-        grid-gap: 5%;
-        input {
-            border: 0;
-            border-radius: 5px;
-            padding: 5%;
+        grid-template-rows: 30% 30% 25% 1fr;
+        grid-template-columns: 100%;
+        grid-template-areas: "..." "logo" "social" "divider";
+        .omg {
+            grid-area: uh
+        }
+        .logo-container {
+            grid-area: logo;
             width: 100%;
-            font-size: 120%;
-            background-color: rgba(141, 141, 141, 0.95);
-            color: #E9DBCC;
-        }
-        div {
-            border-radius: 5px;
-        }
-        button {
-            border: 0;
-            border-radius: 5px;
-        }
-        .username {
-            grid-area: un;
-        }
-        .password {
-            grid-area: pw;
-        }
-        .login-button-hp {
-            grid-area: submit;
-            background-color: $theme-orange;
-        }
-        .social-login{
-            grid-area: so;
             display: flex;
-            justify-content: space-between;
-            height: 100%;
-            .google{
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .logo{
+                width: 15%;
+            }
+            .logo-name{
+                font-size: 1.3rem;
+
+            }
+        }
+        .social-login {
+            grid-area: social;
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            .banner {
+                width: 40%;
+                padding: 1%;
+                .banner-img {
+                    width: 80%;
+                }
+            }
+            .facebook {
+                background-color: #515CB0;
+            }
+            .google {
                 background-color: white;
             }
-            .facebook{
-                background-color: #4267b2;
-            }
-            .social-button{
-                width: 48%;
-                height: 100%;
-                display: flex;
-                justify-content: space-around;
-                align-items: center;  
-                .social-img{
-                    width: 100%;
-                    margin: 0;
-                }  
+        }
+        .divider {
+            grid-area: divider;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            .divider-break {
+                border: 1px solid #828282;
+                display: inline-block;
+                width: 35%;
             }
         }
-
+    }
+    .login-bottom {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .login-card {
+            background-color: $login-form-bgc;
+            width: 100%;
+            height: 95%;
+            display: grid;
+            grid-template-rows: 15% 60% 1fr;
+            .status-switch {
+                display: flex;
+                justify-content: center;
+                align-items: center; // height: 20%;
+                .status {
+                    width: 100%;
+                    .status-text {
+                        font-size: 1rem;
+                        letter-spacing: .1rem;
+                    }
+                }
+            }
+            .form {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                .form-input {
+                    margin-top: 3%;
+                    width: 100%;
+                    background-color: $login-form-input;
+                    color: $font-color-light;
+                    padding: 5%;
+                    font-size: 1.125rem;
+                }
+            }
+            .login-button {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                .submit {
+                    width: 100%;
+                    background-color: $submit-bgc;
+                    padding: 5%;
+                    .submit-text {
+                        color: $submit-text;
+                    }
+                }
+            }
+        }
     }
 }

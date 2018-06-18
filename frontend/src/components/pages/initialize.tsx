@@ -4,9 +4,9 @@ import * as React from "react";
 // redux
 import { connect } from "react-redux";
 import { IRootState } from "../reducers/index";
-// import { getEntireMenu } from "../actions/actions_orders";
-import { getEntireMenu, getOrdersByUserid } from "../actions/actions_orders";
-import { getUserProfileByUserid } from "../actions/actions_user";
+import { getEntireMenu } from "../actions/actions_orders";
+// import { getEntireMenu, getOrdersByUserid } from "../actions/actions_orders";
+// import { getUserProfileByUserid } from "../actions/actions_user";
 
 // for redir
 import * as History from "history";
@@ -19,10 +19,10 @@ interface IInitializeProps {
     menuReady: boolean,
 
     userProfile: any,
-    getUserProfileByUserid: (userID: number) => void,
+    // getUserProfileByUserid: (userID: number) => void,
     userProfileReady: boolean,
     
-    getOrdersByUserid: (userID: number) => void,
+    // getOrdersByUserid: (userID: number) => void,
     orderListReady: boolean,
 }
 
@@ -39,9 +39,9 @@ class PureInitialize extends React.Component<IInitializeProps, {}> {
         // fetch entireMenu , set categories[]
         this.props.getEntireMenu();
         // fetch user data
-        this.props.getUserProfileByUserid(this.props.userProfile.user_id);
+        // this.props.getUserProfileByUserid(this.props.userProfile.user_id);
         // fetch ordersList (or not?)
-        this.props.getOrdersByUserid(this.props.userProfile.user_id);
+        // this.props.getOrdersByUserid(this.props.userProfile.user_id);
     }
 
     public componentDidUpdate() {
@@ -71,12 +71,12 @@ const mapDispatchToProps = (dispatch: any) => {
         getEntireMenu: () => {
             dispatch(getEntireMenu());
         },
-        getUserProfileByUserid: (userID: number) => {
-            dispatch(getUserProfileByUserid(userID));
-        },
-        getOrdersByUserid: (userID: number) => {
-            dispatch(getOrdersByUserid(userID));
-        },
+        // getUserProfileByUserid: (userID: number) => {
+        //     dispatch(getUserProfileByUserid(userID));
+        // },
+        // getOrdersByUserid: (userID: number) => {
+        //     dispatch(getOrdersByUserid(userID));
+        // },
     }
 }
 
