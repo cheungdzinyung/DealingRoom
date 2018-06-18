@@ -23,7 +23,6 @@ export default class ApiRouter {
   private pricesService: PricesService;
   private knex: Knex;
 
-
   constructor(
     jwtAuth: any,
     usersService: UsersService,
@@ -37,7 +36,7 @@ export default class ApiRouter {
     this.itemsService = itemsService;
     this.ordersService = ordersService;
     this.pricesService = pricesService;
-    this.knex = knex
+    this.knex = knex;
   }
 
   public getRouter() {
@@ -51,9 +50,9 @@ export default class ApiRouter {
     router.use("/auth", authRouter.getRouter());
     // remove comment on line 18 and 31, and add the following in between "/users" and usersRouter.router() for authentication:
     // this.jwtAuth.authenticate(),
-    router.use("/users", this.jwtAuth.authenticate(), usersRouter.router()); 
-    router.use("/items", itemsRouter.router());         
-    router.use("/orders", ordersRouter.router());
+    router.use("/users", this.jwtAuth.authenticate(), usersRouter.router());
+    router.use("/items", itemsRouter.router());
+    router.use("/orders", this.jwtAuth.authenticate(), ordersRouter.router());
     router.use("/prices", pricesRouter.router());
 
     return router;

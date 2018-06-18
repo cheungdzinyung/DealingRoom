@@ -74,52 +74,60 @@ export default class PricesService {
       .returning("id")
       .then((orderId: Knex.QueryCallback) => {
         return Promise.all(
-          data.item.map((item: object, i: number) => {
-            return this.knex("orders_items").insert({
-              garnish: data.item[i].garnish,
-              ice: data.item[i].ice,
-              items_id: data.item[i].items_id,
-              orders_id: orderId[0],
-              purchasePrice: data.item[i].purchasePrice,
-              sweetness: data.item[i].sweetness
-            });
-          })
-        )
-          .then(() => {
-            return this.knex("orders")
-              .join("orders_items", "orders.id", "=", "orders_items.orders_id")
-              .join("items", "items.id", "=", "orders_items.items_id")
-              .select("items.id")
-              .where("orders.id", orderId[0]);
-          })
-          .then(orderListId => {
-            return Promise.all(
-              orderListId.map((order: object, j: number) => {
-                return this.knex("items")
-                  .where("id", orderListId[j].id)
-                  .increment("currentPrice", 1)
-                  .select("categories_id");
+          data.item.map((order: object, i: number) => {
+            return this.knex("orders_items")
+              .insert({
+                garnish: data.item[i].garnish,
+                ice: data.item[i].ice,
+                items_id: data.item[i].items_id,
+                orders_id: orderId[0],
+                purchasePrice: data.item[i].purchasePrice,
+                sweetness: data.item[i].sweetness
               })
-            ).then(() => {
-              return Promise.all(
-                orderListId.map((order: object, i: number) => {
+              .returning("id");
+          })
+        ).then((orderItemId: any) => {
+          return Promise.all(
+            orderItemId.map((item: object, j: number) => {
+              return this.knex("orders_items")
+                .join("items", "items.id", "=", "orders_items.items_id")
+                .where("orders_items.id", orderItemId[j][0])
+                .select("items.id as items_id")
+                .then(itemIdIncrease => {
                   return this.knex("items")
-                    .select("categories_id")
-                    .where("id", orderListId[i].id)
-                    .then(catIdList => {
-                      catIdList.map((cat: object, j: number) => {
-                        return this.knex("items")
-                        .whereNot("id", orderListId[j].id)
-                        .decrement("currentPrice", 1);
-                        // console.log(catIdList[0].categories_id);
-                      });
-                      return catIdList[0];
+                    .where("id", itemIdIncrease[0].items_id)
+                    .increment("currentPrice", 1)
+                    .returning("id")
+                    .then(ItemIdDecrease => {
+                      return this.knex("items")
+                        .where("id", ItemIdDecrease[0])
+                        .select("categories_id")
+                        .then(result => {
+                          return this.knex("items")
+                            .where("categories_id", result[0].categories_id)
+                            .whereNot("id", itemIdIncrease[0].items_id)
+                            .decrement("currentPrice", 1);
+                        });
                     });
-                })
-              );
-            });
-          });
+                });
+            })
+          );
+        });
       });
+
+    // .then(orderListId => {
+    //   return Promise.all(
+    //     orderListId
+    //       .map((order: object, j: number) => {
+    //         return this.knex("items")
+    //           .where("id", orderListId[j].id)
+    //           .increment("currentPrice", 1)
+    //           .select("categories_id");
+    //       })
+    //       .then((result: any) => {
+    //         return result;
+    //       })
+    //   );
   }
 
   public update(data: any) {

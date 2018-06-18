@@ -17,7 +17,7 @@ export default class UsersRouter {
     router.get("/quantity/:id", this.getAllQuantity.bind(this));
     router.get("/user/:id", this.getByUserId.bind(this));
     router.get("/categories/:id", this.getAllQuantity.bind(this));
-    router.get("/:id", this.getByOrderId.bind(this));
+    // router.get("/:id", this.getByOrderId.bind(this));
 
     router.put("/:id", this.update.bind(this));
 
@@ -40,16 +40,16 @@ export default class UsersRouter {
     }
   }
 
-  public getByOrderId(req: express.Request, res: express.Response) {
-    return this.ordersService
-      .getByOrderId(req.params.id)
-      .then((result: any) => {
-        res.status(200).json(result);
-      })
-      .catch((err: express.Errback) => {
-        res.status(500).json({ status: "failed" });
-      });
-  }
+  // public getByOrderId(req: express.Request, res: express.Response) {
+  //   return this.ordersService
+  //     .getByOrderId(req.params.id)
+  //     .then((result: any) => {
+  //       res.status(200).json(result);
+  //     })
+  //     .catch((err: express.Errback) => {
+  //       res.status(500).json({ status: "failed" });
+  //     });
+  // }
 
   public getByUserId(req: express.Request, res: express.Response) {
     if (req.user !== undefined && req.user.id === parseInt(req.params.id, 10)) {

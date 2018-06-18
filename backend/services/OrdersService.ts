@@ -41,52 +41,52 @@ export default class OrdersService {
   }
 
   // Working 07/06/18
-  public getByOrderId(id: number) {
-    return this.knex("users")
-      .join("orders", "users.id", "=", "users_id")
-      .where("orders.id", id)
-      .select(
-        "users.id as usersId",
-        "users.username",
-        "users.displayName",
-        "orders.id",
-        "orders.table",
-        "orders.status",
-        "orders.isPaid",
-        "orders.created_at as orderingTime"
-      )
-      .then((order: Knex.QueryCallback) => {
-        return this.knex("orders_items")
-          .join("orders", "orders.id", "=", "orders_items.orders_id")
-          .join("items", "items.id", "=", "orders_items.items_id")
-          .select(
-            "items.id as item_id",
-            "items.itemName as itemName",
-            "orders_items.purchasePrice as purchasePrice",
-            "orders_items.ice as ice",
-            "orders_items.sweetness as sweetness",
-            "orders_items.garnish as garnish"
-          )
-          .where("orders.id", id)
-          .then((orderItemsList: Knex.QueryCallback) => {
-            const entireOrder = [
-              {
-                user_id: order[0].usersId,
-                // tslint:disable-next-line:object-literal-sort-keys
-                userName: order[0].username,
-                displayName: order[0].displayName,
-                orders_id: order[0].id,
-                table: order[0].table,
-                status: order[0].status,
-                isPaid: order[0].isPaid,
-                orderingTime: order[0].orderingTime,
-                orderItems: orderItemsList
-              }
-            ];
-            return entireOrder;
-          });
-      });
-  }
+  // public getByOrderId(id: number) {
+  //   return this.knex("users")
+  //     .join("orders", "users.id", "=", "users_id")
+  //     .where("orders.id", id)
+  //     .select(
+  //       "users.id as usersId",
+  //       "users.username",
+  //       "users.displayName",
+  //       "orders.id",
+  //       "orders.table",
+  //       "orders.status",
+  //       "orders.isPaid",
+  //       "orders.created_at as orderingTime"
+  //     )
+  //     .then((order: Knex.QueryCallback) => {
+  //       return this.knex("orders_items")
+  //         .join("orders", "orders.id", "=", "orders_items.orders_id")
+  //         .join("items", "items.id", "=", "orders_items.items_id")
+  //         .select(
+  //           "items.id as item_id",
+  //           "items.itemName as itemName",
+  //           "orders_items.purchasePrice as purchasePrice",
+  //           "orders_items.ice as ice",
+  //           "orders_items.sweetness as sweetness",
+  //           "orders_items.garnish as garnish"
+  //         )
+  //         .where("orders.id", id)
+  //         .then((orderItemsList: Knex.QueryCallback) => {
+  //           const entireOrder = [
+  //             {
+  //               user_id: order[0].usersId,
+  //               // tslint:disable-next-line:object-literal-sort-keys
+  //               userName: order[0].username,
+  //               displayName: order[0].displayName,
+  //               orders_id: order[0].id,
+  //               table: order[0].table,
+  //               status: order[0].status,
+  //               isPaid: order[0].isPaid,
+  //               orderingTime: order[0].orderingTime,
+  //               orderItems: orderItemsList
+  //             }
+  //           ];
+  //           return entireOrder;
+  //         });
+  //     });
+  // }
 
   // Working 13/06/18
   public getByUserId(id: number) {

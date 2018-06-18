@@ -12,9 +12,9 @@ export default class PricesRouter {
   public router() {
     const router = express.Router();
 
-    router.get("/", this.getAll.bind(this));
-
     router.post("/:id", this.add.bind(this));
+
+    router.get("/", this.getAll.bind(this));
 
     return router;
   }
