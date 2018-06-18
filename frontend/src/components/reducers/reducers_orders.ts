@@ -8,26 +8,73 @@ import {
     CONFIRM_ORDER_FAIL,
     GET_ORDERS_BY_USERID_SUCCESS,
     GET_ORDERS_BY_USERID_FAIL,
+    SOCKET_CONNECT_SUCCESS,
+    SOCKET_UPDATE_ITEM_PRICE,
 } from "../actions/actions_orders";
 
 import {
     IRequestItem,
 } from "../../modules";
 
+export interface IPriceMapping {
+    items_id: number,
+    currentPrice: string, // string???
+    itemStock: number,
+    fixed: boolean,
+}
+
+// export interface IPriceMappingAll {
+//     beer: {
+//         item_id_1: {
+//             "items_id": 1,
+//             "itemStock": 100,
+//             "currentPrice": "60.00",
+//         },
+//         item_id_2: {
+//             "items_id": 2,
+//             "itemStock": 100,
+//             "currentPrice": "60.00",
+//         },
+//     },
+//     red: {
+//         item_id_13: {
+//             "items_id": 13,
+//             "itemStock": 100,
+//             "currentPrice": "60.00",
+//         },
+//         item_id_14: {
+//             "items_id": 14,
+//             "itemStock": 100,
+//             "currentPrice": "60.00",
+//         },
+//     },
+// }
+
 export interface IOrdersState {
+    // socket.io on load? isAuth?
+    socketID: any,
+    socketData: any,
+    // init
+    menuReady: boolean,
+    orderListReady: boolean,
     entireMenu: string[],
     categories: string[],
+    priceMapping: {},
+    // orders
     ordersList: any,
     unpaidOrders: number,
     currentOrder: IRequestItem[],
     currentTotal: number,
-    menuReady: boolean,
-    orderListReady: boolean,
 }
 
 const initialState: IOrdersState = {
+    socketID: "",
+    socketData: {},
+    menuReady: false,
+    orderListReady: false,
     entireMenu: [],
     categories: [],
+    priceMapping: {},
     ordersList: {
         "users_id": 0,
         "username": "John Doe",
@@ -53,8 +100,6 @@ const initialState: IOrdersState = {
     unpaidOrders: 0,
     currentOrder: [],
     currentTotal: 0,
-    menuReady: false,
-    orderListReady: false,
 }
 
 export const ordersReducer = (state: IOrdersState = initialState, action: OrdersActions): IOrdersState => {
@@ -103,6 +148,20 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
         case GET_ORDERS_BY_USERID_FAIL: {
             // get fail, F5?
             return state;
+        }
+        case SOCKET_CONNECT_SUCCESS: {
+            return { ... state, socketID: action.socketID};
+        }
+        case SOCKET_UPDATE_ITEM_PRICE: {
+            const category = action.socketData.category;
+            const categoryItemsDetails = action.socketData.items;
+            const newObj = {};
+            categoryItemsDetails.forEach((e:any) => {
+                newObj[`items_id_${e.items_id}`] = e;
+            });
+            const newPriceMapping = state.priceMapping;
+            newPriceMapping[category] = newObj;
+            return { ...state, socketData: action.socketData, priceMapping: newPriceMapping};
         }
         default: {
             return state;
