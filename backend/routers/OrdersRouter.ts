@@ -25,7 +25,7 @@ export default class UsersRouter {
   }
 
   public add(req: express.Request, res: express.Response) {
-    if (req.user !== undefined && req.user.id === parseInt(req.params.id, 10)) {
+    // if (req.user !== undefined && req.user.id === parseInt(req.params.id, 10)) {
       return this.ordersService
         .add(req.params.id, req.body)
         .then((result: any) => {
@@ -34,10 +34,10 @@ export default class UsersRouter {
         .catch((err: express.Errback) => {
           res.status(500).json({ status: "failed" });
         });
-    } else {
-      res.status(401).json({ status: "unauthorized" });
-      return {};
-    }
+    // } else {
+    //   res.status(401).json({ status: "unauthorized" });
+    //   return {};
+    // }
   }
 
   public getByOrderId(req: express.Request, res: express.Response) {
@@ -52,7 +52,7 @@ export default class UsersRouter {
   }
 
   public getByUserId(req: express.Request, res: express.Response) {
-    if (req.user !== undefined && req.user.id === parseInt(req.params.id, 10)) {
+    // if (req.user !== undefined && req.user.id === parseInt(req.params.id, 10)) {
       return this.ordersService
         .getByUserId(req.params.id)
         .then((result: any) => {
@@ -61,10 +61,10 @@ export default class UsersRouter {
         .catch((err: express.Errback) => {
           res.status(500).json({ status: "failed" });
         });
-    } else {
-      res.status(401).json({ status: "unauthorized" });
-      return {};
-    }
+    // } else {
+    //   res.status(401).json({ status: "unauthorized" });
+    //   return {};
+    // }
   }
 
   public getAllPrice(req: express.Request, res: express.Response) {
