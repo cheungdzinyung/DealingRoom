@@ -38,7 +38,7 @@ export default class UsersRouter {
   }
 
   public get(req: express.Request, res: express.Response) {
-    if (req.user !== undefined && req.user.id === parseInt(req.params.id, 10)) {
+    // if (req.user !== undefined && req.user.id === parseInt(req.params.id, 10)) {
       return this.usersService
         .get(req.params.id)
         .then((result: IUserData) => {
@@ -47,14 +47,14 @@ export default class UsersRouter {
         .catch((err: express.Errback) => {
           res.status(500).json({ status: "failed" });
         });
-    } else {
-      res.status(401).json({ status: "unauthorized" });
-      return {};
-    }
+    // } else {
+    //   res.status(401).json({ status: "unauthorized" });
+    //   return {};
+    // }
   }
 
   public update(req: express.Request, res: express.Response) {
-    if (req.user !== undefined && req.user.id === parseInt(req.params.id, 10)) {
+    // if (req.user !== undefined && req.user.id === parseInt(req.params.id, 10)) {
       return this.usersService
         .update(req.params.id, req.body, req.file)
         .then((result: IUserData) => {
@@ -63,9 +63,9 @@ export default class UsersRouter {
         .catch((err: express.Errback) => {
           res.status(500).json({ status: "failed" });
         });
-    } else {
-      res.status(401).json({ status: "unauthorized" });
-      return {};
-    }
+    // } else {
+    //   res.status(401).json({ status: "unauthorized" });
+    //   return {};
+    // }
   }
 }
