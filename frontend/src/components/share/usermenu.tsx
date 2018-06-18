@@ -4,11 +4,11 @@ import * as React from "react";
 import { withRouter } from "react-router";
 
 // Importing static assets
-import creditCard from "../icons/credit-card-bare.svg";
-import menu from "../icons/menu-bare.svg";
-import receipt from "../icons/orders-bare.svg";
-import wrench from "../icons/setting-bare.svg";
-import icon from "../images/profiles/judith-test.png";
+import menu from "../icons/menu/menu.svg";
+import orders from "../icons/menu/bookmark.svg";
+import request from "../icons/menu/write.svg";
+import setting from "../icons/menu/gear.svg";
+import profile from "../icons/menu/user.svg";
 
 // import redux and friends
 import { connect } from "react-redux";
@@ -55,32 +55,27 @@ class PureUsermenu extends React.Component<IUserMenuProps, {}> {
     return (
       <div className="user-menu">
         <div className="menu-item" onClick={this.toProfile}>
-          <img className="user-icon" src={icon} alt="" />
-          {/* <small className="menu-name">Profile</small> */}
+        <img className="user-menu-icon" src={profile} alt="receipt icon" />
+          <span className="menu-name">Profile</span>
         </div>
         <div className="menu-item" onClick={this.toOrder}>
           <div className="count">
             <span className="count-digit">{this.props.unpaidOrders}</span>
           </div>
-          <img className="user-menu-icon" src={receipt} alt="receipt icon" />
-          {/* <small className="menu-name">Orders</small> */}
+          <img className="user-menu-icon" src={orders} alt="receipt icon" />
+          <span className="menu-name">Orders</span>
         </div>
         <div className="menu-item">
           <img className="user-menu-icon" src={menu} alt="menu icon" onClick={this.toMenu} />
-          {/* <small className="menu-name">Menu</small> */}
+          <span className="menu-name">Menu</span>
         </div>
-        {/* <div className="menu-item">
-          <img className="user-menu-icon" src={menu} alt="menu icon" onClick={this.toRequest} />
-          <small className="menu-name">Request</small>
-        </div> */}
-        {/* <div className="menu-item" onClick={this.toPayment}> */}
         <div className="menu-item" onClick={this.toRequest}>
-          <img className="user-menu-icon" src={creditCard} alt="credit card icon" />
-          {/* <small className="menu-name">Request</small> */}
+          <img className="user-menu-icon" src={request} alt="" />
+          <span className="menu-name">Request</span>
         </div>
         <div className="menu-item" onClick={this.toSetting}>
-          <img className="user-menu-icon" src={wrench} alt="wrench icon" />
-          {/* <small className="menu-name">Setting</small> */}
+          <img className="user-menu-icon" src={setting} alt="gear" />
+          <span className="menu-name">Setting</span>
         </div>
       </div>
     );
