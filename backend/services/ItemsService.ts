@@ -92,18 +92,19 @@ export default class UsersService {
         .groupBy("categoryName")
         .groupByRaw(`extract('hour' from "itemsLog".created_at)`)
         .then((result: any) => {
-          // return result;
-          return Promise.all(
-            result.map((order: object, i: number) => {
-              const obj = {
-                [result[i].categoryName]: result[i].avg
-              };
-              return obj;
-            })
-          );
+          return result;
+          // return Promise.all(
+          //   result.map((order: object, i: number) => {
+          //     const obj = {
+          //       [result[i].categoryName]: result[i].avg
+          //     };
+          //     return obj;
+          //   })
+          // );
         })
     );
   }
+  
   // testing with fluctuating prices ******TODO******
   public getAllInCatWithFluctuatingPrices(
     catName: string,

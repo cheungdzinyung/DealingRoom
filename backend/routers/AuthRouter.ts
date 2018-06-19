@@ -36,7 +36,8 @@ export default class AuthRouter {
         };
         const token = jwtSimple.encode(payload, config.jwtSecret);
         res.json({
-          token
+          token,
+          user_id: userId[0].id
         });
       } else {
         res.sendStatus(401);
