@@ -8,9 +8,9 @@ import { addToCurrentOrder } from "../actions/actions_orders";
 
 // Import UI elements
 import { Card, Collapse, Elevation } from "@blueprintjs/core";
-import Carousel from 'nuka-carousel';
 import { Line } from "react-chartjs-2";
 import Usermenu from "../share/usermenu";
+import MenuItem from "../ui/menuitem";
 
 // Importing interfaces
 // import { IPureCategoryWithItem } from "../../modules";
@@ -25,13 +25,14 @@ import { chartOption } from "../../fakedata";
 import down from "../icons/down.svg";
 import up from "../icons/up.svg";
 import beer from "../images/categories/beer.jpg";
-import cocktail from "../images/categories/cocktails.jpg";
-import whiskie from "../images/categories/whiskie.jpg";
+
 
 import { IRequestItem } from "../../modules";
 
 // socket
 import { store } from "../../store";
+import PageHeader from "../ui/pageheader";
+import CategoryFilter from "../ui/categoryfilter";
 
 interface IMenuProps {
   entireMenu: any,
@@ -45,7 +46,6 @@ interface IMenuState {
   searchBoxEntry: string,
   displayCategoryIndex: number,
   isItemDetailsOpen: { [key: string]: boolean },
-
   // chart data route?
   chartData: any;
 }
@@ -90,7 +90,7 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
   }
 
   // socket
-  public componentDidUpdate () {
+  public componentDidUpdate() {
     this.render();
   }
 
@@ -124,7 +124,7 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
   // search box
   public searching = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ searchBoxEntry: e.target.value.toLowerCase() });
-    store.dispatch({ type: 'POST/buy', data: {items: [{itemID: 1},{itemID:3}]} });
+    store.dispatch({ type: 'POST/buy', data: { items: [{ itemID: 1 }, { itemID: 3 }] } });
   }
 
   // add to cart
@@ -137,29 +137,22 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
     }
   }
 
-  // TODO: to fix the next and Previous of the carousel
 
+  // TODO: to fix the next and Previous of the carousel
   public render() {
     return (
       <div className="page-content-container">
-        {/* FIXME: the carousel won't load image when rendering other element first and coming back with it */}
+        <PageHeader header={"Menu"} subHeader={"Column A, or try column B"} />
+        {/* Hard coding for now */}
+        <CategoryFilter categories={["All", "Beer", "Cocktails", "Drinks"]} />
 
-        <Carousel initialSlideHeight={166} slideIndex={0} className="image-roll" wrapAround={true}>
-          <img src={beer} alt="" />
-          <img src={whiskie} alt="" />
-          <img src={cocktail} alt="" />
-          <img src={beer} alt="" />
-          <img src={whiskie} alt="" />
-          <img src={cocktail} alt="" />
-        </ Carousel>
-
-        {/* for test */}
-        <input type="button" className="btn" value="<<" onClick={this.previousCategory} />
-        <div />
-        <input type="button" className="btn" value=">>" onClick={this.nextCategory} />
-
+        {/* Category image */}
+        <div className="rd-corner menu-display">
+          <img src={beer} alt="" className="rd-corner display-img" />
+        </div>
+        {/* Search item bar */}
         <input
-          className="pt-input searchbar"
+          className="searchbar rd-corner"
           type="text"
           placeholder="Search input"
           dir="auto"
@@ -167,12 +160,25 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
           onChange={this.searching}
         />
 
+
+
+        <MenuItem {...{
+          key: 1,
+          itemName: "Long Island Ice Tea",
+          price: 96,
+          priceDelta: 3.45,
+          details: "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, which gives the drink the same amber hue as its namesake."
+        }} />
+
+
+
+
         {/* render display from all > cat > search */}
         {this.props.entireMenu.map((category: any, categoryIndex: any) => (
           category.items.map((item: any, itemIndex: any) => (
-            ( item.itemName.toLowerCase().search(this.state.searchBoxEntry) !== -1
-              &&  category.categoryName === this.props.categories[this.state.displayCategoryIndex]
-              &&  ( (Object.keys(this.props.priceMapping).length !== 0) ? (this.props.priceMapping[category.categoryName][`items_id_${item.items_id}`].itemStock > 0) : true)
+            (item.itemName.toLowerCase().search(this.state.searchBoxEntry) !== -1
+              && category.categoryName === this.props.categories[this.state.displayCategoryIndex]
+              && ((Object.keys(this.props.priceMapping).length !== 0) ? (this.props.priceMapping[category.categoryName][`items_id_${item.items_id}`].itemStock > 0) : true)
             ) ?
               <div className="item-container">
                 <Card
