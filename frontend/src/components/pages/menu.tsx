@@ -36,7 +36,7 @@ import { store } from "../../store";
 interface IMenuProps {
   entireMenu: any,
   categories: any[],
-  priceMapping: any,
+  // priceMapping: any,
   currentOrder: IRequestItem[],
   addToCurrentOrder: (itemid: string, itemName: string, currentPrice: number) => void,
 }
@@ -90,8 +90,11 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
   }
 
   // socket
-  public componentDidUpdate () {
-    this.render();
+  // public componentDidUpdate () {
+  //   this.render();
+  // }
+  public refreshPrice = () => {
+    store.dispatch({ type: 'POST/buy', data: {} });
   }
 
   // switch category
@@ -124,7 +127,6 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
   // search box
   public searching = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ searchBoxEntry: e.target.value.toLowerCase() });
-    store.dispatch({ type: 'POST/buy', data: {items: [{itemID: 1},{itemID:3}]} });
   }
 
   // add to cart
@@ -140,6 +142,7 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
   // TODO: to fix the next and Previous of the carousel
 
   public render() {
+    // alert("render");
     return (
       <div className="page-content-container">
         {/* FIXME: the carousel won't load image when rendering other element first and coming back with it */}
@@ -157,6 +160,8 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
         <input type="button" className="btn" value="<<" onClick={this.previousCategory} />
         <div />
         <input type="button" className="btn" value=">>" onClick={this.nextCategory} />
+        <div />
+        <input type="button" className="btn" value="F5" onClick={this.refreshPrice} />
 
         <input
           className="pt-input searchbar"
@@ -167,78 +172,83 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
           onChange={this.searching}
         />
 
-        {/* render display from all > cat > search */}
-        {this.props.entireMenu.map((category: any, categoryIndex: any) => (
-          category.items.map((item: any, itemIndex: any) => (
-            ( item.itemName.toLowerCase().search(this.state.searchBoxEntry) !== -1
-              &&  category.categoryName === this.props.categories[this.state.displayCategoryIndex]
-              &&  ( (Object.keys(this.props.priceMapping).length !== 0) ? (this.props.priceMapping[category.categoryName][`items_id_${item.items_id}`].itemStock > 0) : true)
-            ) ?
-              <div className="item-container">
-                <Card
-                  className={
-                    !this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())]
-                      ? "item-cards"
-                      : percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0]) > 0
+        {/* render display from all > by cat > by search > by stock */}
+        { /* mapping is here*/
+          this.props.entireMenu.map((category: any, categoryIndex: any) => (
+            category.items.map((item: any, itemIndex: any) => (
+              (
+                /* v match searching */
+                item.itemName.toLowerCase().search(this.state.searchBoxEntry) !== -1
+                /* v match selected category */
+            &&  category.categoryName === this.props.categories[this.state.displayCategoryIndex]
+                /* v check stock > 0 */
+            &&  item.itemStock > 0
+              ) ?
+                <div className="item-container">
+                  <Card
+                    className={
+                      !this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())]
+                        ? "item-cards"
+                        : percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0]) > 0
 
-                        ? "item-cards item-price-up"
-                        : "item-cards item-price-down"
-                  }
-                  interactive={true}
-                  elevation={Elevation.FOUR}
-                  onClick={this.isOpen.bind(this, category.categoryName.concat(itemIndex.toString()))}
-                  key={`Card_${category.categoryName.concat(itemIndex.toString())}`}
-                >
-                  <div className="pricetag"
-                    onClick={this.addToCurrentOrder}
-                    data-itemid={item.items_id}
-                    // data-currentPrice={item.currentPrice}
-                    data-itemname={item.itemName}>
-                    <span>{item.itemName}</span>
-                    {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] && <span>${(Object.keys(this.props.priceMapping).length !== 0) ? this.props.priceMapping[category.categoryName][`items_id_${item.items_id}`].currentPrice : item.currentPrice}</span>}
-                  </div>
+                          ? "item-cards item-price-up"
+                          : "item-cards item-price-down"
+                    }
+                    interactive={true}
+                    elevation={Elevation.FOUR}
+                    onClick={this.isOpen.bind(this, category.categoryName.concat(itemIndex.toString()))}
+                    key={`Card_${category.categoryName.concat(itemIndex.toString())}`}
+                  >
+                    <div className="pricetag"
+                      onClick={this.addToCurrentOrder}
+                      data-itemid={item.items_id}
+                      data-currentPrice={item.currentPrice}
+                      data-itemname={item.itemName}>
+                      <span>{item.itemName}</span>
+                      {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] && <span>${item.currentPrice}</span>}
+                    </div>
 
-                  {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] ? <div className="arrow-container">
-                    <img
-                      className="arrow"
-                      src={percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0]) > 0 ? up : down}
-                      alt=""
-                    />
-                  </div> : <span>${item.currentPrice}</span>}
-                </Card>
-                {/* ------------Seperate card and card details */}
-                <Collapse
-                  key={`Collapse_${category.categoryName.concat(itemIndex.toString())}`}
-                  className={
-                    "item-details" +
-                    " " +
-                    (this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] ? "item-detail-onflex" : "")
-                  }
-                  isOpen={this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())]}
-                >
-                  <div className="description">
-                    <p className="description-text">{item.itemDescription}</p>
-                  </div>
-                  <div className="chartVar">
-                    <div className="variables">
+                    {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] ? <div className="arrow-container">
                       <img
-                        className="detail-arrow"
+                        className="arrow"
                         src={percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0]) > 0 ? up : down}
                         alt=""
                       />
-                      <span className="detail-percentage">{percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0])}%</span>
+                    </div> : <span>${item.currentPrice}</span>}
+                  </Card>
+                  {/* ------------Seperate card and card details */}
+                  <Collapse
+                    key={`Collapse_${category.categoryName.concat(itemIndex.toString())}`}
+                    className={
+                      "item-details" +
+                      " " +
+                      (this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] ? "item-detail-onflex" : "")
+                    }
+                    isOpen={this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())]}
+                  >
+                    <div className="description">
+                      <p className="description-text">{item.itemDescription}</p>
                     </div>
+                    <div className="chartVar">
+                      <div className="variables">
+                        <img
+                          className="detail-arrow"
+                          src={percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0]) > 0 ? up : down}
+                          alt=""
+                        />
+                        <span className="detail-percentage">{percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0])}%</span>
+                      </div>
 
-                    <Line
-                      width={80}
-                      height={60}
-                      data={item.chartData}
-                      options={chartOption}
-                    />
-                  </div>
-                </Collapse>
-              </div> : <div />))
-        ))}
+                      <Line
+                        width={80}
+                        height={60}
+                        data={item.chartData}
+                        options={chartOption}
+                      />
+                    </div>
+                  </Collapse>
+                </div> : <div />))
+          ))}
 
         <Usermenu />
       </div>
@@ -250,7 +260,7 @@ const mapStateToProps = (state: IRootState) => {
   return {
     entireMenu: state.orders.entireMenu,
     categories: state.orders.categories,
-    priceMapping: state.orders.priceMapping,
+    // priceMapping: state.orders.priceMapping,
     currentOrder: state.orders.currentOrder,
   }
 }

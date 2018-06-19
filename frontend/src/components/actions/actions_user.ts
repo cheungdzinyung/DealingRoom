@@ -101,15 +101,15 @@ export function localLoginFail(): ILocalLoginFailAction {
 export function localLogin(username: string, password: string) {
     return (dispatch: Dispatch<ILocalLoginSuccessAction | ILocalLoginFailAction>) => {
         const loginPackage = {
-            username: "admin",
-            password,
+            username: "Andrew",
+            password: "123456",
             role: "customer",
             displayName: "admin"
         };
         //    vvv right now using sign up since login route is not ready
-        axios.post(`http://localhost:8080/api/users`, loginPackage)
+        axios.post(`http://localhost:8080/api/auth/login`, loginPackage)
             .then((res: any) => {
-                if (res.status === 201) {
+                if (res.status === 200) {
                     dispatch(localLoginSuccess(res.data[0]));
                 } else {
                     alert("status: " + res.status);

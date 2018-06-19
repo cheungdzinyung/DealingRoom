@@ -59,7 +59,7 @@ export interface IOrdersState {
     orderListReady: boolean,
     entireMenu: string[],
     categories: string[],
-    priceMapping: {},
+    // priceMapping: {},
     // orders
     ordersList: any,
     unpaidOrders: number,
@@ -74,7 +74,7 @@ const initialState: IOrdersState = {
     orderListReady: false,
     entireMenu: [],
     categories: [],
-    priceMapping: {},
+    // priceMapping: {},
     ordersList: {
         "users_id": 0,
         "username": "John Doe",
@@ -153,15 +153,17 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
             return { ... state, socketID: action.socketID};
         }
         case SOCKET_UPDATE_ITEM_PRICE: {
-            const category = action.socketData.category;
-            const categoryItemsDetails = action.socketData.items;
-            const newObj = {};
-            categoryItemsDetails.forEach((e:any) => {
-                newObj[`items_id_${e.items_id}`] = e;
-            });
-            const newPriceMapping = state.priceMapping;
-            newPriceMapping[category] = newObj;
-            return { ...state, socketData: action.socketData, priceMapping: newPriceMapping};
+            // const category = action.socketData.category;
+            // const categoryItemsDetails = action.socketData.items;
+            // const newObj = {};
+            // categoryItemsDetails.forEach((e:any) => {
+            //     newObj[`items_id_${e.items_id}`] = e;
+            // });
+            // //                      vvv actually copy the state obj
+            // const newPriceMapping = Object.assign({}, state.priceMapping);
+            // newPriceMapping[category] = newObj;
+            // return { ...state, socketData: action.socketData, priceMapping: newPriceMapping};
+            return { ...state, entireMenu: action.entireMenu };
         }
         default: {
             return state;

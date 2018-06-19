@@ -74,7 +74,7 @@ export const SOCKET_UPDATE_ITEM_PRICE = "SOCKET_UPDATE_ITEM_PRICE";
 export type SOCKET_UPDATE_ITEM_PRICE = typeof SOCKET_UPDATE_ITEM_PRICE;
 export interface ISocketUpdateItemPrice extends Action {
     type: SOCKET_UPDATE_ITEM_PRICE,
-    socketData:any,
+    entireMenu:any,
 }
 
 
@@ -214,9 +214,9 @@ export function socketConnect(socketID: any): ISocketConnectSuccess {
     }
 }
 
-export function socketUpdateItemPrice(socketData: any): ISocketUpdateItemPrice {
+export function socketUpdateItemPrice(entireMenu: any): ISocketUpdateItemPrice {
     return {
         type: SOCKET_UPDATE_ITEM_PRICE,
-        socketData,
+        entireMenu,
     }
 }
