@@ -22,17 +22,21 @@ import { percentageChange } from "../../util/utility"
 import { chartOption } from "../../fakedata";
 
 // Importing static assets
-import down from "../../icons/down.svg";
-import up from "../../icons/up.svg";
-import beer from "../../images/categories/beer.jpg";
-import cocktail from "../../images/categories/cocktails.jpg";
-import whiskie from "../../images/categories/whiskie.jpg";
+import down from "../icons/down.svg";
+import up from "../icons/up.svg";
+import beer from "../images/categories/beer.jpg";
+import cocktail from "../images/categories/cocktails.jpg";
+import whiskie from "../images/categories/whiskie.jpg";
 
 import { IRequestItem } from "../../modules";
+
+// socket
+import { store } from "../../store";
 
 interface IMenuProps {
   entireMenu: any,
   categories: any[],
+  priceMapping: any,
   currentOrder: IRequestItem[],
   addToCurrentOrder: (itemid: string, itemName: string, currentPrice: number) => void,
 }
@@ -85,6 +89,11 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
     };
   }
 
+  // socket
+  public componentDidUpdate () {
+    this.render();
+  }
+
   // switch category
   public previousCategory = () => {
     if (this.state.displayCategoryIndex - 1 < 0) {
@@ -115,6 +124,7 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
   // search box
   public searching = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ searchBoxEntry: e.target.value.toLowerCase() });
+    store.dispatch({ type: 'POST/buy', data: {items: [{itemID: 1},{itemID:3}]} });
   }
 
   // add to cart
@@ -122,7 +132,7 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
     const itemid = e.currentTarget.dataset.itemid;
     const itemName = e.currentTarget.dataset.itemname;    // dataset attr are all lowercase
     if (itemid !== undefined && itemName !== undefined) {
-      const currentPrice = this.props.entireMenu[this.state.displayCategoryIndex].items.find((element:any) => ( parseFloat(itemid) === element.items_id )).currentPrice;
+      const currentPrice = this.props.entireMenu[this.state.displayCategoryIndex].items.find((element: any) => (parseFloat(itemid) === element.items_id)).currentPrice;
       this.props.addToCurrentOrder(itemid, itemName, currentPrice);
     }
   }
@@ -160,8 +170,10 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
         {/* render display from all > cat > search */}
         {this.props.entireMenu.map((category: any, categoryIndex: any) => (
           category.items.map((item: any, itemIndex: any) => (
-            (item.itemName.toLowerCase().search(this.state.searchBoxEntry) !== -1
-              && category.categoryName === this.props.categories[this.state.displayCategoryIndex]) ?
+            ( item.itemName.toLowerCase().search(this.state.searchBoxEntry) !== -1
+              &&  category.categoryName === this.props.categories[this.state.displayCategoryIndex]
+              &&  ( (Object.keys(this.props.priceMapping).length !== 0) ? (this.props.priceMapping[category.categoryName][`items_id_${item.items_id}`].itemStock > 0) : true)
+            ) ?
               <div className="item-container">
                 <Card
                   className={
@@ -183,7 +195,7 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
                     // data-currentPrice={item.currentPrice}
                     data-itemname={item.itemName}>
                     <span>{item.itemName}</span>
-                    {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] && <span>${item.currentPrice}</span>}
+                    {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] && <span>${(Object.keys(this.props.priceMapping).length !== 0) ? this.props.priceMapping[category.categoryName][`items_id_${item.items_id}`].currentPrice : item.currentPrice}</span>}
                   </div>
 
                   {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] ? <div className="arrow-container">
@@ -238,6 +250,7 @@ const mapStateToProps = (state: IRootState) => {
   return {
     entireMenu: state.orders.entireMenu,
     categories: state.orders.categories,
+    priceMapping: state.orders.priceMapping,
     currentOrder: state.orders.currentOrder,
   }
 }

@@ -63,7 +63,22 @@ export interface IGetOrdersByUseridFailAction extends Action {
     type: GET_ORDERS_BY_USERID_FAIL,
 }
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export const SOCKET_CONNECT_SUCCESS = "SOCKET_CONNECT_SUCCESS";
+export type SOCKET_CONNECT_SUCCESS = typeof SOCKET_CONNECT_SUCCESS;
+export interface ISocketConnectSuccess extends Action {
+    type: SOCKET_CONNECT_SUCCESS,
+    socketID:any,
+}
 
+export const SOCKET_UPDATE_ITEM_PRICE = "SOCKET_UPDATE_ITEM_PRICE";
+export type SOCKET_UPDATE_ITEM_PRICE = typeof SOCKET_UPDATE_ITEM_PRICE;
+export interface ISocketUpdateItemPrice extends Action {
+    type: SOCKET_UPDATE_ITEM_PRICE,
+    socketData:any,
+}
+
+
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export type OrdersActions =
     IGetEntireMenuSuccessAction |
     IGetEntireMenuFailAction |
@@ -72,7 +87,9 @@ export type OrdersActions =
     IConfirmOrderSuccessAction |
     IConfirmOrderFailAction |
     IGetOrdersByUseridSuccessAction |
-    IGetOrdersByUseridFailAction;
+    IGetOrdersByUseridFailAction |
+    ISocketConnectSuccess |
+    ISocketUpdateItemPrice;
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function getEntireMenuSuccess(entireMenu: any): IGetEntireMenuSuccessAction {
@@ -190,3 +207,16 @@ export function getOrdersByUserid(userID: number) {
     }
 }
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export function socketConnect(socketID: any): ISocketConnectSuccess {
+    return {
+        type: SOCKET_CONNECT_SUCCESS,
+        socketID,
+    }
+}
+
+export function socketUpdateItemPrice(socketData: any): ISocketUpdateItemPrice {
+    return {
+        type: SOCKET_UPDATE_ITEM_PRICE,
+        socketData,
+    }
+}

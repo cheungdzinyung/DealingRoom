@@ -3,13 +3,15 @@ import {
     CHANGE_PAGE,
     REDIRECT_PAGE,
     RESET_TARGET_PAGE,
+    LOCAL_LOGIN_SUCCESS,
+    LOCAL_LOGIN_FAIL,
     GET_USER_PROFILE_BY_USERID_SUCCESS,
     GET_USER_PROFILE_BY_USERID_FAIL,
 } from "../actions/actions_user";
 
 export interface IUserState {
     // role: string,
-    // isAuth: boolean,
+    isAuth: boolean,
     currentPage: string,
     redirectTarget: string,
     // settings: string,
@@ -19,7 +21,7 @@ export interface IUserState {
 
 const initialState = {
     // role: "customer",
-    // isAuth: false,
+    isAuth: false,
     currentPage: "profile",
     redirectTarget: "none",     // for redir
     // settings: "nth yet",
@@ -39,6 +41,12 @@ export const userReducer = (state: IUserState = initialState, action: UserAction
         }
         case RESET_TARGET_PAGE: {
             return { ...state, redirectTarget: "none"}
+        }
+        case LOCAL_LOGIN_SUCCESS: {
+            return { ...state, isAuth: true, userProfile: action.userInfoPackage }
+        }
+        case LOCAL_LOGIN_FAIL: {
+            return state;
         }
         case GET_USER_PROFILE_BY_USERID_SUCCESS: {
             return { ...state, userProfile: action.userProfile, userProfileReady: true };

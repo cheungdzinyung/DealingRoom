@@ -6,12 +6,12 @@ import Banner from "../share/topbanner";
 import Usermenu from "../share/usermenu";
 
 // Media asset import
-import headerImg from "../../icons/setting.svg";
-import Alipay from "../../images/payment/alipay.png";
-import Paypal from "../../images/payment/paypal.png";
-import Stripe from "../../images/payment/stripe.png";
-import Wechatpay from "../../images/payment/wechatpay.png";
-import profilePic from "../../images/profiles/circle-head.png";
+import headerImg from "../icons/setting.svg";
+import Alipay from "../images/payment/alipay.png";
+import Paypal from "../images/payment/paypal.png";
+import Stripe from "../images/payment/stripe.png";
+import Wechatpay from "../images/payment/wechatpay.png";
+import profilePic from "../images/profiles/circle-head.png";
 
 export default class Setting extends React.Component {
   constructor(props: {}) {

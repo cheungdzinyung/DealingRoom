@@ -4,8 +4,9 @@ import * as React from "react";
 // redux
 import { connect } from "react-redux";
 import { IRootState } from "../reducers/index";
-import { getEntireMenu, getOrdersByUserid } from "../actions/actions_orders";
-import { getUserProfileByUserid } from "../actions/actions_user";
+import { getEntireMenu } from "../actions/actions_orders";
+// import { getEntireMenu, getOrdersByUserid } from "../actions/actions_orders";
+// import { getUserProfileByUserid } from "../actions/actions_user";
 
 // for redir
 import * as History from "history";
@@ -16,9 +17,12 @@ interface IInitializeProps {
     // init
     getEntireMenu: () => void,
     menuReady: boolean,
-    getUserProfileByUserid: (userID: number) => void,
+
+    userProfile: any,
+    // getUserProfileByUserid: (userID: number) => void,
     userProfileReady: boolean,
-    getOrdersByUserid: (userID: number) => void,
+    
+    // getOrdersByUserid: (userID: number) => void,
     orderListReady: boolean,
 }
 
@@ -35,13 +39,13 @@ class PureInitialize extends React.Component<IInitializeProps, {}> {
         // fetch entireMenu , set categories[]
         this.props.getEntireMenu();
         // fetch user data
-        this.props.getUserProfileByUserid(1);
+        // this.props.getUserProfileByUserid(this.props.userProfile.user_id);
         // fetch ordersList (or not?)
-        this.props.getOrdersByUserid(1);
+        // this.props.getOrdersByUserid(this.props.userProfile.user_id);
     }
 
     public componentDidUpdate() {
-        if (this.props.menuReady && this.props.orderListReady && this.props.userProfileReady) {
+        if (this.props.menuReady) {
             this.props.history.push("/menu");
         }
     }
@@ -58,6 +62,7 @@ const mapStateToProps = (state: IRootState) => {
         menuReady: state.orders.menuReady,
         userProfileReady: state.user.userProfileReady,
         orderListReady: state.orders.orderListReady,
+        userProfile: state.user.userProfile,
     }
 }
 
@@ -66,12 +71,12 @@ const mapDispatchToProps = (dispatch: any) => {
         getEntireMenu: () => {
             dispatch(getEntireMenu());
         },
-        getUserProfileByUserid: (userID: number) => {
-            dispatch(getUserProfileByUserid(userID));
-        },
-        getOrdersByUserid: (userID: number) => {
-            dispatch(getOrdersByUserid(userID));
-        },
+        // getUserProfileByUserid: (userID: number) => {
+        //     dispatch(getUserProfileByUserid(userID));
+        // },
+        // getOrdersByUserid: (userID: number) => {
+        //     dispatch(getOrdersByUserid(userID));
+        // },
     }
 }
 

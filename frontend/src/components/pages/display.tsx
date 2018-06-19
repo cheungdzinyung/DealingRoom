@@ -2,9 +2,9 @@
 import * as React from "react";
 
 // Importing static assets
-import downWhite from "../../icons/down-white.svg";
-import upWhite from "../../icons/up-white.svg";
-import tempImg from "../../images/profiles/circle-head.png";
+import downWhite from "../icons/down-white.svg";
+import upWhite from "../icons/up-white.svg";
+import tempImg from "../images/profiles/circle-head.png";
 
 // Importing temporary data
 import { singleCategoryMenuItems } from "../../fakedata";
