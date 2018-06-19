@@ -16,12 +16,12 @@ import {
     IRequestItem,
 } from "../../modules";
 
-export interface IPriceMapping {
-    items_id: number,
-    currentPrice: string, // string???
-    itemStock: number,
-    fixed: boolean,
-}
+// export interface IPriceMapping {
+//     items_id: number,
+//     currentPrice: string, // string???
+//     itemStock: number,
+//     fixed: boolean,
+// }
 
 // export interface IPriceMappingAll {
 //     beer: {
@@ -59,7 +59,7 @@ export interface IOrdersState {
     orderListReady: boolean,
     entireMenu: string[],
     categories: string[],
-    priceMapping: {},
+    // priceMapping: {},
     // orders
     ordersList: any,
     unpaidOrders: number,
@@ -74,7 +74,7 @@ const initialState: IOrdersState = {
     orderListReady: false,
     entireMenu: [],
     categories: [],
-    priceMapping: {},
+    // priceMapping: {},
     ordersList: {
         "users_id": 0,
         "username": "John Doe",
@@ -114,12 +114,12 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
         case ADD_ITEM: {
             // onclick: add item to current order []
             const newItem: IRequestItem = {
-                thisItemID: `${Date.now()}`,            // only for current order
+                thisItemID: Date.now(),                 // only for current order
                 items_id: action.itemid,                // from db
                 itemName: action.itemName,              // from db
                 ice: "normal",                          // allow mods when btn is ready
-                sweetness: "less",
-                garnish: "extra",
+                sweetness: "normal",
+                garnish: "normal",
                 purchasePrice: action.currentPrice,     // from db
             };
             // new total price: x1000 to avoid overflow
@@ -153,15 +153,7 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
             return { ... state, socketID: action.socketID};
         }
         case SOCKET_UPDATE_ITEM_PRICE: {
-            const category = action.socketData.category;
-            const categoryItemsDetails = action.socketData.items;
-            const newObj = {};
-            categoryItemsDetails.forEach((e:any) => {
-                newObj[`items_id_${e.items_id}`] = e;
-            });
-            const newPriceMapping = state.priceMapping;
-            newPriceMapping[category] = newObj;
-            return { ...state, socketData: action.socketData, priceMapping: newPriceMapping};
+            return { ...state, entireMenu: action.entireMenu };
         }
         default: {
             return state;

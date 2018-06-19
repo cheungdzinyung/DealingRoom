@@ -22,7 +22,8 @@ interface ILoginState {
 
 interface ILoginProps {
   history: History.History,
-  isAuth: boolean,
+  // isAuth: boolean,
+  user_id: number,
   localLogin: (username: string, password: string) => void,
 }
 
@@ -31,8 +32,8 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
     super(props);
 
     this.state = {
-      username: "admin",
-      password: "admin",
+      username: "Andrew",
+      password: "123456",
     }
   }
 
@@ -49,7 +50,15 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
   };
   
   public componentDidUpdate () {
-    if(this.props.isAuth) {
+    // actually shld check if token is valid
+    if(localStorage.getItem("dealingRoomToken")) {
+      this.props.history.push("/initialize");
+    }
+  }
+
+  public componentDidMount () {
+    // actually shld check if token is valid
+    if(localStorage.getItem("dealingRoomToken")) {
       this.props.history.push("/initialize");
     }
   }
@@ -93,13 +102,15 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
                 type="text"
                 placeholder="Username"
                 value={this.state.username}
+                onChange = {this.username}
               />
               <input
                 className="form-input rd-corner"
                 placeholder="Passwords"
-                name="username"
+                name="password"
                 type="password"
                 value={this.state.password}
+                onChange = {this.password}
               />
             </form>
 
@@ -117,7 +128,8 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
 
 const mapStateToProps = (state: IRootState) => {
   return {
-    isAuth: state.user.isAuth,
+    // isAuth: state.user.isAuth,
+    user_id: state.user.user_id,
   }
 }
 
