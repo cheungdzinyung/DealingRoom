@@ -106,6 +106,7 @@ export default class PricesService {
                   return this.knex("items")
                     .where("id", itemIdIncrease[0].items_id)
                     .increment("currentPrice", 1)
+                    .decrement("itemStock", 1)
                     .returning("id")
                     .then(itemId => {
                       // obtain the current price from the item's table
@@ -131,6 +132,7 @@ export default class PricesService {
                                       "categories_id",
                                       catId[0].categories_id
                                     )
+                                    // .where("currentPrice", ">", "minimumPrice")
                                     .whereNot("id", itemIdIncrease[0].items_id)
                                     .decrement("currentPrice", 1)
                                     .returning("id")
