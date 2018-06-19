@@ -138,7 +138,7 @@ export default class PricesService {
                                             "categories_id",
                                             catId[0].categories_id
                                           )
-                                          // .where("currentPrice", ">", "minimumPrice")
+                                          .whereRaw(`"currentPrice" > "minimumPrice"`)
                                           .whereNot(
                                             "id",
                                             itemIdIncrease[0].items_id
