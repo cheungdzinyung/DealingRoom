@@ -106,54 +106,66 @@ export default class PricesService {
                   return this.knex("items")
                     .where("id", itemIdIncrease[0].items_id)
                     .increment("currentPrice", 1)
-                    .decrement("itemStock", 1)
                     .returning("id")
-                    .then(itemId => {
-                      // obtain the current price from the item's table
+                    .then(itemIdDecrease => {
+                      // decrease the itemStock of the item being ordered
                       return this.knex("items")
-                        .select("currentPrice")
-                        .where("id", itemId[0])
-                        .then(itemLogPrice => {
-                          // insert the current price into the itemsLog as itemsLogPrice
-                          return this.knex("itemsLog")
-                            .insert({
-                              items_id: itemId[0],
-                              itemsLogPrice: itemLogPrice[0].currentPrice
-                            })
-                            .then(() => {
-                              // check for the category of the item that had its current price increased
-                              return this.knex("items")
-                                .where("id", itemIdIncrease[0].items_id)
-                                .select("categories_id")
-                                .then(catId => {
-                                  // decrease all other items current price in the specific category other than the item being ordered
+                        .where("id", itemIdDecrease[0])
+                        .decrement("itemStock", 1)
+                        .returning("id")
+                        .then(itemId => {
+                          // obtain the current price from the item's table
+                          return this.knex("items")
+                            .select("currentPrice")
+                            .where("id", itemId[0])
+                            .then(itemLogPrice => {
+                              // insert the current price into the itemsLog as itemsLogPrice
+                              return this.knex("itemsLog")
+                                .insert({
+                                  items_id: itemId[0],
+                                  itemsLogPrice: itemLogPrice[0].currentPrice
+                                })
+                                .then(() => {
+                                  // check for the category of the item that had its current price increased
                                   return this.knex("items")
-                                    .where(
-                                      "categories_id",
-                                      catId[0].categories_id
-                                    )
-                                    // .where("currentPrice", ">", "minimumPrice")
-                                    .whereNot("id", itemIdIncrease[0].items_id)
-                                    .decrement("currentPrice", 1)
-                                    .returning("id")
-                                    .then(itemsIdArray => {
-                                      // obtain the current price of the other items in the category from the item's table
-                                      itemsIdArray.map(
-                                        (items: object, k: number) => {
-                                          return this.knex("items")
-                                            .select("currentPrice")
-                                            .where("id", itemsIdArray[k])
-                                            .then(itemsLogPrice => {
-                                              // insert the current price into the itemsLog as itemsLogPrice
-                                              return this.knex(
-                                                "itemsLog"
-                                              ).insert({
-                                                items_id: itemsIdArray[k],
-                                                itemsLogPrice:
-                                                  itemsLogPrice[0].currentPrice
-                                              });
-                                            });
-                                        }
+                                    .where("id", itemIdIncrease[0].items_id)
+                                    .select("categories_id")
+                                    .then(catId => {
+                                      // decrease all other items current price in the specific category other than the item being ordered
+                                      return (
+                                        this.knex("items")
+                                          .where(
+                                            "categories_id",
+                                            catId[0].categories_id
+                                          )
+                                          // .where("currentPrice", ">", "minimumPrice")
+                                          .whereNot(
+                                            "id",
+                                            itemIdIncrease[0].items_id
+                                          )
+                                          .decrement("currentPrice", 1)
+                                          .returning("id")
+                                          .then(itemsIdArray => {
+                                            // obtain the current price of the other items in the category from the item's table
+                                            itemsIdArray.map(
+                                              (items: object, k: number) => {
+                                                return this.knex("items")
+                                                  .select("currentPrice")
+                                                  .where("id", itemsIdArray[k])
+                                                  .then(itemsLogPrice => {
+                                                    // insert the current price into the itemsLog as itemsLogPrice
+                                                    return this.knex(
+                                                      "itemsLog"
+                                                    ).insert({
+                                                      items_id: itemsIdArray[k],
+                                                      itemsLogPrice:
+                                                        itemsLogPrice[0]
+                                                          .currentPrice
+                                                    });
+                                                  });
+                                              }
+                                            );
+                                          })
                                       );
                                     });
                                 });
