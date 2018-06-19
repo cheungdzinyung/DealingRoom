@@ -25,6 +25,7 @@ import { chartOption } from "../../fakedata";
 import down from "../icons/down.svg";
 import up from "../icons/up.svg";
 import beer from "../images/categories/beer.jpg";
+import beer1 from "../images/categories/squarebeer.jpg";
 
 
 import { IRequestItem } from "../../modules";
@@ -167,7 +168,9 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
           itemName: "Long Island Ice Tea",
           price: 96,
           priceDelta: 3.45,
-          details: "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, which gives the drink the same amber hue as its namesake."
+          details: "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, which gives the drink the same amber hue as its namesake.",
+          image: beer1,
+          detailIsOpen: true
         }} />
 
 
