@@ -86,13 +86,11 @@ export default class UsersService {
         .join("items", "itemsLog.items_id", "=", "items.id")
         .join("categories", "items.categories_id", "=", "categories.id")
         .select("categories.categoryName")
-        // .select(this.knex.raw("extract('hour' from itemsLog.created_at) as hour"))
-        // .select("itemsLog.created_at")
+        .select(this.knex.raw(`extract(hour from "itemsLog".created_at) as hour`))
         .avg("itemsLog.itemsLogPrice")
         .whereRaw("??::date = ?", ["created_at", dateOfQuery])
         .groupBy("categoryName")
-        // .groupByRaw("extract('hour' from itemsLog.created_at)")
-        // .groupByRaw("date_trunc('hour', itemsLog.created_at)")
+        .groupByRaw(`extract('hour' from "itemsLog".created_at)`)
         .then((result: any) => {
           return result;
           // return Promise.all(
@@ -106,6 +104,7 @@ export default class UsersService {
         })
     );
   }
+  
   // testing with fluctuating prices ******TODO******
   public getAllInCatWithFluctuatingPrices(
     catName: string,
@@ -115,7 +114,6 @@ export default class UsersService {
       .select("id")
       .whereRaw("??::date = ?", ["created_at", dateOfQuery])
       .then(result => {
-        // tslint:disable-next-line:no-console
         console.log(result);
         return result;
       });
