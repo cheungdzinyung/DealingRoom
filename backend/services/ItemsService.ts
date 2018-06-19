@@ -81,26 +81,30 @@ export default class UsersService {
 
   // testing with fluctuating prices ******TODO******
   public getAllWithFluctuatingPrices(dateOfQuery: string) {
-    return this.knex("categories")
-      .join("items", "items.categories_id", "=", "categories.id")
-      .join("orders_items", "items.id", "=", "orders_items.items_id")
-      .join("orders", "orders.id", "=", "orders_items.orders_id")
-      .select("categories.categoryName")
-      .avg("orders_items.purchasePrice")
-      .whereRaw("??::date = ?", ["created_at", dateOfQuery])
-      .groupBy("categoryName")
-      .then((orderIdList: any) => {
-        // tslint:disable-next-line:no-console
-        // return orderIdList;
-        return Promise.all(
-          orderIdList.map((order: object, i: number) => {
-            const obj = {
-              [orderIdList[i].categoryName]: orderIdList[i].avg
-            };
-            return obj;
-          })
-        );
-      });
+    return (
+      this.knex("itemsLog")
+        .join("items", "itemsLog.items_id", "=", "items.id")
+        .join("categories", "items.categories_id", "=", "categories.id")
+        .select("categories.categoryName")
+        // .select(this.knex.raw("extract('hour' from itemsLog.created_at) as hour"))
+        // .select("itemsLog.created_at")
+        .avg("itemsLog.itemsLogPrice")
+        .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+        .groupBy("categoryName")
+        // .groupByRaw("extract('hour' from itemsLog.created_at)")
+        // .groupByRaw("date_trunc('hour', itemsLog.created_at)")
+        .then((result: any) => {
+          return result;
+          // return Promise.all(
+          //   result.map((order: object, i: number) => {
+          //     const obj = {
+          //       [result[i].categoryName]: result[i].avg
+          //     };
+          //     return obj;
+          //   })
+          // );
+        })
+    );
   }
   // testing with fluctuating prices ******TODO******
   public getAllInCatWithFluctuatingPrices(

@@ -187,7 +187,6 @@ export default class OrdersService {
                 const finalResult = [
                   {
                     user: userOrderList,
-                    // tslint:disable-next-line:object-literal-sort-keys
                     all: otherOrderList
                   }
                 ];
@@ -241,7 +240,6 @@ export default class OrdersService {
                 const finalResult = [
                   {
                     user: userOrderList,
-                    // tslint:disable-next-line:object-literal-sort-keys
                     all: otherOrderList
                   }
                 ];

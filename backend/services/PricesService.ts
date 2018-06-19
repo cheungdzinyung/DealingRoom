@@ -10,7 +10,7 @@ export default class PricesService {
   // Working 15/06/2018 //
   public getAllByCat(catName: string) {
     let catPhoto: string;
-    
+
     // sub-query to obtain the category photo
     this.knex("categories")
       .select("categoryPhoto")
@@ -24,7 +24,7 @@ export default class PricesService {
       .select("id")
       .where("categoryName", catName)
       .then((catId: Knex.QueryCallback) => {
-        // return a list of items within the category with the item_id, minimumPrice and currentPrice        
+        // return a list of items within the category with the item_id, minimumPrice and currentPrice
         return this.knex("items")
           .select("id as item_id", "minimumPrice", "currentPrice")
           .where("categories_id", catId[0].id)
@@ -135,24 +135,23 @@ export default class PricesService {
                                     .decrement("currentPrice", 1)
                                     .returning("id")
                                     .then(itemsIdArray => {
-                                         // obtain the current price of the other items in the category from the item's table
-                                        itemsIdArray.map(
-                                          (items: object, k: number) => {
-                                            return this.knex("items")
-                                              .select("currentPrice")
-                                              .where("id", itemsIdArray[k])
-                                              .then(itemsLogPrice => {
-                                                // insert the current price into the itemsLog as itemsLogPrice
-                                                return this.knex(
-                                                  "itemsLog"
-                                                ).insert({
-                                                  items_id: itemsIdArray[k],
-                                                  itemsLogPrice:
-                                                    itemsLogPrice[0]
-                                                      .currentPrice
-                                                });
+                                      // obtain the current price of the other items in the category from the item's table
+                                      itemsIdArray.map(
+                                        (items: object, k: number) => {
+                                          return this.knex("items")
+                                            .select("currentPrice")
+                                            .where("id", itemsIdArray[k])
+                                            .then(itemsLogPrice => {
+                                              // insert the current price into the itemsLog as itemsLogPrice
+                                              return this.knex(
+                                                "itemsLog"
+                                              ).insert({
+                                                items_id: itemsIdArray[k],
+                                                itemsLogPrice:
+                                                  itemsLogPrice[0].currentPrice
                                               });
-                                          }
+                                            });
+                                        }
                                       );
                                     });
                                 });
