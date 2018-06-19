@@ -23,7 +23,7 @@ export const ADD_ITEM = "ADD_ITEM";
 export type ADD_ITEM = typeof ADD_ITEM;
 export interface IAddItemAction extends Action {
     type: ADD_ITEM,
-    itemid: string,
+    itemid: number,
     itemName: string,
     currentPrice: number,
 }
@@ -32,7 +32,7 @@ export const REMOVE_ITEM = "REMOVE_ITEM";
 export type REMOVE_ITEM = typeof REMOVE_ITEM;
 export interface IRemoveItemAction extends Action {
     type: REMOVE_ITEM,
-    thisItemID: string,
+    thisItemID: number,
 }
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const CONFIRM_ORDER_SUCCESS = "CONFIRM_ORDER_SUCCESS";
@@ -124,7 +124,7 @@ export function getEntireMenu() {
     }
 }
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export function addToCurrentOrder(itemid: string, itemName: string, currentPrice: number): IAddItemAction {
+export function addToCurrentOrder(itemid: number, itemName: string, currentPrice: number): IAddItemAction {
     return {
         type: ADD_ITEM,
         itemid,
@@ -133,7 +133,7 @@ export function addToCurrentOrder(itemid: string, itemName: string, currentPrice
     }
 }
 
-export function removeFromCurrentOrder(thisItemID: string): IRemoveItemAction {
+export function removeFromCurrentOrder(thisItemID: number): IRemoveItemAction {
     return {
         type: REMOVE_ITEM,
         thisItemID,
@@ -156,8 +156,9 @@ export function confirmOrderFail(result: any): IConfirmOrderFailAction {
 }
 
 export function confirmOrder(orderToConfirm: ICurrentOrder) {
+    const config = { headers: {Authorization: "Bearer " + localStorage.getItem("dealingRoomToken")} }
     return (dispatch: Dispatch<IConfirmOrderSuccessAction | IConfirmOrderFailAction>) => {
-        axios.post(`http://localhost:8080/api/orders/${orderToConfirm.users_id}`, orderToConfirm)
+        axios.post(`http://localhost:8080/api/orders/${orderToConfirm.users_id}`, orderToConfirm, config)
             .then((res: any) => {
                 if (res.status === 201) {
                     alert(res.data[0].status);
@@ -188,8 +189,9 @@ export function getOrdersByUseridFail(): IGetOrdersByUseridFailAction {
 }
 
 export function getOrdersByUserid(userID: number) {
+    const config = { headers: {Authorization: "Bearer " + localStorage.getItem("dealingRoomToken")} }
     return (dispatch: Dispatch<IGetOrdersByUseridSuccessAction | IGetOrdersByUseridFailAction>) => {
-        axios.get(`http://localhost:8080/api/orders/user/${userID}`)
+        axios.get(`http://localhost:8080/api/orders/user/${userID}`, config)
             .then((res: any) => {
                 if (res.status === 200) {
                     dispatch(getOrdersByUseridSuccess(res.data[0]));

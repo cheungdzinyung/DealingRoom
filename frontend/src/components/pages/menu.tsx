@@ -8,9 +8,9 @@ import { addToCurrentOrder } from "../actions/actions_orders";
 
 // Import UI elements
 import { Card, Collapse, Elevation } from "@blueprintjs/core";
-import Carousel from 'nuka-carousel';
 import { Line } from "react-chartjs-2";
 import Usermenu from "../share/usermenu";
+import MenuItem from "../ui/menuitem";
 
 // Importing interfaces
 // import { IPureCategoryWithItem } from "../../modules";
@@ -25,27 +25,27 @@ import { chartOption } from "../../fakedata";
 import down from "../icons/down.svg";
 import up from "../icons/up.svg";
 import beer from "../images/categories/beer.jpg";
-import cocktail from "../images/categories/cocktails.jpg";
-import whiskie from "../images/categories/whiskie.jpg";
+
 
 import { IRequestItem } from "../../modules";
 
 // socket
 import { store } from "../../store";
+import PageHeader from "../ui/pageheader";
+import CategoryFilter from "../ui/categoryfilter";
 
 interface IMenuProps {
   entireMenu: any,
   categories: any[],
   // priceMapping: any,
   currentOrder: IRequestItem[],
-  addToCurrentOrder: (itemid: string, itemName: string, currentPrice: number) => void,
+  addToCurrentOrder: (itemid: number, itemName: string, currentPrice: number) => void,
 }
 
 interface IMenuState {
   searchBoxEntry: string,
   displayCategoryIndex: number,
   isItemDetailsOpen: { [key: string]: boolean },
-
   // chart data route?
   chartData: any;
 }
@@ -93,6 +93,7 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
   // public componentDidUpdate () {
   //   this.render();
   // }
+
   public refreshPrice = () => {
     store.dispatch({ type: 'POST/buy', data: {} });
   }
@@ -135,36 +136,27 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
     const itemName = e.currentTarget.dataset.itemname;    // dataset attr are all lowercase
     if (itemid !== undefined && itemName !== undefined) {
       const currentPrice = this.props.entireMenu[this.state.displayCategoryIndex].items.find((element: any) => (parseFloat(itemid) === element.items_id)).currentPrice;
-      this.props.addToCurrentOrder(itemid, itemName, currentPrice);
+      this.props.addToCurrentOrder(parseInt(itemid, 10), itemName, currentPrice);
     }
   }
 
-  // TODO: to fix the next and Previous of the carousel
 
+  // TODO: to fix the next and Previous of the carousel
   public render() {
     // alert("render");
     return (
       <div className="page-content-container">
-        {/* FIXME: the carousel won't load image when rendering other element first and coming back with it */}
+        <PageHeader header={"Menu"} subHeader={"Column A, or try column B"} />
+        {/* Hard coding for now */}
+        <CategoryFilter categories={["All", "Beer", "Cocktails", "Drinks"]} />
 
-        <Carousel initialSlideHeight={166} slideIndex={0} className="image-roll" wrapAround={true}>
-          <img src={beer} alt="" />
-          <img src={whiskie} alt="" />
-          <img src={cocktail} alt="" />
-          <img src={beer} alt="" />
-          <img src={whiskie} alt="" />
-          <img src={cocktail} alt="" />
-        </ Carousel>
-
-        {/* for test */}
-        <input type="button" className="btn" value="<<" onClick={this.previousCategory} />
-        <div />
-        <input type="button" className="btn" value=">>" onClick={this.nextCategory} />
-        <div />
-        <input type="button" className="btn" value="F5" onClick={this.refreshPrice} />
-
+        {/* Category image */}
+        <div className="rd-corner menu-display">
+          <img src={beer} alt="" className="rd-corner display-img" />
+        </div>
+        {/* Search item bar */}
         <input
-          className="pt-input searchbar"
+          className="searchbar rd-corner"
           type="text"
           placeholder="Search input"
           dir="auto"
@@ -172,87 +164,99 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
           onChange={this.searching}
         />
 
-        {/* render display from all > by cat > by search > by stock */}
-        { /* mapping is here*/
-          this.props.entireMenu.map((category: any, categoryIndex: any) => (
-            category.items.map((item: any, itemIndex: any) => (
-              (
-                /* v match searching */
-                item.itemName.toLowerCase().search(this.state.searchBoxEntry) !== -1
-                /* v match selected category */
-            &&  category.categoryName === this.props.categories[this.state.displayCategoryIndex]
-                /* v check stock > 0 */
-            &&  item.itemStock > 0
-              ) ?
-                <div className="item-container">
-                  <Card
-                    className={
-                      !this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())]
-                        ? "item-cards"
-                        : percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0]) > 0
 
-                          ? "item-cards item-price-up"
-                          : "item-cards item-price-down"
-                    }
-                    interactive={true}
-                    elevation={Elevation.FOUR}
-                    onClick={this.isOpen.bind(this, category.categoryName.concat(itemIndex.toString()))}
-                    key={`Card_${category.categoryName.concat(itemIndex.toString())}`}
-                  >
-                    <div className="pricetag"
-                      onClick={this.addToCurrentOrder}
-                      data-itemid={item.items_id}
-                      data-currentPrice={item.currentPrice}
-                      data-itemname={item.itemName}>
-                      <span>{item.itemName}</span>
-                      {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] && <span>${item.currentPrice}</span>}
-                    </div>
 
-                    {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] ? <div className="arrow-container">
+        <MenuItem {...{
+          key: 1,
+          itemName: "Long Island Ice Tea",
+          price: 96,
+          priceDelta: 3.45,
+          details: "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, which gives the drink the same amber hue as its namesake."
+        }} />
+
+
+
+
+        {/* render display from all > cat > search */}
+        {this.props.entireMenu.map((category: any, categoryIndex: any) => (
+          category.items.map((item: any, itemIndex: any) => (
+            (
+              /* v match searching */
+              item.itemName.toLowerCase().search(this.state.searchBoxEntry) !== -1
+              /* v match selected category */
+              && category.categoryName === this.props.categories[this.state.displayCategoryIndex]
+              /* v check stock > 0 */
+              && item.itemStock > 0
+            ) ?
+              <div className="item-container">
+                <Card
+                  className={
+                    !this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())]
+                      ? "item-cards"
+                      : percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0]) > 0
+
+                        ? "item-cards item-price-up"
+                        : "item-cards item-price-down"
+                  }
+                  interactive={true}
+                  elevation={Elevation.FOUR}
+                  onClick={this.isOpen.bind(this, category.categoryName.concat(itemIndex.toString()))}
+                  key={`Card_${category.categoryName.concat(itemIndex.toString())}`}
+                >
+                  <div className="pricetag"
+                    onClick={this.addToCurrentOrder}
+                    data-itemid={item.items_id}
+                    data-currentPrice={item.currentPrice}
+                    data-itemname={item.itemName}>
+                    <span>{item.itemName}</span>
+                    {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] && <span>${item.currentPrice}</span>}
+                  </div>
+
+                  {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] ? <div className="arrow-container">
+                    <img
+                      className="arrow"
+                      src={percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0]) > 0 ? up : down}
+                      alt=""
+                    />
+                  </div> : <span>${item.currentPrice}</span>}
+                </Card>
+                {/* ------------Seperate card and card details */}
+                <Collapse
+                  key={`Collapse_${category.categoryName.concat(itemIndex.toString())}`}
+                  className={
+                    "item-details" +
+                    " " +
+                    (this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] ? "item-detail-onflex" : "")
+                  }
+                  isOpen={this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())]}
+                >
+                  <div className="description">
+                    <p className="description-text">{item.itemDescription}</p>
+                  </div>
+                  <div className="chartVar">
+                    <div className="variables">
                       <img
-                        className="arrow"
+                        className="detail-arrow"
                         src={percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0]) > 0 ? up : down}
                         alt=""
                       />
-                    </div> : <span>${item.currentPrice}</span>}
-                  </Card>
-                  {/* ------------Seperate card and card details */}
-                  <Collapse
-                    key={`Collapse_${category.categoryName.concat(itemIndex.toString())}`}
-                    className={
-                      "item-details" +
-                      " " +
-                      (this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] ? "item-detail-onflex" : "")
-                    }
-                    isOpen={this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())]}
-                  >
-                    <div className="description">
-                      <p className="description-text">{item.itemDescription}</p>
+                      <span className="detail-percentage">{percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0])}%</span>
                     </div>
-                    <div className="chartVar">
-                      <div className="variables">
-                        <img
-                          className="detail-arrow"
-                          src={percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0]) > 0 ? up : down}
-                          alt=""
-                        />
-                        <span className="detail-percentage">{percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0])}%</span>
-                      </div>
 
-                      <Line
-                        width={80}
-                        height={60}
-                        data={item.chartData}
-                        options={chartOption}
-                      />
-                    </div>
-                  </Collapse>
-                </div> : <div />))
-          ))}
+                    <Line
+                      width={80}
+                      height={60}
+                      data={item.chartData}
+                      options={chartOption}
+                    />
+                  </div>
+                </Collapse>
+              </div> : <div />))
+        ))}
 
         <Usermenu />
       </div>
-    );
+    )
   }
 }
 
@@ -267,8 +271,8 @@ const mapStateToProps = (state: IRootState) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    addToCurrentOrder: (uniqueID: string, name: string, currentPrice: number) => {
-      dispatch(addToCurrentOrder(uniqueID, name, currentPrice));
+    addToCurrentOrder: (itemid: number, name: string, currentPrice: number) => {
+      dispatch(addToCurrentOrder(itemid, name, currentPrice));
     }
   }
 }

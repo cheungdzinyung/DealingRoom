@@ -1,19 +1,15 @@
-.image-roll{
-    border-radius: 5px;
-    margin-bottom: 5vmin;
-    // width: 100%;
-}
-
 .menu-banner {
     width: 100%;
     margin-bottom: 5vmin;
 }
 
-.searchbar {
+.menu-display {
     width: 100%;
-    margin-bottom: 5vmin;
-    background-color: $search-bar-bgc;
-    color: $search-bar-font;
+    margin: 7% 0;
+
+    .display-img {
+        width: 100%;
+    }
 }
 
 .item-container {

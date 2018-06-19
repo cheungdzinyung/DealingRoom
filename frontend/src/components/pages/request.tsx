@@ -31,7 +31,7 @@ interface IRequestProps {
   // handling orders
   currentOrder: IRequestItem[],
   currentTotal: number,
-  removeFromCurrentOrder: (thisItemID: string) => void,
+  removeFromCurrentOrder: (thisItemID: number) => void,
   confirmOrder: (orderToConfirm: ICurrentOrder) => void,
   // handling redirect
   history: History.History,
@@ -61,7 +61,7 @@ class PureRequest extends React.Component<IRequestProps, {}> {
   public removeFromCurrentOrder = (e: React.MouseEvent<HTMLDivElement>) => {
     const thisItemID = e.currentTarget.dataset.thisitemid;
     if (thisItemID !== undefined) {
-      this.props.removeFromCurrentOrder(thisItemID);
+      this.props.removeFromCurrentOrder(parseInt(thisItemID, 10));
     }
   }
 
@@ -125,7 +125,7 @@ const mapStateToProps = (state: IRootState) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    removeFromCurrentOrder: (thisItemID: string) => {
+    removeFromCurrentOrder: (thisItemID: number) => {
       dispatch(removeFromCurrentOrder(thisItemID));
     },
     confirmOrder: (orderToConfirm: ICurrentOrder) => {

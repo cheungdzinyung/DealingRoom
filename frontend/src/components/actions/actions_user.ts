@@ -101,8 +101,8 @@ export function localLoginFail(): ILocalLoginFailAction {
 export function localLogin(username: string, password: string) {
     return (dispatch: Dispatch<ILocalLoginSuccessAction | ILocalLoginFailAction>) => {
         const loginPackage = {
-            username: "Andrew",
-            password: "123456",
+            username,
+            password,
             role: "customer",
             displayName: "admin"
         };
@@ -110,7 +110,7 @@ export function localLogin(username: string, password: string) {
         axios.post(`http://localhost:8080/api/auth/login`, loginPackage)
             .then((res: any) => {
                 if (res.status === 200) {
-                    dispatch(localLoginSuccess(res.data[0]));
+                    dispatch(localLoginSuccess(res.data));
                 } else {
                     alert("status: " + res.status);
                     dispatch(localLoginFail());
@@ -138,8 +138,9 @@ export function getUserProfileByUseridFail(): IGetUserProfileByUseridFailAction 
 }
 
 export function getUserProfileByUserid(userID: number) {
+    const config = { headers: {Authorization: "Bearer " + localStorage.getItem("dealingRoomToken")} }
     return (dispatch: Dispatch<IGetUserProfileByUseridSuccessAction | IGetUserProfileByUseridFailAction>) => {
-        axios.get(`http://localhost:8080/api/users/${userID}`)
+        axios.get(`http://localhost:8080/api/users/${userID}`, config)
             .then((res: any) => {
                 if (res.status === 200) {
                     dispatch(getUserProfileByUseridSuccess(res.data[0]));

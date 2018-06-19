@@ -67,7 +67,7 @@ export default class PricesService {
       });
   }
 
-  // Working without error checking (i.e. minimum price) //
+  // Working 19-06-2018 //
   public add(id: number, data: any) {
     // insert the order information into the order's table
     return this.knex("orders")

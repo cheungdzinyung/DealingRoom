@@ -1,0 +1,24 @@
+.categories-filter {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    justify-content: center;
+    align-items: center;
+    .category:first-of-type {
+        background-color: #FFCD44;
+        border-radius: 20px;
+        .category-text:first-of-type {
+            font-weight: 600;
+            color: rgba(86, 26, 8, .95);
+        }
+    }
+    .category {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 10%;
+        .category-text {
+            font-size: .8125rem;
+        }
+    }
+}
