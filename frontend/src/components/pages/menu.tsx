@@ -170,7 +170,17 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
           priceDelta: 3.45,
           details: this.props.entireMenu[0].items.find((e: any)=>(e.items_id===1)).itemDescription,
           image: beer1,
-          detailIsOpen: true
+          detailIsOpen: true,
+          priceData: [
+            {time: "9AM", purchasePrice: 23},
+            {time: "", purchasePrice: 46},
+            {time: "", purchasePrice: 75},
+            {time: "", purchasePrice: 15},
+            {time: "", purchasePrice: 75},
+            {time: "", purchasePrice: 46},
+            {time: "", purchasePrice: 83},
+            {time: "", purchasePrice: 55},
+            {time: "", purchasePrice: 41}]
         }} />
 
 

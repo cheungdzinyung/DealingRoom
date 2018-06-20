@@ -71,7 +71,7 @@ io.on("connection", (socket: any) => {
     //   beerPrice = { ...beerPrice, items: newBeerPriceArray };
     //   console.log(beerPrice);
 
-    //   io.local.emit("action", { type: "SOCKET_UPDATE_ITEM_PRICE", socketData: beerPrice });
+    // io.local.emit("action", { type: "SOCKET_UPDATE_ITEM_PRICE", socketData: beerPrice });
     // } else {
     //   console.log("no such action");
     // }

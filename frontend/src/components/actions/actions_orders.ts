@@ -162,7 +162,7 @@ export function confirmOrder(orderToConfirm: ICurrentOrder) {
             .then((res: any) => {
                 if (res.status === 201) {
                     alert(res.data.status + " now redirect to order list");
-                    alert(JSON.stringify(res.data))
+                    // alert(JSON.stringify(res.data))
                     dispatch(confirmOrderSuccess(res.data, orderToConfirm));
                 } else {
                     alert("error, try again");

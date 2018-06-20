@@ -121,7 +121,7 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
             return { ... state, socketID: action.socketID};
         }
         case SOCKET_UPDATE_ITEM_PRICE: {
-            alert(JSON.stringify(action.entireMenu))
+            // alert(JSON.stringify(action.entireMenu))
             return { ...state, entireMenu: action.entireMenu };
         }
         default: {

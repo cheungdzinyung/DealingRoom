@@ -2,7 +2,10 @@
     margin: 5% 0;
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+
+    // Card - top part of the item
     .menu-item-card {
         position: relative;
         width: 80%;
@@ -73,5 +76,12 @@
                 }
             }
         }
+    }
+
+    // Collapse - the flex part of the item
+    .item-detail-collapse{
+        width: 80%;
+        background-color: $item-detail-bgc;
+        padding: 10%;
     }
 }

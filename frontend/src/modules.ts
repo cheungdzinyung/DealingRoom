@@ -176,6 +176,9 @@ export interface ICurrentOrder {
   item: IRequestItem[],
 }
 
+
+
+
 // store state for ref
 // interface IUserState {
 //   role: string,
@@ -191,3 +194,13 @@ export interface ICurrentOrder {
 //   currentOrder: IRequestItem[],
 //   currentTotal: number,
 // }
+
+
+
+
+
+// New line graph data format
+export interface IItemPriceGraphData{
+  time: string
+  purchasePrice: number
+}
