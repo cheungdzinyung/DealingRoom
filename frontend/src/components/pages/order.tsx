@@ -43,8 +43,8 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
 
     this.state = {
       displayName: "",
-      orderID: 1,
-      tableNumber: 1,
+      orderID: 0,
+      tableNumber: 0,
       thisOrder: { orderItems: "empty" },
       amount: 0,
 

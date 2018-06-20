@@ -2,7 +2,7 @@ import * as React from "react";
 
 // importing UI elements
 import { Card, Elevation, Collapse } from "@blueprintjs/core";
-import { AreaChart, Area, Tooltip, XAxis, YAxis } from "recharts";
+import { AreaChart, Area, Tooltip } from "recharts";
 
 // import static icons
 import wallet from "../icons/item/wallet.svg";
@@ -10,6 +10,9 @@ import info from "../icons/item/info.svg";
 import up from "../icons/item/up.svg";
 // import down from "../icons/item/down.svg";
 import plus from "../icons/item/plus.svg";
+
+// Import types 
+import { IItemPriceGraphData } from "src/modules";
 
 interface IMenuItemProps {
     key: number;
@@ -19,6 +22,8 @@ interface IMenuItemProps {
     details: string;
     image: "*.jpg" | "*.png" | "*.jpeg";
     detailIsOpen: boolean
+    // openDetail: ()=>void
+    priceData: IItemPriceGraphData[]
 }
 
 export default class MenuItem extends React.Component<IMenuItemProps> {
@@ -61,27 +66,26 @@ export default class MenuItem extends React.Component<IMenuItemProps> {
                         </div>
                     </div>
                 </Card>
-                <Collapse className="item-detail-collapse" isOpen={this.props.detailIsOpen}>
-                    <h3>Details</h3>
-                    <hr className="item-split" />
-                    <p>{this.props.details}</p>
-                    <h3>Performance</h3>
-                    <hr className="item-split" />
-                    <AreaChart width={730} height={250} data={data}
-                        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                        <defs>
-                            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                                <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-                            </linearGradient>
-                        </defs>
-                        <XAxis dataKey="time" />
-                        <YAxis />
-                        <Tooltip />
-                        <Area type="monotone" dataKey="uv" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-                        <Area type="monotone" dataKey="pv" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
-                    </AreaChart>
-
+                <Collapse className="item-detail-collapse rd-corner" isOpen={this.props.detailIsOpen}>
+                    <div className="item-detail-wrapper">
+                        <h3 className="item-detail-subheader">Details</h3>
+                        <hr className="item-split" />
+                        <p className="item-detail">{this.props.details}</p>
+                        <h3 className="item-detail-subheader">Performance</h3>
+                        <hr className="item-split" />
+                        <AreaChart width={180} height={80} data={this.props.priceData}>
+                            <defs>
+                                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                                </linearGradient>
+                            </defs>
+                            {/* <XAxis dataKey="time" /> */}
+                            {/* <YAxis /> */}
+                            <Tooltip />
+                            <Area type="monotone" dataKey="purchasePrice" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                        </AreaChart>
+                    </div>
                 </Collapse>
             </div>
         );
