@@ -22,7 +22,6 @@ export default function(usersService: UsersService) {
 
   return {
     initialize: () => passport.initialize(),
-    // tslint:disable-next-line:object-literal-sort-keys
     authenticate: () => passport.authenticate("jwt", config.jwtSession)
   };
 }

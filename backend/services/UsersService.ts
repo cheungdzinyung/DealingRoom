@@ -1,7 +1,9 @@
+import * as bcrypt from "bcrypt";
 import * as fs from "fs-extra";
 import * as Knex from "knex";
 
 import { IUserData } from "../interfaces";
+
 
 export default class UsersService {
   private knex: Knex;
@@ -22,12 +24,13 @@ export default class UsersService {
 
   // Working 10/06/18
   public add(data: IUserData, file: Express.Multer.File) {
+    const hash = bcrypt.hashSync(data.password, 10);
     return this.knex("users")
       .insert({
         displayName: data.displayName,
         facebookToken: data.facebookToken,
         isActive: true,
-        password: data.password,
+        password: hash,
         role: data.role,
         username: data.username
       })
@@ -46,18 +49,26 @@ export default class UsersService {
   public get(req: number) {
     return this.knex("users")
       .where({ id: req, isActive: true })
-      .select("id as users_id", "username", "password", "displayName", "userPhoto", "role");
+      .select(
+        "id as users_id",
+        "username",
+        "password",
+        "displayName",
+        "userPhoto",
+        "role"
+      );
   }
 
   // Working 10/06/18
   public update(id: number, data: IUserData, file: Express.Multer.File) {
+    const hash = bcrypt.hashSync(data.password, 10);
     return this.knex("users")
       .where("id", id)
       .update({
         displayName: data.displayName,
         facebookToken: data.facebookToken,
         isActive: data.isActive,
-        password: data.password,
+        password: hash,
         role: data.role,
         username: data.username
       })
