@@ -2,15 +2,15 @@ import * as React from "react";
 import { Route, Switch } from "react-router-dom";
 import "./scss/App.scss";
 
-import Display from "./components/pages/display/display";
-import Initialize from "./components/pages/mobile/initialize";
-import Login from "./components/pages/mobile/login";
-import Menu from "./components/pages/mobile/menu";
-import Order from "./components/pages/mobile/order";
-import OrderList from "./components/pages/mobile/orderlist";
-import Profile from "./components/pages/mobile/profile";
-import Request from "./components/pages/mobile/request";
-import Setting from "./components/pages/mobile/setting";
+import Display from "./components/container/display/display";
+import Initialize from "./components/container/mobile/initialize";
+import Login from "./components/container/mobile/login";
+import Menu from "./components/container/mobile/menu";
+import Order from "./components/container/mobile/order";
+import OrderList from "./components/container/mobile/orderlist";
+import Profile from "./components/container/mobile/profile";
+import Request from "./components/container/mobile/request";
+import Setting from "./components/container/mobile/setting";
 
 // import redux and friends
 import { connect } from "react-redux";
