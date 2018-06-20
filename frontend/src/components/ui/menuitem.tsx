@@ -31,9 +31,17 @@ interface IMenuItemProps {
     // add item => cb
 }
 
-export default class MenuItem extends React.Component<IMenuItemProps> {
+interface IMenuItemState {
+    detailIsOpen: boolean
+}
+
+export default class MenuItem extends React.Component<IMenuItemProps, IMenuItemState> {
     constructor(props: IMenuItemProps) {
         super(props);
+
+        this.state = {
+            detailIsOpen: false
+        }
     }
 
     public addToCurrentOrder = (e: React.MouseEvent<HTMLImageElement>) => {
@@ -44,6 +52,12 @@ export default class MenuItem extends React.Component<IMenuItemProps> {
         //   const currentPrice = this.props.entireMenu[this.state.displayCategoryIndex].items.find((element: any) => (parseFloat(itemid) === element.items_id)).currentPrice;
           this.props.addToCurrentOrder(this.props.item_id, this.props.itemName, this.props.currentPrice);
         // }
+      }
+
+      public toggle = () => {
+          this.setState({
+            detailIsOpen: !this.state.detailIsOpen
+          })
       }
 
     public render() {
@@ -58,7 +72,7 @@ export default class MenuItem extends React.Component<IMenuItemProps> {
                     {/* Product images */}
                     <img src={this.props.itemPhoto} className="menu-item-img" alt="" />
                     {/* Info button  */}
-                    <img className="item-info" src={info} alt="" />
+                    <img className="item-info" src={info} alt="" onClick={this.toggle} />
                     <img className="add-item" src={plus} alt="" onClick={this.addToCurrentOrder} />
                     <span className="menu-item-name">{this.props.itemName}</span>
                     <div className="menu-item-bot">
@@ -81,7 +95,7 @@ export default class MenuItem extends React.Component<IMenuItemProps> {
                         </div>
                     </div>
                 </Card>
-                <Collapse className="item-detail-collapse rd-corner" isOpen={this.props.detailIsOpen}>
+                <Collapse className="item-detail-collapse rd-corner" isOpen={this.state.detailIsOpen}>
                     <div className="item-detail-wrapper">
                         <h3 className="item-detail-subheader">Details</h3>
                         <hr className="item-split" />
