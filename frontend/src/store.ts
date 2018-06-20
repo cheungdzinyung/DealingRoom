@@ -2,11 +2,13 @@ import { applyMiddleware, createStore, Action, compose } from "redux";
 import { IRootState, rootReducer } from "./components/reducers/index";
 import thunk from 'redux-thunk';
 
+// export const API_SERVER = process.env.REACT_APP_API_SERVER;
+export const API_SERVER = process.env.REACT_APP_API_DEV;
+
 import createSocketIoMiddleware from 'redux-socket.io';
 import * as io from 'socket.io-client';
 
-// const socket = io(`${process.env.REACT_APP_API_DEV}`);
-const socket = io(`${process.env.REACT_APP_API_SERVER}`);
+const socket = io(`${API_SERVER}`);
 const socketIoMiddleware = createSocketIoMiddleware(socket, ["GET/", "POST", "PUT"]);
 
 import logger from 'redux-logger';
