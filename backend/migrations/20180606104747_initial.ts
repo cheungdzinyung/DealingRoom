@@ -7,7 +7,7 @@ exports.up = (knex: Knex) => {
         .increments("id")
         .unsigned()
         .primary();
-      users.string("username");
+      users.string("username").unique();
       users.text("password");
       users.string("displayName");
       users.text("userPhoto").defaultTo("");
