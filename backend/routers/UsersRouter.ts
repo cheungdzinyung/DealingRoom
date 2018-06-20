@@ -17,7 +17,7 @@ export default class UsersRouter {
   public router() {
     const router = express.Router();
 
-    router.post("/", upload.single("userPhoto"), this.add.bind(this));
+    // router.post("/", upload.single("userPhoto"), this.add.bind(this));
 
     router.get("/", this.get.bind(this));
 
@@ -26,17 +26,17 @@ export default class UsersRouter {
     return router;
   }
 
-  public add(req: express.Request, res: express.Response) {
-    return this.usersService
-      .add(req.body, req.file)
-      .then((result: IUserData) => {
-        res.status(201).json(result);
-      })
-      .catch((err: express.Errback) => {
-        console.log(err)
-        res.status(500).json({ status: "failed" });
-      });
-  }
+  // public add(req: express.Request, res: express.Response) {
+  //   return this.usersService
+  //     .add(req.body, req.file)
+  //     .then((result: IUserData) => {
+  //       res.status(201).json(result);
+  //     })
+  //     .catch((err: express.Errback) => {
+  //       console.log(err)
+  //       res.status(500).json({ status: "failed" });
+  //     });
+  // }
 
   public get(req: express.Request, res: express.Response) {
     if (req.user !== undefined) {
