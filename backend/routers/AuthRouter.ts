@@ -17,6 +17,7 @@ export default class AuthRouter {
   public getRouter() {
     const router = express.Router();
     router.post("/google", this.loginWithGoogle.bind(this));
+    router.post("/facebook", this.loginWithFacebook.bind(this));
     router.post("/login", upload.single(), this.localLogin.bind(this));
     return router;
   }
@@ -61,7 +62,32 @@ export default class AuthRouter {
       if (authResult.data.error) {
         res.sendStatus(401);
       }
+      console.log(authResult.data);
+      const token = jwtSimple.encode(
+        { id: accessToken, info: authResult.data },
+        config.jwtSecret
+      );
+      res.json({ token });
+    } catch (err) {
+      res.sendStatus(401);
+    }
+  }
 
+  public async loginWithFacebook(req: express.Request, res: express.Response) {
+    const accessToken = req.body.accessToken;
+    console.log(accessToken);
+    if (!accessToken) {
+      res.sendStatus(401);
+    }
+    try {
+      const authResult = await axios.get(
+        `https://graph.facebook.com/me?access_token=${accessToken}`
+      );
+
+      if (authResult.data.error) {
+        res.sendStatus(401);
+      }
+      console.log(authResult.data);
       const token = jwtSimple.encode(
         { id: accessToken, info: authResult.data },
         config.jwtSecret

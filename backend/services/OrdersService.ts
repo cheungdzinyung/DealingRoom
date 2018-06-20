@@ -19,7 +19,7 @@ export default class OrdersService {
         users_id: id
       })
       .returning("id")
-      .then((orderId: Knex.QueryCallback) => {
+      .then((orderId: any) => {
         // insert the information of the items within the order into the orders_items table
         return Promise.all(
           data.item.map((order: object, i: number) => {
@@ -54,12 +54,12 @@ export default class OrdersService {
                         .where("id", itemIdDecrease[0])
                         .decrement("itemStock", 1)
                         .returning("id")
-                        .then(itemId => {
+                        .then((itemId: Knex.QueryBuilder) => {
                           // obtain the current price from the item's table
                           return this.knex("items")
                             .select("currentPrice")
                             .where("id", itemId[0])
-                            .then(itemLogPrice => {
+                            .then((itemLogPrice: Knex.QueryBuilder) => {
                               // insert the current price into the itemsLog as itemsLogPrice
                               return this.knex("itemsLog")
                                 .insert({
@@ -71,7 +71,7 @@ export default class OrdersService {
                                   return this.knex("items")
                                     .where("id", itemIdIncrease[0].items_id)
                                     .select("categories_id")
-                                    .then(catId => {
+                                    .then((catId: Knex.QueryBuilder) => {
                                       // decrease all other items current price in the specific category other than the item being ordered
                                       return this.knex("items")
                                         .where(
@@ -87,14 +87,14 @@ export default class OrdersService {
                                         )
                                         .decrement("currentPrice", 1)
                                         .returning("id")
-                                        .then(itemsIdArray => {
+                                        .then((itemsIdArray:any) => {
                                           // obtain the current price of the other items in the category from the item's table
                                           itemsIdArray.map(
                                             (items: object, k: number) => {
                                               return this.knex("items")
                                                 .select("currentPrice")
                                                 .where("id", itemsIdArray[k])
-                                                .then(itemsLogPrice => {
+                                                .then((itemsLogPrice: Knex.QueryBuilder) => {
                                                   // insert the current price into the itemsLog as itemsLogPrice
                                                   return this.knex(
                                                     "itemsLog"
@@ -177,7 +177,7 @@ export default class OrdersService {
     return this.knex("users")
       .select("username", "displayName")
       .where("id", id)
-      .then((userInfo: any) => {
+      .then((userInfo: Knex.QueryBuilder) => {
         return this.knex("users")
           .join("orders", "users.id", "=", "users_id")
           .where("users.id", id)
@@ -216,7 +216,6 @@ export default class OrdersService {
               const entireOrder = [
                 {
                   users_id: id,
-                  // tslint:disable-next-line:object-literal-sort-keys
                   userName: userInfo[0].username,
                   displayName: userInfo[0].displayName,
                   orders: orderList
@@ -248,7 +247,7 @@ export default class OrdersService {
             };
             return obj;
           })
-        ).then(userOrderList => {
+        ).then((userOrderList: any) => {
           return this.knex("categories")
             .join("items", "items.categories_id", "=", "categories.id")
             .join("orders_items", "items.id", "=", "orders_items.items_id")
@@ -264,59 +263,6 @@ export default class OrdersService {
                 result2.map((order: object, i: number) => {
                   const obj = {
                     [result2[i].categoryName]: result2[i].avg
-                  };
-                  return obj;
-                })
-              ).then(otherOrderList => {
-                const finalResult = [
-                  {
-                    user: userOrderList,
-                    all: otherOrderList
-                  }
-                ];
-                return finalResult;
-              });
-            });
-        });
-      });
-  }
-
-  // *****TODO******//
-  public getAllQuantity(id: number, dateOfQuery: string) {
-    return this.knex("categories")
-      .join("items", "items.categories_id", "=", "categories.id")
-      .join("orders_items", "items.id", "=", "orders_items.items_id")
-      .join("orders", "orders.id", "=", "orders_items.orders_id")
-      .join("users", "users.id", "=", "orders.users_id")
-      .select("categories.categoryName")
-      .count("orders_items.id")
-      .whereRaw("??::date = ?", ["created_at", dateOfQuery])
-      .where("users.id", id)
-      .groupBy("categoryName")
-      .then((result: any) => {
-        return Promise.all(
-          result.map((order: object, i: number) => {
-            const obj = {
-              [result[i].categoryName]: result[i].count
-            };
-            return obj;
-          })
-        ).then(userOrderList => {
-          return this.knex("categories")
-            .join("items", "items.categories_id", "=", "categories.id")
-            .join("orders_items", "items.id", "=", "orders_items.items_id")
-            .join("orders", "orders.id", "=", "orders_items.orders_id")
-            .join("users", "users.id", "=", "orders.users_id")
-            .select("categories.categoryName")
-            .count("orders_items.id")
-            .whereRaw("??::date = ?", ["created_at", dateOfQuery])
-            .whereNot("users.id", id)
-            .groupBy("categoryName")
-            .then((result2: any) => {
-              return Promise.all(
-                result2.map((order: object, i: number) => {
-                  const obj = {
-                    [result2[i].categoryName]: result2[i].count
                   };
                   return obj;
                 })
@@ -350,26 +296,3 @@ export default class OrdersService {
       });
   }
 }
-
-//////// Allen F///////////////
-// async getOrderByUserId(id: number) {
-//   let [user] = await this.knex("users")
-//     .where("id", id)
-//     .select("users.id as user_id", "username", "displayName"); // user should be first element of array (Destructuring_assignment)
-
-//   const orderList = await this.knex("orders")
-//     .where("users_id", id)
-//     .select("id");
-
-//   const orders = await Promise.all(
-//     orderList.map(async (_order: object, i: number) => {
-//       console.log(orderList[i].id);
-//       let [order] = await this.getOrderByOrderId(id);
-//       delete order.user_id;
-//       delete order.userName;
-//       delete order.displayName;
-//       return order;
-//     })
-//   );
-//   user["orders"] = orders;
-//   return user;

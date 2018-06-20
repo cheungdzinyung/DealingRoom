@@ -7,7 +7,6 @@ export default function(usersService: UsersService) {
   const strategy = new PassportJWT.Strategy(
     {
       secretOrKey: config.jwtSecret,
-      // tslint:disable-next-line:object-literal-sort-keys
       jwtFromRequest: PassportJWT.ExtractJwt.fromAuthHeaderAsBearerToken()
     },
     async (payload, done) => {
