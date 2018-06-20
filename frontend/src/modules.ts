@@ -148,7 +148,6 @@ export interface IPureMenuItemWithFlux {
 Corresponding API path: api/items
 URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiitems5d/obtaining-all-item's-information
 */
-
 export interface IPureCategoryWithItem {
   categoryName: string;
   categoryPhoto: string;
