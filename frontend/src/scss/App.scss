@@ -31,22 +31,26 @@ $header-sub-text: rgba(233, 219, 204, .3);
 @import "~@blueprintjs/core/lib/css/blueprint.css";
 @import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
 @import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,500,600,700|Proza+Libre:400,500|IBM+Plex+Mono');
-@import './share/common';
-@import './share/usermenu';
-@import './share/topbanner';
-@import './share/OrderBanner';
-@import './pages/login';
-@import './pages/profile';
-@import './pages/setting';
-@import './pages/menu';
-@import './pages/display';
-@import './pages/payment';
-@import './pages/order';
-@import './pages/orderlist';
-@import './pages/request';
-@import './ui/header';
-@import './ui/categoryfilter';
-@import './ui/menuitem';
+// Imports, internal SCSS modules
+// Presentation component styling
+@import './ui/mobile/categoryfilter';
+@import './ui/mobile/header';
+@import './ui/mobile/itemcard';
+@import './ui/mobile/menuitem';
+@import './ui/mobile/orderbanner';
+@import './ui/mobile/topbanner';
+@import './ui/mobile/usermenu';
+// Container component styling
+// Technically speaking, this should even be here at all (according to the founder of Redux. hehe) omg
+@import './pages/mobile/login';
+@import './pages/mobile/profile';
+@import './pages/mobile/setting';
+@import './pages/mobile/menu';
+@import './pages/mobile/payment';
+@import './pages/mobile/order';
+@import './pages/mobile/orderlist';
+@import './pages/mobile/request';
+
 // Top level reset
 html,
 body {
@@ -106,3 +110,38 @@ button,
 input {
     border: 0;
 }
+
+
+// Style element shares across multiple components
+.page-content-container {
+    width: 100%;
+    padding: 5vh 10% 17vh 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .rd-corner {
+    border-radius: 5px;
+  }
+  
+  .searchbar {
+    width: 100%;
+    padding: 3.5% 5%;
+    background-color: $search-bar-bgc;
+    color: $search-bar-font;
+    font-size: 1rem;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  
+  #up-triangle-path,
+  #up-triangle-group {
+    fill: $up;
+    stroke: $up;
+  }
+  
+  *::-moz-placeholder,
+  *::-ms-input-placeholder,
+  *::-webkit-input-placeholder {
+    color: $placebolder-color;
+  }
