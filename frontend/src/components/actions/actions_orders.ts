@@ -1,6 +1,8 @@
 import { Action, Dispatch } from "redux";
 import axios from "axios";
 
+import {API_SERVER} from "../../store";
+
 import {
     ICurrentOrder,
 } from "../../modules";
@@ -108,7 +110,7 @@ export function getEntireMenuFail(): IGetEntireMenuFailAction {
 export function getEntireMenu() {
     return (dispatch: Dispatch<IGetEntireMenuSuccessAction | IGetEntireMenuFailAction>) => {
         // axios.get("${process.env.REACT_APP_API_DEV}/api/items")
-        axios.get(`${process.env.REACT_APP_API_DEV}/api/items`)
+        axios.get(`${API_SERVER}/api/items`)
             .then((res: any) => {
                 if (res.status === 200) {
                     // alert(Object.keys(res.data));
@@ -160,7 +162,7 @@ export function confirmOrder(orderToConfirm: ICurrentOrder) {
     const config = { headers: {Authorization: "Bearer " + localStorage.getItem("dealingRoomToken")} }
     return (dispatch: Dispatch<IConfirmOrderSuccessAction | IConfirmOrderFailAction>) => {
         // axios.post(`${process.env.REACT_APP_API_DEV}/api/orders/${orderToConfirm.users_id}`, orderToConfirm, config)
-        axios.post(`${process.env.REACT_APP_API_SERVER}/api/orders/${orderToConfirm.users_id}`, orderToConfirm, config)
+        axios.post(`${API_SERVER}/api/orders/${orderToConfirm.users_id}`, orderToConfirm, config)
             .then((res: any) => {
                 if (res.status === 201) {
                     alert(res.data.status + " now redirect to order list");
@@ -195,7 +197,7 @@ export function getOrdersByUserid(userID: number) {
     const config = { headers: {Authorization: "Bearer " + localStorage.getItem("dealingRoomToken")} }
     return (dispatch: Dispatch<IGetOrdersByUseridSuccessAction | IGetOrdersByUseridFailAction>) => {
         // axios.get(`${process.env.REACT_APP_API_DEV}/api/orders/user/${userID}`, config)
-        axios.get(`${process.env.REACT_APP_API_SERVER}/api/orders/user/${userID}`, config)
+        axios.get(`${API_SERVER}/api/orders/user/${userID}`, config)
             .then((res: any) => {
                 if (res.status === 200) {
                     dispatch(getOrdersByUseridSuccess(res.data[0]));
