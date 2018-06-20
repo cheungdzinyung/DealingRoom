@@ -37,9 +37,10 @@ class PureRequest extends React.Component<IRequestProps, {}> {
     super(props);
   }
 
-  public componentWillMount () {
+  public componentDidMount () {
     if (this.props.currentOrder.length === 0) {
-      this.props.redirectPage("/order", this.props.history);
+      alert("your shopping cart is empty")
+      this.props.redirectPage("/menu", this.props.history);
       this.props.resetTargetPage();
     }
   }

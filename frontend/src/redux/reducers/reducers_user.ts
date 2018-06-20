@@ -54,7 +54,7 @@ export const userReducer = (state: IUserState = initialState, action: UserAction
         }
         case REDIRECT_PAGE: {
             // action.history.push(action.redirectTarget);
-            action.history.push("/order");
+            action.history.push(`${action.redirectTarget}`);
             return { ...state, redirectTarget: action.redirectTarget }
         }
         case RESET_TARGET_PAGE: {
