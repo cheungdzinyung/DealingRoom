@@ -159,7 +159,7 @@ export default class OrdersService {
             // broadcast newMenu
             console.log(entireMenu);
             io.local.emit("action", { type: "SOCKET_UPDATE_ITEM_PRICE", entireMenu });
-            // vvv old price, wt's wrong?
+            // vvv old price, what's wrong?
             return { ...confirmedOrder[0], entireMenu }
           });
         })
@@ -215,7 +215,7 @@ export default class OrdersService {
   // }
 
   // Working 13/06/18
-  public getByUserId(id: number) {
+  public getByUser(id: number) {
     return this.knex("users")
       .select("username", "displayName")
       .where("id", id)

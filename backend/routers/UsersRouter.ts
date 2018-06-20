@@ -19,9 +19,9 @@ export default class UsersRouter {
 
     router.post("/", upload.single("userPhoto"), this.add.bind(this));
 
-    router.get("/:id", this.get.bind(this));
+    router.get("/", this.get.bind(this));
 
-    router.put("/:id", upload.single("userPhoto"), this.update.bind(this));
+    router.put("/", upload.single("userPhoto"), this.update.bind(this));
 
     return router;
   }
@@ -39,9 +39,9 @@ export default class UsersRouter {
   }
 
   public get(req: express.Request, res: express.Response) {
-    if (req.user !== undefined && req.user.id === parseInt(req.params.id, 10)) {
+    if (req.user !== undefined) {
       return this.usersService
-        .get(req.params.id)
+        .get(req.user.id)
         .then((result: IUserData) => {
           res.status(200).json(result);
         })
@@ -55,9 +55,9 @@ export default class UsersRouter {
   }
 
   public update(req: express.Request, res: express.Response) {
-    if (req.user !== undefined && req.user.id === parseInt(req.params.id, 10)) {
+    if (req.user !== undefined) {
       return this.usersService
-        .update(req.params.id, req.body, req.file)
+        .update(req.user.id, req.body, req.file)
         .then((result: IUserData) => {
           res.status(201).json(result);
         })
