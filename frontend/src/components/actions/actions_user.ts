@@ -1,6 +1,8 @@
 import { Action, Dispatch } from "redux";
 import axios from "axios";
 
+import {API_SERVER} from "../../store";
+
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const CHANGE_PAGE = "CHANGE_PAGE";
 export type CHANGE_PAGE = typeof CHANGE_PAGE;
@@ -107,7 +109,8 @@ export function localLogin(username: string, password: string) {
             displayName: "admin"
         };
         //    vvv right now using sign up since login route is not ready
-        axios.post(`http://localhost:8080/api/auth/login`, loginPackage)
+        // axios.post(`${process.env.REACT_APP_API_DEV}/api/auth/login`, loginPackage)
+        axios.post(`${API_SERVER}/api/auth/login`, loginPackage)
             .then((res: any) => {
                 if (res.status === 200) {
                     dispatch(localLoginSuccess(res.data));
@@ -140,7 +143,8 @@ export function getUserProfileByUseridFail(): IGetUserProfileByUseridFailAction 
 export function getUserProfileByUserid(userID: number) {
     const config = { headers: {Authorization: "Bearer " + localStorage.getItem("dealingRoomToken")} }
     return (dispatch: Dispatch<IGetUserProfileByUseridSuccessAction | IGetUserProfileByUseridFailAction>) => {
-        axios.get(`http://localhost:8080/api/users/${userID}`, config)
+        // axios.get(`${process.env.REACT_APP_API_DEV}/api/users/${userID}`, config)
+        axios.get(`${API_SERVER}/api/users/${userID}`, config)
             .then((res: any) => {
                 if (res.status === 200) {
                     dispatch(getUserProfileByUseridSuccess(res.data[0]));

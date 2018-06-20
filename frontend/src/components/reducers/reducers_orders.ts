@@ -13,7 +13,7 @@ import {
 } from "../actions/actions_orders";
 
 import {
-    IRequestItem,
+    IRequestItem, IPureCategoryWithItem,
 } from "../../modules";
 
 export interface IOrdersState {
@@ -23,7 +23,7 @@ export interface IOrdersState {
     // init
     menuReady: boolean,
     orderListReady: boolean,
-    entireMenu: string[],
+    entireMenu: IPureCategoryWithItem[],
     categories: string[],
     // priceMapping: {},
     // orders
@@ -81,7 +81,7 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
             // onclick: add item to current order []
             const newItem: IRequestItem = {
                 thisItemID: Date.now(),                 // only for current order
-                items_id: action.itemid,                // from db
+                items_id: action.item_id,                // from db
                 itemName: action.itemName,              // from db
                 ice: "normal",                          // allow mods when btn is ready
                 sweetness: "normal",

@@ -1,6 +1,8 @@
 import { Action, Dispatch } from "redux";
 import axios from "axios";
 
+import {API_SERVER} from "../../store";
+
 import {
     ICurrentOrder,
 } from "../../modules";
@@ -23,7 +25,7 @@ export const ADD_ITEM = "ADD_ITEM";
 export type ADD_ITEM = typeof ADD_ITEM;
 export interface IAddItemAction extends Action {
     type: ADD_ITEM,
-    itemid: number,
+    item_id: number,
     itemName: string,
     currentPrice: number,
 }
@@ -107,7 +109,8 @@ export function getEntireMenuFail(): IGetEntireMenuFailAction {
 
 export function getEntireMenu() {
     return (dispatch: Dispatch<IGetEntireMenuSuccessAction | IGetEntireMenuFailAction>) => {
-        axios.get("http://localhost:8080/api/items")
+        // axios.get("${process.env.REACT_APP_API_DEV}/api/items")
+        axios.get(`${API_SERVER}/api/items`)
             .then((res: any) => {
                 if (res.status === 200) {
                     // alert(Object.keys(res.data));
@@ -124,10 +127,10 @@ export function getEntireMenu() {
     }
 }
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export function addToCurrentOrder(itemid: number, itemName: string, currentPrice: number): IAddItemAction {
+export function addToCurrentOrder(itemId: number, itemName: string, currentPrice: number): IAddItemAction {
     return {
         type: ADD_ITEM,
-        itemid,
+        item_id: itemId,
         itemName,
         currentPrice,
     }
@@ -158,7 +161,8 @@ export function confirmOrderFail(result: any): IConfirmOrderFailAction {
 export function confirmOrder(orderToConfirm: ICurrentOrder) {
     const config = { headers: {Authorization: "Bearer " + localStorage.getItem("dealingRoomToken")} }
     return (dispatch: Dispatch<IConfirmOrderSuccessAction | IConfirmOrderFailAction>) => {
-        axios.post(`http://localhost:8080/api/orders/${orderToConfirm.users_id}`, orderToConfirm, config)
+        // axios.post(`${process.env.REACT_APP_API_DEV}/api/orders/${orderToConfirm.users_id}`, orderToConfirm, config)
+        axios.post(`${API_SERVER}/api/orders/${orderToConfirm.users_id}`, orderToConfirm, config)
             .then((res: any) => {
                 if (res.status === 201) {
                     alert(res.data.status + " now redirect to order list");
@@ -192,7 +196,8 @@ export function getOrdersByUseridFail(): IGetOrdersByUseridFailAction {
 export function getOrdersByUserid(userID: number) {
     const config = { headers: {Authorization: "Bearer " + localStorage.getItem("dealingRoomToken")} }
     return (dispatch: Dispatch<IGetOrdersByUseridSuccessAction | IGetOrdersByUseridFailAction>) => {
-        axios.get(`http://localhost:8080/api/orders/user/${userID}`, config)
+        // axios.get(`${process.env.REACT_APP_API_DEV}/api/orders/user/${userID}`, config)
+        axios.get(`${API_SERVER}/api/orders/user/${userID}`, config)
             .then((res: any) => {
                 if (res.status === 200) {
                     dispatch(getOrdersByUseridSuccess(res.data[0]));
