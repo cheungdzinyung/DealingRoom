@@ -2,7 +2,6 @@ import * as React from "react";
 
 // importing UI elements
 import { Card, Elevation, Collapse } from "@blueprintjs/core";
-import {}
 
 // import static icons
 import wallet from "../icons/item/wallet.svg";
