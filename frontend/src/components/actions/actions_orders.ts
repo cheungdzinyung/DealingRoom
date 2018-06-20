@@ -107,7 +107,8 @@ export function getEntireMenuFail(): IGetEntireMenuFailAction {
 
 export function getEntireMenu() {
     return (dispatch: Dispatch<IGetEntireMenuSuccessAction | IGetEntireMenuFailAction>) => {
-        axios.get("http://localhost:8080/api/items")
+        // axios.get("${process.env.REACT_APP_API_DEV}/api/items")
+        axios.get(`${process.env.REACT_APP_API_DEV}/api/items`)
             .then((res: any) => {
                 if (res.status === 200) {
                     // alert(Object.keys(res.data));
@@ -158,7 +159,8 @@ export function confirmOrderFail(result: any): IConfirmOrderFailAction {
 export function confirmOrder(orderToConfirm: ICurrentOrder) {
     const config = { headers: {Authorization: "Bearer " + localStorage.getItem("dealingRoomToken")} }
     return (dispatch: Dispatch<IConfirmOrderSuccessAction | IConfirmOrderFailAction>) => {
-        axios.post(`http://localhost:8080/api/orders/${orderToConfirm.users_id}`, orderToConfirm, config)
+        // axios.post(`${process.env.REACT_APP_API_DEV}/api/orders/${orderToConfirm.users_id}`, orderToConfirm, config)
+        axios.post(`${process.env.REACT_APP_API_SERVER}/api/orders/${orderToConfirm.users_id}`, orderToConfirm, config)
             .then((res: any) => {
                 if (res.status === 201) {
                     alert(res.data.status + " now redirect to order list");
@@ -192,7 +194,8 @@ export function getOrdersByUseridFail(): IGetOrdersByUseridFailAction {
 export function getOrdersByUserid(userID: number) {
     const config = { headers: {Authorization: "Bearer " + localStorage.getItem("dealingRoomToken")} }
     return (dispatch: Dispatch<IGetOrdersByUseridSuccessAction | IGetOrdersByUseridFailAction>) => {
-        axios.get(`http://localhost:8080/api/orders/user/${userID}`, config)
+        // axios.get(`${process.env.REACT_APP_API_DEV}/api/orders/user/${userID}`, config)
+        axios.get(`${process.env.REACT_APP_API_SERVER}/api/orders/user/${userID}`, config)
             .then((res: any) => {
                 if (res.status === 200) {
                     dispatch(getOrdersByUseridSuccess(res.data[0]));

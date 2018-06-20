@@ -37,7 +37,7 @@ app.listen(config.port, () => {
 
 import * as http from "http";
 const server = http.createServer();
-server.listen(8008);
+server.listen(8080);
 
 import * as socketIO from "socket.io";
 export const io = socketIO();

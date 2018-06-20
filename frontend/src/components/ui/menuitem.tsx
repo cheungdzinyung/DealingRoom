@@ -16,19 +16,33 @@ import { IItemPriceGraphData } from "src/modules";
 
 interface IMenuItemProps {
     key: number;
+    itemID: number;
     itemName: string;
-    price: number;
+    currentPrice: number;
     priceDelta: number;
     details: string;
+    addToCurrentOrder: (itemID: number, itemName: string, currentPrice: number)=>void;
     image: "*.jpg" | "*.png" | "*.jpeg";
-    detailIsOpen: boolean
-    priceData: IItemPriceGraphData[]
+    detailIsOpen: boolean;
+    priceData: IItemPriceGraphData[];
+
 }
 
 export default class MenuItem extends React.Component<IMenuItemProps> {
     constructor(props: IMenuItemProps) {
         super(props);
     }
+
+    public addToCurrentOrder = (e: React.MouseEvent<HTMLImageElement>) => {
+    // public addToCurrentOrder = (e: React.MouseEvent<HTMLDivElement>) => {
+        // const itemid = e.currentTarget.dataset.itemid;
+        // const itemName = e.currentTarget.dataset.itemname;    // dataset attr are all lowercase
+        // if (itemid !== undefined && itemName !== undefined) {
+        //   const currentPrice = this.props.entireMenu[this.state.displayCategoryIndex].items.find((element: any) => (parseFloat(itemid) === element.items_id)).currentPrice;
+          this.props.addToCurrentOrder(this.props.itemID, this.props.itemName, this.props.currentPrice);
+        // }
+      }
+
     public render() {
         return (
             <div className="menu-item-container">
@@ -37,13 +51,14 @@ export default class MenuItem extends React.Component<IMenuItemProps> {
                     interactive={true}
                     elevation={Elevation.ONE}
                     key={this.props.key}
+                    // onClick={this.addToCurrentOrder}
                 >
                     {/* Absolute location */}
                     {/* Product images */}
                     <img src={this.props.image} className="menu-item-img" alt="" />
                     {/* Info button  */}
                     <img className="item-info" src={info} alt="" />
-                    <img className="add-item" src={plus} alt="" />
+                    <img className="add-item" src={plus} alt="" onClick={this.addToCurrentOrder} />
                     <span className="menu-item-name">{this.props.itemName}</span>
                     <div className="menu-item-bot">
                         {/* Divider */}
@@ -53,7 +68,7 @@ export default class MenuItem extends React.Component<IMenuItemProps> {
                             <div className="item-flucutation-container">
                                 <img className="flux-img" src={wallet} alt="" />
                                 <span className="item-fluctuation-display">
-                                    &#36;{this.props.price}
+                                    &#36;{this.props.currentPrice}
                                 </span>
                             </div>
                             <div className="item-flucutation-container">

@@ -39,7 +39,7 @@ interface IMenuProps {
   entireMenu: any,
   categories: any[],
   currentOrder: IRequestItem[],
-  addToCurrentOrder: (itemid: number, itemName: string, currentPrice: number) => void,
+  addToCurrentOrder: (itemID: number, itemName: string, currentPrice: number) => void,
 }
 
 interface IMenuState {
@@ -164,11 +164,13 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
 
 
         <MenuItem {...{
-          key: this.props.entireMenu[0].items.find((e: any)=>(e.items_id===1)).items_id,
+          key: 1, 
+          itemID: this.props.entireMenu[0].items.find((e: any)=>(e.items_id===1)).items_id,
           itemName: this.props.entireMenu[0].items.find((e: any)=>(e.items_id===1)).itemName,
-          price: this.props.entireMenu[0].items.find((e: any)=>(e.items_id===1)).currentPrice,
+          currentPrice: this.props.entireMenu[0].items.find((e: any)=>(e.items_id===1)).currentPrice,
           priceDelta: 3.45,
           details: this.props.entireMenu[0].items.find((e: any)=>(e.items_id===1)).itemDescription,
+          addToCurrentOrder: this.props.addToCurrentOrder,
           image: beer1,
           detailIsOpen: true,
           priceData: [

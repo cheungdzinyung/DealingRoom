@@ -4,7 +4,9 @@ import thunk from 'redux-thunk';
 
 import createSocketIoMiddleware from 'redux-socket.io';
 import * as io from 'socket.io-client';
-const socket = io("http://localhost:8008");
+
+// const socket = io(`${process.env.REACT_APP_API_DEV}`);
+const socket = io(`${process.env.REACT_APP_API_SERVER}`);
 const socketIoMiddleware = createSocketIoMiddleware(socket, ["GET/", "POST", "PUT"]);
 
 import logger from 'redux-logger';
