@@ -182,7 +182,9 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
             {time: "", purchasePrice: 46},
             {time: "", purchasePrice: 83},
             {time: "", purchasePrice: 55},
-            {time: "", purchasePrice: 41}]
+            {time: "", purchasePrice: 41}
+          ], 
+          // openDetail: 
         }} />
 
 
