@@ -3,9 +3,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-
-    // Card - top part of the item
+    align-items: flex-end; // Card - top part of the item
     .menu-item-card {
         position: relative;
         width: 80%;
@@ -13,8 +11,7 @@
         background-color: $item-card-bgc;
         display: grid;
         grid-template-columns: repeat(4, 25%);
-        grid-template-rows: repeat(5, 20%);
-        // Absolute positioning
+        grid-template-rows: repeat(5, 20%); // Absolute positioning
         .menu-item-img {
             width: 40%;
             border-radius: 50%;
@@ -23,19 +20,18 @@
             left: -25%;
             filter: drop-shadow(0 4px 4px rgba(0, 0, 0, .25));
         }
-        .item-info{
+        .item-info {
             position: absolute;
             top: 10px;
             right: 10px;
             width: 6%;
         }
-        .add-item{
+        .add-item {
             position: absolute;
             bottom: -15px;
             right: 20px;
             width: 30px;
         }
-        
         .menu-item-name {
             font-size: 1.1rem;
             flex-wrap: wrap;
@@ -76,12 +72,22 @@
                 }
             }
         }
-    }
-
-    // Collapse - the flex part of the item
-    .item-detail-collapse{
+    } // Collapse - the flex part of the item
+    .item-detail-collapse {
         width: 80%;
         background-color: $item-detail-bgc;
-        padding: 10%;
+        .item-detail-wrapper {
+            width: 100%;
+            padding: 12% 10%;
+            .item-detail-subheader {
+                color: $item-detail-subheaders;
+                font-size: 1rem;
+            }
+            .item-detail {
+                color: $item-detail-text;
+                font-size: .7rem;
+                letter-spacing: .05rem;
+            }
+        }
     }
 }
