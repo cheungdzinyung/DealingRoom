@@ -15,8 +15,9 @@ export default class UsersRouter {
 
     router.get("/prices/", this.getAllPrice.bind(this));
     router.get("/user/", this.getByUser.bind(this));
+    router.get("/", this.getAllOrders.bind(this));
 
-    router.put("/", this.update.bind(this));
+    router.put("/:id", this.update.bind(this));
 
     return router;
   }
@@ -67,11 +68,30 @@ export default class UsersRouter {
   }
 
   public update(req: express.Request, res: express.Response) {
-    if (req.user !== undefined ) {
+    if (req.user !== undefined) {
       return this.ordersService
-        .update(req.user.id, req.body)
+        .update(req.params.id, req.body)
         .then((result: any) => {
           res.status(201).json(result);
+        })
+        .catch((err: express.Errback) => {
+          res.status(500).json({ status: "failed" });
+        });
+    } else {
+      return res.status(401).json({ status: "unauthorized" });
+    }
+  }
+
+  public getAllOrders(req: express.Request, res: express.Response) {
+    if (req.user !== undefined) {
+      return this.ordersService
+        .getAllOrders(req.user.id)
+        .then((result: any) => {
+          if (result === "customer") {
+            res.status(401).json({ status: "unauthorized" });
+          } else {
+            res.status(201).json(result);
+          }
         })
         .catch((err: express.Errback) => {
           res.status(500).json({ status: "failed" });

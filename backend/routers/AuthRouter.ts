@@ -5,13 +5,19 @@ import * as Knex from "knex";
 import * as multer from "multer";
 import config from "../config";
 
-const upload = multer();
+import { IUserData } from "../interfaces";
+import UsersService from "../services/UsersService";
+
+const storage = multer.memoryStorage();
+const upload = multer({ dest: "../users", storage });
 
 export default class AuthRouter {
   private knex: Knex;
+  private usersService: UsersService;
 
-  constructor(knex: Knex) {
+  constructor(knex: Knex, usersService: UsersService) {
     this.knex = knex;
+    this.usersService = usersService;
   }
 
   public getRouter() {
@@ -19,9 +25,22 @@ export default class AuthRouter {
     router.post("/google", this.loginWithGoogle.bind(this));
     router.post("/facebook", this.loginWithFacebook.bind(this));
     router.post("/login", upload.single(), this.localLogin.bind(this));
+    router.post("/signup", upload.single("userPhoto"), this.signUp.bind(this));
     return router;
   }
 
+  public signUp(req: express.Request, res: express.Response) {
+    return this.usersService
+      .add(req.body, req.file)
+      .then((result: IUserData) => {
+        res.status(201).json(result);
+      })
+      .catch((err: express.Errback) => {
+        console.log(err)
+        res.status(500).json({ status: "failed" });
+      });
+  }
+  
   public async localLogin(req: express.Request, res: express.Response) {
     if (req.body.username && req.body.password) {
       const username = req.body.username;
