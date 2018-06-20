@@ -5,22 +5,42 @@ import * as Knex from "knex";
 import * as multer from "multer";
 import config from "../config";
 
-const upload = multer();
+import { IUserData } from "../interfaces";
+import UsersService from "../services/UsersService";
+
+const storage = multer.memoryStorage();
+const upload = multer({ dest: "../users", storage });
 
 export default class AuthRouter {
   private knex: Knex;
+  private usersService: UsersService;
 
-  constructor(knex: Knex) {
+  constructor(knex: Knex, usersService: UsersService) {
     this.knex = knex;
+    this.usersService = usersService;
   }
 
   public getRouter() {
     const router = express.Router();
     router.post("/google", this.loginWithGoogle.bind(this));
+    router.post("/facebook", this.loginWithFacebook.bind(this));
     router.post("/login", upload.single(), this.localLogin.bind(this));
+    router.post("/signup", upload.single("userPhoto"), this.signUp.bind(this));
     return router;
   }
 
+  public signUp(req: express.Request, res: express.Response) {
+    return this.usersService
+      .add(req.body, req.file)
+      .then((result: IUserData) => {
+        res.status(201).json(result);
+      })
+      .catch((err: express.Errback) => {
+        console.log(err)
+        res.status(500).json({ status: "failed" });
+      });
+  }
+  
   public async localLogin(req: express.Request, res: express.Response) {
     if (req.body.username && req.body.password) {
       const username = req.body.username;
@@ -61,7 +81,32 @@ export default class AuthRouter {
       if (authResult.data.error) {
         res.sendStatus(401);
       }
+      console.log(authResult.data);
+      const token = jwtSimple.encode(
+        { id: accessToken, info: authResult.data },
+        config.jwtSecret
+      );
+      res.json({ token });
+    } catch (err) {
+      res.sendStatus(401);
+    }
+  }
 
+  public async loginWithFacebook(req: express.Request, res: express.Response) {
+    const accessToken = req.body.accessToken;
+    console.log(accessToken);
+    if (!accessToken) {
+      res.sendStatus(401);
+    }
+    try {
+      const authResult = await axios.get(
+        `https://graph.facebook.com/me?access_token=${accessToken}`
+      );
+
+      if (authResult.data.error) {
+        res.sendStatus(401);
+      }
+      console.log(authResult.data);
       const token = jwtSimple.encode(
         { id: accessToken, info: authResult.data },
         config.jwtSecret
