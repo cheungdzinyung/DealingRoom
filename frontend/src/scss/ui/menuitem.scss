@@ -1,22 +1,93 @@
 .menu-item-container {
     margin: 5% 0;
-    width:100%;
+    width: 100%;
     display: flex;
-    justify-content: flex-end;
-    .menu-item-card{
+    flex-direction: column;
+    align-items: flex-end; // Card - top part of the item
+    .menu-item-card {
         position: relative;
         width: 80%;
+        height: auto;
         background-color: $item-card-bgc;
         display: grid;
         grid-template-columns: repeat(4, 25%);
-        grid-template-rows: 1.3fr 1fr;
-        .menu-item-name{
-            font-size: 1.5rem;
+        grid-template-rows: repeat(5, 20%); // Absolute positioning
+        .menu-item-img {
+            width: 40%;
+            border-radius: 50%;
+            position: absolute;
+            top: 15%;
+            left: -25%;
+            filter: drop-shadow(0 4px 4px rgba(0, 0, 0, .25));
+        }
+        .item-info {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 6%;
+        }
+        .add-item {
+            position: absolute;
+            bottom: -15px;
+            right: 20px;
+            width: 30px;
+        }
+        .menu-item-name {
+            font-size: 1.1rem;
             flex-wrap: wrap;
-            grid-column: 2/5;
-            grid-row: 1/2;
-            font-weight: 600;
+            grid-column: 2/4;
+            grid-row: 1/4;
+            font-weight: 500;
             color: $item-card-text;
+        }
+        .menu-item-bot {
+            width: 100%;
+            grid-column: 2/5;
+            grid-row: 4/6;
+            .item-split {
+                margin: 7% 0;
+                width: 20%;
+                border-radius: 20%;
+                border: 2px solid rgba(255, 205, 68, .75);
+            }
+            .item-fluctuation {
+                width: 100%; // grid-row:2/5;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                .item-flucutation-container {
+                    width: 50%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: center;
+                    .flux-img {
+                        width: 15%;
+                    }
+                    .item-fluctuation-display {
+                        text-align: center;
+                        margin-left: 8%;
+                    }
+                }
+            }
+        }
+    } // Collapse - the flex part of the item
+    .item-detail-collapse {
+        width: 80%;
+        background-color: $item-detail-bgc;
+        .item-detail-wrapper {
+            width: 100%;
+            padding: 12% 10%;
+            .item-detail-subheader {
+                color: $item-detail-subheaders;
+                font-size: 1rem;
+            }
+            .item-detail {
+                color: $item-detail-text;
+                font-size: .7rem;
+                letter-spacing: .05rem;
+            }
         }
     }
 }

@@ -148,7 +148,6 @@ export interface IPureMenuItemWithFlux {
 Corresponding API path: api/items
 URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiitems5d/obtaining-all-item's-information
 */
-
 export interface IPureCategoryWithItem {
   categoryName: string;
   categoryPhoto: string;
@@ -161,8 +160,8 @@ Corresponding API path POST: api/orders/user/:id
 */
 // each item in shopping cart
 export interface IRequestItem {
-  thisItemID: string,
-  items_id: string,
+  thisItemID: number,
+  items_id: number,
   itemName: string,
   ice: ModificationType,
   sweetness: ModificationType,
@@ -176,6 +175,9 @@ export interface ICurrentOrder {
   status: OrderStatus,
   item: IRequestItem[],
 }
+
+
+
 
 // store state for ref
 // interface IUserState {
@@ -192,3 +194,13 @@ export interface ICurrentOrder {
 //   currentOrder: IRequestItem[],
 //   currentTotal: number,
 // }
+
+
+
+
+
+// New line graph data format
+export interface IItemPriceGraphData{
+  time: string
+  purchasePrice: number
+}

@@ -25,6 +25,7 @@ import { chartOption } from "../../fakedata";
 import down from "../icons/down.svg";
 import up from "../icons/up.svg";
 import beer from "../images/categories/beer.jpg";
+import beer1 from "../images/categories/squarebeer.jpg";
 
 
 import { IRequestItem } from "../../modules";
@@ -37,9 +38,8 @@ import CategoryFilter from "../ui/categoryfilter";
 interface IMenuProps {
   entireMenu: any,
   categories: any[],
-  priceMapping: any,
   currentOrder: IRequestItem[],
-  addToCurrentOrder: (itemid: string, itemName: string, currentPrice: number) => void,
+  addToCurrentOrder: (itemid: number, itemName: string, currentPrice: number) => void,
 }
 
 interface IMenuState {
@@ -89,9 +89,11 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
     };
   }
 
-  // socket
-  public componentDidUpdate() {
-    this.render();
+  // price fluc. by socket.io, new price recieved in actions_orders
+  // map state.entireMenu to props and comp will re-render when updated
+  // F5 btn for testing
+  public refreshPrice = () => {
+    store.dispatch({ type: 'POST/buy', data: {} });
   }
 
   // switch category
@@ -124,7 +126,6 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
   // search box
   public searching = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ searchBoxEntry: e.target.value.toLowerCase() });
-    store.dispatch({ type: 'POST/buy', data: { items: [{ itemID: 1 }, { itemID: 3 }] } });
   }
 
   // add to cart
@@ -133,13 +134,13 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
     const itemName = e.currentTarget.dataset.itemname;    // dataset attr are all lowercase
     if (itemid !== undefined && itemName !== undefined) {
       const currentPrice = this.props.entireMenu[this.state.displayCategoryIndex].items.find((element: any) => (parseFloat(itemid) === element.items_id)).currentPrice;
-      this.props.addToCurrentOrder(itemid, itemName, currentPrice);
+      this.props.addToCurrentOrder(parseInt(itemid, 10), itemName, currentPrice);
     }
   }
 
-
   // TODO: to fix the next and Previous of the carousel
   public render() {
+    // alert("render");
     return (
       <div className="page-content-container">
         <PageHeader header={"Menu"} subHeader={"Column A, or try column B"} />
@@ -163,11 +164,25 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
 
 
         <MenuItem {...{
-          key: 1,
-          itemName: "Long Island Ice Tea",
-          price: 96,
+          key: this.props.entireMenu[0].items.find((e: any)=>(e.items_id===1)).items_id,
+          itemName: this.props.entireMenu[0].items.find((e: any)=>(e.items_id===1)).itemName,
+          price: this.props.entireMenu[0].items.find((e: any)=>(e.items_id===1)).currentPrice,
           priceDelta: 3.45,
-          details: "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, which gives the drink the same amber hue as its namesake."
+          details: this.props.entireMenu[0].items.find((e: any)=>(e.items_id===1)).itemDescription,
+          image: beer1,
+          detailIsOpen: true,
+          priceData: [
+            {time: "9AM", purchasePrice: 23},
+            {time: "", purchasePrice: 46},
+            {time: "", purchasePrice: 75},
+            {time: "", purchasePrice: 15},
+            {time: "", purchasePrice: 75},
+            {time: "", purchasePrice: 46},
+            {time: "", purchasePrice: 83},
+            {time: "", purchasePrice: 55},
+            {time: "", purchasePrice: 41}
+          ], 
+          // openDetail: 
         }} />
 
 
@@ -176,9 +191,13 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
         {/* render display from all > cat > search */}
         {this.props.entireMenu.map((category: any, categoryIndex: any) => (
           category.items.map((item: any, itemIndex: any) => (
-            (item.itemName.toLowerCase().search(this.state.searchBoxEntry) !== -1
+            (
+              /* v match searching */
+              item.itemName.toLowerCase().search(this.state.searchBoxEntry) !== -1
+              /* v match selected category */
               && category.categoryName === this.props.categories[this.state.displayCategoryIndex]
-              && ((Object.keys(this.props.priceMapping).length !== 0) ? (this.props.priceMapping[category.categoryName][`items_id_${item.items_id}`].itemStock > 0) : true)
+              /* v check stock > 0 */
+              && item.itemStock > 0
             ) ?
               <div className="item-container">
                 <Card
@@ -198,10 +217,10 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
                   <div className="pricetag"
                     onClick={this.addToCurrentOrder}
                     data-itemid={item.items_id}
-                    // data-currentPrice={item.currentPrice}
+                    data-currentPrice={item.currentPrice}
                     data-itemname={item.itemName}>
                     <span>{item.itemName}</span>
-                    {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] && <span>${(Object.keys(this.props.priceMapping).length !== 0) ? this.props.priceMapping[category.categoryName][`items_id_${item.items_id}`].currentPrice : item.currentPrice}</span>}
+                    {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] && <span>${item.currentPrice}</span>}
                   </div>
 
                   {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] ? <div className="arrow-container">
@@ -248,7 +267,7 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
 
         <Usermenu />
       </div>
-    );
+    )
   }
 }
 
@@ -256,15 +275,15 @@ const mapStateToProps = (state: IRootState) => {
   return {
     entireMenu: state.orders.entireMenu,
     categories: state.orders.categories,
-    priceMapping: state.orders.priceMapping,
+    // priceMapping: state.orders.priceMapping,
     currentOrder: state.orders.currentOrder,
   }
 }
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    addToCurrentOrder: (uniqueID: string, name: string, currentPrice: number) => {
-      dispatch(addToCurrentOrder(uniqueID, name, currentPrice));
+    addToCurrentOrder: (itemid: number, name: string, currentPrice: number) => {
+      dispatch(addToCurrentOrder(itemid, name, currentPrice));
     }
   }
 }

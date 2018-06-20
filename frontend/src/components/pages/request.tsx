@@ -29,9 +29,11 @@ import { IRequestItem, ICurrentOrder } from "../../modules";
 
 interface IRequestProps {
   // handling orders
+  user_id: number,
+  // table_id: number,
   currentOrder: IRequestItem[],
   currentTotal: number,
-  removeFromCurrentOrder: (thisItemID: string) => void,
+  removeFromCurrentOrder: (thisItemID: number) => void,
   confirmOrder: (orderToConfirm: ICurrentOrder) => void,
   // handling redirect
   history: History.History,
@@ -61,13 +63,13 @@ class PureRequest extends React.Component<IRequestProps, {}> {
   public removeFromCurrentOrder = (e: React.MouseEvent<HTMLDivElement>) => {
     const thisItemID = e.currentTarget.dataset.thisitemid;
     if (thisItemID !== undefined) {
-      this.props.removeFromCurrentOrder(thisItemID);
+      this.props.removeFromCurrentOrder(parseInt(thisItemID, 10));
     }
   }
 
   public confirmOrder = () => {
     const orderToConfirm: ICurrentOrder = {
-      users_id: 1,  // get from root state
+      users_id: this.props.user_id,  // get from root state
       table: 1,   // get from root state
       status: "confirmed", // change to confirmed
       item: this.props.currentOrder,
@@ -118,6 +120,7 @@ class PureRequest extends React.Component<IRequestProps, {}> {
 
 const mapStateToProps = (state: IRootState) => {
   return {
+    user_id: state.user.user_id,
     currentOrder: state.orders.currentOrder,
     currentTotal: state.orders.currentTotal,
   }
@@ -125,7 +128,7 @@ const mapStateToProps = (state: IRootState) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    removeFromCurrentOrder: (thisItemID: string) => {
+    removeFromCurrentOrder: (thisItemID: number) => {
       dispatch(removeFromCurrentOrder(thisItemID));
     },
     confirmOrder: (orderToConfirm: ICurrentOrder) => {

@@ -23,7 +23,7 @@ export const ADD_ITEM = "ADD_ITEM";
 export type ADD_ITEM = typeof ADD_ITEM;
 export interface IAddItemAction extends Action {
     type: ADD_ITEM,
-    itemid: string,
+    itemid: number,
     itemName: string,
     currentPrice: number,
 }
@@ -32,7 +32,7 @@ export const REMOVE_ITEM = "REMOVE_ITEM";
 export type REMOVE_ITEM = typeof REMOVE_ITEM;
 export interface IRemoveItemAction extends Action {
     type: REMOVE_ITEM,
-    thisItemID: string,
+    thisItemID: number,
 }
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const CONFIRM_ORDER_SUCCESS = "CONFIRM_ORDER_SUCCESS";
@@ -74,7 +74,7 @@ export const SOCKET_UPDATE_ITEM_PRICE = "SOCKET_UPDATE_ITEM_PRICE";
 export type SOCKET_UPDATE_ITEM_PRICE = typeof SOCKET_UPDATE_ITEM_PRICE;
 export interface ISocketUpdateItemPrice extends Action {
     type: SOCKET_UPDATE_ITEM_PRICE,
-    socketData:any,
+    entireMenu:any,
 }
 
 
@@ -124,7 +124,7 @@ export function getEntireMenu() {
     }
 }
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export function addToCurrentOrder(itemid: string, itemName: string, currentPrice: number): IAddItemAction {
+export function addToCurrentOrder(itemid: number, itemName: string, currentPrice: number): IAddItemAction {
     return {
         type: ADD_ITEM,
         itemid,
@@ -133,7 +133,7 @@ export function addToCurrentOrder(itemid: string, itemName: string, currentPrice
     }
 }
 
-export function removeFromCurrentOrder(thisItemID: string): IRemoveItemAction {
+export function removeFromCurrentOrder(thisItemID: number): IRemoveItemAction {
     return {
         type: REMOVE_ITEM,
         thisItemID,
@@ -156,15 +156,17 @@ export function confirmOrderFail(result: any): IConfirmOrderFailAction {
 }
 
 export function confirmOrder(orderToConfirm: ICurrentOrder) {
+    const config = { headers: {Authorization: "Bearer " + localStorage.getItem("dealingRoomToken")} }
     return (dispatch: Dispatch<IConfirmOrderSuccessAction | IConfirmOrderFailAction>) => {
-        axios.post(`http://localhost:8080/api/orders/${orderToConfirm.users_id}`, orderToConfirm)
+        axios.post(`http://localhost:8080/api/orders/${orderToConfirm.users_id}`, orderToConfirm, config)
             .then((res: any) => {
                 if (res.status === 201) {
-                    alert(res.data[0].status);
-                    dispatch(confirmOrderSuccess(res.body, orderToConfirm));
+                    alert(res.data.status + " now redirect to order list");
+                    // alert(JSON.stringify(res.data))
+                    dispatch(confirmOrderSuccess(res.data, orderToConfirm));
                 } else {
                     alert("error, try again");
-                    dispatch(confirmOrderFail(res.body));
+                    dispatch(confirmOrderFail(res.data));
                 }
             })
             .catch((err: any) => {
@@ -188,8 +190,9 @@ export function getOrdersByUseridFail(): IGetOrdersByUseridFailAction {
 }
 
 export function getOrdersByUserid(userID: number) {
+    const config = { headers: {Authorization: "Bearer " + localStorage.getItem("dealingRoomToken")} }
     return (dispatch: Dispatch<IGetOrdersByUseridSuccessAction | IGetOrdersByUseridFailAction>) => {
-        axios.get(`http://localhost:8080/api/orders/user/${userID}`)
+        axios.get(`http://localhost:8080/api/orders/user/${userID}`, config)
             .then((res: any) => {
                 if (res.status === 200) {
                     dispatch(getOrdersByUseridSuccess(res.data[0]));
@@ -214,9 +217,9 @@ export function socketConnect(socketID: any): ISocketConnectSuccess {
     }
 }
 
-export function socketUpdateItemPrice(socketData: any): ISocketUpdateItemPrice {
+export function socketUpdateItemPrice(entireMenu: any): ISocketUpdateItemPrice {
     return {
         type: SOCKET_UPDATE_ITEM_PRICE,
-        socketData,
+        entireMenu,
     }
 }

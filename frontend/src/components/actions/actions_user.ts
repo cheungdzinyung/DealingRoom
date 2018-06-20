@@ -101,16 +101,16 @@ export function localLoginFail(): ILocalLoginFailAction {
 export function localLogin(username: string, password: string) {
     return (dispatch: Dispatch<ILocalLoginSuccessAction | ILocalLoginFailAction>) => {
         const loginPackage = {
-            username: "admin",
+            username,
             password,
             role: "customer",
             displayName: "admin"
         };
         //    vvv right now using sign up since login route is not ready
-        axios.post(`http://localhost:8080/api/users`, loginPackage)
+        axios.post(`http://localhost:8080/api/auth/login`, loginPackage)
             .then((res: any) => {
-                if (res.status === 201) {
-                    dispatch(localLoginSuccess(res.data[0]));
+                if (res.status === 200) {
+                    dispatch(localLoginSuccess(res.data));
                 } else {
                     alert("status: " + res.status);
                     dispatch(localLoginFail());
@@ -138,8 +138,9 @@ export function getUserProfileByUseridFail(): IGetUserProfileByUseridFailAction 
 }
 
 export function getUserProfileByUserid(userID: number) {
+    const config = { headers: {Authorization: "Bearer " + localStorage.getItem("dealingRoomToken")} }
     return (dispatch: Dispatch<IGetUserProfileByUseridSuccessAction | IGetUserProfileByUseridFailAction>) => {
-        axios.get(`http://localhost:8080/api/users/${userID}`)
+        axios.get(`http://localhost:8080/api/users/${userID}`, config)
             .then((res: any) => {
                 if (res.status === 200) {
                     dispatch(getUserProfileByUseridSuccess(res.data[0]));

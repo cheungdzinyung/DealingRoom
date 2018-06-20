@@ -22,6 +22,7 @@ import { getOrdersByUserid } from "../actions/actions_orders";
 
 interface IOrdersProps {
   history: History.History,
+  user_id: number,
   ordersList: any,
   getOrdersByUserid: (userID: number) => void,
 }
@@ -36,7 +37,7 @@ class PureOrderList extends React.Component<IOrdersProps, {}> {
   }
 
   public componentDidMount () {
-    const userID = 1;
+    const userID = this.props.user_id;
     this.props.getOrdersByUserid(userID);
   }
 
@@ -112,6 +113,7 @@ class PureOrderList extends React.Component<IOrdersProps, {}> {
 
 const mapStateToProps = (state: IRootState) => {
   return {
+    user_id: state.user.user_id,
     ordersList: state.orders.ordersList,
   }
 }

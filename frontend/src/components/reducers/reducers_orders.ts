@@ -16,40 +16,6 @@ import {
     IRequestItem,
 } from "../../modules";
 
-export interface IPriceMapping {
-    items_id: number,
-    currentPrice: string, // string???
-    itemStock: number,
-    fixed: boolean,
-}
-
-// export interface IPriceMappingAll {
-//     beer: {
-//         item_id_1: {
-//             "items_id": 1,
-//             "itemStock": 100,
-//             "currentPrice": "60.00",
-//         },
-//         item_id_2: {
-//             "items_id": 2,
-//             "itemStock": 100,
-//             "currentPrice": "60.00",
-//         },
-//     },
-//     red: {
-//         item_id_13: {
-//             "items_id": 13,
-//             "itemStock": 100,
-//             "currentPrice": "60.00",
-//         },
-//         item_id_14: {
-//             "items_id": 14,
-//             "itemStock": 100,
-//             "currentPrice": "60.00",
-//         },
-//     },
-// }
-
 export interface IOrdersState {
     // socket.io on load? isAuth?
     socketID: any,
@@ -59,7 +25,7 @@ export interface IOrdersState {
     orderListReady: boolean,
     entireMenu: string[],
     categories: string[],
-    priceMapping: {},
+    // priceMapping: {},
     // orders
     ordersList: any,
     unpaidOrders: number,
@@ -74,15 +40,15 @@ const initialState: IOrdersState = {
     orderListReady: false,
     entireMenu: [],
     categories: [],
-    priceMapping: {},
+    // priceMapping: {},
     ordersList: {
         "users_id": 0,
         "username": "John Doe",
         "displayName": "J.Doe",
         "orders":
             [{
-                "orders_id": 1,
-                "table": 12,
+                "orders_id": 0,
+                "table": 0,
                 "status": "confirmed",
                 "isPaid": false,
                 "orderingTime": 20170101,
@@ -93,7 +59,7 @@ const initialState: IOrdersState = {
                         "ice": "normal",
                         "sweetness": "normal",
                         "garnish": "normal",
-                        "purchasePrice": 105.00
+                        "purchasePrice": 0
                     }]
             }]
     },
@@ -114,13 +80,14 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
         case ADD_ITEM: {
             // onclick: add item to current order []
             const newItem: IRequestItem = {
-                thisItemID: `${Date.now()}`,            // only for current order
+                thisItemID: Date.now(),                 // only for current order
                 items_id: action.itemid,                // from db
                 itemName: action.itemName,              // from db
                 ice: "normal",                          // allow mods when btn is ready
-                sweetness: "less",
-                garnish: "extra",
+                sweetness: "normal",
+                garnish: "normal",
                 purchasePrice: action.currentPrice,     // from db
+                // status: "confirmed",
             };
             // new total price: x1000 to avoid overflow
             const newTotal = (state.currentTotal * 1000 + newItem.purchasePrice * 1000) / 1000;
@@ -134,7 +101,8 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
         }
         case CONFIRM_ORDER_SUCCESS: {
             // write to db ok, clear current order n current total, redir by action
-            return { ...state, currentOrder: [], currentTotal: 0 };
+            // action.result = { users_id: num, status: str, orders_id: num, entireMenu }
+            return { ...state, currentOrder: [], currentTotal: 0, entireMenu: action.result.entireMenu };
         }
         case CONFIRM_ORDER_FAIL: {
             // write to db failed, keep current order in root state
@@ -153,15 +121,8 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
             return { ... state, socketID: action.socketID};
         }
         case SOCKET_UPDATE_ITEM_PRICE: {
-            const category = action.socketData.category;
-            const categoryItemsDetails = action.socketData.items;
-            const newObj = {};
-            categoryItemsDetails.forEach((e:any) => {
-                newObj[`items_id_${e.items_id}`] = e;
-            });
-            const newPriceMapping = state.priceMapping;
-            newPriceMapping[category] = newObj;
-            return { ...state, socketData: action.socketData, priceMapping: newPriceMapping};
+            // alert(JSON.stringify(action.entireMenu))
+            return { ...state, entireMenu: action.entireMenu };
         }
         default: {
             return state;

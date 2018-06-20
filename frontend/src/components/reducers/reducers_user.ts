@@ -11,23 +11,34 @@ import {
 
 export interface IUserState {
     // role: string,
-    isAuth: boolean,
+    // isAuth: boolean,
     currentPage: string,
     redirectTarget: string,
     // settings: string,
+    user_id: number,
     userProfile: any,
     userProfileReady: boolean,
 }
 
 const initialState = {
     // role: "customer",
-    isAuth: false,
+    // isAuth: false,
     currentPage: "profile",
     redirectTarget: "none",     // for redir
     // settings: "nth yet",
+    user_id: 0,
     userProfile: {},
     userProfileReady: false,
 }
+
+// declare global {
+//     // for FB login?
+//     interface Window {
+//         FB: {
+//             logout: (callback: () => void) => void;
+//         };
+//     }
+// }
 
 export const userReducer = (state: IUserState = initialState, action: UserActions): IUserState => {
     switch (action.type) {
@@ -43,7 +54,8 @@ export const userReducer = (state: IUserState = initialState, action: UserAction
             return { ...state, redirectTarget: "none"}
         }
         case LOCAL_LOGIN_SUCCESS: {
-            return { ...state, isAuth: true, userProfile: action.userInfoPackage }
+            localStorage.setItem("dealingRoomToken", action.userInfoPackage.token);
+            return { ...state, user_id: action.userInfoPackage.user_id };
         }
         case LOCAL_LOGIN_FAIL: {
             return state;
