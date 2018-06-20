@@ -38,7 +38,6 @@ import CategoryFilter from "../ui/categoryfilter";
 interface IMenuProps {
   entireMenu: any,
   categories: any[],
-  // priceMapping: any,
   currentOrder: IRequestItem[],
   addToCurrentOrder: (itemid: number, itemName: string, currentPrice: number) => void,
 }
@@ -90,11 +89,9 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
     };
   }
 
-  // socket
-  // public componentDidUpdate () {
-  //   this.render();
-  // }
-
+  // price fluc. by socket.io, new price recieved in actions_orders
+  // map state.entireMenu to props and comp will re-render when updated
+  // F5 btn for testing
   public refreshPrice = () => {
     store.dispatch({ type: 'POST/buy', data: {} });
   }
@@ -141,7 +138,6 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
     }
   }
 
-
   // TODO: to fix the next and Previous of the carousel
   public render() {
     // alert("render");
@@ -168,11 +164,11 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
 
 
         <MenuItem {...{
-          key: 1,
-          itemName: "Long Island Ice Tea",
-          price: 96,
+          key: this.props.entireMenu[0].items.find((e: any)=>(e.items_id===1)).items_id,
+          itemName: this.props.entireMenu[0].items.find((e: any)=>(e.items_id===1)).itemName,
+          price: this.props.entireMenu[0].items.find((e: any)=>(e.items_id===1)).currentPrice,
           priceDelta: 3.45,
-          details: "Made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, which gives the drink the same amber hue as its namesake.",
+          details: this.props.entireMenu[0].items.find((e: any)=>(e.items_id===1)).itemDescription,
           image: beer1,
           detailIsOpen: true,
           priceData: [

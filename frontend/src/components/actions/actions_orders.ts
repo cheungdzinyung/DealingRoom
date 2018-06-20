@@ -161,11 +161,12 @@ export function confirmOrder(orderToConfirm: ICurrentOrder) {
         axios.post(`http://localhost:8080/api/orders/${orderToConfirm.users_id}`, orderToConfirm, config)
             .then((res: any) => {
                 if (res.status === 201) {
-                    alert(res.data[0].status);
-                    dispatch(confirmOrderSuccess(res.body, orderToConfirm));
+                    alert(res.data.status + " now redirect to order list");
+                    // alert(JSON.stringify(res.data))
+                    dispatch(confirmOrderSuccess(res.data, orderToConfirm));
                 } else {
                     alert("error, try again");
-                    dispatch(confirmOrderFail(res.body));
+                    dispatch(confirmOrderFail(res.data));
                 }
             })
             .catch((err: any) => {

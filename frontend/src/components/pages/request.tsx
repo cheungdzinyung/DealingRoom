@@ -29,6 +29,8 @@ import { IRequestItem, ICurrentOrder } from "../../modules";
 
 interface IRequestProps {
   // handling orders
+  user_id: number,
+  // table_id: number,
   currentOrder: IRequestItem[],
   currentTotal: number,
   removeFromCurrentOrder: (thisItemID: number) => void,
@@ -67,7 +69,7 @@ class PureRequest extends React.Component<IRequestProps, {}> {
 
   public confirmOrder = () => {
     const orderToConfirm: ICurrentOrder = {
-      users_id: 1,  // get from root state
+      users_id: this.props.user_id,  // get from root state
       table: 1,   // get from root state
       status: "confirmed", // change to confirmed
       item: this.props.currentOrder,
@@ -118,6 +120,7 @@ class PureRequest extends React.Component<IRequestProps, {}> {
 
 const mapStateToProps = (state: IRootState) => {
   return {
+    user_id: state.user.user_id,
     currentOrder: state.orders.currentOrder,
     currentTotal: state.orders.currentTotal,
   }
