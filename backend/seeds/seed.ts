@@ -23,28 +23,28 @@ exports.seed = (knex: Knex) => {
         .insert([
           {
             displayName: "ACDY",
-            password: "123456",
+            password: "$2b$10$aMVkMXNlDsAqwCN94421J.0QuCfJtkto39jmeBI619kVqN31LQBjW",
             role: "manager",
             userPhoto: "",
             username: "Andrew"
           },
           {
-            displayName: "Longspeach",
-            password: "123456",
+            displayName: "io",
+            password: "$2b$10$4DkXdXX/ysplda5MCaw78eB0Q8IPJJ7Wv1Hh3DDEyUUT45yTNLgym",
             role: "manager",
             userPhoto: "",
             username: "Ivan"
           },
           {
             displayName: "Curtit",
-            password: "123456",
+            password: "$2b$10$HVwiMLFL4HC4b5XpsBdk5emwBK1hywORaxVBGUQipnBNKG1E0Cooe",
             role: "manager", 
             userPhoto: "",
             username: "Judith"
           },
           {
-            displayName: "Harrixxon",
-            password: "123456",
+            displayName: "Harrixon",
+            password: "$2b$10$FaDh6jBBZw/.RaegZIf7qeBL2qzxoJJXyArSKALpN0hLxSjOXLODm",
             role: "manager",
             userPhoto: "",
             username: "Harrison"
