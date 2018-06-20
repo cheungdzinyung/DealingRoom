@@ -2,39 +2,43 @@
 import { Card, Elevation } from "@blueprintjs/core";
 import * as History from "history";
 import * as React from "react";
-import { IPureUsersOrderList } from "../../modules"
+// import { IPureUsersOrderList } from "../../modules"
 
 // Importing components
 import OrderBanner from "../share/orderbanner";
 import Usermenu from "../share/usermenu";
 
 // Importing static assets
-import checkIcon from "../../icons/check.svg";
-import headerImg from "../../icons/orders.svg";
+import checkIcon from "../icons/check.svg";
+import headerImg from "../icons/orders.svg";
 
 // Importing fake data
-import { orderList } from "../../fakedata";
+// import { orderList } from "../../fakedata";
 
+// import redux and friends
+import { connect } from "react-redux";
+import { IRootState } from "../reducers/index";
+import { getOrdersByUserid } from "../actions/actions_orders";
 
-interface IPureOrdersProps {
-  history: History.History
+interface IOrdersProps {
+  history: History.History,
+  user_id: number,
+  ordersList: any,
+  getOrdersByUserid: (userID: number) => void,
 }
 
-interface IPureOrdersStates {
-  userOrders: IPureUsersOrderList; 
-}
-
-export default class OrderList extends React.Component<IPureOrdersProps, IPureOrdersStates> {
-  constructor(props: IPureOrdersProps) {
+class PureOrderList extends React.Component<IOrdersProps, {}> {
+  constructor(props: IOrdersProps) {
     super(props);
-
-    this.state = {
-      userOrders:  orderList
-    };
   }
 
   public openSingleOrder = (orderNumber: number) => {
     this.props.history.push(`/order/${orderNumber}`);
+  }
+
+  public componentDidMount () {
+    const userID = this.props.user_id;
+    this.props.getOrdersByUserid(userID);
   }
 
   public render() {
@@ -42,24 +46,25 @@ export default class OrderList extends React.Component<IPureOrdersProps, IPureOr
       
       <div className="page-content-container">
         <OrderBanner displayName="Ivan" tableNumber={3} image={headerImg} />
-        {this.state.userOrders.orders.filter(each => !each.isPaid).length > 0 && (
+        {this.props.ordersList.orders.filter( (each:any) => !each.isPaid).length > 0 && (
           <div className="order-header-container">
             <h3 className="order-header">To be paid</h3>
           </div>
         )}
-        {this.state.userOrders.orders
-          .filter(each => !each.isPaid)
-          .map((indOrd, index) => (
+        {this.props.ordersList.orders
+          .filter((each:any) => !each.isPaid)
+          .map((indOrd: any, index: any) => (
             <Card
               className="order-cards"
               interactive={true}
               elevation={Elevation.TWO}
+              key={`unpaid_${index}`}
               onClick={this.openSingleOrder.bind(this, indOrd.orders_id)}
             >
               <div className="top">
                 <div className="order-details">
                   <h3 className="order-number">Order #{indOrd.orders_id}</h3>
-                  <p className="order-amount">Total Amount: ${indOrd.orderTotal}</p>
+                  <p className="order-amount">Total Amount: ${indOrd.orderItems.reduce((accu: number, curr: any) => (accu + parseFloat(curr.purchasePrice)), 0)}</p>
                   <p className="order-time">
                     Ordering time: {indOrd.orderingTime}
                   </p>
@@ -72,24 +77,25 @@ export default class OrderList extends React.Component<IPureOrdersProps, IPureOr
             </Card>
           ))}
         {/* Split into two parts */}
-        {this.state.userOrders.orders.filter(each => each.isPaid === true).length >
+        {this.props.ordersList.orders.filter((each: any) => each.isPaid === true).length >
           0 && (
             <div className="order-header-container">
               <h3 className="order-header">Paid</h3>
             </div>
           )}
-        {this.state.userOrders.orders
-          .filter(each => each.isPaid === true)
-          .map((indOrd, index) => (
+        {this.props.ordersList.orders
+          .filter((each:any) => each.isPaid === true)
+          .map((indOrd:any, index:any) => (
             <Card
               className="order-cards"
               interactive={true}
               elevation={Elevation.TWO}
+              key={`paid_${index}`}
             >
               <div className="top">
                 <div className="order-details">
                   <h3 className="order-number">Order #{indOrd.orders_id}</h3>
-                  <p className="order-amount">Total Amount: ${indOrd.orderTotal}</p>
+                  <p className="order-amount">Total Amount: ${indOrd.orderItems.reduce((accu: number, curr: any) => (accu + parseFloat(curr.purchasePrice)), 0)}</p>
                   <p className="order-time">
                     Ordering time: {indOrd.orderingTime}
                   </p>
@@ -104,3 +110,22 @@ export default class OrderList extends React.Component<IPureOrdersProps, IPureOr
     );
   }
 }
+
+const mapStateToProps = (state: IRootState) => {
+  return {
+    user_id: state.user.user_id,
+    ordersList: state.orders.ordersList,
+  }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    getOrdersByUserid: (userID: number) => {
+      dispatch(getOrdersByUserid(userID));
+    },
+  }
+}
+
+const OrderList = connect(mapStateToProps, mapDispatchToProps)(PureOrderList);
+
+export default OrderList

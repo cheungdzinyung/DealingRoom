@@ -7,6 +7,19 @@
   align-items: center;
 }
 
+.rd-corner {
+  border-radius: 5px;
+}
+
+.searchbar {
+  width: 100%;
+  padding: 3.5% 5%;
+  background-color: $search-bar-bgc;
+  color: $search-bar-font;
+  font-size: 1rem;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
 #up-triangle-path,
 #up-triangle-group {
   fill: $up;

@@ -24,16 +24,18 @@ export default class UsersService {
   public add(data: IUserData, file: Express.Multer.File) {
     return this.knex("users")
       .insert({
-        username: data.username,
-        password: data.password,
         displayName: data.displayName,
         facebookToken: data.facebookToken,
+        isActive: true,
+        password: data.password,
         role: data.role,
-        isActive: true
+        username: data.username
       })
       .returning("id")
       .then(async (id: Knex.QueryCallback) => {
-        await this.saveUpdateUserImage(id[0], file);
+        if (file !== undefined) {
+          await this.saveUpdateUserImage(id[0], file);
+        }
         return this.knex("users")
           .where("id", id[0])
           .select("id as user_id", "displayName", "userPhoto");
@@ -41,29 +43,31 @@ export default class UsersService {
   }
 
   // Working 06/06/18
-  get(req: number) {
+  public get(req: number) {
     return this.knex("users")
       .where({ id: req, isActive: true })
-      .select("username", "password", "displayName", "userPhoto", "role");
+      .select("id as users_id", "username", "password", "displayName", "userPhoto", "role");
   }
 
   // Working 10/06/18
-  update(id: number, data: IUserData, file: Express.Multer.File) {
+  public update(id: number, data: IUserData, file: Express.Multer.File) {
     return this.knex("users")
       .where("id", id)
       .update({
-        username: data.username,
-        password: data.password,
         displayName: data.displayName,
         facebookToken: data.facebookToken,
+        isActive: data.isActive,
+        password: data.password,
         role: data.role,
-        isActive: data.isActive
+        username: data.username
       })
       .returning("id")
-      .then(async (id: Knex.QueryCallback) => {
-        await this.saveUpdateUserImage(id[0], file);
+      .then(async (userId: Knex.QueryCallback) => {
+        if (file !== undefined) {
+          await this.saveUpdateUserImage(id[0], file);
+        }
         return this.knex("users")
-          .where("id", id[0])
+          .where("id", userId[0])
           .select("displayName", "userPhoto");
       });
   }

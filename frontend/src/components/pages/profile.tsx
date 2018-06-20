@@ -8,7 +8,7 @@ import Banner from "../share/topbanner";
 import Usermenu from "../share/usermenu";
 
 // Importing static 
-import tempImg from "../../images/profiles/circle-head.png";
+import tempImg from "../images/profiles/circle-head.png";
 
 // Importing types
 import { IGraphDataCombiner } from "src/modules";

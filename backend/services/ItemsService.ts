@@ -66,7 +66,7 @@ export default class UsersService {
       .join("items", "categories.id", "=", "items.categories_id")
       .where("items.id", req)
       .select(
-        "items.id",
+        "items.id as items_id",
         "items.itemName",
         "items.itemStock",
         "categories.categoryName",
@@ -79,22 +79,80 @@ export default class UsersService {
       );
   }
 
-  // Working 06/06/18
+  // testing with fluctuating prices ******TODO******
+  public getAllWithFluctuatingPrices(dateOfQuery: string) {
+    return (
+      this.knex("itemsLog")
+        .join("items", "itemsLog.items_id", "=", "items.id")
+        .join("categories", "items.categories_id", "=", "categories.id")
+        .select("categories.categoryName")
+        .select(this.knex.raw(`extract(hour from "itemsLog".created_at) as hour`))
+        .avg("itemsLog.itemsLogPrice")
+        .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+        .groupBy("categoryName")
+        .groupByRaw(`extract('hour' from "itemsLog".created_at)`)
+        .then((result: any) => {
+          return result;
+          // return Promise.all(
+          //   result.map((order: object, i: number) => {
+          //     const obj = {
+          //       [result[i].categoryName]: result[i].avg
+          //     };
+          //     return obj;
+          //   })
+          // );
+        })
+    );
+  }
+  
+  // testing with fluctuating prices ******TODO******
+  public getAllInCatWithFluctuatingPrices(
+    catName: string,
+    dateOfQuery: string
+  ) {
+    return this.knex("orders")
+      .select("id")
+      .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+      .then(result => {
+        console.log(result);
+        return result;
+      });
+  }
+
+  // Working 15/06/18
   public getAll() {
     return this.knex("categories")
-      .join("items", "categories.id", "=", "items.categories_id")
-      .select(
-        "items.id",
-        "items.itemName",
-        "items.itemStock",
-        "categories.categoryName",
-        "items.minimumPrice",
-        "items.currentPrice",
-        "items.itemPhoto",
-        "items.itemDescription",
-        "items.isSpecial",
-        "items.isActive"
-      );
+      .select("id", "categoryName", "categoryPhoto")
+      .then(categoryList => {
+        return Promise.all(
+          categoryList.map((item: object, i: number) => {
+            return this.knex("items")
+              .select(
+                "id as items_id",
+                "itemName",
+                "itemStock",
+                "minimumPrice",
+                "currentPrice",
+                "itemPhoto",
+                "itemDescription",
+                "isSpecial",
+                "isActive"
+              )
+              .where("items.categories_id", categoryList[i].id);
+          })
+        ).then(itemList => {
+          return Promise.all(
+            categoryList.map((category: object, j: number) => {
+              const result = {
+                categoryName: categoryList[j].categoryName,
+                categoryPhoto: categoryList[j].categoryPhoto,
+                items: itemList[j]
+              };
+              return result;
+            })
+          );
+        });
+      });
   }
 
   // Working 07/06/18
@@ -112,7 +170,7 @@ export default class UsersService {
       .then((catId: Knex.QueryCallback) => {
         return this.knex("items")
           .select(
-            "id",
+            "id as items_id",
             "itemName",
             "itemStock",
             "minimumPrice",
@@ -163,7 +221,7 @@ export default class UsersService {
           .join("items", "categories.id", "=", "items.categories_id")
           .where("items.id", itemId[0])
           .select(
-            "items.id",
+            "items.id as items_id",
             "items.itemName",
             "items.itemStock",
             "categories.categoryName",

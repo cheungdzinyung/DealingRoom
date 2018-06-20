@@ -23,24 +23,28 @@ exports.seed = (knex: Knex) => {
         .insert([
           {
             displayName: "ACDY",
+            password: "123456",
             role: "manager",
             userPhoto: "",
             username: "Andrew"
           },
           {
             displayName: "Longspeach",
+            password: "123456",
             role: "manager",
             userPhoto: "",
             username: "Ivan"
           },
           {
             displayName: "Curtit",
-            role: "manager",
+            password: "123456",
+            role: "manager", 
             userPhoto: "",
             username: "Judith"
           },
           {
             displayName: "Harrixxon",
+            password: "123456",
             role: "manager",
             userPhoto: "",
             username: "Harrison"
@@ -53,18 +57,18 @@ exports.seed = (knex: Knex) => {
               return knex("categories").del();
             })
             .then(() => {
-              let categoriesData = fs.readJsonSync(
+              const categoriesData = fs.readJsonSync(
                 path.join(__dirname, "/categoriesData.json")
               );
               return knex("categories")
                 .insert(categoriesData)
                 .then(() => {
-                  let itemsData = fs.readJsonSync(
+                  const itemsData = fs.readJsonSync(
                     path.join(__dirname, "/itemsData.json")
                   );
-                  let itemsPromises: {}[] = [];
+                  const itemsPromises: Array<{}> = [];
                   itemsData.forEach((item: IItemsType) => {
-                    let category = item.category;
+                    const category = item.category;
                     itemsPromises.push(createItems(knex, item, category));
                   });
                   return Promise.all(itemsPromises);
