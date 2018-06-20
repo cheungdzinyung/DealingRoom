@@ -15,15 +15,17 @@ import plus from "../icons/item/plus.svg";
 import { IItemPriceGraphData } from "src/modules";
 
 interface IMenuItemProps {
-    key: number;
+    item_id: number;
+    categoryName: string;
     itemName: string;
-    price: number;
+    currentPrice: number;
     priceDelta: number;
-    details: string;
-    image: "*.jpg" | "*.png" | "*.jpeg";
+    itemDescription: string;
+    itemPhoto: "*.jpg" | "*.png" | "*.jpeg";
     detailIsOpen: boolean
-    // openDetail: ()=>void
-    priceData: IItemPriceGraphData[]
+    chartData: IItemPriceGraphData[]
+    // openDetail => cb
+    // add item => cb
 }
 
 export default class MenuItem extends React.Component<IMenuItemProps> {
@@ -35,13 +37,12 @@ export default class MenuItem extends React.Component<IMenuItemProps> {
             <div className="menu-item-container">
                 <Card
                     className="menu-item-card rd-corner"
-                    interactive={true}
                     elevation={Elevation.ONE}
-                    key={this.props.key}
+                    data-productId={this.props.item_id}
                 >
                     {/* Absolute location */}
                     {/* Product images */}
-                    <img src={this.props.image} className="menu-item-img" alt="" />
+                    <img src={this.props.itemPhoto} className="menu-item-img" alt="" />
                     {/* Info button  */}
                     <img className="item-info" src={info} alt="" />
                     <img className="add-item" src={plus} alt="" />
@@ -54,7 +55,7 @@ export default class MenuItem extends React.Component<IMenuItemProps> {
                             <div className="item-flucutation-container">
                                 <img className="flux-img" src={wallet} alt="" />
                                 <span className="item-fluctuation-display">
-                                    &#36;{this.props.price}
+                                    &#36;{this.props.currentPrice}
                                 </span>
                             </div>
                             <div className="item-flucutation-container">
@@ -70,18 +71,16 @@ export default class MenuItem extends React.Component<IMenuItemProps> {
                     <div className="item-detail-wrapper">
                         <h3 className="item-detail-subheader">Details</h3>
                         <hr className="item-split" />
-                        <p className="item-detail">{this.props.details}</p>
+                        <p className="item-detail">{this.props.itemDescription}</p>
                         <h3 className="item-detail-subheader">Performance</h3>
                         <hr className="item-split" />
-                        <AreaChart width={180} height={80} data={this.props.priceData}>
+                        <AreaChart width={180} height={80} data={this.props.chartData}>
                             <defs>
                                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                                     <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
                                     <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
                                 </linearGradient>
                             </defs>
-                            {/* <XAxis dataKey="time" /> */}
-                            {/* <YAxis /> */}
                             <Tooltip />
                             <Area type="monotone" dataKey="purchasePrice" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
                         </AreaChart>

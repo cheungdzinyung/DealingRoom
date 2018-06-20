@@ -23,7 +23,7 @@ export const ADD_ITEM = "ADD_ITEM";
 export type ADD_ITEM = typeof ADD_ITEM;
 export interface IAddItemAction extends Action {
     type: ADD_ITEM,
-    itemid: number,
+    item_id: number,
     itemName: string,
     currentPrice: number,
 }
@@ -124,10 +124,10 @@ export function getEntireMenu() {
     }
 }
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export function addToCurrentOrder(itemid: number, itemName: string, currentPrice: number): IAddItemAction {
+export function addToCurrentOrder(itemId: number, itemName: string, currentPrice: number): IAddItemAction {
     return {
         type: ADD_ITEM,
-        itemid,
+        item_id: itemId,
         itemName,
         currentPrice,
     }
