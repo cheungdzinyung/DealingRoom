@@ -7,36 +7,24 @@ import { IRootState } from "../reducers/index";
 import { addToCurrentOrder } from "../actions/actions_orders";
 
 // Import UI elements
-import { Card, Collapse, Elevation } from "@blueprintjs/core";
-import { Line } from "react-chartjs-2";
 import Usermenu from "../share/usermenu";
 import MenuItem from "../ui/menuitem";
 
 // Importing interfaces
-// import { IPureCategoryWithItem } from "../../modules";
+import { IRequestItem, IPureCategoryWithItem, IPureMenuItemWithFlux } from "../../modules";
 
 // Importing helper function
-import { percentageChange } from "../../util/utility"
-
-// Importing replacable fake data
-import { chartOption } from "../../fakedata";
-
-// Importing static assets
-import down from "../icons/down.svg";
-import up from "../icons/up.svg";
-import beer from "../images/categories/beer.jpg";
-import beer1 from "../images/categories/squarebeer.jpg";
-
-
-import { IRequestItem } from "../../modules";
+// import { percentageChange } from "../../util/utility";
 
 // socket
 import { store } from "../../store";
 import PageHeader from "../ui/pageheader";
 import CategoryFilter from "../ui/categoryfilter";
 
+
+// Props and States
 interface IMenuProps {
-  entireMenu: any,
+  entireMenu: IPureCategoryWithItem[],
   categories: any[],
   currentOrder: IRequestItem[],
   addToCurrentOrder: (itemID: number, itemName: string, currentPrice: number) => void,
@@ -46,11 +34,10 @@ interface IMenuState {
   searchBoxEntry: string,
   displayCategoryIndex: number,
   isItemDetailsOpen: { [key: string]: boolean },
-  // chart data route?
-  chartData: any;
 }
 
-class PureMenu extends React.Component<IMenuProps, IMenuState> {
+// Component class
+export class PureMenu extends React.Component<IMenuProps, IMenuState> {
   constructor(props: IMenuProps) {
     super(props);
 
@@ -65,27 +52,7 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
     this.state = {
       searchBoxEntry: "",
       displayCategoryIndex: 0,
-      isItemDetailsOpen: tempisItemDetailsOpen,
-
-      chartData:
-      {
-        datasets: [
-          {
-            backgroundColor: "rgba(0,0,0,0)",
-            borderColor: "rgba(235,87,87,1)",
-            borderJoinStyle: "miter",
-            data: [12, 13, 8, 16, 3, 46],
-            fill: true,
-            label: "hey",
-            pointBackgroundColor: "rgba(111, 207, 151, 1)",
-            pointBorderColor: "rgba(235, 87, 87, 1)",
-            pointBorderWidth: 2,
-            pointRadius: 3,
-            strokeColor: "rgba(66, 66, 66, .4)"
-          }
-        ],
-        labels: ["09:00", "", "", "", "", "Now"]
-      }
+      isItemDetailsOpen: tempisItemDetailsOpen
     };
   }
 
@@ -129,14 +96,15 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
   }
 
   // add to cart
-  public addToCurrentOrder = (e: React.MouseEvent<HTMLDivElement>) => {
-    const itemid = e.currentTarget.dataset.itemid;
-    const itemName = e.currentTarget.dataset.itemname;    // dataset attr are all lowercase
-    if (itemid !== undefined && itemName !== undefined) {
-      const currentPrice = this.props.entireMenu[this.state.displayCategoryIndex].items.find((element: any) => (parseFloat(itemid) === element.items_id)).currentPrice;
-      this.props.addToCurrentOrder(parseInt(itemid, 10), itemName, currentPrice);
-    }
-  }
+  // public addToCurrentOrder = (e: React.MouseEvent<HTMLDivElement>) => {
+  //   const itemid = e.currentTarget.dataset.itemid;
+  //   const itemName = e.currentTarget.dataset.itemname;
+  //   // dataset attr are all lowercase
+  //   if (itemid !== undefined && itemName !== undefined) {
+  //     const currentPrice = this.props.entireMenu[this.state.displayCategoryIndex].items.find((element: IPureMenuItemWithFlux) => (parseFloat(itemid) === element.item_id)).currentPrice;
+  //     this.props.addToCurrentOrder(parseInt(itemid, 10), itemName, currentPrice);
+  //   }
+  // }
 
   // TODO: to fix the next and Previous of the carousel
   public render() {
@@ -149,7 +117,7 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
 
         {/* Category image */}
         <div className="rd-corner menu-display">
-          <img src={beer} alt="" className="rd-corner display-img" />
+          <img src={this.props.entireMenu[0].categoryPhoto} alt="" className="rd-corner display-img" />
         </div>
         {/* Search item bar */}
         <input
@@ -161,38 +129,9 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
           onChange={this.searching}
         />
 
-
-
-        <MenuItem {...{
-          key: 1, 
-          itemID: this.props.entireMenu[0].items.find((e: any)=>(e.items_id===1)).items_id,
-          itemName: this.props.entireMenu[0].items.find((e: any)=>(e.items_id===1)).itemName,
-          currentPrice: this.props.entireMenu[0].items.find((e: any)=>(e.items_id===1)).currentPrice,
-          priceDelta: 3.45,
-          details: this.props.entireMenu[0].items.find((e: any)=>(e.items_id===1)).itemDescription,
-          addToCurrentOrder: this.props.addToCurrentOrder,
-          image: beer1,
-          detailIsOpen: true,
-          priceData: [
-            {time: "9AM", purchasePrice: 23},
-            {time: "", purchasePrice: 46},
-            {time: "", purchasePrice: 75},
-            {time: "", purchasePrice: 15},
-            {time: "", purchasePrice: 75},
-            {time: "", purchasePrice: 46},
-            {time: "", purchasePrice: 83},
-            {time: "", purchasePrice: 55},
-            {time: "", purchasePrice: 41}
-          ], 
-          // openDetail: 
-        }} />
-
-
-
-
         {/* render display from all > cat > search */}
-        {this.props.entireMenu.map((category: any, categoryIndex: any) => (
-          category.items.map((item: any, itemIndex: any) => (
+        {this.props.entireMenu.map((category: IPureCategoryWithItem, categoryIndex: number) => (
+          category.items.map((item: IPureMenuItemWithFlux, itemIndex: number) => (
             (
               /* v match searching */
               item.itemName.toLowerCase().search(this.state.searchBoxEntry) !== -1
@@ -200,79 +139,28 @@ class PureMenu extends React.Component<IMenuProps, IMenuState> {
               && category.categoryName === this.props.categories[this.state.displayCategoryIndex]
               /* v check stock > 0 */
               && item.itemStock > 0
-            ) ?
-              <div className="item-container">
-                <Card
-                  className={
-                    !this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())]
-                      ? "item-cards"
-                      : percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0]) > 0
-
-                        ? "item-cards item-price-up"
-                        : "item-cards item-price-down"
-                  }
-                  interactive={true}
-                  elevation={Elevation.FOUR}
-                  onClick={this.isOpen.bind(this, category.categoryName.concat(itemIndex.toString()))}
-                  key={`Card_${category.categoryName.concat(itemIndex.toString())}`}
-                >
-                  <div className="pricetag"
-                    onClick={this.addToCurrentOrder}
-                    data-itemid={item.items_id}
-                    data-currentPrice={item.currentPrice}
-                    data-itemname={item.itemName}>
-                    <span>{item.itemName}</span>
-                    {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] && <span>${item.currentPrice}</span>}
-                  </div>
-
-                  {!this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] ? <div className="arrow-container">
-                    <img
-                      className="arrow"
-                      src={percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0]) > 0 ? up : down}
-                      alt=""
-                    />
-                  </div> : <span>${item.currentPrice}</span>}
-                </Card>
-                {/* ------------Seperate card and card details */}
-                <Collapse
-                  key={`Collapse_${category.categoryName.concat(itemIndex.toString())}`}
-                  className={
-                    "item-details" +
-                    " " +
-                    (this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())] ? "item-detail-onflex" : "")
-                  }
-                  isOpen={this.state.isItemDetailsOpen[category.categoryName.concat(itemIndex.toString())]}
-                >
-                  <div className="description">
-                    <p className="description-text">{item.itemDescription}</p>
-                  </div>
-                  <div className="chartVar">
-                    <div className="variables">
-                      <img
-                        className="detail-arrow"
-                        src={percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0]) > 0 ? up : down}
-                        alt=""
-                      />
-                      <span className="detail-percentage">{percentageChange(this.state.chartData.datasets[0].data[this.state.chartData.datasets[0].data.length - 1], this.state.chartData.datasets[0].data[0])}%</span>
-                    </div>
-
-                    <Line
-                      width={80}
-                      height={60}
-                      data={item.chartData}
-                      options={chartOption}
-                    />
-                  </div>
-                </Collapse>
-              </div> : <div />))
+            ) &&
+            <MenuItem
+              item_id={item.item_id}
+              categoryName={item.categoryName}
+              itemName={item.itemName}
+              currentPrice={item.currentPrice}
+              priceDelta={3}
+              itemDescription={item.itemDescription}
+              itemPhoto={item.itemPhoto}
+              detailIsOpen={true}
+              chartData={item.chartData}
+              addToCurrentOrder={this.props.addToCurrentOrder} />
+          ))
         ))}
-
         <Usermenu />
       </div>
     )
   }
 }
 
+
+// Redux
 const mapStateToProps = (state: IRootState) => {
   return {
     entireMenu: state.orders.entireMenu,
