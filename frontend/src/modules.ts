@@ -98,8 +98,8 @@ Corresponding API path: api/items
 URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiitems5d/obtaining-all-item's-information
  */
 export interface IPureMenuItemWithFlux {
-  categoryName: string;
-  item_id: number;
+  // categoryName: string;
+  items_id: number;
   itemName: string;
   itemStock: number;
   minimumPrice: number;

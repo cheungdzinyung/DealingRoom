@@ -38,12 +38,18 @@ class PureInitialize extends React.Component<IInitializeProps, {}> {
     }
 
     public componentDidMount() {
-        // fetch entireMenu , set categories[]
-        this.props.getEntireMenu();
-        // fetch user data
-        this.props.getUserProfileByUserid(this.props.user_id);
-        // fetch ordersList (or not?)
-        this.props.getOrdersByUserid(this.props.user_id);
+        const ID = localStorage.getItem("UID");
+        if(ID !== null) {
+            // fetch entireMenu , set categories[]
+            this.props.getEntireMenu();
+            // fetch user data
+            // this.props.getUserProfileByUserid(this.props.user_id);
+            this.props.getUserProfileByUserid(parseInt(ID,10));
+            // fetch ordersList (or not?)
+            // this.props.getOrdersByUserid(this.props.user_id);
+            this.props.getOrdersByUserid(parseInt(ID ,10));
+
+        }
     }
 
     public componentDidUpdate() {

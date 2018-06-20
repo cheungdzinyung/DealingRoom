@@ -38,7 +38,30 @@ const initialState: IOrdersState = {
     socketData: {},
     menuReady: false,
     orderListReady: false,
-    entireMenu: [],
+    // entireMenu: [],
+    entireMenu: [
+        {
+            "categoryName": "beer",
+            "categoryPhoto": "../storage/img/beer.jpg",
+            "items": [
+                {
+                    "items_id": 0,
+                    "itemName": "Asahi",
+                    "itemStock": 1,
+                    "minimumPrice": 999.00,
+                    "currentPrice": 999.00,
+                    "itemPhoto": "../storage/items/asahi.jpeg",
+                    "itemDescription": "",
+                    "isSpecial": false,
+                    "isActive": true,
+                    "chartData": [        {time: '', purchasePrice: 30},
+                    {time: '', purchasePrice: 40},
+                    {time: '', purchasePrice: 20},
+                    {time: '', purchasePrice: 27},
+                    {time: '', purchasePrice: 18},
+                    {time: '', purchasePrice: 23},
+                    {time: '', purchasePrice: 34},]
+                },],},],
     categories: [],
     // priceMapping: {},
     ordersList: {

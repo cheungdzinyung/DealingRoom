@@ -4,7 +4,7 @@ import * as React from "react";
 // redux
 import { connect } from "react-redux";
 import { IRootState } from "../reducers/index";
-import { addToCurrentOrder } from "../actions/actions_orders";
+import { addToCurrentOrder, getEntireMenu } from "../actions/actions_orders";
 
 // Import UI elements
 import Usermenu from "../share/usermenu";
@@ -24,6 +24,8 @@ import CategoryFilter from "../ui/categoryfilter";
 
 // Props and States
 interface IMenuProps {
+  getEntireMenu: () => void,
+  menuReady: boolean,
   entireMenu: IPureCategoryWithItem[],
   categories: any[],
   currentOrder: IRequestItem[],
@@ -106,9 +108,14 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
   //   }
   // }
 
+  public componentWillMount() {
+    if (!this.props.menuReady) {
+      this.props.getEntireMenu();
+    }
+  }
+
   // TODO: to fix the next and Previous of the carousel
   public render() {
-    // alert("render");
     return (
       <div className="page-content-container">
         <PageHeader header={"Menu"} subHeader={"Column A, or try column B"} />
@@ -117,6 +124,7 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
 
         {/* Category image */}
         <div className="rd-corner menu-display">
+        {/* {alert(JSON.stringify(this.props.entireMenu[0]))} */}
           <img src={this.props.entireMenu[0].categoryPhoto} alt="" className="rd-corner display-img" />
         </div>
         {/* Search item bar */}
@@ -141,8 +149,8 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
               && item.itemStock > 0
             ) &&
             <MenuItem
-              item_id={item.item_id}
-              categoryName={item.categoryName}
+              item_id={item.items_id}
+              categoryName={category.categoryName}
               itemName={item.itemName}
               currentPrice={item.currentPrice}
               priceDelta={3}
@@ -172,6 +180,9 @@ const mapStateToProps = (state: IRootState) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
+    getEntireMenu: () => {
+      dispatch(getEntireMenu());
+    },
     addToCurrentOrder: (itemid: number, name: string, currentPrice: number) => {
       dispatch(addToCurrentOrder(itemid, name, currentPrice));
     }

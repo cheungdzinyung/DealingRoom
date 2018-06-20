@@ -37,8 +37,11 @@ class PureOrderList extends React.Component<IOrdersProps, {}> {
   }
 
   public componentDidMount () {
-    const userID = this.props.user_id;
-    this.props.getOrdersByUserid(userID);
+    // const userID = this.props.user_id;
+    const userID = localStorage.getItem("UID");
+    if (userID !== null){
+      this.props.getOrdersByUserid(parseInt(userID, 10));
+    }
   }
 
   public render() {

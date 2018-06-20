@@ -55,6 +55,7 @@ export const userReducer = (state: IUserState = initialState, action: UserAction
         }
         case LOCAL_LOGIN_SUCCESS: {
             localStorage.setItem("dealingRoomToken", action.userInfoPackage.token);
+            localStorage.setItem("UID", action.userInfoPackage.user_id);
             return { ...state, user_id: action.userInfoPackage.user_id };
         }
         case LOCAL_LOGIN_FAIL: {
