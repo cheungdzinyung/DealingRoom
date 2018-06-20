@@ -17,7 +17,8 @@ interface IMenuItemProps {
   priceDelta: number;
   details: string;
   image: "*.jpg" | "*.png" | "*.jpeg";
-  detailIsOpen: boolean
+  detailIsOpen: boolean;
+  
 }
 
 export default class MenuItem extends React.Component<IMenuItemProps> {
