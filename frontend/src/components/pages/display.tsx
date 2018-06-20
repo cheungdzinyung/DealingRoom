@@ -21,16 +21,16 @@ interface IDisplayState {
     // categoryName: string;
 
     singleCategory: IPureCategoryWithItem
-  }
+}
 
 export default class Display extends React.Component<{}, IDisplayState> {
     constructor(props: {}) {
-      super(props);
+        super(props);
 
-      this.state = {
-        //   Sorry Judith, I depleted the original fake data structure, this is the newest one
-        singleCategory: singleCategoryMenuItems
-      }
+        this.state = {
+            //   Sorry Judith, I depleted the original fake data structure, this is the newest one
+            singleCategory: singleCategoryMenuItems
+        }
     }
 
     // public componentWillMount(){} // use it for calling backend
@@ -53,7 +53,7 @@ export default class Display extends React.Component<{}, IDisplayState> {
                     <h2>{this.state.singleCategory.categoryName}</h2>
                 </div>
                 <div className="display-container">
-                {this.state.singleCategory.items.map((item, i) => {
+                    {this.state.singleCategory.items.map((item, i) => {
                         return (
                             <div className="display-grid" key={i}>
                                 <div className="item-name-display">
@@ -62,19 +62,19 @@ export default class Display extends React.Component<{}, IDisplayState> {
                                 <div className={
                                     this.state.singleCategory.items.map[i]
                                         ? "item-arrow-display"
-                                        : percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0
+                                        : percentageChange(item.chartData[item.chartData.length - 1].purchasePrice, item.chartData[0].purchasePrice) > 0
                                             ? "item-arrow-display item-price-up"
                                             : "item-arrow-display item-price-down"
                                 }>
-                                    <img className='arrow' src={percentageChange(item.chartData.datasets[0].data[item.chartData.datasets[0].data.length - 1], item.chartData.datasets[0].data[0]) > 0 ? upWhite : downWhite} alt="" />
+                                    <img className='arrow' src={percentageChange(item.chartData[item.chartData.length - 1].purchasePrice, item.chartData[0].purchasePrice) > 0 ? upWhite : downWhite} alt="" />
                                 </div>
                             </div>
                         )
                     }
-                )}
-            </div>
+                    )}
+                </div>
                 <div className="rssFeed">This round of discount is brought to you by dealingroom!</div>
             </div>
-              );
+        );
     }
 }

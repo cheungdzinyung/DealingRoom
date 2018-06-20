@@ -24,52 +24,8 @@ type CANCELLED = typeof CANCELLED;
 export type OrderStatus = ORDERED | CONFIRMED | MADE | SERVED | CANCELLED;
 
 // Graph related
-/*
-To use it when pulling up personal profile with the consumption comparison web graph
-Corresponding API path: 
-URL: 
- */
-export interface IGraphSingleDataSet {
-  label: string;
-  backgroundColor: string;
-  strokeColor: string;
-  pointColor: string;
-  pointStrokeColor: string;
-  pointHighlightFill: string;
-  pointHighlightStroke: string;
-  data: number[];
-}
 
-/*
-The shape for powering the Radus graph on the profile page
- */
-export interface IGraphDataCombiner {
-  labels: string[];
-  datasets: IGraphSingleDataSet[];
-}
 
-/* Corresponding to no API, but to the graph data that 1 line item on the menu should come along with*/
-export interface IItemFluctuationDataSet {
-  backgroundColor: string;
-  borderColor: string;
-  borderJoinStyle: string;
-  data: number[];
-  fill: boolean;
-  label: string;
-  pointBackgroundColor: string;
-  pointBorderColor: string;
-  pointBorderWidth: number;
-  pointRadius: number;
-  strokeColor: string;
-}
-
-/*
-The shape for powering the Line graph on the menu page
- */
-export interface IItemFluctuationDataCombiner {
-  labels: string[];
-  datasets: IItemFluctuationDataSet[];
-}
 
 
 /*
@@ -77,12 +33,13 @@ Corresponding API path: api/order/:orderid
 URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiordersorderid5d/retreiving-order-information-by-order-id
  */
 export interface IPureItemLine {
+  item_id: number;
   itemName: string;
+  purchasePrice: number;
   ice: ModificationType;
   sweetness: ModificationType;
   garnish: ModificationType;
-  purchasePrice: number;
-  item_id: number;
+  
 }
 
 /*
@@ -126,6 +83,16 @@ export interface IPureUsersOrderList {
   orders: IPureUserOrder[];
 }
 
+/* 
+Corresponding API path: api/items
+URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiitems5d/obtaining-all-item's-information
+*/
+export interface IPureCategoryWithItem {
+  categoryName: string;
+  categoryPhoto: string;
+  items: IPureMenuItemWithFlux[];
+}
+
 /*
 Corresponding API path: api/items
 URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiitems5d/obtaining-all-item's-information
@@ -141,17 +108,13 @@ export interface IPureMenuItemWithFlux {
   itemDescription: string;
   isSpecial: boolean;
   isActive: boolean;
-  chartData: IItemFluctuationDataCombiner;
+  chartData: IItemPriceGraphData[];
 }
 
-/* 
-Corresponding API path: api/items
-URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiitems5d/obtaining-all-item's-information
-*/
-export interface IPureCategoryWithItem {
-  categoryName: string;
-  categoryPhoto: string;
-  items: IPureMenuItemWithFlux[];
+// New line graph data format
+export interface IItemPriceGraphData{
+  time: string
+  purchasePrice: number
 }
 
 /* 
@@ -199,8 +162,3 @@ export interface ICurrentOrder {
 
 
 
-// New line graph data format
-export interface IItemPriceGraphData{
-  time: string
-  purchasePrice: number
-}

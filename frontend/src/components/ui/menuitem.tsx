@@ -15,22 +15,33 @@ import plus from "../icons/item/plus.svg";
 import { IItemPriceGraphData } from "src/modules";
 
 interface IMenuItemProps {
-    key: number;
-    itemID: number;
+    // key: number;
+    // details: string;
+    addToCurrentOrder: (itemID: number, itemName: string, currentPrice: number)=>void;
+    item_id: number;
+    categoryName: string;
     itemName: string;
     currentPrice: number;
     priceDelta: number;
-    details: string;
-    addToCurrentOrder: (itemID: number, itemName: string, currentPrice: number)=>void;
-    image: "*.jpg" | "*.png" | "*.jpeg";
+    itemDescription: string;
+    itemPhoto: "*.jpg" | "*.png" | "*.jpeg";
     detailIsOpen: boolean
-    // openDetail: ()=>void
-    priceData: IItemPriceGraphData[]
+    chartData: IItemPriceGraphData[]
+    // openDetail => cb
+    // add item => cb
 }
 
-export default class MenuItem extends React.Component<IMenuItemProps> {
+interface IMenuItemState {
+    detailIsOpen: boolean
+}
+
+export default class MenuItem extends React.Component<IMenuItemProps, IMenuItemState> {
     constructor(props: IMenuItemProps) {
         super(props);
+
+        this.state = {
+            detailIsOpen: false
+        }
     }
 
     public addToCurrentOrder = (e: React.MouseEvent<HTMLImageElement>) => {
@@ -39,8 +50,14 @@ export default class MenuItem extends React.Component<IMenuItemProps> {
         // const itemName = e.currentTarget.dataset.itemname;    // dataset attr are all lowercase
         // if (itemid !== undefined && itemName !== undefined) {
         //   const currentPrice = this.props.entireMenu[this.state.displayCategoryIndex].items.find((element: any) => (parseFloat(itemid) === element.items_id)).currentPrice;
-          this.props.addToCurrentOrder(this.props.itemID, this.props.itemName, this.props.currentPrice);
+          this.props.addToCurrentOrder(this.props.item_id, this.props.itemName, this.props.currentPrice);
         // }
+      }
+
+      public toggle = () => {
+          this.setState({
+            detailIsOpen: !this.state.detailIsOpen
+          })
       }
 
     public render() {
@@ -48,16 +65,14 @@ export default class MenuItem extends React.Component<IMenuItemProps> {
             <div className="menu-item-container">
                 <Card
                     className="menu-item-card rd-corner"
-                    interactive={true}
                     elevation={Elevation.ONE}
-                    key={this.props.key}
-                    // onClick={this.addToCurrentOrder}
+                    data-productId={this.props.item_id}
                 >
                     {/* Absolute location */}
                     {/* Product images */}
-                    <img src={this.props.image} className="menu-item-img" alt="" />
+                    <img src={this.props.itemPhoto} className="menu-item-img" alt="" />
                     {/* Info button  */}
-                    <img className="item-info" src={info} alt="" />
+                    <img className="item-info" src={info} alt="" onClick={this.toggle} />
                     <img className="add-item" src={plus} alt="" onClick={this.addToCurrentOrder} />
                     <span className="menu-item-name">{this.props.itemName}</span>
                     <div className="menu-item-bot">
@@ -80,22 +95,20 @@ export default class MenuItem extends React.Component<IMenuItemProps> {
                         </div>
                     </div>
                 </Card>
-                <Collapse className="item-detail-collapse rd-corner" isOpen={this.props.detailIsOpen}>
+                <Collapse className="item-detail-collapse rd-corner" isOpen={this.state.detailIsOpen}>
                     <div className="item-detail-wrapper">
                         <h3 className="item-detail-subheader">Details</h3>
                         <hr className="item-split" />
-                        <p className="item-detail">{this.props.details}</p>
+                        <p className="item-detail">{this.props.itemDescription}</p>
                         <h3 className="item-detail-subheader">Performance</h3>
                         <hr className="item-split" />
-                        <AreaChart width={180} height={80} data={this.props.priceData}>
+                        <AreaChart width={180} height={80} data={this.props.chartData}>
                             <defs>
                                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                                     <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
                                     <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
                                 </linearGradient>
                             </defs>
-                            {/* <XAxis dataKey="time" /> */}
-                            {/* <YAxis /> */}
                             <Tooltip />
                             <Area type="monotone" dataKey="purchasePrice" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
                         </AreaChart>

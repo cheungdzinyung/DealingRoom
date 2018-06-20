@@ -8,8 +8,9 @@ export const API_SERVER = process.env.REACT_APP_API_DEV;
 import createSocketIoMiddleware from 'redux-socket.io';
 import * as io from 'socket.io-client';
 
+// const socket = io("http://localhost:8080");
 const socket = io(`${API_SERVER}`);
-const socketIoMiddleware = createSocketIoMiddleware(socket, ["GET/", "POST", "PUT"]);
+const socketIoMiddleware = createSocketIoMiddleware(socket, ["GET", "POST", "PUT"]);
 
 import logger from 'redux-logger';
 declare global {
