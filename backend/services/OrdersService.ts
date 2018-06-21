@@ -1,6 +1,5 @@
 import * as Knex from "knex";
 // import { IOrderData } from "../interfaces";
-// import { io } from "../app";
 
 export default class OrdersService {
   private knex: Knex;
@@ -127,51 +126,6 @@ export default class OrdersService {
               .where("id", orderId[0]);
           });
         });
-        // .then((confirmedOrder: any) => {
-        //   return this.knex("categories")
-        //     .select("id", "categoryName", "categoryPhoto")
-        //     .then(categoryList => {
-        //       return Promise.all(
-        //         categoryList.map((item: object, i: number) => {
-        //           return this.knex("items")
-        //             .select(
-        //               "id as items_id",
-        //               "itemName",
-        //               "itemStock",
-        //               "minimumPrice",
-        //               "currentPrice",
-        //               "itemPhoto",
-        //               "itemDescription",
-        //               "isSpecial",
-        //               "isActive"
-        //             )
-        //             .where("items.categories_id", categoryList[i].id);
-        //         })
-        //       )
-        //         .then(itemList => {
-        //           return Promise.all(
-        //             categoryList.map((category: object, j: number) => {
-        //               const result = {
-        //                 categoryName: categoryList[j].categoryName,
-        //                 categoryPhoto: categoryList[j].categoryPhoto,
-        //                 items: itemList[j]
-        //               };
-        //               return result;
-        //             })
-        //           );
-        //         })
-        //         .then((entireMenu: any) => {
-        //           // broadcast newMenu
-        //           console.log(entireMenu);
-        //           io.local.emit("action", {
-        //             type: "SOCKET_UPDATE_ITEM_PRICE",
-        //             entireMenu
-        //           });
-        //           // vvv old price, what's wrong?
-        //           return { ...confirmedOrder[0], entireMenu };
-        //         });
-        //     });
-        // });
       });
   }
 
@@ -278,7 +232,7 @@ export default class OrdersService {
       });
   }
 
-  // Working 15-06-2018//
+  // Working 15/06/18
   public getAllPrice(id: number, dateOfQuery: string) {
     return this.knex("categories")
       .join("items", "items.categories_id", "=", "categories.id")
@@ -347,7 +301,7 @@ export default class OrdersService {
       });
   }
 
-  // TODO //
+  // Working 21/06/18 //
   public getAllOrders(id: number) {
     return this.knex("users")
       .select("role")
