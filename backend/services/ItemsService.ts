@@ -84,22 +84,23 @@ export default class UsersService {
     return this.knex("itemsLog")
       .join("items", "itemsLog.items_id", "=", "items.id")
       .join("categories", "items.categories_id", "=", "categories.id")
-      .select("categories.categoryName")
+      .select("items.itemName")
       .select(this.knex.raw(`extract(hour from "itemsLog".created_at) as hour`))
       .avg("itemsLog.itemsLogPrice")
       .whereRaw("??::date = ?", ["created_at", dateOfQuery])
-      .groupBy("categoryName")
+      .where("items.itemName", "Asahi")
+      .groupBy("itemName")
       .groupByRaw(`extract('hour' from "itemsLog".created_at)`)
-      .then((result: Knex.QueryBuilder) => {
-        return result;
-        // return Promise.all(
-        //   result.map((order: object, i: number) => {
-        //     const obj = {
-        //       [result[i].categoryName]: result[i].avg
-        //     };
-        //     return obj;
-        //   })
-        // );
+      .then((result: any) => {
+        return Promise.all(
+          result.map((order: object, i: number) => {
+            const obj = {
+              time: result[i].hour.toString(),
+              purchasePrice: parseInt(result[i].avg, 10)
+            };
+            return obj;
+          })
+        );
       });
   }
 
@@ -112,7 +113,7 @@ export default class UsersService {
       .join("items", "itemsLog.items_id", "=", "items.id")
       .join("categories", "items.categories_id", "=", "categories.id")
       .select("categories.categoryName")
-      .select(this.knex.raw(`extract(hour from "itemsLog".created_at) as hour`))
+      .select(this.knex.raw(`extract(hour from "itemsLog".created_at) as time`))
       .avg("itemsLog.itemsLogPrice")
       .where("catName", "categories.categoryName")
       .whereRaw("??::date = ?", ["created_at", dateOfQuery])
@@ -139,7 +140,7 @@ export default class UsersService {
         return Promise.all(
           categoryList.map((item: object, i: number) => {
             return this.knex("items")
-            .join("categories", "items.categories_id", "=", "categories.id")
+              .join("categories", "items.categories_id", "=", "categories.id")
               .select(
                 "items.id as items_id",
                 "items.itemName",
@@ -153,7 +154,17 @@ export default class UsersService {
                 "items.isActive"
               )
               .where("items.categories_id", categoryList[i].id)
-              .orderBy("items.id", "ase")
+              .orderBy("items.id", "ase");
+            // }).then((itemListNoFluc)=>{
+            //   return this.knex("itemsLog")
+            //   .join("items", "itemsLog.items_id", "=", "items.id")
+            //   .join("categories", "items.categories_id", "=", "categories.id")
+            //   .select("items.itemName")
+            //   .select(this.knex.raw(`extract(hour from "itemsLog".created_at) as time`))
+            //   .avg("itemsLog.itemsLogPrice")
+            //   .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+            //   .groupBy("itemName")
+            //   .groupByRaw(`extract('hour' from "itemsLog".created_at)`)
           })
         ).then((itemList: any) => {
           return Promise.all(
