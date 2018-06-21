@@ -93,9 +93,23 @@ export interface IPureCategoryWithItem {
 }
 
 /*
-Corresponding API path: api/items
+Corresponding API path: api/items/?fluctuation=YYYY-MM-DD&category=<category>
 URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiitems5d/obtaining-all-item's-information
  */
+export interface IPureMenuItem {
+  // categoryName: string;
+  items_id: number;
+  itemName: string;
+  categoryName: string,
+  itemStock: number;
+  minimumPrice: number;
+  currentPrice: number;
+  itemPhoto: any;
+  itemDescription: string;
+  isSpecial: boolean;
+  isActive: boolean;
+}
+
 export interface IPureMenuItemWithFlux {
   // categoryName: string;
   items_id: number;
