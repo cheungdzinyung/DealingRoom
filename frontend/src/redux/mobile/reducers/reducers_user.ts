@@ -69,7 +69,7 @@ export const userReducer = (state: IUserState = initialState, action: UserAction
             return state;
         }
         case LOCAL_SIGNUP_SUCCESS: {
-            localStorage.setItem("dealingRoomToken", action.userInfoPackage.token);
+            localStorage.setItem("dealingRoomToken", action.userInfoPackage.password);
             return { ...state, isAuth: true };
         }
         case LOCAL_SIGNUP_FAIL: {

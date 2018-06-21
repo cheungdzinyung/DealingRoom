@@ -169,7 +169,7 @@ export function localSignUpFail(errMsg: any): ILocalSignUpFailAction {
 //         axios.post(`${API_SERVER}/api/auth/signup`, signUpPackage)
 //             .then((res: any) => {
 //                 if (res.status === 201) {
-//                     dispatch(localSignUpSuccess(res.data));
+//                     dispatch(localSignUpSuccess(res.data[0]));
 //                 } else {
 //                     alert("status: " + res.status);
 //                     dispatch(localSignUpFail(res.status));
@@ -182,7 +182,7 @@ export function localSignUpFail(errMsg: any): ILocalSignUpFailAction {
 //     }
 // }
 
-// WORK AROUND
+// WORK AROUND 
 export function localSignUp(username: string, password: string) {
     return (dispatch: Dispatch<ILocalSignUpSuccessAction | ILocalSignUpFailAction | ILocalLoginSuccessAction | ILocalLoginFailAction>) => {
         const signUpPackage: ISignUpPackage = {
