@@ -3,7 +3,7 @@ import * as React from "react";
 
 // redux
 import { connect } from "react-redux";
-import { IRootState } from "../../../redux/mobile/reducers/index";
+import { IRootState } from "../../../redux/store";
 import { addToCurrentOrder, getEntireMenu } from "../../../redux/mobile/actions/actions_orders";
 
 // Import UI elements
@@ -11,7 +11,7 @@ import UserMenu from "../../ui/mobile/usermenu";
 import MenuItem from "../../ui/mobile/menuitem";
 
 // Importing interfaces
-import { IRequestItem, IPureCategoryWithItem, IPureMenuItemWithFlux } from "../../../modules";
+import { IRequestItem, IMenuCategoryWithFlux, IMenuItemWithFlux } from "../../../modules";
 
 // Importing helper function
 // import { percentageChange } from "../../util/utility";
@@ -26,7 +26,7 @@ import CategoryFilter from "../../ui/mobile/categoryfilter";
 interface IMenuProps {
   getEntireMenu: () => void,
   menuReady: boolean,
-  entireMenu: IPureCategoryWithItem[],
+  entireMenu: IMenuCategoryWithFlux[],
   categories: any[],
   currentOrder: IRequestItem[],
   addToCurrentOrder: (itemID: number, itemName: string, currentPrice: number) => void,
@@ -138,8 +138,8 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
         />
 
         {/* render display from all > cat > search */}
-        {this.props.entireMenu.map((category: IPureCategoryWithItem, categoryIndex: number) => (
-          category.items.map((item: IPureMenuItemWithFlux, itemIndex: number) => (
+        {this.props.entireMenu.map((category: IMenuCategoryWithFlux, categoryIndex: number) => (
+          category.items.map((item: IMenuItemWithFlux, itemIndex: number) => (
             (
               /* v match searching, check for invalid char */
               item.itemName.toLowerCase().search(this.state.searchBoxEntry.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1")) !== -1
@@ -171,10 +171,10 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
 // Redux
 const mapStateToProps = (state: IRootState) => {
   return {
-    entireMenu: state.orders.entireMenu,
-    categories: state.orders.categories,
+    entireMenu: state.customer.orders.entireMenu,
+    categories: state.customer.orders.categories,
     // priceMapping: state.orders.priceMapping,
-    currentOrder: state.orders.currentOrder,
+    currentOrder: state.customer.orders.currentOrder,
   }
 }
 

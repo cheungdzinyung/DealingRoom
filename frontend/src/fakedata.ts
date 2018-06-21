@@ -1,13 +1,13 @@
 import {
   
-  IPureCategoryWithItem,
+  IMenuCategoryWithFlux,
   // IPureItemLine,
   // IPureOrder,
   // IPureUsersOrderList
 } from "src/modules";
 
 
-export const singleCategoryMenuItems: IPureCategoryWithItem = {
+export const singleCategoryMenuItems: IMenuCategoryWithFlux = {
   categoryName: "Beer",
   categoryPhoto: "www.dealingroom.com/public/img/beer.jpeg",
   items: [
@@ -19,6 +19,75 @@ export const singleCategoryMenuItems: IPureCategoryWithItem = {
       itemDescription:
         "ASAHI SUPER DRY’s uses carefully selected strains of yeast that not only facilitate outstanding fermentation.",
       itemName: "Asahi",
+      itemPhoto: "../storage/items/asahi.jpeg",
+      itemStock: 100,
+      items_id: 1,
+      minimumPrice: 15.0,
+      // tslint:disable-next-line:object-literal-sort-keys
+      chartData: [
+        {time: '', purchasePrice: 30},
+        {time: '', purchasePrice: 40},
+        {time: '', purchasePrice: 20},
+        {time: '', purchasePrice: 27},
+        {time: '', purchasePrice: 18},
+        {time: '', purchasePrice: 23},
+        {time: '', purchasePrice: 34},
+  ]
+    },
+    {
+      categoryName: "Beer",
+      currentPrice: 50.0,
+      isActive: true,
+      isSpecial: false,
+      itemDescription:
+        "ASAHI SUPER DRY’s uses carefully selected strains of yeast that not only facilitate outstanding fermentation.",
+      itemName: "Heineken",
+      itemPhoto: "../storage/items/asahi.jpeg",
+      itemStock: 100,
+      items_id: 2,
+      minimumPrice: 15.0,
+      // tslint:disable-next-line:object-literal-sort-keys
+      chartData: [
+        {time: '', purchasePrice: 40},
+        {time: '', purchasePrice: 60},
+        {time: '', purchasePrice: 20},
+        {time: '', purchasePrice: 27},
+        {time: '', purchasePrice: 28},
+        {time: '', purchasePrice: 33},
+        {time: '', purchasePrice: 34},
+  ]
+    },
+    {
+      categoryName: "Beer",
+      currentPrice: 60.0,
+      isActive: true,
+      isSpecial: false,
+      itemDescription:
+        "ASAHI SUPER DRY’s uses carefully selected strains of yeast that not only facilitate outstanding fermentation.",
+      itemName: "Guinness",
+      itemPhoto: "../storage/items/asahi.jpeg",
+      itemStock: 100,
+      items_id: 1,
+      minimumPrice: 15.0,
+      // tslint:disable-next-line:object-literal-sort-keys
+      chartData: [
+        {time: '', purchasePrice: 30},
+        {time: '', purchasePrice: 40},
+        {time: '', purchasePrice: 20},
+        {time: '', purchasePrice: 27},
+        {time: '', purchasePrice: 18},
+        {time: '', purchasePrice: 23},
+        {time: '', purchasePrice: 34},
+  ]
+    },
+    {
+      categoryName: "Beer",
+      currentPrice: 55.0,
+      isActive: true,
+      isSpecial: false,
+      itemDescription:
+        "ASAHI SUPER DRY’s uses carefully selected strains of yeast that not only facilitate outstanding fermentation.",
+      itemName: "Lager",
       itemPhoto: "../storage/items/asahi.jpeg",
       itemStock: 100,
       items_id: 1,

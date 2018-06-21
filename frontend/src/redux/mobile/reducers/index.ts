@@ -2,12 +2,12 @@ import { combineReducers } from 'redux';
 import { ordersReducer, IOrdersState } from "./reducers_orders";
 import { userReducer, IUserState } from "./reducers_user";
 
-export interface IRootState {
+export interface ICustomerState {
     orders: IOrdersState,
     user: IUserState,
 }
 
-export const rootReducer = combineReducers<IRootState>({
+export const customerReducer = combineReducers<ICustomerState>({
     orders: ordersReducer,
     user: userReducer,
 });

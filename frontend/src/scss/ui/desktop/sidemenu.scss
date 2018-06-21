@@ -22,14 +22,33 @@
         }
     }
     .menu{
-        .menu-selection{
-            .section-header{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
 
+        .menu-section{
+            width: 100%;
+            .section-header{
+                font-size: .8rem;
             }
             .section-pages{
+                margin: 15% 0 20% 0;
+                width: 100%;
                 .section-page-line{
-                    .page-line-icon{}
-                    .page-line-text{}
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 10%;
+                    cursor: pointer;
+                    .page-line-icon{
+                        width: 7%
+                    }
+                    .page-line-text{
+                        margin-left: 5%;
+                        font-size: .7rem;
+                    }
                 }
                 
             }

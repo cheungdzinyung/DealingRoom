@@ -1,0 +1,35 @@
+.filter-container {
+    width: 20%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 16vh 2.5%;
+    .filter-header {
+        font-size: .8rem;
+    }
+    .filter-line {
+        margin-top: 10%;
+        .filter-subheader {
+            font-size: .7rem;
+            display: block;
+        }
+        .filter-select-box {
+            margin-top: 3%;
+            .filter-select {
+                font-size: 1rem;
+                letter-spacing: 1px;
+                width: 100%;
+                padding: 4% 2%;
+                text-align: center;
+                text-align-last: center;
+                border: 1px #C4C4C4 solid;
+                color: #E9DBCC;
+                background-color: rgba(141, 141, 141, .5);
+                option {
+                    background-color: rgba(141, 141, 141, .5);
+                }
+            }
+        }
+    }
+}

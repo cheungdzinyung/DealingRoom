@@ -38,9 +38,9 @@ export default class UsersRouter {
             })
             .then(finalResult => {
               // broadcast newMenu
-              io.local.emit("action", {
+              io.emit("action", {
                 type: "SOCKET_UPDATE_ITEM_PRICE",
-                finalResult
+                entireMenu: finalResult
               });
               res.status(201).json(result);
             });

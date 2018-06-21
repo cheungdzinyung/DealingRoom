@@ -12,7 +12,7 @@ import profile from "../../assets/icons/menu/user.svg";
 
 // import redux and friends
 import { connect } from "react-redux";
-import { IRootState } from "../../../redux/mobile/reducers/index";
+import { IRootState } from "../../../redux/store";
 import { changePage } from "../../../redux/mobile/actions/actions_user";
 
 interface IUserMenuProps {
@@ -84,7 +84,7 @@ class PureUserMenu extends React.Component<IUserMenuProps, {}> {
 
 const mapStateToProps = (state: IRootState) => {
   return {
-    unpaidOrders: state.orders.unpaidOrders,
+    unpaidOrders: state.customer.orders.unpaidOrders,
   }
 }
 

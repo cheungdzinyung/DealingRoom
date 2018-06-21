@@ -12,7 +12,7 @@ import checkIcon from "../../assets/icons/check.svg";
 
 // import redux and friends
 import { connect } from "react-redux";
-import { IRootState } from "../../../redux/mobile/reducers/index";
+import { IRootState } from "../../../redux/store";
 import { getOrdersByUserToken } from "../../../redux/mobile/actions/actions_orders";
 import PageHeader from "src/components/ui/mobile/pageheader";
 
@@ -116,7 +116,7 @@ class PureOrderList extends React.Component<IOrdersProps, {}> {
 const mapStateToProps = (state: IRootState) => {
   return {
     // user_id: state.user.user_id,
-    ordersList: state.orders.ordersList,
+    ordersList: state.customer.orders.ordersList,
   }
 }
 

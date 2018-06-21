@@ -1,14 +1,30 @@
 import { applyMiddleware, createStore, Action, compose } from "redux";
-import { IRootState, rootReducer } from "./mobile/reducers/index";
 import thunk from 'redux-thunk';
 
+
+// combining reducers for mobile and 'desktop' version
+import { combineReducers } from 'redux';
+import { ICustomerState, customerReducer } from "./mobile/reducers/index";
+import { IStaffState, staffReducer } from "./desktop/reducers/index";
+
+export interface IRootState {
+    customer: ICustomerState,
+    staff: IStaffState,
+}
+export const rootReducer = combineReducers<IRootState>({
+    customer: customerReducer,
+    staff: staffReducer,
+});
+
+
+// env
 // export const API_SERVER = process.env.REACT_APP_API_SERVER;
 export const API_SERVER = process.env.REACT_APP_API_DEV;
 
+
+// socket.io
 import createSocketIoMiddleware from 'redux-socket.io';
 import * as io from 'socket.io-client';
-
-// const socket = io("http://localhost:8080");
 const socket = io(`${API_SERVER}`);
 const socketIoMiddleware = createSocketIoMiddleware(socket, ["GET", "POST", "PUT"]);
 
@@ -21,8 +37,13 @@ declare global {
 }
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-// export const store = createStore<IRootState, Action, {}, {}>(rootReducer, composeEnhancers(applyMiddleware(thunk, logger)));
+
+// create store
 export const store = createStore<IRootState, Action, {}, {}>(rootReducer, composeEnhancers(applyMiddleware(thunk, logger, socketIoMiddleware)));
+
+
+
+
 
 // vvv not sure what this do
 // store.subscribe(()=>{
