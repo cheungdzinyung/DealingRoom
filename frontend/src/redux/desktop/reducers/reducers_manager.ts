@@ -8,10 +8,10 @@ import {
     CHANGE_ITEM_STATUS_FAIL, 
 } from "../actions/actions_manager";
 
-import { IPureCategoryWithoutFlux } from "../../../modules";
+import { IMenuCategoryWithoutFlux } from "../../../modules";
 
 export interface IManagerState {
-    entireMenu: IPureCategoryWithoutFlux[],
+    entireMenu: IMenuCategoryWithoutFlux[],
     categories: string[],
     menuReady: boolean,
 }

@@ -4,15 +4,15 @@ import axios from "axios";
 
 import { API_SERVER } from "../../store";
 
-import { IPureMenuItem } from "../../../modules";
+import { IMenuCategoryWithoutFlux, ICreateMenuItem, IEditMenuItem } from "../../../modules";
 
 // Type creation
 export const CREATE_ITEM_SUCCESS = "CREATE_ITEM_SUCCESS";
 export type CREATE_ITEM_SUCCESS = typeof CREATE_ITEM_SUCCESS;
 export interface ICreateItemSuccessAction extends Action {
 	type: CREATE_ITEM_SUCCESS,
-	itemStatus: IPureMenuItem,
-	entireMenu: any,
+	itemStatus: ICreateMenuItem,
+	entireMenu: IMenuCategoryWithoutFlux[],
 }
 
 export const CREATE_ITEM_FAIL = "CREATE_ITEM_FAIL";
@@ -28,8 +28,8 @@ export const CHANGE_ITEM_STATUS_SUCCESS = "CHANGE_ITEM_STATUS_SUCCESS";
 export type CHANGE_ITEM_STATUS_SUCCESS = typeof CHANGE_ITEM_STATUS_SUCCESS;
 export interface IChangeItemStatusSuccessAction extends Action {
 	type: CHANGE_ITEM_STATUS_SUCCESS,
-	itemStatus: IPureMenuItem,
-	entireMenu: any,
+	itemStatus: IEditMenuItem,
+	entireMenu: IMenuCategoryWithoutFlux[],
 }
 
 export const CHANGE_ITEM_STATUS_FAIL = "CHANGE_ITEM_STATUS_FAIL";
@@ -44,7 +44,7 @@ export const GET_ENTIRE_MENU_SUCCESS = "GET_ENTIRE_MENU_SUCCESS";
 export type GET_ENTIRE_MENU_SUCCESS = typeof GET_ENTIRE_MENU_SUCCESS;
 export interface IGetEntireMenuSuccessAction extends Action {
 	type: GET_ENTIRE_MENU_SUCCESS,
-	entireMenu: any,
+	entireMenu: IMenuCategoryWithoutFlux[],
 }
 
 export const GET_ENTIRE_MENU_FAIL = "GET_ENTIRE_MENU_FAIL";
@@ -65,7 +65,7 @@ export type ManagerActions =
 	IChangeItemStatusFailAction;
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export function getEntireMenuSuccess(entireMenu: any): IGetEntireMenuSuccessAction {
+export function getEntireMenuSuccess(entireMenu: IMenuCategoryWithoutFlux[]): IGetEntireMenuSuccessAction {
     return {
         type: GET_ENTIRE_MENU_SUCCESS,
         entireMenu,
@@ -98,7 +98,7 @@ export function getEntireMenu() {
     }
 }
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export function createItemSuccess(itemStatus: IPureMenuItem, entireMenu: any): ICreateItemSuccessAction {
+export function createItemSuccess(itemStatus: ICreateMenuItem, entireMenu: IMenuCategoryWithoutFlux[]): ICreateItemSuccessAction {
 	return {
 		type: CREATE_ITEM_SUCCESS,
 		itemStatus,
@@ -113,13 +113,13 @@ export function createItemFail(): ICreateItemFailAction {
 	}
 }
 
-export function createItem(itemStatus: IPureMenuItem) {
+export function createItem(itemStatus: ICreateMenuItem) {
 	const config = { headers: { Authorization: "Bearer " + localStorage.getItem("dealingRoomToken") } }
 	return (dispatch: Dispatch<ICreateItemSuccessAction | ICreateItemFailAction>) => {
 		axios.post(`${API_SERVER}/api/items/`, itemStatus, config)
 			.then((res: any) => {
 				if (res.status === 200) {
-					dispatch(createItemSuccess(res.data, itemStatus));
+					dispatch(createItemSuccess(itemStatus, res.data));
 				} else {
 					alert("create item error, try again");
 					dispatch(createItemFail());
@@ -133,7 +133,7 @@ export function createItem(itemStatus: IPureMenuItem) {
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export function changeItemStatusSuccess(itemStatus: IPureMenuItem, entireMenu: any): IChangeItemStatusSuccessAction {
+export function changeItemStatusSuccess(itemStatus: IEditMenuItem, entireMenu: IMenuCategoryWithoutFlux[]): IChangeItemStatusSuccessAction {
 	return {
 		type: CHANGE_ITEM_STATUS_SUCCESS,
 		itemStatus,
@@ -148,13 +148,13 @@ export function changeItemStatusFail(): IChangeItemStatusFailAction {
 	}
 }
 
-export function changeItemStatus(itemStatus: IPureMenuItem) {
+export function changeItemStatus(itemStatus: IEditMenuItem) {
 	const config = { headers: { Authorization: "Bearer " + localStorage.getItem("dealingRoomToken") } }
 	return (dispatch: Dispatch<IChangeItemStatusSuccessAction | IChangeItemStatusFailAction>) => {
 		axios.put(`${API_SERVER}/api/items/${itemStatus.items_id}`, itemStatus, config)
 			.then((res: any) => {
 				if (res.status === 200) {
-					dispatch(changeItemStatusSuccess(res.data, itemStatus));
+					dispatch(changeItemStatusSuccess(itemStatus, res.data));
 				} else {
 					alert("update error, try again");
 					dispatch(changeItemStatusFail());

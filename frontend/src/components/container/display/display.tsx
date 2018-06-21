@@ -10,7 +10,7 @@ import tempImg from "../../assets/images/profiles/circle-head.png";
 import { singleCategoryMenuItems } from "../../../fakedata";
 
 // Importing utility function and classes
-import { IPureCategoryWithItem } from "src/modules";
+import { IMenuCategoryWithFlux } from "src/modules";
 import { percentageChange } from '../../../util/utility';
 
 
@@ -20,7 +20,7 @@ interface IDisplayState {
     // categories : IPureMenuCategory;
     // categoryName: string;
 
-    singleCategory: IPureCategoryWithItem
+    singleCategory: IMenuCategoryWithFlux
 }
 
 export default class Display extends React.Component<{}, IDisplayState> {

@@ -33,6 +33,39 @@ export type ActiveSpecialFilter = ALL | boolean;
 
 
 /*
+Corresponding API path: api/item/????
+for adding and editing menu items
+*/
+// current price === starting price
+// item_id is generated in backend
+export interface ICreateMenuItem {
+  itemName: string,
+  itemStock: number,
+  categoryName: string,
+  itemDescription: string,
+  minimumPrice: number,
+  currentPrice: number,        
+  itemPhoto: any,
+  isSpecial: boolean,
+  isActive: boolean,
+}
+
+// id and current price is untouched
+export interface IEditMenuItem {
+  items_id: number,
+  itemName: string,
+  itemStock: number,
+  categoryName: string,
+  itemDescription: string,
+  minimumPrice: number,
+  itemPhoto: any,
+  isSpecial: boolean,
+  isActive: boolean,
+}
+
+
+
+/*
 Corresponding API path: api/order/:orderid
 URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiordersorderid5d/retreiving-order-information-by-order-id
  */
@@ -91,16 +124,16 @@ export interface IPureUsersOrderList {
 Corresponding API path: api/items
 URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiitems5d/obtaining-all-item's-information
 */
-export interface IPureCategoryWithItem {
+export interface IMenuCategoryWithFlux {
   categoryName: string;
   categoryPhoto: string;
-  items: IPureMenuItemWithFlux[];
+  items: IMenuItemWithFlux[];
 }
 
-export interface IPureCategoryWithoutFlux{
+export interface IMenuCategoryWithoutFlux{
   categoryName: string;
   categoryPhoto: string;
-  items: IPureMenuItem[];
+  items: IMenuItemWithoutFlux[];
 }
 
 /*
@@ -108,7 +141,7 @@ Corresponding API path: api/items/?fluctuation=YYYY-MM-DD&category=<category>
 URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiitems5d/obtaining-all-item's-information
  */
 
-export interface IPureMenuItem {
+export interface IMenuItemWithoutFlux {
   items_id: number;
   itemName: string;
   itemStock: number;
@@ -120,7 +153,7 @@ export interface IPureMenuItem {
   isSpecial: boolean;
   isActive: boolean;
 }
-export interface IPureMenuItemWithFlux extends IPureMenuItem{
+export interface IMenuItemWithFlux extends IMenuItemWithoutFlux{
   chartData: IItemPriceGraphData[];
 }
 

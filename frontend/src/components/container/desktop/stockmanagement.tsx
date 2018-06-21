@@ -5,26 +5,25 @@ import * as React from "react";
 import AdminSideMenu from "../../ui/desktop/sidemenu";
 
 // Importing interfaces
-import { ActiveSpecialFilter, IPureCategoryWithoutFlux, IPureMenuItem } from "src/modules";
+import { ActiveSpecialFilter, IMenuCategoryWithoutFlux, ICreateMenuItem, IEditMenuItem } from "src/modules";
 
 // redux
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
 import { getEntireMenu, createItem, changeItemStatus } from "../../../redux/desktop/actions/actions_manager";
 
-
 interface IStockManagementProps {
     menuReady: boolean,
-    entireMenu: IPureCategoryWithoutFlux[],
+    entireMenu: IMenuCategoryWithoutFlux[],
     categories: string[],
     getEntireMenu: () => void,
 
 
     // this goes to create page's state for new item input
-    createItem: (itemStatus: IPureMenuItem) => void,
+    createItem: (itemStatus: ICreateMenuItem) => void,
 
     // this goes to edit page's state for item changes
-    changeItemStatus: (itemStatus: IPureMenuItem) => void,
+    changeItemStatus: (itemStatus: IEditMenuItem) => void,
 
 
 }
@@ -70,13 +69,13 @@ export class PureStockManagement extends React.Component<IStockManagementProps, 
         }
     }
 
-    public filterByCategory (e: React.MouseEvent<HTMLButtonElement>) {
+    public filterByCategory(e: React.MouseEvent<HTMLButtonElement>) {
         this.setState({
             category: e.currentTarget.value
         });
     }
 
-    public filterByActive (e: React.MouseEvent<HTMLButtonElement>) {
+    public filterByActive(e: React.MouseEvent<HTMLButtonElement>) {
         let choice: ActiveSpecialFilter;
         if (e.currentTarget.value === "not active") {
             choice = false
@@ -90,7 +89,7 @@ export class PureStockManagement extends React.Component<IStockManagementProps, 
         });
     }
 
-    public filterBySpecial (e: React.MouseEvent<HTMLButtonElement>) {
+    public filterBySpecial(e: React.MouseEvent<HTMLButtonElement>) {
         let choice: ActiveSpecialFilter;
         if (e.currentTarget.value === "not active") {
             choice = false
@@ -105,17 +104,17 @@ export class PureStockManagement extends React.Component<IStockManagementProps, 
     }
 
 
-    public goToAdd (e: React.MouseEvent<HTMLDivElement>) {
+    public goToAdd(e: React.MouseEvent<HTMLDivElement>) {
         // trigger to open moddle or wtever page
         // this.props.clickToAdd();
     }
 
-    public goToEdit (e: React.MouseEvent<HTMLDivElement>) {
+    public goToEdit(e: React.MouseEvent<HTMLDivElement>) {
         // trigger to open moddle or wtever page
         // this.props.clickToEdit(this.props.item_id);
     }
 
-    public componentDidMount () {
+    public componentDidMount() {
         if (!this.props.menuReady) {
             this.props.getEntireMenu();
         }
@@ -162,7 +161,7 @@ export class PureStockManagement extends React.Component<IStockManagementProps, 
     //         itemDescription: e.target.value
     //     });
     // }
-    
+
     // // need to parseInt() when send to BE
     // public setItemQuantity (e: React.ChangeEvent<HTMLInputElement>) {
     //     this.setState ({
@@ -182,7 +181,21 @@ export class PureStockManagement extends React.Component<IStockManagementProps, 
     //     });
     // }
 
-
+    // public confirmAdd() {
+    //     const newItem = {
+    //         // items_id: number;            // NO ENTRY !! gen by BE
+    //         itemName: this.state.itemName,
+    //         itemStock: this.state.itemStock,
+    //         categoryName: this.state.categoryName,
+    //         itemDescription: this.state.itemDescription,
+    //         minimumPrice: this.state.minimumPrice,
+    //         currentPrice: this.state.currentPrice,        // starting price
+    //         itemPhoto: this.state.itemPhoto,
+    //         isSpecial: this.state.isSpecial,
+    //         isActive: this.state.isActive,
+    //     };
+    //     this.props.createItem(newItem);
+    // }
 
 
 
@@ -202,10 +215,10 @@ const mapDispatchToProps = (dispatch: any) => {
         getEntireMenu: () => {
             dispatch(getEntireMenu());
         },
-        createItem: (itemStatus: IPureMenuItem) => {
+        createItem: (itemStatus: ICreateMenuItem) => {
             dispatch(createItem(itemStatus));
         },
-        changeItemStatus: (itemStatus: IPureMenuItem) => {
+        changeItemStatus: (itemStatus: IEditMenuItem) => {
             dispatch(changeItemStatus(itemStatus));
         },
 
