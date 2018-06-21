@@ -139,16 +139,18 @@ export default class UsersService {
         return Promise.all(
           categoryList.map((item: object, i: number) => {
             return this.knex("items")
+            .join("categories", "items.categories_id", "=", "categories.id")
               .select(
-                "id as items_id",
-                "itemName",
-                "itemStock",
-                "minimumPrice",
-                "currentPrice",
-                "itemPhoto",
-                "itemDescription",
-                "isSpecial",
-                "isActive"
+                "items.id as items_id",
+                "items.itemName",
+                "categories.categoryName",
+                "items.itemStock",
+                "items.minimumPrice",
+                "items.currentPrice",
+                "items.itemPhoto",
+                "items.itemDescription",
+                "items.isSpecial",
+                "items.isActive"
               )
               .where("items.categories_id", categoryList[i].id);
           })

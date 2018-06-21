@@ -1,11 +1,14 @@
 import * as express from "express";
+import ItemsService from "../services/ItemsService";
 import OrdersService from "../services/OrdersService";
 
 export default class UsersRouter {
   private ordersService: OrdersService;
+  private itemsService: ItemsService;
 
-  constructor(ordersService: OrdersService) {
+  constructor(ordersService: OrdersService, itemsService: ItemsService) {
     this.ordersService = ordersService;
+    this.itemsService = itemsService;
   }
 
   public router() {
@@ -27,7 +30,10 @@ export default class UsersRouter {
       return this.ordersService
         .add(req.user.id, req.body)
         .then((result: any) => {
-          res.status(201).json(result);
+          return this.itemsService.getAll().then(orderList => {
+            result[0].entireOrder = orderList;
+            res.status(201).json(result);
+          });
         })
         .catch((err: express.Errback) => {
           res.status(500).json({ status: "failed" });
