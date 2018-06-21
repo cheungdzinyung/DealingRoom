@@ -3,12 +3,14 @@ import * as React from "react";
 
 // Importing UI components
 import AdminSideMenu from "../../ui/desktop/sidemenu";
+import StockFilter from "../../ui/desktop/stockfilter";
 
 // Importing interfaces
 import { ActiveSpecialFilter, IPureCategoryWithoutFlux } from "src/modules";
 
 
-interface IStockManagementProps{
+
+interface IStockManagementProps {
     itemlist: IPureCategoryWithoutFlux[]
 }
 
@@ -19,24 +21,25 @@ interface IStockManagementState {
 }
 
 export default class StockManagement extends React.Component<IStockManagementProps, IStockManagementState> {
-    constructor (props: IStockManagementProps){
+    constructor(props: IStockManagementProps) {
         super(props)
 
-        this.state={
+        this.state = {
             category: "all",
             isActive: "all",
             isSpecial: "all"
         }
     }
 
-    public render(){
+    public render() {
         return (
-        <div className="desktop-page-container">
-        <AdminSideMenu/>
-        </div>
+            <div className="desktop-page-container">
+                <AdminSideMenu />
+                <StockFilter />
+            </div>
         )
     }
-        
-    
+
+
 
 }

@@ -14,20 +14,22 @@ export default class StockFilter extends React.Component {
                     <span className="filter-subheader">Categories</span>
                     <div className="pt-select">
                         <select >
-                            <option selected={true}>All</option>
+                            <option value="all" selected={true}>All</option>
                             <option value="beer">Beer</option>
                             <option value="cocktail">Cocktail</option>
                             <option value="redWine">Red Wine</option>
-                            {/* <option value="whiteWine"></option>
-                            <option value="champagne"></option>
-                            <option value="vodka"></option>
-                            <option value="tequila"></option>
-                            <option value="whiskey"></option>
-                            <option value="gin"></option>
-                            <option value="rum"></option>
-                            <option value="brandy"></option>
-                            <option value="non-alcoholic"></option>
-                            <option value="snack"></option> */}
+                            <option value="whiteWine">White Wine</option>
+                            <option value="champagne">Champagne</option>
+                            <option value="vodka">Vodka</option>
+                            <option value="tequila">Tequila</option>
+                            <option value="whiskey">Whiskey</option>
+                            <option value="gin">Gin</option>
+                            <option value="rum">Rum</option>
+                            <option value="brandy">Brandy</option>
+                            <option value="non-alcoholic">Non-alcoholic</option>
+                            <option value="snack">Snack</option>
+                            <option value="main">Main</option>
+                            <option value="dessert">Dessert</option>
 
                         </select>
                     </div>
@@ -36,11 +38,9 @@ export default class StockFilter extends React.Component {
                     <span className="filter-subheader">Activies</span>
                     <div className="pt-select">
                         <select >
-                            <option selected={true}>Choose an item...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                            <option value="4">Four</option>
+                            <option value="all" selected={true}>All</option>
+                            <option value="true">True</option>
+                            <option value="false">False</option>
                         </select>
                     </div>
                 </div>
@@ -48,11 +48,9 @@ export default class StockFilter extends React.Component {
                     <span className="filter-subheader">Specials</span>
                     <div className="pt-select">
                         <select >
-                            <option selected={true}>Choose an item...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                            <option value="4">Four</option>
+                            <option value="all" selected={true}>All</option>
+                            <option value="true">True</option>
+                            <option value="false">False</option>
                         </select>
                     </div>
                 </div>
