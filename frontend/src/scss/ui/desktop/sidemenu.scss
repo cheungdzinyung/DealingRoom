@@ -1,0 +1,38 @@
+.admin-menu {
+    width: 20%;
+    height: 100vh;
+    padding: 2.5%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-right: 1px solid #4F4F4F;
+    display: grid;
+    grid-template-rows: 12vh 1fr;
+    .corner {
+        width: 100%;
+        display:flex;
+        justify-content: flex-start;
+        align-items: center;
+        .corner-logo{
+            width: 12%
+        }
+        .corner-name{
+            margin-left: 5%;
+            font-size: .9rem;
+        }
+    }
+    .menu{
+        .menu-selection{
+            .section-header{
+
+            }
+            .section-pages{
+                .section-page-line{
+                    .page-line-icon{}
+                    .page-line-text{}
+                }
+                
+            }
+        }
+    }
+}
