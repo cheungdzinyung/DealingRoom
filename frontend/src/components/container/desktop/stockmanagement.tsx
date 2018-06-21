@@ -123,6 +123,7 @@ export class PureStockManagement extends React.Component<IStockManagementProps, 
         return (
             <div className="desktop-page-container">
                 <AdminSideMenu />
+                <StockFilter />
             </div>
         )
     }
