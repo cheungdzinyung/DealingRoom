@@ -50,6 +50,7 @@ const initialState: IOrdersState = {
                     "items_id": 0,
                     "itemName": "Asahi",
                     "itemStock": 1,
+                    categoryName: "beer",
                     "minimumPrice": 999.00,
                     "currentPrice": 999.00,
                     "itemPhoto": "../storage/items/asahi.jpeg",

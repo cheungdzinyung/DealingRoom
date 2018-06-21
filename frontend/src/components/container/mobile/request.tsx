@@ -17,6 +17,7 @@ import { Button, Card, Elevation, Intent } from "@blueprintjs/core";
 
 // Importing interfaces
 import { IRequestItem, ICurrentOrder } from "../../../modules";
+import PageHeader from "src/components/ui/mobile/pageheader";
 
 interface IRequestProps {
   // handling orders
@@ -72,7 +73,7 @@ class PureRequest extends React.Component<IRequestProps, {}> {
   public render() {
     return (
       <div className="page-content-container">
-        
+        <PageHeader header="Request" subHeader="Make up your mind"/>
         {this.props.currentOrder.map((item, i) => (
           <Card key={i}
             className="request-line"

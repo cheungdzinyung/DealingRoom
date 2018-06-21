@@ -1,6 +1,6 @@
 import * as Knex from "knex";
 // import { IOrderData } from "../interfaces";
-import { io } from "../app";
+// import { io } from "../app";
 
 export default class OrdersService {
   private knex: Knex;
@@ -36,7 +36,7 @@ export default class OrdersService {
               .returning("id");
           })
         ).then((orderItemId: any) => {
-          Promise.all(
+          return Promise.all(
             orderItemId.map((item: object, j: number) => {
               // obtain the each item's id that is being ordered
               return this.knex("orders_items")
@@ -120,57 +120,58 @@ export default class OrdersService {
                     });
                 });
             })
-          );
-          // return the user_id, order status and order_id of the added order
-          return this.knex("orders")
-            .select("users_id", "status", "id as orders_id")
-            .where("id", orderId[0]);
-        });
-      })
-      .then((confirmedOrder: any) => {
-        return this.knex("categories")
-          .select("id", "categoryName", "categoryPhoto")
-          .then(categoryList => {
-            return Promise.all(
-              categoryList.map((item: object, i: number) => {
-                return this.knex("items")
-                  .select(
-                    "id as items_id",
-                    "itemName",
-                    "itemStock",
-                    "minimumPrice",
-                    "currentPrice",
-                    "itemPhoto",
-                    "itemDescription",
-                    "isSpecial",
-                    "isActive"
-                  )
-                  .where("items.categories_id", categoryList[i].id);
-              })
-            )
-              .then(itemList => {
-                return Promise.all(
-                  categoryList.map((category: object, j: number) => {
-                    const result = {
-                      categoryName: categoryList[j].categoryName,
-                      categoryPhoto: categoryList[j].categoryPhoto,
-                      items: itemList[j]
-                    };
-                    return result;
-                  })
-                );
-              })
-              .then((entireMenu: any) => {
-                // broadcast newMenu
-                console.log(entireMenu);
-                io.local.emit("action", {
-                  type: "SOCKET_UPDATE_ITEM_PRICE",
-                  entireMenu
-                });
-                // vvv old price, what's wrong?
-                return { ...confirmedOrder[0], entireMenu };
-              });
+          ).then(() => {
+            // return the user_id, order status and order_id of the added order
+            return this.knex("orders")
+              .select("users_id", "status", "id as orders_id")
+              .where("id", orderId[0]);
           });
+        });
+        // .then((confirmedOrder: any) => {
+        //   return this.knex("categories")
+        //     .select("id", "categoryName", "categoryPhoto")
+        //     .then(categoryList => {
+        //       return Promise.all(
+        //         categoryList.map((item: object, i: number) => {
+        //           return this.knex("items")
+        //             .select(
+        //               "id as items_id",
+        //               "itemName",
+        //               "itemStock",
+        //               "minimumPrice",
+        //               "currentPrice",
+        //               "itemPhoto",
+        //               "itemDescription",
+        //               "isSpecial",
+        //               "isActive"
+        //             )
+        //             .where("items.categories_id", categoryList[i].id);
+        //         })
+        //       )
+        //         .then(itemList => {
+        //           return Promise.all(
+        //             categoryList.map((category: object, j: number) => {
+        //               const result = {
+        //                 categoryName: categoryList[j].categoryName,
+        //                 categoryPhoto: categoryList[j].categoryPhoto,
+        //                 items: itemList[j]
+        //               };
+        //               return result;
+        //             })
+        //           );
+        //         })
+        //         .then((entireMenu: any) => {
+        //           // broadcast newMenu
+        //           console.log(entireMenu);
+        //           io.local.emit("action", {
+        //             type: "SOCKET_UPDATE_ITEM_PRICE",
+        //             entireMenu
+        //           });
+        //           // vvv old price, what's wrong?
+        //           return { ...confirmedOrder[0], entireMenu };
+        //         });
+        //     });
+        // });
       });
   }
 
@@ -357,54 +358,54 @@ export default class OrdersService {
           userRole[0].role === "bartender" ||
           userRole[0].role === "server"
         ) {
-        return this.knex("orders")
-          .join("users", "users.id", "=", "orders.users_id")
-          .whereNot({ status: "served", isPaid: true })
-          .select(
-            "orders.id as orders_id",
-            "users.id as users_id",
-            "users.displayName",
-            "orders.table",
-            "orders.status",
-            "orders.isPaid"
-          )
-          .then(ordersList => {
-            return Promise.all(
-              ordersList.map((order: object, i: number) => {
-                return this.knex("orders")
-                  .join(
-                    "orders_items",
-                    "orders_items.orders_id",
-                    "=",
-                    "orders.id"
-                  )
-                  .join("items", "items.id", "=", "orders_items.items_id")
-                  .select(
-                    "items.itemName",
-                    "orders_items.ice",
-                    "orders_items.sweetness",
-                    "orders_items.garnish",
-                    "orders_items.purchasePrice"
-                  )
-                  .where("orders.id", ordersList[i].orders_id);
-              })
-            ).then(itemsList => {
+          return this.knex("orders")
+            .join("users", "users.id", "=", "orders.users_id")
+            .whereNot({ status: "served", isPaid: true })
+            .select(
+              "orders.id as orders_id",
+              "users.id as users_id",
+              "users.displayName",
+              "orders.table",
+              "orders.status",
+              "orders.isPaid"
+            )
+            .then(ordersList => {
               return Promise.all(
-                ordersList.map((category: object, j: number) => {
-                  const result = {
-                    orders_id: ordersList[j].orders_id,
-                    users_id: ordersList[j].users_id,
-                    displayName: ordersList[j].displayName,
-                    table: ordersList[j].table,
-                    status: ordersList[j].status,
-                    isPaid: ordersList[j].isPaid,
-                    order: itemsList[j]
-                  };
-                  return result;
+                ordersList.map((order: object, i: number) => {
+                  return this.knex("orders")
+                    .join(
+                      "orders_items",
+                      "orders_items.orders_id",
+                      "=",
+                      "orders.id"
+                    )
+                    .join("items", "items.id", "=", "orders_items.items_id")
+                    .select(
+                      "items.itemName",
+                      "orders_items.ice",
+                      "orders_items.sweetness",
+                      "orders_items.garnish",
+                      "orders_items.purchasePrice"
+                    )
+                    .where("orders.id", ordersList[i].orders_id);
                 })
-              );
+              ).then(itemsList => {
+                return Promise.all(
+                  ordersList.map((category: object, j: number) => {
+                    const result = {
+                      orders_id: ordersList[j].orders_id,
+                      users_id: ordersList[j].users_id,
+                      displayName: ordersList[j].displayName,
+                      table: ordersList[j].table,
+                      status: ordersList[j].status,
+                      isPaid: ordersList[j].isPaid,
+                      order: itemsList[j]
+                    };
+                    return result;
+                  })
+                );
+              });
             });
-          });
         } else {
           return userRole[0].role;
         }

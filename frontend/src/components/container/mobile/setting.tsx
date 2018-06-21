@@ -9,7 +9,7 @@ import Alipay from "../../assets/images/payment/alipay.png";
 import Paypal from "../../assets/images/payment/paypal.png";
 import Stripe from "../../assets/images/payment/stripe.png";
 import Wechatpay from "../../assets/images/payment/wechatpay.png";
-import profilePic from "../../assets/images/profiles/circle-head.png";
+import PageHeader from "src/components/ui/mobile/pageheader";
 
 export default class Setting extends React.Component {
   constructor(props: {}) {
@@ -18,7 +18,7 @@ export default class Setting extends React.Component {
   public render() {
     return (
       <div className="page-content-container">
-        <img className="setting-img" src={profilePic} alt="" />
+        <PageHeader header="Setting" subHeader="Column A, or try column B"/>
         <FormGroup
           className="user-info-form"
           labelFor="login"
