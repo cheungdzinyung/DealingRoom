@@ -1,5 +1,12 @@
-.admin-menu{
-    width: 100%;
+.admin-menu {
+    width: 20vw;
     height: 100vh;
-    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-right: 1px solid #4F4F4F;
+    padding: 20%;
+    display: grid;
+    grid-template-rows: 12vh 1fr;
+
 }

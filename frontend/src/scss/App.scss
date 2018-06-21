@@ -51,6 +51,7 @@ $header-sub-text: rgba(233, 219, 204, .3);
 @import './pages/mobile/order';
 @import './pages/mobile/orderlist';
 @import './pages/mobile/request';
+// @import './pages/desktop/
 
 // Top level reset
 html,
@@ -114,6 +115,7 @@ input {
 
 
 // Style element shares across multiple components
+// Mobile
 .page-content-container {
     width: 100%;
     padding: 5vh 10% 17vh 10%;
@@ -146,3 +148,12 @@ input {
   *::-webkit-input-placeholder {
     color: $placebolder-color;
   }
+
+
+//   Desktop
+.desktop-page-container{
+    position: relative;
+    display: grid;
+    grid-template-columns: 20% 1fr 20%;
+    grid-gap: 5px;
+}

@@ -35,8 +35,7 @@ class AdminSideMenu extends React.Component<IUserMenuProps, {}> {
     public render() {
         return (
             <div className="admin-menu">
-                123
-      </div>
+                123</div>
         );
     }
 }
