@@ -152,7 +152,8 @@ export default class UsersService {
                 "items.isSpecial",
                 "items.isActive"
               )
-              .where("items.categories_id", categoryList[i].id);
+              .where("items.categories_id", categoryList[i].id)
+              .orderBy("items.id", "ase")
           })
         ).then((itemList: any) => {
           return Promise.all(
