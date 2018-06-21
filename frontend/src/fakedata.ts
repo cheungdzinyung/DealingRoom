@@ -1,12 +1,8 @@
 import {
-  IPureCategoryWithItem,
-  IPureMenuItem
-  // IPureItemLine,
-  // IPureOrder,
-  // IPureUsersOrderList
+  IMenuCategoryWithFlux, IMenuItemWithoutFlux
 } from "src/modules";
 
-export const singleCategoryMenuItems: IPureCategoryWithItem = {
+export const singleCategoryMenuItems: IMenuCategoryWithFlux = {
   categoryName: "Beer",
   categoryPhoto: "www.dealingroom.com/public/img/beer.jpeg",
   items: [
@@ -105,7 +101,7 @@ export const singleCategoryMenuItems: IPureCategoryWithItem = {
   ]
 };
 
-export const onelineitemtest: IPureMenuItem = {
+export const onelineitemtest: IMenuItemWithoutFlux = {
   items_id: 1,
   itemName: "string",
   itemStock: 12,

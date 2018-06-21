@@ -2,10 +2,10 @@
 import * as React from "react";
 
 // Importing Interfaces
-import { IPureMenuItem } from "src/modules";
+import { IMenuItemWithoutFlux } from "src/modules";
 
-export default class StockItemLine extends React.Component<IPureMenuItem, {}> {
-  constructor(props: IPureMenuItem) {
+export default class StockItemLine extends React.Component<IMenuItemWithoutFlux, {}> {
+  constructor(props: IMenuItemWithoutFlux) {
     super(props);
   }
   public render() {
