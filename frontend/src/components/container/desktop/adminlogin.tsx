@@ -6,9 +6,9 @@ import * as React from "react";
 import { Card } from "@blueprintjs/core";
 
 // Importing static assets
-import facebook from "../../icons/signup/facebook.svg";
-import google from "../../icons/signup/google.svg";
-import logo from "../../icons/all/logo.svg";
+import facebook from "../../assets/icons/signup/facebook.svg";
+import google from "../../assets/icons/signup/google.svg";
+import logo from "../../assets/icons/all/logo.svg";
 
 // redux
 // import { connect } from "react-redux";
@@ -26,7 +26,7 @@ interface ILoginProps {
   localLogin: (username: string, password: string) => void,
 }
 
-export class PureLogin extends React.Component<ILoginProps, ILoginState> {
+export default class AdminLogin extends React.Component<ILoginProps, ILoginState> {
   constructor(props: ILoginProps) {
     super(props);
 

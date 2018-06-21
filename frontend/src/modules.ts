@@ -23,6 +23,11 @@ type CANCELLED = typeof CANCELLED;
 
 export type OrderStatus = ORDERED | CONFIRMED | MADE | SERVED | CANCELLED;
 
+const ALL = "all"
+type ALL = typeof ALL;
+
+export type ActiveSpecialFilter = ALL | boolean;
+
 // All acceptable image types
 // export type ImageExt = "*.jpg" | "*.png" | "*.jpeg" | string;
 
@@ -92,35 +97,30 @@ export interface IPureCategoryWithItem {
   items: IPureMenuItemWithFlux[];
 }
 
+export interface IPureCategoryWithoutFlux{
+  categoryName: string;
+  categoryPhoto: string;
+  items: IPureMenuItem[];
+}
+
 /*
 Corresponding API path: api/items/?fluctuation=YYYY-MM-DD&category=<category>
 URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiitems5d/obtaining-all-item's-information
  */
+
 export interface IPureMenuItem {
-  // categoryName: string;
   items_id: number;
   itemName: string;
-  categoryName: string,
   itemStock: number;
+  categoryName: string;
+  itemDescription: string;
   minimumPrice: number;
   currentPrice: number;
   itemPhoto: any;
-  itemDescription: string;
   isSpecial: boolean;
   isActive: boolean;
 }
-
-export interface IPureMenuItemWithFlux {
-  // categoryName: string;
-  items_id: number;
-  itemName: string;
-  itemStock: number;
-  minimumPrice: number;
-  currentPrice: number;
-  itemPhoto: any;
-  itemDescription: string;
-  isSpecial: boolean;
-  isActive: boolean;
+export interface IPureMenuItemWithFlux extends IPureMenuItem{
   chartData: IItemPriceGraphData[];
 }
 
@@ -132,7 +132,6 @@ export interface IItemPriceGraphData{
 
 /* 
 Corresponding API path POST: api/orders/user/:id
-
 */
 // each item in shopping cart
 export interface IRequestItem {

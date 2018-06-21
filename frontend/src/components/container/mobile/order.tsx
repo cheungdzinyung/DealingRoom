@@ -17,6 +17,7 @@ import paymentTest from "../../assets/images/payment/stripe.png"
 // import redux and friends
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/mobile/reducers/index";
+import PageHeader from "src/components/ui/mobile/pageheader";
 
 interface IOrderProps {
   match: match<{ orderId: number }>;
@@ -82,8 +83,7 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
   public render() {
     return (
       <div className="page-content-container">
-
-
+      <PageHeader header={`Order ${this.state.orderID}`} subHeader="Your wish is our command"/>
         {
           this.state.thisOrder.orderItems !== "empty" ?
             <div>
