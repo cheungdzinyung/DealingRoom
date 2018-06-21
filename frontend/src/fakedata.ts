@@ -1,11 +1,10 @@
 import {
-  
   IPureCategoryWithItem,
+  IPureMenuItem
   // IPureItemLine,
   // IPureOrder,
   // IPureUsersOrderList
 } from "src/modules";
-
 
 export const singleCategoryMenuItems: IPureCategoryWithItem = {
   categoryName: "Beer",
@@ -25,14 +24,14 @@ export const singleCategoryMenuItems: IPureCategoryWithItem = {
       minimumPrice: 15.0,
       // tslint:disable-next-line:object-literal-sort-keys
       chartData: [
-        {time: '', purchasePrice: 30},
-        {time: '', purchasePrice: 40},
-        {time: '', purchasePrice: 20},
-        {time: '', purchasePrice: 27},
-        {time: '', purchasePrice: 18},
-        {time: '', purchasePrice: 23},
-        {time: '', purchasePrice: 34},
-  ]
+        { time: "", purchasePrice: 30 },
+        { time: "", purchasePrice: 40 },
+        { time: "", purchasePrice: 20 },
+        { time: "", purchasePrice: 27 },
+        { time: "", purchasePrice: 18 },
+        { time: "", purchasePrice: 23 },
+        { time: "", purchasePrice: 34 }
+      ]
     },
     {
       categoryName: "Beer",
@@ -48,14 +47,14 @@ export const singleCategoryMenuItems: IPureCategoryWithItem = {
       minimumPrice: 15.0,
       // tslint:disable-next-line:object-literal-sort-keys
       chartData: [
-        {time: '', purchasePrice: 40},
-        {time: '', purchasePrice: 60},
-        {time: '', purchasePrice: 20},
-        {time: '', purchasePrice: 27},
-        {time: '', purchasePrice: 28},
-        {time: '', purchasePrice: 33},
-        {time: '', purchasePrice: 34},
-  ]
+        { time: "", purchasePrice: 40 },
+        { time: "", purchasePrice: 60 },
+        { time: "", purchasePrice: 20 },
+        { time: "", purchasePrice: 27 },
+        { time: "", purchasePrice: 28 },
+        { time: "", purchasePrice: 33 },
+        { time: "", purchasePrice: 34 }
+      ]
     },
     {
       categoryName: "Beer",
@@ -71,14 +70,14 @@ export const singleCategoryMenuItems: IPureCategoryWithItem = {
       minimumPrice: 15.0,
       // tslint:disable-next-line:object-literal-sort-keys
       chartData: [
-        {time: '', purchasePrice: 30},
-        {time: '', purchasePrice: 40},
-        {time: '', purchasePrice: 20},
-        {time: '', purchasePrice: 27},
-        {time: '', purchasePrice: 18},
-        {time: '', purchasePrice: 23},
-        {time: '', purchasePrice: 34},
-  ]
+        { time: "", purchasePrice: 30 },
+        { time: "", purchasePrice: 40 },
+        { time: "", purchasePrice: 20 },
+        { time: "", purchasePrice: 27 },
+        { time: "", purchasePrice: 18 },
+        { time: "", purchasePrice: 23 },
+        { time: "", purchasePrice: 34 }
+      ]
     },
     {
       categoryName: "Beer",
@@ -94,17 +93,31 @@ export const singleCategoryMenuItems: IPureCategoryWithItem = {
       minimumPrice: 15.0,
       // tslint:disable-next-line:object-literal-sort-keys
       chartData: [
-        {time: '', purchasePrice: 30},
-        {time: '', purchasePrice: 40},
-        {time: '', purchasePrice: 20},
-        {time: '', purchasePrice: 27},
-        {time: '', purchasePrice: 18},
-        {time: '', purchasePrice: 23},
-        {time: '', purchasePrice: 34},
-  ]
+        { time: "", purchasePrice: 30 },
+        { time: "", purchasePrice: 40 },
+        { time: "", purchasePrice: 20 },
+        { time: "", purchasePrice: 27 },
+        { time: "", purchasePrice: 18 },
+        { time: "", purchasePrice: 23 },
+        { time: "", purchasePrice: 34 }
+      ]
     }
   ]
-}
+};
+
+export const onelineitemtest: IPureMenuItem = {
+  items_id: 1,
+  itemName: "string",
+  itemStock: 12,
+  categoryName: "beer",
+  itemDescription:
+    "FAODHASODHASOdhasoudhasoduhasoduwehaouha oaduhs oduahwod uhaouh reouhwaoe isd",
+  minimumPrice: 12,
+  currentPrice: 13,
+  itemPhoto: 123,
+  isSpecial: true,
+  isActive: true
+};
 
 // export const chartOption = {
 //   layout: {
