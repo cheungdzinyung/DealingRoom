@@ -2,16 +2,17 @@
 import * as React from "react";
 
 // Importing static assets
-import downWhite from "../../assets/icons/down-white.svg";
-import upWhite from "../../assets/icons/up-white.svg";
-import tempImg from "../../assets/images/profiles/circle-head.png";
+// import downWhite from "../../assets/icons/down-white.svg";
+// import upWhite from "../../assets/icons/up-white.svg";
+import tempImg from "../../assets/images/categories/squarebeer.jpg";
 
 // Importing temporary data
 import { singleCategoryMenuItems } from "../../../fakedata";
 
 // Importing utility function and classes
 import { IPureCategoryWithItem } from "src/modules";
-import { percentageChange } from '../../../util/utility';
+import { LineChart, XAxis, YAxis, CartesianGrid, Line } from "recharts";
+// import { percentageChange } from '../../../util/utility';
 
 
 
@@ -33,58 +34,48 @@ export default class Display extends React.Component<{}, IDisplayState> {
         }
     }
 
-    // public componentWillMount(){} // use it for calling backend
-
-    // Sorry for the following method is depleted because the data structure is now changed to the exact format that we will be receiving from the backend, which the category will also come with the path, hence it is no longer necessary to create just a state for just the item category.
-
-    // public componentDidMount() {
-    //     // the category name should be either from previous page or from the backend
-    //     const categoryName = this.state.categories.name.find((name) => name === 'Cocktails');
-    //     if (categoryName) {
-    //         this.setState({categoryName});
-    //     }
-    // }
-
     public render() {
         return (
-            <div className="display-content-container">
-                {/* <div className="display-banner"> */}
-                    {/* <img className="display-img" src={tempImg} alt="display-pic" />
-                    <h2>{this.state.singleCategory.categoryName}</h2> */}
-                
-                <div className="display-container">
-                                <img className="display-img" src={tempImg} alt="display-pic" />
-                                <h2>{this.state.singleCategory.categoryName}</h2>
+            <div className="display-container">
+                <div className="category-display">
+                    <img className="display-img" src={tempImg} alt="display-pic" />
+                    <h2>{this.state.singleCategory.categoryName}</h2>
+                </div>
+
+                <div className="price-fluctuation-graph">
+                    <LineChart width={500} height={180} data={[
+                        { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
+                        { name: 'Page B', uv: 3000, pv: 1398, amt: 2210 },
+                        { name: 'Page C', uv: 2000, pv: 9800, amt: 2290 },
+                        { name: 'Page D', uv: 2780, pv: 3908, amt: 2000 },
+                        { name: 'Page E', uv: 1890, pv: 4800, amt: 2181 },
+                        { name: 'Page F', uv: 2390, pv: 3800, amt: 2500 },
+                        { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
+                    ]}>
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+                        <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+                        <Line type="monotone" dataKey="pv" stroke="#82ca9d" />
+                    </LineChart>
+                </div>
+                <div className="category-item-container">
                     {this.state.singleCategory.items.map((item, i) => {
                         return (
-                            <div className="display-grid" key={i}>
-                                <div className="item-name-display">
-                                    <span>{item.itemName}</span>
-                                </div>
-                                <div className={
-                                    this.state.singleCategory.items.map[i]
-                                        ? "item-arrow-display"
-                                        : percentageChange(item.chartData[item.chartData.length - 1].purchasePrice, item.chartData[0].purchasePrice) > 0
-                                            ? "item-arrow-display item-price-up"
-                                            : "item-arrow-display item-price-down"
-                                }>
-                                    <img className='arrow' src={percentageChange(item.chartData[item.chartData.length - 1].purchasePrice, item.chartData[0].purchasePrice) > 0 ? upWhite : downWhite} alt="" />
-                                </div>
-                                <span className="item-fluctuation-display">${item.currentPrice}</span>
-                                <div className="category-item-display">
+                            <div className="category-item-display" key={i}>
                                 <span>{item.itemName}</span>
                                 <span>${item.currentPrice}</span>
-                                <span>{item.itemName}</span>
-                                <span>${item.currentPrice}</span>
-                                </div>
                             </div>
                         )
+                    })
                     }
-                    )}
-                {/* </div> */}
                 </div>
-                <div className="rssFeed">This round of discount is brought to you by dealingroom!</div>
+
+                <div className="rss-feed">
+                <span className="feed-text">This round of discount is brought to you by dealingroom!</span>
+                </div>
             </div>
         );
     }
+
 }
