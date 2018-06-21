@@ -12,7 +12,7 @@ export type CREATE_ITEM_SUCCESS = typeof CREATE_ITEM_SUCCESS;
 export interface ICreateItemSuccessAction extends Action {
 	type: CREATE_ITEM_SUCCESS,
 	itemStatus: IPureMenuItem,
-	newItemArray: any,
+	entireMenu: any,
 }
 
 export const CREATE_ITEM_FAIL = "CREATE_ITEM_FAIL";
@@ -29,7 +29,7 @@ export type CHANGE_ITEM_STATUS_SUCCESS = typeof CHANGE_ITEM_STATUS_SUCCESS;
 export interface IChangeItemStatusSuccessAction extends Action {
 	type: CHANGE_ITEM_STATUS_SUCCESS,
 	itemStatus: IPureMenuItem,
-	newItemArray: any,
+	entireMenu: any,
 }
 
 export const CHANGE_ITEM_STATUS_FAIL = "CHANGE_ITEM_STATUS_FAIL";
@@ -39,22 +39,70 @@ export interface IChangeItemStatusFailAction extends Action {
 	// result: any,
 }
 
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export const GET_ENTIRE_MENU_SUCCESS = "GET_ENTIRE_MENU_SUCCESS";
+export type GET_ENTIRE_MENU_SUCCESS = typeof GET_ENTIRE_MENU_SUCCESS;
+export interface IGetEntireMenuSuccessAction extends Action {
+	type: GET_ENTIRE_MENU_SUCCESS,
+	entireMenu: any,
+}
+
+export const GET_ENTIRE_MENU_FAIL = "GET_ENTIRE_MENU_FAIL";
+export type GET_ENTIRE_MENU_FAIL = typeof GET_ENTIRE_MENU_FAIL;
+export interface IGetEntireMenuFailAction extends Action {
+	type: GET_ENTIRE_MENU_FAIL,
+}
+
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 // Combined types
 export type ManagerActions =
+	IGetEntireMenuSuccessAction |
+	IGetEntireMenuFailAction |
 	ICreateItemSuccessAction |
 	ICreateItemFailAction |
 	IChangeItemStatusSuccessAction |
 	IChangeItemStatusFailAction;
 
-
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export function createItemSuccess(itemStatus: IPureMenuItem, newItemArray: any): ICreateItemSuccessAction {
+export function getEntireMenuSuccess(entireMenu: any): IGetEntireMenuSuccessAction {
+    return {
+        type: GET_ENTIRE_MENU_SUCCESS,
+        entireMenu,
+    }
+}
+
+export function getEntireMenuFail(): IGetEntireMenuFailAction {
+    return {
+        type: GET_ENTIRE_MENU_FAIL,
+    }
+}
+
+export function getEntireMenu() {
+    return (dispatch: Dispatch<IGetEntireMenuSuccessAction | IGetEntireMenuFailAction>) => {
+        // axios.get("${process.env.REACT_APP_API_DEV}/api/items")
+        axios.get(`${API_SERVER}/api/items`)
+            .then((res: any) => {
+                if (res.status === 200) {
+                    // alert(Object.keys(res.data));
+                    dispatch(getEntireMenuSuccess(res.data));
+                } else {
+                    alert("error not 200");
+                    dispatch(getEntireMenuFail());
+                }
+            })
+            .catch((err: any) => {
+                alert(err);
+                dispatch(getEntireMenuFail());
+            });
+    }
+}
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export function createItemSuccess(itemStatus: IPureMenuItem, entireMenu: any): ICreateItemSuccessAction {
 	return {
 		type: CREATE_ITEM_SUCCESS,
 		itemStatus,
-		newItemArray,
+		entireMenu,
 	}
 }
 
@@ -85,11 +133,11 @@ export function createItem(itemStatus: IPureMenuItem) {
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export function changeItemStatusSuccess(itemStatus: IPureMenuItem, newItemArray: any): IChangeItemStatusSuccessAction {
+export function changeItemStatusSuccess(itemStatus: IPureMenuItem, entireMenu: any): IChangeItemStatusSuccessAction {
 	return {
 		type: CHANGE_ITEM_STATUS_SUCCESS,
 		itemStatus,
-		newItemArray,
+		entireMenu,
 	}
 }
 
