@@ -31,13 +31,13 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use("/api", apiRouter.getRouter());
 
-app.listen(config.port, () => {
-  console.log(`Application started at port: ${config.port}`);
-});
+// app.listen(config.port, () => {
+//   console.log(`Application started at port: ${config.port}`);
+// });
 
 import * as http from "http";
-const server = http.createServer();
-server.listen(8008);
+const server = http.createServer(app);
+server.listen(8080);
 
 import * as socketIO from "socket.io";
 export const io = socketIO();

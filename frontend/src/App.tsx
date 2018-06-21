@@ -2,19 +2,19 @@ import * as React from "react";
 import { Route, Switch } from "react-router-dom";
 import "./scss/App.scss";
 
-import Display from "./components/pages/display";
-import Initialize from "./components/pages/initialize";
-import Login from "./components/pages/login";
-import Menu from "./components/pages/menu";
-import Order from "./components/pages/order";
-import OrderList from "./components/pages/orderlist";
-import Profile from "./components/pages/profile";
-import Request from "./components/pages/request";
-import Setting from "./components/pages/setting";
+import Display from "./components/container/display/display";
+import Initialize from "./components/container/mobile/initialize";
+import Login from "./components/container/mobile/login";
+import Menu from "./components/container/mobile/menu";
+import Order from "./components/container/mobile/order";
+import OrderList from "./components/container/mobile/orderlist";
+import Profile from "./components/container/mobile/profile";
+import Request from "./components/container/mobile/request";
+import Setting from "./components/container/mobile/setting";
 
 // import redux and friends
 import { connect } from "react-redux";
-import { IRootState } from "src/components/reducers/index";
+import { IRootState } from "./redux/mobile/reducers/index";
 
 // interface IAppProps {}
 
