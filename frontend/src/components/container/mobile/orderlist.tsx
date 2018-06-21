@@ -14,6 +14,7 @@ import checkIcon from "../../assets/icons/check.svg";
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/mobile/reducers/index";
 import { getOrdersByUserToken } from "../../../redux/mobile/actions/actions_orders";
+import PageHeader from "src/components/ui/mobile/pageheader";
 
 interface IOrdersProps {
   history: History.History,
@@ -38,7 +39,7 @@ class PureOrderList extends React.Component<IOrdersProps, {}> {
   public render() {
     return (
       <div className="page-content-container">
-
+      <PageHeader header="Order" subHeader="Your wish is our command"/>
         { /* check if new customer has no history to display */
           (this.props.ordersList.orders.length === 0) ?
             ( <div className="order-header-container">
