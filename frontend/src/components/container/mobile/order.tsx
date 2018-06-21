@@ -16,7 +16,7 @@ import paymentTest from "../../assets/images/payment/stripe.png"
 
 // import redux and friends
 import { connect } from "react-redux";
-import { IRootState } from "../../../redux/mobile/reducers/index";
+import { IRootState } from "../../../redux/store";
 import PageHeader from "src/components/ui/mobile/pageheader";
 
 interface IOrderProps {
@@ -114,7 +114,7 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
 
 const mapStateToProps = (state: IRootState) => {
   return {
-    ordersList: state.orders.ordersList,
+    ordersList: state.customer.orders.ordersList,
   }
 }
 

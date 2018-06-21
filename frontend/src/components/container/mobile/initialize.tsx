@@ -3,7 +3,7 @@ import * as React from "react";
 
 // redux
 import { connect } from "react-redux";
-import { IRootState } from "../../../redux/mobile/reducers/index";
+import { IRootState } from "../../../redux/store";
 // import { getEntireMenu } from "../actions/actions_orders";
 import { getEntireMenu, getOrdersByUserToken } from "../../../redux/mobile/actions/actions_orders";
 import { getUserProfileByUserToken } from "../../../redux/mobile/actions/actions_user";
@@ -65,11 +65,11 @@ class PureInitialize extends React.Component<IInitializeProps, {}> {
 
 const mapStateToProps = (state: IRootState) => {
     return {
-        isAuth: state.user.isAuth,
-        menuReady: state.orders.menuReady,
-        userProfileReady: state.user.userProfileReady,
-        orderListReady: state.orders.orderListReady,
-        userProfile: state.user.userProfile,
+        isAuth: state.customer.user.isAuth,
+        menuReady: state.customer.orders.menuReady,
+        userProfileReady: state.customer.user.userProfileReady,
+        orderListReady: state.customer.orders.orderListReady,
+        userProfile: state.customer.user.userProfile,
     }
 }
 
