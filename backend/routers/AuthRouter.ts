@@ -65,7 +65,7 @@ export default class AuthRouter {
         }
       });
     } else {
-      res.sendStatus(401);
+      res.sendStatus(401).json("need password and username");
     }
   }
 

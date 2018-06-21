@@ -52,7 +52,6 @@ export default class UsersService {
       .select(
         "id as users_id",
         "username",
-        "password",
         "displayName",
         "userPhoto",
         "role"
