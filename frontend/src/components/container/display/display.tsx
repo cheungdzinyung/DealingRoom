@@ -10,9 +10,9 @@ import tempImg from "../../assets/images/categories/squarebeer.jpg";
 import { singleCategoryMenuItems } from "../../../fakedata";
 
 // Importing utility function and classes
-import { IPureCategoryWithItem } from "src/modules";
 import { LineChart, XAxis, YAxis, CartesianGrid, Line } from "recharts";
 // import { percentageChange } from '../../../util/utility';
+import { IMenuCategoryWithFlux } from "src/modules";
 
 
 
@@ -21,7 +21,7 @@ interface IDisplayState {
     // categories : IPureMenuCategory;
     // categoryName: string;
 
-    singleCategory: IPureCategoryWithItem
+    singleCategory: IMenuCategoryWithFlux
 }
 
 export default class Display extends React.Component<{}, IDisplayState> {
