@@ -100,6 +100,7 @@ export default class ItemsRouter {
         res.status(201).json(result);
       })
       .catch((err: express.Errback) => {
+        console.log(err)
         res.status(500).json({ status: "failed" });
       });
   }

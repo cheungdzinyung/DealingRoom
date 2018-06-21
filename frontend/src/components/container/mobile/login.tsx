@@ -12,7 +12,7 @@ import logo from "../../assets/icons/all/logo.svg";
 
 // redux
 import { connect } from "react-redux";
-import { IRootState } from "../../../redux/mobile/reducers/index";
+import { IRootState } from "../../../redux/store";
 import { localLogin } from "../../../redux/mobile/actions/actions_user";
 
 interface ILoginState {
@@ -128,7 +128,7 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
 
 const mapStateToProps = (state: IRootState) => {
   return {
-    isAuth: state.user.isAuth,
+    isAuth: state.customer.user.isAuth,
   }
 }
 

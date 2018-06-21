@@ -1,7 +1,7 @@
 import { Action, Dispatch } from "redux";
 import axios from "axios";
 
-import { API_SERVER } from "../../../redux/store";
+import { API_SERVER } from "../../store";
 
 import {
     ICurrentOrder,
@@ -165,9 +165,9 @@ export function confirmOrder(orderToConfirm: ICurrentOrder) {
         axios.post(`${API_SERVER}/api/orders/`, orderToConfirm, config)
             .then((res: any) => {
                 if (res.status === 201) {
-                    alert(res.data.status + " now redirect to order list");
+                    alert(res.data[0].status + " now redirect to order list");
                     // alert(JSON.stringify(res.data))
-                    dispatch(confirmOrderSuccess(res.data, orderToConfirm));
+                    dispatch(confirmOrderSuccess(res.data[0], orderToConfirm));
                 } else {
                     alert("error, try again");
                     dispatch(confirmOrderFail(res.data));
