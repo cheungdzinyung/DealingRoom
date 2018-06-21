@@ -5,10 +5,10 @@
     display: flex;
     flex-direction: column;
     // position: relative;
-    .display-banner {
-        display: flex;
-        // flex: 1;
-        flex-direction: row;
+    // .display-banner {
+    //     display: flex;
+    //     // flex: 1;
+    //     flex-direction: row;
         h2 {
             display: flex;
             align-items: center;
@@ -18,7 +18,6 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 3.998em;
         }
-    }
     .display-container {
         padding-top: 5vh;
         display: flex;
