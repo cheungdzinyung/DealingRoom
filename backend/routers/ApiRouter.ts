@@ -44,7 +44,7 @@ export default class ApiRouter {
     const authRouter = new AuthRouter(this.knex, this.usersService);
     const usersRouter = new UsersRouter(this.usersService);
     const itemsRouter = new ItemsRouter(this.itemsService);
-    const ordersRouter = new OrdersRouter(this.ordersService);
+    const ordersRouter = new OrdersRouter(this.ordersService, this.itemsService);
     const pricesRouter = new PricesRouter(this.pricesService);
 
     router.use("/auth", authRouter.getRouter());
