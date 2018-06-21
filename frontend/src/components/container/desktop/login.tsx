@@ -11,9 +11,8 @@ import google from "../../icons/signup/google.svg";
 import logo from "../../icons/all/logo.svg";
 
 // redux
-import { connect } from "react-redux";
-import { IRootState } from "../../reducers/index";
-import { localLogin } from "../../actions/actions_user";
+// import { connect } from "react-redux";
+
 
 interface ILoginState {
   username: string,
@@ -27,7 +26,7 @@ interface ILoginProps {
   localLogin: (username: string, password: string) => void,
 }
 
-class PureLogin extends React.Component<ILoginProps, ILoginState> {
+export class PureLogin extends React.Component<ILoginProps, ILoginState> {
   constructor(props: ILoginProps) {
     super(props);
 
@@ -125,22 +124,3 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
     );
   }
 }
-
-const mapStateToProps = (state: IRootState) => {
-  return {
-    // isAuth: state.user.isAuth,
-    user_id: state.user.user_id,
-  }
-}
-
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    localLogin: (username: string, password: string) => {
-      dispatch(localLogin(username, password));
-    }
-  }
-}
-
-const Login = connect(mapStateToProps, mapDispatchToProps)(PureLogin);
-
-export default Login
