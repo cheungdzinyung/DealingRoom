@@ -12,14 +12,14 @@ import checkIcon from "../../assets/icons/check.svg";
 
 // import redux and friends
 import { connect } from "react-redux";
-import { IRootState } from "../../../redux/reducers/index";
-import { getOrdersByUserid } from "../../../redux/actions/actions_orders";
+import { IRootState } from "../../../redux/mobile/reducers/index";
+import { getOrdersByUserToken } from "../../../redux/mobile/actions/actions_orders";
 
 interface IOrdersProps {
   history: History.History,
-  user_id: number,
+  // user_id: number,
   ordersList: any,
-  getOrdersByUserid: (userID: number) => void,
+  getOrdersByUserToken: () => void,
 }
 
 class PureOrderList extends React.Component<IOrdersProps, {}> {
@@ -31,22 +31,28 @@ class PureOrderList extends React.Component<IOrdersProps, {}> {
     this.props.history.push(`/order/${orderNumber}`);
   }
 
-  public componentDidMount () {
-    const userID = this.props.user_id;
-    this.props.getOrdersByUserid(userID);
+  public componentDidMount() {
+    this.props.getOrdersByUserToken();
   }
 
   public render() {
     return (
       <div className="page-content-container">
 
-        {this.props.ordersList.orders.filter( (each:any) => !each.isPaid).length > 0 && (
+        { /* check if new customer has no history to display */
+          (this.props.ordersList.orders.length === 0) ?
+            ( <div className="order-header-container">
+                <h3 className="order-header">Your order history is empty, get a drink</h3>
+              </div>) : <div />
+        }
+
+        {this.props.ordersList.orders.filter((each: any) => !each.isPaid).length > 0 && (
           <div className="order-header-container">
             <h3 className="order-header">To be paid</h3>
           </div>
         )}
         {this.props.ordersList.orders
-          .filter((each:any) => !each.isPaid)
+          .filter((each: any) => !each.isPaid)
           .map((indOrd: any, index: any) => (
             <Card
               className="order-cards"
@@ -78,8 +84,8 @@ class PureOrderList extends React.Component<IOrdersProps, {}> {
             </div>
           )}
         {this.props.ordersList.orders
-          .filter((each:any) => each.isPaid === true)
-          .map((indOrd:any, index:any) => (
+          .filter((each: any) => each.isPaid === true)
+          .map((indOrd: any, index: any) => (
             <Card
               className="order-cards"
               interactive={true}
@@ -100,6 +106,7 @@ class PureOrderList extends React.Component<IOrdersProps, {}> {
           ))}
         {/* End of Dynamic content*/}
         <Usermenu />
+
       </div>
     );
   }
@@ -107,15 +114,15 @@ class PureOrderList extends React.Component<IOrdersProps, {}> {
 
 const mapStateToProps = (state: IRootState) => {
   return {
-    user_id: state.user.user_id,
+    // user_id: state.user.user_id,
     ordersList: state.orders.ordersList,
   }
 }
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getOrdersByUserid: (userID: number) => {
-      dispatch(getOrdersByUserid(userID));
+    getOrdersByUserToken: () => {
+      dispatch(getOrdersByUserToken());
     },
   }
 }

@@ -5,29 +5,36 @@ import {
     RESET_TARGET_PAGE,
     LOCAL_LOGIN_SUCCESS,
     LOCAL_LOGIN_FAIL,
-    GET_USER_PROFILE_BY_USERID_SUCCESS,
-    GET_USER_PROFILE_BY_USERID_FAIL,
+    GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS,
+    GET_USER_PROFILE_BY_USER_TOKEN_FAIL,
 } from "../actions/actions_user";
+
+import { IUserProfile } from "../../../modules";
 
 export interface IUserState {
     // role: string,
-    // isAuth: boolean,
+    isAuth: boolean,
     currentPage: string,
     redirectTarget: string,
     // settings: string,
-    user_id: number,
-    userProfile: any,
+    userProfile: IUserProfile,
     userProfileReady: boolean,
 }
 
 const initialState = {
     // role: "customer",
-    // isAuth: false,
+    isAuth: false,
     currentPage: "profile",
     redirectTarget: "none",     // for redir
     // settings: "nth yet",
-    user_id: 0,
-    userProfile: {},
+    userProfile: {
+        users_id: 0,
+        username: "string",
+        password: "string",
+        displayName: "string",
+        userPhoto: "string",
+        role: "string",
+    },
     userProfileReady: false,
 }
 
@@ -43,27 +50,27 @@ const initialState = {
 export const userReducer = (state: IUserState = initialState, action: UserActions): IUserState => {
     switch (action.type) {
         case CHANGE_PAGE: {
-            return { ...state, currentPage: action.currentPage}
+            return { ...state, currentPage: action.currentPage }
         }
         case REDIRECT_PAGE: {
             // action.history.push(action.redirectTarget);
-            action.history.push("/order");
-            return { ...state, redirectTarget: action.redirectTarget}
+            action.history.push(`${action.redirectTarget}`);
+            return { ...state, redirectTarget: action.redirectTarget }
         }
         case RESET_TARGET_PAGE: {
-            return { ...state, redirectTarget: "none"}
+            return { ...state, redirectTarget: "none" }
         }
         case LOCAL_LOGIN_SUCCESS: {
             localStorage.setItem("dealingRoomToken", action.userInfoPackage.token);
-            return { ...state, user_id: action.userInfoPackage.user_id };
+            return { ...state, isAuth: true };
         }
         case LOCAL_LOGIN_FAIL: {
             return state;
         }
-        case GET_USER_PROFILE_BY_USERID_SUCCESS: {
+        case GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS: {
             return { ...state, userProfile: action.userProfile, userProfileReady: true };
         }
-        case GET_USER_PROFILE_BY_USERID_FAIL: {
+        case GET_USER_PROFILE_BY_USER_TOKEN_FAIL: {
             return state;
         }
         default: {

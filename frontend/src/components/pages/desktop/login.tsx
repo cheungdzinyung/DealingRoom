@@ -6,14 +6,14 @@ import * as React from "react";
 import { Card } from "@blueprintjs/core";
 
 // Importing static assets
-import facebook from "../../assets/icons/signup/facebook.svg";
-import google from "../../assets/icons/signup/google.svg";
-import logo from "../../assets/icons/all/logo.svg";
+import facebook from "../../icons/signup/facebook.svg";
+import google from "../../icons/signup/google.svg";
+import logo from "../../icons/all/logo.svg";
 
 // redux
 import { connect } from "react-redux";
-import { IRootState } from "../../../redux/mobile/reducers/index";
-import { localLogin } from "../../../redux/mobile/actions/actions_user";
+import { IRootState } from "../../reducers/index";
+import { localLogin } from "../../actions/actions_user";
 
 interface ILoginState {
   username: string,
@@ -22,8 +22,8 @@ interface ILoginState {
 
 interface ILoginProps {
   history: History.History,
-  isAuth: boolean,
-  // user_id: number,
+  // isAuth: boolean,
+  user_id: number,
   localLogin: (username: string, password: string) => void,
 }
 
@@ -50,14 +50,14 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
   };
   
   public componentDidUpdate () {
-    // actually shld check if token is valid
+    // actually should check if token is valid
     if(localStorage.getItem("dealingRoomToken")) {
       this.props.history.push("/initialize");
     }
   }
 
   public componentDidMount () {
-    // actually shld check if token is valid
+    // actually should check if token is valid
     if(localStorage.getItem("dealingRoomToken")) {
       this.props.history.push("/initialize");
     }
@@ -128,7 +128,8 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
 
 const mapStateToProps = (state: IRootState) => {
   return {
-    isAuth: state.user.isAuth,
+    // isAuth: state.user.isAuth,
+    user_id: state.user.user_id,
   }
 }
 

@@ -1,11 +1,11 @@
 import { Action, Dispatch } from "redux";
 import axios from "axios";
 
-import {API_SERVER} from "../../redux/store";
+import { API_SERVER } from "../../../redux/store";
 
 import {
     ICurrentOrder,
-} from "../../modules";
+} from "../../../modules";
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const GET_ENTIRE_MENU_SUCCESS = "GET_ENTIRE_MENU_SUCCESS";
@@ -52,31 +52,31 @@ export interface IConfirmOrderFailAction extends Action {
     result: any,
 }
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export const GET_ORDERS_BY_USERID_SUCCESS = "GET_ORDERS_BY_USERID_SUCCESS";
-export type GET_ORDERS_BY_USERID_SUCCESS = typeof GET_ORDERS_BY_USERID_SUCCESS;
-export interface IGetOrdersByUseridSuccessAction extends Action {
-    type: GET_ORDERS_BY_USERID_SUCCESS,
+export const GET_ORDERS_BY_USER_TOKEN_SUCCESS = "GET_ORDERS_BY_USER_TOKEN_SUCCESS";
+export type GET_ORDERS_BY_USER_TOKEN_SUCCESS = typeof GET_ORDERS_BY_USER_TOKEN_SUCCESS;
+export interface IGetOrdersByUserTokenSuccessAction extends Action {
+    type: GET_ORDERS_BY_USER_TOKEN_SUCCESS,
     allOrdersByOneUser: any,
 }
 
-export const GET_ORDERS_BY_USERID_FAIL = "GET_ORDERS_BY_USERID_FAIL";
-export type GET_ORDERS_BY_USERID_FAIL = typeof GET_ORDERS_BY_USERID_FAIL;
-export interface IGetOrdersByUseridFailAction extends Action {
-    type: GET_ORDERS_BY_USERID_FAIL,
+export const GET_ORDERS_BY_USER_TOKEN_FAIL = "GET_ORDERS_BY_USER_TOKEN_FAIL";
+export type GET_ORDERS_BY_USER_TOKEN_FAIL = typeof GET_ORDERS_BY_USER_TOKEN_FAIL;
+export interface IGetOrdersByUserTokenFailAction extends Action {
+    type: GET_ORDERS_BY_USER_TOKEN_FAIL,
 }
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const SOCKET_CONNECT_SUCCESS = "SOCKET_CONNECT_SUCCESS";
 export type SOCKET_CONNECT_SUCCESS = typeof SOCKET_CONNECT_SUCCESS;
 export interface ISocketConnectSuccess extends Action {
     type: SOCKET_CONNECT_SUCCESS,
-    socketID:any,
+    socketID: any,
 }
 
 export const SOCKET_UPDATE_ITEM_PRICE = "SOCKET_UPDATE_ITEM_PRICE";
 export type SOCKET_UPDATE_ITEM_PRICE = typeof SOCKET_UPDATE_ITEM_PRICE;
 export interface ISocketUpdateItemPrice extends Action {
     type: SOCKET_UPDATE_ITEM_PRICE,
-    entireMenu:any,
+    entireMenu: any,
 }
 
 
@@ -88,8 +88,8 @@ export type OrdersActions =
     IRemoveItemAction |
     IConfirmOrderSuccessAction |
     IConfirmOrderFailAction |
-    IGetOrdersByUseridSuccessAction |
-    IGetOrdersByUseridFailAction |
+    IGetOrdersByUserTokenSuccessAction |
+    IGetOrdersByUserTokenFailAction |
     ISocketConnectSuccess |
     ISocketUpdateItemPrice;
 
@@ -120,7 +120,7 @@ export function getEntireMenu() {
                     dispatch(getEntireMenuFail());
                 }
             })
-            .catch((err:any) => {
+            .catch((err: any) => {
                 alert(err);
                 dispatch(getEntireMenuFail());
             });
@@ -159,10 +159,10 @@ export function confirmOrderFail(result: any): IConfirmOrderFailAction {
 }
 
 export function confirmOrder(orderToConfirm: ICurrentOrder) {
-    const config = { headers: {Authorization: "Bearer " + localStorage.getItem("dealingRoomToken")} }
+    const config = { headers: { Authorization: "Bearer " + localStorage.getItem("dealingRoomToken") } }
     return (dispatch: Dispatch<IConfirmOrderSuccessAction | IConfirmOrderFailAction>) => {
         // axios.post(`${process.env.REACT_APP_API_DEV}/api/orders/${orderToConfirm.users_id}`, orderToConfirm, config)
-        axios.post(`${API_SERVER}/api/orders/${orderToConfirm.users_id}`, orderToConfirm, config)
+        axios.post(`${API_SERVER}/api/orders/`, orderToConfirm, config)
             .then((res: any) => {
                 if (res.status === 201) {
                     alert(res.data.status + " now redirect to order list");
@@ -180,37 +180,37 @@ export function confirmOrder(orderToConfirm: ICurrentOrder) {
     }
 }
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export function getOrdersByUseridSuccess(allOrdersByOneUser: any): IGetOrdersByUseridSuccessAction {
+export function getOrdersByUserTokenSuccess(allOrdersByOneUser: any): IGetOrdersByUserTokenSuccessAction {
     return {
-        type: GET_ORDERS_BY_USERID_SUCCESS,
+        type: GET_ORDERS_BY_USER_TOKEN_SUCCESS,
         allOrdersByOneUser,
     }
 }
 
-export function getOrdersByUseridFail(): IGetOrdersByUseridFailAction {
+export function getOrdersByUserTokenFail(): IGetOrdersByUserTokenFailAction {
     return {
-        type: GET_ORDERS_BY_USERID_FAIL,
+        type: GET_ORDERS_BY_USER_TOKEN_FAIL,
     }
 }
 
-export function getOrdersByUserid(userID: number) {
-    const config = { headers: {Authorization: "Bearer " + localStorage.getItem("dealingRoomToken")} }
-    return (dispatch: Dispatch<IGetOrdersByUseridSuccessAction | IGetOrdersByUseridFailAction>) => {
+export function getOrdersByUserToken() {
+    const config = { headers: { Authorization: "Bearer " + localStorage.getItem("dealingRoomToken") } }
+    return (dispatch: Dispatch<IGetOrdersByUserTokenSuccessAction | IGetOrdersByUserTokenFailAction>) => {
         // axios.get(`${process.env.REACT_APP_API_DEV}/api/orders/user/${userID}`, config)
-        axios.get(`${API_SERVER}/api/orders/user/${userID}`, config)
+        axios.get(`${API_SERVER}/api/orders/user/`, config)
             .then((res: any) => {
                 if (res.status === 200) {
-                    dispatch(getOrdersByUseridSuccess(res.data[0]));
+                    dispatch(getOrdersByUserTokenSuccess(res.data[0]));
                     // auto redir to order list page
                     // dispatch(changePage(OrderList));
                 } else {
                     alert("status: " + res.status);
-                    dispatch(getOrdersByUseridFail());
+                    dispatch(getOrdersByUserTokenFail());
                 }
             })
             .catch((err: any) => {
                 alert(err);
-                dispatch(getOrdersByUseridFail())
+                dispatch(getOrdersByUserTokenFail())
             });
     }
 }

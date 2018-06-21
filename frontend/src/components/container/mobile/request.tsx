@@ -3,13 +3,13 @@ import * as React from "react";
 
 // import redux and friends
 import { connect } from "react-redux";
-import { IRootState } from "../../../redux/reducers/index";
-import { removeFromCurrentOrder, confirmOrder } from "../../../redux/actions/actions_orders";
+import { IRootState } from "../../../redux/mobile/reducers/index";
+import { removeFromCurrentOrder, confirmOrder } from "../../../redux/mobile/actions/actions_orders";
 
 // for redir
 import * as History from "history";
 import { withRouter } from "react-router";
-import { redirectPage, resetTargetPage } from "../../../redux/actions/actions_user";
+import { redirectPage, resetTargetPage } from "../../../redux/mobile/actions/actions_user";
 
 // Importing UI
 import UserMenu from "../../ui/mobile/usermenu";
@@ -37,9 +37,10 @@ class PureRequest extends React.Component<IRequestProps, {}> {
     super(props);
   }
 
-  public componentWillMount () {
+  public componentDidMount () {
     if (this.props.currentOrder.length === 0) {
-      this.props.redirectPage("/order", this.props.history);
+      alert("your shopping cart is empty")
+      this.props.redirectPage("/menu", this.props.history);
       this.props.resetTargetPage();
     }
   }
@@ -111,7 +112,7 @@ class PureRequest extends React.Component<IRequestProps, {}> {
 
 const mapStateToProps = (state: IRootState) => {
   return {
-    user_id: state.user.user_id,
+    user_id: state.user.userProfile.users_id,
     currentOrder: state.orders.currentOrder,
     currentTotal: state.orders.currentTotal,
   }

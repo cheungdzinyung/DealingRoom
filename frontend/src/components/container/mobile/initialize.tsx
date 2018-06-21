@@ -3,10 +3,10 @@ import * as React from "react";
 
 // redux
 import { connect } from "react-redux";
-import { IRootState } from "../../../redux/reducers/index";
+import { IRootState } from "../../../redux/mobile/reducers/index";
 // import { getEntireMenu } from "../actions/actions_orders";
-import { getEntireMenu, getOrdersByUserid } from "../../../redux/actions/actions_orders";
-import { getUserProfileByUserid } from "../../../redux/actions/actions_user";
+import { getEntireMenu, getOrdersByUserToken } from "../../../redux/mobile/actions/actions_orders";
+import { getUserProfileByUserToken } from "../../../redux/mobile/actions/actions_user";
 
 // for redir
 import * as History from "history";
@@ -15,16 +15,16 @@ interface IInitializeProps {
     // handling redirect
     history: History.History,
     // init
-    user_id: number,
+    isAuth: boolean,
 
     getEntireMenu: () => void,
     menuReady: boolean,
 
     userProfile: any,
-    getUserProfileByUserid: (userID: number) => void,
+    getUserProfileByUserToken: () => void,
     userProfileReady: boolean,
-    
-    getOrdersByUserid: (userID: number) => void,
+
+    getOrdersByUserToken: () => void,
     orderListReady: boolean,
 }
 
@@ -41,9 +41,11 @@ class PureInitialize extends React.Component<IInitializeProps, {}> {
         // fetch entireMenu , set categories[]
         this.props.getEntireMenu();
         // fetch user data
-        this.props.getUserProfileByUserid(this.props.user_id);
+        // this.props.getUserProfileByUserid(this.props.user_id);
+        this.props.getUserProfileByUserToken();
         // fetch ordersList (or not?)
-        this.props.getOrdersByUserid(this.props.user_id);
+        // this.props.getOrdersByUserid(this.props.user_id);
+        this.props.getOrdersByUserToken();
     }
 
     public componentDidUpdate() {
@@ -54,14 +56,16 @@ class PureInitialize extends React.Component<IInitializeProps, {}> {
 
     public render() {
         return (
-            <div />
+            <div className="order-header-container">
+                <h3 className="order-header">Your order history is empty, get a drink</h3>
+            </div>
         )
     }
 }
 
 const mapStateToProps = (state: IRootState) => {
     return {
-        user_id: state.user.user_id,
+        isAuth: state.user.isAuth,
         menuReady: state.orders.menuReady,
         userProfileReady: state.user.userProfileReady,
         orderListReady: state.orders.orderListReady,
@@ -74,11 +78,11 @@ const mapDispatchToProps = (dispatch: any) => {
         getEntireMenu: () => {
             dispatch(getEntireMenu());
         },
-        getUserProfileByUserid: (userID: number) => {
-            dispatch(getUserProfileByUserid(userID));
+        getUserProfileByUserToken: () => {
+            dispatch(getUserProfileByUserToken());
         },
-        getOrdersByUserid: (userID: number) => {
-            dispatch(getOrdersByUserid(userID));
+        getOrdersByUserToken: () => {
+            dispatch(getOrdersByUserToken());
         },
     }
 }

@@ -6,19 +6,21 @@ import {
     REMOVE_ITEM,
     CONFIRM_ORDER_SUCCESS,
     CONFIRM_ORDER_FAIL,
-    GET_ORDERS_BY_USERID_SUCCESS,
-    GET_ORDERS_BY_USERID_FAIL,
+    GET_ORDERS_BY_USER_TOKEN_SUCCESS,
+    GET_ORDERS_BY_USER_TOKEN_FAIL,
     SOCKET_CONNECT_SUCCESS,
     SOCKET_UPDATE_ITEM_PRICE,
 } from "../actions/actions_orders";
 
 import {
-    IRequestItem, IPureCategoryWithItem,
-} from "../../modules";
+    IRequestItem,
+    IPureCategoryWithItem,
+    IPureUsersOrderList,
+} from "../../../modules";
 
 export interface IOrdersState {
     // socket.io on load? isAuth?
-    socketID: any,
+    socketID: string,
     socketData: any,
     // init
     menuReady: boolean,
@@ -27,7 +29,7 @@ export interface IOrdersState {
     categories: string[],
     // priceMapping: {},
     // orders
-    ordersList: any,
+    ordersList: IPureUsersOrderList,
     unpaidOrders: number,
     currentOrder: IRequestItem[],
     currentTotal: number,
@@ -38,7 +40,31 @@ const initialState: IOrdersState = {
     socketData: {},
     menuReady: false,
     orderListReady: false,
-    entireMenu: [],
+    // entireMenu: [],
+    entireMenu: [
+        {
+            "categoryName": "beer",
+            "categoryPhoto": "../storage/img/beer.jpg",
+            "items": [
+                {
+                    "items_id": 0,
+                    "itemName": "Asahi",
+                    "itemStock": 1,
+                    "minimumPrice": 999.00,
+                    "currentPrice": 999.00,
+                    "itemPhoto": "../storage/items/asahi.jpeg",
+                    "itemDescription": "",
+                    "isSpecial": false,
+                    "isActive": true,
+                    "chartData": [{ time: '', purchasePrice: 30 },
+                    { time: '', purchasePrice: 40 },
+                    { time: '', purchasePrice: 20 },
+                    { time: '', purchasePrice: 27 },
+                    { time: '', purchasePrice: 18 },
+                    { time: '', purchasePrice: 23 },
+                    { time: '', purchasePrice: 34 },]
+                },],
+        },],
     categories: [],
     // priceMapping: {},
     ordersList: {
@@ -52,14 +78,15 @@ const initialState: IOrdersState = {
                 "status": "confirmed",
                 "isPaid": false,
                 "orderingTime": 20170101,
+                "orderTotal": 0,
                 "orderItems":
                     [{
-                        "itemName": "Asahi",
                         "items_id": 1,
+                        "itemName": "Asahi",
+                        "purchasePrice": 0,
                         "ice": "normal",
                         "sweetness": "normal",
                         "garnish": "normal",
-                        "purchasePrice": 0
                     }]
             }]
     },
@@ -108,17 +135,17 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
             // write to db failed, keep current order in root state
             return state;
         }
-        case GET_ORDERS_BY_USERID_SUCCESS: {
+        case GET_ORDERS_BY_USER_TOKEN_SUCCESS: {
             // need to change data type
             const unpaidOrders = action.allOrdersByOneUser.orders.filter((e: any) => (e.isPaid === false)).length;
             return { ...state, ordersList: action.allOrdersByOneUser, unpaidOrders, orderListReady: true };
         }
-        case GET_ORDERS_BY_USERID_FAIL: {
+        case GET_ORDERS_BY_USER_TOKEN_FAIL: {
             // get fail, F5?
             return state;
         }
         case SOCKET_CONNECT_SUCCESS: {
-            return { ... state, socketID: action.socketID};
+            return { ...state, socketID: action.socketID };
         }
         case SOCKET_UPDATE_ITEM_PRICE: {
             // alert(JSON.stringify(action.entireMenu))

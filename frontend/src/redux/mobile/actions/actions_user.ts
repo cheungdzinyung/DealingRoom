@@ -1,7 +1,7 @@
 import { Action, Dispatch } from "redux";
 import axios from "axios";
 
-import {API_SERVER} from "../../redux/store";
+import { API_SERVER } from "../../../redux/store";
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const CHANGE_PAGE = "CHANGE_PAGE";
@@ -40,17 +40,17 @@ export interface ILocalLoginFailAction extends Action {
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export const GET_USER_PROFILE_BY_USERID_SUCCESS = "GET_USER_PROFILE_BY_USERID_SUCCESS";
-export type GET_USER_PROFILE_BY_USERID_SUCCESS = typeof GET_USER_PROFILE_BY_USERID_SUCCESS;
-export interface IGetUserProfileByUseridSuccessAction extends Action {
-    type: GET_USER_PROFILE_BY_USERID_SUCCESS,
+export const GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS = "GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS";
+export type GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS = typeof GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS;
+export interface IGetUserProfileByUserTokenSuccessAction extends Action {
+    type: GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS,
     userProfile: any,
 }
 
-export const GET_USER_PROFILE_BY_USERID_FAIL = "GET_USER_PROFILE_BY_USERID_FAIL";
-export type GET_USER_PROFILE_BY_USERID_FAIL = typeof GET_USER_PROFILE_BY_USERID_FAIL;
-export interface IGetUserProfileByUseridFailAction extends Action {
-    type: GET_USER_PROFILE_BY_USERID_FAIL,
+export const GET_USER_PROFILE_BY_USER_TOKEN_FAIL = "GET_USER_PROFILE_BY_USER_TOKEN_FAIL";
+export type GET_USER_PROFILE_BY_USER_TOKEN_FAIL = typeof GET_USER_PROFILE_BY_USER_TOKEN_FAIL;
+export interface IGetUserProfileByUserTokenFailAction extends Action {
+    type: GET_USER_PROFILE_BY_USER_TOKEN_FAIL,
     // result: any,
 }
 
@@ -61,8 +61,8 @@ export type UserActions =
     IRestTargetPageAction |
     ILocalLoginSuccessAction |
     ILocalLoginFailAction |
-    IGetUserProfileByUseridSuccessAction |
-    IGetUserProfileByUseridFailAction;
+    IGetUserProfileByUserTokenSuccessAction |
+    IGetUserProfileByUserTokenFailAction;
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function changePage(currentPage: string): IChangePageAction {
@@ -127,37 +127,37 @@ export function localLogin(username: string, password: string) {
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export function getUserProfileByUseridSuccess(userProfile: any): IGetUserProfileByUseridSuccessAction {
+export function getUserProfileByUserTokenSuccess(userProfile: any): IGetUserProfileByUserTokenSuccessAction {
     return {
-        type: GET_USER_PROFILE_BY_USERID_SUCCESS,
+        type: GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS,
         userProfile,
     }
 }
 
-export function getUserProfileByUseridFail(): IGetUserProfileByUseridFailAction {
+export function getUserProfileByUserTokenFail(): IGetUserProfileByUserTokenFailAction {
     return {
-        type: GET_USER_PROFILE_BY_USERID_FAIL,
+        type: GET_USER_PROFILE_BY_USER_TOKEN_FAIL,
     }
 }
 
-export function getUserProfileByUserid(userID: number) {
-    const config = { headers: {Authorization: "Bearer " + localStorage.getItem("dealingRoomToken")} }
-    return (dispatch: Dispatch<IGetUserProfileByUseridSuccessAction | IGetUserProfileByUseridFailAction>) => {
+export function getUserProfileByUserToken() {
+    const config = { headers: { Authorization: "Bearer " + localStorage.getItem("dealingRoomToken") } }
+    return (dispatch: Dispatch<IGetUserProfileByUserTokenSuccessAction | IGetUserProfileByUserTokenFailAction>) => {
         // axios.get(`${process.env.REACT_APP_API_DEV}/api/users/${userID}`, config)
-        axios.get(`${API_SERVER}/api/users/${userID}`, config)
+        axios.get(`${API_SERVER}/api/users`, config)
             .then((res: any) => {
                 if (res.status === 200) {
-                    dispatch(getUserProfileByUseridSuccess(res.data[0]));
+                    dispatch(getUserProfileByUserTokenSuccess(res.data[0]));
                     // auto redir to order list page ===> moved to init page
                     // dispatch(changePage(OrderList));
                 } else {
                     alert("status: " + res.status);
-                    dispatch(getUserProfileByUseridFail());
+                    dispatch(getUserProfileByUserTokenFail());
                 }
             })
             .catch((err: any) => {
                 alert(err);
-                dispatch(getUserProfileByUseridFail())
+                dispatch(getUserProfileByUserTokenFail())
             });
     }
 }

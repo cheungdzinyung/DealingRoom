@@ -23,9 +23,8 @@ type CANCELLED = typeof CANCELLED;
 
 export type OrderStatus = ORDERED | CONFIRMED | MADE | SERVED | CANCELLED;
 
-// Graph related
-
-
+// All acceptable image types
+// export type ImageExt = "*.jpg" | "*.png" | "*.jpeg" | string;
 
 
 /*
@@ -33,7 +32,7 @@ Corresponding API path: api/order/:orderid
 URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiordersorderid5d/retreiving-order-information-by-order-id
  */
 export interface IPureItemLine {
-  item_id: number;
+  items_id: number;
   itemName: string;
   purchasePrice: number;
   ice: ModificationType;
@@ -78,7 +77,7 @@ URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiordersuseruserid5d/ret
  */
 export interface IPureUsersOrderList {
   users_id: number;
-  userName: string;
+  username: string;
   displayName: string;
   orders: IPureUserOrder[];
 }
@@ -98,8 +97,8 @@ Corresponding API path: api/items
 URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiitems5d/obtaining-all-item's-information
  */
 export interface IPureMenuItemWithFlux {
-  categoryName: string;
-  item_id: number;
+  // categoryName: string;
+  items_id: number;
   itemName: string;
   itemStock: number;
   minimumPrice: number;
@@ -132,12 +131,36 @@ export interface IRequestItem {
   purchasePrice: number,
 }
 // the shopping cart
+// this is for when send to BE
 export interface ICurrentOrder {
   users_id: number,
   table: number,
   status: OrderStatus,
   item: IRequestItem[],
 }
+
+
+/* 
+Corresponding API path GET: api/users/
+
+*/
+export interface IUserProfile {
+  users_id: number,
+  username: string,
+  password: string,
+  displayName: string,
+  userPhoto: string,
+  role: string,
+}
+
+
+
+
+
+
+
+
+
 
 
 
