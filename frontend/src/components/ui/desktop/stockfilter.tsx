@@ -12,8 +12,8 @@ export default class StockFilter extends React.Component {
                 <span className="filter-header">Filters</span>
                 <div className="filter-line">
                     <span className="filter-subheader">Categories</span>
-                    <div className="pt-select">
-                        <select >
+                    <div className="filter-select-box">
+                        <select className="filter-select rd-corner">
                             <option value="all" selected={true}>All</option>
                             <option value="beer">Beer</option>
                             <option value="cocktail">Cocktail</option>
@@ -36,8 +36,8 @@ export default class StockFilter extends React.Component {
                 </div>
                 <div className="filter-line">
                     <span className="filter-subheader">Activies</span>
-                    <div className="pt-select">
-                        <select >
+                    <div className="filter-select-box">
+                        <select className="filter-select rd-corner">
                             <option value="all" selected={true}>All</option>
                             <option value="true">True</option>
                             <option value="false">False</option>
@@ -46,8 +46,8 @@ export default class StockFilter extends React.Component {
                 </div>
                 <div className="filter-line">
                     <span className="filter-subheader">Specials</span>
-                    <div className="pt-select">
-                        <select >
+                    <div className="filter-select-box">
+                        <select className="filter-select rd-corner">
                             <option value="all" selected={true}>All</option>
                             <option value="true">True</option>
                             <option value="false">False</option>
