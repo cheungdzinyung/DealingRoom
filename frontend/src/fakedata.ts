@@ -12,7 +12,7 @@ export const singleCategoryMenuItems: IPureCategoryWithItem = {
   categoryPhoto: "www.dealingroom.com/public/img/beer.jpeg",
   items: [
     {
-      // categoryName: "Beer",
+      categoryName: "Beer",
       currentPrice: 60.0,
       isActive: true,
       isSpecial: false,

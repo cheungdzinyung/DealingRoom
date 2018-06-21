@@ -40,6 +40,7 @@ $header-sub-text: rgba(233, 219, 204, .3);
 @import './ui/mobile/orderbanner';
 @import './ui/mobile/topbanner';
 @import './ui/mobile/usermenu';
+@import './ui/desktop/sidemenu';
 // Container component styling
 // Technically speaking, this should even be here at all (according to the founder of Redux. hehe) omg
 @import './pages/mobile/login';
