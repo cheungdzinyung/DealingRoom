@@ -14,6 +14,7 @@ import logo from "../../assets/icons/all/logo.svg";
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
 import { localLogin } from "../../../redux/mobile/actions/actions_user";
+import { localSignUp } from "../../../redux/mobile/actions/actions_user";
 
 interface ILoginState {
   username: string,
@@ -25,6 +26,7 @@ interface ILoginProps {
   isAuth: boolean,
   // user_id: number,
   localLogin: (username: string, password: string) => void,
+  localSignUp: (username: string, password: string) => void,
 }
 
 class PureLogin extends React.Component<ILoginProps, ILoginState> {
@@ -48,6 +50,10 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
   public toLocalLogin = () => {
     this.props.localLogin(this.state.username, this.state.password);
   };
+
+  public toLocalSignUp = () => {
+    this.props.localSignUp(this.state.username, this.state.password);
+  }
   
   public componentDidUpdate () {
     // actually shld check if token is valid
@@ -119,6 +125,11 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
                 <span className="submit-text">LOGIN</span>
               </button>
             </div>
+            <div className="login-button ">
+              <button className="submit rd-corner" onClick={this.toLocalSignUp}>
+                <span className="submit-text">SIGN UP</span>
+              </button>
+            </div>
           </Card>
         </div>
       </div>
@@ -136,6 +147,9 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     localLogin: (username: string, password: string) => {
       dispatch(localLogin(username, password));
+    },
+    localSignUp: (username: string, password: string) => {
+      dispatch(localSignUp(username, password));
     }
   }
 }

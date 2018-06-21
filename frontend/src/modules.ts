@@ -199,7 +199,17 @@ export interface IUserProfile {
   role: string,
 }
 
+export interface ISignUpPackage {
+  displayName: string,
+  username: string,
+  password: string,
+  role: "manager" | "bartender" | "waiter" | "customer",
+}
 
+export interface ILoginPackage {
+  username: string,
+  password: string,
+}
 
 
 
