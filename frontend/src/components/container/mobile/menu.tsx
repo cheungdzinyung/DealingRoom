@@ -3,7 +3,7 @@ import * as React from "react";
 
 // redux
 import { connect } from "react-redux";
-import { IRootState } from "../../../redux/mobile/reducers/index";
+import { IRootState } from "../../../redux/store";
 import { addToCurrentOrder, getEntireMenu } from "../../../redux/mobile/actions/actions_orders";
 
 // Import UI elements
@@ -171,10 +171,10 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
 // Redux
 const mapStateToProps = (state: IRootState) => {
   return {
-    entireMenu: state.orders.entireMenu,
-    categories: state.orders.categories,
+    entireMenu: state.customer.orders.entireMenu,
+    categories: state.customer.orders.categories,
     // priceMapping: state.orders.priceMapping,
-    currentOrder: state.orders.currentOrder,
+    currentOrder: state.customer.orders.currentOrder,
   }
 }
 

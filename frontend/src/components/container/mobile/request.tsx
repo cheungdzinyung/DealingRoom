@@ -3,7 +3,7 @@ import * as React from "react";
 
 // import redux and friends
 import { connect } from "react-redux";
-import { IRootState } from "../../../redux/mobile/reducers/index";
+import { IRootState } from "../../../redux/store";
 import { removeFromCurrentOrder, confirmOrder } from "../../../redux/mobile/actions/actions_orders";
 
 // for redir
@@ -113,9 +113,9 @@ class PureRequest extends React.Component<IRequestProps, {}> {
 
 const mapStateToProps = (state: IRootState) => {
   return {
-    user_id: state.user.userProfile.users_id,
-    currentOrder: state.orders.currentOrder,
-    currentTotal: state.orders.currentTotal,
+    user_id: state.customer.user.userProfile.users_id,
+    currentOrder: state.customer.orders.currentOrder,
+    currentTotal: state.customer.orders.currentTotal,
   }
 }
 

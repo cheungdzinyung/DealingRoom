@@ -2,6 +2,8 @@ import * as express from "express";
 import ItemsService from "../services/ItemsService";
 import OrdersService from "../services/OrdersService";
 
+import { io } from "../app";
+
 export default class UsersRouter {
   private ordersService: OrdersService;
   private itemsService: ItemsService;
@@ -31,8 +33,12 @@ export default class UsersRouter {
         .add(req.user.id, req.body)
         .then((result: any) => {
           return this.itemsService.getAll().then(orderList => {
-            result[0].entireOrder = orderList;
+            result[0].entireMenu = orderList;
             res.status(201).json(result);
+            io.local.emit("action", {
+              type: "SOCKET_UPDATE_ITEM_PRICE",
+              entireMenu: (result[0].entireMenu)
+            });
           });
         })
         .catch((err: express.Errback) => {
