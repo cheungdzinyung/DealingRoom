@@ -9,7 +9,7 @@ import {
     GET_USER_PROFILE_BY_USER_TOKEN_FAIL,
 } from "../actions/actions_user";
 
-import { IUserProfile } from "../../modules";
+import { IUserProfile } from "../../../modules";
 
 export interface IUserState {
     // role: string,

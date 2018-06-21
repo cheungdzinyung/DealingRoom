@@ -23,9 +23,8 @@ type CANCELLED = typeof CANCELLED;
 
 export type OrderStatus = ORDERED | CONFIRMED | MADE | SERVED | CANCELLED;
 
-// Graph related
-
-
+// All acceptable image types
+// export type ImageExt = "*.jpg" | "*.png" | "*.jpeg" | string;
 
 
 /*

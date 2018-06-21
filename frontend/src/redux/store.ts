@@ -1,5 +1,5 @@
 import { applyMiddleware, createStore, Action, compose } from "redux";
-import { IRootState, rootReducer } from "./reducers/index";
+import { IRootState, rootReducer } from "./mobile/reducers/index";
 import thunk from 'redux-thunk';
 
 // export const API_SERVER = process.env.REACT_APP_API_SERVER;

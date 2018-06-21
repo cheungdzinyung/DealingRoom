@@ -3,13 +3,13 @@ import * as React from "react";
 
 // import redux and friends
 import { connect } from "react-redux";
-import { IRootState } from "../../../redux/reducers/index";
-import { removeFromCurrentOrder, confirmOrder } from "../../../redux/actions/actions_orders";
+import { IRootState } from "../../../redux/mobile/reducers/index";
+import { removeFromCurrentOrder, confirmOrder } from "../../../redux/mobile/actions/actions_orders";
 
 // for redir
 import * as History from "history";
 import { withRouter } from "react-router";
-import { redirectPage, resetTargetPage } from "../../../redux/actions/actions_user";
+import { redirectPage, resetTargetPage } from "../../../redux/mobile/actions/actions_user";
 
 // Importing UI
 import UserMenu from "../../ui/mobile/usermenu";

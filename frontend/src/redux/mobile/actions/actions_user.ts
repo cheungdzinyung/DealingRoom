@@ -1,7 +1,7 @@
 import { Action, Dispatch } from "redux";
 import axios from "axios";
 
-import { API_SERVER } from "../../redux/store";
+import { API_SERVER } from "../../../redux/store";
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const CHANGE_PAGE = "CHANGE_PAGE";

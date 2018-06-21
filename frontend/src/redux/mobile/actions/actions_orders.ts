@@ -1,11 +1,11 @@
 import { Action, Dispatch } from "redux";
 import axios from "axios";
 
-import { API_SERVER } from "../../redux/store";
+import { API_SERVER } from "../../../redux/store";
 
 import {
     ICurrentOrder,
-} from "../../modules";
+} from "../../../modules";
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const GET_ENTIRE_MENU_SUCCESS = "GET_ENTIRE_MENU_SUCCESS";

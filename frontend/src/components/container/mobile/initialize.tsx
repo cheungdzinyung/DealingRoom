@@ -3,10 +3,10 @@ import * as React from "react";
 
 // redux
 import { connect } from "react-redux";
-import { IRootState } from "../../../redux/reducers/index";
+import { IRootState } from "../../../redux/mobile/reducers/index";
 // import { getEntireMenu } from "../actions/actions_orders";
-import { getEntireMenu, getOrdersByUserToken } from "../../../redux/actions/actions_orders";
-import { getUserProfileByUserToken } from "../../../redux/actions/actions_user";
+import { getEntireMenu, getOrdersByUserToken } from "../../../redux/mobile/actions/actions_orders";
+import { getUserProfileByUserToken } from "../../../redux/mobile/actions/actions_user";
 
 // for redir
 import * as History from "history";

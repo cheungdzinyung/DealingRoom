@@ -14,7 +14,7 @@ import Setting from "./components/container/mobile/setting";
 
 // import redux and friends
 import { connect } from "react-redux";
-import { IRootState } from "./redux/reducers/index";
+import { IRootState } from "./redux/mobile/reducers/index";
 
 // interface IAppProps {}
 

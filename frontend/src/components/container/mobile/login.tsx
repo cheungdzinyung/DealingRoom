@@ -12,8 +12,8 @@ import logo from "../../assets/icons/all/logo.svg";
 
 // redux
 import { connect } from "react-redux";
-import { IRootState } from "../../../redux/reducers/index";
-import { localLogin } from "../../../redux/actions/actions_user";
+import { IRootState } from "../../../redux/mobile/reducers/index";
+import { localLogin } from "../../../redux/mobile/actions/actions_user";
 
 interface ILoginState {
   username: string,

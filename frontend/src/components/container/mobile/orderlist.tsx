@@ -12,8 +12,8 @@ import checkIcon from "../../assets/icons/check.svg";
 
 // import redux and friends
 import { connect } from "react-redux";
-import { IRootState } from "../../../redux/reducers/index";
-import { getOrdersByUserToken } from "../../../redux/actions/actions_orders";
+import { IRootState } from "../../../redux/mobile/reducers/index";
+import { getOrdersByUserToken } from "../../../redux/mobile/actions/actions_orders";
 
 interface IOrdersProps {
   history: History.History,

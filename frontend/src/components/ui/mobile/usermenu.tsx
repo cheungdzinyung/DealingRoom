@@ -12,8 +12,8 @@ import profile from "../../assets/icons/menu/user.svg";
 
 // import redux and friends
 import { connect } from "react-redux";
-import { IRootState } from "../../../redux/reducers/index";
-import { changePage } from "../../../redux/actions/actions_user";
+import { IRootState } from "../../../redux/mobile/reducers/index";
+import { changePage } from "../../../redux/mobile/actions/actions_user";
 
 interface IUserMenuProps {
   history: History.History,

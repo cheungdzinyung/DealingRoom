@@ -16,7 +16,7 @@ import {
     IRequestItem,
     IPureCategoryWithItem,
     IPureUsersOrderList,
-} from "../../modules";
+} from "../../../modules";
 
 export interface IOrdersState {
     // socket.io on load? isAuth?

@@ -3,8 +3,8 @@ import * as React from "react";
 
 // redux
 import { connect } from "react-redux";
-import { IRootState } from "../../../redux/reducers/index";
-import { addToCurrentOrder, getEntireMenu } from "../../../redux/actions/actions_orders";
+import { IRootState } from "../../../redux/mobile/reducers/index";
+import { addToCurrentOrder, getEntireMenu } from "../../../redux/mobile/actions/actions_orders";
 
 // Import UI elements
 import UserMenu from "../../ui/mobile/usermenu";
