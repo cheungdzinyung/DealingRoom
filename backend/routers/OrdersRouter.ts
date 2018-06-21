@@ -1,8 +1,7 @@
 import * as express from "express";
+import { io } from "../app";
 import ItemsService from "../services/ItemsService";
 import OrdersService from "../services/OrdersService";
-
-import { io } from "../app";
 
 export default class UsersRouter {
   private ordersService: OrdersService;
@@ -32,14 +31,19 @@ export default class UsersRouter {
       return this.ordersService
         .add(req.user.id, req.body)
         .then((result: any) => {
-          return this.itemsService.getAll().then(orderList => {
-            result[0].entireMenu = orderList;
-            res.status(201).json(result);
-            io.local.emit("action", {
-              type: "SOCKET_UPDATE_ITEM_PRICE",
-              entireMenu: (result[0].entireMenu)
+          return this.itemsService
+            .getAll()
+            .then(orderList => {
+              return (result[0].entireOrder = orderList);
+            })
+            .then(finalResult => {
+              // broadcast newMenu
+              io.emit("action", {
+                type: "SOCKET_UPDATE_ITEM_PRICE",
+                entireMenu: finalResult
+              });
+              res.status(201).json(result);
             });
-          });
         })
         .catch((err: express.Errback) => {
           res.status(500).json({ status: "failed" });
