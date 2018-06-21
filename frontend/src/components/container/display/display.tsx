@@ -35,7 +35,7 @@ export default class Display extends React.Component<{}, IDisplayState> {
 
     // public componentWillMount(){} // use it for calling backend
 
-    // Sorry for the following method is depleted becuase the data structure is now changed to the exact format that we will be receiving from the backend, which the category will also come with the path, hence it is no longer necessary to create just a state for just the item category.
+    // Sorry for the following method is depleted because the data structure is now changed to the exact format that we will be receiving from the backend, which the category will also come with the path, hence it is no longer necessary to create just a state for just the item category.
 
     // public componentDidMount() {
     //     // the category name should be either from previous page or from the backend
@@ -48,11 +48,13 @@ export default class Display extends React.Component<{}, IDisplayState> {
     public render() {
         return (
             <div className="display-content-container">
-                <div className="display-banner">
-                    <img className="display-img" src={tempImg} alt="display-pic" />
-                    <h2>{this.state.singleCategory.categoryName}</h2>
-                </div>
+                {/* <div className="display-banner"> */}
+                    {/* <img className="display-img" src={tempImg} alt="display-pic" />
+                    <h2>{this.state.singleCategory.categoryName}</h2> */}
+                
                 <div className="display-container">
+                                <img className="display-img" src={tempImg} alt="display-pic" />
+                                <h2>{this.state.singleCategory.categoryName}</h2>
                     {this.state.singleCategory.items.map((item, i) => {
                         return (
                             <div className="display-grid" key={i}>
@@ -68,10 +70,18 @@ export default class Display extends React.Component<{}, IDisplayState> {
                                 }>
                                     <img className='arrow' src={percentageChange(item.chartData[item.chartData.length - 1].purchasePrice, item.chartData[0].purchasePrice) > 0 ? upWhite : downWhite} alt="" />
                                 </div>
+                                <span className="item-fluctuation-display">${item.currentPrice}</span>
+                                <div className="category-item-display">
+                                <span>{item.itemName}</span>
+                                <span>${item.currentPrice}</span>
+                                <span>{item.itemName}</span>
+                                <span>${item.currentPrice}</span>
+                                </div>
                             </div>
                         )
                     }
                     )}
+                {/* </div> */}
                 </div>
                 <div className="rssFeed">This round of discount is brought to you by dealingroom!</div>
             </div>

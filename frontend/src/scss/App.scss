@@ -51,6 +51,9 @@ $header-sub-text: rgba(233, 219, 204, .3);
 @import './pages/mobile/orderlist';
 @import './pages/mobile/request';
 
+// Display screen styling
+@import './pages/display/display';
+
 // Top level reset
 html,
 body {
