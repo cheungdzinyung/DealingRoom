@@ -34,7 +34,7 @@ export default class UsersRouter {
           return this.itemsService
             .getAll()
             .then(orderList => {
-              return (result[0].entireOrder = orderList);
+              return (result[0].entireMenu = orderList);
             })
             .then(finalResult => {
               // broadcast newMenu
