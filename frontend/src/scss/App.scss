@@ -50,6 +50,7 @@ $header-sub-text: rgba(233, 219, 204, .3);
 @import './ui/desktop/stockfilter';
 @import './ui/desktop/stockitemline';
 @import './ui/desktop/pageheader';
+@import './ui/desktop/ordercard';
 // Container component styling
 // Technically speaking, this should even be here at all (according to the founder of Redux. hehe) omg
 //--> Mobile
@@ -63,8 +64,10 @@ $header-sub-text: rgba(233, 219, 204, .3);
 @import './pages/mobile/request';
 //--> Desktop
 @import './pages/desktop/stockmanagement';
+@import './pages/desktop/currentorders';
 // Display screen styling
 @import './pages/display/display';
+
 // Top level reset
 html,
 body {

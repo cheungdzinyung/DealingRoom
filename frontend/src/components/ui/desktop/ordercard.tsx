@@ -1,9 +1,9 @@
 // Importing modules
 import * as React from "react";
-import { IOrder } from "src/modules";
+import { IPureOrder } from "src/modules";
 
-export default class OrderCard extends React.Component<IOrder> {
-    constructor(props: IOrder) {
+export default class OrderCard extends React.Component<IPureOrder> {
+    constructor(props: IPureOrder) {
         super(props)
     }
     public render() {
@@ -17,7 +17,7 @@ export default class OrderCard extends React.Component<IOrder> {
                 </div>
                 <div className="order-item-container">
                     {this.props.orderItems.map((item, index) => (
-                        <div className="order-item-line">
+                        <div className="order-item-line" key={index}>
                             <div className="order-item-name-container">
                                 <span className="order-item-name">{item.itemName}</span>
                             </div>
@@ -28,7 +28,6 @@ export default class OrderCard extends React.Component<IOrder> {
                             </div>
                         </div>
                     ))}
-
                 </div>
             </div>
         )
