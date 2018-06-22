@@ -14,7 +14,7 @@ import {
 
 import {
     IRequestItem,
-    IPureCategoryWithItem,
+    IMenuCategoryWithFlux,
     IPureUsersOrderList,
 } from "../../../modules";
 
@@ -25,7 +25,7 @@ export interface IOrdersState {
     // init
     menuReady: boolean,
     orderListReady: boolean,
-    entireMenu: IPureCategoryWithItem[],
+    entireMenu: IMenuCategoryWithFlux[],
     categories: string[],
     // priceMapping: {},
     // orders

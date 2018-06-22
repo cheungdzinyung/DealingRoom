@@ -5,6 +5,7 @@ import { API_SERVER } from "../../store";
 
 import {
     ICurrentOrder,
+    IMenuCategoryWithFlux,
 } from "../../../modules";
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
@@ -12,7 +13,7 @@ export const GET_ENTIRE_MENU_SUCCESS = "GET_ENTIRE_MENU_SUCCESS";
 export type GET_ENTIRE_MENU_SUCCESS = typeof GET_ENTIRE_MENU_SUCCESS;
 export interface IGetEntireMenuSuccessAction extends Action {
     type: GET_ENTIRE_MENU_SUCCESS,
-    entireMenu: any,
+    entireMenu: IMenuCategoryWithFlux[],
 }
 
 export const GET_ENTIRE_MENU_FAIL = "GET_ENTIRE_MENU_FAIL";
@@ -76,7 +77,7 @@ export const SOCKET_UPDATE_ITEM_PRICE = "SOCKET_UPDATE_ITEM_PRICE";
 export type SOCKET_UPDATE_ITEM_PRICE = typeof SOCKET_UPDATE_ITEM_PRICE;
 export interface ISocketUpdateItemPrice extends Action {
     type: SOCKET_UPDATE_ITEM_PRICE,
-    entireMenu: any,
+    entireMenu: IMenuCategoryWithFlux[],
 }
 
 
@@ -94,7 +95,7 @@ export type OrdersActions =
     ISocketUpdateItemPrice;
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export function getEntireMenuSuccess(entireMenu: any): IGetEntireMenuSuccessAction {
+export function getEntireMenuSuccess(entireMenu: IMenuCategoryWithFlux[]): IGetEntireMenuSuccessAction {
     return {
         type: GET_ENTIRE_MENU_SUCCESS,
         entireMenu,
@@ -222,7 +223,7 @@ export function socketConnect(socketID: any): ISocketConnectSuccess {
     }
 }
 
-export function socketUpdateItemPrice(entireMenu: any): ISocketUpdateItemPrice {
+export function socketUpdateItemPrice(entireMenu: IMenuCategoryWithFlux[]): ISocketUpdateItemPrice {
     return {
         type: SOCKET_UPDATE_ITEM_PRICE,
         entireMenu,

@@ -4,7 +4,6 @@ import * as React from "react";
 // redux
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
-// import { getEntireMenu } from "../actions/actions_orders";
 import { getEntireMenu, getOrdersByUserToken } from "../../../redux/mobile/actions/actions_orders";
 import { getUserProfileByUserToken } from "../../../redux/mobile/actions/actions_user";
 
@@ -28,10 +27,6 @@ interface IInitializeProps {
     orderListReady: boolean,
 }
 
-// interface IInitializeState {
-
-// }
-
 class PureInitialize extends React.Component<IInitializeProps, {}> {
     constructor(props: IInitializeProps) {
         super(props)
@@ -41,10 +36,8 @@ class PureInitialize extends React.Component<IInitializeProps, {}> {
         // fetch entireMenu , set categories[]
         this.props.getEntireMenu();
         // fetch user data
-        // this.props.getUserProfileByUserid(this.props.user_id);
         this.props.getUserProfileByUserToken();
-        // fetch ordersList (or not?)
-        // this.props.getOrdersByUserid(this.props.user_id);
+        // fetch ordersList
         this.props.getOrdersByUserToken();
     }
 

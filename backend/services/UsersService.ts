@@ -41,7 +41,7 @@ export default class UsersService {
         }
         return this.knex("users")
           .where("id", id[0])
-          .select("id as user_id", "displayName", "userPhoto");
+          .select("id as user_id", "password", "displayName", "userPhoto");
       });
   }
 

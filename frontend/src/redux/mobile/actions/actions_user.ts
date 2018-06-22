@@ -2,6 +2,7 @@ import { Action, Dispatch } from "redux";
 import axios from "axios";
 
 import { API_SERVER } from "../../../redux/store";
+import { ISignUpPackage, ILoginPackage } from "../../../modules";
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const CHANGE_PAGE = "CHANGE_PAGE";
@@ -40,6 +41,21 @@ export interface ILocalLoginFailAction extends Action {
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export const LOCAL_SIGNUP_SUCCESS = "LOCAL_SIGNUP_SUCCESS";
+export type LOCAL_SIGNUP_SUCCESS = typeof LOCAL_SIGNUP_SUCCESS;
+export interface ILocalSignUpSuccessAction extends Action {
+    type: LOCAL_SIGNUP_SUCCESS,
+    userInfoPackage: any,
+}
+
+export const LOCAL_SIGNUP_FAIL = "LOCAL_SIGNUP_FAIL";
+export type LOCAL_SIGNUP_FAIL = typeof LOCAL_SIGNUP_FAIL;
+export interface ILocalSignUpFailAction extends Action {
+    type: LOCAL_SIGNUP_FAIL,
+    errMsg: any,
+}
+
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS = "GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS";
 export type GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS = typeof GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS;
 export interface IGetUserProfileByUserTokenSuccessAction extends Action {
@@ -61,6 +77,8 @@ export type UserActions =
     IRestTargetPageAction |
     ILocalLoginSuccessAction |
     ILocalLoginFailAction |
+    ILocalSignUpSuccessAction |
+    ILocalSignUpFailAction |
     IGetUserProfileByUserTokenSuccessAction |
     IGetUserProfileByUserTokenFailAction;
 
@@ -102,14 +120,11 @@ export function localLoginFail(): ILocalLoginFailAction {
 
 export function localLogin(username: string, password: string) {
     return (dispatch: Dispatch<ILocalLoginSuccessAction | ILocalLoginFailAction>) => {
-        const loginPackage = {
+        const loginPackage: ILoginPackage = {
             username,
             password,
-            role: "customer",
-            displayName: "admin"
         };
-        //    vvv right now using sign up since login route is not ready
-        // axios.post(`${process.env.REACT_APP_API_DEV}/api/auth/login`, loginPackage)
+
         axios.post(`${API_SERVER}/api/auth/login`, loginPackage)
             .then((res: any) => {
                 if (res.status === 200) {
@@ -125,6 +140,93 @@ export function localLogin(username: string, password: string) {
             });
     }
 }
+
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export function localSignUpSuccess(userInfoPackage: any): ILocalSignUpSuccessAction {
+    return {
+        type: LOCAL_SIGNUP_SUCCESS,
+        userInfoPackage,
+    }
+}
+
+export function localSignUpFail(errMsg: any): ILocalSignUpFailAction {
+    return {
+        type: LOCAL_SIGNUP_FAIL,
+        errMsg,
+    }
+}
+
+// REAL
+// export function localSignUp(username: string, password: string) {
+//     return (dispatch: Dispatch<ILocalSignUpSuccessAction | ILocalSignUpFailAction>) => {
+//         const signUpPackage: ISignUpPackage = {
+//             username,
+//             password,
+//             role: "customer",
+//             displayName: username,
+//         };
+        
+//         axios.post(`${API_SERVER}/api/auth/signup`, signUpPackage)
+//             .then((res: any) => {
+//                 if (res.status === 201) {
+//                     dispatch(localSignUpSuccess(res.data));
+//                 } else {
+//                     alert("status: " + res.status);
+//                     dispatch(localSignUpFail(res.status));
+//                 }
+//             })
+//             .catch((err: any) => {
+//                 alert(err);
+//                 dispatch(localSignUpFail(err));
+//             });
+//     }
+// }
+
+// WORK AROUND
+export function localSignUp(username: string, password: string) {
+    return (dispatch: Dispatch<ILocalSignUpSuccessAction | ILocalSignUpFailAction | ILocalLoginSuccessAction | ILocalLoginFailAction>) => {
+        const signUpPackage: ISignUpPackage = {
+            username,
+            password,
+            role: "customer",
+            displayName: username,
+        };
+
+        const loginPackage = {
+            username,
+            password
+        }
+        
+        axios.post(`${API_SERVER}/api/auth/signup`, signUpPackage)
+            .then((res: any) => {
+                if (res.status === 201) {
+                    axios.post(`${API_SERVER}/api/auth/login`, loginPackage)
+                        .then((resp: any) => {
+                            if (resp.status === 200) {
+                                dispatch(localLoginSuccess(resp.data));
+                            } else {
+                                alert("status: " + res.status);
+                                dispatch(localLoginFail());
+                            }
+                        })
+                        .catch((err: any) => {
+                            alert(err);
+                            dispatch(localLoginFail());
+                        });
+                    // dispatch(localSignUpSuccess(res.data));
+                } else {
+                    alert("status: " + res.status);
+                    dispatch(localSignUpFail(res.status));
+                }
+            })
+            .catch((err: any) => {
+                alert(err);
+                dispatch(localSignUpFail(err));
+            });
+    }
+}
+
+
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function getUserProfileByUserTokenSuccess(userProfile: any): IGetUserProfileByUserTokenSuccessAction {

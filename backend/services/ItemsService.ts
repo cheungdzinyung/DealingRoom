@@ -155,16 +155,6 @@ export default class UsersService {
               )
               .where("items.categories_id", categoryList[i].id)
               .orderBy("items.id", "ase");
-            // }).then((itemListNoFluc)=>{
-            //   return this.knex("itemsLog")
-            //   .join("items", "itemsLog.items_id", "=", "items.id")
-            //   .join("categories", "items.categories_id", "=", "categories.id")
-            //   .select("items.itemName")
-            //   .select(this.knex.raw(`extract(hour from "itemsLog".created_at) as time`))
-            //   .avg("itemsLog.itemsLogPrice")
-            //   .whereRaw("??::date = ?", ["created_at", dateOfQuery])
-            //   .groupBy("itemName")
-            //   .groupByRaw(`extract('hour' from "itemsLog".created_at)`)
           })
         ).then((itemList: any) => {
           return Promise.all(
@@ -261,3 +251,25 @@ export default class UsersService {
       });
   }
 }
+
+// return this.knex("itemsLog")
+//       .join("items", "itemsLog.items_id", "=", "items.id")
+//       .join("categories", "items.categories_id", "=", "categories.id")
+//       .select("items.itemName")
+//       .select(this.knex.raw(`extract(hour from "itemsLog".created_at) as hour`))
+//       .avg("itemsLog.itemsLogPrice")
+//       .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+//       .where("items.itemName", "Asahi")
+//       .groupBy("itemName")
+//       .groupByRaw(`extract('hour' from "itemsLog".created_at)`)
+//       .then((result: any) => {
+//         return Promise.all(
+//           result.map((order: object, i: number) => {
+//             const obj = {
+//               time: result[i].hour.toString(),
+//               purchasePrice: parseInt(result[i].avg, 10)
+//             };
+//             return obj;
+//           })
+//         );
+//       });
