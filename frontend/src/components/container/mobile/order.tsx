@@ -12,7 +12,7 @@ import Usermenu from "../../ui/mobile/usermenu";
 import paymentTest from "../../assets/images/payment/stripe.png"
 
 // Importing types
-// import { IPureOrder } from "../../modules";
+// import { IOrder } from "../../modules";
 
 // import redux and friends
 import { connect } from "react-redux";
@@ -32,7 +32,7 @@ interface IOrderState {
   amount: number,
 
   paymentMethod: string
-  // order: IPureOrder
+  // order: IOrder
 }
 
 class PureOrder extends React.Component<IOrderProps, IOrderState> {
