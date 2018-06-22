@@ -130,7 +130,43 @@ export const adminAllItemTest: IMenuItemWithoutFlux[] = [
     minimumPrice: 12,
     currentPrice: 13,
     itemPhoto: "./assets/images/squarebeer.jpg",
+    isSpecial: false,
+    isActive: true
+  },{
+    items_id: 1,
+    itemName: "Asahi",
+    itemStock: 12,
+    categoryName: "beer",
+    itemDescription:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    minimumPrice: 12,
+    currentPrice: 13,
+    itemPhoto: "../../assets/images/squarebeer.jpg",
+    isSpecial: false,
+    isActive: false
+  },{
+    items_id: 1,
+    itemName: "Asahi",
+    itemStock: 12,
+    categoryName: "beer",
+    itemDescription:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    minimumPrice: 12,
+    currentPrice: 13,
+    itemPhoto: "../../assets/images/squarebeer.jpg",
     isSpecial: true,
+    isActive: true
+  },{
+    items_id: 1,
+    itemName: "Asahi",
+    itemStock: 12,
+    categoryName: "beer",
+    itemDescription:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    minimumPrice: 12,
+    currentPrice: 13,
+    itemPhoto: "../../assets/images/squarebeer.jpg",
+    isSpecial: false,
     isActive: true
   },{
     items_id: 1,
@@ -154,44 +190,8 @@ export const adminAllItemTest: IMenuItemWithoutFlux[] = [
     minimumPrice: 12,
     currentPrice: 13,
     itemPhoto: "../../assets/images/squarebeer.jpg",
-    isSpecial: true,
-    isActive: true
-  },{
-    items_id: 1,
-    itemName: "Asahi",
-    itemStock: 12,
-    categoryName: "beer",
-    itemDescription:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    minimumPrice: 12,
-    currentPrice: 13,
-    itemPhoto: "../../assets/images/squarebeer.jpg",
-    isSpecial: true,
-    isActive: true
-  },{
-    items_id: 1,
-    itemName: "Asahi",
-    itemStock: 12,
-    categoryName: "beer",
-    itemDescription:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    minimumPrice: 12,
-    currentPrice: 13,
-    itemPhoto: "../../assets/images/squarebeer.jpg",
-    isSpecial: true,
-    isActive: true
-  },{
-    items_id: 1,
-    itemName: "Asahi",
-    itemStock: 12,
-    categoryName: "beer",
-    itemDescription:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    minimumPrice: 12,
-    currentPrice: 13,
-    itemPhoto: "../../assets/images/squarebeer.jpg",
-    isSpecial: true,
-    isActive: true
+    isSpecial: false,
+    isActive: false
   }
 ]
 
