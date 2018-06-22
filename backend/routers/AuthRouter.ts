@@ -112,13 +112,42 @@ export default class AuthRouter {
           throw new Error(result.data.error);
         } else {
           // console.log("authResult ", result.data);
-          const token = jwtSimple.encode(
-            { id: accessToken, info: result.data },
-            config.jwtSecret
-          );
 
-          // console.log(token);
-          res.json({ token });
+          // const jwtToken = jwtSimple.encode(
+          //   { id: accessToken, info: result.data },
+          //   config.jwtSecret
+          // );
+
+          // TODO : find FB user from DB
+          // if true => res.json(usually login result)
+          // TODO
+          // if false => add to DB, send back usually sign up result
+          const signUpPackage = {
+            // vvv required
+            displayName: result.data.name,
+            facebookToken: accessToken,
+            isActive: true,
+            password: accessToken,
+            role: "customer",
+            username: result.data.id,
+            // vvv to match data tpye
+            id: 0,
+            // vvv maybe?
+            userPhoto: "",
+          }
+          await this.usersService
+          .add(signUpPackage, req.file)
+          .then((addResult: IUserData) => {
+            console.log(addResult);
+            res.status(200).json(addResult);
+          })
+          .catch((err: express.Errback) => {
+            console.log("add user err: ", err);
+            res.status(500).json({ err, status: "failed" });
+          });
+
+          // console.log(result);
+          // res.json({ jwtToken });
 
           // cannot set status since axios have set it already
           // err code: Can't set headers after they are sent

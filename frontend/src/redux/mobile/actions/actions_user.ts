@@ -270,7 +270,7 @@ export function loginFacebook(accessToken: string) {
                     dispatch(loginFacebookFail("unknown error"));
                 }
                 else if (!res.data.token) {
-                    dispatch(loginFacebookFail(res.data.message || ""));
+                    dispatch(loginFacebookFail("token not found"));
                 } else {
                     // res.data.token is the jwt-token processed by BE
                     dispatch(loginFacebookSucccess(res.data.token));
