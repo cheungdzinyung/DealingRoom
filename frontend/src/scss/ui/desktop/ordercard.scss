@@ -1,6 +1,37 @@
-.order-item-container {
-    position: relative;
-    display: grid;
-    grid-template-columns: 40vw 40vw;
-    grid-template-rows: 30vh 30vh 30vh;
+.order-card-container {
+//    width: 50%;
+//    padding: 10% 2%;
+   .order-header-container {
+       display: flex;
+       justify-content: space-between;
+       padding: 3% 5%;
+       background-color: rgba(233, 219, 204, .55);
+       border-top-left-radius: 5px;
+       border-top-right-radius: 5px;
+       .order-confirmed {
+           background-color: rgb(255, 0, 0);
+       }
+   }
+   .order-item-line {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 2% 5%;
+
+        .item-mods-container {
+            color:#E9DBCC;
+            display: flex;
+            justify-content: flex-end;
+            // .mods-icon {
+            //     padding: 0 5%;
+            // }
+        }
+   }
+   .order-item-container {
+        padding: 5% 0;
+        background-color:#4B4A51;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+   }
+
 }

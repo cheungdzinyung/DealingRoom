@@ -1,16 +1,16 @@
 // Importing modules
 import * as React from "react";
-import { IPureOrder } from "src/modules";
+import { IOrder } from "src/modules";
 
-export default class OrderCard extends React.Component<IPureOrder> {
-    constructor(props: IPureOrder) {
+export default class OrderCard extends React.Component<IOrder> {
+    constructor(props: IOrder) {
         super(props)
     }
     public render() {
         return (
             <div className="order-card-container">
                 <div className="order-header-container">
-                    <span className="order-id">{this.props.orders_id}</span>
+                    <span className="order-id">#{this.props.orders_id}</span>
                     <div className="order-button">
                         <span className="order-confirmed">DONE</span>
                     </div>

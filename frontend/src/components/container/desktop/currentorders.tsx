@@ -22,8 +22,10 @@ export default class CurrentOrders extends React.Component<IOrder[]> {
         return (
             // tslint:disable-next-line:no-unused-expression
             <div className="desktop-page-container">
+                <div className="currentorder-header">
+                    <h1 className="currentorder-text">Current Orders</h1>
+                </div>
                 <AdminSideMenu />
-
                 <div className="order-card-display">
                     <OrderCard {...orderItems} />
                 </div>
