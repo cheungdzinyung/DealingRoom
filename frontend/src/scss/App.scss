@@ -18,6 +18,10 @@ $item-card-text: rgba(233, 219, 204, 1);
 $item-detail-bgc: rgba(81, 81, 81, .55);
 $item-detail-subheaders: rgba(233, 219, 204, 1);
 $item-detail-text: rgba(233, 219, 204, .7);
+$admin-item-card-bgc: rgba(141, 141, 141, .5);
+$admin-item-name-text:rgba(233, 219, 204, 1);
+$admin-item-description-text:rgba(233, 219, 204, .5);
+$admin-item-price-text:rgba(255, 205, 68, 1);
 $warning-orange: rgba(255, 205, 68, .9);
 $bot-menu-bgc: rgba(81, 81, 81, 1);
 $bot-menu-text: rgba(233, 219, 204, .6);
@@ -45,6 +49,9 @@ $header-sub-text: rgba(233, 219, 204, .3);
 //--> Desktop
 @import './ui/desktop/sidemenu';
 @import './ui/desktop/stockfilter';
+@import './ui/desktop/stockitemline';
+@import './ui/desktop/pageheader';
+@import './ui/desktop/ordercard';
 // Container component styling
 // Technically speaking, this should even be here at all (according to the founder of Redux. hehe) omg
 //--> Mobile
@@ -58,8 +65,10 @@ $header-sub-text: rgba(233, 219, 204, .3);
 @import './pages/mobile/request';
 //--> Desktop
 @import './pages/desktop/stockmanagement';
+@import './pages/desktop/currentorders';
 // Display screen styling
 @import './pages/display/display';
+
 // Top level reset
 html,
 body {
@@ -157,8 +166,11 @@ input {
 
 //   Desktop
 .desktop-page-container {
+    width: 100vw;
+    height: 100vh;
     position: relative;
     display: grid;
     grid-template-columns: 20% 1fr 20%;
+    grid-template-rows: 12vh 1fr;
     grid-gap: 5px;
 }
