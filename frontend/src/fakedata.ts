@@ -1,11 +1,10 @@
 import {
   
-  IMenuCategoryWithFlux,
-  // IPureItemLine,
-  // IPureOrder,
-  // IPureUsersOrderList
+  IOrder,
+  // IItemWithMod,
+  // ICustomerOrderList
+  IMenuCategoryWithFlux, IMenuItemWithoutFlux
 } from "src/modules";
-
 
 export const singleCategoryMenuItems: IMenuCategoryWithFlux = {
   categoryName: "Beer",
@@ -25,14 +24,14 @@ export const singleCategoryMenuItems: IMenuCategoryWithFlux = {
       minimumPrice: 15.0,
       // tslint:disable-next-line:object-literal-sort-keys
       chartData: [
-        {time: '', purchasePrice: 30},
-        {time: '', purchasePrice: 40},
-        {time: '', purchasePrice: 20},
-        {time: '', purchasePrice: 27},
-        {time: '', purchasePrice: 18},
-        {time: '', purchasePrice: 23},
-        {time: '', purchasePrice: 34},
-  ]
+        { time: "", purchasePrice: 30 },
+        { time: "", purchasePrice: 40 },
+        { time: "", purchasePrice: 20 },
+        { time: "", purchasePrice: 27 },
+        { time: "", purchasePrice: 18 },
+        { time: "", purchasePrice: 23 },
+        { time: "", purchasePrice: 34 }
+      ]
     },
     {
       categoryName: "Beer",
@@ -48,14 +47,14 @@ export const singleCategoryMenuItems: IMenuCategoryWithFlux = {
       minimumPrice: 15.0,
       // tslint:disable-next-line:object-literal-sort-keys
       chartData: [
-        {time: '', purchasePrice: 40},
-        {time: '', purchasePrice: 60},
-        {time: '', purchasePrice: 20},
-        {time: '', purchasePrice: 27},
-        {time: '', purchasePrice: 28},
-        {time: '', purchasePrice: 33},
-        {time: '', purchasePrice: 34},
-  ]
+        { time: "", purchasePrice: 40 },
+        { time: "", purchasePrice: 60 },
+        { time: "", purchasePrice: 20 },
+        { time: "", purchasePrice: 27 },
+        { time: "", purchasePrice: 28 },
+        { time: "", purchasePrice: 33 },
+        { time: "", purchasePrice: 34 }
+      ]
     },
     {
       categoryName: "Beer",
@@ -71,14 +70,14 @@ export const singleCategoryMenuItems: IMenuCategoryWithFlux = {
       minimumPrice: 15.0,
       // tslint:disable-next-line:object-literal-sort-keys
       chartData: [
-        {time: '', purchasePrice: 30},
-        {time: '', purchasePrice: 40},
-        {time: '', purchasePrice: 20},
-        {time: '', purchasePrice: 27},
-        {time: '', purchasePrice: 18},
-        {time: '', purchasePrice: 23},
-        {time: '', purchasePrice: 34},
-  ]
+        { time: "", purchasePrice: 30 },
+        { time: "", purchasePrice: 40 },
+        { time: "", purchasePrice: 20 },
+        { time: "", purchasePrice: 27 },
+        { time: "", purchasePrice: 18 },
+        { time: "", purchasePrice: 23 },
+        { time: "", purchasePrice: 34 }
+      ]
     },
     {
       categoryName: "Beer",
@@ -94,16 +93,66 @@ export const singleCategoryMenuItems: IMenuCategoryWithFlux = {
       minimumPrice: 15.0,
       // tslint:disable-next-line:object-literal-sort-keys
       chartData: [
-        {time: '', purchasePrice: 30},
-        {time: '', purchasePrice: 40},
-        {time: '', purchasePrice: 20},
-        {time: '', purchasePrice: 27},
-        {time: '', purchasePrice: 18},
-        {time: '', purchasePrice: 23},
-        {time: '', purchasePrice: 34},
-  ]
+        { time: "", purchasePrice: 30 },
+        { time: "", purchasePrice: 40 },
+        { time: "", purchasePrice: 20 },
+        { time: "", purchasePrice: 27 },
+        { time: "", purchasePrice: 18 },
+        { time: "", purchasePrice: 23 },
+        { time: "", purchasePrice: 34 }
+      ]
     }
   ]
+};
+
+export const onelineitemtest: IMenuItemWithoutFlux = {
+  items_id: 1,
+  itemName: "string",
+  itemStock: 12,
+  categoryName: "beer",
+  itemDescription:
+    "FAODHASODHASOdhasoudhasoduhasoduwehaouha oaduhs oduahwod uhaouh reouhwaoe isd",
+  minimumPrice: 12,
+  currentPrice: 13,
+  itemPhoto: 123,
+  isSpecial: true,
+  isActive: true
+};
+
+export const orderItems: IOrder = {
+  users_id: 3,
+  userName: "judith",
+  displayName: "Juju",
+  orders_id: 12,
+  table: 12,
+  status: "confirmed",
+  isPaid: false,
+  orderTotal: 300,
+  orderItems: [{
+    items_id: 2,
+    itemName: "Heineken",
+    purchasePrice: 60,
+    ice: "normal",
+    sweetness: "normal",
+    garnish: "normal",
+  },
+  {
+    items_id: 3,
+    itemName: "Long Island Ice Tea",
+    purchasePrice: 80,
+    ice: "normal",
+    sweetness: "normal",
+    garnish: "normal",
+  },
+  {
+    items_id: 4,
+    itemName: "Cosmopolitan",
+    purchasePrice: 120,
+    ice: "normal",
+    sweetness: "normal",
+    garnish: "normal",
+  },
+],
 }
 
 // export const chartOption = {
@@ -146,7 +195,7 @@ export const singleCategoryMenuItems: IMenuCategoryWithFlux = {
 //   ]
 // };
 
-// export const orderList: IPureUsersOrderList = {
+// export const orderList: ICustomerOrderList = {
 //   displayName: "Johnny",
 //   userName: "John Doe",
 //   users_id: 1,
@@ -220,7 +269,7 @@ export const singleCategoryMenuItems: IMenuCategoryWithFlux = {
 //   ]
 // };
 
-// export const singleOrder: IPureOrder = {
+// export const singleOrder: IOrder = {
 //   displayName: "Sabrina",
 //   isPaid: false,
 //   orderTotal: 155,
@@ -250,7 +299,7 @@ export const singleCategoryMenuItems: IMenuCategoryWithFlux = {
 //   ]
 // };
 
-// export const requestList: IPureItemLine[] = [
+// export const requestList: IItemWithMod[] = [
 //   {
 //     garnish: "normal",
 //     ice: "normal",

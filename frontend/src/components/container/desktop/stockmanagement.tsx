@@ -4,6 +4,7 @@ import * as React from "react";
 // Importing UI components
 import AdminSideMenu from "../../ui/desktop/sidemenu";
 import StockFilter from "../../ui/desktop/stockfilter";
+import PageHeader from "../../ui/desktop/pageheader";
 
 // Importing interfaces
 import { ActiveSpecialFilter, IMenuCategoryWithoutFlux, ICreateMenuItem, IEditMenuItem } from "src/modules";
@@ -121,12 +122,15 @@ export class PureStockManagement extends React.Component<IStockManagementProps, 
 
     public render() {
         return (
-            <div className="desktop-page-container">
-                <AdminSideMenu />
-                <StockFilter />
+          <div className="desktop-page-container">
+            <AdminSideMenu />
+            <div className="page-container-center">
+              <PageHeader header="Stock Management" />
             </div>
-        )
-    }
+            <StockFilter />
+          </div>
+        );
+      }
 
 
     // // in add / edit page

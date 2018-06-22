@@ -18,6 +18,7 @@ import Setting from "./components/container/mobile/setting";
 // Importing desktop containers
 import AdminLogin from "./components/container/desktop/adminlogin";
 import StockManagement from "./components/container/desktop/stockmanagement";
+import CurrentOrders from "./components/container/desktop/currentorders";
 
 // import redux and friends
 import { connect } from "react-redux";
@@ -48,6 +49,7 @@ class PureApp extends React.Component<{}, {}> {
           {/* Routes to admin/desktop screens */}
           <Route exact={true} path="/admin/login" component={AdminLogin}/>
           <Route exact={true} path="/admin/stock" component={StockManagement}/>
+          <Route exact={true} path="/admin/currentorders" component={CurrentOrders}/>
         </Switch>
       </div>
     );
