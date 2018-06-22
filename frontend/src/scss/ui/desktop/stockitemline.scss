@@ -1,5 +1,11 @@
-%small-text{
+%small-text {
     font-size: .8rem;
+}
+
+%flex-cnt-cnt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .stock-item-card {
@@ -7,34 +13,35 @@
     width: 52.5vw;
     height: 52.5vw * 177 / 756;
     display: grid;
-    grid-template-columns: 23.41% 53.18% 23.41%;
+    // grid-template-columns: 23.41% 53.18% 23.41%;
+    grid-template-columns: 23.41% 56.59% 20%;
     margin-bottom: 2.5%;
     .stock-item-img {
         width: 100%;
     }
-    .stock-item-info{
+    .stock-item-info {
         // height: 100%;
         display: grid;
         grid-template-rows: 25% 20% 31% 24%;
         padding: 2% 4%;
-        .stock-item-category{
+        .stock-item-category {
             align-self: center;
             font-size: .5rem;
             letter-spacing: .5px;
         }
-        .stock-item-name-price{
+        .stock-item-name-price {
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            .stock-item-name{
+            .stock-item-name {
                 color: $admin-item-name-text;
             }
-            .stock-item-price{
+            .stock-item-price {
                 color: $admin-item-price-text;
             }
         }
-        .stock-item-description{
+        .stock-item-description {
             @extend %small-text;
             line-height: 1.2;
             color: $admin-item-description-text;
@@ -42,14 +49,46 @@
             padding: 0;
             overflow: hidden;
         }
-        .stock-item-price-floor{
+        .stock-item-price-floor {
             align-self: center;
-            .stock-item-price-floor-text{
+            .stock-item-price-floor-text {
                 @extend %small-text;
                 color: #E77070;
             }
-            .stock-item-price-floor-number{
+            .stock-item-price-floor-number {
                 @extend %small-text;
+            }
+        }
+    }
+    .stock-item-mod {
+        display: grid;
+        grid-template-rows: 40% 1fr;
+        .spec-act {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            .isSpecial {
+                @extend %flex-cnt-cnt;
+                .star {}
+            }
+            .active-button {
+                @extend %flex-cnt-cnt;
+                width: 50%;
+                height: 40%;
+                // padding: 4% 15%;
+            }
+            .isActive {
+                background-color: rgba(115, 237, 166, .9);
+                .isActive-button-text {
+                    font-size: 100%;
+                }
+            }
+            .isNotActive {
+                background-color: rgba(238, 83, 83, .8);
+                .isActive-button-text {
+                    font-size: 100%;
+                }
             }
         }
     }
