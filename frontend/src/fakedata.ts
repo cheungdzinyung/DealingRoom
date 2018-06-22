@@ -1,8 +1,8 @@
 import {
   
   IPureCategoryWithItem,
+  IPureOrder,
   // IPureItemLine,
-  // IPureOrder,
   // IPureUsersOrderList
 } from "src/modules";
 
@@ -104,6 +104,42 @@ export const singleCategoryMenuItems: IPureCategoryWithItem = {
   ]
     }
   ]
+}
+
+export const orderItems: IPureOrder = {
+  users_id: 3,
+  userName: "judith",
+  displayName: "Juju",
+  orders_id: 12,
+  table: 12,
+  status: "confirmed",
+  isPaid: false,
+  orderTotal: 300,
+  orderItems: [{
+    items_id: 2,
+    itemName: "Heineken",
+    purchasePrice: 60,
+    ice: "normal",
+    sweetness: "normal",
+    garnish: "normal",
+  },
+  {
+    items_id: 3,
+    itemName: "Long Island Ice Tea",
+    purchasePrice: 80,
+    ice: "normal",
+    sweetness: "normal",
+    garnish: "normal",
+  },
+  {
+    items_id: 4,
+    itemName: "Cosmopolitan",
+    purchasePrice: 120,
+    ice: "normal",
+    sweetness: "normal",
+    garnish: "normal",
+  },
+],
 }
 
 // export const chartOption = {
