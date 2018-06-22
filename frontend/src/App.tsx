@@ -2,19 +2,27 @@ import * as React from "react";
 import { Route, Switch } from "react-router-dom";
 import "./scss/App.scss";
 
-import Display from "./components/pages/display";
-import Initialize from "./components/pages/initialize";
-import Login from "./components/pages/login";
-import Menu from "./components/pages/menu";
-import Order from "./components/pages/order";
-import OrderList from "./components/pages/orderlist";
-import Profile from "./components/pages/profile";
-import Request from "./components/pages/request";
-import Setting from "./components/pages/setting";
+// Importing display containers
+import Display from "./components/container/display/display";
+
+// Importing mobile containers
+import Initialize from "./components/container/mobile/initialize";
+import Login from "./components/container/mobile/login";
+import Menu from "./components/container/mobile/menu";
+import Order from "./components/container/mobile/order";
+import OrderList from "./components/container/mobile/orderlist";
+import Profile from "./components/container/mobile/profile";
+import Request from "./components/container/mobile/request";
+import Setting from "./components/container/mobile/setting";
+
+// Importing desktop containers
+import AdminLogin from "./components/container/desktop/adminlogin";
+import StockManagement from "./components/container/desktop/stockmanagement";
+import CurrentOrders from "./components/container/desktop/currentorders";
 
 // import redux and friends
 import { connect } from "react-redux";
-import { IRootState } from "src/components/reducers/index";
+import { IRootState } from "./redux/store";
 
 // interface IAppProps {}
 
@@ -38,6 +46,10 @@ class PureApp extends React.Component<{}, {}> {
           <Route path="/display" component={Display} />
           <Route path="/request" component={Request} />
           <Route path="/initialize" component={Initialize} />
+          {/* Routes to admin/desktop screens */}
+          <Route exact={true} path="/admin/login" component={AdminLogin}/>
+          <Route exact={true} path="/admin/stock" component={StockManagement}/>
+          <Route exact={true} path="/admin/currentorders" component={CurrentOrders}/>
         </Switch>
       </div>
     );

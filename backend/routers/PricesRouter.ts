@@ -11,11 +11,7 @@ export default class PricesRouter {
 
   public router() {
     const router = express.Router();
-
-    router.post("/:id", this.add.bind(this));
-
     router.get("/", this.getAll.bind(this));
-
     return router;
   }
 
@@ -39,16 +35,5 @@ export default class PricesRouter {
           res.status(500).json({ status: "failed" });
         });
     }
-  }
-
-  public add(req: express.Request, res: express.Response) {
-    return this.pricesService
-      .add(req.params.id, req.body)
-      .then((result: any) => {
-        res.status(200).json(result);
-      })
-      .catch((err: express.Errback) => {
-        res.status(500).json({ status: "failed" });
-      });
   }
 }
