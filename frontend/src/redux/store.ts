@@ -18,8 +18,8 @@ export const rootReducer = combineReducers<IRootState>({
 
 
 // env
-// export const API_SERVER = process.env.REACT_APP_API_SERVER;
-export const API_SERVER = process.env.REACT_APP_API_DEV;
+export const API_SERVER = process.env.REACT_APP_API_SERVER;
+// export const API_SERVER = process.env.REACT_APP_API_DEV;
 
 
 // socket.io
