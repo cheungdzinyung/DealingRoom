@@ -19,6 +19,7 @@ import { localSignUp } from "../../../redux/mobile/actions/actions_user";
 interface ILoginState {
   username: string,
   password: string,
+  localLoginType: "login" | "signUp",
 }
 
 interface ILoginProps {
@@ -36,6 +37,7 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
     this.state = {
       username: "Andrew",
       password: "123456",
+      localLoginType: "login",
     }
   }
 
@@ -54,17 +56,29 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
   public toLocalSignUp = () => {
     this.props.localSignUp(this.state.username, this.state.password);
   }
-  
-  public componentDidUpdate () {
+
+  public chooseLogin = () => {
+    this.setState({
+      localLoginType: "login"
+    })
+  }
+
+  public chooseSignUp = () => {
+    this.setState({
+      localLoginType: "signUp"
+    })
+  }
+
+  public componentDidUpdate() {
     // actually shld check if token is valid
-    if(localStorage.getItem("dealingRoomToken")) {
+    if (localStorage.getItem("dealingRoomToken")) {
       this.props.history.push("/initialize");
     }
   }
 
-  public componentDidMount () {
+  public componentDidMount() {
     // actually shld check if token is valid
-    if(localStorage.getItem("dealingRoomToken")) {
+    if (localStorage.getItem("dealingRoomToken")) {
       this.props.history.push("/initialize");
     }
   }
@@ -93,14 +107,29 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
         </div>
         <div className="login-bottom">
           <Card className="login-card rd-corner">
-            <div className="status-switch">
-              <div className="status">
-                <span className="status-text">LOGIN</span>
-              </div>
-              <div className="status">
-                <span className="status-text">SIGNUP</span>
-              </div>
-            </div>
+
+            {/* <div className="status-switch"> */}
+              {
+                (this.state.localLoginType === "login") ?
+                <div className="status-switch">
+                    <div className="status-chosen" onClick={this.chooseLogin}>
+                      <span className="status-text">LOGIN</span>
+                    </div>
+                    <div className="status" onClick={this.chooseSignUp}>
+                      <span className="status-text">SIGNUP</span>
+                    </div>
+                  </div> :
+                  <div className="status-switch">
+                    <div className="status" onClick={this.chooseLogin}>
+                      <span className="status-text">LOGIN</span>
+                    </div>
+                    <div className="status-chosen" onClick={this.chooseSignUp}>
+                      <span className="status-text">SIGNUP</span>
+                    </div>
+                  </div>
+              }
+            {/* </div> */}
+
             <form className="form" action="">
               <input
                 className="form-input rd-corner"
@@ -108,7 +137,7 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
                 type="text"
                 placeholder="Username"
                 value={this.state.username}
-                onChange = {this.username}
+                onChange={this.username}
               />
               <input
                 className="form-input rd-corner"
@@ -116,20 +145,25 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
                 name="password"
                 type="password"
                 value={this.state.password}
-                onChange = {this.password}
+                onChange={this.password}
               />
             </form>
 
-            <div className="login-button ">
-              <button className="submit rd-corner" onClick={this.toLocalLogin}>
-                <span className="submit-text">LOGIN</span>
-              </button>
-            </div>
-            <div className="login-button ">
-              <button className="submit rd-corner" onClick={this.toLocalSignUp}>
-                <span className="submit-text">SIGN UP</span>
-              </button>
-            </div>
+            {
+              (this.state.localLoginType === "login") ?
+                <div className="login-button ">
+                  <button className="submit rd-corner" onClick={this.toLocalLogin}>
+                    <span className="submit-text">LOGIN</span>
+                  </button>
+                </div>
+                :
+                <div className="login-button ">
+                  <button className="submit rd-corner" onClick={this.toLocalSignUp}>
+                    <span className="submit-text">SIGN UP</span>
+                  </button>
+                </div>
+            }
+
           </Card>
         </div>
       </div>
