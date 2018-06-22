@@ -56,6 +56,21 @@ export interface ILocalSignUpFailAction extends Action {
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export const FB_LOGIN_SUCCESS = "FB_LOGIN_SUCCESS";
+export type FB_LOGIN_SUCCESS = typeof FB_LOGIN_SUCCESS;
+export interface IFBLoginSuccessAction extends Action {
+    type: FB_LOGIN_SUCCESS,
+    FBtoken: string,
+}
+
+export const FB_LOGIN_FAIL = "FB_LOGIN_FAIL";
+export type FB_LOGIN_FAIL = typeof FB_LOGIN_FAIL;
+export interface IFBLoginFailAction extends Action {
+    type: FB_LOGIN_FAIL,
+    errMsg: string,
+}
+
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS = "GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS";
 export type GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS = typeof GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS;
 export interface IGetUserProfileByUserTokenSuccessAction extends Action {
@@ -79,6 +94,8 @@ export type UserActions =
     ILocalLoginFailAction |
     ILocalSignUpSuccessAction |
     ILocalSignUpFailAction |
+    IFBLoginSuccessAction |
+    IFBLoginFailAction |
     IGetUserProfileByUserTokenSuccessAction |
     IGetUserProfileByUserTokenFailAction;
 
@@ -226,7 +243,44 @@ export function localSignUp(username: string, password: string) {
     }
 }
 
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export function loginFacebookSucccess(FBtoken: string): IFBLoginSuccessAction {
+    return {
+        type: FB_LOGIN_SUCCESS,
+        FBtoken,
+    }
+}
 
+export function loginFacebookFail(errMsg: string): IFBLoginFailAction {
+    return {
+        type: FB_LOGIN_FAIL,
+        errMsg,
+    }
+}
+
+// get FB token is done by plugin
+// if success, send token to BE and store in DB
+export function loginFacebook(accessToken: string) {
+    return (dispatch: Dispatch<IFBLoginSuccessAction | IFBLoginFailAction>) => {
+        return axios
+            .post<{ accessToken: string; message?: string }>(
+                `${API_SERVER}/api/auth/facebook`, { accessToken } )
+            .then((res: any) => {
+                if (res.data == null) {
+                    dispatch(loginFacebookFail("unknown error"));
+                }
+                else if (!res.data.token) {
+                    dispatch(loginFacebookFail(res.data.message || ""));
+                } else {
+                    // res.data.token is the jwt-token processed by BE
+                    dispatch(loginFacebookSucccess(res.data.token));
+                }
+            })
+            .catch((err: any) => {
+                dispatch(loginFacebookFail(err));
+            });
+    }
+}
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function getUserProfileByUserTokenSuccess(userProfile: any): IGetUserProfileByUserTokenSuccessAction {

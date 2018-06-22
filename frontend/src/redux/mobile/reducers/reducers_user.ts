@@ -7,6 +7,8 @@ import {
     LOCAL_LOGIN_FAIL,
     LOCAL_SIGNUP_SUCCESS,
     LOCAL_SIGNUP_FAIL,
+    FB_LOGIN_SUCCESS,
+    FB_LOGIN_FAIL,
     GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS,
     GET_USER_PROFILE_BY_USER_TOKEN_FAIL,
 } from "../actions/actions_user";
@@ -75,6 +77,17 @@ export const userReducer = (state: IUserState = initialState, action: UserAction
         case LOCAL_SIGNUP_FAIL: {
             return state
         }
+        case FB_LOGIN_SUCCESS:
+        {
+            localStorage.setItem("dealingRoomToken", action.FBtoken);
+            return { ...state, isAuth: true }
+            // alert(`FB login ok ;) ${action.FBtoken}`)
+            // return state;
+        }
+        case FB_LOGIN_FAIL:
+        {
+            return state
+        }        
         case GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS: {
             return { ...state, userProfile: action.userProfile, userProfileReady: true };
         }

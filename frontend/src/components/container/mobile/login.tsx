@@ -13,8 +13,10 @@ import logo from "../../assets/icons/all/logo.svg";
 // redux
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
-import { localLogin } from "../../../redux/mobile/actions/actions_user";
-import { localSignUp } from "../../../redux/mobile/actions/actions_user";
+import { localLogin, localSignUp, loginFacebook } from "../../../redux/mobile/actions/actions_user";
+
+import ReactFacebookLogin, { ReactFacebookLoginInfo } from 'react-facebook-login';
+import { GoogleLogin } from 'react-google-login';
 
 interface ILoginState {
   username: string,
@@ -28,6 +30,8 @@ interface ILoginProps {
   // user_id: number,
   localLogin: (username: string, password: string) => void,
   localSignUp: (username: string, password: string) => void,
+
+  loginFacebook: (token: string) => void,
 }
 
 class PureLogin extends React.Component<ILoginProps, ILoginState> {
@@ -69,6 +73,22 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
     })
   }
 
+  public FBLogin = () => {
+    return null;
+  }
+
+  public responseFromFB = (userInfo: ReactFacebookLoginInfo & { accessToken: string }) => {
+    if (userInfo.accessToken) {
+      alert(userInfo.accessToken)
+      this.props.loginFacebook(userInfo.accessToken);
+    }
+    return null;
+  }
+
+  public responseGoogle = (response: any) => {
+    // alert(response);
+  }
+
   public componentDidUpdate() {
     // actually shld check if token is valid
     if (localStorage.getItem("dealingRoomToken")) {
@@ -92,12 +112,38 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
             <span className="logo-name">Dealing Room</span>
           </div>
           <div className="social-login">
-            <div className="banner rd-corner google">
-              <img className="banner-img" src={google} alt="" />
-            </div>
-            <div className="banner rd-corner facebook ">
-              <img className="banner-img" src={facebook} alt="" />
-            </div>
+
+            {/* <div> */}
+              <ReactFacebookLogin
+                appId={process.env.REACT_APP_FACEBOOK_APP_ID || ""}
+                autoLoad={false}
+                fields="name,email,picture"
+                onClick={this.FBLogin}
+                callback={this.responseFromFB}
+                textButton=""
+                icon={<img className="banner-img-fb" src={facebook} alt="" />}
+              />
+            {/* </div> */}
+
+            {/* <div> */}
+              <span className="banner rd-corner">
+                <GoogleLogin
+                  clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+                  buttonText=""
+                  onSuccess={this.responseGoogle}
+                  onFailure={this.responseGoogle}
+                  className="kep-login-facebook metro google-white"
+                  children={<img className="banner-img-google" src={google} alt="" />}
+                />
+              </span>
+            {/* </div> */}
+
+            {/* <div className="banner rd-corner google">
+              <span>
+                <img className="banner-img" src={google} alt="" />
+              </span>
+            </div> */}
+
           </div>
           <div className="divider">
             <hr className="divider-break" />
@@ -109,25 +155,25 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
           <Card className="login-card rd-corner">
 
             {/* <div className="status-switch"> */}
-              {
-                (this.state.localLoginType === "login") ?
+            {
+              (this.state.localLoginType === "login") ?
                 <div className="status-switch">
-                    <div className="status-chosen" onClick={this.chooseLogin}>
-                      <span className="status-text">LOGIN</span>
-                    </div>
-                    <div className="status" onClick={this.chooseSignUp}>
-                      <span className="status-text">SIGNUP</span>
-                    </div>
-                  </div> :
-                  <div className="status-switch">
-                    <div className="status" onClick={this.chooseLogin}>
-                      <span className="status-text">LOGIN</span>
-                    </div>
-                    <div className="status-chosen" onClick={this.chooseSignUp}>
-                      <span className="status-text">SIGNUP</span>
-                    </div>
+                  <div className="status-chosen" onClick={this.chooseLogin}>
+                    <span className="status-text">LOGIN</span>
                   </div>
-              }
+                  <div className="status" onClick={this.chooseSignUp}>
+                    <span className="status-text">SIGNUP</span>
+                  </div>
+                </div> :
+                <div className="status-switch">
+                  <div className="status" onClick={this.chooseLogin}>
+                    <span className="status-text">LOGIN</span>
+                  </div>
+                  <div className="status-chosen" onClick={this.chooseSignUp}>
+                    <span className="status-text">SIGNUP</span>
+                  </div>
+                </div>
+            }
             {/* </div> */}
 
             <form className="form" action="">
@@ -184,6 +230,9 @@ const mapDispatchToProps = (dispatch: any) => {
     },
     localSignUp: (username: string, password: string) => {
       dispatch(localSignUp(username, password));
+    },
+    loginFacebook: (token: string) => {
+      dispatch(loginFacebook(token));
     }
   }
 }

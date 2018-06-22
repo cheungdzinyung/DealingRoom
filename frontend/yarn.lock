@@ -91,6 +91,12 @@
     "@types/node" "*"
     "@types/react" "*"
 
+"@types/react-facebook-login@^3.6.4":
+  version "3.6.4"
+  resolved "https://registry.yarnpkg.com/@types/react-facebook-login/-/react-facebook-login-3.6.4.tgz#f2dc4cca8af780c25a71210bec92e0c50ada2c5c"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-redux@^6.0.2":
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-6.0.2.tgz#10069b53db8e0920fd8656e068dcf10c53c9ad2a"
@@ -6255,6 +6261,17 @@ react-dom@^16.4.0:
 react-error-overlay@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-4.0.0.tgz#d198408a85b4070937a98667f500c832f86bd5d4"
+
+react-facebook-login@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/react-facebook-login/-/react-facebook-login-4.0.1.tgz#7d43672ee86e3f2cd9e8758de1e61eb66a212611"
+
+react-google-login@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/react-google-login/-/react-google-login-3.2.1.tgz#9ab6ac3694d0e6e2974f1e588c53cf7b903a36e6"
+  dependencies:
+    "@types/react" "*"
+    prop-types "^15.6.0"
 
 react-move@^2.7.0:
   version "2.7.0"
