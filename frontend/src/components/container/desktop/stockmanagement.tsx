@@ -13,6 +13,8 @@ import { ActiveSpecialFilter, IMenuCategoryWithoutFlux, ICreateMenuItem, IEditMe
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
 import { getEntireMenu, createItem, changeItemStatus } from "../../../redux/desktop/actions/actions_manager";
+import StockItemLine from "../../ui/desktop/stockitemline";
+import { adminAllItemTest } from "../../../fakedata";
 
 interface IStockManagementProps {
     menuReady: boolean,
@@ -122,15 +124,22 @@ export class PureStockManagement extends React.Component<IStockManagementProps, 
 
     public render() {
         return (
-          <div className="desktop-page-container">
-            <AdminSideMenu />
-            <div className="page-container-center">
-              <PageHeader header="Stock Management" />
+            <div className="desktop-page-container">
+                <AdminSideMenu />
+                <div className="page-container-center">
+                    <PageHeader header="Stock Management" />
+
+                    {
+                        adminAllItemTest.map((eachItem, index) => (
+                            <StockItemLine {...eachItem} />
+                        ))
+                    }
+
+                </div>
+                <StockFilter />
             </div>
-            <StockFilter />
-          </div>
         );
-      }
+    }
 
 
     // // in add / edit page

@@ -1,5 +1,8 @@
 .page-container-center{
     grid-column: 2/3;
-    display: grid;
-    grid-template-rows: 20% 1fr;
+    grid-row: 2/3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
