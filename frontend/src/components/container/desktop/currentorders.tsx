@@ -4,18 +4,18 @@ import * as React from "react";
 // Importing UI components
 import AdminSideMenu from "../../ui/desktop/sidemenu";
 import OrderCard from "../../ui/desktop/ordercard";
-import { IPureOrder } from "src/modules";
+import { IOrder } from "src/modules";
 
 import { orderItems } from "../../../fakedata";
 
 // import paymentTest from "../../assets/images/payment/stripe.png"
 
 // interface ICurrentOrdersProps{
-//     // orderItems: IPureOrder[];
+//     // orderItems: IOrder[];
 // }
 
-export default class CurrentOrders extends React.Component<IPureOrder[]> {
-    constructor(props: IPureOrder[]) {
+export default class CurrentOrders extends React.Component<IOrder[]> {
+    constructor(props: IOrder[]) {
         super(props)
     }
     public render() {

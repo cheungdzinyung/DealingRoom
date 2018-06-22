@@ -1,8 +1,8 @@
 import {
   
-  IPureOrder,
-  // IPureItemLine,
-  // IPureUsersOrderList
+  IOrder,
+  // IItemWithMod,
+  // ICustomerOrderList
   IMenuCategoryWithFlux, IMenuItemWithoutFlux
 } from "src/modules";
 
@@ -119,7 +119,7 @@ export const onelineitemtest: IMenuItemWithoutFlux = {
   isActive: true
 };
 
-export const orderItems: IPureOrder = {
+export const orderItems: IOrder = {
   users_id: 3,
   userName: "judith",
   displayName: "Juju",
@@ -195,7 +195,7 @@ export const orderItems: IPureOrder = {
 //   ]
 // };
 
-// export const orderList: IPureUsersOrderList = {
+// export const orderList: ICustomerOrderList = {
 //   displayName: "Johnny",
 //   userName: "John Doe",
 //   users_id: 1,
@@ -269,7 +269,7 @@ export const orderItems: IPureOrder = {
 //   ]
 // };
 
-// export const singleOrder: IPureOrder = {
+// export const singleOrder: IOrder = {
 //   displayName: "Sabrina",
 //   isPaid: false,
 //   orderTotal: 155,
@@ -299,7 +299,7 @@ export const orderItems: IPureOrder = {
 //   ]
 // };
 
-// export const requestList: IPureItemLine[] = [
+// export const requestList: IItemWithMod[] = [
 //   {
 //     garnish: "normal",
 //     ice: "normal",
