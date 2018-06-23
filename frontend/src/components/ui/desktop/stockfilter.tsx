@@ -58,3 +58,38 @@ export default class StockFilter extends React.Component {
         )
     }
 }
+
+
+// public filterByCategory(e: React.MouseEvent<HTMLButtonElement>) {
+//     this.setState({
+//         category: e.currentTarget.value
+//     });
+// }
+
+// public filterByActive(e: React.MouseEvent<HTMLButtonElement>) {
+//     let choice: ActiveSpecialFilter;
+//     if (e.currentTarget.value === "not active") {
+//         choice = false
+//     } else if (e.currentTarget.value === "active") {
+//         choice = true;
+//     } else {
+//         choice = "all";
+//     }
+//     this.setState({
+//         isActive: choice
+//     });
+// }
+
+// public filterBySpecial(e: React.MouseEvent<HTMLButtonElement>) {
+//     let choice: ActiveSpecialFilter;
+//     if (e.currentTarget.value === "not active") {
+//         choice = false
+//     } else if (e.currentTarget.value === "active") {
+//         choice = true;
+//     } else {
+//         choice = "all";
+//     }
+//     this.setState({
+//         isSpecial: choice
+//     });
+// }

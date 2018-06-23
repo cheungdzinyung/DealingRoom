@@ -44,7 +44,7 @@ export interface ICreateMenuItem {
   categoryName: string,
   itemDescription: string,
   minimumPrice: number,
-  currentPrice: number,        
+  currentPrice: number,
   itemPhoto: any,
   isSpecial: boolean,
   isActive: boolean,
@@ -69,21 +69,20 @@ export interface IEditMenuItem {
 Corresponding API path: api/order/:orderid
 URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiordersorderid5d/retreiving-order-information-by-order-id
  */
-export interface IPureItemLine {
+export interface IItemWithMod {
   items_id: number;
   itemName: string;
   purchasePrice: number;
   ice: ModificationType;
   sweetness: ModificationType;
   garnish: ModificationType;
-  
 }
 
 /*
 Corresponding API path: api/order/:orderid
 URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiordersorderid5d/retreiving-order-information-by-order-id
  */
-export interface IPureOrder {
+export interface IOrder {
   users_id: number;
   userName: string;
   displayName: string;
@@ -92,47 +91,48 @@ export interface IPureOrder {
   status: OrderStatus;
   isPaid: boolean;
   orderTotal: number;
-  orderItems: IPureItemLine[];
+  orderItems: IItemWithMod[];
 }
 
 /*
 Corresponding API path: api/orders/user/:userid
 URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiordersuseruserid5d/retreiving-orders-information-by-user-id
  */
-export interface IPureUserOrder {
+export interface ICustomerOrderSingle {
   orders_id: number;
   table: number;
   status: OrderStatus;
   isPaid: boolean;
   orderingTime: number;
   orderTotal: number;
-  orderItems: IPureItemLine[];
+  orderItems: IItemWithMod[];
 }
 
 /*
 Corresponding API path: api/orders/user/:userid
 URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiordersuseruserid5d/retreiving-orders-information-by-user-id
  */
-export interface IPureUsersOrderList {
+export interface ICustomerOrderList {
   users_id: number;
   username: string;
   displayName: string;
-  orders: IPureUserOrder[];
+  orders: ICustomerOrderSingle[];
 }
 
 /* 
 Corresponding API path: api/items
 URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiitems5d/obtaining-all-item's-information
 */
-export interface IMenuCategoryWithFlux {
+export interface IMenuCategory {
   categoryName: string;
   categoryPhoto: string;
+}
+
+export interface IMenuCategoryWithFlux extends IMenuCategory {
   items: IMenuItemWithFlux[];
 }
 
-export interface IMenuCategoryWithoutFlux{
-  categoryName: string;
-  categoryPhoto: string;
+export interface IMenuCategoryWithoutFlux extends IMenuCategory {
   items: IMenuItemWithoutFlux[];
 }
 
@@ -153,12 +153,13 @@ export interface IMenuItemWithoutFlux {
   isSpecial: boolean;
   isActive: boolean;
 }
-export interface IMenuItemWithFlux extends IMenuItemWithoutFlux{
+
+export interface IMenuItemWithFlux extends IMenuItemWithoutFlux {
   chartData: IItemPriceGraphData[];
 }
 
 // New line graph data format
-export interface IItemPriceGraphData{
+export interface IItemPriceGraphData {
   time: string
   purchasePrice: number
 }
@@ -167,14 +168,8 @@ export interface IItemPriceGraphData{
 Corresponding API path POST: api/orders/user/:id
 */
 // each item in shopping cart
-export interface IRequestItem {
+export interface IRequestItem extends IItemWithMod {
   thisItemID: number,
-  items_id: number,
-  itemName: string,
-  ice: ModificationType,
-  sweetness: ModificationType,
-  garnish: ModificationType,
-  purchasePrice: number,
 }
 // the shopping cart
 // this is for when send to BE
@@ -210,9 +205,6 @@ export interface ILoginPackage {
   username: string,
   password: string,
 }
-
-
-
 
 
 

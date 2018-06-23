@@ -15,7 +15,7 @@ import {
 import {
     IRequestItem,
     IMenuCategoryWithFlux,
-    IPureUsersOrderList,
+    ICustomerOrderList,
 } from "../../../modules";
 
 export interface IOrdersState {
@@ -29,7 +29,7 @@ export interface IOrdersState {
     categories: string[],
     // priceMapping: {},
     // orders
-    ordersList: IPureUsersOrderList,
+    ordersList: ICustomerOrderList,
     unpaidOrders: number,
     currentOrder: IRequestItem[],
     currentTotal: number,

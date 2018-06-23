@@ -18,6 +18,10 @@ $item-card-text: rgba(233, 219, 204, 1);
 $item-detail-bgc: rgba(81, 81, 81, .55);
 $item-detail-subheaders: rgba(233, 219, 204, 1);
 $item-detail-text: rgba(233, 219, 204, .7);
+$admin-item-card-bgc: rgba(141, 141, 141, .5);
+$admin-item-name-text:rgba(233, 219, 204, 1);
+$admin-item-description-text:rgba(233, 219, 204, .5);
+$admin-item-price-text:rgba(255, 205, 68, 1);
 $warning-orange: rgba(255, 205, 68, .9);
 $bot-menu-bgc: rgba(81, 81, 81, 1);
 $bot-menu-text: rgba(233, 219, 204, .6);
@@ -33,6 +37,7 @@ $header-sub-text: rgba(233, 219, 204, .3);
 @import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,500,600,700|Proza+Libre:400,500|IBM+Plex+Mono');
 // Imports, internal SCSS modules
 // Presentation component styling
+//--> Mobile
 @import './ui/mobile/categoryfilter';
 @import './ui/mobile/header';
 @import './ui/mobile/itemcard';
@@ -40,10 +45,15 @@ $header-sub-text: rgba(233, 219, 204, .3);
 @import './ui/mobile/orderbanner';
 @import './ui/mobile/topbanner';
 @import './ui/mobile/usermenu';
+//--> Desktop
 @import './ui/desktop/sidemenu';
 @import './ui/desktop/stockfilter';
+@import './ui/desktop/stockitemline';
+@import './ui/desktop/pageheader';
+@import './ui/desktop/ordercard';
 // Container component styling
 // Technically speaking, this should even be here at all (according to the founder of Redux. hehe) omg
+//--> Mobile
 @import './pages/mobile/login';
 @import './pages/mobile/profile';
 @import './pages/mobile/setting';
@@ -52,8 +62,9 @@ $header-sub-text: rgba(233, 219, 204, .3);
 @import './pages/mobile/order';
 @import './pages/mobile/orderlist';
 @import './pages/mobile/request';
-// @import './pages/desktop/
-
+//--> Desktop
+@import './pages/desktop/stockmanagement';
+@import './pages/desktop/currentorders';
 // Display screen styling
 @import './pages/display/display';
 
@@ -117,7 +128,6 @@ input {
     border: 0;
 }
 
-
 // Style element shares across multiple components
 // Mobile
 .page-content-container {
@@ -126,38 +136,40 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  
-  .rd-corner {
+}
+
+.rd-corner {
     border-radius: 5px;
-  }
-  
-  .searchbar {
+}
+
+.searchbar {
     width: 100%;
     padding: 3.5% 5%;
     background-color: $search-bar-bgc;
     color: $search-bar-font;
     font-size: 1rem;
     font-family: 'IBM Plex Mono', monospace;
-  }
-  
-  #up-triangle-path,
-  #up-triangle-group {
+}
+
+#up-triangle-path,
+#up-triangle-group {
     fill: $up;
     stroke: $up;
-  }
-  
-  *::-moz-placeholder,
-  *::-ms-input-placeholder,
-  *::-webkit-input-placeholder {
-    color: $placebolder-color;
-  }
+}
 
+*::-moz-placeholder,
+*::-ms-input-placeholder,
+*::-webkit-input-placeholder {
+    color: $placebolder-color;
+}
 
 //   Desktop
-.desktop-page-container{
+.desktop-page-container {
+    width: 100vw;
+    height: 100vh;
     position: relative;
     display: grid;
     grid-template-columns: 20% 1fr 20%;
+    grid-template-rows: 12vh 1fr;
     grid-gap: 5px;
 }
