@@ -48,7 +48,7 @@ export default class AuthRouter {
         });
       })
       .catch((err: any) => {
-        if (err.code === '23505') {
+        if (err.code === "23505") {
           res.status(400).json({ status: "User already exist" });
         } else {
           res.status(500).json({ status: "failed" });
@@ -56,30 +56,39 @@ export default class AuthRouter {
       });
   }
 
-  public async localLogin(req: express.Request, res: express.Response) {
+  public localLogin(req: express.Request, res: express.Response) {
     if (req.body.username && req.body.password) {
       const username = req.body.username;
       const password = req.body.password;
-      const userId = await this.knex("users")
+      this.knex("users")
+        .where("username", username)
         .select("id", "username", "password")
-        .where("username", username);
-      bcrypt.compare(password, userId[0].password).then(result => {
-        if (result === true) {
-          const payload = {
-            id: userId[0].id,
-            username: userId[0].username
-          };
-          const token = jwtSimple.encode(payload, config.jwtSecret);
-          res.json({
-            token,
-            user_id: userId[0].id
+        .then(user => {
+          if (!user || !user[0]) {
+            res.status(401).json("User does not exist");
+            return;
+          }
+          bcrypt.compare(password, user[0].password).then(result => {
+            if (result === true) {
+              const payload = {
+                id: user[0].id,
+                username: user[0].username
+              };
+              const token = jwtSimple.encode(payload, config.jwtSecret);
+              res.json({
+                token,
+                user_id: user[0].id
+              });
+            } else {
+              res.status(401).json("Unauthorized, password error");
+            }
           });
-        } else {
-          res.sendStatus(401);
-        }
-      });
+        })
+        .catch(error => {
+          console.log(error);
+        });
     } else {
-      res.sendStatus(401).json("need password and username");
+      res.status(401).json("Please enter both password and username");
     }
   }
 
