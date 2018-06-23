@@ -216,7 +216,7 @@ export function localSignUp(username: string, password: string) {
         
         axios.post(`${API_SERVER}/api/auth/signup`, signUpPackage)
             .then((res: any) => {
-                if (res.status === 201) {
+                if (res.status === 200) {
                     axios.post(`${API_SERVER}/api/auth/login`, loginPackage)
                         .then((resp: any) => {
                             if (resp.status === 200) {
