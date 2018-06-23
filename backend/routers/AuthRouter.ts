@@ -34,11 +34,25 @@ export default class AuthRouter {
     return this.usersService
       .add(req.body, req.file)
       .then((result: IUserData) => {
-        res.status(201).json(result);
+        console.log(result);
+        const payload = {
+          id: result[0].id,
+          username: result[0].username
+        };
+        const token = jwtSimple.encode(payload, config.jwtSecret);
+        res.json({
+          token,
+          user_id: result[0].id,
+          displayName: result[0].displayName,
+          userPhoto: result[0].userPhoto
+        });
       })
-      .catch((err: express.Errback) => {
-        console.log(err);
-        res.status(500).json({ status: "failed" });
+      .catch((err: any) => {
+        if (err.code === '23505') {
+          res.status(400).json({ status: "User already exist" });
+        } else {
+          res.status(500).json({ status: "failed" });
+        }
       });
   }
 
