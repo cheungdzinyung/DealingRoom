@@ -97,48 +97,90 @@ export default class AuthRouter {
     console.log(accessToken);
     if (!accessToken) {
       res.sendStatus(401);
-    }
-    try {
-      const authResult = await axios.get(
-        `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${accessToken}`
-      );
+    } else {
+      try {
+        const authResult = await axios.get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${accessToken}`
+        );
 
-      if (authResult.data.error) {
+        if (authResult.data.error) {
+          res.sendStatus(401);
+        } else {
+          console.log(authResult.data);
+          const token = jwtSimple.encode(
+            { id: accessToken, info: authResult.data },
+            config.jwtSecret
+          );
+          res.json({ token });
+        }
+      } catch (err) {
         res.sendStatus(401);
       }
-      console.log(authResult.data);
-      const token = jwtSimple.encode(
-        { id: accessToken, info: authResult.data },
-        config.jwtSecret
-      );
-      res.json({ token });
-    } catch (err) {
-      res.sendStatus(401);
     }
   }
 
   public async loginWithFacebook(req: express.Request, res: express.Response) {
     const accessToken = req.body.accessToken;
-    console.log(accessToken);
+    // console.log(accessToken);
     if (!accessToken) {
-      res.sendStatus(401);
-    }
-    try {
-      const authResult = await axios.get(
-        `https://graph.facebook.com/me?access_token=${accessToken}`
-      );
+      res.sendStatus(401).json({ errMsg: "missing access token" });
+    } else {
+      try {
+        const result = await axios.get(
+          `https://graph.facebook.com/me?access_token=${accessToken}`
+        );
 
-      if (authResult.data.error) {
-        res.sendStatus(401);
+        if (result.data.error) {
+          // console.log("auth result err ", result.data.error);
+          throw new Error(result.data.error);
+        } else {
+          // console.log("authResult ", result.data);
+
+          // TODO : find FB user from DB
+          // if true => res.json(usually login result)
+          // TODO
+          // if false => add to DB, send back usually sign up result
+          const signUpPackage = {
+            // vvv required
+            displayName: result.data.name,
+            facebookToken: accessToken,
+            isActive: true,
+            password: accessToken,
+            role: "customer",
+            username: result.data.id,
+            // vvv to match data tpye
+            id: 0,
+            // vvv maybe?
+            userPhoto: "",
+          }
+          await this.usersService
+          .add(signUpPackage, req.file)
+          .then((addResult: IUserData) => {
+            console.log(addResult);
+
+            const jwtToken = jwtSimple.encode(
+              { id: addResult.id, info: addResult.username },
+              config.jwtSecret
+            );
+            
+            res.status(200).json({ ...addResult, token: jwtToken});
+          })
+          .catch((err: express.Errback) => {
+            console.log("add user err: ", err);
+            res.status(500).json({ err, status: "failed" });
+          });
+
+          // console.log(result);
+          // res.json({ jwtToken });
+
+          // cannot set status since axios have set it already
+          // err code: Can't set headers after they are sent
+          // res.sendStatus(200).json({token});
+        }
+
+      } catch (err) {
+        res.sendStatus(401).json({ err });
       }
-      console.log(authResult.data);
-      const token = jwtSimple.encode(
-        { id: accessToken, info: authResult.data },
-        config.jwtSecret
-      );
-      res.json({ token });
-    } catch (err) {
-      res.sendStatus(401);
     }
   }
 }

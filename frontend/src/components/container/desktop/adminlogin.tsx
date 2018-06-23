@@ -13,7 +13,6 @@ import logo from "../../assets/icons/all/logo.svg";
 // redux
 // import { connect } from "react-redux";
 
-
 interface ILoginState {
   username: string,
   password: string,

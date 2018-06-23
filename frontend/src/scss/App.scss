@@ -26,6 +26,7 @@ $warning-orange: rgba(255, 205, 68, .9);
 $bot-menu-bgc: rgba(81, 81, 81, 1);
 $bot-menu-text: rgba(233, 219, 204, .6);
 $login-form-bgc: rgba(141, 141, 141, .85);
+$login-form-chosen-tap: linear-gradient(rgba(167, 167, 167, 0.85), rgba(141, 141, 141, .85));
 $login-form-input: rgba(141, 141, 141, .95);
 $submit-bgc:rgba(238, 83, 83, .85);
 $submit-text: rgba(242, 242, 242, 1);
@@ -54,19 +55,19 @@ $header-sub-text: rgba(233, 219, 204, .3);
 // Container component styling
 // Technically speaking, this should even be here at all (according to the founder of Redux. hehe) omg
 //--> Mobile
-@import './pages/mobile/login';
-@import './pages/mobile/profile';
-@import './pages/mobile/setting';
-@import './pages/mobile/menu';
-@import './pages/mobile/payment';
-@import './pages/mobile/order';
-@import './pages/mobile/orderlist';
-@import './pages/mobile/request';
+@import './container/mobile/login';
+@import './container/mobile/profile';
+@import './container/mobile/setting';
+@import './container/mobile/menu';
+@import './container/mobile/payment';
+@import './container/mobile/order';
+@import './container/mobile/orderlist';
+@import './container/mobile/request';
 //--> Desktop
-@import './pages/desktop/stockmanagement';
-@import './pages/desktop/currentorders';
+@import './container/desktop/stockmanagement';
+@import './container/desktop/currentorders';
 // Display screen styling
-@import './pages/display/display';
+@import './container/display/display';
 
 // Top level reset
 html,
