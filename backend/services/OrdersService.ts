@@ -41,12 +41,16 @@ export default class OrdersService {
               return this.knex("orders_items")
                 .join("items", "items.id", "=", "orders_items.items_id")
                 .where("orders_items.id", orderItemId[j][0])
-                .select("items.id as items_id")
+                .select("items.id as items_id", "items.categories_id")
                 .then((itemIdIncrease: Knex.QueryBuilder) => {
                   // increase the current price of the item being ordered
+                  let priceUp: number;
+                  itemIdIncrease[0].categories_id === 1
+                    ? (priceUp = 9)
+                    : (priceUp = 8);
                   return this.knex("items")
                     .where("id", itemIdIncrease[0].items_id)
-                    .increment("currentPrice", 1)
+                    .increment("currentPrice", priceUp)
                     .returning("id")
                     .then((itemIdDecrease: Knex.QueryBuilder) => {
                       // decrease the itemStock of the item being ordered
@@ -72,6 +76,10 @@ export default class OrdersService {
                                     .where("id", itemIdIncrease[0].items_id)
                                     .select("categories_id")
                                     .then((catId: Knex.QueryBuilder) => {
+                                      let priceDown: number;
+                                      catId[0].categories_id === 1
+                                        ? (priceDown = 1)
+                                        : (priceDown = 2);
                                       // decrease all other items current price in the specific category other than the item being ordered
                                       return this.knex("items")
                                         .where(
@@ -85,7 +93,7 @@ export default class OrdersService {
                                           "id",
                                           itemIdIncrease[0].items_id
                                         )
-                                        .decrement("currentPrice", 1)
+                                        .decrement("currentPrice", priceDown)
                                         .returning("id")
                                         .then((itemsIdArray: any) => {
                                           // obtain the current price of the other items in the category from the item's table
