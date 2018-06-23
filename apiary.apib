@@ -318,6 +318,111 @@ All items information within a category can be obtained through this route. The 
                 }
             ]
         }
+
+## %5Bapi/orders/%5D [/api/orders/]
+### Retreiving all orders information [GET]
+All orders' information can be obtained through this route (except ones that have order.status as served and order.isPaid as true). 
+This route can only be accessed by a staff of the bar. The response is returned in JSON format along with a 200 status code. 
++ Response 200 (application/json)
+
+        [
+            {
+                "orders_id": 3,
+                "users_id": 1,
+                "displayName": "ACDY",
+                "table": 11,
+                "status": "confirmed",
+                "isPaid": false,
+                "order": [
+                    {
+                        "itemName": "Botanist",
+                        "ice": "normal",
+                        "sweetness": "normal",
+                        "garnish": "normal",
+                        "purchasePrice": "100.00"
+                    },
+                    {
+                        "itemName": "Asahi",
+                        "ice": "normal",
+                        "sweetness": "normal",
+                        "garnish": "normal",
+                        "purchasePrice": "60.00"
+                    }
+                ]
+            },
+            {
+                "orders_id": 4,
+                "users_id": 1,
+                "displayName": "ACDY",
+                "table": 11,
+                "status": "confirmed",
+                "isPaid": false,
+                "order": [
+                    {
+                        "itemName": "Botanist",
+                        "ice": "normal",
+                        "sweetness": "normal",
+                        "garnish": "normal",
+                        "purchasePrice": "100.00"
+                    },
+                    {
+                        "itemName": "Asahi",
+                        "ice": "normal",
+                        "sweetness": "normal",
+                        "garnish": "normal",
+                        "purchasePrice": "60.00"
+                    }
+                ]
+            },
+            {
+                "orders_id": 5,
+                "users_id": 1,
+                "displayName": "ACDY",
+                "table": 11,
+                "status": "confirmed",
+                "isPaid": false,
+                "order": [
+                    {
+                        "itemName": "Botanist",
+                        "ice": "normal",
+                        "sweetness": "normal",
+                        "garnish": "normal",
+                        "purchasePrice": "100.00"
+                    },
+                    {
+                        "itemName": "Asahi",
+                        "ice": "normal",
+                        "sweetness": "normal",
+                        "garnish": "normal",
+                        "purchasePrice": "60.00"
+                    }
+                ]
+            },
+            {
+                "orders_id": 2,
+                "users_id": 1,
+                "displayName": "ACDY",
+                "table": 11,
+                "status": "made",
+                "isPaid": false,
+                "order": [
+                    {
+                        "itemName": "Botanist",
+                        "ice": "normal",
+                        "sweetness": "normal",
+                        "garnish": "normal",
+                        "purchasePrice": "100.00"
+                    },
+                    {
+                        "itemName": "Asahi",
+                        "ice": "normal",
+                        "sweetness": "normal",
+                        "garnish": "normal",
+                        "purchasePrice": "60.00"
+                    }
+                ]
+            }
+        ]
     
 ## %5Bapi/orders/:orderid%5D [/api/orders/:orderid]
 ### Retreiving order information by order id [GET]
