@@ -49,9 +49,9 @@ export default class AuthRouter {
       })
       .catch((err: any) => {
         if (err.code === "23505") {
-          res.status(400).json({ status: "User already exist" });
+          res.status(400).json({ status: "User already exist." });
         } else {
-          res.status(500).json({ status: "failed" });
+          res.status(500).json({ status: "Sign up failed, please try again." });
         }
       });
   }
@@ -65,7 +65,7 @@ export default class AuthRouter {
         .select("id", "username", "password")
         .then(user => {
           if (!user || !user[0]) {
-            res.status(401).json("User does not exist");
+            res.status(401).json("Unauthorized, user does not exist");
             return;
           }
           bcrypt.compare(password, user[0].password).then(result => {
@@ -86,9 +86,10 @@ export default class AuthRouter {
         })
         .catch(error => {
           console.log(error);
+          res.status(501).json(error);
         });
     } else {
-      res.status(401).json("Please enter both password and username");
+      res.status(401).json("Unauthorized, password and username cannot be empty");
     }
   }
 

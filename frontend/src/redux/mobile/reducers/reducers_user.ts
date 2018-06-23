@@ -70,14 +70,14 @@ export const userReducer = (state: IUserState = initialState, action: UserAction
             return { ...state, isAuth: true, userAPIErr: "none" };
         }
         case LOCAL_LOGIN_FAIL: {
-            return { ...state, userAPIErr: "LOCAL_LOGIN_FAIL" };
+            return { ...state, userAPIErr: action.errMsg };
         }
         case LOCAL_SIGNUP_SUCCESS: {
             localStorage.setItem("dealingRoomToken", action.userInfoPackage.password);
             return { ...state, isAuth: true, userAPIErr: "none" };
         }
         case LOCAL_SIGNUP_FAIL: {
-            return { ...state, userAPIErr: "LOCAL_SIGNUP_FAIL" }
+            return { ...state, userAPIErr: action.errMsg }
         }
         case FB_LOGIN_SUCCESS:
         {

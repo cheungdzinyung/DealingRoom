@@ -38,6 +38,7 @@ export const LOCAL_LOGIN_FAIL = "LOCAL_LOGIN_FAIL";
 export type LOCAL_LOGIN_FAIL = typeof LOCAL_LOGIN_FAIL;
 export interface ILocalLoginFailAction extends Action {
     type: LOCAL_LOGIN_FAIL,
+    errMsg: string,
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
@@ -82,7 +83,7 @@ export const GET_USER_PROFILE_BY_USER_TOKEN_FAIL = "GET_USER_PROFILE_BY_USER_TOK
 export type GET_USER_PROFILE_BY_USER_TOKEN_FAIL = typeof GET_USER_PROFILE_BY_USER_TOKEN_FAIL;
 export interface IGetUserProfileByUserTokenFailAction extends Action {
     type: GET_USER_PROFILE_BY_USER_TOKEN_FAIL,
-    // result: any,
+    errMsg: string,
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
@@ -129,9 +130,10 @@ export function localLoginSuccess(userInfoPackage: any): ILocalLoginSuccessActio
     }
 }
 
-export function localLoginFail(): ILocalLoginFailAction {
+export function localLoginFail(errMsg: string): ILocalLoginFailAction {
     return {
         type: LOCAL_LOGIN_FAIL,
+        errMsg,
     }
 }
 
@@ -147,13 +149,13 @@ export function localLogin(username: string, password: string) {
                 if (res.status === 200) {
                     dispatch(localLoginSuccess(res.data));
                 } else {
-                    alert("status: " + res.status);
-                    dispatch(localLoginFail());
+                    dispatch(localLoginFail(res.status));
+                    throw new Error ("Login failed, please try again.");
                 }
             })
             .catch((err: any) => {
-                alert(err);
-                dispatch(localLoginFail());
+                alert(err.response.data || err);
+                dispatch(localLoginFail(err.response.data || err));
             });
     }
 }
@@ -223,12 +225,12 @@ export function localSignUp(username: string, password: string) {
                                 dispatch(localLoginSuccess(resp.data));
                             } else {
                                 alert("status: " + res.status);
-                                dispatch(localLoginFail());
+                                dispatch(localLoginFail(""));
                             }
                         })
                         .catch((err: any) => {
                             alert(err);
-                            dispatch(localLoginFail());
+                            dispatch(localLoginFail(""));
                         });
                     // dispatch(localSignUpSuccess(res.data));
                 } else {
@@ -237,8 +239,8 @@ export function localSignUp(username: string, password: string) {
                 }
             })
             .catch((err: any) => {
-                alert(err);
-                dispatch(localSignUpFail(err));
+                alert(err.response.data || err);
+                dispatch(localSignUpFail(err.response.data || err));
             });
     }
 }
@@ -290,9 +292,10 @@ export function getUserProfileByUserTokenSuccess(userProfile: any): IGetUserProf
     }
 }
 
-export function getUserProfileByUserTokenFail(): IGetUserProfileByUserTokenFailAction {
+export function getUserProfileByUserTokenFail(errMsg: string,): IGetUserProfileByUserTokenFailAction {
     return {
         type: GET_USER_PROFILE_BY_USER_TOKEN_FAIL,
+        errMsg,
     }
 }
 
@@ -308,12 +311,12 @@ export function getUserProfileByUserToken() {
                     // dispatch(changePage(OrderList));
                 } else {
                     alert("status: " + res.status);
-                    dispatch(getUserProfileByUserTokenFail());
+                    dispatch(getUserProfileByUserTokenFail(""));
                 }
             })
             .catch((err: any) => {
                 alert(err);
-                dispatch(getUserProfileByUserTokenFail())
+                dispatch(getUserProfileByUserTokenFail(""))
             });
     }
 }
