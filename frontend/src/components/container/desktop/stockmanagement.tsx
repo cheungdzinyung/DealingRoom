@@ -23,7 +23,7 @@ import {
   changeItemStatus
 } from "../../../redux/desktop/actions/actions_manager";
 import StockItemLine from "../../ui/desktop/stockitemline";
-import { adminAllItemTest } from "../../../fakedata";
+// import { adminAllItemTest } from "../../../fakedata";
 
 interface IStockManagementProps {
   menuReady: boolean;
@@ -80,48 +80,24 @@ export class PureStockManagement extends React.Component<
     };
   }
 
-  public filterByCategory(e: React.MouseEvent<HTMLButtonElement>) {
-    this.setState({
-      category: e.currentTarget.value
-    });
-  }
-
-  public filterByActive(e: React.MouseEvent<HTMLButtonElement>) {
-    let choice: ActiveSpecialFilter;
-    if (e.currentTarget.value === "not active") {
-      choice = false;
-    } else if (e.currentTarget.value === "active") {
-      choice = true;
-    } else {
-      choice = "all";
-    }
-    this.setState({
-      isActive: choice
-    });
-  }
-
-  public filterBySpecial(e: React.MouseEvent<HTMLButtonElement>) {
-    let choice: ActiveSpecialFilter;
-    if (e.currentTarget.value === "not active") {
-      choice = false;
-    } else if (e.currentTarget.value === "active") {
-      choice = true;
-    } else {
-      choice = "all";
-    }
-    this.setState({
-      isSpecial: choice
-    });
-  }
-
-  public goToAdd(e: React.MouseEvent<HTMLDivElement>) {
+  public goToAdd = (e: React.MouseEvent<HTMLDivElement>) => {
     // trigger to open moddle or wtever page
     // this.props.clickToAdd();
   }
 
-  public goToEdit(e: React.MouseEvent<HTMLDivElement>) {
+  public goToEdit = (e: React.MouseEvent<HTMLDivElement>) => {
     // trigger to open moddle or wtever page
     // this.props.clickToEdit(this.props.item_id);
+  }
+
+  public filterChange = (filterChange: any) => {
+    if (filterChange.filter === "category") {
+      this.setState ({ category: filterChange.choice })
+    } else if (filterChange.filter === "isActive") {
+      this.setState ({ isActive: filterChange.choice })
+    } else if (filterChange.filter === "isSpecial") {
+      this.setState ({ isSpecial: filterChange.choice })
+    }
   }
 
   public componentDidMount() {
@@ -137,11 +113,24 @@ export class PureStockManagement extends React.Component<
         <div className="page-container-center">
           <PageHeader header="Stock Management" />
 
-          {adminAllItemTest.map((eachItem, index) => (
-            <StockItemLine {...eachItem} />
-          ))}
+          { /* per cat */ 
+            this.props.entireMenu.map((eachCat, index) => (
+              /* per item */
+              eachCat.items.map((eachItem, i) => {
+                if (  (this.state.category === "all" || this.state.category === eachItem.categoryName)
+                  &&  (this.state.isActive === "all" || this.state.isActive === eachItem.isActive) 
+                  &&  (this.state.isSpecial === "all" || this.state.isSpecial === eachItem.isSpecial)) {
+                  return <StockItemLine {...eachItem} />
+                }
+                else {
+                  return <div/>
+                }
+              })
+            )
+          )
+        }
         </div>
-        <StockFilter />
+        <StockFilter filterChange={this.filterChange}/>
       </div>
     );
   }

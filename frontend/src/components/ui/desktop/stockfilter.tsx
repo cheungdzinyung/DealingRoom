@@ -1,9 +1,79 @@
 import * as React from "react";
 
+// redux
+import { connect } from "react-redux";
+import { IRootState } from "../../../redux/store";
+// import {
 
-export default class StockFilter extends React.Component {
-    constructor(props: {}) {
-        super(props)
+// } from "../../../redux/desktop/actions/actions_manager";
+
+// Importing interfaces
+import {
+    ActiveSpecialFilter,
+    // IMenuCategoryWithoutFlux,
+    // ICreateMenuItem,
+    // IEditMenuItem
+} from "src/modules";
+
+import { firstLetterCaps } from "src/util/utility";
+
+interface IStockFilterProps {
+    categories: string[],
+    filterChange: (filterChange: any) => void,
+}
+
+interface IStockFilterState {
+    category: string,
+    isActive: ActiveSpecialFilter,
+    isSpecial: ActiveSpecialFilter,
+}
+
+export class PureStockFilter extends React.Component<IStockFilterProps, IStockFilterState> {
+    constructor(props: IStockFilterProps) {
+        super(props);
+
+        this.state = {
+            category: "all",
+            isActive: "all",
+            isSpecial: "all"
+        }
+    }
+
+    public filterByCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        this.setState({
+            category: e.currentTarget.value
+        });
+        this.props.filterChange({filter: "category", choice: e.currentTarget.value });
+    }
+
+    public filterByActive = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        let choice: ActiveSpecialFilter;
+        if (e.currentTarget.value === "true") {
+            choice = true
+        } else if (e.currentTarget.value === "false") {
+            choice = false;
+        } else {
+            choice = "all";
+        }
+        this.setState({
+            isActive: choice
+        });
+        this.props.filterChange({filter: "isActive", choice });
+    }
+
+    public filterBySpecial = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        let choice: ActiveSpecialFilter;
+        if (e.currentTarget.value === "true") {
+            choice = true
+        } else if (e.currentTarget.value === "false") {
+            choice = false;
+        } else {
+            choice = "all";
+        }
+        this.setState({
+            isSpecial: choice
+        });
+        this.props.filterChange({filter: "isSpecial", choice });
     }
 
     public render() {
@@ -13,31 +83,22 @@ export default class StockFilter extends React.Component {
                 <div className="filter-line">
                     <span className="filter-subheader">Categories</span>
                     <div className="filter-select-box">
-                        <select className="filter-select rd-corner">
+                        <select className="filter-select rd-corner" onChange={this.filterByCategory}>
                             <option value="all" selected={true}>All</option>
-                            <option value="beer">Beer</option>
-                            <option value="cocktail">Cocktail</option>
-                            <option value="redWine">Red Wine</option>
-                            <option value="whiteWine">White Wine</option>
-                            <option value="champagne">Champagne</option>
-                            <option value="vodka">Vodka</option>
-                            <option value="tequila">Tequila</option>
-                            <option value="whiskey">Whiskey</option>
-                            <option value="gin">Gin</option>
-                            <option value="rum">Rum</option>
-                            <option value="brandy">Brandy</option>
-                            <option value="non-alcoholic">Non-alcoholic</option>
-                            <option value="snack">Snack</option>
-                            <option value="main">Main</option>
-                            <option value="dessert">Dessert</option>
-
+                            {
+                                this.props.categories.map((category: string) => (
+                                    <option value={category}>
+                                        {firstLetterCaps(category)}
+                                    </option>
+                                ))
+                            }
                         </select>
                     </div>
                 </div>
                 <div className="filter-line">
-                    <span className="filter-subheader">Activies</span>
+                    <span className="filter-subheader">Active</span>
                     <div className="filter-select-box">
-                        <select className="filter-select rd-corner">
+                        <select className="filter-select rd-corner" onChange={this.filterByActive}>
                             <option value="all" selected={true}>All</option>
                             <option value="true">True</option>
                             <option value="false">False</option>
@@ -47,7 +108,7 @@ export default class StockFilter extends React.Component {
                 <div className="filter-line">
                     <span className="filter-subheader">Specials</span>
                     <div className="filter-select-box">
-                        <select className="filter-select rd-corner">
+                        <select className="filter-select rd-corner" onChange={this.filterBySpecial}>
                             <option value="all" selected={true}>All</option>
                             <option value="true">True</option>
                             <option value="false">False</option>
@@ -59,37 +120,22 @@ export default class StockFilter extends React.Component {
     }
 }
 
+// Redux
+const mapStateToProps = (state: IRootState) => {
+    return {
+        categories: state.staff.manager.categories,
+    };
+};
 
-// public filterByCategory(e: React.MouseEvent<HTMLButtonElement>) {
-//     this.setState({
-//         category: e.currentTarget.value
-//     });
-// }
+const mapDispatchToProps = (dispatch: any) => {
+    return {
 
-// public filterByActive(e: React.MouseEvent<HTMLButtonElement>) {
-//     let choice: ActiveSpecialFilter;
-//     if (e.currentTarget.value === "not active") {
-//         choice = false
-//     } else if (e.currentTarget.value === "active") {
-//         choice = true;
-//     } else {
-//         choice = "all";
-//     }
-//     this.setState({
-//         isActive: choice
-//     });
-// }
+    };
+};
 
-// public filterBySpecial(e: React.MouseEvent<HTMLButtonElement>) {
-//     let choice: ActiveSpecialFilter;
-//     if (e.currentTarget.value === "not active") {
-//         choice = false
-//     } else if (e.currentTarget.value === "active") {
-//         choice = true;
-//     } else {
-//         choice = "all";
-//     }
-//     this.setState({
-//         isSpecial: choice
-//     });
-// }
+const StockFilter = connect(mapStateToProps, mapDispatchToProps)(PureStockFilter);
+
+export default StockFilter;
+
+
+
