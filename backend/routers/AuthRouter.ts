@@ -127,10 +127,10 @@ export default class AuthRouter {
         } else {
           // console.log("authResult ", result.data);
 
-          // const jwtToken = jwtSimple.encode(
-          //   { id: accessToken, info: result.data },
-          //   config.jwtSecret
-          // );
+          const jwtToken = jwtSimple.encode(
+            { id: accessToken, info: result.data },
+            config.jwtSecret
+          );
 
           // TODO : find FB user from DB
           // if true => res.json(usually login result)
@@ -153,7 +153,7 @@ export default class AuthRouter {
           .add(signUpPackage, req.file)
           .then((addResult: IUserData) => {
             console.log(addResult);
-            res.status(200).json(addResult);
+            res.status(200).json({ ...addResult, token: jwtToken});
           })
           .catch((err: express.Errback) => {
             console.log("add user err: ", err);
