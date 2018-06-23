@@ -34,6 +34,7 @@ export default class AuthRouter {
     return this.usersService
       .add(req.body, req.file)
       .then((result: IUserData) => {
+        console.log(result);
         const payload = {
           id: result[0].id,
           username: result[0].username
@@ -46,9 +47,12 @@ export default class AuthRouter {
           userPhoto: result[0].userPhoto
         });
       })
-      .catch((err: express.Errback) => {
-        console.log(err);
-        res.status(500).json({ status: "failed" });
+      .catch((err: any) => {
+        if (err.code === '23505') {
+          res.status(400).json({ status: "User already exist" });
+        } else {
+          res.status(500).json({ status: "failed" });
+        }
       });
   }
 
