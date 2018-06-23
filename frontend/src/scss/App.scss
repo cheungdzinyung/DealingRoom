@@ -55,19 +55,19 @@ $header-sub-text: rgba(233, 219, 204, .3);
 // Container component styling
 // Technically speaking, this should even be here at all (according to the founder of Redux. hehe) omg
 //--> Mobile
-@import './pages/mobile/login';
-@import './pages/mobile/profile';
-@import './pages/mobile/setting';
-@import './pages/mobile/menu';
-@import './pages/mobile/payment';
-@import './pages/mobile/order';
-@import './pages/mobile/orderlist';
-@import './pages/mobile/request';
+@import './container/mobile/login';
+@import './container/mobile/profile';
+@import './container/mobile/setting';
+@import './container/mobile/menu';
+@import './container/mobile/payment';
+@import './container/mobile/order';
+@import './container/mobile/orderlist';
+@import './container/mobile/request';
 //--> Desktop
-@import './pages/desktop/stockmanagement';
-@import './pages/desktop/currentorders';
+@import './container/desktop/stockmanagement';
+@import './container/desktop/currentorders';
 // Display screen styling
-@import './pages/display/display';
+@import './container/display/display';
 
 // Top level reset
 html,
