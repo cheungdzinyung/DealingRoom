@@ -32,7 +32,8 @@ interface IStockManagementState {
   category: string;
   isActive: ActiveSpecialFilter;
   isSpecial: ActiveSpecialFilter;
-  isModalOpen: { [key: string]: boolean };
+  // isModalOpen: { [key: string]: boolean };
+  isModalOpen: boolean;
 }
 
 export class PureStockManagement extends React.Component<
@@ -46,20 +47,14 @@ export class PureStockManagement extends React.Component<
       category: "all",
       isActive: "all",
       isSpecial: "all",
-      isModalOpen: { item: true }
+      // isModalOpen: { item: true }
+      isModalOpen: false
     };
+
+    this.openEditModal.bind(this);
   }
 
-  public goToAdd = (e: React.MouseEvent<HTMLDivElement>) => {
-    // trigger to open moddle or wtever page
-    // this.props.clickToAdd();
-  };
-
-  public goToEdit = (e: React.MouseEvent<HTMLDivElement>) => {
-    // trigger to open moddle or wtever page
-    // this.props.clickToEdit(this.props.item_id);
-  };
-
+  // Controlling the filer
   public filterChange = (filterChange: any) => {
     if (filterChange.filter === "category") {
       this.setState({ category: filterChange.choice });
@@ -68,6 +63,12 @@ export class PureStockManagement extends React.Component<
     } else if (filterChange.filter === "isSpecial") {
       this.setState({ isSpecial: filterChange.choice });
     }
+  };
+
+  public openEditModal = () => {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen
+    });
   };
 
   public componentDidMount() {
@@ -98,9 +99,7 @@ export class PureStockManagement extends React.Component<
                   (this.state.isSpecial === "all" ||
                     this.state.isSpecial === eachItem.isSpecial)
                 ) {
-                  return (
-                  <StockItemLine singleItem={eachItem} />
-                );
+                  return <StockItemLine openModal={this.openEditModal} singleItem={eachItem} />;
                 } else {
                   return <span />;
                 }
@@ -108,11 +107,14 @@ export class PureStockManagement extends React.Component<
             )}
           </div>
         </div>
-        
+
         {this.props.stockManageModalState === "discard" ? (
           <div />
         ) : (
-          <StockManageModal />
+          <StockManageModal
+            
+            isModalOpen={this.state.isModalOpen}
+          />
         )}
       </div>
     );
@@ -143,3 +145,13 @@ const StockManagement = connect(
 )(PureStockManagement);
 
 export default StockManagement;
+
+// public goToAdd = (e: React.MouseEvent<HTMLDivElement>) => {
+//   trigger to open moddle or wtever page
+//   this.props.clickToAdd();
+// };
+
+// public goToEdit = (e: React.MouseEvent<HTMLDivElement>) => {
+//   trigger to open moddle or wtever page
+//   this.props.clickToEdit(this.props.item_id);
+// };

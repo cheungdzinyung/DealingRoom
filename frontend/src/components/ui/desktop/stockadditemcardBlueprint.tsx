@@ -43,6 +43,8 @@ interface IStockManageModalProps {
     stockManageModalState: IStockManageModalState,
     targetItem?: IUpdateMenuItem
   ) => void;
+  isModalOpen: boolean;
+  
 }
 
 interface IStockManageModalStates {
@@ -56,7 +58,7 @@ interface IStockManageModalStates {
   itemPhoto: any;
   isSpecial: boolean;
   isActive: boolean;
-  modal: boolean;
+  // modal: boolean;
 }
 
 // Redux
@@ -104,7 +106,7 @@ class RealStockManageModal extends React.Component<
       itemPhoto: "itemPhoto",
       isSpecial: false,
       isActive: true,
-      modal: true
+      // modal: true
     };
   }
 
@@ -117,7 +119,7 @@ class RealStockManageModal extends React.Component<
   public discard = () => {
     // MODAL_ACTION_DISCARD
     this.props.toggleStockManageModal("discard");
-    this.setState({ modal: !this.state.modal });
+    // this.setState({ modal: !this.state.modal });
   };
 
   public create = () => {
@@ -210,7 +212,7 @@ class RealStockManageModal extends React.Component<
 
   public render() {
     return (
-      <Dialog isOpen={this.state.modal}>
+      <Dialog isOpen={this.props.isModalOpen}>
         <h1>New Item</h1>
         {/* <select
           className="filter-select rd-corner stock-item-category"

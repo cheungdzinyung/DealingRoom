@@ -22,6 +22,7 @@ import { toggleStockManageModal } from "../../../redux/desktop/actions/actions_m
 
 interface IPureStockItemLineProps {
   singleItem: IMenuItemWithoutFlux,
+  openModal: ()=> void,
   toggleStockManageModal: (stockManageModalState: IStockManageModalState, targetItem?: IUpdateMenuItem) => void,
 }
 
@@ -33,23 +34,15 @@ interface IStockItemStates {
 
 
 class PureStockItemLine extends React.Component<IPureStockItemLineProps,IStockItemStates> {
+  
   constructor(props: IPureStockItemLineProps) {
     super(props);
 
-    this.state = {
-      isEditMenuOpen: false
-    }
   }
 
   public editItem = () => {
     this.props.toggleStockManageModal("update", this.props.singleItem);
-    this.setState({
-      isEditMenuOpen: true
-    });
-  };
-
-  public toggleDialog = () => {
-    this.setState({ isEditMenuOpen: !this.state.isEditMenuOpen });
+    this.props.openModal();
   };
 
   public render() {
