@@ -219,22 +219,22 @@ export function localSignUp(username: string, password: string) {
         axios.post(`${API_SERVER}/api/auth/signup`, signUpPackage)
             .then((res: any) => {
                 if (res.status === 200) {
+                    // dispatch(localSignUpSuccess(res.data));
                     axios.post(`${API_SERVER}/api/auth/login`, loginPackage)
                         .then((resp: any) => {
                             if (resp.status === 200) {
                                 dispatch(localLoginSuccess(resp.data));
                             } else {
-                                alert("status: " + res.status);
-                                dispatch(localLoginFail(""));
+                                alert("status: " + resp.status);
+                                dispatch(localLoginFail(resp.status));
                             }
                         })
                         .catch((err: any) => {
-                            alert(err);
-                            dispatch(localLoginFail(""));
+                            alert("login fail" + err);
+                            dispatch(localLoginFail(err));
                         });
-                    // dispatch(localSignUpSuccess(res.data));
                 } else {
-                    alert("status: " + res.status);
+                    alert("sign up fail: " + res.status);
                     dispatch(localSignUpFail(res.status));
                 }
             })
@@ -302,7 +302,6 @@ export function getUserProfileByUserTokenFail(errMsg: string,): IGetUserProfileB
 export function getUserProfileByUserToken() {
     const config = { headers: { Authorization: "Bearer " + localStorage.getItem("dealingRoomToken") } }
     return (dispatch: Dispatch<IGetUserProfileByUserTokenSuccessAction | IGetUserProfileByUserTokenFailAction>) => {
-        // axios.get(`${process.env.REACT_APP_API_DEV}/api/users/${userID}`, config)
         axios.get(`${API_SERVER}/api/users`, config)
             .then((res: any) => {
                 if (res.status === 200) {

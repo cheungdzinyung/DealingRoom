@@ -2,7 +2,7 @@
 import * as React from "react";
 
 // Importing Interfaces
-import { IMenuItemWithoutFlux } from "src/modules";
+import { IMenuItemWithoutFlux, IStockManageModalState, IUpdateMenuItem } from "src/modules";
 
 // Importing utility function
 import { firstLetterCaps } from "../../../util/utility";
@@ -14,48 +14,62 @@ import UnfilledStar from "../../assets/icons/desktop/stocklist/starunfilled.svg"
 // Importing temp fake images
 import img from "../../assets/images/categories/squarebeer.jpg";
 
-export default class StockItemLine extends React.Component<
-  IMenuItemWithoutFlux,
-  {}
-> {
-  constructor(props: IMenuItemWithoutFlux) {
+// redux
+import { connect } from "react-redux";
+import { IRootState } from "../../../redux/store";
+import { toggleStockManageModal } from "../../../redux/desktop/actions/actions_manager";
+
+interface IPureStockItemLineProps {
+  singleItem: IMenuItemWithoutFlux,
+  toggleStockManageModal: (stockManageModalState: IStockManageModalState, targetItem?: IUpdateMenuItem) => void,
+
+}
+
+class PureStockItemLine extends React.Component<IPureStockItemLineProps,{}> {
+  constructor(props: IPureStockItemLineProps) {
     super(props);
   }
+
+  public edit = (e: React.MouseEvent<HTMLDivElement>) => {
+    this.props.toggleStockManageModal("update", this.props.singleItem);
+  }
+
   public render() {
     return (
       <div
         className="stock-item-card rd-corner"
-        data-productId={this.props.items_id}
+        data-productid={this.props.singleItem.items_id}
+        onClick={this.edit}
       >
         <img src={img} alt="" className="stock-item-img rd-corner" />
         <div className="stock-item-info">
           <span className="stock-item-category">
-            {firstLetterCaps(this.props.categoryName)}
+            {firstLetterCaps(this.props.singleItem.categoryName)}
           </span>
           <div className="stock-item-name-price">
-            <span className="stock-item-name">{this.props.itemName}</span>
+            <span className="stock-item-name">{this.props.singleItem.itemName}</span>
             <span className="stock-item-price">
-              &#36;{this.props.currentPrice}
+              &#36;{this.props.singleItem.currentPrice}
             </span>
           </div>
-          <p className="stock-item-description">{this.props.itemDescription}</p>
+          <p className="stock-item-description">{this.props.singleItem.itemDescription}</p>
           <div className="stock-item-price-floor">
             <span className="stock-item-price-floor-text">Price floor:</span>
             <span className="stock-item-price-floor-number">
-              &#36;{this.props.minimumPrice}
+              &#36;{this.props.singleItem.minimumPrice}
             </span>
           </div>
         </div>
         <div className="stock-item-mod">
           <div className="spec-act">
             <div className="isSpecial">
-              {this.props.isSpecial ? (
+              {this.props.singleItem.isSpecial ? (
                 <img src={FilledStar} alt="" className="star" />
               ) : (
                 <img src={UnfilledStar} alt="" className="star" />
               )}
             </div>
-            {this.props.isActive ? (
+            {this.props.singleItem.isActive ? (
               <button className="active-button rd-corner isActive">
                 <span className="isActive-button-text">Active</span>
               </button>
@@ -71,53 +85,24 @@ export default class StockItemLine extends React.Component<
   }
 }
 
-// public setCategory (e: React.MouseEvent<HTMLButtonElement>) {
-//     this.setState ({
-//         category: e.currentTarget.value
-//     });
-// }
+// Redux
+const mapStateToProps = (state: IRootState) => {
+  return {
+      stockManageModalState: state.staff.manager.stockManageModalState,
+  };
+};
 
-// public setItemName (e: React.ChangeEvent<HTMLInputElement>) {
-//     this.setState ({
-//         itemName: e.target.value
-//     });
-// }
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+      toggleStockManageModal: (stockManageModalState: IStockManageModalState, targetItem?: IUpdateMenuItem) => {
+          dispatch(toggleStockManageModal(stockManageModalState, targetItem));
+      }
+  };
+};
 
-// public setItemDescription (e: React.ChangeEvent<HTMLInputElement>) {
-//     this.setState ({
-//         itemDescription: e.target.value
-//     });
-// }
+const StockItemLine = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PureStockItemLine);
 
-// // need to parseFloat() when send to BE
-// public setItemMinPrice (e: React.ChangeEvent<HTMLInputElement>) {
-//     this.setState ({
-//         itemDescription: e.target.value
-//     });
-// }
-
-// // need to parseFloat() when send to BE
-// public setItemStartPrice (e: React.ChangeEvent<HTMLInputElement>) {
-//     this.setState ({
-//         itemDescription: e.target.value
-//     });
-// }
-
-// // need to parseInt() when send to BE
-// public setItemQuantity (e: React.ChangeEvent<HTMLInputElement>) {
-//     this.setState ({
-//         itemDescription: e.target.value
-//     });
-// }
-
-// public toggleActive () {
-//     this.setState ({
-//         isActive: !this.state.isActive
-//     });
-// }
-
-// public toggleSpecial () {
-//     this.setState ({
-//         isSpecial: !this.state.isSpecial
-//     });
-// }
+export default StockItemLine;

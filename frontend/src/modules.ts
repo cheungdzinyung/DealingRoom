@@ -51,7 +51,7 @@ export interface ICreateMenuItem {
 }
 
 // id and current price is untouched
-export interface IEditMenuItem {
+export interface IUpdateMenuItem {
   items_id: number,
   itemName: string,
   itemStock: number,
@@ -63,7 +63,7 @@ export interface IEditMenuItem {
   isActive: boolean,
 }
 
-
+export type IStockManageModalState = "create" | "update" | "discard";
 
 /*
 Corresponding API path: api/order/:orderid

@@ -74,20 +74,18 @@ export const userReducer = (state: IUserState = initialState, action: UserAction
         }
         case LOCAL_SIGNUP_SUCCESS: {
             localStorage.setItem("dealingRoomToken", action.userInfoPackage.password);
-            return { ...state, isAuth: true, userAPIErr: "none" };
+            return { ...state, userAPIErr: "none" };
         }
         case LOCAL_SIGNUP_FAIL: {
             return { ...state, userAPIErr: action.errMsg }
         }
-        case FB_LOGIN_SUCCESS:
-        {
+        case FB_LOGIN_SUCCESS: {
             localStorage.setItem("dealingRoomToken", action.FBtoken);
             return { ...state, isAuth: true, userAPIErr: "none" }
             // alert(`FB login ok ;) ${action.FBtoken}`)
             // return state;
         }
-        case FB_LOGIN_FAIL:
-        {
+        case FB_LOGIN_FAIL: {
             return { ...state, userAPIErr: action.errMsg ||"FB_LOGIN_FAIL" }
         }        
         case GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS: {

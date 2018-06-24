@@ -19,20 +19,32 @@ import Setting from "./components/container/mobile/setting";
 import AdminLogin from "./components/container/desktop/adminlogin";
 import StockManagement from "./components/container/desktop/stockmanagement";
 import CurrentOrders from "./components/container/desktop/currentorders";
+// import StockManageModal from "./components/ui/desktop/stockadditemcard";
 
 // import redux and friends
 import { connect } from "react-redux";
 import { IRootState } from "./redux/store";
 
-// interface IAppProps {}
+// import {
+//   IStockManageModalState,
+// } from "src/modules";
+
+// interface IAppProps {
+//   stockManageModalState: IStockManageModalState,
+// }
 
 class PureApp extends React.Component<{}, {}> {
   constructor(props: {}) {
     super(props);
   }
 
+  public componentDidUpdate () {
+    this.render();
+  }
+
   public render() {
     return (
+      // <Router>
       <div className="full-page">
         {/* TODO: To move each page container into common space */}
         <Switch>
@@ -48,16 +60,19 @@ class PureApp extends React.Component<{}, {}> {
           <Route path="/initialize" component={Initialize} />
           {/* Routes to admin/desktop screens */}
           <Route exact={true} path="/admin/login" component={AdminLogin}/>
-          <Route exact={true} path="/admin/stock" component={StockManagement}/>
+          <Route exact={true} path="/admin/stock/" component={StockManagement}/>
           <Route exact={true} path="/admin/currentorders" component={CurrentOrders}/>
         </Switch>
       </div>
+      // </Router>
     );
   }
 }
 
 const mapStateToProps = (state: IRootState) => {
-  return {};
+  return {
+    // stockManageModalState: state.staff.manager.stockManageModalState,
+  };
 }
 
 const mapDispatchToProps = (dispatch: any) => {

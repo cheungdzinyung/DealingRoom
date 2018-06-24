@@ -49,9 +49,9 @@ export default class AuthRouter {
       })
       .catch((err: any) => {
         if (err.code === "23505") {
-          res.status(400).json({ status: "User already exist." });
+          res.status(400).json("User already exist.");
         } else {
-          res.status(500).json({ status: "Sign up failed, please try again." });
+          res.status(500).json("Sign up failed, please try again.");
         }
       });
   }

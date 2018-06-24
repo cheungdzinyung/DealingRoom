@@ -3,16 +3,14 @@ import * as React from "react";
 // redux
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
-// import {
-
-// } from "../../../redux/desktop/actions/actions_manager";
+import {
+    toggleStockManageModal,
+} from "../../../redux/desktop/actions/actions_manager";
 
 // Importing interfaces
 import {
     ActiveSpecialFilter,
-    // IMenuCategoryWithoutFlux,
-    // ICreateMenuItem,
-    // IEditMenuItem
+    IStockManageModalState,
 } from "src/modules";
 
 import { firstLetterCaps } from "src/util/utility";
@@ -20,6 +18,7 @@ import { firstLetterCaps } from "src/util/utility";
 interface IStockFilterProps {
     categories: string[],
     filterChange: (filterChange: any) => void,
+    toggleStockManageModal: (stockManageModalState: IStockManageModalState) => void,
 }
 
 interface IStockFilterState {
@@ -43,7 +42,7 @@ export class PureStockFilter extends React.Component<IStockFilterProps, IStockFi
         this.setState({
             category: e.currentTarget.value
         });
-        this.props.filterChange({filter: "category", choice: e.currentTarget.value });
+        this.props.filterChange({ filter: "category", choice: e.currentTarget.value });
     }
 
     public filterByActive = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -58,7 +57,7 @@ export class PureStockFilter extends React.Component<IStockFilterProps, IStockFi
         this.setState({
             isActive: choice
         });
-        this.props.filterChange({filter: "isActive", choice });
+        this.props.filterChange({ filter: "isActive", choice });
     }
 
     public filterBySpecial = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -73,7 +72,11 @@ export class PureStockFilter extends React.Component<IStockFilterProps, IStockFi
         this.setState({
             isSpecial: choice
         });
-        this.props.filterChange({filter: "isSpecial", choice });
+        this.props.filterChange({ filter: "isSpecial", choice });
+    }
+
+    public createItem = () => {
+        this.props.toggleStockManageModal("create");
     }
 
     public render() {
@@ -83,11 +86,11 @@ export class PureStockFilter extends React.Component<IStockFilterProps, IStockFi
                 <div className="filter-line">
                     <span className="filter-subheader">Categories</span>
                     <div className="filter-select-box">
-                        <select className="filter-select rd-corner" onChange={this.filterByCategory}>
-                            <option value="all" selected={true}>All</option>
+                        <select className="filter-select rd-corner" defaultValue="all" onChange={this.filterByCategory}>
+                            <option value="all" >All</option>
                             {
                                 this.props.categories.map((category: string) => (
-                                    <option value={category}>
+                                    <option key={category} value={category}>
                                         {firstLetterCaps(category)}
                                     </option>
                                 ))
@@ -98,8 +101,8 @@ export class PureStockFilter extends React.Component<IStockFilterProps, IStockFi
                 <div className="filter-line">
                     <span className="filter-subheader">Active</span>
                     <div className="filter-select-box">
-                        <select className="filter-select rd-corner" onChange={this.filterByActive}>
-                            <option value="all" selected={true}>All</option>
+                        <select className="filter-select rd-corner" defaultValue="all" onChange={this.filterByActive}>
+                            <option value="all">All</option>
                             <option value="true">True</option>
                             <option value="false">False</option>
                         </select>
@@ -108,11 +111,22 @@ export class PureStockFilter extends React.Component<IStockFilterProps, IStockFi
                 <div className="filter-line">
                     <span className="filter-subheader">Specials</span>
                     <div className="filter-select-box">
-                        <select className="filter-select rd-corner" onChange={this.filterBySpecial}>
-                            <option value="all" selected={true}>All</option>
+                        <select className="filter-select rd-corner" defaultValue="all" onChange={this.filterBySpecial}>
+                            <option value="all">All</option>
                             <option value="true">True</option>
                             <option value="false">False</option>
                         </select>
+                    </div>
+                </div>
+
+                <div className="filter-line">
+                    <span className="filter-subheader" />
+                    <div className="filter-select-box">
+                        <input 
+                            type="button" 
+                            className="filter-select rd-corner" 
+                            value="Create New Item"
+                            onClick={this.createItem} />
                     </div>
                 </div>
             </div>
@@ -129,7 +143,9 @@ const mapStateToProps = (state: IRootState) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-
+        toggleStockManageModal: (stockManageModalState: IStockManageModalState) => {
+            dispatch(toggleStockManageModal(stockManageModalState));
+        }
     };
 };
 

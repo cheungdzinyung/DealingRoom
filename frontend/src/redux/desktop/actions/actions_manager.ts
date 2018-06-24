@@ -4,14 +4,18 @@ import axios from "axios";
 
 import { API_SERVER } from "../../store";
 
-import { IMenuCategoryWithoutFlux, ICreateMenuItem, IEditMenuItem } from "../../../modules";
+import { 
+	IMenuCategoryWithoutFlux,
+	ICreateMenuItem,
+	IUpdateMenuItem,
+	IStockManageModalState,
+} from "../../../modules";
 
 // Type creation
 export const CREATE_ITEM_SUCCESS = "CREATE_ITEM_SUCCESS";
 export type CREATE_ITEM_SUCCESS = typeof CREATE_ITEM_SUCCESS;
 export interface ICreateItemSuccessAction extends Action {
 	type: CREATE_ITEM_SUCCESS,
-	itemStatus: ICreateMenuItem,
 	entireMenu: IMenuCategoryWithoutFlux[],
 }
 
@@ -24,18 +28,17 @@ export interface ICreateItemFailAction extends Action {
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 // Change item status
-export const CHANGE_ITEM_STATUS_SUCCESS = "CHANGE_ITEM_STATUS_SUCCESS";
-export type CHANGE_ITEM_STATUS_SUCCESS = typeof CHANGE_ITEM_STATUS_SUCCESS;
-export interface IChangeItemStatusSuccessAction extends Action {
-	type: CHANGE_ITEM_STATUS_SUCCESS,
-	itemStatus: IEditMenuItem,
+export const UPDATE_ITEM_SUCCESS = "UPDATE_ITEM_SUCCESS";
+export type UPDATE_ITEM_SUCCESS = typeof UPDATE_ITEM_SUCCESS;
+export interface IUpdateItemSuccessAction extends Action {
+	type: UPDATE_ITEM_SUCCESS,
 	entireMenu: IMenuCategoryWithoutFlux[],
 }
 
-export const CHANGE_ITEM_STATUS_FAIL = "CHANGE_ITEM_STATUS_FAIL";
-export type CHANGE_ITEM_STATUS_FAIL = typeof CHANGE_ITEM_STATUS_FAIL;
-export interface IChangeItemStatusFailAction extends Action {
-	type: CHANGE_ITEM_STATUS_FAIL,
+export const UPDATE_ITEM_FAIL = "UPDATE_ITEM_FAIL";
+export type UPDATE_ITEM_FAIL = typeof UPDATE_ITEM_FAIL;
+export interface IUpdateItemFailAction extends Action {
+	type: UPDATE_ITEM_FAIL,
 	// result: any,
 }
 
@@ -53,6 +56,14 @@ export interface IGetEntireMenuFailAction extends Action {
 	type: GET_ENTIRE_MENU_FAIL,
 }
 
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export const TOGGLE_STOCK_MANAGE_MODAL = "TOGGLE_STOCK_MANAGE_MODAL";
+export type TOGGLE_STOCK_MANAGE_MODAL = typeof TOGGLE_STOCK_MANAGE_MODAL;
+export interface IToggleStockManageModalAction extends Action {
+	type: TOGGLE_STOCK_MANAGE_MODAL,
+	stockManageModalState: IStockManageModalState,
+	targetItem?: IUpdateMenuItem,
+}
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 // Combined types
@@ -61,8 +72,9 @@ export type ManagerActions =
 	IGetEntireMenuFailAction |
 	ICreateItemSuccessAction |
 	ICreateItemFailAction |
-	IChangeItemStatusSuccessAction |
-	IChangeItemStatusFailAction;
+	IUpdateItemSuccessAction |
+	IUpdateItemFailAction |
+	IToggleStockManageModalAction;
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function getEntireMenuSuccess(entireMenu: IMenuCategoryWithoutFlux[]): IGetEntireMenuSuccessAction {
@@ -98,10 +110,9 @@ export function getEntireMenu() {
     }
 }
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export function createItemSuccess(itemStatus: ICreateMenuItem, entireMenu: IMenuCategoryWithoutFlux[]): ICreateItemSuccessAction {
+export function createItemSuccess(entireMenu: IMenuCategoryWithoutFlux[]): ICreateItemSuccessAction {
 	return {
 		type: CREATE_ITEM_SUCCESS,
-		itemStatus,
 		entireMenu,
 	}
 }
@@ -119,7 +130,7 @@ export function createItem(itemStatus: ICreateMenuItem) {
 		axios.post(`${API_SERVER}/api/items/`, itemStatus, config)
 			.then((res: any) => {
 				if (res.status === 200) {
-					dispatch(createItemSuccess(itemStatus, res.data));
+					dispatch(createItemSuccess(res.data));
 				} else {
 					alert("create item error, try again");
 					dispatch(createItemFail());
@@ -133,36 +144,44 @@ export function createItem(itemStatus: ICreateMenuItem) {
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export function changeItemStatusSuccess(itemStatus: IEditMenuItem, entireMenu: IMenuCategoryWithoutFlux[]): IChangeItemStatusSuccessAction {
+export function updateItemSuccess(entireMenu: IMenuCategoryWithoutFlux[]): IUpdateItemSuccessAction {
 	return {
-		type: CHANGE_ITEM_STATUS_SUCCESS,
-		itemStatus,
+		type: UPDATE_ITEM_SUCCESS,
 		entireMenu,
 	}
 }
 
-export function changeItemStatusFail(): IChangeItemStatusFailAction {
+export function updateItemFail(): IUpdateItemFailAction {
 	return {
-		type: CHANGE_ITEM_STATUS_FAIL,
+		type: UPDATE_ITEM_FAIL,
 		// result,
 	}
 }
 
-export function changeItemStatus(itemStatus: IEditMenuItem) {
+export function updateItem(itemStatus: IUpdateMenuItem) {
 	const config = { headers: { Authorization: "Bearer " + localStorage.getItem("dealingRoomToken") } }
-	return (dispatch: Dispatch<IChangeItemStatusSuccessAction | IChangeItemStatusFailAction>) => {
+	return (dispatch: Dispatch<IUpdateItemSuccessAction | IUpdateItemFailAction>) => {
 		axios.put(`${API_SERVER}/api/items/${itemStatus.items_id}`, itemStatus, config)
 			.then((res: any) => {
 				if (res.status === 200) {
-					dispatch(changeItemStatusSuccess(itemStatus, res.data));
+					dispatch(updateItemSuccess(res.data));
 				} else {
 					alert("update error, try again");
-					dispatch(changeItemStatusFail());
+					dispatch(updateItemFail());
 				}
 			})
 			.catch((err: any) => {
 				alert(err);
-				dispatch(changeItemStatusFail());
+				dispatch(updateItemFail());
 			})
+	}
+}
+
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export function toggleStockManageModal(stockManageModalState: IStockManageModalState, targetItem?: IUpdateMenuItem): IToggleStockManageModalAction {
+	return {
+		type: TOGGLE_STOCK_MANAGE_MODAL,
+		stockManageModalState,
+		targetItem,
 	}
 }
