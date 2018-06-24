@@ -1,6 +1,9 @@
 // Importing modules
 import * as React from "react";
 
+// Importing UI elements
+import { Dialog, Button, Intent } from "@blueprintjs/core";
+
 // Importing Interfaces
 import { IMenuItemWithoutFlux } from "src/modules";
 
@@ -15,13 +18,32 @@ import Menu from "../../assets/icons/desktop/stocklist/menu.svg";
 // Importing temp fake images
 import img from "../../assets/images/categories/squarebeer.jpg";
 
+interface IStockItemLineState {
+  isEditMenuOpen: boolean;
+}
+
 export default class StockItemLine extends React.Component<
   IMenuItemWithoutFlux,
-  {}
+  IStockItemLineState
 > {
   constructor(props: IMenuItemWithoutFlux) {
     super(props);
+
+    this.state = {
+      isEditMenuOpen: false
+    }
   }
+
+  public openEditMenu = () => {
+    this.setState({
+      isEditMenuOpen: true
+    });
+  };
+
+  public toggleDialog = () => {
+    this.setState({ isEditMenuOpen: !this.state.isEditMenuOpen });
+  };
+
   public render() {
     return (
       <div
@@ -67,9 +89,32 @@ export default class StockItemLine extends React.Component<
             )}
           </div>
           <div className="item-edit-menu">
-            <img src={Menu} alt="" className="edit-item-icon"/>
+            <img
+              src={Menu}
+              alt=""
+              className="edit-item-icon"
+              onClick={this.openEditMenu}
+            />
           </div>
         </div>
+        <Dialog
+          icon="inbox"
+          isOpen={this.state.isEditMenuOpen}
+          onClose={this.toggleDialog}
+          title="Dialog header"
+        >
+          <div className="pt-dialog-body">Some content</div>
+          <div className="pt-dialog-footer">
+            <div className="pt-dialog-footer-actions">
+              <Button text="Secondary" />
+              <Button
+                intent={Intent.PRIMARY}
+                onClick={this.toggleDialog}
+                text="Primary"
+              />
+            </div>
+          </div>
+        </Dialog>
       </div>
     );
   }
