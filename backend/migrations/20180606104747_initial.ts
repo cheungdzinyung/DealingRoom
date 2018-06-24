@@ -12,6 +12,8 @@ exports.up = (knex: Knex) => {
       users.string("displayName");
       users.text("userPhoto").defaultTo("");
       users.text("facebookToken");
+      users.text("googleToken");
+      users.text("stripeToken");
       users.enum("role", ["bartender", "server", "manager", "customer"]).notNullable();
       users.boolean("isActive").defaultTo(true).notNullable();
     })

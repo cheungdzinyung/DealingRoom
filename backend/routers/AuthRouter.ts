@@ -63,7 +63,7 @@ export default class AuthRouter {
       this.knex("users")
         .where("username", username)
         .select("id", "username", "password")
-        .then(user => {
+        .then((user: Knex.QueryBuilder) => {
           if (!user || !user[0]) {
             res.status(401).json("User does not exist");
             return;
@@ -100,13 +100,19 @@ export default class AuthRouter {
     } else {
       try {
         const authResult = await axios.get(
-          `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${accessToken}`
+          `https://www.googleapis.com/oauth2/v2/userinfo`,
+          { headers: { Authorization: "Bearer " + accessToken } }
         );
 
         if (authResult.data.error) {
           res.sendStatus(401);
         } else {
-          console.log(authResult.data);
+          console.log(authResult.data.picture);
+          console.log(authResult.data.name);
+          console.log(authResult.data.locale);
+          console.log(authResult.data.gender);
+          console.log(authResult.data.given_name);
+          console.log(authResult.data.id);
           const token = jwtSimple.encode(
             { id: accessToken, info: authResult.data },
             config.jwtSecret
@@ -114,7 +120,7 @@ export default class AuthRouter {
           res.json({ token });
         }
       } catch (err) {
-        res.sendStatus(401);
+        res.status(400);
       }
     }
   }
@@ -151,24 +157,24 @@ export default class AuthRouter {
             // vvv to match data tpye
             id: 0,
             // vvv maybe?
-            userPhoto: "",
-          }
+            userPhoto: ""
+          };
           await this.usersService
-          .add(signUpPackage, req.file)
-          .then((addResult: IUserData) => {
-            console.log(addResult);
+            .add(signUpPackage, req.file)
+            .then((addResult: IUserData) => {
+              console.log(addResult);
 
-            const jwtToken = jwtSimple.encode(
-              { id: addResult.id, info: addResult.username },
-              config.jwtSecret
-            );
-            
-            res.status(200).json({ ...addResult, token: jwtToken});
-          })
-          .catch((err: express.Errback) => {
-            console.log("add user err: ", err);
-            res.status(500).json({ err, status: "failed" });
-          });
+              const jwtToken = jwtSimple.encode(
+                { id: addResult.id, info: addResult.username },
+                config.jwtSecret
+              );
+
+              res.status(200).json({ ...addResult, token: jwtToken });
+            })
+            .catch((err: express.Errback) => {
+              console.log("add user err: ", err);
+              res.status(500).json({ err, status: "failed" });
+            });
 
           // console.log(result);
           // res.json({ jwtToken });
@@ -177,7 +183,6 @@ export default class AuthRouter {
           // err code: Can't set headers after they are sent
           // res.sendStatus(200).json({token});
         }
-
       } catch (err) {
         res.sendStatus(401).json({ err });
       }

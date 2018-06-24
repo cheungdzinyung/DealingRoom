@@ -46,8 +46,8 @@ export default class OrdersService {
                   // increase the current price of the item being ordered
                   let priceUp: number;
                   itemIdIncrease[0].categories_id === 1
-                    ? (priceUp = 9.33)
-                    : (priceUp = 8.33);
+                    ? (priceUp = 10)
+                    : (priceUp = 10);
                     return this.knex("items")
                     .update({"currentPrice" : this.knex.raw(`?? + ${priceUp}`, ["currentPrice"])})
                     .where("id", itemIdIncrease[0].items_id)
@@ -78,8 +78,8 @@ export default class OrdersService {
                                     .then((catId: Knex.QueryBuilder) => {
                                       let priceDown: number;
                                       catId[0].categories_id === 1
-                                        ? (priceDown = 1.33)
-                                        : (priceDown = 2);
+                                        ? (priceDown = 10/9)
+                                        : (priceDown = 10/4);
                                       // decrease all other items current price in the specific category other than the item being ordered
                                       return this.knex("items")
                                         .where(
