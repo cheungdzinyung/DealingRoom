@@ -122,15 +122,26 @@ export class PureStockFilter extends React.Component<IStockFilterProps, IStockFi
                 <div className="filter-line">
                     <span className="filter-subheader" />
                     <div className="filter-select-box">
-                        <input 
-                            type="button" 
-                            className="filter-select rd-corner" 
+                        <input
+                            type="button"
+                            className="filter-select rd-corner"
                             value="Create New Item"
                             onClick={this.createItem} />
                     </div>
                 </div>
+
+                <div className="filter-line">
+                    <span className="filter-subheader">Specials</span>
+                    <div className="filter-select-box">
+                        <select defaultValue="all" className="filter-select rd-corner">
+                            <option value="all">All</option>
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-        )
+        );
     }
 }
 

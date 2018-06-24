@@ -40,7 +40,9 @@ export default class UsersService {
           })
           .returning("id")
           .then(async (itemId: Knex.QueryCallback) => {
-            await this.saveUpdateItemImage(itemId[0], file);
+            if (file !== undefined) {
+              await this.saveUpdateItemImage(itemId[0], file);
+            }
             return this.knex("categories")
               .join("items", "categories.id", "=", "items.categories_id")
               .where("items.id", itemId[0])
@@ -351,7 +353,9 @@ export default class UsersService {
           .returning("id");
       })
       .then(async (itemId: Knex.QueryCallback) => {
-        await this.saveUpdateItemImage(itemId[0], file);
+        if (file !== undefined) {
+          await this.saveUpdateItemImage(itemId[0], file);
+        }
         return this.knex("categories")
           .join("items", "categories.id", "=", "items.categories_id")
           .where("items.id", itemId[0])

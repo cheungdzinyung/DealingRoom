@@ -51,7 +51,7 @@ interface IStockManageModalStates {
     categoryName: string;
     itemDescription: string;
     minimumPrice: number;
-    currentPrice: number;        // starting price | NO MOD FOR EDIT MODAL!!
+    currentPrice: number;        //  starting price | NO MOD FOR EDIT MODAL!!
     itemPhoto: any;
     isSpecial: boolean;
     isActive: boolean;
@@ -91,6 +91,8 @@ class PureStockManageModal extends React.Component<IStockManageModalProps, IStoc
 
     public create = () => {
         // MODAL_ACTION_CONFIRM
+        // const minimumPrice = (typeof(this.state.minimumPrice) === "string") ? parseFloat(this.state.minimumPrice) : this.state.minimumPrice;
+        // const currentPrice = (typeof(this.state.currentPrice) === "string") ? parseFloat(this.state.currentPrice) : this.state.currentPrice;
         const newItemStatus = {
             itemName: this.state.itemName,
             itemStock: this.state.itemStock,
@@ -107,6 +109,7 @@ class PureStockManageModal extends React.Component<IStockManageModalProps, IStoc
 
     public update = () => {
         // MODAL_ACTION_UPDATE
+        // const minimumPrice = (typeof(this.state.minimumPrice) === "string") ? parseFloat(this.state.minimumPrice) : this.state.minimumPrice;
         const updateItemStatus = {
             items_id: this.state.items_id,
             itemName: this.state.itemName,
@@ -121,72 +124,74 @@ class PureStockManageModal extends React.Component<IStockManageModalProps, IStoc
         this.props.updateItem(updateItemStatus);
     }
 
-    public setCategory(e: React.ChangeEvent<HTMLSelectElement>) {
+    public setCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
         this.setState({
             categoryName: e.currentTarget.value
         });
     }
 
-    public setItemName(e: React.ChangeEvent<HTMLInputElement>) {
+    public setItemName = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             itemName: e.target.value
         });
     }
 
-    public setItemDescription(e: React.ChangeEvent<HTMLInputElement>) {
+    public setItemDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             itemDescription: e.target.value
         });
     }
 
     // need to parseFloat() when send to BE
-    public setItemMinPrice(e: React.ChangeEvent<HTMLInputElement>) {
+    public setItemMinPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
-            itemDescription: e.target.value
+            minimumPrice: parseFloat(e.target.value)
         });
     }
 
     // need to parseFloat() when send to BE
-    public setItemStartPrice(e: React.ChangeEvent<HTMLInputElement>) {
+    public setItemStartPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
-            itemDescription: e.target.value
+            currentPrice: parseFloat(e.target.value)
         });
     }
 
     // need to parseInt() when send to BE
-    public setItemQuantity(e: React.ChangeEvent<HTMLInputElement>) {
+    public setItemQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
+        // if (e.target.value.search(/^[0-9]/g) !== -1) {
         this.setState({
-            itemDescription: e.target.value
+            itemStock: parseInt(e.target.value, 10)
         });
+        // }
     }
 
-    public toggleActive() {
+    public toggleActive = () => {
         this.setState({
             isActive: !this.state.isActive
         });
     }
 
-    public toggleSpecial() {
+    public toggleSpecial = () => {
         this.setState({
             isSpecial: !this.state.isSpecial
         });
     }
 
-    public confirmAdd() {
-        const newItem = {
-            // items_id: number;            // NO ENTRY !! gen by BE
-            itemName: this.state.itemName,
-            itemStock: this.state.itemStock,
-            categoryName: this.state.categoryName,
-            itemDescription: this.state.itemDescription,
-            minimumPrice: this.state.minimumPrice,
-            currentPrice: this.state.currentPrice,        // starting price
-            itemPhoto: this.state.itemPhoto,
-            isSpecial: this.state.isSpecial,
-            isActive: this.state.isActive,
-        };
-        this.props.createItem(newItem);
-    }
+    // public confirmAdd = () =>{
+    //     const newItem = {
+    //         // items_id: number;            // NO ENTRY !! gen by BE
+    //         itemName: this.state.itemName,
+    //         itemStock: this.state.itemStock,
+    //         categoryName: this.state.categoryName,
+    //         itemDescription: this.state.itemDescription,
+    //         minimumPrice: this.state.minimumPrice,
+    //         currentPrice: this.state.currentPrice,        // starting price
+    //         itemPhoto: this.state.itemPhoto,
+    //         isSpecial: this.state.isSpecial,
+    //         isActive: this.state.isActive,
+    //     };
+    //     this.props.createItem(newItem);
+    // }
 
     public render() {
         return (
@@ -196,7 +201,7 @@ class PureStockManageModal extends React.Component<IStockManageModalProps, IStoc
                     <ModalBody>
                         <div
                             className="stock-item-card rd-corner"
-                            data-productId={this.state.items_id}
+                            data-productid={this.state.items_id}
                         >
                             <img src={img} alt="" className="stock-item-img rd-corner" />
                             <div className="stock-item-info">
@@ -220,8 +225,8 @@ class PureStockManageModal extends React.Component<IStockManageModalProps, IStoc
                                         onChange={this.setItemName} />
 
                                     <input
-                                        type="text"
-                                        disabled={true}
+                                        type="number"
+                                        disabled={(this.props.stockManageModalState==="create")?false:true}
                                         className="stock-item-price"
                                         value={this.state.currentPrice}
                                         placeholder="item price"
@@ -238,12 +243,21 @@ class PureStockManageModal extends React.Component<IStockManageModalProps, IStoc
                                 <div className="stock-item-price-floor">
                                     <span className="stock-item-price-floor-text">Price floor:</span>
                                     <input
-                                        type="text"
-                                        disabled={true}
+                                        type="number"
                                         className="stock-item-price-floor-number"
                                         value={this.state.minimumPrice}
                                         placeholder="item price"
                                         onChange={this.setItemMinPrice} />
+                                </div>
+
+                                <div className="stock-item-price-floor">
+                                    <span className="stock-item-price-floor-text">Stock:</span>
+                                    <input
+                                        type="text"
+                                        className="stock-item-price-floor-number"
+                                        value={this.state.itemStock}
+                                        placeholder="item stock"
+                                        onChange={this.setItemQuantity} />
                                 </div>
                             </div>
 
@@ -251,22 +265,22 @@ class PureStockManageModal extends React.Component<IStockManageModalProps, IStoc
                                 <div className="spec-act">
 
                                     {this.state.isSpecial
-                                        ? ( <input type="button" className="isSpecial" onChange={this.toggleSpecial}>
-                                                <img src={FilledStar} alt="" className="star" />
-                                            </input>)
-                                        : ( <input type="button" className="isSpecial" onChange={this.toggleSpecial}>
-                                                <img src={UnfilledStar} alt="" className="star" />
-                                            </input>)
+                                        ? (<button className="isSpecial" onClick={this.toggleSpecial}>
+                                            <img src={FilledStar} alt="" className="star" />
+                                        </button>)
+                                        : (<button className="isSpecial" onClick={this.toggleSpecial}>
+                                            <img src={UnfilledStar} alt="" className="star" />
+                                        </button>)
                                     }
 
 
                                     {this.state.isActive
-                                        ? ( <button className="active-button rd-corner isActive" onChange={this.toggleActive}>
-                                                <span className="isActive-button-text">Active</span>
-                                            </button>)
-                                        : ( <button className="active-button rd-corner isNotActive" onChange={this.toggleActive}>
-                                                <span className="isActive-button-text">Inactive</span>
-                                            </button>)
+                                        ? (<button className="active-button rd-corner isActive" onClick={this.toggleActive}>
+                                            <span className="isActive-button-text">Active</span>
+                                        </button>)
+                                        : (<button className="active-button rd-corner isNotActive" onClick={this.toggleActive}>
+                                            <span className="isActive-button-text">Inactive</span>
+                                        </button>)
                                     }
                                 </div>
                             </div>

@@ -10,6 +10,7 @@ import { firstLetterCaps } from "../../../util/utility";
 // Importing static image assets
 import FilledStar from "../../assets/icons/desktop/stocklist/starfilled.svg";
 import UnfilledStar from "../../assets/icons/desktop/stocklist/starunfilled.svg";
+import Menu from "../../assets/icons/desktop/stocklist/menu.svg";
 
 // Importing temp fake images
 import img from "../../assets/images/categories/squarebeer.jpg";
@@ -78,6 +79,9 @@ class PureStockItemLine extends React.Component<IPureStockItemLineProps,{}> {
                 <span className="isActive-button-text">Inactive</span>
               </button>
             )}
+          </div>
+          <div className="item-edit-menu">
+            <img src={Menu} alt="" className="edit-item-icon"/>
           </div>
         </div>
       </div>

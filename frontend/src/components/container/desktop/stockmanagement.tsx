@@ -105,7 +105,7 @@ export class PureStockManagement extends React.Component<
           (this.props.stockManageModalState === "discard")
           // (false)
           ? <div/>
-          : <StockManageModal/>
+          : <StockManageModal key="1"/>
         }
 
 

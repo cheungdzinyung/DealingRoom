@@ -12,8 +12,7 @@
     background-color: $admin-item-card-bgc;
     width: 52.5vw;
     height: 52.5vw * 177 / 756;
-    display: grid;
-    // grid-template-columns: 23.41% 53.18% 23.41%;
+    display: grid; // grid-template-columns: 23.41% 53.18% 23.41%;
     grid-template-columns: 23.41% 56.59% 20%;
     margin-bottom: 2.5%;
     .stock-item-img {
@@ -64,8 +63,10 @@
         display: grid;
         grid-template-rows: 40% 1fr;
         .spec-act {
+            padding: 0 10%;
+            ;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
             width: 100%;
             .isSpecial {
@@ -74,9 +75,8 @@
             }
             .active-button {
                 @extend %flex-cnt-cnt;
-                width: 50%;
-                height: 40%;
-                // padding: 4% 15%;
+                width: 70%;
+                height: 40%; // padding: 4% 15%;
             }
             .isActive {
                 background-color: rgba(115, 237, 166, .9);
@@ -89,6 +89,18 @@
                 .isActive-button-text {
                     font-size: 100%;
                 }
+            }
+        }
+        .item-edit-menu {
+            width: 100%;
+            padding: 10%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+            .edit-item-icon {
+                @extend %clickable;
+                margin: 0 5%;
+                width: 12%;
             }
         }
     }
