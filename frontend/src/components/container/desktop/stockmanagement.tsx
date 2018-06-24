@@ -135,11 +135,12 @@ export class PureStockManagement extends React.Component<
       <div className="desktop-page-container">
         <AdminSideMenu />
         <div className="page-container-center">
-          <PageHeader header="Stock Management" />
-
-          {adminAllItemTest.map((eachItem, index) => (
-            <StockItemLine {...eachItem} />
-          ))}
+          <div className="page-container-center-content-wrapper">
+            <PageHeader header="Stock Management" />
+            {adminAllItemTest.map((eachItem, index) => (
+              <StockItemLine {...eachItem} />
+            ))}
+          </div>
         </div>
         <StockFilter />
       </div>

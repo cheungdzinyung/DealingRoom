@@ -1,8 +1,14 @@
-.page-container-center{
+.page-container-center {
     grid-column: 2/3;
-    grid-row: 2/3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    grid-row: 1/3;
+    padding: (100vw * .025);
+    display: grid;
+    grid-template-rows: 12vh 1fr;
+    .page-container-center-content-wrapper {
+        grid-row: 2/3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        // justify-content: center;
+    }
 }
