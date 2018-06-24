@@ -6,7 +6,7 @@ import * as Knex from "knex";
 
 
 // import * as Stripe from "stripe";
-// const stripe = new Stripe("pk_test_mvSKx8b0nj3UqrklcWBdvdnR");
+// const stripe = new Stripe("sk_test_mlmBZyk66UHoOBcCkRKyPdig");
 
 import config from "./config";
 import * as KnexConfig from "./knexfile";
@@ -15,6 +15,7 @@ import jwtStrategy from "./util/auth/jwtStrategy";
 
 import ItemsService from "./services/ItemsService";
 import OrdersService from "./services/OrdersService";
+import PaymentsService from "./services/PaymentsService"
 import PricesService from "./services/PricesService";
 import UsersService from "./services/UsersService";
 
@@ -26,9 +27,10 @@ const usersService = new UsersService(knex);
 const itemsService = new ItemsService(knex);
 const ordersService = new OrdersService(knex);
 const pricesService = new PricesService(knex);
+const paymentsService = new PaymentsService(knex);
 
 const jwtAuth = jwtStrategy(usersService);
-const apiRouter = new ApiRouter(jwtAuth, usersService, itemsService, ordersService, pricesService, knex);
+const apiRouter = new ApiRouter(jwtAuth, usersService, itemsService, ordersService, pricesService, paymentsService, knex);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
