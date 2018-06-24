@@ -4,7 +4,7 @@ import * as React from "react";
 // Importing UI components
 import AdminSideMenu from "../../ui/desktop/sidemenu";
 import StockFilter from "../../ui/desktop/stockfilter";
-
+import PageHeader from "../../ui/desktop/pageheader";
 
 // Importing interfaces
 import {
@@ -135,9 +135,12 @@ export class PureStockManagement extends React.Component<
       <div className="desktop-page-container">
         <AdminSideMenu />
         <div className="page-container-center">
-          {adminAllItemTest.map((eachItem, index) => (
-            <StockItemLine {...eachItem} />
-          ))}
+          <div className="page-container-center-content-wrapper">
+            <PageHeader header="Stock Management" />
+            {adminAllItemTest.map((eachItem, index) => (
+              <StockItemLine {...eachItem} />
+            ))}
+          </div>
         </div>
         <StockFilter />
       </div>
