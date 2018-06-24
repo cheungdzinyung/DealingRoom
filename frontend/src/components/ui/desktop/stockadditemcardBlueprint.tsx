@@ -29,6 +29,7 @@ import {
   toggleStockManageModal
 } from "../../../redux/desktop/actions/actions_manager";
 
+// Props and States
 interface IStockManageModalProps {
   stockManageModalState: IStockManageModalState;
   categories: string[];
@@ -57,6 +58,33 @@ interface IStockManageModalStates {
   isActive: boolean;
   modal: boolean;
 }
+
+// Redux
+const mapStateToProps = (state: IRootState) => {
+  return {
+    targetItem: state.staff.manager.targetItem,
+    stockManageModalState: state.staff.manager.stockManageModalState,
+    categories: state.staff.manager.categories
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    createItem: (itemStatus: ICreateMenuItem) => {
+      dispatch(createItem(itemStatus));
+    },
+    updateItem: (itemStatus: IUpdateMenuItem) => {
+      dispatch(updateItem(itemStatus));
+    },
+    toggleStockManageModal: (
+      stockManageModalState: IStockManageModalState,
+      targetItem?: IUpdateMenuItem
+    ) => {
+      dispatch(toggleStockManageModal(stockManageModalState, targetItem));
+    }
+  };
+};
+
 
 class RealStockManageModal extends React.Component<
   IStockManageModalProps,
@@ -246,32 +274,8 @@ class RealStockManageModal extends React.Component<
   }
 }
 
-// Redux
-const mapStateToProps = (state: IRootState) => {
-  return {
-    targetItem: state.staff.manager.targetItem,
-    stockManageModalState: state.staff.manager.stockManageModalState,
-    categories: state.staff.manager.categories
-  };
-};
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    createItem: (itemStatus: ICreateMenuItem) => {
-      dispatch(createItem(itemStatus));
-    },
-    updateItem: (itemStatus: IUpdateMenuItem) => {
-      dispatch(updateItem(itemStatus));
-    },
-    toggleStockManageModal: (
-      stockManageModalState: IStockManageModalState,
-      targetItem?: IUpdateMenuItem
-    ) => {
-      dispatch(toggleStockManageModal(stockManageModalState, targetItem));
-    }
-  };
-};
-
+// Redux connect and export
 const StockManageModal = connect(
   mapStateToProps,
   mapDispatchToProps

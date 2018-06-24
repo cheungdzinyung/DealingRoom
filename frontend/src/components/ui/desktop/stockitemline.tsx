@@ -57,7 +57,6 @@ class PureStockItemLine extends React.Component<IPureStockItemLineProps,IStockIt
       <div
         className="stock-item-card rd-corner"
         data-productid={this.props.singleItem.items_id}
-        
       >
         <img src={img} alt="" className="stock-item-img rd-corner" />
         <div className="stock-item-info">
