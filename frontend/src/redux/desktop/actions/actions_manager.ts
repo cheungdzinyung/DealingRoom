@@ -129,7 +129,7 @@ export function createItem(itemStatus: ICreateMenuItem) {
 	return (dispatch: Dispatch<ICreateItemSuccessAction | ICreateItemFailAction>) => {
 		axios.post(`${API_SERVER}/api/items/`, itemStatus, config)
 			.then((res: any) => {
-				if (res.status === 200) {
+				if (res.status === 201) {
 					dispatch(createItemSuccess(res.data));
 				} else {
 					alert("create item error, try again");
@@ -163,7 +163,7 @@ export function updateItem(itemStatus: IUpdateMenuItem) {
 	return (dispatch: Dispatch<IUpdateItemSuccessAction | IUpdateItemFailAction>) => {
 		axios.put(`${API_SERVER}/api/items/${itemStatus.items_id}`, itemStatus, config)
 			.then((res: any) => {
-				if (res.status === 200) {
+				if (res.status === 201) {
 					dispatch(updateItemSuccess(res.data));
 				} else {
 					alert("update error, try again");

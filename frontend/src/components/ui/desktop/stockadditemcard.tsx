@@ -160,7 +160,7 @@ class PureStockManageModal extends React.Component<IStockManageModalProps, IStoc
     public setItemQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
         // if (e.target.value.search(/^[0-9]/g) !== -1) {
         this.setState({
-            itemStock: parseInt(e.target.value, 10)
+            itemStock: parseInt(e.target.value, 10) || 0
         });
         // }
     }
@@ -177,22 +177,6 @@ class PureStockManageModal extends React.Component<IStockManageModalProps, IStoc
         });
     }
 
-    // public confirmAdd = () =>{
-    //     const newItem = {
-    //         // items_id: number;            // NO ENTRY !! gen by BE
-    //         itemName: this.state.itemName,
-    //         itemStock: this.state.itemStock,
-    //         categoryName: this.state.categoryName,
-    //         itemDescription: this.state.itemDescription,
-    //         minimumPrice: this.state.minimumPrice,
-    //         currentPrice: this.state.currentPrice,        // starting price
-    //         itemPhoto: this.state.itemPhoto,
-    //         isSpecial: this.state.isSpecial,
-    //         isActive: this.state.isActive,
-    //     };
-    //     this.props.createItem(newItem);
-    // }
-
     public render() {
         return (
             <div>
@@ -205,8 +189,10 @@ class PureStockManageModal extends React.Component<IStockManageModalProps, IStoc
                         >
                             <img src={img} alt="" className="stock-item-img rd-corner" />
                             <div className="stock-item-info">
-                                <select className="filter-select rd-corner stock-item-category" defaultValue="all" onChange={this.setCategory}>
-                                    <option value="all" >All</option>
+                                <select
+                                    className="filter-select rd-corner stock-item-category"
+                                    defaultValue={(this.props.stockManageModalState === "create") ? "beer" : this.props.targetItem.categoryName}
+                                    onChange={this.setCategory}>
                                     {
                                         this.props.categories.map((category: string) => (
                                             <option key={category} value={category}>
@@ -226,7 +212,7 @@ class PureStockManageModal extends React.Component<IStockManageModalProps, IStoc
 
                                     <input
                                         type="number"
-                                        disabled={(this.props.stockManageModalState==="create")?false:true}
+                                        disabled={(this.props.stockManageModalState === "create") ? false : true}
                                         className="stock-item-price"
                                         value={this.state.currentPrice}
                                         placeholder="item price"
