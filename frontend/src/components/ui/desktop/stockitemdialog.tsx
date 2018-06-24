@@ -2,12 +2,13 @@
 import * as React from "react";
 
 // Importing UI elements
-import { Dialog, Button, Intent } from "@blueprintjs/core";
+import { Dialog, Button } from "@blueprintjs/core";
 
 // Importing Interfaces
 // import { IMenuItemWithoutFlux } from "src/modules";
 
 // Importing utility function
+
 // import { firstLetterCaps } from "../../../util/utility";
 
 // Importing static image assets
@@ -34,18 +35,13 @@ export default class StockItemDialog extends React.Component<
       <Dialog
         icon="inbox"
         isOpen={this.props.isEditMenuOpen}
-        onClose={this.props.}
+        
         title="Dialog header"
       >
         <div className="pt-dialog-body">Some content</div>
         <div className="pt-dialog-footer">
           <div className="pt-dialog-footer-actions">
             <Button text="Secondary" />
-            <Button
-              intent={Intent.PRIMARY}
-              onClick={this.toggleDialog}
-              text="Primary"
-            />
           </div>
         </div>
       </Dialog>

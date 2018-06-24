@@ -17,7 +17,7 @@ import { IItemPriceGraphData } from "src/modules";
 interface IMenuItemProps {
     // key: number;
     // details: string;
-    addToCurrentOrder: (itemID: number, itemName: string, currentPrice: number)=>void;
+    addToCurrentOrder: (itemID: number, itemName: string, currentPrice: number) => void;
     item_id: number;
     categoryName: string;
     itemName: string;
@@ -45,20 +45,20 @@ export default class MenuItem extends React.Component<IMenuItemProps, IMenuItemS
     }
 
     public addToCurrentOrder = (e: React.MouseEvent<HTMLImageElement>) => {
-    // public addToCurrentOrder = (e: React.MouseEvent<HTMLDivElement>) => {
+        // public addToCurrentOrder = (e: React.MouseEvent<HTMLDivElement>) => {
         // const itemid = e.currentTarget.dataset.itemid;
         // const itemName = e.currentTarget.dataset.itemname;    // dataset attr are all lowercase
         // if (itemid !== undefined && itemName !== undefined) {
         //   const currentPrice = this.props.entireMenu[this.state.displayCategoryIndex].items.find((element: any) => (parseFloat(itemid) === element.items_id)).currentPrice;
-          this.props.addToCurrentOrder(this.props.item_id, this.props.itemName, this.props.currentPrice);
+        this.props.addToCurrentOrder(this.props.item_id, this.props.itemName, this.props.currentPrice);
         // }
-      }
+    }
 
-      public toggle = () => {
-          this.setState({
+    public toggle = () => {
+        this.setState({
             detailIsOpen: !this.state.detailIsOpen
-          })
-      }
+        })
+    }
 
     public render() {
         return (
@@ -89,8 +89,8 @@ export default class MenuItem extends React.Component<IMenuItemProps, IMenuItemS
                             <div className="item-flucutation-container">
                                 <img className="flux-img" src={up} alt="" />
                                 <span className="item-fluctuation-display">
-                                    {this.props.priceDelta}%
-                </span>
+                                    {this.props.priceDelta}
+                                </span>
                             </div>
                         </div>
                     </div>

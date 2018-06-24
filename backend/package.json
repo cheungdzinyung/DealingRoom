@@ -20,7 +20,8 @@
     "passport-google-oauth20": "^1.0.0",
     "passport-jwt": "^4.0.0",
     "pg": "^7.4.3",
-    "socket.io": "^2.1.1"
+    "socket.io": "^2.1.1",
+    "stripe": "^6.1.1"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
@@ -38,6 +39,7 @@
     "@types/passport-jwt": "^3.0.1",
     "@types/pg": "^7.4.9",
     "@types/socket.io": "^1.4.36",
+    "@types/stripe": "^5.0.15",
     "nodemon": "^1.17.5",
     "ts-node": "^6.1.0",
     "tslint": "^5.10.0",
