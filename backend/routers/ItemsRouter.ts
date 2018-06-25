@@ -54,6 +54,7 @@ export default class ItemsRouter {
     req.query.isActive !== undefined
       ? (isActive = req.query.isActive)
       : (isActive = true);
+      
     if (req.query.fluctuatingPrices !== undefined) {
       if (req.query.category !== undefined) {
         return this.itemsService

@@ -1,5 +1,8 @@
 import * as express from "express";
+import * as jwtSimple from "jwt-simple";
 import * as multer from "multer";
+
+import config from "../config";
 
 import { IUserData } from "../interfaces";
 import UsersService from "../services/UsersService";
@@ -59,15 +62,23 @@ export default class UsersRouter {
       return this.usersService
         .update(req.user.id, req.body, req.file)
         .then((result: IUserData) => {
-          res.status(201).json(result);
+          const payload = {
+            id: result[0].id,
+            username: result[0].username
+          };
+          const token = jwtSimple.encode(payload, config.jwtSecret);
+          res.json({
+            token,
+            user_id: result[0].id,
+            displayName: result[0].displayName,
+            userPhoto: result[0].userPhoto
+          });
         })
-        .catch((err: express.Errback) => {
+        .catch((err: any) => {
           res.status(500).json({ status: "failed" });
         });
     } else {
-      res.status(401).json({ status: "unauthorized" });
-      return {};
+      return res.status(401).json({ status: "unauthorized" });
     }
   }
-
 }
