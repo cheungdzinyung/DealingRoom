@@ -9,7 +9,7 @@ import {
   ICreateMenuItem,
   IUpdateMenuItem,
   IStockManageModalState
-} from "../../../modules";
+} from "src/modules";
 
 // Importing utility function
 // import { firstLetterCaps } from "../../../util/utility";
@@ -22,12 +22,12 @@ import {
 
 // redux
 import { connect } from "react-redux";
-import { IRootState } from "../../../redux/store";
+import { IRootState } from "src/redux/store";
 import {
   createItem,
   updateItem,
   toggleStockManageModal
-} from "../../../redux/desktop/actions/actions_manager";
+} from "src/redux/desktop/actions/actions_manager";
 
 // Props and States
 interface IStockManageModalProps {
@@ -44,7 +44,7 @@ interface IStockManageModalProps {
     targetItem?: IUpdateMenuItem
   ) => void;
   isModalOpen: boolean;
-  
+
 }
 
 interface IStockManageModalStates {
@@ -91,7 +91,7 @@ const mapDispatchToProps = (dispatch: any) => {
 class RealStockManageModal extends React.Component<
   IStockManageModalProps,
   IStockManageModalStates
-> {
+  > {
   constructor(props: IStockManageModalProps) {
     super(props);
 
@@ -213,7 +213,12 @@ class RealStockManageModal extends React.Component<
   public render() {
     return (
       <Dialog isOpen={this.props.isModalOpen}>
-        <h1>New Item</h1>
+        <div className="edit-item-container">
+          <h1>New Item</h1>
+        </div>
+
+
+
         {/* <select
           className="filter-select rd-corner stock-item-category"
           defaultValue={
@@ -264,10 +269,10 @@ class RealStockManageModal extends React.Component<
             Create
           </button>
         ) : (
-          <button color="primary" onClick={this.update}>
-            Update
+            <button color="primary" onClick={this.update}>
+              Update
           </button>
-        )}
+          )}
         <button color="secondary" onClick={this.discard}>
           Discard
         </button>
