@@ -62,7 +62,9 @@ export default class UsersService {
         isActive: data.isActive,
         password: hash,
         role: data.role,
-        username: data.username
+        username: data.username,
+        stripeToken: data.stripeToken,
+        googleToken: data.googleToken
       })
       .returning("id")
       .then(async (userId: Knex.QueryCallback) => {
@@ -71,7 +73,7 @@ export default class UsersService {
         }
         return this.knex("users")
           .where("id", userId[0])
-          .select("displayName", "userPhoto");
+          .select("id",  "password", "displayName", "userPhoto");
       });
   }
 }
