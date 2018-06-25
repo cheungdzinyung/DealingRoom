@@ -3,6 +3,10 @@ import * as React from "react";
 
 // Importing UI elements
 import { Dialog } from "@blueprintjs/core";
+import ItemModalDescription from "./additemmodal/itemDescription";
+import ItemModalInfo from "./additemmodal/itemInfo";
+import ItemModalStatus from "./additemmodal/itemStatus";
+import ItemModalImage from "./additemmodal/itemImage";
 
 // Importing Interfaces
 import {
@@ -44,6 +48,7 @@ interface IStockManageModalProps {
     targetItem?: IUpdateMenuItem
   ) => void;
   isModalOpen: boolean;
+  switchModal: () => void;
 
 }
 
@@ -169,7 +174,7 @@ class RealStockManageModal extends React.Component<
     });
   };
 
-  public setItemDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
+  public setItemDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     this.setState({
       itemDescription: e.target.value
     });
@@ -212,70 +217,13 @@ class RealStockManageModal extends React.Component<
 
   public render() {
     return (
-      <Dialog isOpen={this.props.isModalOpen}>
-        <div className="edit-item-container">
-          <h1>New Item</h1>
+      <Dialog isOpen={this.props.isModalOpen} className="edit-item-container" canEscapeKeyClose={true} canOutsideClickClose={true} onClose={this.props.switchModal}>
+        <div className="edit-item-grid">
+          <ItemModalImage />
+          <ItemModalInfo />
+          <ItemModalStatus />
+          <ItemModalDescription descriptionText={this.state.itemDescription} onChange={this.setItemDescription} />
         </div>
-
-
-
-        {/* <select
-          className="filter-select rd-corner stock-item-category"
-          defaultValue={
-            this.props.stockManageModalState === "create"
-              ? "beer"
-              : this.props.targetItem.categoryName
-          }
-          onChange={this.setCategory}
-        >
-          {this.props.categories.map((category: string) => (
-            <option key={category} value={category}>
-              {firstLetterCaps(category)}
-            </option>
-          ))}
-        </select> */}
-
-        <div className="stock-item-name-price">
-          <input
-            type="text"
-            className="stock-item-name"
-            value={this.state.itemName}
-            placeholder="item name"
-            onChange={this.setItemName}
-          />
-
-          <input
-            type="number"
-            disabled={
-              this.props.stockManageModalState === "create" ? false : true
-            }
-            className="stock-item-price"
-            value={this.state.currentPrice}
-            placeholder="item price"
-            onChange={this.setItemStartPrice}
-          />
-        </div>
-
-        <input
-          type="text"
-          className="stock-item-description"
-          value={this.state.itemDescription}
-          placeholder="item description"
-          onChange={this.setItemDescription}
-        />
-
-        {this.props.stockManageModalState === "create" ? (
-          <button color="primary" onClick={this.create}>
-            Create
-          </button>
-        ) : (
-            <button color="primary" onClick={this.update}>
-              Update
-          </button>
-          )}
-        <button color="secondary" onClick={this.discard}>
-          Discard
-        </button>
       </Dialog>
     );
   }
