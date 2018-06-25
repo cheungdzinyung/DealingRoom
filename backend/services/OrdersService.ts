@@ -50,7 +50,11 @@ export default class OrdersService {
                       ? (priceUp = 10)
                       : (priceUp = 10);
                     return this.knex("items")
-                      .update({currentPrice: this.knex.raw(`?? + ${priceUp}`, ["currentPrice"])})
+                      .update({
+                        currentPrice: this.knex.raw(`?? + ${priceUp}`, [
+                          "currentPrice"
+                        ])
+                      })
                       .where("id", itemIdIncrease[0].items_id)
                       .returning("id")
                       .then((itemIdDecrease: Knex.QueryBuilder) => {
@@ -83,10 +87,23 @@ export default class OrdersService {
                                           : (priceDown = 10 / 4);
                                         // decrease all other items current price in the specific category other than the item being ordered
                                         return this.knex("items")
-                                          .where("categories_id",catId[0].categories_id)
-                                          .whereRaw(`"currentPrice" > "minimumPrice"`)
-                                          .whereNot("id", itemIdIncrease[0].items_id)
-                                          .update({currentPrice: this.knex.raw(`?? - ${priceDown}`,["currentPrice"])})
+                                          .where(
+                                            "categories_id",
+                                            catId[0].categories_id
+                                          )
+                                          .whereRaw(
+                                            `"currentPrice" > "minimumPrice"`
+                                          )
+                                          .whereNot(
+                                            "id",
+                                            itemIdIncrease[0].items_id
+                                          )
+                                          .update({
+                                            currentPrice: this.knex.raw(
+                                              `?? - ${priceDown}`,
+                                              ["currentPrice"]
+                                            )
+                                          })
                                           .returning("id")
                                           .then((itemsIdArray: any) => {
                                             // obtain the current price of the other items in the category from the item's table
@@ -95,23 +112,50 @@ export default class OrdersService {
                                                 return this.knex("items")
                                                   .select("currentPrice")
                                                   .where("id", itemsIdArray[k])
-                                                  .then((itemsLogPrice: Knex.QueryBuilder) => {
+                                                  .then(
+                                                    (
+                                                      itemsLogPrice: Knex.QueryBuilder
+                                                    ) => {
                                                       // insert the current price into the itemsLog as itemsLogPrice
-                                                      return this.knex("itemsLog")
+                                                      return this.knex(
+                                                        "itemsLog"
+                                                      )
                                                         .insert({
-                                                          items_id: itemsIdArray[k],
-                                                          itemsLogPrice: itemsLogPrice[0].currentPrice
+                                                          items_id:
+                                                            itemsIdArray[k],
+                                                          itemsLogPrice:
+                                                            itemsLogPrice[0]
+                                                              .currentPrice
                                                         })
                                                         .then(() => {
-                                                          // calculate the total price of the order 
-                                                          return this.knex("orders_items")
-                                                            .sum("purchasePrice")
-                                                            .where("orders_id",orderId[0])
-                                                            .then((totalPrice: Knex.QueryCallback) => {
+                                                          // calculate the total price of the order
+                                                          return this.knex(
+                                                            "orders_items"
+                                                          )
+                                                            .sum(
+                                                              "purchasePrice"
+                                                            )
+                                                            .where(
+                                                              "orders_id",
+                                                              orderId[0]
+                                                            )
+                                                            .then(
+                                                              (
+                                                                totalPrice: Knex.QueryCallback
+                                                              ) => {
                                                                 // update the total price of the order into the order table
-                                                                return this.knex("orders")
-                                                                  .update({orderTotal: totalPrice[0].sum})
-                                                                  .where("id", orderId[0]);
+                                                                return this.knex(
+                                                                  "orders"
+                                                                )
+                                                                  .update({
+                                                                    orderTotal:
+                                                                      totalPrice[0]
+                                                                        .sum
+                                                                  })
+                                                                  .where(
+                                                                    "id",
+                                                                    orderId[0]
+                                                                  );
                                                               }
                                                             );
                                                         });
@@ -202,6 +246,7 @@ export default class OrdersService {
             "orders.isPaid",
             "orders.created_at as orderingTime"
           )
+          .orderBy("orders.id")
           .then((orderList: any) => {
             return Promise.all(
               orderList.map((item: object, i: number) => {
@@ -323,7 +368,7 @@ export default class OrdersService {
         ) {
           return this.knex("orders")
             .join("users", "users.id", "=", "orders.users_id")
-            .whereNot({ status: "served", isPaid: true })
+            .whereNot(this.knex.raw(`(status='served' AND "isPaid"=true)`))
             .select(
               "orders.id as orders_id",
               "users.id as users_id",
@@ -332,6 +377,7 @@ export default class OrdersService {
               "orders.status",
               "orders.isPaid"
             )
+            .orderBy("orders_id")
             .then(ordersList => {
               return Promise.all(
                 ordersList.map((order: object, i: number) => {
