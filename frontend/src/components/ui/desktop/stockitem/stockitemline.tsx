@@ -5,20 +5,20 @@ import * as React from "react";
 import { IMenuItemWithoutFlux, IStockManageModalState, IUpdateMenuItem } from "src/modules";
 
 // Importing utility function
-import { firstLetterCaps } from "../../../util/utility";
+import { firstLetterCaps } from "../../../../util/utility";
 
 // Importing static image assets
-import FilledStar from "../../assets/icons/desktop/stocklist/starfilled.svg";
-import UnfilledStar from "../../assets/icons/desktop/stocklist/starunfilled.svg";
-import Menu from "../../assets/icons/desktop/stocklist/menu.svg";
+import FilledStar from "src/components/assets/icons/desktop/stocklist/starfilled.svg";
+import UnfilledStar from "src/components/assets/icons/desktop/stocklist/starunfilled.svg";
+import Menu from "src/components/assets/icons/desktop/stocklist/menu.svg";
 
 // Importing temp fake images
-import img from "../../assets/images/categories/squarebeer.jpg";
+import img from "src/components/assets/images/categories/squarebeer.jpg";
 
 // redux
 import { connect } from "react-redux";
-import { IRootState } from "../../../redux/store";
-import { toggleStockManageModal } from "../../../redux/desktop/actions/actions_manager";
+import { IRootState } from "src/redux/store";
+import { toggleStockManageModal } from "src/redux/desktop/actions/actions_manager";
 
 interface IPureStockItemLineProps {
   singleItem: IMenuItemWithoutFlux,
@@ -29,8 +29,6 @@ interface IPureStockItemLineProps {
 interface IStockItemStates {
   isEditMenuOpen: boolean
 }
-
-
 
 
 class PureStockItemLine extends React.Component<IPureStockItemLineProps,IStockItemStates> {

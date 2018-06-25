@@ -10,8 +10,8 @@ import { getEntireMenu } from "../../../redux/desktop/actions/actions_manager";
 import AdminSideMenu from "../../ui/desktop/sidemenu";
 import StockFilter from "../../ui/desktop/stockfilter";
 import PageHeader from "../../ui/desktop/pageheader";
-import StockItemLine from "../../ui/desktop/stockitemline";
-import StockManageModal from "../../ui/desktop/stockadditemcardBlueprint";
+import StockItemLine from "../../ui/desktop/stockitem/stockitemline";
+import StockManageModal from "../../ui/desktop/stockitem/stockadditemcard";
 
 // Importing interfaces
 import {
@@ -112,7 +112,6 @@ export class PureStockManagement extends React.Component<
           <div />
         ) : (
           <StockManageModal
-            
             isModalOpen={this.state.isModalOpen}
           />
         )}
