@@ -55,7 +55,6 @@ interface IStockManageModalStates {
   itemPhoto: any;
   isSpecial: boolean;
   isActive: boolean;
-  // modal: boolean;
 }
 
 // Redux
@@ -209,7 +208,12 @@ class RealStockManageModal extends React.Component<
 
   public render() {
     return (
-      <Dialog isOpen={this.props.isModalOpen} className="edit-item-container" canEscapeKeyClose={true} canOutsideClickClose={true} onClose={this.props.closeEditModal}>
+      <Dialog
+        isOpen={this.props.isModalOpen}
+        className="edit-item-container"
+        canEscapeKeyClose={true}
+        canOutsideClickClose={true}
+        onClose={this.props.closeEditModal}>
         <div className="edit-item-grid">
           <ItemModalImage />
           <ItemModalInfo
@@ -221,10 +225,16 @@ class RealStockManageModal extends React.Component<
             setStock={this.setItemQuantity}
             setMinimunPrice={this.setItemMinPrice}
             setCurrentPrice={this.setItemStartPrice} />
-          <ItemModalStatus 
-          categories={this.props.categories}
-          setCategories={this.setCategory}/>
-          <ItemModalDescription descriptionText={this.state.itemDescription} onChange={this.setItemDescription} />
+          <ItemModalStatus
+            categories={this.props.categories}
+            isActive={this.state.isActive}
+            isSpecial={this.state.isSpecial}
+            setCategories={this.setCategory}
+            toggleActive={this.toggleActive}
+            toggleSpecial={this.toggleSpecial} />
+          <ItemModalDescription
+            descriptionText={this.state.itemDescription}
+            onChange={this.setItemDescription} />
         </div>
       </Dialog>
     );
