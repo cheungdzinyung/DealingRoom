@@ -2,6 +2,11 @@
 import * as React from "react";
 import { match } from "react-router-dom";
 
+// for redir
+import * as History from "history";
+import { withRouter } from "react-router";
+import { redirectPage, resetTargetPage } from "../../../redux/mobile/actions/actions_user";
+import {setPaymentTargetId } from "../../../redux/mobile/actions/actions_payment";
 // Importing UI elements
 import { Card, Elevation } from "@blueprintjs/core";
 
@@ -22,6 +27,14 @@ import PageHeader from "src/components/ui/mobile/pageheader";
 interface IOrderProps {
   match: match<{ orderId: number }>;
   ordersList: any;
+
+  // handling redirect
+  history: History.History,
+  redirectPage: (redirectTarget: string, history: any) => void,
+  resetTargetPage: () => void,
+
+  // set target order id
+  setPaymentTargetId: (paymentTargetId: number) => void,
 }
 
 interface IOrderState {
@@ -50,18 +63,11 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
     }
   }
 
-  public componentWillMount() {
-    // if (this.props.redirectTarget === "/order") {
-    //   this.props.resetTargetPage();
-    // }
+  public componentDidMount() {
 
     const displayName = this.props.ordersList.displayName;
     const orderID = this.props.match.params.orderId;
     const thisOrder = (this.props.ordersList.orders.find((e: any) => {
-      // alert(`${e.orders_id} :${orderID} : ${typeof(e.orders_id)} : ${typeof(orderID)}`)
-      // 1 : 1 : num : str
-      // alert(`${e.orders_id}` === `${orderID}`)
-      // true
       return (`${e.orders_id}` === `${orderID}`);
     }));
 
@@ -70,20 +76,20 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
       const amount = thisOrder.orderItems.reduce((accu: number, curr: any) => (accu + parseFloat(curr.purchasePrice)), 0);
       this.setState({
         displayName, orderID, tableNumber, thisOrder, amount
-      })
-
+      });
     }
   }
 
-  public payment = () => {
-    // TODO: stripe, this.state
-    return null;
+  public toPaymentPage = () => {
+    this.props.setPaymentTargetId(this.state.orderID);
+    this.props.redirectPage("/payment", this.props.history);
+    this.props.resetTargetPage();
   }
 
   public render() {
     return (
       <div className="page-content-container">
-      <PageHeader header={`Order ${this.state.orderID}`} subHeader="Your wish is our command"/>
+        <PageHeader header={`Order ${this.state.orderID}`} subHeader="Your wish is our command" />
         {
           this.state.thisOrder.orderItems !== "empty" ?
             <div>
@@ -99,12 +105,12 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
               ))}
               <img className="payment-method" src={this.state.paymentMethod} alt="" />
               <Card className="order-summary" elevation={Elevation.TWO}>
-                <button className="payment-button" onClick={this.payment}>
+                <button className="payment-button" onClick={this.toPaymentPage}>
                   <span className="payment-header">Pay Now</span>
                   <span className="payment-amount">HK&#36; {this.state.amount}</span>
                 </button>
               </Card>
-            </div>  : <div />
+            </div> : <div />
         }
         <Usermenu />
       </div>
@@ -112,18 +118,27 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
   }
 }
 
+
 const mapStateToProps = (state: IRootState) => {
   return {
     ordersList: state.customer.orders.ordersList,
   }
 }
 
-// const mapDispatchToProps = (dispatch: any) => {
-//   return {
-//     }
-//   }
-// }
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    setPaymentTargetId: (paymentTargetId: number, totalAmount: number) => {
+      dispatch(setPaymentTargetId(paymentTargetId, totalAmount));
+    },
+    redirectPage: (redirectTarget: string, history: any) => {
+      dispatch(redirectPage(redirectTarget, history));
+    },
+    resetTargetPage: () => {
+      dispatch(resetTargetPage());
+    },
+  }
+}
 
-const Order = connect(mapStateToProps, {})(PureOrder);
+  const Order = connect(mapStateToProps, mapDispatchToProps)(PureOrder);
 
-export default Order;
+  export default withRouter(Order as any);
