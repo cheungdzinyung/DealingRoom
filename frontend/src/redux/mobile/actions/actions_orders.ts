@@ -117,7 +117,7 @@ export function getEntireMenu() {
                     // alert(Object.keys(res.data));
                     dispatch(getEntireMenuSuccess(res.data));
                 } else {
-                    alert("error not 200");
+                    alert("error, status code not match: " + res.status);
                     dispatch(getEntireMenuFail());
                 }
             })
@@ -170,7 +170,7 @@ export function confirmOrder(orderToConfirm: ICurrentOrder) {
                     // alert(JSON.stringify(res.data))
                     dispatch(confirmOrderSuccess(res.data[0], orderToConfirm));
                 } else {
-                    alert("error, try again");
+                    alert("error, status code not match: " + res.status);
                     dispatch(confirmOrderFail(res.data));
                 }
             })
@@ -202,10 +202,8 @@ export function getOrdersByUserToken() {
             .then((res: any) => {
                 if (res.status === 200) {
                     dispatch(getOrdersByUserTokenSuccess(res.data[0]));
-                    // auto redir to order list page
-                    // dispatch(changePage(OrderList));
                 } else {
-                    alert("status: " + res.status);
+                    alert("error, status code not match: " + res.status);
                     dispatch(getOrdersByUserTokenFail());
                 }
             })
@@ -215,6 +213,7 @@ export function getOrdersByUserToken() {
             });
     }
 }
+
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function socketConnect(socketID: any): ISocketConnectSuccess {
     return {

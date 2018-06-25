@@ -4,25 +4,46 @@ import * as React from "react";
 import Stripe from "../../assets/images/payment/stripe.png";
 
 // Importing interfaces
-// import { ICustomerOrderList } from "../../../modules";
+import { OrderStatus } from "../../../modules";
 
 import StripeCheckout from 'react-stripe-checkout';
 
 import { STRIPE_PUBLISHABLE } from "../../../redux/store";
-// const PAYMENT_SERVER_URL = API_SERVER;
 
+// import redux and friends
+import { connect } from "react-redux";
+import { IRootState } from "../../../redux/store";
+import { payWithStripe, resetPaymentResult } from "../../../redux/mobile/actions/actions_payment";
+
+// for redir
+import * as History from "history";
+
+interface IPaymentInfo {
+    userName: string,
+    orderId: number,
+    amount: number,
+}
+
+interface IPaymentResult {
+    order_id: number,
+    status: OrderStatus,
+    isPaid: boolean,
+}
 
 interface IPurePaymentProps {
-    paymentInfo: {
-        userName: string,
-        orderId: number,
-        amount: number,
-    }
+    // handle payment
+    paymentInfo: IPaymentInfo,
+    
+    paymentResult: IPaymentResult,
+    payWithStripe: (orderId: number, token?: any) => void,
+    // handling redirect
+    history: History.History,
+    resetPaymentResult: () => void,
 }
 
 const CURRENCY = 'HKD';
 
-export default class MySrtipeComponent extends React.Component<IPurePaymentProps, {}> {
+class PureMySrtipeComponent extends React.Component<IPurePaymentProps, {}> {
     constructor(props: IPurePaymentProps) {
         super(props);
     }
@@ -32,31 +53,50 @@ export default class MySrtipeComponent extends React.Component<IPurePaymentProps
     )
 
     public onTokenReceive = (amount: number, description: any) => (token: any) => {
+        // localStorage.setItem("dealingRoomStripeToken", token.id);
+        this.props.payWithStripe(this.props.paymentInfo.orderId, token.id);
+    }
 
-        // axios.post(PAYMENT_SERVER_URL,
-        //     {
-        //         description,
-        //         source: token.id,
-        //         currency: CURRENCY,
-        //         amount: this.fromDollarToCent(this.props.paymentInfo.amount),
-        //     })
-        //     .then(this.successPayment)
-        //     .catch(this.errorPayment);
+    public componentDidUpdate() {
+        if (this.props.paymentResult.isPaid) {
+            alert("Payment successful :)");
+            this.props.history.push(`/order`);
+            this.props.resetPaymentResult();
+        }
     }
 
     public render() {
         return (
             <StripeCheckout
-                name          ={this.props.paymentInfo.userName}
-                description   ={`Dealingroom.live order#${this.props.paymentInfo.orderId}`}
-                currency      ={CURRENCY}
-                amount        ={this.fromDollarToCent(this.props.paymentInfo.amount)}
-                token         ={this.onTokenReceive(this.props.paymentInfo.amount, `Dealingroom.live orderID: ${this.props.paymentInfo.orderId}`)}
-                stripeKey     ={STRIPE_PUBLISHABLE || ""}>
+                name={this.props.paymentInfo.userName}
+                description={`Dealingroom.live order#${this.props.paymentInfo.orderId}`}
+                currency={CURRENCY}
+                amount={this.fromDollarToCent(this.props.paymentInfo.amount)}
+                token={this.onTokenReceive(this.props.paymentInfo.amount, `Dealingroom.live orderID: ${this.props.paymentInfo.orderId}`)}
+                stripeKey={STRIPE_PUBLISHABLE || ""}>
                 <img src={Stripe} alt="" className="payment-banner" />
             </StripeCheckout>
         );
     }
 }
 
+const mapStateToProps = (state: IRootState) => {
+    return {
+        paymentResult: state.customer.payment.paymentResult,
+    }
+}
 
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        payWithStripe: (orderId: number, token?: any) => {
+            dispatch(payWithStripe(orderId, token));
+        },
+        resetPaymentResult: () => {
+            dispatch(resetPaymentResult());
+        },
+    }
+}
+
+const MySrtipeComponent = connect(mapStateToProps, mapDispatchToProps)(PureMySrtipeComponent);
+
+export default MySrtipeComponent;

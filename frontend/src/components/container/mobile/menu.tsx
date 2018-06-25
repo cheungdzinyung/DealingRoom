@@ -97,17 +97,6 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
     this.setState({ searchBoxEntry: e.target.value.toLowerCase() });
   }
 
-  // add to cart
-  // public addToCurrentOrder = (e: React.MouseEvent<HTMLDivElement>) => {
-  //   const itemid = e.currentTarget.dataset.itemid;
-  //   const itemName = e.currentTarget.dataset.itemname;
-  //   // dataset attr are all lowercase
-  //   if (itemid !== undefined && itemName !== undefined) {
-  //     const currentPrice = this.props.entireMenu[this.state.displayCategoryIndex].items.find((element: IPureMenuItemWithFlux) => (parseFloat(itemid) === element.item_id)).currentPrice;
-  //     this.props.addToCurrentOrder(parseInt(itemid, 10), itemName, currentPrice);
-  //   }
-  // }
-
   public componentWillMount() {
     if (!this.props.menuReady) {
       this.props.getEntireMenu();
