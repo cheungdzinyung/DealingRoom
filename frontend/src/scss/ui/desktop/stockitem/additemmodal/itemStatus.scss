@@ -1,0 +1,36 @@
+.edit-item-status {
+    // Location from parent grid
+    grid-row: 2/3;
+    grid-column: 1/2; // Styling for child grid
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: repeat(2, 50%);
+    grid-template-areas: "select select" "star switch";
+    
+    padding: 10%;
+    .edit-item-filter-select {
+        grid-area: select;
+        width: 100%;
+        font-size: .8rem;
+        letter-spacing: 1px;
+        width: 100%;
+        padding: 4% 2%;
+        text-align: center;
+        text-align-last: center;
+        border: 1px #C4C4C4 solid;
+        color: #E9DBCC;
+        background-color: rgba(141, 141, 141, .5);
+        option {
+            background-color: rgba(141, 141, 141, .5);
+        }
+    }
+    .edit-item-star-container {
+        grid-area: star;
+        height: 100%;
+        .edit-item-star-img {}
+    }
+    .edit-item-status-switch {
+        grid-area: switch;
+        background-color: red;
+    }
+}

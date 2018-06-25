@@ -22,7 +22,7 @@ import { toggleStockManageModal } from "src/redux/desktop/actions/actions_manage
 
 interface IPureStockItemLineProps {
   singleItem: IMenuItemWithoutFlux,
-  openModal: ()=> void,
+  openModal: () => void,
   toggleStockManageModal: (stockManageModalState: IStockManageModalState, targetItem?: IUpdateMenuItem) => void,
 }
 
@@ -31,16 +31,17 @@ interface IStockItemStates {
 }
 
 
-class PureStockItemLine extends React.Component<IPureStockItemLineProps,IStockItemStates> {
-  
+class PureStockItemLine extends React.Component<IPureStockItemLineProps, IStockItemStates> {
+
   constructor(props: IPureStockItemLineProps) {
     super(props);
 
   }
 
   public editItem = () => {
-    this.props.toggleStockManageModal("update", this.props.singleItem);
     this.props.openModal();
+    this.props.toggleStockManageModal("update", this.props.singleItem);   
+
   };
 
   public render() {
@@ -74,18 +75,18 @@ class PureStockItemLine extends React.Component<IPureStockItemLineProps,IStockIt
               {this.props.singleItem.isSpecial ? (
                 <img src={FilledStar} alt="" className="star" />
               ) : (
-                <img src={UnfilledStar} alt="" className="star" />
-              )}
+                  <img src={UnfilledStar} alt="" className="star" />
+                )}
             </div>
             {this.props.singleItem.isActive ? (
               <button className="active-button rd-corner isActive">
                 <span className="isActive-button-text">Active</span>
               </button>
             ) : (
-              <button className="active-button rd-corner isNotActive">
-                <span className="isActive-button-text">Inactive</span>
-              </button>
-            )}
+                <button className="active-button rd-corner isNotActive">
+                  <span className="isActive-button-text">Inactive</span>
+                </button>
+              )}
           </div>
           <div className="item-edit-menu">
             <img
@@ -104,15 +105,15 @@ class PureStockItemLine extends React.Component<IPureStockItemLineProps,IStockIt
 // Redux
 const mapStateToProps = (state: IRootState) => {
   return {
-      stockManageModalState: state.staff.manager.stockManageModalState,
+    stockManageModalState: state.staff.manager.stockManageModalState,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-      toggleStockManageModal: (stockManageModalState: IStockManageModalState, targetItem?: IUpdateMenuItem) => {
-          dispatch(toggleStockManageModal(stockManageModalState, targetItem));
-      }
+    toggleStockManageModal: (stockManageModalState: IStockManageModalState, targetItem?: IUpdateMenuItem) => {
+      dispatch(toggleStockManageModal(stockManageModalState, targetItem));
+    }
   };
 };
 
