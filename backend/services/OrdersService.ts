@@ -323,7 +323,7 @@ export default class OrdersService {
         ) {
           return this.knex("orders")
             .join("users", "users.id", "=", "orders.users_id")
-            .whereNot({ status: "served", isPaid: true })
+            .whereNot(this.knex.raw(`(status='served' AND "isPaid"=true)`))
             .select(
               "orders.id as orders_id",
               "users.id as users_id",
@@ -332,6 +332,7 @@ export default class OrdersService {
               "orders.status",
               "orders.isPaid"
             )
+            .orderBy("orders_id")
             .then(ordersList => {
               return Promise.all(
                 ordersList.map((order: object, i: number) => {

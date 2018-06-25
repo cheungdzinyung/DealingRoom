@@ -52,11 +52,9 @@ export default class ApiRouter {
     const itemsRouter = new ItemsRouter(this.itemsService);
     const ordersRouter = new OrdersRouter(this.ordersService, this.itemsService);
     const pricesRouter = new PricesRouter(this.pricesService);
-    const paymentsRouter = new PaymentsRouter(this.paymentsService);
+    const paymentsRouter = new PaymentsRouter(this.knex, this.ordersService, this.paymentsService);
 
     router.use("/auth", authRouter.getRouter());
-    // remove comment on line 18 and 31, and add the following in between "/users" and usersRouter.router() for authentication:
-    // this.jwtAuth.authenticate(),
     router.use("/users", this.jwtAuth.authenticate(), usersRouter.router());
     router.use("/items", itemsRouter.router());
     router.use("/orders", this.jwtAuth.authenticate(), ordersRouter.router());

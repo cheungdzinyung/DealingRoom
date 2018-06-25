@@ -4,10 +4,6 @@ import * as dotenv from "dotenv";
 import * as express from "express";
 import * as Knex from "knex";
 
-
-// import * as Stripe from "stripe";
-// const stripe = new Stripe("sk_test_mlmBZyk66UHoOBcCkRKyPdig");
-
 import config from "./config";
 import * as KnexConfig from "./knexfile";
 import ApiRouter from "./routers/ApiRouter";
