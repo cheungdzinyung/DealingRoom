@@ -121,7 +121,7 @@ export class PureStockManagement extends React.Component<
     return (
       <div className="desktop-page-container">
         <AdminSideMenu />
-        <StockFilter filterChange={this.filterChange} />
+        <StockFilter filterChange={this.filterChange} openModal={this.openEditModal}/>
         <div className="page-container-center">
           <div className="page-container-center-content-wrapper">
             <PageHeader header="Stock Management" />
