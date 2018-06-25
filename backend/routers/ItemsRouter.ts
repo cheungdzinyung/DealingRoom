@@ -50,6 +50,10 @@ export default class ItemsRouter {
   }
 
   public getAll(req: express.Request, res: express.Response) {
+    let isActive: boolean;
+    req.query.isActive !== undefined
+      ? (isActive = req.query.isActive)
+      : (isActive = true);
     if (req.query.fluctuatingPrices !== undefined) {
       if (req.query.category !== undefined) {
         return this.itemsService
@@ -76,7 +80,7 @@ export default class ItemsRouter {
     } else {
       if (req.query.category !== undefined) {
         return this.itemsService
-          .getAllInCat(req.query.category)
+          .getAllInCat(req.query.category, req.query.isActive)
           .then((result: any) => {
             res.status(200).json(result);
           })
@@ -85,7 +89,7 @@ export default class ItemsRouter {
           });
       } else {
         return this.itemsService
-          .getAll()
+          .getAll(isActive)
           .then((result: any) => {
             res.status(200).json(result);
           })

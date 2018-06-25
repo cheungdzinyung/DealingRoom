@@ -31,8 +31,9 @@ export default class UsersRouter {
       return this.ordersService
         .add(req.user.id, req.body)
         .then((result: any) => {
+          const isActive = true;
           return this.itemsService
-            .getAll()
+            .getAll(isActive)
             .then(orderList => {
               return (result[0].entireMenu = orderList);
             })
