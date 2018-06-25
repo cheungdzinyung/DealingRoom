@@ -19,6 +19,7 @@ import Setting from "./components/container/mobile/setting";
 import AdminLogin from "./components/container/desktop/adminlogin";
 import StockManagement from "./components/container/desktop/stockmanagement";
 import CurrentOrders from "./components/container/desktop/currentorders";
+import PendingOrders from "./components/container/desktop/pendingorders";
 // import StockManageModal from "./components/ui/desktop/stockadditemcard";
 
 // import redux and friends
@@ -62,6 +63,7 @@ class PureApp extends React.Component<{}, {}> {
           <Route exact={true} path="/admin/login" component={AdminLogin}/>
           <Route exact={true} path="/admin/stock/" component={StockManagement}/>
           <Route exact={true} path="/admin/currentorders" component={CurrentOrders}/>
+          <Route exact={true} path="/admin/pendingorders" component={PendingOrders}/>
         </Switch>
       </div>
       // </Router>
