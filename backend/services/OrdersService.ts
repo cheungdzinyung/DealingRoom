@@ -323,7 +323,7 @@ export default class OrdersService {
         ) {
           return this.knex("orders")
             .join("users", "users.id", "=", "orders.users_id")
-            .whereNot({ status: "served", isPaid: true })
+            .whereNot({status: "served", isPaid: true})
             .select(
               "orders.id as orders_id",
               "users.id as users_id",

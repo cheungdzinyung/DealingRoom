@@ -1,5 +1,8 @@
 import * as Knex from "knex";
 
+import * as Stripe from "stripe";
+const stripe = new Stripe("sk_test_mlmBZyk66UHoOBcCkRKyPdig");
+
 export default class PaymentsService {
   private knex: Knex;
 
@@ -8,12 +11,19 @@ export default class PaymentsService {
   }
 
   // TO DO
-  public add(data: any) {
-    return this.knex("users");
-  }
-
-  // TO DO
-  public get(id: number) {
-    return this.knex("users");
+  public charge(token: string, orderId: number) {
+    console.log(token);
+    return this.knex("orders")
+      .select("id", "orderTotal")
+      .where("id", orderId)
+      .then((bill: any) => {
+        return stripe.charges.create({
+          amount: bill[0].orderTotal * 100,
+          currency: "hkd",
+          description: "Dealing Room",
+          source: token,
+          statement_descriptor: `order number: ${bill[0].id}`
+        });
+      });
   }
 }
