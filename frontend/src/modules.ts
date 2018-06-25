@@ -23,14 +23,13 @@ type CANCELLED = typeof CANCELLED;
 
 export type OrderStatus = ORDERED | CONFIRMED | MADE | SERVED | CANCELLED;
 
-const ALL = "all"
+const ALL = "all";
 type ALL = typeof ALL;
 
 export type ActiveSpecialFilter = ALL | boolean;
 
 // All acceptable image types
 // export type ImageExt = "*.jpg" | "*.png" | "*.jpeg" | string;
-
 
 /*
 Corresponding API path: api/item/????
@@ -39,28 +38,28 @@ for adding and editing menu items
 // current price === starting price
 // item_id is generated in backend
 export interface ICreateMenuItem {
-  itemName: string,
-  itemStock: number,
-  categoryName: string,
-  itemDescription: string,
-  minimumPrice: number,
-  currentPrice: number,
-  itemPhoto: any,
-  isSpecial: boolean,
-  isActive: boolean,
+  itemName: string;
+  itemStock: number;
+  categoryName: string;
+  itemDescription: string;
+  minimumPrice: number;
+  currentPrice: number;
+  itemPhoto: any;
+  isSpecial: boolean;
+  isActive: boolean;
 }
 
 // id and current price is untouched
 export interface IUpdateMenuItem {
-  items_id: number,
-  itemName: string,
-  itemStock: number,
-  categoryName: string,
-  itemDescription: string,
-  minimumPrice: number,
-  itemPhoto: any,
-  isSpecial: boolean,
-  isActive: boolean,
+  items_id: number;
+  itemName: string;
+  itemStock: number;
+  categoryName: string;
+  itemDescription: string;
+  minimumPrice: number;
+  itemPhoto: any;
+  isSpecial: boolean;
+  isActive: boolean;
 }
 
 export type IStockManageModalState = "create" | "update" | "discard";
@@ -160,8 +159,8 @@ export interface IMenuItemWithFlux extends IMenuItemWithoutFlux {
 
 // New line graph data format
 export interface IItemPriceGraphData {
-  time: string
-  purchasePrice: number
+  time: string;
+  purchasePrice: number;
 }
 
 /* 
@@ -169,49 +168,41 @@ Corresponding API path POST: api/orders/user/:id
 */
 // each item in shopping cart
 export interface IRequestItem extends IItemWithMod {
-  thisItemID: number,
+  thisItemID: number;
 }
 // the shopping cart
 // this is for when send to BE
 export interface ICurrentOrder {
-  users_id: number,
-  table: number,
-  status: OrderStatus,
-  item: IRequestItem[],
+  users_id: number;
+  table: number;
+  status: OrderStatus;
+  item: IRequestItem[];
 }
-
 
 /* 
 Corresponding API path GET: api/users/
 
 */
 export interface IUserProfile {
-  users_id: number,
-  username: string,
-  password: string,
-  displayName: string,
-  userPhoto: string,
-  role: string,
+  users_id: number;
+  username: string;
+  password: string;
+  displayName: string;
+  userPhoto: string;
+  role: string;
 }
 
 export interface ISignUpPackage {
-  displayName: string,
-  username: string,
-  password: string,
-  role: "manager" | "bartender" | "waiter" | "customer",
+  displayName: string;
+  username: string;
+  password: string;
+  role: "manager" | "bartender" | "waiter" | "customer";
 }
 
 export interface ILoginPackage {
-  username: string,
-  password: string,
+  username: string;
+  password: string;
 }
-
-
-
-
-
-
-
 
 // store state for ref
 // interface IUserState {
@@ -228,8 +219,3 @@ export interface ILoginPackage {
 //   currentOrder: IRequestItem[],
 //   currentTotal: number,
 // }
-
-
-
-
-

@@ -1,7 +1,3 @@
-// I am just a pretty little filler
-
-
-
 // Importing modules
 import * as React from "react";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';

@@ -22,25 +22,34 @@ import { toggleStockManageModal } from "../../../redux/desktop/actions/actions_m
 
 interface IPureStockItemLineProps {
   singleItem: IMenuItemWithoutFlux,
+  openModal: ()=> void,
   toggleStockManageModal: (stockManageModalState: IStockManageModalState, targetItem?: IUpdateMenuItem) => void,
-
 }
 
-class PureStockItemLine extends React.Component<IPureStockItemLineProps,{}> {
+interface IStockItemStates {
+  isEditMenuOpen: boolean
+}
+
+
+
+
+class PureStockItemLine extends React.Component<IPureStockItemLineProps,IStockItemStates> {
+  
   constructor(props: IPureStockItemLineProps) {
     super(props);
+
   }
 
-  public edit = (e: React.MouseEvent<HTMLDivElement>) => {
+  public editItem = () => {
     this.props.toggleStockManageModal("update", this.props.singleItem);
-  }
+    this.props.openModal();
+  };
 
   public render() {
     return (
       <div
         className="stock-item-card rd-corner"
         data-productid={this.props.singleItem.items_id}
-        onClick={this.edit}
       >
         <img src={img} alt="" className="stock-item-img rd-corner" />
         <div className="stock-item-info">
@@ -81,7 +90,12 @@ class PureStockItemLine extends React.Component<IPureStockItemLineProps,{}> {
             )}
           </div>
           <div className="item-edit-menu">
-            <img src={Menu} alt="" className="edit-item-icon"/>
+            <img
+              src={Menu}
+              alt=""
+              className="edit-item-icon"
+              onClick={this.editItem}
+            />
           </div>
         </div>
       </div>
