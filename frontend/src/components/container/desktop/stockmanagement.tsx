@@ -21,6 +21,7 @@ import {
   IUpdateMenuItem
 } from "src/modules";
 
+
 interface IStockManagementProps {
   menuReady: boolean;
   entireMenu: IMenuCategoryWithoutFlux[];
@@ -98,7 +99,7 @@ export class PureStockManagement extends React.Component<
   public switchEditModal = () => {
     this.props.toggleStockManageModal("update", this.props.targetItem);
     this.setState({
-      isModalOpen: !this.state.isModalOpen
+      isModalOpen: true
     });
   };
 

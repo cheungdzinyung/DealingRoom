@@ -25,6 +25,9 @@ import { withRouter } from "react-router";
 // Importing interfaces
 // import { ICustomerOrderList } from "../../../modules";
 
+// fetch stripe script
+// import scriptLoader from 'react-async-script-loader';
+
 interface IPurePaymentProps {
     paymentTargetId: number,
     totalAmount: number,
@@ -32,7 +35,9 @@ interface IPurePaymentProps {
     history: History.History,
 
     // stripe
-    // mixins: [ReactScriptLoaderMixin];
+    // isScriptLoaded: boolean,
+    // isScriptLoadSucceed: boolean,
+
 }
 
 interface IPurePaymentState {
@@ -66,19 +71,44 @@ class PurePayment extends React.Component<IPurePaymentProps, IPurePaymentState> 
         }
     }
 
-    public getScriptURL = () => {
-        return 'https://js.stripe.com/v2/';
-    }
+    // public componentWillReceiveProps() {
+    //     if (this.props.isScriptLoaded && !this.props.isScriptLoaded) {
+    //         // load finished, !== undefined
+    //         if (this.props.isScriptLoadSucceed) {
+    //             // this.initEditor();
+    //             this.render();
+    //         }
+    //         else {
+    //             this.onLoadScriptError();
+    //         }
+    //     }
+    // }
+
+    // public onLoadScriptError = () => {
+    //     alert("script load failed");
+    // }
+
+    // public componentDidMount() {
+    //     const { isScriptLoaded, isScriptLoadSucceed } = this.props
+    //     if (isScriptLoaded && isScriptLoadSucceed) {
+    //         // this.initEditor();
+    //         this.render();
+    //     }
+    // }
+
+    // public getScriptURL = () => {
+    //     return 'https://js.stripe.com/v2/';
+    // }
 
     // public onScriptLoaded = () => {
     //     if (!this.state.token) {
     //       // Put your publishable key here
     //       Stripe.setPublishableKey('pk_test_xxxx');
-    
+
     //       this.setState({ stripeLoading: false, stripeLoadingError: false });
     //     }
     //   }
-    
+
     // public onScriptError = () => {
     //     this.setState({ stripeLoading: false, stripeLoadingError: true });
     //   }
@@ -157,17 +187,15 @@ const mapDispatchToProps = (dispatch: any) => {
         //   removeFromCurrentOrder: (thisItemID: number) => {
         //     dispatch(removeFromCurrentOrder(thisItemID));
         //   },
-        //   confirmOrder: (orderToConfirm: ICurrentOrder) => {
-        //     dispatch(confirmOrder(orderToConfirm));
-        //   },
-        //   redirectPage: (redirectTarget: string, history: any) => {
-        //     dispatch(redirectPage(redirectTarget, history));
-        //   },
-        //   resetTargetPage: () => {
-        //     dispatch(resetTargetPage());
-        //   },
     }
 }
+
+// export const loader = scriptLoader(
+//     // api address
+//     [ 'https://js.stripe.com/v2/' ],
+//     // where u want to save it
+//     '/assets/bootstrap-markdown.js'
+//   )(PurePayment);
 
 const Payment = connect(mapStateToProps, mapDispatchToProps)(PurePayment);
 

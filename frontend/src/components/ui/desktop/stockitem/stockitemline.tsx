@@ -39,8 +39,8 @@ class PureStockItemLine extends React.Component<IPureStockItemLineProps,IStockIt
   }
 
   public editItem = () => {
-    this.props.toggleStockManageModal("update", this.props.singleItem);
     this.props.openModal();
+    this.props.toggleStockManageModal("update", this.props.singleItem);
   };
 
   public render() {
