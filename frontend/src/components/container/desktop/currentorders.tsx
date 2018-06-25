@@ -7,7 +7,7 @@ import AdminSideMenu from "../../ui/desktop/sidemenu";
 import OrderCard from "../../ui/desktop/ordercard";
 import { IOrder } from "src/modules";
 
-import { orderItems } from "../../../fakedata";
+import { allOrders } from "../../../fakedata";
 
 
 export default class CurrentOrders extends React.Component<IOrder[]> {
@@ -20,11 +20,13 @@ export default class CurrentOrders extends React.Component<IOrder[]> {
             <div className="desktop-page-container">
                 <AdminSideMenu />
                 <div className="currentorder-container-center">
-                    <div className="currentorder-header">
-                        <PageHeader header="Current Orders" />
-                    </div>
-                    <div className="order-card-display">
-                        <OrderCard {...orderItems} />
+                    <div className="currentorder-wrapper">
+                        <div className="currentorder-header">
+                            <PageHeader header="Current Orders" />
+                        </div>
+                        <div className="order-card-display">
+                            {allOrders.map((oneOrder, index) => (<OrderCard {...oneOrder} />))}
+                        </div>
                     </div>
                 </div>
             </div>

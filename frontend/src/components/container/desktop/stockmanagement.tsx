@@ -4,7 +4,7 @@ import * as React from "react";
 // redux
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
-import { getEntireMenu } from "../../../redux/desktop/actions/actions_manager";
+import { getEntireMenu, toggleStockManageModal } from "../../../redux/desktop/actions/actions_manager";
 
 // Importing UI components
 import AdminSideMenu from "../../ui/desktop/sidemenu";
@@ -17,7 +17,8 @@ import StockManageModal from "../../ui/desktop/stockitem/stockadditemcard";
 import {
   ActiveSpecialFilter,
   IMenuCategoryWithoutFlux,
-  IStockManageModalState
+  IStockManageModalState,
+  IUpdateMenuItem
 } from "src/modules";
 
 interface IStockManagementProps {
@@ -26,6 +27,12 @@ interface IStockManagementProps {
   categories: string[];
   getEntireMenu: () => void;
   stockManageModalState: IStockManageModalState;
+
+  targetItem: IUpdateMenuItem;
+  toggleStockManageModal: (
+    stockManageModalState: IStockManageModalState,
+    targetItem?: IUpdateMenuItem
+  ) => void;
 }
 
 interface IStockManagementState {
@@ -34,6 +41,31 @@ interface IStockManagementState {
   isSpecial: ActiveSpecialFilter;
   isModalOpen: boolean;
 }
+
+// Redux
+const mapStateToProps = (state: IRootState) => {
+  return {
+    entireMenu: state.staff.manager.entireMenu,
+    targetItem: state.staff.manager.targetItem,
+    categories: state.staff.manager.categories,
+    menuReady: state.staff.manager.menuReady,
+    stockManageModalState: state.staff.manager.stockManageModalState
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    getEntireMenu: () => {
+      dispatch(getEntireMenu());
+    },
+    toggleStockManageModal: (
+      stockManageModalState: IStockManageModalState,
+      targetItem?: IUpdateMenuItem
+    ) => {
+      dispatch(toggleStockManageModal(stockManageModalState, targetItem));
+    }
+  };
+};
 
 export class PureStockManagement extends React.Component<
   IStockManagementProps,
@@ -49,7 +81,8 @@ export class PureStockManagement extends React.Component<
       isModalOpen: false
     };
 
-    this.switchEditModal.bind(this);
+    this.openEditModal.bind(this);
+    this.closeEditModal.bind(this);
   }
 
   // Controlling the filer
@@ -63,11 +96,19 @@ export class PureStockManagement extends React.Component<
     }
   };
 
-  public switchEditModal = () => {
+  public openEditModal = () => {
+    this.props.toggleStockManageModal("update", this.props.targetItem);
     this.setState({
-      isModalOpen: !this.state.isModalOpen
+      isModalOpen: true
     });
   };
+
+  public closeEditModal = () => {
+    this.setState({
+      isModalOpen: false
+    });
+    this.props.toggleStockManageModal("discard");
+  }
 
   public componentDidMount() {
     if (!this.props.menuReady) {
@@ -97,7 +138,7 @@ export class PureStockManagement extends React.Component<
                     (this.state.isSpecial === "all" ||
                       this.state.isSpecial === eachItem.isSpecial)
                   ) {
-                    return <StockItemLine openModal={this.switchEditModal} singleItem={eachItem} />;
+                    return <StockItemLine openModal={this.openEditModal} singleItem={eachItem} />;
                   } else {
                     return <span />;
                   }
@@ -111,7 +152,7 @@ export class PureStockManagement extends React.Component<
         ) : (
             <StockManageModal
               isModalOpen={this.state.isModalOpen}
-              switchModal={this.switchEditModal}
+              closeEditModal={this.closeEditModal}
             />
           )}
       </div>
@@ -119,23 +160,7 @@ export class PureStockManagement extends React.Component<
   }
 }
 
-// Redux
-const mapStateToProps = (state: IRootState) => {
-  return {
-    entireMenu: state.staff.manager.entireMenu,
-    categories: state.staff.manager.categories,
-    menuReady: state.staff.manager.menuReady,
-    stockManageModalState: state.staff.manager.stockManageModalState
-  };
-};
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    getEntireMenu: () => {
-      dispatch(getEntireMenu());
-    }
-  };
-};
 
 const StockManagement = connect(
   mapStateToProps,
