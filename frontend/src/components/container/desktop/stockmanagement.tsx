@@ -81,7 +81,8 @@ export class PureStockManagement extends React.Component<
       isModalOpen: false
     };
 
-    this.switchEditModal.bind(this);
+    this.openEditModal.bind(this);
+    this.closeEditModal.bind(this);
   }
 
   // Controlling the filer
@@ -95,12 +96,19 @@ export class PureStockManagement extends React.Component<
     }
   };
 
-  public switchEditModal = () => {
+  public openEditModal = () => {
     this.props.toggleStockManageModal("update", this.props.targetItem);
     this.setState({
-      isModalOpen: !this.state.isModalOpen
+      isModalOpen: true
     });
   };
+
+  public closeEditModal = () => {
+    this.setState({
+      isModalOpen: false
+    });
+    this.props.toggleStockManageModal("discard");
+  }
 
   public componentDidMount() {
     if (!this.props.menuReady) {
@@ -130,7 +138,7 @@ export class PureStockManagement extends React.Component<
                     (this.state.isSpecial === "all" ||
                       this.state.isSpecial === eachItem.isSpecial)
                   ) {
-                    return <StockItemLine openModal={this.switchEditModal} singleItem={eachItem} />;
+                    return <StockItemLine openModal={this.openEditModal} singleItem={eachItem} />;
                   } else {
                     return <span />;
                   }
@@ -144,7 +152,7 @@ export class PureStockManagement extends React.Component<
         ) : (
             <StockManageModal
               isModalOpen={this.state.isModalOpen}
-              switchModal={this.switchEditModal}
+              closeEditModal={this.closeEditModal}
             />
           )}
       </div>

@@ -4,7 +4,7 @@ import * as React from "react";
 // Importing UI elements
 import { Dialog } from "@blueprintjs/core";
 import ItemModalDescription from "./additemmodal/itemDescription";
-import ItemModalInfo from "./additemmodal/itemInfo";
+// import ItemModalInfo from "./additemmodal/itemInfo";
 import ItemModalStatus from "./additemmodal/itemStatus";
 import ItemModalImage from "./additemmodal/itemImage";
 
@@ -49,7 +49,7 @@ interface IStockManageModalProps {
   ) => void;
 
   isModalOpen: boolean;
-  switchModal: () => void;
+  closeEditModal: () => void;
 
 }
 
@@ -218,10 +218,10 @@ class RealStockManageModal extends React.Component<
 
   public render() {
     return (
-      <Dialog isOpen={this.props.isModalOpen} className="edit-item-container" canEscapeKeyClose={true} canOutsideClickClose={true} onClose={this.props.switchModal}>
+      <Dialog isOpen={this.props.isModalOpen} className="edit-item-container" canEscapeKeyClose={true} canOutsideClickClose={true} onClose={this.props.closeEditModal}>
         <div className="edit-item-grid">
           <ItemModalImage />
-          <ItemModalInfo />
+          {/* <ItemModalInfo /> */}
           <ItemModalStatus />
           <ItemModalDescription descriptionText={this.state.itemDescription} onChange={this.setItemDescription} />
         </div>
