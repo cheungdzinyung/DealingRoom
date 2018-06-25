@@ -5,11 +5,13 @@ import * as React from "react";
 // Component import
 import Usermenu from "../../ui/mobile/usermenu";
 import PageHeader from "src/components/ui/mobile/pageheader";
+import MySrtipeComponent from "./myStripeComponent";
+
 
 // Media asset import
 // import Alipay from "../../assets/images/payment/alipay.png";
 // import Paypal from "../../assets/images/payment/paypal.png";
-import Stripe from "../../assets/images/payment/stripe.png";
+// import Stripe from "../../assets/images/payment/stripe.png";
 // import Wechatpay from "../../assets/images/payment/wechatpay.png";
 
 // import redux and friends
@@ -25,32 +27,17 @@ import { withRouter } from "react-router";
 // Importing interfaces
 // import { ICustomerOrderList } from "../../../modules";
 
-// fetch stripe script
-// import scriptLoader from 'react-async-script-loader';
 
 interface IPurePaymentProps {
     paymentTargetId: number,
     totalAmount: number,
-
     history: History.History,
-
-    // stripe
-    // isScriptLoaded: boolean,
-    // isScriptLoadSucceed: boolean,
-
 }
 
 interface IPurePaymentState {
-    cardNumber: string,
-    expMonth: string,
-    expYear: string,
-    cvc: string,
-    submitDisabled: boolean,
-    stripeLoading: boolean,
-    stripeLoadingError: boolean,
-    paymentComplete: boolean,
-    paymentError: any,
-    token: string,
+    userName: string,
+    orderId: number,
+    amount: number,
 }
 
 class PurePayment extends React.Component<IPurePaymentProps, IPurePaymentState> {
@@ -58,120 +45,47 @@ class PurePayment extends React.Component<IPurePaymentProps, IPurePaymentState> 
         super(props);
 
         this.state = {
-            cardNumber: "",
-            expMonth: "",
-            expYear: "",
-            cvc: "",
-            submitDisabled: false,
-            stripeLoading: false,
-            stripeLoadingError: false,
-            paymentComplete: false,
-            paymentError: null,
-            token: "",
+            userName: "",
+            orderId: 0,
+            amount: 0,
         }
     }
 
-    // public componentWillReceiveProps() {
-    //     if (this.props.isScriptLoaded && !this.props.isScriptLoaded) {
-    //         // load finished, !== undefined
-    //         if (this.props.isScriptLoadSucceed) {
-    //             // this.initEditor();
-    //             this.render();
-    //         }
-    //         else {
-    //             this.onLoadScriptError();
-    //         }
-    //     }
-    // }
-
-    // public onLoadScriptError = () => {
-    //     alert("script load failed");
-    // }
-
-    // public componentDidMount() {
-    //     const { isScriptLoaded, isScriptLoadSucceed } = this.props
-    //     if (isScriptLoaded && isScriptLoadSucceed) {
-    //         // this.initEditor();
-    //         this.render();
-    //     }
-    // }
-
-    // public getScriptURL = () => {
-    //     return 'https://js.stripe.com/v2/';
-    // }
-
-    // public onScriptLoaded = () => {
-    //     if (!this.state.token) {
-    //       // Put your publishable key here
-    //       Stripe.setPublishableKey('pk_test_xxxx');
-
-    //       this.setState({ stripeLoading: false, stripeLoadingError: false });
-    //     }
-    //   }
-
-    // public onScriptError = () => {
-    //     this.setState({ stripeLoading: false, stripeLoadingError: true });
-    //   }
+    public fromDollarToCent = (amount: number) => (
+        amount * 100
+    )
 
     public onFormSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
         e.preventDefault();
-        this.setState({ submitDisabled: true, paymentError: null });
-        // send form here
-        // Stripe.createToken(e.target, (status: any, response: any) => {
-        //     if (response.error) {
-        //         this.setState({ paymentError: response.error.message, submitDisabled: false });
-        //     }
-        //     else {
-        //         this.setState({ paymentComplete: true, submitDisabled: false, token: response.id });
-        //         // make request to your server here!
-        //     }
-        // });
+        // this.setState({ submitDisabled: true, paymentError: null });
+    }
+
+    public successPayment = (data: any) => {
+        alert('Payment Successful');
+    };
+
+    public errorPayment = (data: any) => {
+        alert('Payment Error');
+    };
+
+    public componentDidMount () {
+        this.setState ({
+            userName: "",
+            orderId: this.props.paymentTargetId,
+            amount: this.props.totalAmount,
+        })
     }
 
 
     public render() {
-        if (this.state.stripeLoading) {
-            return (
-                <div>
-                    <div>Loading</div>
-                    <Usermenu />
-                </div>
-            )
-        }
-        else if (this.state.stripeLoadingError) {
-            return (
-                <div>
-                    <div>Error</div>
-                    <Usermenu />
-                </div>
-            );
-        }
-        else if (this.state.paymentComplete) {
-            return (
-                <div>
-                    <div>Payment Complete!</div>
-                    <Usermenu />
-                </div>
-            );
-        }
-        else {
-            return (
-                <div className="page-content-container">
-                    <PageHeader header={`Order # ${this.props.paymentTargetId}`} subHeader={`Order Total $${this.props.totalAmount} `} />
-                    <form className="user-info-form" onSubmit={this.onFormSubmit} >
-                        <span>{this.state.paymentError}</span><br />
-                        <input type='text' data-stripe='number' placeholder='credit card number' className="pt-large input-field" /><br />
-                        <input type='text' data-stripe='exp-month' placeholder='expiration month' className="pt-large input-field" /><br />
-                        <input type='text' data-stripe='exp-year' placeholder='expiration year' className="pt-large input-field" /><br />
-                        <input type='text' data-stripe='cvc' placeholder='cvc' className="pt-large input-field" /><br />
-                        <input disabled={this.state.submitDisabled} type='submit' value='Pay by :' className="conf-button" />
-                    </form>
-                    <br />
-                    <img src={Stripe} alt="" className="payment-banner" />
-                    <Usermenu />
-                </div>
-            );
-        }
+        return (
+            <div className="page-content-container">
+                <PageHeader header={`Order # ${this.props.paymentTargetId}`} subHeader={`Order Total $${this.props.totalAmount} `} />
+                <br />
+                < MySrtipeComponent paymentInfo={this.state} />
+                <Usermenu />
+            </div>
+        );
     }
 }
 
@@ -179,6 +93,7 @@ const mapStateToProps = (state: IRootState) => {
     return {
         paymentTargetId: state.customer.payment.paymentTargetId,
         totalAmount: state.customer.payment.totalAmount,
+        userName: state.customer.user.userProfile.displayName,
     }
 }
 
@@ -190,12 +105,6 @@ const mapDispatchToProps = (dispatch: any) => {
     }
 }
 
-// export const loader = scriptLoader(
-//     // api address
-//     [ 'https://js.stripe.com/v2/' ],
-//     // where u want to save it
-//     '/assets/bootstrap-markdown.js'
-//   )(PurePayment);
 
 const Payment = connect(mapStateToProps, mapDispatchToProps)(PurePayment);
 

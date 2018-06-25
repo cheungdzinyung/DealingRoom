@@ -34,7 +34,7 @@ interface IOrderProps {
   resetTargetPage: () => void,
 
   // set target order id
-  setPaymentTargetId: (paymentTargetId: number) => void,
+  setPaymentTargetId: (paymentTargetId: number, totalAmount: number) => void,
 }
 
 interface IOrderState {
@@ -81,7 +81,7 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
   }
 
   public toPaymentPage = () => {
-    this.props.setPaymentTargetId(this.state.orderID);
+    this.props.setPaymentTargetId(this.state.orderID, this.state.amount);
     this.props.redirectPage("/payment", this.props.history);
     this.props.resetTargetPage();
   }
