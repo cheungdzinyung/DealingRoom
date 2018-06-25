@@ -1,7 +1,6 @@
 import { applyMiddleware, createStore, Action, compose } from "redux";
 import thunk from 'redux-thunk';
 
-
 // combining reducers for mobile and 'desktop' version
 import { combineReducers } from 'redux';
 import { ICustomerState, customerReducer } from "./mobile/reducers/index";

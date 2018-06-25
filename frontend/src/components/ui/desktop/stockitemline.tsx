@@ -1,9 +1,6 @@
 // Importing modules
 import * as React from "react";
 
-// Importing UI elements
-import { Dialog, Button, Intent } from "@blueprintjs/core";
-
 // Importing Interfaces
 import { IMenuItemWithoutFlux, IStockManageModalState, IUpdateMenuItem } from "src/modules";
 
@@ -23,44 +20,36 @@ import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
 import { toggleStockManageModal } from "../../../redux/desktop/actions/actions_manager";
 
-interface IStockItemLineState {
-  isEditMenuOpen: boolean;
-}
-
 interface IPureStockItemLineProps {
   singleItem: IMenuItemWithoutFlux,
+  openModal: ()=> void,
   toggleStockManageModal: (stockManageModalState: IStockManageModalState, targetItem?: IUpdateMenuItem) => void,
-
 }
 
-class PureStockItemLine extends React.Component<IPureStockItemLineProps,IStockItemLineState> {
+interface IStockItemStates {
+  isEditMenuOpen: boolean
+}
+
+
+
+
+class PureStockItemLine extends React.Component<IPureStockItemLineProps,IStockItemStates> {
+  
   constructor(props: IPureStockItemLineProps) {
     super(props);
 
-    this.state = {
-      isEditMenuOpen: false
-    }
   }
 
-  public openEditMenu = () => {
-    this.setState({
-      isEditMenuOpen: true
-    });
-  };
-
-  public toggleDialog = () => {
-    this.setState({ isEditMenuOpen: !this.state.isEditMenuOpen });
-  };
-  public edit = (e: React.MouseEvent<HTMLDivElement>) => {
+  public editItem = () => {
     this.props.toggleStockManageModal("update", this.props.singleItem);
-  }
+    this.props.openModal();
+  };
 
   public render() {
     return (
       <div
         className="stock-item-card rd-corner"
         data-productid={this.props.singleItem.items_id}
-        onClick={this.edit}
       >
         <img src={img} alt="" className="stock-item-img rd-corner" />
         <div className="stock-item-info">
@@ -105,28 +94,10 @@ class PureStockItemLine extends React.Component<IPureStockItemLineProps,IStockIt
               src={Menu}
               alt=""
               className="edit-item-icon"
-              onClick={this.openEditMenu}
+              onClick={this.editItem}
             />
           </div>
         </div>
-        <Dialog
-          icon="inbox"
-          isOpen={this.state.isEditMenuOpen}
-          onClose={this.toggleDialog}
-          title="Dialog header"
-        >
-          <div className="pt-dialog-body">Some content</div>
-          <div className="pt-dialog-footer">
-            <div className="pt-dialog-footer-actions">
-              <Button text="Secondary" />
-              <Button
-                intent={Intent.PRIMARY}
-                onClick={this.toggleDialog}
-                text="Primary"
-              />
-            </div>
-          </div>
-        </Dialog>
       </div>
     );
   }

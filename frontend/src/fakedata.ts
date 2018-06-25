@@ -229,8 +229,18 @@ export const orderItems: IOrder = {
     sweetness: "normal",
     garnish: "normal",
   },
+  {
+    items_id: 18,
+    itemName: "Daiquiri",
+    purchasePrice: 100,
+    ice: "normal",
+    sweetness: "normal",
+    garnish: "normal",
+  },
 ],
-}
+};
+
+
 
 // export const chartOption = {
 //   layout: {
