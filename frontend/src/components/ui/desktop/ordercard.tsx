@@ -12,7 +12,9 @@ export default class OrderCard extends React.Component<IOrder> {
                 <div className="order-header-container">
                     <span className="order-id">#{this.props.orders_id}</span>
                     <div className="order-button">
-                        <span className="order-confirmed">DONE</span>
+                        <button className="order-confirmed">
+                            <span className="button-order-text">Done</span>
+                        </button>
                     </div>
                 </div>
                 <div className="order-item-container">
