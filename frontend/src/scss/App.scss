@@ -1,64 +1,13 @@
-// Templates
-$bgc-tinted: hsla(240, 3%, 18%, 0.5);
-$bgc-shaded: rgba(45, 44, 48, .9);
-$font-color-dark: rgba(22, 25, 23, .85);
-$font-color-light: rgba(233, 219, 204, 1);
-$bgc: #171619;
-$search-bar-bgc: rgba(141, 141, 141, .3);
-$search-bar-font: rgba(233, 219, 204, 1);
-$placebolder-color:rgba(233, 219, 204, .55);
-$theme-orange: rgba(252, 178, 75, 0.97);
-$notification-alert: rgb(255, 0, 0);
-$up: rgba(111, 207, 151, 1);
-$up-dim: rgba(111, 207, 151, .24);
-$down: rgba(235, 87, 87, 1);
-$down-dim: rgba(235, 87, 87, .24);
-$item-card-bgc: rgba(81, 81, 81, .9);
-$item-card-text: rgba(233, 219, 204, 1);
-$item-detail-bgc: rgba(81, 81, 81, .55);
-$item-detail-subheaders: rgba(233, 219, 204, 1);
-$item-detail-text: rgba(233, 219, 204, .7);
-$warning-orange: rgba(255, 205, 68, .9);
-$bot-menu-bgc: rgba(81, 81, 81, 1);
-$bot-menu-text: rgba(233, 219, 204, .6);
-$login-form-bgc: rgba(141, 141, 141, .85);
-$login-form-input: rgba(141, 141, 141, .95);
-$submit-bgc:rgba(238, 83, 83, .85);
-$submit-text: rgba(242, 242, 242, 1);
-$header-text: rgba(233, 219, 204, 1);
-$header-sub-text: rgba(233, 219, 204, .3);
 // Imports, external
 @import "~@blueprintjs/core/lib/css/blueprint.css";
 @import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
 @import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,500,600,700|Proza+Libre:400,500|IBM+Plex+Mono');
 // Imports, internal SCSS modules
-// Presentation component styling
-//--> Mobile
-@import './ui/mobile/categoryfilter';
-@import './ui/mobile/header';
-@import './ui/mobile/itemcard';
-@import './ui/mobile/menuitem';
-@import './ui/mobile/orderbanner';
-@import './ui/mobile/topbanner';
-@import './ui/mobile/usermenu';
-//--> Desktop
-@import './ui/desktop/sidemenu';
-@import './ui/desktop/stockfilter';
-// Container component styling
-// Technically speaking, this should even be here at all (according to the founder of Redux. hehe) omg
-//--> Mobile
-@import './pages/mobile/login';
-@import './pages/mobile/profile';
-@import './pages/mobile/setting';
-@import './pages/mobile/menu';
-@import './pages/mobile/payment';
-@import './pages/mobile/order';
-@import './pages/mobile/orderlist';
-@import './pages/mobile/request';
-//--> Desktop
-@import './pages/desktop/stockmanagement';
-// Display screen styling
-@import './pages/display/display';
+@import './templates';
+@import './ui/imports';
+@import './container/imports';
+
+
 // Top level reset
 html,
 body {
@@ -117,47 +66,4 @@ small,
 button,
 input {
     border: 0;
-}
-
-// Style element shares across multiple components
-// Mobile
-.page-content-container {
-    width: 100%;
-    padding: 5vh 10% 17vh 10%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.rd-corner {
-    border-radius: 5px;
-}
-
-.searchbar {
-    width: 100%;
-    padding: 3.5% 5%;
-    background-color: $search-bar-bgc;
-    color: $search-bar-font;
-    font-size: 1rem;
-    font-family: 'IBM Plex Mono', monospace;
-}
-
-#up-triangle-path,
-#up-triangle-group {
-    fill: $up;
-    stroke: $up;
-}
-
-*::-moz-placeholder,
-*::-ms-input-placeholder,
-*::-webkit-input-placeholder {
-    color: $placebolder-color;
-}
-
-//   Desktop
-.desktop-page-container {
-    position: relative;
-    display: grid;
-    grid-template-columns: 20% 1fr 20%;
-    grid-gap: 5px;
 }

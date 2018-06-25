@@ -10,14 +10,16 @@ export default class OrderCard extends React.Component<IOrder> {
         return (
             <div className="order-card-container">
                 <div className="order-header-container">
-                    <span className="order-id">{this.props.orders_id}</span>
+                    <span className="order-id">#{this.props.orders_id}</span>
                     <div className="order-button">
-                        <span className="order-confirmed">DONE</span>
+                        <button className="order-confirmed">
+                            <span className="button-order-text">{this.props.status}</span>
+                        </button>
                     </div>
                 </div>
                 <div className="order-item-container">
                     {this.props.orderItems.map((item, index) => (
-                        <div className="order-item-line">
+                        <div className="order-item-line" key={index}>
                             <div className="order-item-name-container">
                                 <span className="order-item-name">{item.itemName}</span>
                             </div>
@@ -28,7 +30,6 @@ export default class OrderCard extends React.Component<IOrder> {
                             </div>
                         </div>
                     ))}
-
                 </div>
             </div>
         )

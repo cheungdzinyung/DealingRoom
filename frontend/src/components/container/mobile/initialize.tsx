@@ -18,13 +18,14 @@ interface IInitializeProps {
 
     getEntireMenu: () => void,
     menuReady: boolean,
+    getOrdersByUserToken: () => void,
+    orderListReady: boolean,
+    orderAPIErr: string,
 
     userProfile: any,
     getUserProfileByUserToken: () => void,
     userProfileReady: boolean,
-
-    getOrdersByUserToken: () => void,
-    orderListReady: boolean,
+    userAPIErr: string,
 }
 
 class PureInitialize extends React.Component<IInitializeProps, {}> {
@@ -35,14 +36,23 @@ class PureInitialize extends React.Component<IInitializeProps, {}> {
     public componentDidMount() {
         // fetch entireMenu , set categories[]
         this.props.getEntireMenu();
-        // fetch user data
-        this.props.getUserProfileByUserToken();
         // fetch ordersList
         this.props.getOrdersByUserToken();
+        // fetch user data
+        this.props.getUserProfileByUserToken();
     }
 
     public componentDidUpdate() {
-        if (this.props.menuReady) {
+        if (this.props.orderAPIErr === "GET_ENTIRE_MENU_FAIL") {
+            this.props.getEntireMenu();
+        }
+        if (this.props.orderAPIErr === "GET_ORDERS_BY_USER_TOKEN_FAIL") {
+            this.props.getOrdersByUserToken();
+        }
+        if (this.props.userAPIErr === "GET_USER_PROFILE_BY_USER_TOKEN_FAIL") {
+            this.props.getUserProfileByUserToken();
+        }
+        if (this.props.menuReady && this.props.userProfileReady && this.props.orderListReady) {
             this.props.history.push("/menu");
         }
     }
@@ -50,7 +60,8 @@ class PureInitialize extends React.Component<IInitializeProps, {}> {
     public render() {
         return (
             <div className="order-header-container">
-                <h3 className="order-header">Your order history is empty, get a drink</h3>
+                <h3 className="order-header">Loading ...</h3>
+                <h3 className="order-header">Please Wait ...</h3>
             </div>
         )
     }
@@ -63,6 +74,8 @@ const mapStateToProps = (state: IRootState) => {
         userProfileReady: state.customer.user.userProfileReady,
         orderListReady: state.customer.orders.orderListReady,
         userProfile: state.customer.user.userProfile,
+        userAPIErr: state.customer.user.userAPIErr,
+        orderAPIErr: state.customer.orders.orderAPIErr,
     }
 }
 

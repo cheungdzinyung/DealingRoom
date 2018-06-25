@@ -7,6 +7,8 @@ import {
     LOCAL_LOGIN_FAIL,
     LOCAL_SIGNUP_SUCCESS,
     LOCAL_SIGNUP_FAIL,
+    FB_LOGIN_SUCCESS,
+    FB_LOGIN_FAIL,
     GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS,
     GET_USER_PROFILE_BY_USER_TOKEN_FAIL,
 } from "../actions/actions_user";
@@ -21,6 +23,7 @@ export interface IUserState {
     // settings: string,
     userProfile: IUserProfile,
     userProfileReady: boolean,
+    userAPIErr: string,
 }
 
 const initialState = {
@@ -38,6 +41,7 @@ const initialState = {
         role: "string",
     },
     userProfileReady: false,
+    userAPIErr: "none",
 }
 
 // declare global {
@@ -63,23 +67,32 @@ export const userReducer = (state: IUserState = initialState, action: UserAction
         }
         case LOCAL_LOGIN_SUCCESS: {
             localStorage.setItem("dealingRoomToken", action.userInfoPackage.token);
-            return { ...state, isAuth: true };
+            return { ...state, isAuth: true, userAPIErr: "none" };
         }
         case LOCAL_LOGIN_FAIL: {
-            return state;
+            return { ...state, userAPIErr: action.errMsg };
         }
         case LOCAL_SIGNUP_SUCCESS: {
-            localStorage.setItem("dealingRoomToken", action.userInfoPackage.token);
-            return { ...state, isAuth: true };
+            localStorage.setItem("dealingRoomToken", action.userInfoPackage.password);
+            return { ...state, userAPIErr: "none" };
         }
         case LOCAL_SIGNUP_FAIL: {
-            return state
+            return { ...state, userAPIErr: action.errMsg }
         }
+        case FB_LOGIN_SUCCESS: {
+            localStorage.setItem("dealingRoomToken", action.FBtoken);
+            return { ...state, isAuth: true, userAPIErr: "none" }
+            // alert(`FB login ok ;) ${action.FBtoken}`)
+            // return state;
+        }
+        case FB_LOGIN_FAIL: {
+            return { ...state, userAPIErr: action.errMsg ||"FB_LOGIN_FAIL" }
+        }        
         case GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS: {
-            return { ...state, userProfile: action.userProfile, userProfileReady: true };
+            return { ...state, userProfile: action.userProfile, userProfileReady: true, userAPIErr: "none" };
         }
         case GET_USER_PROFILE_BY_USER_TOKEN_FAIL: {
-            return state;
+            return { ...state, userAPIErr: "GET_USER_PROFILE_BY_USER_TOKEN_FAIL" };
         }
         default: {
             return state

@@ -33,6 +33,7 @@ export interface IOrdersState {
     unpaidOrders: number,
     currentOrder: IRequestItem[],
     currentTotal: number,
+    orderAPIErr: string,
 }
 
 const initialState: IOrdersState = {
@@ -94,16 +95,22 @@ const initialState: IOrdersState = {
     unpaidOrders: 0,
     currentOrder: [],
     currentTotal: 0,
+    orderAPIErr: "none",
 }
 
 export const ordersReducer = (state: IOrdersState = initialState, action: OrdersActions): IOrdersState => {
     switch (action.type) {
         case GET_ENTIRE_MENU_SUCCESS: {
             const categories = action.entireMenu.map((category: any) => (category.categoryName));
-            return { ...state, entireMenu: action.entireMenu, categories, menuReady: true };
+            return { ...state,
+                    entireMenu: action.entireMenu,
+                    categories,
+                    menuReady: true,
+                    orderAPIErr: "none"
+                };
         }
         case GET_ENTIRE_MENU_FAIL: {
-            return state;
+            return { ...state, orderAPIErr: "GET_ENTIRE_MENU_FAIL" };
         }
         case ADD_ITEM: {
             // onclick: add item to current order []
@@ -119,31 +126,47 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
             };
             // new total price: x1000 to avoid overflow
             const newTotal = (state.currentTotal * 1000 + newItem.purchasePrice * 1000) / 1000;
-            return { ...state, currentOrder: state.currentOrder.concat([newItem]), currentTotal: newTotal };
+            return { ...state, 
+                    currentOrder: state.currentOrder.concat([newItem]),
+                    currentTotal: newTotal
+                };
         }
         case REMOVE_ITEM: {
             const newArray = state.currentOrder.filter((e: IRequestItem) => (e.thisItemID !== action.thisItemID));
             // new total price: x1000 to avoid overflow
             const newTotal = newArray.reduce((accu, e: IRequestItem) => (accu + e.purchasePrice * 1000), 0) / 1000;
-            return { ...state, currentOrder: newArray, currentTotal: newTotal };
+            return { ...state,
+                    currentOrder: newArray,
+                    currentTotal: newTotal
+                };
         }
         case CONFIRM_ORDER_SUCCESS: {
             // write to db ok, clear current order n current total, redir by action
             // action.result = { users_id: num, status: str, orders_id: num, entireMenu }
-            return { ...state, currentOrder: [], currentTotal: 0, entireMenu: action.result.entireMenu };
+            return { ...state,
+                    currentOrder: [],
+                    currentTotal: 0,
+                    entireMenu: action.result.entireMenu,
+                    orderAPIErr: "none"
+                };
         }
         case CONFIRM_ORDER_FAIL: {
             // write to db failed, keep current order in root state
-            return state;
+            return { ...state, orderAPIErr: "CONFIRM_ORDER_FAIL" };
         }
         case GET_ORDERS_BY_USER_TOKEN_SUCCESS: {
             // need to change data type
             const unpaidOrders = action.allOrdersByOneUser.orders.filter((e: any) => (e.isPaid === false)).length;
-            return { ...state, ordersList: action.allOrdersByOneUser, unpaidOrders, orderListReady: true };
+            return { ...state,
+                    ordersList: action.allOrdersByOneUser,
+                    unpaidOrders,
+                    orderListReady: true,
+                    orderAPIErr: "none",
+                };
         }
         case GET_ORDERS_BY_USER_TOKEN_FAIL: {
             // get fail, F5?
-            return state;
+            return { ...state, orderAPIErr: "GET_ORDERS_BY_USER_TOKEN_FAIL" };
         }
         case SOCKET_CONNECT_SUCCESS: {
             return { ...state, socketID: action.socketID };

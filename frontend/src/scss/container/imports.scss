@@ -1,0 +1,14 @@
+//--> Mobile
+@import './mobile/login';
+@import './mobile/profile';
+@import './mobile/setting';
+@import './mobile/menu';
+@import './mobile/payment';
+@import './mobile/order';
+@import './mobile/orderlist';
+@import './mobile/request';
+//--> Desktop
+@import './desktop/stockmanagement';
+@import './desktop/currentorders';
+// Display screen styling
+@import './display/display';

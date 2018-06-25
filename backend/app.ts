@@ -11,6 +11,7 @@ import jwtStrategy from "./util/auth/jwtStrategy";
 
 import ItemsService from "./services/ItemsService";
 import OrdersService from "./services/OrdersService";
+import PaymentsService from "./services/PaymentsService"
 import PricesService from "./services/PricesService";
 import UsersService from "./services/UsersService";
 
@@ -22,18 +23,19 @@ const usersService = new UsersService(knex);
 const itemsService = new ItemsService(knex);
 const ordersService = new OrdersService(knex);
 const pricesService = new PricesService(knex);
+const paymentsService = new PaymentsService(knex);
 
 const jwtAuth = jwtStrategy(usersService);
-const apiRouter = new ApiRouter(jwtAuth, usersService, itemsService, ordersService, pricesService, knex);
+const apiRouter = new ApiRouter(jwtAuth, usersService, itemsService, ordersService, pricesService, paymentsService, knex);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use("/api", apiRouter.getRouter());
 
-// app.listen(config.port, () => {
-//   console.log(`Application started at port: ${config.port}`);
-// });
+app.listen(config.port, () => {
+  console.log(`Application started at port: ${config.port}`);
+});
 
 import * as http from "http";
 const server = http.createServer(app);

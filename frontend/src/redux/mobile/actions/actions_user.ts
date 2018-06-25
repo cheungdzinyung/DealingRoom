@@ -38,6 +38,7 @@ export const LOCAL_LOGIN_FAIL = "LOCAL_LOGIN_FAIL";
 export type LOCAL_LOGIN_FAIL = typeof LOCAL_LOGIN_FAIL;
 export interface ILocalLoginFailAction extends Action {
     type: LOCAL_LOGIN_FAIL,
+    errMsg: string,
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
@@ -56,6 +57,21 @@ export interface ILocalSignUpFailAction extends Action {
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export const FB_LOGIN_SUCCESS = "FB_LOGIN_SUCCESS";
+export type FB_LOGIN_SUCCESS = typeof FB_LOGIN_SUCCESS;
+export interface IFBLoginSuccessAction extends Action {
+    type: FB_LOGIN_SUCCESS,
+    FBtoken: string,
+}
+
+export const FB_LOGIN_FAIL = "FB_LOGIN_FAIL";
+export type FB_LOGIN_FAIL = typeof FB_LOGIN_FAIL;
+export interface IFBLoginFailAction extends Action {
+    type: FB_LOGIN_FAIL,
+    errMsg: string,
+}
+
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS = "GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS";
 export type GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS = typeof GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS;
 export interface IGetUserProfileByUserTokenSuccessAction extends Action {
@@ -67,7 +83,7 @@ export const GET_USER_PROFILE_BY_USER_TOKEN_FAIL = "GET_USER_PROFILE_BY_USER_TOK
 export type GET_USER_PROFILE_BY_USER_TOKEN_FAIL = typeof GET_USER_PROFILE_BY_USER_TOKEN_FAIL;
 export interface IGetUserProfileByUserTokenFailAction extends Action {
     type: GET_USER_PROFILE_BY_USER_TOKEN_FAIL,
-    // result: any,
+    errMsg: string,
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
@@ -79,6 +95,8 @@ export type UserActions =
     ILocalLoginFailAction |
     ILocalSignUpSuccessAction |
     ILocalSignUpFailAction |
+    IFBLoginSuccessAction |
+    IFBLoginFailAction |
     IGetUserProfileByUserTokenSuccessAction |
     IGetUserProfileByUserTokenFailAction;
 
@@ -112,9 +130,10 @@ export function localLoginSuccess(userInfoPackage: any): ILocalLoginSuccessActio
     }
 }
 
-export function localLoginFail(): ILocalLoginFailAction {
+export function localLoginFail(errMsg: string): ILocalLoginFailAction {
     return {
         type: LOCAL_LOGIN_FAIL,
+        errMsg,
     }
 }
 
@@ -130,13 +149,13 @@ export function localLogin(username: string, password: string) {
                 if (res.status === 200) {
                     dispatch(localLoginSuccess(res.data));
                 } else {
-                    alert("status: " + res.status);
-                    dispatch(localLoginFail());
+                    dispatch(localLoginFail(res.status));
+                    throw new Error ("Login failed, please try again.");
                 }
             })
             .catch((err: any) => {
-                alert(err);
-                dispatch(localLoginFail());
+                alert(err.response.data || err);
+                dispatch(localLoginFail(err.response.data || err));
             });
     }
 }
@@ -169,7 +188,7 @@ export function localSignUpFail(errMsg: any): ILocalSignUpFailAction {
 //         axios.post(`${API_SERVER}/api/auth/signup`, signUpPackage)
 //             .then((res: any) => {
 //                 if (res.status === 201) {
-//                     dispatch(localSignUpSuccess(res.data));
+//                     dispatch(localSignUpSuccess(res.data[0]));
 //                 } else {
 //                     alert("status: " + res.status);
 //                     dispatch(localSignUpFail(res.status));
@@ -182,7 +201,7 @@ export function localSignUpFail(errMsg: any): ILocalSignUpFailAction {
 //     }
 // }
 
-// WORK AROUND
+// WORK AROUND 
 export function localSignUp(username: string, password: string) {
     return (dispatch: Dispatch<ILocalSignUpSuccessAction | ILocalSignUpFailAction | ILocalLoginSuccessAction | ILocalLoginFailAction>) => {
         const signUpPackage: ISignUpPackage = {
@@ -199,34 +218,71 @@ export function localSignUp(username: string, password: string) {
         
         axios.post(`${API_SERVER}/api/auth/signup`, signUpPackage)
             .then((res: any) => {
-                if (res.status === 201) {
+                if (res.status === 200) {
+                    // dispatch(localSignUpSuccess(res.data));
                     axios.post(`${API_SERVER}/api/auth/login`, loginPackage)
                         .then((resp: any) => {
                             if (resp.status === 200) {
                                 dispatch(localLoginSuccess(resp.data));
                             } else {
-                                alert("status: " + res.status);
-                                dispatch(localLoginFail());
+                                alert("status: " + resp.status);
+                                dispatch(localLoginFail(resp.status));
                             }
                         })
                         .catch((err: any) => {
-                            alert(err);
-                            dispatch(localLoginFail());
+                            alert("login fail" + err);
+                            dispatch(localLoginFail(err));
                         });
-                    // dispatch(localSignUpSuccess(res.data));
                 } else {
-                    alert("status: " + res.status);
+                    alert("sign up fail: " + res.status);
                     dispatch(localSignUpFail(res.status));
                 }
             })
             .catch((err: any) => {
-                alert(err);
-                dispatch(localSignUpFail(err));
+                alert(err.response.data || err);
+                dispatch(localSignUpFail(err.response.data || err));
             });
     }
 }
 
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export function loginFacebookSucccess(FBtoken: string): IFBLoginSuccessAction {
+    return {
+        type: FB_LOGIN_SUCCESS,
+        FBtoken,
+    }
+}
 
+export function loginFacebookFail(errMsg: string): IFBLoginFailAction {
+    return {
+        type: FB_LOGIN_FAIL,
+        errMsg,
+    }
+}
+
+// get FB token is done by plugin
+// if success, send token to BE and store in DB
+export function loginFacebook(accessToken: string) {
+    return (dispatch: Dispatch<IFBLoginSuccessAction | IFBLoginFailAction>) => {
+        return axios
+            .post<{ accessToken: string; message?: string }>(
+                `${API_SERVER}/api/auth/facebook`, { accessToken } )
+            .then((res: any) => {
+                if (res.data == null) {
+                    dispatch(loginFacebookFail("unknown error"));
+                }
+                else if (!res.data.token) {
+                    dispatch(loginFacebookFail("token not found"));
+                } else {
+                    // res.data.token is the jwt-token processed by BE
+                    dispatch(loginFacebookSucccess(res.data.token));
+                }
+            })
+            .catch((err: any) => {
+                dispatch(loginFacebookFail(err));
+            });
+    }
+}
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function getUserProfileByUserTokenSuccess(userProfile: any): IGetUserProfileByUserTokenSuccessAction {
@@ -236,16 +292,16 @@ export function getUserProfileByUserTokenSuccess(userProfile: any): IGetUserProf
     }
 }
 
-export function getUserProfileByUserTokenFail(): IGetUserProfileByUserTokenFailAction {
+export function getUserProfileByUserTokenFail(errMsg: string,): IGetUserProfileByUserTokenFailAction {
     return {
         type: GET_USER_PROFILE_BY_USER_TOKEN_FAIL,
+        errMsg,
     }
 }
 
 export function getUserProfileByUserToken() {
     const config = { headers: { Authorization: "Bearer " + localStorage.getItem("dealingRoomToken") } }
     return (dispatch: Dispatch<IGetUserProfileByUserTokenSuccessAction | IGetUserProfileByUserTokenFailAction>) => {
-        // axios.get(`${process.env.REACT_APP_API_DEV}/api/users/${userID}`, config)
         axios.get(`${API_SERVER}/api/users`, config)
             .then((res: any) => {
                 if (res.status === 200) {
@@ -254,12 +310,12 @@ export function getUserProfileByUserToken() {
                     // dispatch(changePage(OrderList));
                 } else {
                     alert("status: " + res.status);
-                    dispatch(getUserProfileByUserTokenFail());
+                    dispatch(getUserProfileByUserTokenFail(""));
                 }
             })
             .catch((err: any) => {
                 alert(err);
-                dispatch(getUserProfileByUserTokenFail())
+                dispatch(getUserProfileByUserTokenFail(""))
             });
     }
 }

@@ -2,7 +2,7 @@
     width: 20%;
     height: 100vh;
     padding: 2.5%;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     border-right: 1px solid #4F4F4F;
@@ -31,7 +31,7 @@
         .menu-section{
             width: 100%;
             .section-header{
-                font-size: .8rem;
+                font-size: 1rem;
             }
             .section-pages{
                 margin: 15% 0 20% 0;

@@ -4,7 +4,6 @@ import * as Knex from "knex";
 
 import { IUserData } from "../interfaces";
 
-
 export default class UsersService {
   private knex: Knex;
 
@@ -41,7 +40,7 @@ export default class UsersService {
         }
         return this.knex("users")
           .where("id", id[0])
-          .select("id as user_id", "password", "displayName", "userPhoto");
+          .select("id", "password", "displayName", "userPhoto");
       });
   }
 
@@ -49,13 +48,7 @@ export default class UsersService {
   public get(req: number) {
     return this.knex("users")
       .where({ id: req, isActive: true })
-      .select(
-        "id as users_id",
-        "username",
-        "displayName",
-        "userPhoto",
-        "role"
-      );
+      .select("id as users_id", "username", "displayName", "userPhoto", "role");
   }
 
   // Working 10/06/18
@@ -69,7 +62,9 @@ export default class UsersService {
         isActive: data.isActive,
         password: hash,
         role: data.role,
-        username: data.username
+        username: data.username,
+        stripeToken: data.stripeToken,
+        googleToken: data.googleToken
       })
       .returning("id")
       .then(async (userId: Knex.QueryCallback) => {
@@ -78,7 +73,7 @@ export default class UsersService {
         }
         return this.knex("users")
           .where("id", userId[0])
-          .select("displayName", "userPhoto");
+          .select("id",  "password", "displayName", "userPhoto");
       });
   }
 }

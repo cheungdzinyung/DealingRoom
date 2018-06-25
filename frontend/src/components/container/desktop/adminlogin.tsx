@@ -13,7 +13,6 @@ import logo from "../../assets/icons/all/logo.svg";
 // redux
 // import { connect } from "react-redux";
 
-
 interface ILoginState {
   username: string,
   password: string,
@@ -89,7 +88,7 @@ export default class AdminLogin extends React.Component<ILoginProps, ILoginState
             <div className="status-switch">
               <div className="status">
                 <span className="status-text">LOGIN</span>
-              </div>
+              </div> 
               <div className="status">
                 <span className="status-text">SIGNUP</span>
               </div>

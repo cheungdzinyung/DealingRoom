@@ -50,10 +50,18 @@ export default class ItemsRouter {
   }
 
   public getAll(req: express.Request, res: express.Response) {
-    if (req.query.category !== undefined) {
-      if (req.query.fluctuatingPrices !== undefined) {
+    let isActive: boolean;
+    req.query.isActive !== undefined
+      ? (isActive = req.query.isActive)
+      : (isActive = true);
+      
+    if (req.query.fluctuatingPrices !== undefined) {
+      if (req.query.category !== undefined) {
         return this.itemsService
-          .getAllInCatWithFluctuatingPrices(req.query.category, req.query.fluctuatingPrices)
+          .getAllInCatWithFluctuatingPrices(
+            req.query.category,
+            req.query.fluctuatingPrices
+          )
           .then((result: any) => {
             res.status(200).json(result);
           })
@@ -62,7 +70,7 @@ export default class ItemsRouter {
           });
       } else {
         return this.itemsService
-          .getAllInCat(req.query.category)
+          .getAllWithFluctuatingPrices(req.query.fluctuatingPrices)
           .then((result: any) => {
             res.status(200).json(result);
           })
@@ -71,24 +79,24 @@ export default class ItemsRouter {
           });
       }
     } else {
-      if (req.query.fluctuatingPrices !== undefined) {
+      if (req.query.category !== undefined) {
         return this.itemsService
-          .getAllWithFluctuatingPrices(req.query.fluctuatingPrices)
+          .getAllInCat(req.query.category, req.query.isActive)
           .then((result: any) => {
             res.status(200).json(result);
           })
           .catch((err: express.Errback) => {
             res.status(500).json({ status: "failed" });
           });
-      }else{
+      } else {
         return this.itemsService
-        .getAll()
-        .then((result: any) => {
-          res.status(200).json(result);
-        })
-        .catch((err: express.Errback) => {
-          res.status(500).json({ status: "failed" });
-        });
+          .getAll(isActive)
+          .then((result: any) => {
+            res.status(200).json(result);
+          })
+          .catch((err: express.Errback) => {
+            res.status(500).json({ status: "failed" });
+          });
       }
     }
   }
@@ -100,7 +108,7 @@ export default class ItemsRouter {
         res.status(201).json(result);
       })
       .catch((err: express.Errback) => {
-        console.log(err)
+        console.log(err);
         res.status(500).json({ status: "failed" });
       });
   }
