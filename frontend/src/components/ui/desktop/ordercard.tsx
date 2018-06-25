@@ -13,7 +13,7 @@ export default class OrderCard extends React.Component<IOrder> {
                     <span className="order-id">#{this.props.orders_id}</span>
                     <div className="order-button">
                         <button className="order-confirmed">
-                            <span className="button-order-text">Done</span>
+                            <span className="button-order-text">{this.props.status}</span>
                         </button>
                     </div>
                 </div>

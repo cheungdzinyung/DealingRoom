@@ -25,7 +25,7 @@ export default class CurrentOrders extends React.Component<IOrder[]> {
                             <PageHeader header="Current Orders" />
                         </div>
                         <div className="order-card-display">
-                            {allOrders.map((oneOrder, index) => (<OrderCard {...oneOrder} />))}
+                            {allOrders.map((oneOrder, index) => (<OrderCard {...oneOrder} key={index}/>))}
                         </div>
                     </div>
                 </div>

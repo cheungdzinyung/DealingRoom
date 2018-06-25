@@ -4,7 +4,7 @@ import * as React from "react";
 // Importing UI elements
 import { Dialog } from "@blueprintjs/core";
 import ItemModalDescription from "./additemmodal/itemDescription";
-// import ItemModalInfo from "./additemmodal/itemInfo";
+import ItemModalInfo from "./additemmodal/itemInfo";
 import ItemModalStatus from "./additemmodal/itemStatus";
 import ItemModalImage from "./additemmodal/itemImage";
 
@@ -14,15 +14,6 @@ import {
   IUpdateMenuItem,
   IStockManageModalState
 } from "src/modules";
-
-// Importing utility function
-// import { firstLetterCaps } from "../../../util/utility";
-
-// Importing static image assets
-// import FilledStar from "../../assets/icons/desktop/stocklist/starfilled.svg";
-// import UnfilledStar from "../../assets/icons/desktop/stocklist/starunfilled.svg";
-
-
 
 // redux
 import { connect } from "react-redux";
@@ -64,7 +55,6 @@ interface IStockManageModalStates {
   itemPhoto: any;
   isSpecial: boolean;
   isActive: boolean;
-  // modal: boolean;
 }
 
 // Redux
@@ -111,8 +101,7 @@ class RealStockManageModal extends React.Component<
       currentPrice: 0, // starting price
       itemPhoto: "itemPhoto",
       isSpecial: false,
-      isActive: true,
-      // modal: true
+      isActive: true
     };
   }
 
@@ -162,6 +151,7 @@ class RealStockManageModal extends React.Component<
     };
     this.props.updateItem(updateItemStatus);
   };
+
 
   public setCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
     this.setState({
@@ -218,12 +208,33 @@ class RealStockManageModal extends React.Component<
 
   public render() {
     return (
-      <Dialog isOpen={this.props.isModalOpen} className="edit-item-container" canEscapeKeyClose={true} canOutsideClickClose={true} onClose={this.props.closeEditModal}>
+      <Dialog
+        isOpen={this.props.isModalOpen}
+        className="edit-item-container"
+        canEscapeKeyClose={true}
+        canOutsideClickClose={true}
+        onClose={this.props.closeEditModal}>
         <div className="edit-item-grid">
           <ItemModalImage />
-          {/* <ItemModalInfo /> */}
-          <ItemModalStatus />
-          <ItemModalDescription descriptionText={this.state.itemDescription} onChange={this.setItemDescription} />
+          <ItemModalInfo
+            itemName={this.state.itemName}
+            itemStock={this.state.itemStock}
+            minimumPrice={this.state.minimumPrice}
+            currentPrice={this.state.currentPrice}
+            setName={this.setItemName}
+            setStock={this.setItemQuantity}
+            setMinimunPrice={this.setItemMinPrice}
+            setCurrentPrice={this.setItemStartPrice} />
+          <ItemModalStatus
+            categories={this.props.categories}
+            isActive={this.state.isActive}
+            isSpecial={this.state.isSpecial}
+            setCategories={this.setCategory}
+            toggleActive={this.toggleActive}
+            toggleSpecial={this.toggleSpecial} />
+          <ItemModalDescription
+            descriptionText={this.state.itemDescription}
+            onChange={this.setItemDescription} />
         </div>
       </Dialog>
     );

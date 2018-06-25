@@ -33,9 +33,9 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use("/api", apiRouter.getRouter());
 
-// app.listen(config.port, () => {
-//   console.log(`Application started at port: ${config.port}`);
-// });
+app.listen(config.port, () => {
+  console.log(`Application started at port: ${config.port}`);
+});
 
 import * as http from "http";
 const server = http.createServer(app);
