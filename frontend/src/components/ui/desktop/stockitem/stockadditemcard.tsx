@@ -42,11 +42,12 @@ interface IStockManageModalProps {
   createItem: (itemStatus: ICreateMenuItem) => void;
   // this goes to edit page's state for item changes
   updateItem: (itemStatus: IUpdateMenuItem) => void;
-  // close modal
+  // Control opening of modal
   toggleStockManageModal: (
     stockManageModalState: IStockManageModalState,
     targetItem?: IUpdateMenuItem
   ) => void;
+
   isModalOpen: boolean;
   switchModal: () => void;
 
