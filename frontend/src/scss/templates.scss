@@ -1,0 +1,84 @@
+// Style element shares across multiple components
+// Templates
+$bgc-tinted: hsla(240, 3%, 18%, 0.5);
+$bgc-shaded: rgba(45, 44, 48, .9);
+$font-color-dark: rgba(22, 25, 23, .85);
+$font-color-light: rgba(233, 219, 204, 1);
+$bgc: #171619;
+$search-bar-bgc: rgba(141, 141, 141, .3);
+$search-bar-font: rgba(233, 219, 204, 1);
+$placebolder-color:rgba(233, 219, 204, .55);
+$theme-orange: rgba(252, 178, 75, 0.97);
+$notification-alert: rgb(255, 0, 0);
+$up: rgba(111, 207, 151, 1);
+$up-dim: rgba(111, 207, 151, .24);
+$down: rgba(235, 87, 87, 1);
+$down-dim: rgba(235, 87, 87, .24);
+$item-card-bgc: rgba(81, 81, 81, .9);
+$item-card-text: rgba(233, 219, 204, 1);
+$item-detail-bgc: rgba(81, 81, 81, .55);
+$item-detail-subheaders: rgba(233, 219, 204, 1);
+$item-detail-text: rgba(233, 219, 204, .7);
+$admin-item-card-bgc: rgba(141, 141, 141, .5);
+$admin-item-name-text:rgba(233, 219, 204, 1);
+$admin-item-description-text:rgba(233, 219, 204, .5);
+$admin-item-price-text:rgba(255, 205, 68, 1);
+$admin-item-card-modal-bgc: rgba(141, 141, 141, .9);
+$warning-orange: rgba(255, 205, 68, .9);
+$bot-menu-bgc: rgba(81, 81, 81, 1);
+$bot-menu-text: rgba(233, 219, 204, .6);
+$login-form-bgc: rgba(141, 141, 141, .85);
+$login-form-chosen-tap: linear-gradient(rgba(167, 167, 167, 0.85), rgba(141, 141, 141, .85));
+$login-form-input: rgba(141, 141, 141, .95);
+$submit-bgc:rgba(238, 83, 83, .85);
+$submit-text: rgba(242, 242, 242, 1);
+$header-text: rgba(233, 219, 204, 1);
+$header-sub-text: rgba(233, 219, 204, .3);
+// Mobile
+.page-content-container {
+    width: 100%;
+    padding: 5vh 10% 17vh 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rd-corner {
+    border-radius: 5px;
+}
+
+.searchbar {
+    width: 100%;
+    padding: 3.5% 5%;
+    background-color: $search-bar-bgc;
+    color: $search-bar-font;
+    font-size: 1rem;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+#up-triangle-path,
+#up-triangle-group {
+    fill: $up;
+    stroke: $up;
+}
+
+*::-moz-placeholder,
+*::-ms-input-placeholder,
+*::-webkit-input-placeholder {
+    color: $placebolder-color;
+}
+
+//   Desktop
+.desktop-page-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: 20% 1fr 20%;
+    grid-template-rows: 12vh 1fr;
+    grid-gap: 5px;
+}
+
+%clickable {
+    cursor: pointer;
+}

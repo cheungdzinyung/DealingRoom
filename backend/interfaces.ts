@@ -5,6 +5,8 @@ export interface IUserData {
   displayName: string;
   userPhoto: string;
   facebookToken: string;
+  stripeToken: string;
+  googleToken: string;
   role: string;
   isActive: boolean;
 }

@@ -171,7 +171,7 @@ export default class UsersService {
   // Working 23/06/18
   public getAllInCatWithFluctuatingPrices(
     catName: string,
-    dateOfQuery: string
+    dateOfQuery: string,
   ) {
     let catPhoto: string;
     this.knex("categories")
@@ -253,7 +253,7 @@ export default class UsersService {
   }
 
   // Working 15/06/18
-  public getAll() {
+  public getAll(isActive: boolean) {
     return this.knex("categories")
       .select("id", "categoryName", "categoryPhoto")
       .then((categoryList: any) => {
@@ -274,6 +274,7 @@ export default class UsersService {
                 "items.isActive"
               )
               .where("items.categories_id", categoryList[i].id)
+              .where("items.isActive", isActive)
               .orderBy("items.id", "ase");
           })
         ).then((itemList: any) => {
@@ -292,7 +293,7 @@ export default class UsersService {
   }
 
   // Working 07/06/18
-  public getAllInCat(catName: string) {
+  public getAllInCat(catName: string, isActive: boolean) {
     let catPhoto: string;
     this.knex("categories")
       .select("categoryPhoto")
@@ -317,6 +318,7 @@ export default class UsersService {
             "isSpecial"
           )
           .where("categories_id", catId[0].id)
+          .where("items.isActive", isActive)
           .orderBy("id", "ase")
           .then((itemList: Knex.QueryCallback) => {
             const result = [

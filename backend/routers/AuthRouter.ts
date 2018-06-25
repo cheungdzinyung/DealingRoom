@@ -34,7 +34,6 @@ export default class AuthRouter {
     return this.usersService
       .add(req.body, req.file)
       .then((result: IUserData) => {
-        console.log(result);
         const payload = {
           id: result[0].id,
           username: result[0].username
@@ -155,10 +154,12 @@ export default class AuthRouter {
             password: accessToken,
             role: "customer",
             username: result.data.id,
-            // vvv to match data tpye
+            // vvv to match data type
             id: 0,
             // vvv maybe?
-            userPhoto: ""
+            userPhoto: "",
+            stripeToken: "",
+            googleToken: ""
           };
           await this.usersService
             .add(signUpPackage, req.file)
