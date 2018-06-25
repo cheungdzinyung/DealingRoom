@@ -32,14 +32,13 @@ interface IStockManagementState {
   category: string;
   isActive: ActiveSpecialFilter;
   isSpecial: ActiveSpecialFilter;
-  // isModalOpen: { [key: string]: boolean };
   isModalOpen: boolean;
 }
 
 export class PureStockManagement extends React.Component<
   IStockManagementProps,
   IStockManagementState
-> {
+  > {
   constructor(props: IStockManagementProps) {
     super(props);
 
@@ -47,11 +46,10 @@ export class PureStockManagement extends React.Component<
       category: "all",
       isActive: "all",
       isSpecial: "all",
-      // isModalOpen: { item: true }
       isModalOpen: false
     };
 
-    this.openEditModal.bind(this);
+    this.switchEditModal.bind(this);
   }
 
   // Controlling the filer
@@ -65,7 +63,7 @@ export class PureStockManagement extends React.Component<
     }
   };
 
-  public openEditModal = () => {
+  public switchEditModal = () => {
     this.setState({
       isModalOpen: !this.state.isModalOpen
     });
@@ -88,33 +86,34 @@ export class PureStockManagement extends React.Component<
 
             {/* per cat */
 
-            this.props.entireMenu.map((eachCat, indexCat) =>
-              /* per item */
-              eachCat.items.map((eachItem, indexItem) => {
-                if (
-                  (this.state.category === "all" ||
-                    this.state.category === eachItem.categoryName) &&
-                  (this.state.isActive === "all" ||
-                    this.state.isActive === eachItem.isActive) &&
-                  (this.state.isSpecial === "all" ||
-                    this.state.isSpecial === eachItem.isSpecial)
-                ) {
-                  return <StockItemLine openModal={this.openEditModal} singleItem={eachItem} />;
-                } else {
-                  return <span />;
-                }
-              })
-            )}
+              this.props.entireMenu.map((eachCat, indexCat) =>
+                /* per item */
+                eachCat.items.map((eachItem, indexItem) => {
+                  if (
+                    (this.state.category === "all" ||
+                      this.state.category === eachItem.categoryName) &&
+                    (this.state.isActive === "all" ||
+                      this.state.isActive === eachItem.isActive) &&
+                    (this.state.isSpecial === "all" ||
+                      this.state.isSpecial === eachItem.isSpecial)
+                  ) {
+                    return <StockItemLine openModal={this.switchEditModal} singleItem={eachItem} />;
+                  } else {
+                    return <span />;
+                  }
+                })
+              )}
           </div>
         </div>
 
         {this.props.stockManageModalState === "discard" ? (
           <div />
         ) : (
-          <StockManageModal
-            isModalOpen={this.state.isModalOpen}
-          />
-        )}
+            <StockManageModal
+              isModalOpen={this.state.isModalOpen}
+              switchModal={this.switchEditModal}
+            />
+          )}
       </div>
     );
   }
