@@ -8,7 +8,7 @@ import {
 
 export const singleCategoryMenuItems: IMenuCategoryWithFlux = {
   categoryName: "Beer",
-  categoryPhoto: "www.dealingroom.com/public/img/beer.jpeg",
+  categoryPhoto: "https://www.google.com.hk/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwi2-IaRrvHbAhXFULwKHQSjAiUQjRx6BAgBEAU&url=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F49458472%2Freact-native-image-with-token-and-ttl%3Fnoredirect%3D1%26lq%3D1&psig=AOvVaw3CM4Pw4ZoRdE9zQaPCxRG8&ust=1530103560191004",
   items: [
     {
       categoryName: "Beer",
