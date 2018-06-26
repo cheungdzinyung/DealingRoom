@@ -47,6 +47,17 @@ class PurePendingOrders extends React.Component<IPendingOrdersProps> {
 
         }
     }
+
+    public componentDidMount() {
+        if(!this.props.allOrdersReady){
+            this.props.getAllOrders();
+        }
+    }
+
+    public served = (e: React.MouseEvent<HTMLButtonElement>) => {
+        this.props.updateOrderStatusServed(1);
+    }
+
     public render() {
         return (
             // tslint:disable-next-line:no-unused-expression

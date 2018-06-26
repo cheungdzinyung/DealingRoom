@@ -42,8 +42,7 @@ const initialState: IOrdersState = {
     socketID: "",
     socketData: {},
     menuReady: false,
-    orderListReady: false,
-    // entireMenu: [],
+    orderListReady: false,  
     entireMenu: [
         {
             "categoryName": "beer",

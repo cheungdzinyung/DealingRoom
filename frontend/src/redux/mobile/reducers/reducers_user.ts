@@ -28,7 +28,7 @@ export interface IUserState {
 
 const initialState = {
     // role: "customer",
-    isAuth: false,
+    isAuth: false,              // wrong after F5
     currentPage: "profile",
     redirectTarget: "none",     // for redir
     // settings: "nth yet",
