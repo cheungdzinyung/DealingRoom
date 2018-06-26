@@ -163,6 +163,13 @@ export interface IItemPriceGraphData {
   purchasePrice: number;
 }
 
+export interface IConsumptionGraphData{
+  category: string
+  you: number
+  everyone: number
+  maxPrice: number
+}
+
 /* 
 Corresponding API path POST: api/orders/user/:id
 */

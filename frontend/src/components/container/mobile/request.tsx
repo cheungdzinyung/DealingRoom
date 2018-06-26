@@ -4,7 +4,7 @@ import * as React from "react";
 // import redux and friends
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
-import { removeFromCurrentOrder, confirmOrder } from "../../../redux/mobile/actions/actions_orders";
+import { removeFromCurrentOrder, confirmOrder, resetConfirmOrderStatus } from "../../../redux/mobile/actions/actions_orders";
 
 // for redir
 import * as History from "history";
@@ -14,6 +14,7 @@ import { redirectPage, resetTargetPage } from "../../../redux/mobile/actions/act
 // Importing UI
 import UserMenu from "../../ui/mobile/usermenu";
 import { Button, Card, Elevation, Intent } from "@blueprintjs/core";
+import { AppToaster } from "src/components/ui/mobile/toast";
 
 // Importing interfaces
 import { IRequestItem, ICurrentOrder } from "../../../modules";
@@ -31,6 +32,8 @@ interface IRequestProps {
   history: History.History,
   redirectPage: (redirectTarget: string, history: any) => void,
   resetTargetPage: () => void,
+  confirmOrderStatus: "null" | "confirmed" | "failed",
+  resetConfirmOrderStatus: () => void,
 }
 
 class PureRequest extends React.Component<IRequestProps, {}> {
@@ -38,17 +41,27 @@ class PureRequest extends React.Component<IRequestProps, {}> {
     super(props);
   }
 
-  public componentDidMount () {
+  public componentDidMount() {
     if (this.props.currentOrder.length === 0) {
-      alert("your shopping cart is empty")
       this.props.redirectPage("/menu", this.props.history);
       this.props.resetTargetPage();
+      AppToaster.show({
+        message: "Empty Basket",
+        intent: Intent.WARNING,
+        icon: "issue",
+        timeout: 2000
+      });
     }
   }
 
   public componentDidUpdate() {
-    if (this.props.currentOrder.length === 0) {
+    if (this.props.currentOrder.length === 0 && this.props.confirmOrderStatus==="confirmed") {
       this.props.redirectPage("/order", this.props.history);
+      this.props.resetTargetPage();
+      this.props.resetConfirmOrderStatus();
+    } else if (this.props.currentOrder.length === 0) {
+      alert("your shopping cart is empty")
+      this.props.redirectPage("/menu", this.props.history);
       this.props.resetTargetPage();
     }
   }
@@ -57,6 +70,12 @@ class PureRequest extends React.Component<IRequestProps, {}> {
     const thisItemID = e.currentTarget.dataset.thisitemid;
     if (thisItemID !== undefined) {
       this.props.removeFromCurrentOrder(parseInt(thisItemID, 10));
+      // AppToaster.show({
+      //   message: "Item removed from order!",
+      //   intent: Intent.DANGER,
+      //   icon: "trash",
+      //   timeout: 500
+      // });
     }
   }
 
@@ -68,12 +87,15 @@ class PureRequest extends React.Component<IRequestProps, {}> {
       item: this.props.currentOrder,
     }
     this.props.confirmOrder(orderToConfirm);
+    // Cannot use componentDidUpdate
+
   }
+
 
   public render() {
     return (
       <div className="page-content-container">
-        <PageHeader header="Request" subHeader="Make up your mind"/>
+        <PageHeader header="Request" subHeader="Make up your mind" />
         {this.props.currentOrder.map((item, i) => (
           <Card key={i}
             className="request-line"
@@ -116,6 +138,7 @@ const mapStateToProps = (state: IRootState) => {
     user_id: state.customer.user.userProfile.users_id,
     currentOrder: state.customer.orders.currentOrder,
     currentTotal: state.customer.orders.currentTotal,
+    confirmOrderStatus: state.customer.orders.confirmOrderStatus,
   }
 }
 
@@ -133,9 +156,12 @@ const mapDispatchToProps = (dispatch: any) => {
     resetTargetPage: () => {
       dispatch(resetTargetPage());
     },
+    resetConfirmOrderStatus: () => {
+      dispatch(resetConfirmOrderStatus());
+    }
   }
 }
 
-  const Request = connect(mapStateToProps, mapDispatchToProps)(PureRequest);
+const Request = connect(mapStateToProps, mapDispatchToProps)(PureRequest);
 
-  export default withRouter(Request as any);
+export default withRouter(Request as any);
