@@ -47,6 +47,7 @@ export default class UsersRouter {
             });
         })
         .catch((err: express.Errback) => {
+          console.log(err);
           res.status(500).json({ status: "failed" });
         });
     } else {

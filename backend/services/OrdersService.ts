@@ -1,3 +1,4 @@
+import { Promise as BlueBirdPromise } from "bluebird";
 import * as Knex from "knex";
 // import { IOrderData } from "../interfaces";
 
@@ -9,178 +10,275 @@ export default class OrdersService {
   }
 
   // Working 19/06/18
-  public add(id: number, data: any) {
-    // insert the order information into the order's table
-    return this.knex("orders")
+  public async add(id: number, data: any) {
+    const orderId: any = await this.knex("orders")
       .insert({
         isPaid: false,
         status: data.status,
         table: data.table,
         users_id: id
       })
-      .returning("id")
-      .then((orderId: any) => {
-        // insert the information of the items within the order into the orders_items table
-        return Promise.all(
-          data.item.map((order: object, i: number) => {
-            return this.knex("orders_items")
-              .insert({
-                garnish: data.item[i].garnish,
-                ice: data.item[i].ice,
-                items_id: data.item[i].items_id,
-                orders_id: orderId[0],
-                purchasePrice: data.item[i].purchasePrice,
-                sweetness: data.item[i].sweetness
-              })
-              .returning("id");
-          })
-        )
-          .then((orderItemId: any) => {
-            return Promise.all(
-              orderItemId.map((item: object, j: number) => {
-                // obtain the each item's id that is being ordered
-                return this.knex("orders_items")
-                  .join("items", "items.id", "=", "orders_items.items_id")
-                  .where("orders_items.id", orderItemId[j][0])
-                  .select("items.id as items_id", "items.categories_id")
-                  .then((itemIdIncrease: Knex.QueryBuilder) => {
-                    // increase the current price of the item being ordered
-                    let priceUp: number;
-                    itemIdIncrease[0].categories_id === 1
-                      ? (priceUp = 10)
-                      : (priceUp = 10);
-                    return this.knex("items")
-                      .update({
-                        currentPrice: this.knex.raw(`?? + ${priceUp}`, [
-                          "currentPrice"
-                        ])
-                      })
-                      .where("id", itemIdIncrease[0].items_id)
-                      .returning("id")
-                      .then((itemIdDecrease: Knex.QueryBuilder) => {
-                        // decrease the itemStock of the item being ordered
-                        return this.knex("items")
-                          .where("id", itemIdDecrease[0])
-                          .decrement("itemStock", 1)
-                          .returning("id")
-                          .then((itemId: Knex.QueryBuilder) => {
-                            // obtain the current price from the item's table
-                            return this.knex("items")
-                              .select("currentPrice")
-                              .where("id", itemId[0])
-                              .then((itemLogPrice: Knex.QueryBuilder) => {
-                                // insert the current price into the itemsLog as itemsLogPrice
-                                return this.knex("itemsLog")
-                                  .insert({
-                                    items_id: itemId[0],
-                                    itemsLogPrice: itemLogPrice[0].currentPrice
-                                  })
-                                  .then(() => {
-                                    // check for the category of the item that had its current price increased
-                                    return this.knex("items")
-                                      .where("id", itemIdIncrease[0].items_id)
-                                      .select("categories_id")
-                                      .then((catId: Knex.QueryBuilder) => {
-                                        let priceDown: number;
-                                        catId[0].categories_id === 1
-                                          ? (priceDown = 10 / 9)
-                                          : (priceDown = 10 / 4);
-                                        // decrease all other items current price in the specific category other than the item being ordered
-                                        return this.knex("items")
-                                          .where(
-                                            "categories_id",
-                                            catId[0].categories_id
-                                          )
-                                          .whereRaw(
-                                            `"currentPrice" > "minimumPrice"`
-                                          )
-                                          .whereNot(
-                                            "id",
-                                            itemIdIncrease[0].items_id
-                                          )
-                                          .update({
-                                            currentPrice: this.knex.raw(
-                                              `?? - ${priceDown}`,
-                                              ["currentPrice"]
-                                            )
-                                          })
-                                          .returning("id")
-                                          .then((itemsIdArray: any) => {
-                                            // obtain the current price of the other items in the category from the item's table
-                                            itemsIdArray.map(
-                                              (items: object, k: number) => {
-                                                return this.knex("items")
-                                                  .select("currentPrice")
-                                                  .where("id", itemsIdArray[k])
-                                                  .then(
-                                                    (
-                                                      itemsLogPrice: Knex.QueryBuilder
-                                                    ) => {
-                                                      // insert the current price into the itemsLog as itemsLogPrice
-                                                      return this.knex(
-                                                        "itemsLog"
-                                                      )
-                                                        .insert({
-                                                          items_id:
-                                                            itemsIdArray[k],
-                                                          itemsLogPrice:
-                                                            itemsLogPrice[0]
-                                                              .currentPrice
-                                                        })
-                                                        .then(() => {
-                                                          // calculate the total price of the order
-                                                          return this.knex(
-                                                            "orders_items"
-                                                          )
-                                                            .sum(
-                                                              "purchasePrice"
-                                                            )
-                                                            .where(
-                                                              "orders_id",
-                                                              orderId[0]
-                                                            )
-                                                            .then(
-                                                              (
-                                                                totalPrice: Knex.QueryCallback
-                                                              ) => {
-                                                                // update the total price of the order into the order table
-                                                                return this.knex(
-                                                                  "orders"
-                                                                )
-                                                                  .update({
-                                                                    orderTotal:
-                                                                      totalPrice[0]
-                                                                        .sum
-                                                                  })
-                                                                  .where(
-                                                                    "id",
-                                                                    orderId[0]
-                                                                  );
-                                                              }
-                                                            );
-                                                        });
-                                                    }
-                                                  );
-                                              }
-                                            );
-                                          });
-                                      });
-                                  });
-                              });
-                          });
-                      });
-                  });
-              })
-            );
-          })
-          .then(() => {
-            // return the user_id, order status and order_id of the added order
-            return this.knex("orders")
-              .select("users_id", "status", "id as orders_id")
-              .where("id", orderId[0]);
-          });
+      .returning("id");
+
+    const orderItems: any = data.item.map((order: any) => {
+      return {
+        garnish: order.garnish,
+        ice: order.ice,
+        items_id: order.items_id,
+        orders_id: orderId[0],
+        purchasePrice: order.purchasePrice,
+        sweetness: order.sweetness
+      };
+    });
+
+    const orderItemsIds = await this.knex("orders_items")
+      .insert(orderItems)
+      .returning("id");
+
+    await BlueBirdPromise.map(orderItemsIds, async (item: any) => {
+      console.log("item[0]", item);
+      const orderItemsResult = await this.knex("orders_items")
+        .join("items", "items.id", "=", "orders_items.items_id")
+        .where("orders_items.id", item)
+        .first()
+        .select("items.id as items_id", "items.categories_id");
+
+      const priceUp: number = orderItemsResult.categories_id === 1 ? 10 : 10;
+
+      const itemIdDecrease = await this.knex("items")
+        .update({
+          currentPrice: this.knex.raw(`?? + ${priceUp}`, ["currentPrice"])
+        })
+        .where("id", orderItemsResult.items_id)
+        .returning("id");
+
+      const itemId = await this.knex("items")
+        .where("id", itemIdDecrease[0])
+        .decrement("itemStock", 1)
+        .returning("id");
+
+      const itemLogPrice = await this.knex("items")
+        .select("currentPrice")
+        .first()
+        .where("id", itemId[0]);
+
+      await this.knex("itemsLog").insert({
+        items_id: itemId[0],
+        itemsLogPrice: itemLogPrice.currentPrice
       });
+
+      const catId = await this.knex("items")
+        .where("id", orderItemsResult.items_id)
+        .select("categories_id");
+      console.log("stage 8", catId);
+
+      const priceDown: number = catId[0].categories_id === 1 ? 10 / 9 : 10 / 4;
+
+      const itemsIdArray = await this.knex("items")
+        .where("categories_id", catId[0].categories_id)
+        .whereRaw(`"currentPrice" > "minimumPrice"`)
+        .whereNot("id", orderItemsResult.items_id)
+        .update({
+          currentPrice: this.knex.raw(`?? - ${priceDown}`, ["currentPrice"])
+        })
+        .returning("id");
+
+      const itemsCurrentPrices = await this.knex("items")
+        .select("currentPrice", "id")
+        .whereIn("id", itemsIdArray);
+
+      const itemLogs = itemsCurrentPrices.map((itemLogItem: any) => {
+        return {
+          items_id: itemLogItem.id,
+          itemsLogPrice: itemLogItem.currentPrice
+        };
+      });
+
+      await this.knex("itemsLog").insert(itemLogs);
+    });
+    const totalPrice = await this.knex("orders_items")
+      .sum("purchasePrice")
+      .where("orders_id", orderId[0]);
+
+    await this.knex("orders")
+      .update({ orderTotal: totalPrice[0].sum })
+      .where("id", orderId[0]);
+
+    return await this.knex("orders")
+      .select("users_id", "status", "id as orders_id")
+      .where("id", orderId[0]);
   }
+  // // insert the order information into the order's table
+  // return this.knex("orders")
+  //   .insert({
+  //     isPaid: false,
+  //     status: data.status,
+  //     table: data.table,
+  //     users_id: id
+  //   })
+  //   .returning("id")
+  //   .then((orderId: any) => {
+  //     // insert the information of the items within the order into the orders_items table
+  //     return Promise.all(
+  //       data.item.map((order: object, i: number) => {
+  //         return this.knex("orders_items")
+  //           .insert({
+  //             garnish: data.item[i].garnish,
+  //             ice: data.item[i].ice,
+  //             items_id: data.item[i].items_id,
+  //             orders_id: orderId[0],
+  //             purchasePrice: data.item[i].purchasePrice,
+  //             sweetness: data.item[i].sweetness
+  //           })
+  //           .returning("id");
+  //       })
+  //     )
+  //       .then((orderItemId: any) => {
+  //         return Promise.all(
+  //           orderItemId.map((item: object, j: number) => {
+  //             // obtain the each item's id that is being ordered
+  //             return this.knex("orders_items")
+  //               .join("items", "items.id", "=", "orders_items.items_id")
+  //               .where("orders_items.id", orderItemId[j][0])
+  //               .select("items.id as items_id", "items.categories_id")
+  //               .then((itemIdIncrease: Knex.QueryBuilder) => {
+  //                 // increase the current price of the item being ordered
+  //                 let priceUp: number;
+  //                 itemIdIncrease[0].categories_id === 1
+  //                   ? (priceUp = 10)
+  //                   : (priceUp = 10);
+  //                 return this.knex("items")
+  //                   .update({
+  //                     currentPrice: this.knex.raw(`?? + ${priceUp}`, [
+  //                       "currentPrice"
+  //                     ])
+  //                   })
+  //                   .where("id", itemIdIncrease[0].items_id)
+  //                   .returning("id")
+  //                   .then((itemIdDecrease: Knex.QueryBuilder) => {
+  //                     // decrease the itemStock of the item being ordered
+  //                     return this.knex("items")
+  //                       .where("id", itemIdDecrease[0])
+  //                       .decrement("itemStock", 1)
+  //                       .returning("id")
+  //                       .then((itemId: Knex.QueryBuilder) => {
+  //                         // obtain the current price from the item's table
+  //                         return this.knex("items")
+  //                           .select("currentPrice")
+  //                           .where("id", itemId[0])
+  //                           .then((itemLogPrice: Knex.QueryBuilder) => {
+  //                             // insert the current price into the itemsLog as itemsLogPrice
+  //                             return this.knex("itemsLog")
+  //                               .insert({
+  //                                 items_id: itemId[0],
+  //                                 itemsLogPrice: itemLogPrice[0].currentPrice
+  //                               })
+  //                               .then(() => {
+  //                                 // check for the category of the item that had its current price increased
+  //                                 return this.knex("items")
+  //                                   .where("id", itemIdIncrease[0].items_id)
+  //                                   .select("categories_id")
+  //                                   .then((catId: Knex.QueryBuilder) => {
+  //                                     let priceDown: number;
+  //                                     catId[0].categories_id === 1
+  //                                       ? (priceDown = 10 / 9)
+  //                                       : (priceDown = 10 / 4);
+  //                                     // decrease all other items current price in the specific category other than the item being ordered
+  //                                     return this.knex("items")
+  //                                       .where(
+  //                                         "categories_id",
+  //                                         catId[0].categories_id
+  //                                       )
+  //                                       .whereRaw(
+  //                                         `"currentPrice" > "minimumPrice"`
+  //                                       )
+  //                                       .whereNot(
+  //                                         "id",
+  //                                         itemIdIncrease[0].items_id
+  //                                       )
+  //                                       .update({
+  //                                         currentPrice: this.knex.raw(
+  //                                           `?? - ${priceDown}`,
+  //                                           ["currentPrice"]
+  //                                         )
+  //                                       })
+  //                                       .returning("id")
+  //                                       .then((itemsIdArray: any) => {
+  //                                         // obtain the current price of the other items in the category from the item's table
+  //                                         itemsIdArray.map(
+  //                                           (items: object, k: number) => {
+  //                                             return this.knex("items")
+  //                                               .select("currentPrice")
+  //                                               .where("id", itemsIdArray[k])
+  //                                               .then(
+  //                                                 (
+  //                                                   itemsLogPrice: Knex.QueryBuilder
+  //                                                 ) => {
+  //                                                   // insert the current price into the itemsLog as itemsLogPrice
+  //                                                   return this.knex(
+  //                                                     "itemsLog"
+  //                                                   )
+  //                                                     .insert({
+  //                                                       items_id:
+  //                                                         itemsIdArray[k],
+  //                                                       itemsLogPrice:
+  //                                                         itemsLogPrice[0]
+  //                                                           .currentPrice
+  //                                                     })
+  //                                                     .then(() => {
+  //                                                       // calculate the total price of the order
+  //                                                       return this.knex(
+  //                                                         "orders_items"
+  //                                                       )
+  //                                                         .sum(
+  //                                                           "purchasePrice"
+  //                                                         )
+  //                                                         .where(
+  //                                                           "orders_id",
+  //                                                           orderId[0]
+  //                                                         )
+  //                                                         .then(
+  //                                                           (
+  //                                                             totalPrice: Knex.QueryCallback
+  //                                                           ) => {
+  //                                                             // update the total price of the order into the order table
+  //                                                             return this.knex(
+  //                                                               "orders"
+  //                                                             )
+  //                                                               .update({
+  //                                                                 orderTotal:
+  //                                                                   totalPrice[0]
+  //                                                                     .sum
+  //                                                               })
+  //                                                               .where(
+  //                                                                 "id",
+  //                                                                 orderId[0]
+  //                                                               );
+  //                                                           }
+  //                                                         );
+  //                                                     });
+  //                                                 }
+  //                                               );
+  //                                           }
+  //                                         );
+  //                                       });
+  //                                   });
+  //                               });
+  //                           });
+  //                       });
+  //                   });
+  //               });
+  //           })
+  //         );
+  //       })
+  //       .then(() => {
+  //         // return the user_id, order status and order_id of the added order
+  //         return this.knex("orders")
+  //           .select("users_id", "status", "id as orders_id")
+  //           .where("id", orderId[0]);
+  //       });
+  //   });
+  // }
 
   // Working 07/06/18
   // public getByOrderId(id: number) {
