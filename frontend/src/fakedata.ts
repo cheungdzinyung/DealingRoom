@@ -1,9 +1,9 @@
 import {
-  
+
   IOrder,
   // IItemWithMod,
   // ICustomerOrderList
-  IMenuCategoryWithFlux, IMenuItemWithoutFlux
+  IMenuCategoryWithFlux, IMenuItemWithoutFlux, IMenuItemWithFlux
 } from "src/modules";
 
 export const singleCategoryMenuItems: IMenuCategoryWithFlux = {
@@ -132,7 +132,7 @@ export const adminAllItemTest: IMenuItemWithoutFlux[] = [
     itemPhoto: "./assets/images/squarebeer.jpg",
     isSpecial: false,
     isActive: true
-  },{
+  }, {
     items_id: 1,
     itemName: "Asahi",
     itemStock: 12,
@@ -144,7 +144,7 @@ export const adminAllItemTest: IMenuItemWithoutFlux[] = [
     itemPhoto: "../../assets/images/squarebeer.jpg",
     isSpecial: false,
     isActive: false
-  },{
+  }, {
     items_id: 1,
     itemName: "Asahi",
     itemStock: 12,
@@ -156,7 +156,7 @@ export const adminAllItemTest: IMenuItemWithoutFlux[] = [
     itemPhoto: "../../assets/images/squarebeer.jpg",
     isSpecial: true,
     isActive: true
-  },{
+  }, {
     items_id: 1,
     itemName: "Asahi",
     itemStock: 12,
@@ -168,7 +168,7 @@ export const adminAllItemTest: IMenuItemWithoutFlux[] = [
     itemPhoto: "../../assets/images/squarebeer.jpg",
     isSpecial: false,
     isActive: true
-  },{
+  }, {
     items_id: 1,
     itemName: "Asahi",
     itemStock: 12,
@@ -180,7 +180,7 @@ export const adminAllItemTest: IMenuItemWithoutFlux[] = [
     itemPhoto: "../../assets/images/squarebeer.jpg",
     isSpecial: true,
     isActive: true
-  },{
+  }, {
     items_id: 1,
     itemName: "Asahi",
     itemStock: 12,
@@ -192,6 +192,143 @@ export const adminAllItemTest: IMenuItemWithoutFlux[] = [
     itemPhoto: "../../assets/images/squarebeer.jpg",
     isSpecial: false,
     isActive: false
+  }
+]
+
+
+export const displayMenuItemListTest: IMenuItemWithFlux[] = [
+  {
+    items_id: 1,
+    itemName: "Asahi",
+    itemStock: 12,
+    categoryName: "beer",
+    itemDescription:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    minimumPrice: 12,
+    currentPrice: 13,
+    itemPhoto: "./assets/images/squarebeer.jpg",
+    isSpecial: false,
+    isActive: true,
+    chartData: [
+      { time: "9", purchasePrice: 13 },
+      { time: "10", purchasePrice: 26 },
+      { time: "11", purchasePrice: 19 },
+      { time: "12", purchasePrice: 28 },
+      { time: "13", purchasePrice: 33 },
+      { time: "14", purchasePrice: 29 },
+      { time: "15", purchasePrice: 18 },
+      { time: "16", purchasePrice: 36 }
+    ]
+  }, {
+    items_id: 1,
+    itemName: "Asahi",
+    itemStock: 12,
+    categoryName: "beer",
+    itemDescription:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    minimumPrice: 12,
+    currentPrice: 13,
+    itemPhoto: "../../assets/images/squarebeer.jpg",
+    isSpecial: false,
+    isActive: false,
+    chartData: [
+      { time: "9", purchasePrice: 13 },
+      { time: "10", purchasePrice: 26 },
+      { time: "11", purchasePrice: 19 },
+      { time: "12", purchasePrice: 28 },
+      { time: "13", purchasePrice: 33 },
+      { time: "14", purchasePrice: 29 },
+      { time: "15", purchasePrice: 18 },
+      { time: "16", purchasePrice: 36 }
+    ]
+  }, {
+    items_id: 1,
+    itemName: "Asahi",
+    itemStock: 12,
+    categoryName: "beer",
+    itemDescription:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    minimumPrice: 12,
+    currentPrice: 13,
+    itemPhoto: "../../assets/images/squarebeer.jpg",
+    isSpecial: true,
+    isActive: true,
+    chartData: [
+      { time: "9", purchasePrice: 13 },
+      { time: "10", purchasePrice: 26 },
+      { time: "11", purchasePrice: 19 },
+      { time: "12", purchasePrice: 28 },
+      { time: "13", purchasePrice: 33 },
+      { time: "14", purchasePrice: 29 },
+      { time: "15", purchasePrice: 18 },
+      { time: "16", purchasePrice: 36 }
+    ]
+  }, {
+    items_id: 1,
+    itemName: "Asahi",
+    itemStock: 12,
+    categoryName: "beer",
+    itemDescription:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    minimumPrice: 12,
+    currentPrice: 13,
+    itemPhoto: "../../assets/images/squarebeer.jpg",
+    isSpecial: false,
+    isActive: true,
+    chartData: [
+      { time: "9", purchasePrice: 13 },
+      { time: "10", purchasePrice: 26 },
+      { time: "11", purchasePrice: 19 },
+      { time: "12", purchasePrice: 28 },
+      { time: "13", purchasePrice: 33 },
+      { time: "14", purchasePrice: 29 },
+      { time: "15", purchasePrice: 18 },
+      { time: "16", purchasePrice: 36 }
+    ]
+  }, {
+    items_id: 1,
+    itemName: "Asahi",
+    itemStock: 12,
+    categoryName: "beer",
+    itemDescription:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    minimumPrice: 12,
+    currentPrice: 13,
+    itemPhoto: "../../assets/images/squarebeer.jpg",
+    isSpecial: true,
+    isActive: true,
+    chartData: [
+      { time: "9", purchasePrice: 13 },
+      { time: "10", purchasePrice: 26 },
+      { time: "11", purchasePrice: 19 },
+      { time: "12", purchasePrice: 28 },
+      { time: "13", purchasePrice: 33 },
+      { time: "14", purchasePrice: 29 },
+      { time: "15", purchasePrice: 18 },
+      { time: "16", purchasePrice: 36 }
+    ]
+  }, {
+    items_id: 1,
+    itemName: "Asahi",
+    itemStock: 12,
+    categoryName: "beer",
+    itemDescription:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    minimumPrice: 12,
+    currentPrice: 13,
+    itemPhoto: "../../assets/images/squarebeer.jpg",
+    isSpecial: false,
+    isActive: false,
+    chartData: [
+      { time: "9", purchasePrice: 13 },
+      { time: "10", purchasePrice: 26 },
+      { time: "11", purchasePrice: 19 },
+      { time: "12", purchasePrice: 28 },
+      { time: "13", purchasePrice: 33 },
+      { time: "14", purchasePrice: 29 },
+      { time: "15", purchasePrice: 18 },
+      { time: "16", purchasePrice: 36 }
+    ]
   }
 ]
 
@@ -237,7 +374,7 @@ export const allOrders: IOrder[] = [
       sweetness: "normal",
       garnish: "normal",
     },
-  ],
+    ],
   },
   {
     users_id: 3,
@@ -272,7 +409,7 @@ export const allOrders: IOrder[] = [
       sweetness: "normal",
       garnish: "normal",
     },
-  ],
+    ],
   },
   {
     users_id: 3,
@@ -315,9 +452,9 @@ export const allOrders: IOrder[] = [
       sweetness: "normal",
       garnish: "normal",
     },
-  ],
+    ],
   },
-{
+  {
     users_id: 3,
     userName: "judith",
     displayName: "Juju",
@@ -350,7 +487,7 @@ export const allOrders: IOrder[] = [
       sweetness: "normal",
       garnish: "normal",
     },
-  ],
+    ],
   },
   {
     users_id: 3,
@@ -393,7 +530,7 @@ export const allOrders: IOrder[] = [
       sweetness: "normal",
       garnish: "normal",
     },
-  ],
+    ],
   },
   {
     users_id: 3,
@@ -444,7 +581,7 @@ export const allOrders: IOrder[] = [
       sweetness: "normal",
       garnish: "normal",
     },
-  ],
+    ],
   },
 ]
 
