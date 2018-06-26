@@ -28,7 +28,7 @@ export interface IUserState {
 
 const initialState = {
     // role: "customer",
-    isAuth: false,
+    isAuth: false,              // wrong after F5
     currentPage: "profile",
     redirectTarget: "none",     // for redir
     // settings: "nth yet",
@@ -44,26 +44,17 @@ const initialState = {
     userAPIErr: "none",
 }
 
-// declare global {
-//     // for FB login?
-//     interface Window {
-//         FB: {
-//             logout: (callback: () => void) => void;
-//         };
-//     }
-// }
-
 export const userReducer = (state: IUserState = initialState, action: UserActions): IUserState => {
     switch (action.type) {
         case CHANGE_PAGE: {
-            return { ...state, currentPage: action.currentPage }
+            return { ...state, currentPage: action.currentPage };
         }
         case REDIRECT_PAGE: {
             action.history.push(`${action.redirectTarget}`);
-            return { ...state, redirectTarget: action.redirectTarget }
+            return { ...state, redirectTarget: action.redirectTarget };
         }
         case RESET_TARGET_PAGE: {
-            return { ...state, redirectTarget: "none" }
+            return { ...state, redirectTarget: "none" };
         }
         case LOCAL_LOGIN_SUCCESS: {
             localStorage.setItem("dealingRoomToken", action.userInfoPackage.token);
@@ -77,16 +68,16 @@ export const userReducer = (state: IUserState = initialState, action: UserAction
             return { ...state, userAPIErr: "none" };
         }
         case LOCAL_SIGNUP_FAIL: {
-            return { ...state, userAPIErr: action.errMsg }
+            return { ...state, userAPIErr: action.errMsg };
         }
         case FB_LOGIN_SUCCESS: {
             localStorage.setItem("dealingRoomToken", action.FBtoken);
-            return { ...state, isAuth: true, userAPIErr: "none" }
+            return { ...state, isAuth: true, userAPIErr: "none" };
             // alert(`FB login ok ;) ${action.FBtoken}`)
             // return state;
         }
         case FB_LOGIN_FAIL: {
-            return { ...state, userAPIErr: action.errMsg ||"FB_LOGIN_FAIL" }
+            return { ...state, userAPIErr: action.errMsg ||"FB_LOGIN_FAIL" };
         }        
         case GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS: {
             return { ...state, userProfile: action.userProfile, userProfileReady: true, userAPIErr: "none" };
@@ -95,7 +86,7 @@ export const userReducer = (state: IUserState = initialState, action: UserAction
             return { ...state, userAPIErr: "GET_USER_PROFILE_BY_USER_TOKEN_FAIL" };
         }
         default: {
-            return state
+            return state;
         }
     }
 }

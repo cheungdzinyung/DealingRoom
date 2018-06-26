@@ -1,5 +1,6 @@
 import * as express from "express";
 import * as multer from "multer";
+import * as path from "path"
 
 import { IItemData } from "../interfaces";
 import ItemsService from "../services/ItemsService";
@@ -21,6 +22,7 @@ export default class ItemsRouter {
 
     router.get("/:id", this.get.bind(this));
     router.get("/", this.getAll.bind(this));
+    router.get("/image/:id", this.getImage.bind(this));
 
     router.put("/:id", upload.single("itemPhoto"), this.update.bind(this));
 
@@ -50,11 +52,6 @@ export default class ItemsRouter {
   }
 
   public getAll(req: express.Request, res: express.Response) {
-    let isActive: boolean;
-    req.query.isActive !== undefined
-      ? (isActive = req.query.isActive)
-      : (isActive = true);
-      
     if (req.query.fluctuatingPrices !== undefined) {
       if (req.query.category !== undefined) {
         return this.itemsService
@@ -90,7 +87,7 @@ export default class ItemsRouter {
           });
       } else {
         return this.itemsService
-          .getAll(isActive)
+          .getAll(req.query.isActive)
           .then((result: any) => {
             res.status(200).json(result);
           })
@@ -99,6 +96,18 @@ export default class ItemsRouter {
           });
       }
     }
+  }
+
+  public getImage(req: express.Request, res: express.Response) {
+    return this.itemsService
+      .getItemImage(req.params.id)
+      .then((result: any) => {
+        const name = result[0].itemName.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()
+        res.sendFile(path.join(__dirname, '../storage/items', `${name}.png`));
+      })
+      .catch((err: express.Errback) => {
+        res.status(500).json({ status: "failed" });
+      });
   }
 
   public update(req: express.Request, res: express.Response) {

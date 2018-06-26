@@ -6,6 +6,7 @@ import {
     REMOVE_ITEM,
     CONFIRM_ORDER_SUCCESS,
     CONFIRM_ORDER_FAIL,
+    RESET_CONFIRM_ORDER_STATUS,
     GET_ORDERS_BY_USER_TOKEN_SUCCESS,
     GET_ORDERS_BY_USER_TOKEN_FAIL,
     SOCKET_CONNECT_SUCCESS,
@@ -34,14 +35,14 @@ export interface IOrdersState {
     currentOrder: IRequestItem[],
     currentTotal: number,
     orderAPIErr: string,
+    confirmOrderStatus: "null" | "confirmed" | "failed",
 }
 
 const initialState: IOrdersState = {
     socketID: "",
     socketData: {},
     menuReady: false,
-    orderListReady: false,
-    // entireMenu: [],
+    orderListReady: false,  
     entireMenu: [
         {
             "categoryName": "beer",
@@ -51,7 +52,7 @@ const initialState: IOrdersState = {
                     "items_id": 0,
                     "itemName": "Asahi",
                     "itemStock": 1,
-                    categoryName: "beer",
+                    "categoryName": "beer",
                     "minimumPrice": 999.00,
                     "currentPrice": 999.00,
                     "itemPhoto": "../storage/items/asahi.jpeg",
@@ -96,6 +97,7 @@ const initialState: IOrdersState = {
     currentOrder: [],
     currentTotal: 0,
     orderAPIErr: "none",
+    confirmOrderStatus: "null",
 }
 
 export const ordersReducer = (state: IOrdersState = initialState, action: OrdersActions): IOrdersState => {
@@ -147,12 +149,16 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
                     currentOrder: [],
                     currentTotal: 0,
                     entireMenu: action.result.entireMenu,
-                    orderAPIErr: "none"
+                    orderAPIErr: "none",
+                    confirmOrderStatus: "confirmed",
                 };
         }
         case CONFIRM_ORDER_FAIL: {
             // write to db failed, keep current order in root state
-            return { ...state, orderAPIErr: "CONFIRM_ORDER_FAIL" };
+            return { ...state, orderAPIErr: "CONFIRM_ORDER_FAIL", confirmOrderStatus: "failed" };
+        }
+        case RESET_CONFIRM_ORDER_STATUS: {
+            return { ...state, confirmOrderStatus: "null" };
         }
         case GET_ORDERS_BY_USER_TOKEN_SUCCESS: {
             // need to change data type

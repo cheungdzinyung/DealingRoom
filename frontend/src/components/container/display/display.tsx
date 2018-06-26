@@ -1,81 +1,101 @@
 // Importing modules from library
 import * as React from "react";
 
-// Importing static assets
-// import downWhite from "../../assets/icons/down-white.svg";
-// import upWhite from "../../assets/icons/up-white.svg";
-import tempImg from "../../assets/images/categories/squarebeer.jpg";
+
+// import tempImg from "../../assets/images/categories/squarebeer.jpg";
 
 // Importing temporary data
-import { singleCategoryMenuItems } from "../../../fakedata";
+import { singleCategoryMenuItems, displayMenuItemListTest } from "src/fakedata";
 
 // Importing utility function and classes
-import { LineChart, XAxis, YAxis, CartesianGrid, Line } from "recharts";
+// import { LineChart, XAxis, YAxis, CartesianGrid, Line } from "recharts";
 // import { percentageChange } from '../../../util/utility';
 import { IMenuCategoryWithFlux } from "src/modules";
 
+import { DisplayFlexItemLine } from "src/components/ui/display/displayfluxitemline";
+import { DisplayMain } from "src/components/ui/display/displaymain";
 
+// redux
+import { connect } from "react-redux";
+import { IRootState } from "../../../redux/store";
+import { getEntireMenu } from "../../../redux/desktop/actions/actions_display";
+
+
+interface IDisplayProps {
+    entireMenu: IMenuCategoryWithFlux[],
+    menuReady: boolean,
+    categories: string[],
+    getEntireMenu: () => void,
+}
 
 interface IDisplayState {
-    // items : IPureMenuItemWithFluctuation[];
-    // categories : IPureMenuCategory;
-    // categoryName: string;
-
     singleCategory: IMenuCategoryWithFlux
 }
 
-export default class Display extends React.Component<{}, IDisplayState> {
-    constructor(props: {}) {
+const mapStateToProps = (state: IRootState) => {
+    return {
+        entireMenu: state.staff.display.entireMenu,
+        menuReady: state.staff.display.menuReady,
+        categories: state.staff.display.categories,
+    };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        getEntireMenu: () => {
+            dispatch(getEntireMenu());
+        },
+    };
+};
+
+class PureDisplay extends React.Component<IDisplayProps, IDisplayState> {
+    constructor(props: IDisplayProps) {
         super(props);
 
         this.state = {
-            //   Sorry Judith, I depleted the original fake data structure, this is the newest one
             singleCategory: singleCategoryMenuItems
         }
     }
 
+    public componentDidMount () {
+        if (!this.props.menuReady) {
+            this.props.getEntireMenu();
+        }
+    }
+
     public render() {
+
+        const data = [
+            { time: "9", purchasePrice: 13 },
+            { time: "10", purchasePrice: 26 },
+            { time: "11", purchasePrice: 19 },
+            { time: "12", purchasePrice: 28 },
+            { time: "13", purchasePrice: 33 },
+            { time: "14", purchasePrice: 29 },
+            { time: "15", purchasePrice: 18 },
+            { time: "16", purchasePrice: 36 }
+        ];
         return (
             <div className="display-container">
-                <div className="category-display">
-                    <img className="display-img" src={tempImg} alt="display-pic" />
-                    <h2>{this.state.singleCategory.categoryName}</h2>
+                <div className="display-data-container">
+                    <DisplayMain singleCategory={"Beer"} pirceChange={320} data={data} />
+                    <div className="display-data-sub-container">12</div>
+                    <div className="display-data-info-container">12</div>
+                    <div className="display-data-prices-container">
+                        {displayMenuItemListTest.map((itemLine, index) => (
+                            <DisplayFlexItemLine {...itemLine} />
+                        ))}
+                    </div>
                 </div>
-
-                <div className="price-fluctuation-graph">
-                    <LineChart width={500} height={180} data={[
-                        { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
-                        { name: 'Page B', uv: 3000, pv: 1398, amt: 2210 },
-                        { name: 'Page C', uv: 2000, pv: 9800, amt: 2290 },
-                        { name: 'Page D', uv: 2780, pv: 3908, amt: 2000 },
-                        { name: 'Page E', uv: 1890, pv: 4800, amt: 2181 },
-                        { name: 'Page F', uv: 2390, pv: 3800, amt: 2500 },
-                        { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
-                    ]}>
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-                        <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-                        <Line type="monotone" dataKey="pv" stroke="#82ca9d" />
-                    </LineChart>
-                </div>
-                <div className="category-item-container">
-                    {this.state.singleCategory.items.map((item, i) => {
-                        return (
-                            <div className="category-item-display" key={i}>
-                                <span>{item.itemName}</span>
-                                <span>${item.currentPrice}</span>
-                            </div>
-                        )
-                    })
-                    }
-                </div>
-
                 <div className="rss-feed">
-                <span className="feed-text">This round of discount is brought to you by dealingroom!</span>
+                    <span className="feed-text">This round of discount is brought to you by dealingroom!</span>
                 </div>
             </div>
         );
     }
 
 }
+
+const Display = connect(mapStateToProps, mapDispatchToProps)(PureDisplay);
+
+export default Display;

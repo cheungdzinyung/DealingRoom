@@ -1,9 +1,9 @@
 import {
-  
+
   IOrder,
   // IItemWithMod,
   // ICustomerOrderList
-  IMenuCategoryWithFlux, IMenuItemWithoutFlux
+  IMenuCategoryWithFlux, IMenuItemWithoutFlux, IMenuItemWithFlux
 } from "src/modules";
 
 export const singleCategoryMenuItems: IMenuCategoryWithFlux = {
@@ -132,7 +132,7 @@ export const adminAllItemTest: IMenuItemWithoutFlux[] = [
     itemPhoto: "./assets/images/squarebeer.jpg",
     isSpecial: false,
     isActive: true
-  },{
+  }, {
     items_id: 1,
     itemName: "Asahi",
     itemStock: 12,
@@ -144,7 +144,7 @@ export const adminAllItemTest: IMenuItemWithoutFlux[] = [
     itemPhoto: "../../assets/images/squarebeer.jpg",
     isSpecial: false,
     isActive: false
-  },{
+  }, {
     items_id: 1,
     itemName: "Asahi",
     itemStock: 12,
@@ -156,7 +156,7 @@ export const adminAllItemTest: IMenuItemWithoutFlux[] = [
     itemPhoto: "../../assets/images/squarebeer.jpg",
     isSpecial: true,
     isActive: true
-  },{
+  }, {
     items_id: 1,
     itemName: "Asahi",
     itemStock: 12,
@@ -168,7 +168,7 @@ export const adminAllItemTest: IMenuItemWithoutFlux[] = [
     itemPhoto: "../../assets/images/squarebeer.jpg",
     isSpecial: false,
     isActive: true
-  },{
+  }, {
     items_id: 1,
     itemName: "Asahi",
     itemStock: 12,
@@ -180,7 +180,7 @@ export const adminAllItemTest: IMenuItemWithoutFlux[] = [
     itemPhoto: "../../assets/images/squarebeer.jpg",
     isSpecial: true,
     isActive: true
-  },{
+  }, {
     items_id: 1,
     itemName: "Asahi",
     itemStock: 12,
@@ -192,6 +192,143 @@ export const adminAllItemTest: IMenuItemWithoutFlux[] = [
     itemPhoto: "../../assets/images/squarebeer.jpg",
     isSpecial: false,
     isActive: false
+  }
+]
+
+
+export const displayMenuItemListTest: IMenuItemWithFlux[] = [
+  {
+    items_id: 1,
+    itemName: "Asahi",
+    itemStock: 12,
+    categoryName: "beer",
+    itemDescription:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    minimumPrice: 12,
+    currentPrice: 13,
+    itemPhoto: "./assets/images/squarebeer.jpg",
+    isSpecial: false,
+    isActive: true,
+    chartData: [
+      { time: "9", purchasePrice: 13 },
+      { time: "10", purchasePrice: 26 },
+      { time: "11", purchasePrice: 19 },
+      { time: "12", purchasePrice: 28 },
+      { time: "13", purchasePrice: 33 },
+      { time: "14", purchasePrice: 29 },
+      { time: "15", purchasePrice: 18 },
+      { time: "16", purchasePrice: 36 }
+    ]
+  }, {
+    items_id: 1,
+    itemName: "Asahi",
+    itemStock: 12,
+    categoryName: "beer",
+    itemDescription:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    minimumPrice: 12,
+    currentPrice: 13,
+    itemPhoto: "../../assets/images/squarebeer.jpg",
+    isSpecial: false,
+    isActive: false,
+    chartData: [
+      { time: "9", purchasePrice: 13 },
+      { time: "10", purchasePrice: 26 },
+      { time: "11", purchasePrice: 19 },
+      { time: "12", purchasePrice: 28 },
+      { time: "13", purchasePrice: 33 },
+      { time: "14", purchasePrice: 29 },
+      { time: "15", purchasePrice: 18 },
+      { time: "16", purchasePrice: 36 }
+    ]
+  }, {
+    items_id: 1,
+    itemName: "Asahi",
+    itemStock: 12,
+    categoryName: "beer",
+    itemDescription:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    minimumPrice: 12,
+    currentPrice: 13,
+    itemPhoto: "../../assets/images/squarebeer.jpg",
+    isSpecial: true,
+    isActive: true,
+    chartData: [
+      { time: "9", purchasePrice: 13 },
+      { time: "10", purchasePrice: 26 },
+      { time: "11", purchasePrice: 19 },
+      { time: "12", purchasePrice: 28 },
+      { time: "13", purchasePrice: 33 },
+      { time: "14", purchasePrice: 29 },
+      { time: "15", purchasePrice: 18 },
+      { time: "16", purchasePrice: 36 }
+    ]
+  }, {
+    items_id: 1,
+    itemName: "Asahi",
+    itemStock: 12,
+    categoryName: "beer",
+    itemDescription:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    minimumPrice: 12,
+    currentPrice: 13,
+    itemPhoto: "../../assets/images/squarebeer.jpg",
+    isSpecial: false,
+    isActive: true,
+    chartData: [
+      { time: "9", purchasePrice: 13 },
+      { time: "10", purchasePrice: 26 },
+      { time: "11", purchasePrice: 19 },
+      { time: "12", purchasePrice: 28 },
+      { time: "13", purchasePrice: 33 },
+      { time: "14", purchasePrice: 29 },
+      { time: "15", purchasePrice: 18 },
+      { time: "16", purchasePrice: 36 }
+    ]
+  }, {
+    items_id: 1,
+    itemName: "Asahi",
+    itemStock: 12,
+    categoryName: "beer",
+    itemDescription:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    minimumPrice: 12,
+    currentPrice: 13,
+    itemPhoto: "../../assets/images/squarebeer.jpg",
+    isSpecial: true,
+    isActive: true,
+    chartData: [
+      { time: "9", purchasePrice: 13 },
+      { time: "10", purchasePrice: 26 },
+      { time: "11", purchasePrice: 19 },
+      { time: "12", purchasePrice: 28 },
+      { time: "13", purchasePrice: 33 },
+      { time: "14", purchasePrice: 29 },
+      { time: "15", purchasePrice: 18 },
+      { time: "16", purchasePrice: 36 }
+    ]
+  }, {
+    items_id: 1,
+    itemName: "Asahi",
+    itemStock: 12,
+    categoryName: "beer",
+    itemDescription:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    minimumPrice: 12,
+    currentPrice: 13,
+    itemPhoto: "../../assets/images/squarebeer.jpg",
+    isSpecial: false,
+    isActive: false,
+    chartData: [
+      { time: "9", purchasePrice: 13 },
+      { time: "10", purchasePrice: 26 },
+      { time: "11", purchasePrice: 19 },
+      { time: "12", purchasePrice: 28 },
+      { time: "13", purchasePrice: 33 },
+      { time: "14", purchasePrice: 29 },
+      { time: "15", purchasePrice: 18 },
+      { time: "16", purchasePrice: 36 }
+    ]
   }
 ]
 
@@ -237,7 +374,7 @@ export const allOrders: IOrder[] = [
       sweetness: "normal",
       garnish: "normal",
     },
-  ],
+    ],
   },
   {
     users_id: 3,
@@ -245,7 +382,7 @@ export const allOrders: IOrder[] = [
     displayName: "Juju",
     orders_id: 18,
     table: 12,
-    status: "confirmed",
+    status: "made",
     isPaid: false,
     orderTotal: 300,
     orderItems: [{
@@ -272,13 +409,13 @@ export const allOrders: IOrder[] = [
       sweetness: "normal",
       garnish: "normal",
     },
-  ],
+    ],
   },
   {
     users_id: 3,
     userName: "judith",
     displayName: "Juju",
-    orders_id: 20,
+    orders_id: 2,
     table: 12,
     status: "confirmed",
     isPaid: false,
@@ -315,15 +452,50 @@ export const allOrders: IOrder[] = [
       sweetness: "normal",
       garnish: "normal",
     },
-  ],
+    ],
   },
-{
+  {
     users_id: 3,
     userName: "judith",
     displayName: "Juju",
     orders_id: 6,
     table: 12,
-    status: "confirmed",
+    status: "served",
+    isPaid: true,
+    orderTotal: 300,
+    orderItems: [{
+      items_id: 6,
+      itemName: "Heineken",
+      purchasePrice: 60,
+      ice: "normal",
+      sweetness: "normal",
+      garnish: "normal",
+    },
+    {
+      items_id: 12,
+      itemName: "Long Island Ice Tea",
+      purchasePrice: 80,
+      ice: "normal",
+      sweetness: "normal",
+      garnish: "normal",
+    },
+    {
+      items_id: 15,
+      itemName: "Cosmopolitan",
+      purchasePrice: 120,
+      ice: "normal",
+      sweetness: "normal",
+      garnish: "normal",
+    },
+    ],
+  },
+  {
+    users_id: 3,
+    userName: "judith",
+    displayName: "Juju",
+    orders_id: 8,
+    table: 12,
+    status: "served",
     isPaid: false,
     orderTotal: 300,
     orderItems: [{
@@ -358,187 +530,61 @@ export const allOrders: IOrder[] = [
       sweetness: "normal",
       garnish: "normal",
     },
-  ],
+    ],
+  },
+  {
+    users_id: 3,
+    userName: "judith",
+    displayName: "Juju",
+    orders_id: 12,
+    table: 12,
+    status: "served",
+    isPaid: true,
+    orderTotal: 300,
+    orderItems: [{
+      items_id: 6,
+      itemName: "Heineken",
+      purchasePrice: 60,
+      ice: "normal",
+      sweetness: "normal",
+      garnish: "normal",
+    },
+    {
+      items_id: 16,
+      itemName: "Margarita",
+      purchasePrice: 120,
+      ice: "normal",
+      sweetness: "normal",
+      garnish: "normal",
+    },
+    {
+      items_id: 16,
+      itemName: "Margarita",
+      purchasePrice: 120,
+      ice: "normal",
+      sweetness: "normal",
+      garnish: "normal",
+    },
+    {
+      items_id: 15,
+      itemName: "Cosmopolitan",
+      purchasePrice: 120,
+      ice: "normal",
+      sweetness: "normal",
+      garnish: "normal",
+    },
+    {
+      items_id: 15,
+      itemName: "Cosmopolitan",
+      purchasePrice: 120,
+      ice: "normal",
+      sweetness: "normal",
+      garnish: "normal",
+    },
+    ],
   },
 ]
 
-export const pendingOrders: IOrder[] = [
-  {
-    users_id: 3,
-    userName: "judith",
-    displayName: "Juju",
-    orders_id: 1,
-    table: 12,
-    status: "served",
-    isPaid: false,
-    orderTotal: 300,
-    orderItems: [{
-      items_id: 6,
-      itemName: "Heineken",
-      purchasePrice: 60,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 12,
-      itemName: "Long Island Ice Tea",
-      purchasePrice: 80,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 15,
-      itemName: "Cosmopolitan",
-      purchasePrice: 120,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 13,
-      itemName: "Daiquiri",
-      purchasePrice: 100,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-  ],
-  },
-  {
-    users_id: 3,
-    userName: "judith",
-    displayName: "Juju",
-    orders_id: 3,
-    table: 12,
-    status: "served",
-    isPaid: true,
-    orderTotal: 300,
-    orderItems: [{
-      items_id: 6,
-      itemName: "Heineken",
-      purchasePrice: 60,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 15,
-      itemName: "Cosmopolitan",
-      purchasePrice: 120,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-  ],
-  },
-  {
-    users_id: 3,
-    userName: "judith",
-    displayName: "Juju",
-    orders_id: 4,
-    table: 12,
-    status: "served",
-    isPaid: true,
-    orderTotal: 220,
-    orderItems: [{
-      items_id: 9,
-      itemName: "Bloody Mary",
-      purchasePrice: 100,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 15,
-      itemName: "Cosmopolitan",
-      purchasePrice: 120,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-  ],
-  },
-  {
-    users_id: 3,
-    userName: "judith",
-    displayName: "Juju",
-    orders_id: 6,
-    table: 12,
-    status: "served",
-    isPaid: true,
-    orderTotal: 300,
-    orderItems: [{
-      items_id: 6,
-      itemName: "Heineken",
-      purchasePrice: 60,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 12,
-      itemName: "Long Island Ice Tea",
-      purchasePrice: 80,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 15,
-      itemName: "Cosmopolitan",
-      purchasePrice: 120,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 13,
-      itemName: "Daiquiri",
-      purchasePrice: 100,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-  ],
-  },
-  {
-    users_id: 3,
-    userName: "judith",
-    displayName: "Juju",
-    orders_id: 5,
-    table: 12,
-    status: "made",
-    isPaid: true,
-    orderTotal: 300,
-    orderItems: [{
-      items_id: 6,
-      itemName: "Heineken",
-      purchasePrice: 60,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 12,
-      itemName: "Long Island Ice Tea",
-      purchasePrice: 80,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 13,
-      itemName: "Daiquiri",
-      purchasePrice: 100,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-  ],
-  },
-];
 
 // used at first for the OrderCard but change into [allOrders]
 // export const orderItems: IOrder = {

@@ -23,28 +23,32 @@ exports.seed = (knex: Knex) => {
         .insert([
           {
             displayName: "ACDY",
-            password: "$2b$10$aMVkMXNlDsAqwCN94421J.0QuCfJtkto39jmeBI619kVqN31LQBjW",
+            password:
+              "$2b$10$aMVkMXNlDsAqwCN94421J.0QuCfJtkto39jmeBI619kVqN31LQBjW",
             role: "manager",
             userPhoto: "",
             username: "Andrew"
           },
           {
             displayName: "io",
-            password: "$2b$10$4DkXdXX/ysplda5MCaw78eB0Q8IPJJ7Wv1Hh3DDEyUUT45yTNLgym",
+            password:
+              "$2b$10$4DkXdXX/ysplda5MCaw78eB0Q8IPJJ7Wv1Hh3DDEyUUT45yTNLgym",
             role: "manager",
             userPhoto: "",
             username: "Ivan"
           },
           {
             displayName: "Curtit",
-            password: "$2b$10$HVwiMLFL4HC4b5XpsBdk5emwBK1hywORaxVBGUQipnBNKG1E0Cooe",
-            role: "manager", 
+            password:
+              "$2b$10$HVwiMLFL4HC4b5XpsBdk5emwBK1hywORaxVBGUQipnBNKG1E0Cooe",
+            role: "manager",
             userPhoto: "",
             username: "Judith"
           },
           {
             displayName: "Harrixon",
-            password: "$2b$10$FaDh6jBBZw/.RaegZIf7qeBL2qzxoJJXyArSKALpN0hLxSjOXLODm",
+            password:
+              "$2b$10$FaDh6jBBZw/.RaegZIf7qeBL2qzxoJJXyArSKALpN0hLxSjOXLODm",
             role: "manager",
             userPhoto: "",
             username: "Harrison"
@@ -83,16 +87,27 @@ const createItems = (knex: Knex, item: IItemsType, category: string) => {
     .where("categoryName", category)
     .first()
     .then(categoryRecord => {
-      return knex("items").insert({
-        itemName: item.itemName,
-        itemStock: item.itemStock,
-        categories_id: categoryRecord.id,
-        minimumPrice: item.minimumPrice,
-        currentPrice: item.currentPrice,
-        itemPhoto: item.itemPhoto,
-        itemDescription: item.itemDescription,
-        isSpecial: item.isSpecial,
-        isActive: item.isActive
-      });
+      return knex("items")
+        .insert({
+          itemName: item.itemName,
+          itemStock: item.itemStock,
+          categories_id: categoryRecord.id,
+          minimumPrice: item.minimumPrice,
+          currentPrice: item.currentPrice,
+          itemDescription: item.itemDescription,
+          isSpecial: item.isSpecial,
+          isActive: item.isActive
+        })
+        .returning("id")
+        .then((itemId: Knex.QueryCallback) => {
+          console.log(itemId);
+          return knex("items")
+            .update({
+              itemPhoto: `https://api.dealingroom.live/api/items/image/${
+                itemId[0]
+              }`
+            })
+            .where("id", itemId[0]);
+        });
     });
 };

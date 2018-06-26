@@ -94,6 +94,30 @@ export interface IOrder {
 }
 
 /*
+Corresponding API path: api/orders, config:{headers:{Authorization:"Bearer " + token}}
+URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiordersuseruserid5d/retreiving-orders-information-by-user-id
+
+for the use of bartender's / waiter's orderlist
+ */
+export interface IOrderItemWithMod {
+  itemName: string;
+  ice: ModificationType;
+  sweetness: ModificationType;
+  garnish: ModificationType;
+  purchasePrice: string;
+}
+
+export interface IOrderListStaff {
+  users_id: number;
+  displayName: string;
+  orders_id: number;
+  table: number;
+  status: OrderStatus;
+  isPaid: boolean;
+  order: IOrderItemWithMod[];
+}
+
+/*
 Corresponding API path: api/orders/user/:userid
 URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiordersuseruserid5d/retreiving-orders-information-by-user-id
  */
@@ -161,6 +185,13 @@ export interface IMenuItemWithFlux extends IMenuItemWithoutFlux {
 export interface IItemPriceGraphData {
   time: string;
   purchasePrice: number;
+}
+
+export interface IConsumptionGraphData{
+  category: string
+  you: number
+  everyone: number
+  maxPrice: number
 }
 
 /* 

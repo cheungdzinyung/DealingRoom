@@ -8,12 +8,13 @@ import { Card, Elevation } from "@blueprintjs/core";
 import Usermenu from "../../ui/mobile/usermenu";
 
 // Importing static assets
-import checkIcon from "../../assets/icons/check.svg";
+import checkIcon from "../../assets/icons/orderlist/checkmark.svg";
 
 // import redux and friends
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
 import { getOrdersByUserToken } from "../../../redux/mobile/actions/actions_orders";
+import { getUserProfileByUserToken } from "../../../redux/mobile/actions/actions_user";
 import PageHeader from "src/components/ui/mobile/pageheader";
 
 interface IOrdersProps {
@@ -21,6 +22,9 @@ interface IOrdersProps {
   // user_id: number,
   ordersList: any,
   getOrdersByUserToken: () => void,
+
+  userProfileReady: boolean;
+  getUserProfileByUserToken: () => void;
 }
 
 class PureOrderList extends React.Component<IOrdersProps, {}> {
@@ -33,6 +37,9 @@ class PureOrderList extends React.Component<IOrdersProps, {}> {
   }
 
   public componentDidMount() {
+    if (!this.props.userProfileReady) {
+      this.props.getUserProfileByUserToken();
+    }
     this.props.getOrdersByUserToken();
   }
 
@@ -115,7 +122,7 @@ class PureOrderList extends React.Component<IOrdersProps, {}> {
 
 const mapStateToProps = (state: IRootState) => {
   return {
-    // user_id: state.user.user_id,
+    userProfileReady: state.customer.user.userProfileReady,
     ordersList: state.customer.orders.ordersList,
   }
 }
@@ -124,6 +131,9 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     getOrdersByUserToken: () => {
       dispatch(getOrdersByUserToken());
+    },
+    getUserProfileByUserToken: () => {
+      dispatch(getUserProfileByUserToken());
     },
   }
 }

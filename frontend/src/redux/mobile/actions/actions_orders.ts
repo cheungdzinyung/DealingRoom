@@ -52,6 +52,12 @@ export interface IConfirmOrderFailAction extends Action {
     type: CONFIRM_ORDER_FAIL,
     result: any,
 }
+
+export const RESET_CONFIRM_ORDER_STATUS = "RESET_CONFIRM_ORDER_STATUS";
+export type RESET_CONFIRM_ORDER_STATUS = typeof RESET_CONFIRM_ORDER_STATUS;
+export interface IResetConfirmOrderStatusAction extends Action {
+    type: RESET_CONFIRM_ORDER_STATUS,
+}
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const GET_ORDERS_BY_USER_TOKEN_SUCCESS = "GET_ORDERS_BY_USER_TOKEN_SUCCESS";
 export type GET_ORDERS_BY_USER_TOKEN_SUCCESS = typeof GET_ORDERS_BY_USER_TOKEN_SUCCESS;
@@ -89,6 +95,7 @@ export type OrdersActions =
     IRemoveItemAction |
     IConfirmOrderSuccessAction |
     IConfirmOrderFailAction |
+    IResetConfirmOrderStatusAction |
     IGetOrdersByUserTokenSuccessAction |
     IGetOrdersByUserTokenFailAction |
     ISocketConnectSuccess |
@@ -117,7 +124,7 @@ export function getEntireMenu() {
                     // alert(Object.keys(res.data));
                     dispatch(getEntireMenuSuccess(res.data));
                 } else {
-                    alert("error not 200");
+                    alert("error, status code not match: " + res.status);
                     dispatch(getEntireMenuFail());
                 }
             })
@@ -166,11 +173,11 @@ export function confirmOrder(orderToConfirm: ICurrentOrder) {
         axios.post(`${API_SERVER}/api/orders/`, orderToConfirm, config)
             .then((res: any) => {
                 if (res.status === 201) {
-                    alert(res.data[0].status + " now redirect to order list");
+                    // alert(res.data[0].status + " now redirect to order list");
                     // alert(JSON.stringify(res.data))
                     dispatch(confirmOrderSuccess(res.data[0], orderToConfirm));
                 } else {
-                    alert("error, try again");
+                    alert("error, status code not match: " + res.status);
                     dispatch(confirmOrderFail(res.data));
                 }
             })
@@ -180,6 +187,13 @@ export function confirmOrder(orderToConfirm: ICurrentOrder) {
             });
     }
 }
+
+export function resetConfirmOrderStatus(): IResetConfirmOrderStatusAction {
+    return {
+        type: RESET_CONFIRM_ORDER_STATUS,
+    }
+}
+
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function getOrdersByUserTokenSuccess(allOrdersByOneUser: any): IGetOrdersByUserTokenSuccessAction {
     return {
@@ -202,10 +216,8 @@ export function getOrdersByUserToken() {
             .then((res: any) => {
                 if (res.status === 200) {
                     dispatch(getOrdersByUserTokenSuccess(res.data[0]));
-                    // auto redir to order list page
-                    // dispatch(changePage(OrderList));
                 } else {
-                    alert("status: " + res.status);
+                    alert("error, status code not match: " + res.status);
                     dispatch(getOrdersByUserTokenFail());
                 }
             })
@@ -215,6 +227,7 @@ export function getOrdersByUserToken() {
             });
     }
 }
+
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function socketConnect(socketID: any): ISocketConnectSuccess {
     return {

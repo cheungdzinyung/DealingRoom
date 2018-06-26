@@ -20,14 +20,15 @@
         border: 1px #C4C4C4 solid;
         color: #E9DBCC;
         background-color: rgba(141, 141, 141, .5);
-        option {
-            background-color: rgba(141, 141, 141, .5);
-        }
+            option {
+                background-color: rgba(141, 141, 141, .5);
+            }
     }
     .edit-item-star-container {
         grid-area: star;
         height: 100%;
-        .edit-item-star-img {}
+        .edit-item-star-img {
+        }
     }
     .edit-item-status-switch {
         grid-area: switch;

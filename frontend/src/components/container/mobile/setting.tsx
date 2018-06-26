@@ -5,10 +5,6 @@ import * as React from "react";
 import Usermenu from "../../ui/mobile/usermenu";
 
 // Media asset import
-import Alipay from "../../assets/images/payment/alipay.png";
-import Paypal from "../../assets/images/payment/paypal.png";
-import Stripe from "../../assets/images/payment/stripe.png";
-import Wechatpay from "../../assets/images/payment/wechatpay.png";
 import PageHeader from "src/components/ui/mobile/pageheader";
 
 export default class Setting extends React.Component {
@@ -18,7 +14,7 @@ export default class Setting extends React.Component {
   public render() {
     return (
       <div className="page-content-container">
-        <PageHeader header="Setting" subHeader="Column A, or try column B"/>
+        <PageHeader header="Setting" subHeader="Column A, or try column B" />
         <FormGroup
           className="user-info-form"
           labelFor="login"
@@ -30,7 +26,7 @@ export default class Setting extends React.Component {
             dir="auto"
           />
           <input
-            placeholder="Email"
+            placeholder="Username"
             type="text"
             className="pt-large input-field"
           />
@@ -39,16 +35,7 @@ export default class Setting extends React.Component {
             type="password"
             className="pt-large input-field"
           />
-          <input
-            placeholder="Confirm Password"
-            type="password"
-            className="pt-large input-field"
-          />
         </FormGroup>
-        <img src={Stripe} alt="" className="payment-banner" />
-        <img src={Paypal} alt="" className="payment-banner" />
-        <img src={Alipay} alt="" className="payment-banner" />
-        <img src={Wechatpay} alt="" className="payment-banner" />
         <button className="conf-button" type="submit">
           <span>Confirm</span>
         </button>

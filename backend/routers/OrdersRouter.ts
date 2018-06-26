@@ -47,6 +47,7 @@ export default class UsersRouter {
             });
         })
         .catch((err: express.Errback) => {
+          console.log(err);
           res.status(500).json({ status: "failed" });
         });
     } else {
@@ -77,10 +78,10 @@ export default class UsersRouter {
           res.status(200).json(result);
         })
         .catch((err: express.Errback) => {
-          res.status(500).json({ status: "failed" });
+          res.status(500).json({ status: "failed"});
         });
     } else {
-      return res.status(401).json({ status: "unauthorized" });
+      return res.status(401).json({ status: "unauthorized " });
     }
   }
 
@@ -89,7 +90,19 @@ export default class UsersRouter {
       return this.ordersService
         .update(req.params.id, req.body)
         .then((result: any) => {
-          res.status(201).json(result);
+          return this.ordersService
+            .getAllOrders(1)
+            .then(orderList => {
+              return (result[0].allOrders = orderList);
+            })
+            .then((finalResult: any) => {
+              // broadcast newOrderList
+              io.emit("action", {
+                type: "SOCKET_UPDATE_ORDER_LIST",
+                allOrders: finalResult
+              });
+              res.status(201).json(result);
+            });
         })
         .catch((err: express.Errback) => {
           res.status(500).json({ status: "failed" });
