@@ -24,7 +24,7 @@ interface IMenuItemProps {
     currentPrice: number;
     priceDelta: number;
     itemDescription: string;
-    itemPhoto: "*.jpg" | "*.png" | "*.jpeg";
+    itemPhoto: string;
     detailIsOpen: boolean
     chartData: IItemPriceGraphData[]
 }

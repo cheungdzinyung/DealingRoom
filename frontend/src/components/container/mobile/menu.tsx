@@ -14,8 +14,10 @@ import { AppToaster } from "src/components/ui/mobile/toast";
 import { Intent } from "@blueprintjs/core";
 import UserMenu from "../../ui/mobile/usermenu";
 import MenuItem from "../../ui/mobile/menuitem";
-import tempImg from "src/components/assets/images/categories/squarebeer.jpg";
+// import tempImg from "src/components/assets/images/categories/squarebeer.jpg";
 import tempImgLong from "src/components/assets/images/categories/beer.jpg";
+
+import {API_SERVER} from "../../../redux/store";
 
 // Importing interfaces
 import {
@@ -200,7 +202,8 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
                     currentPrice={item.currentPrice}
                     priceDelta={3}
                     itemDescription={item.itemDescription}
-                    itemPhoto={tempImg}
+                    // itemPhoto={tempImg}
+                    itemPhoto={`${API_SERVER}/api/items/image/${item.items_id}`}
                     detailIsOpen={true}
                     chartData={item.chartData}
                     addToCurrentOrder={this.props.addToCurrentOrder}
