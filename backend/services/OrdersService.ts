@@ -215,7 +215,7 @@ export default class OrdersService {
       order.orders = orderItems;
     });
 
-    // combine the information into the agreed upon format and return
+    // combine the information into the agreed upon format and returned
     const entireOrder = [
       {
         users_id: id,
@@ -228,83 +228,87 @@ export default class OrdersService {
   }
 
   // Working 15/06/18
-  public getAllPrice(id: number, dateOfQuery: string) {
-    return this.knex("orders_items")
+  public async getAllPrice(id: number, dateOfQuery: string) {
+    // define the max value for the radar graph's use
+    const maxValue = await this.knex("orders_items")
       .join("orders", "orders.id", "=", "orders_items.orders_id")
       .first()
       .whereRaw("??::date = ?", ["orders.created_at", dateOfQuery])
-      .select(this.knex.raw(`max("orders_items"."purchasePrice")`))
-      .then((maxValue: any) => {
-        return this.knex("categories")
-          .join("items", "items.categories_id", "=", "categories.id")
-          .join("orders_items", "items.id", "=", "orders_items.items_id")
-          .join("orders", "orders.id", "=", "orders_items.orders_id")
-          .join("users", "users.id", "=", "orders.users_id")
-          .select("categories.categoryName")
-          .avg("orders_items.purchasePrice")
-          .whereRaw("??::date = ?", ["created_at", dateOfQuery])
-          .where("users.id", id)
-          .groupBy("categoryName")
-          .then((userResult: any) => {
-            return Promise.all(
-              userResult.map((order: object, i: number) => {
-                const obj = {
-                  category: userResult[i].categoryName,
-                  price: userResult[i].avg,
-                  max: maxValue.max
-                };
-                return obj;
-              })
-            ).then((userOrderList: any) => {
-              return this.knex("categories")
-                .join("items", "items.categories_id", "=", "categories.id")
-                .join("orders_items", "items.id", "=", "orders_items.items_id")
-                .join("orders", "orders.id", "=", "orders_items.orders_id")
-                .join("users", "users.id", "=", "orders.users_id")
-                .select("categories.categoryName")
-                .avg("orders_items.purchasePrice")
-                .whereRaw("??::date = ?", ["created_at", dateOfQuery])
-                .whereNot("users.id", id)
-                .groupBy("categoryName")
-                .then((allResult: any) => {
-                  return Promise.all(
-                    allResult.map((order: object, i: number) => {
-                      const obj = {
-                        category: allResult[i].categoryName,
-                        price: allResult[i].avg,
-                        max: maxValue.max
-                      };
-                      return obj;
-                    })
-                  ).then(otherOrderList => {
-                    const finalResult = [
-                      {
-                        user: userOrderList,
-                        all: otherOrderList
-                      }
-                    ];
-                    return finalResult;
-                  });
-                });
-            });
-          });
-      });
+      .select(this.knex.raw(`max("orders_items"."purchasePrice")`));
+
+    // obtain the values for the user
+    const userResult = await this.knex("categories")
+      .join("items", "items.categories_id", "=", "categories.id")
+      .join("orders_items", "items.id", "=", "orders_items.items_id")
+      .join("orders", "orders.id", "=", "orders_items.orders_id")
+      .join("users", "users.id", "=", "orders.users_id")
+      .select("categories.categoryName")
+      .avg("orders_items.purchasePrice")
+      .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+      .where("users.id", id)
+      .groupBy("categoryName");
+
+    // combine the user's values in the agreed upon format
+    const userOrderList = await BlueBirdPromise.map(
+      userResult,
+      async (order: any) => {
+        const obj = {
+          category: order.categoryName,
+          price: order.avg,
+          max: maxValue.max
+        };
+        return obj;
+      }
+    );
+
+    // obtain the values for all other users
+    const allResult = await this.knex("categories")
+      .join("items", "items.categories_id", "=", "categories.id")
+      .join("orders_items", "items.id", "=", "orders_items.items_id")
+      .join("orders", "orders.id", "=", "orders_items.orders_id")
+      .join("users", "users.id", "=", "orders.users_id")
+      .select("categories.categoryName")
+      .avg("orders_items.purchasePrice")
+      .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+      .whereNot("users.id", id)
+      .groupBy("categoryName");
+
+    // combine all other users' values in the agreed upon format
+    const otherOrderList = await BlueBirdPromise.map(
+      allResult,
+      async (order: any) => {
+        const obj = {
+          category: order.categoryName,
+          price: order.avg,
+          max: maxValue.max
+        };
+        return obj;
+      }
+    );
+
+    // combine all values in the agreed upon format and return the results
+    const finalResult = [
+      {
+        user: userOrderList,
+        all: otherOrderList
+      }
+    ];
+    return finalResult;
   }
 
   // Working 08/06/18
-  public update(id: number, data: any) {
-    return this.knex("orders")
+  public async update(id: number, data: any) {
+    const orderId = await this.knex("orders")
       .where("id", id)
       .update({
         isPaid: data.isPaid,
         status: data.status
       })
-      .returning("id")
-      .then((orderId: number) => {
-        return this.knex("orders")
-          .where("id", orderId[0])
-          .select("id as order_id", "status", "isPaid");
-      });
+      .returning("id");
+
+    return this.knex("orders")
+      .where("id", orderId[0])
+      .select("id as order_id", "status", "isPaid");
   }
 
   // Working 21/06/18 //
