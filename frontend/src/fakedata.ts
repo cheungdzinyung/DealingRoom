@@ -3,7 +3,7 @@ import {
   IOrder,
   // IItemWithMod,
   // ICustomerOrderList
-  IMenuCategoryWithFlux, IMenuItemWithoutFlux, IMenuItemWithFlux
+  IMenuCategoryWithFlux, IMenuItemWithoutFlux, IMenuItemWithFlux, IConsumptionGraphData
 } from "src/modules";
 
 export const singleCategoryMenuItems: IMenuCategoryWithFlux = {
@@ -584,6 +584,17 @@ export const allOrders: IOrder[] = [
     ],
   },
 ]
+
+
+export const profileConsumptionGraphTest: IConsumptionGraphData[] = [
+  {category:"beer", you: 100, everyone: 200, maxPrice: 250},
+  {category:"shake", you: 190, everyone: 180, maxPrice: 250},
+  {category:"love", you: 100, everyone: 250, maxPrice: 250},
+  {category:"hate", you: 170, everyone: 182, maxPrice: 250},
+  {category:"smart", you: 230, everyone: 100, maxPrice: 250},
+  {category:"power", you: 100, everyone: 90, maxPrice: 250}
+]
+
 
 
 // used at first for the OrderCard but change into [allOrders]

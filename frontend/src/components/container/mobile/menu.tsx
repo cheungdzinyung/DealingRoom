@@ -29,8 +29,6 @@ import { store } from "../../../redux/store";
 import PageHeader from "../../ui/mobile/pageheader";
 import CategoryFilter from "../../ui/mobile/categoryfilter";
 
-
-
 // Props and States
 interface IMenuProps {
   // From redux
@@ -74,7 +72,7 @@ const mapDispatchToProps = (dispatch: any) => {
         message: "Item added to order!",
         intent: Intent.SUCCESS,
         icon: "tick",
-        timeout: 500
+        timeout: 2000
       });
     }
   };
@@ -190,7 +188,7 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
                   ) !== -1 &&
                 /* v match selected category */
                 category.categoryName ===
-                this.props.categories[this.state.displayCategoryIndex] &&
+                  this.props.categories[this.state.displayCategoryIndex] &&
                 /* v check stock > 0 */
                 item.itemStock > 0 && (
                   <MenuItem
