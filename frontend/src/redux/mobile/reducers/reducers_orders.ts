@@ -42,8 +42,7 @@ const initialState: IOrdersState = {
     socketID: "",
     socketData: {},
     menuReady: false,
-    orderListReady: false,
-    // entireMenu: [],
+    orderListReady: false,  
     entireMenu: [
         {
             "categoryName": "beer",
@@ -53,7 +52,7 @@ const initialState: IOrdersState = {
                     "items_id": 0,
                     "itemName": "Asahi",
                     "itemStock": 1,
-                    categoryName: "beer",
+                    "categoryName": "beer",
                     "minimumPrice": 999.00,
                     "currentPrice": 999.00,
                     "itemPhoto": "../storage/items/asahi.jpeg",

@@ -50,7 +50,7 @@ class PureCurrentOrders extends React.Component<ICurrentOrdersProps> {
     }
 
     public made = (e: React.MouseEvent<HTMLButtonElement>) => {
-        this.props.updateOrderStatusMade(3);
+        this.props.updateOrderStatusMade(4);
     }
 
     public render() {

@@ -6,7 +6,7 @@ import { match } from "react-router-dom";
 import * as History from "history";
 import { withRouter } from "react-router";
 import { redirectPage, resetTargetPage } from "../../../redux/mobile/actions/actions_user";
-import {setPaymentTargetId } from "../../../redux/mobile/actions/actions_payment";
+import { setPaymentTargetId } from "../../../redux/mobile/actions/actions_payment";
 // Importing UI elements
 import { Card, Elevation } from "@blueprintjs/core";
 
@@ -23,10 +23,12 @@ import paymentTest from "../../assets/images/payment/stripe.png"
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
 import PageHeader from "src/components/ui/mobile/pageheader";
+import MySrtipeComponent from "./myStripeComponent";
 
 interface IOrderProps {
   match: match<{ orderId: number }>;
   ordersList: any;
+  userName: string;     // === displayname
 
   // handling redirect
   history: History.History,
@@ -38,14 +40,14 @@ interface IOrderProps {
 }
 
 interface IOrderState {
-  displayName: string,
-  orderID: number,
   tableNumber: number,
   thisOrder: any,
-  amount: number,
+  paymentMethod: string,
 
-  paymentMethod: string
-  // order: IOrder
+  /* vvv needed for stripe */
+  userName: string,
+  orderId: number,
+  amount: number,
 }
 
 class PureOrder extends React.Component<IOrderProps, IOrderState> {
@@ -53,43 +55,42 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
     super(props);
 
     this.state = {
-      displayName: "",
-      orderID: 0,
       tableNumber: 0,
       thisOrder: { orderItems: "empty" },
-      amount: 0,
-
       paymentMethod: paymentTest,
+
+      userName: "",   // as in display name
+      orderId: 0,
+      amount: 0,
     }
   }
 
   public componentDidMount() {
-
-    const displayName = this.props.ordersList.displayName;
-    const orderID = this.props.match.params.orderId;
+    // make sure selected order exist in array
+    const userName = this.props.ordersList.displayName;
+    const orderId = this.props.match.params.orderId;
     const thisOrder = (this.props.ordersList.orders.find((e: any) => {
-      return (`${e.orders_id}` === `${orderID}`);
+      return (`${e.orders_id}` === `${orderId}`);
     }));
-
+    // setState for Card to render
     if (thisOrder !== undefined) {
       const tableNumber = thisOrder.table;
       const amount = thisOrder.orderItems.reduce((accu: number, curr: any) => (accu + parseFloat(curr.purchasePrice)), 0);
       this.setState({
-        displayName, orderID, tableNumber, thisOrder, amount
+        userName, orderId, tableNumber, thisOrder, amount
       });
+    } else {
+      // either err or F5
+      alert("opps, sth wrong, redirecting to order history page");
+      this.props.history.push("/order");
     }
-  }
 
-  public toPaymentPage = () => {
-    this.props.setPaymentTargetId(this.state.orderID, this.state.amount);
-    this.props.redirectPage("/payment", this.props.history);
-    this.props.resetTargetPage();
   }
 
   public render() {
     return (
       <div className="page-content-container">
-        <PageHeader header={`Order ${this.state.orderID}`} subHeader="Your wish is our command" />
+        <PageHeader header={`Order ${this.state.orderId}`} subHeader="Your wish is our command" />
         {
           this.state.thisOrder.orderItems !== "empty" ?
             <div>
@@ -103,13 +104,23 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
                   <span className="order-item">{line.itemName}</span>
                 </Card>
               ))}
-              <img className="payment-method" src={this.state.paymentMethod} alt="" />
+
               <Card className="order-summary" elevation={Elevation.TWO}>
-                <button className="payment-button" onClick={this.toPaymentPage}>
-                  <span className="payment-header">Pay Now</span>
+                <button className="payment-button">
+                  <span className="payment-header">Pay With Your Prefered Method</span>
                   <span className="payment-amount">HK&#36; {this.state.amount}</span>
                 </button>
               </Card>
+
+              <MySrtipeComponent
+                paymentInfo={{
+                  userName: this.props.userName,
+                  orderId: this.props.match.params.orderId,
+                  amount: this.state.amount
+                }}
+                history={this.props.history}
+              />
+
             </div> : <div />
         }
         <Usermenu />
@@ -122,6 +133,10 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
 const mapStateToProps = (state: IRootState) => {
   return {
     ordersList: state.customer.orders.ordersList,
+
+    paymentTargetId: state.customer.payment.paymentTargetId,
+    totalAmount: state.customer.payment.totalAmount,
+    userName: state.customer.user.userProfile.displayName,
   }
 }
 
@@ -139,6 +154,6 @@ const mapDispatchToProps = (dispatch: any) => {
   }
 }
 
-  const Order = connect(mapStateToProps, mapDispatchToProps)(PureOrder);
+const Order = connect(mapStateToProps, mapDispatchToProps)(PureOrder);
 
-  export default withRouter(Order as any);
+export default withRouter(Order as any);

@@ -15,22 +15,51 @@ import { IMenuCategoryWithFlux } from "src/modules";
 import { DisplayFlexItemLine } from "src/components/ui/display/displayfluxitemline";
 import { DisplayMain } from "src/components/ui/display/displaymain";
 
+// redux
+import { connect } from "react-redux";
+import { IRootState } from "../../../redux/store";
+import { getEntireMenu } from "../../../redux/desktop/actions/actions_display";
 
 
-// interface IDisplayProps {
-//     singleCategory: IMenuCategoryWithFlux
-// }
+interface IDisplayProps {
+    entireMenu: IMenuCategoryWithFlux[],
+    menuReady: boolean,
+    categories: string[],
+    getEntireMenu: () => void,
+}
 
 interface IDisplayState {
     singleCategory: IMenuCategoryWithFlux
 }
 
-export default class Display extends React.Component<{}, IDisplayState> {
-    constructor(props: {}) {
+const mapStateToProps = (state: IRootState) => {
+    return {
+        entireMenu: state.staff.display.entireMenu,
+        menuReady: state.staff.display.menuReady,
+        categories: state.staff.display.categories,
+    };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        getEntireMenu: () => {
+            dispatch(getEntireMenu());
+        },
+    };
+};
+
+class PureDisplay extends React.Component<IDisplayProps, IDisplayState> {
+    constructor(props: IDisplayProps) {
         super(props);
 
         this.state = {
             singleCategory: singleCategoryMenuItems
+        }
+    }
+
+    public componentDidMount () {
+        if (!this.props.menuReady) {
+            this.props.getEntireMenu();
         }
     }
 
@@ -66,3 +95,7 @@ export default class Display extends React.Component<{}, IDisplayState> {
     }
 
 }
+
+const Display = connect(mapStateToProps, mapDispatchToProps)(PureDisplay);
+
+export default Display;
