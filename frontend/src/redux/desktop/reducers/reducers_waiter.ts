@@ -68,9 +68,8 @@ export const waiterReducer = (state: IWaiterState = initialState, action: Waiter
             return { ...state, socketID: action.socketID };
         }
         case SOCKET_UPDATE_ORDER_LIST: {
-            alert(JSON.stringify(action.allOrders))
-            // return { ...state, allOrders: action.allOrders };
-            return state;
+            // alert(JSON.stringify(action.allOrders))
+            return { ...state, allOrders: action.allOrders };
         }
         default: {
             return state;

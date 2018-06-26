@@ -72,7 +72,12 @@ export default class OrdersService {
         .select("categories_id");
       console.log("stage 8", catId);
 
-      const priceDown: number = catId[0].categories_id === 1 ? 10 / 9 : 10 / 4;
+      const priceDown: number =
+        catId[0].categories_id === 1 ||
+        catId[0].categories_id === 2 ||
+        catId[0].categories_id === 12
+          ? 10 / 9
+          : 10 / 4;
 
       const itemsIdArray = await this.knex("items")
         .where("categories_id", catId[0].categories_id)

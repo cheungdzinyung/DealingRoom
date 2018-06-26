@@ -1,6 +1,6 @@
+// import { Promise as BlueBirdPromise } from "bluebird";
 import * as fs from "fs-extra";
 import * as Knex from "knex";
-
 import { IItemData } from "../interfaces";
 
 export default class UsersService {
@@ -10,8 +10,12 @@ export default class UsersService {
     this.knex = knex;
   }
 
-  public saveUpdateItemImage(id: number, file: Express.Multer.File, name: string) {
-    name = name.replace(/([^a-zA-Z0-9])/g, "").toLowerCase()
+  public saveUpdateItemImage(
+    id: number,
+    file: Express.Multer.File,
+    name: string
+  ) {
+    name = name.replace(/([^a-zA-Z0-9])/g, "").toLowerCase();
     const imagePath = `../storage/items/${name}`;
     fs.outputFile(imagePath, file.buffer);
     return this.knex("items")
@@ -24,7 +28,7 @@ export default class UsersService {
   public getItemImage(id: number) {
     return this.knex("items")
       .where("id", id)
-      .select("itemName")
+      .select("itemName");
   }
 
   // Working 10/06/18
@@ -260,43 +264,81 @@ export default class UsersService {
   }
 
   // Working 15/06/18
-  public getAll(isActive: boolean) {
-    return this.knex("categories")
-      .select("id", "categoryName", "categoryPhoto")
-      .then((categoryList: any) => {
-        return Promise.all(
-          categoryList.map((item: object, i: number) => {
-            return this.knex("items")
-              .join("categories", "items.categories_id", "=", "categories.id")
-              .select(
-                "items.id as items_id",
-                "items.itemName",
-                "categories.categoryName",
-                "items.itemStock",
-                "items.minimumPrice",
-                "items.currentPrice",
-                "items.itemPhoto",
-                "items.itemDescription",
-                "items.isSpecial",
-                "items.isActive"
-              )
-              .where("items.categories_id", categoryList[i].id)
-              .where("items.isActive", isActive)
-              .orderBy("items.id", "ase");
-          })
-        ).then((itemList: any) => {
+  public getAll(isActive: any) {
+    if (isActive === undefined) {
+      return this.knex("categories")
+        .select("id", "categoryName", "categoryPhoto")
+        .then((categoryList: any) => {
           return Promise.all(
-            categoryList.map((category: object, j: number) => {
-              const result = {
-                categoryName: categoryList[j].categoryName,
-                categoryPhoto: categoryList[j].categoryPhoto,
-                items: itemList[j]
-              };
-              return result;
+            categoryList.map((item: object, i: number) => {
+              return this.knex("items")
+                .join("categories", "items.categories_id", "=", "categories.id")
+                .select(
+                  "items.id as items_id",
+                  "items.itemName",
+                  "categories.categoryName",
+                  "items.itemStock",
+                  "items.minimumPrice",
+                  "items.currentPrice",
+                  "items.itemPhoto",
+                  "items.itemDescription",
+                  "items.isSpecial",
+                  "items.isActive"
+                )
+                .where("items.categories_id", categoryList[i].id)
+                .orderBy("items.id", "ase");
             })
-          );
+          ).then((itemList: any) => {
+            return Promise.all(
+              categoryList.map((category: object, j: number) => {
+                const result = {
+                  categoryName: categoryList[j].categoryName,
+                  categoryPhoto: categoryList[j].categoryPhoto,
+                  items: itemList[j]
+                };
+                return result;
+              })
+            );
+          });
         });
-      });
+    } else {
+      return this.knex("categories")
+        .select("id", "categoryName", "categoryPhoto")
+        .then((categoryList: any) => {
+          return Promise.all(
+            categoryList.map((item: object, i: number) => {
+              return this.knex("items")
+                .join("categories", "items.categories_id", "=", "categories.id")
+                .select(
+                  "items.id as items_id",
+                  "items.itemName",
+                  "categories.categoryName",
+                  "items.itemStock",
+                  "items.minimumPrice",
+                  "items.currentPrice",
+                  "items.itemPhoto",
+                  "items.itemDescription",
+                  "items.isSpecial",
+                  "items.isActive"
+                )
+                .where("items.categories_id", categoryList[i].id)
+                .where("items.isActive", isActive)
+                .orderBy("items.id", "ase");
+            })
+          ).then((itemList: any) => {
+            return Promise.all(
+              categoryList.map((category: object, j: number) => {
+                const result = {
+                  categoryName: categoryList[j].categoryName,
+                  categoryPhoto: categoryList[j].categoryPhoto,
+                  items: itemList[j]
+                };
+                return result;
+              })
+            );
+          });
+        });
+    }
   }
 
   // Working 07/06/18
