@@ -10,14 +10,21 @@ export default class UsersService {
     this.knex = knex;
   }
 
-  public saveUpdateItemImage(id: number, file: Express.Multer.File) {
-    const imagePath = `./storage/items/${file.originalname}`;
+  public saveUpdateItemImage(id: number, file: Express.Multer.File, name: string) {
+    name = name.replace(/([^a-zA-Z0-9])/g, "").toLowerCase()
+    const imagePath = `../storage/items/${name}`;
     fs.outputFile(imagePath, file.buffer);
     return this.knex("items")
       .where("id", id)
       .update({
-        itemPhoto: imagePath
+        itemPhoto: `https://api.dealingroom.live/api/items/image/${id}`
       });
+  }
+
+  public getItemImage(id: number) {
+    return this.knex("items")
+      .where("id", id)
+      .select("itemName")
   }
 
   // Working 10/06/18
@@ -41,7 +48,7 @@ export default class UsersService {
           .returning("id")
           .then(async (itemId: Knex.QueryCallback) => {
             if (file !== undefined) {
-              await this.saveUpdateItemImage(itemId[0], file);
+              await this.saveUpdateItemImage(itemId[0], file, data.itemName);
             }
             return this.knex("categories")
               .join("items", "categories.id", "=", "items.categories_id")
@@ -171,7 +178,7 @@ export default class UsersService {
   // Working 23/06/18
   public getAllInCatWithFluctuatingPrices(
     catName: string,
-    dateOfQuery: string,
+    dateOfQuery: string
   ) {
     let catPhoto: string;
     this.knex("categories")
@@ -356,7 +363,7 @@ export default class UsersService {
       })
       .then(async (itemId: Knex.QueryCallback) => {
         if (file !== undefined) {
-          await this.saveUpdateItemImage(itemId[0], file);
+          await this.saveUpdateItemImage(itemId[0], file, data.itemName);
         }
         return this.knex("categories")
           .join("items", "categories.id", "=", "items.categories_id")

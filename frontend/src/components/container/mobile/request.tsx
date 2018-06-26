@@ -55,14 +55,25 @@ class PureRequest extends React.Component<IRequestProps, {}> {
   }
 
   public componentDidUpdate() {
-    if (this.props.currentOrder.length === 0 && this.props.confirmOrderStatus==="confirmed") {
+    if (this.props.currentOrder.length === 0 && this.props.confirmOrderStatus === "confirmed") {
       this.props.redirectPage("/order", this.props.history);
       this.props.resetTargetPage();
       this.props.resetConfirmOrderStatus();
+      AppToaster.show({
+        message: "Your order is confirmed!",
+        intent: Intent.PRIMARY,
+        icon: "thumbs-up",
+        timeout: 2000
+      })
     } else if (this.props.currentOrder.length === 0) {
-      alert("your shopping cart is empty")
       this.props.redirectPage("/menu", this.props.history);
       this.props.resetTargetPage();
+      AppToaster.show({
+        message: "Your basket is empty!",
+        intent: Intent.WARNING,
+        icon: "issue",
+        timeout: 2000
+      });
     }
   }
 
@@ -70,12 +81,6 @@ class PureRequest extends React.Component<IRequestProps, {}> {
     const thisItemID = e.currentTarget.dataset.thisitemid;
     if (thisItemID !== undefined) {
       this.props.removeFromCurrentOrder(parseInt(thisItemID, 10));
-      // AppToaster.show({
-      //   message: "Item removed from order!",
-      //   intent: Intent.DANGER,
-      //   icon: "trash",
-      //   timeout: 500
-      // });
     }
   }
 
@@ -87,8 +92,6 @@ class PureRequest extends React.Component<IRequestProps, {}> {
       item: this.props.currentOrder,
     }
     this.props.confirmOrder(orderToConfirm);
-    // Cannot use componentDidUpdate
-
   }
 
 

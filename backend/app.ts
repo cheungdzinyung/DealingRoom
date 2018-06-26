@@ -33,11 +33,14 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use("/api", apiRouter.getRouter());
 
+<<<<<<< HEAD
+=======
 // @Andrew do not use this one, it will break the socket
 // app.listen(config.port, () => {
 //   console.log(`Application started at port: ${config.port}`);
 // });
 
+>>>>>>> 012fb54fc5bf08f1b2ad8736aa7d4de75c61e4cf
 import * as http from "http";
 const server = http.createServer(app);
 server.listen(8080);

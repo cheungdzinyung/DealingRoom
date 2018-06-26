@@ -47,6 +47,7 @@ export default class UsersRouter {
             });
         })
         .catch((err: express.Errback) => {
+          console.log(err);
           res.status(500).json({ status: "failed" });
         });
     } else {
@@ -89,6 +90,11 @@ export default class UsersRouter {
       return this.ordersService
         .update(req.params.id, req.body)
         .then((result: any) => {
+          // broadcast newOrderList
+          io.emit("action", {
+            type: "SOCKET_UPDATE_ORDER_LIST",
+            allOrders: [],
+          });
           res.status(201).json(result);
         })
         .catch((err: express.Errback) => {
