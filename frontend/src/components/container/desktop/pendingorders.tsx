@@ -37,7 +37,7 @@ const mapDispatchToProps = (dispatch: any) => {
     };
 };
 
-import { pendingOrders } from "../../../fakedata";
+import { allOrders } from "../../../fakedata";
 
 class PurePendingOrders extends React.Component<IPendingOrdersProps> {
     constructor(props: IPendingOrdersProps) {
@@ -58,8 +58,9 @@ class PurePendingOrders extends React.Component<IPendingOrdersProps> {
                             <PageHeader header="Pending Orders" />
                         </div>
                         <div className="order-card-display">
-                            {pendingOrders.filter}
-                            {pendingOrders.map((oneOrder, index) => (<OrderCard {...oneOrder} key={index} />))}
+                            { allOrders
+                                .filter((each: any) => each.status === "confirmed" || each.status === "made")
+                                .map((oneOrder, index) => (<OrderCard {...oneOrder} key={index} />))}
                         </div>
                     </div>
                 </div>

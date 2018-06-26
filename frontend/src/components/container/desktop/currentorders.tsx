@@ -65,7 +65,11 @@ class PureCurrentOrders extends React.Component<ICurrentOrdersProps> {
                             <button className="test-socket" onClick={this.made}>TEST SOCKET</button>
                         </div>
                         <div className="order-card-display">
-                            {allOrders.map((oneOrder, index) => (<OrderCard {...oneOrder} key={index} />))}
+                            {allOrders
+                                .filter((each: any) => each.status === "made" || each.status === "served")
+                                .filter((each: any) => each.isPaid || !each.isPaid)  
+                                .map((oneOrder, index) => (<OrderCard {...oneOrder} key={index}/>))
+                            }              
                         </div>
                     </div>
                 </div>
