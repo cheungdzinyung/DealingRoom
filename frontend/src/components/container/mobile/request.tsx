@@ -4,7 +4,7 @@ import * as React from "react";
 // import redux and friends
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
-import { removeFromCurrentOrder, confirmOrder } from "../../../redux/mobile/actions/actions_orders";
+import { removeFromCurrentOrder, confirmOrder, resetConfirmOrderStatus } from "../../../redux/mobile/actions/actions_orders";
 
 // for redir
 import * as History from "history";
@@ -31,6 +31,8 @@ interface IRequestProps {
   history: History.History,
   redirectPage: (redirectTarget: string, history: any) => void,
   resetTargetPage: () => void,
+  confirmOrderStatus: "null" | "confirmed" | "failed",
+  resetConfirmOrderStatus: () => void,
 }
 
 class PureRequest extends React.Component<IRequestProps, {}> {
@@ -47,8 +49,13 @@ class PureRequest extends React.Component<IRequestProps, {}> {
   }
 
   public componentDidUpdate() {
-    if (this.props.currentOrder.length === 0) {
+    if (this.props.currentOrder.length === 0 && this.props.confirmOrderStatus==="confirmed") {
       this.props.redirectPage("/order", this.props.history);
+      this.props.resetTargetPage();
+      this.props.resetConfirmOrderStatus();
+    } else if (this.props.currentOrder.length === 0) {
+      alert("your shopping cart is empty")
+      this.props.redirectPage("/menu", this.props.history);
       this.props.resetTargetPage();
     }
   }
@@ -116,6 +123,7 @@ const mapStateToProps = (state: IRootState) => {
     user_id: state.customer.user.userProfile.users_id,
     currentOrder: state.customer.orders.currentOrder,
     currentTotal: state.customer.orders.currentTotal,
+    confirmOrderStatus: state.customer.orders.confirmOrderStatus,
   }
 }
 
@@ -133,6 +141,9 @@ const mapDispatchToProps = (dispatch: any) => {
     resetTargetPage: () => {
       dispatch(resetTargetPage());
     },
+    resetConfirmOrderStatus: () => {
+      dispatch(resetConfirmOrderStatus());
+    }
   }
 }
 
