@@ -161,21 +161,9 @@ export class PureStockManagement extends React.Component<
   }
 }
 
-
-
 const StockManagement = connect(
   mapStateToProps,
   mapDispatchToProps
 )(PureStockManagement);
 
 export default StockManagement;
-
-// public goToAdd = (e: React.MouseEvent<HTMLDivElement>) => {
-//   trigger to open moddle or wtever page
-//   this.props.clickToAdd();
-// };
-
-// public goToEdit = (e: React.MouseEvent<HTMLDivElement>) => {
-//   trigger to open moddle or wtever page
-//   this.props.clickToEdit(this.props.item_id);
-// };
