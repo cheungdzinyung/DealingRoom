@@ -78,7 +78,7 @@ export default class UsersRouter {
           res.status(200).json(result);
         })
         .catch((err: express.Errback) => {
-          res.status(500).json({ status: "failed" });
+          res.status(500).json({ status: "failed"});
         });
     } else {
       return res.status(401).json({ status: "unauthorized " });
