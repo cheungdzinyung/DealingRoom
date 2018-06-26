@@ -10,26 +10,26 @@ import {
 } from "../../../redux/mobile/actions/actions_orders";
 
 // Import UI elements
+import { AppToaster } from "src/components/ui/mobile/toast";
+import { Intent } from "@blueprintjs/core";
 import UserMenu from "../../ui/mobile/usermenu";
 import MenuItem from "../../ui/mobile/menuitem";
+import tempImg from "src/components/assets/images/categories/squarebeer.jpg";
+import tempImgLong from "src/components/assets/images/categories/beer.jpg";
 
 // Importing interfaces
 import {
   IRequestItem,
   IMenuCategoryWithFlux,
   IMenuItemWithFlux
-} from "../../../modules";
-
-// Importing helper function
-// import { percentageChange } from "../../util/utility";
+} from "src/modules";
 
 // socket
 import { store } from "../../../redux/store";
 import PageHeader from "../../ui/mobile/pageheader";
 import CategoryFilter from "../../ui/mobile/categoryfilter";
 
-import tempImg from "src/components/assets/images/categories/squarebeer.jpg";
-import tempImgLong from "src/components/assets/images/categories/beer.jpg";
+
 
 // Props and States
 interface IMenuProps {
@@ -70,6 +70,11 @@ const mapDispatchToProps = (dispatch: any) => {
     },
     addToCurrentOrder: (itemid: number, name: string, currentPrice: number) => {
       dispatch(addToCurrentOrder(itemid, name, currentPrice));
+      AppToaster.show({
+        message: "Item added to order!",
+        intent: Intent.SUCCESS,
+        icon: "tick"
+      });
     }
   };
 };
@@ -184,7 +189,7 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
                   ) !== -1 &&
                 /* v match selected category */
                 category.categoryName ===
-                  this.props.categories[this.state.displayCategoryIndex] &&
+                this.props.categories[this.state.displayCategoryIndex] &&
                 /* v check stock > 0 */
                 item.itemStock > 0 && (
                   <MenuItem
