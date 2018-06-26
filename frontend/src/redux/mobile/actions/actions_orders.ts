@@ -52,6 +52,12 @@ export interface IConfirmOrderFailAction extends Action {
     type: CONFIRM_ORDER_FAIL,
     result: any,
 }
+
+export const RESET_CONFIRM_ORDER_STATUS = "RESET_CONFIRM_ORDER_STATUS";
+export type RESET_CONFIRM_ORDER_STATUS = typeof RESET_CONFIRM_ORDER_STATUS;
+export interface IResetConfirmOrderStatusAction extends Action {
+    type: RESET_CONFIRM_ORDER_STATUS,
+}
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const GET_ORDERS_BY_USER_TOKEN_SUCCESS = "GET_ORDERS_BY_USER_TOKEN_SUCCESS";
 export type GET_ORDERS_BY_USER_TOKEN_SUCCESS = typeof GET_ORDERS_BY_USER_TOKEN_SUCCESS;
@@ -89,6 +95,7 @@ export type OrdersActions =
     IRemoveItemAction |
     IConfirmOrderSuccessAction |
     IConfirmOrderFailAction |
+    IResetConfirmOrderStatusAction |
     IGetOrdersByUserTokenSuccessAction |
     IGetOrdersByUserTokenFailAction |
     ISocketConnectSuccess |
@@ -180,6 +187,13 @@ export function confirmOrder(orderToConfirm: ICurrentOrder) {
             });
     }
 }
+
+export function resetConfirmOrderStatus(): IResetConfirmOrderStatusAction {
+    return {
+        type: RESET_CONFIRM_ORDER_STATUS,
+    }
+}
+
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function getOrdersByUserTokenSuccess(allOrdersByOneUser: any): IGetOrdersByUserTokenSuccessAction {
     return {
