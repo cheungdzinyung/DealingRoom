@@ -14,6 +14,7 @@ import { redirectPage, resetTargetPage } from "../../../redux/mobile/actions/act
 // Importing UI
 import UserMenu from "../../ui/mobile/usermenu";
 import { Button, Card, Elevation, Intent } from "@blueprintjs/core";
+import { AppToaster } from "src/components/ui/mobile/toast";
 
 // Importing interfaces
 import { IRequestItem, ICurrentOrder } from "../../../modules";
@@ -38,11 +39,16 @@ class PureRequest extends React.Component<IRequestProps, {}> {
     super(props);
   }
 
-  public componentDidMount () {
+  public componentDidMount() {
     if (this.props.currentOrder.length === 0) {
-      alert("your shopping cart is empty")
       this.props.redirectPage("/menu", this.props.history);
       this.props.resetTargetPage();
+      AppToaster.show({
+        message: "Empty Basket",
+        intent: Intent.WARNING,
+        icon: "issue",
+        timeout: 2000
+      });
     }
   }
 
@@ -50,6 +56,19 @@ class PureRequest extends React.Component<IRequestProps, {}> {
     if (this.props.currentOrder.length === 0) {
       this.props.redirectPage("/order", this.props.history);
       this.props.resetTargetPage();
+      AppToaster.show({
+        message: "Your order is confirmed",
+        intent: Intent.SUCCESS,
+        icon: "tick",
+        timeout: 1000
+      });
+      // this.props.redirectPage("/order", this.props.history);
+      // this.props.resetTargetPage();
+      // AppToaster.show({
+      //   message: "Your order is confirmed",
+      //   intent: Intent.SUCCESS,
+      //   icon: "tick",
+      //   timeout: 1000
     }
   }
 
@@ -57,6 +76,12 @@ class PureRequest extends React.Component<IRequestProps, {}> {
     const thisItemID = e.currentTarget.dataset.thisitemid;
     if (thisItemID !== undefined) {
       this.props.removeFromCurrentOrder(parseInt(thisItemID, 10));
+      // AppToaster.show({
+      //   message: "Item removed from order!",
+      //   intent: Intent.DANGER,
+      //   icon: "trash",
+      //   timeout: 500
+      // });
     }
   }
 
@@ -68,12 +93,15 @@ class PureRequest extends React.Component<IRequestProps, {}> {
       item: this.props.currentOrder,
     }
     this.props.confirmOrder(orderToConfirm);
+    // Cannot use componentDidUpdate
+
   }
+
 
   public render() {
     return (
       <div className="page-content-container">
-        <PageHeader header="Request" subHeader="Make up your mind"/>
+        <PageHeader header="Request" subHeader="Make up your mind" />
         {this.props.currentOrder.map((item, i) => (
           <Card key={i}
             className="request-line"
@@ -136,6 +164,6 @@ const mapDispatchToProps = (dispatch: any) => {
   }
 }
 
-  const Request = connect(mapStateToProps, mapDispatchToProps)(PureRequest);
+const Request = connect(mapStateToProps, mapDispatchToProps)(PureRequest);
 
-  export default withRouter(Request as any);
+export default withRouter(Request as any);

@@ -73,7 +73,8 @@ const mapDispatchToProps = (dispatch: any) => {
       AppToaster.show({
         message: "Item added to order!",
         intent: Intent.SUCCESS,
-        icon: "tick"
+        icon: "tick",
+        timeout: 500
       });
     }
   };
