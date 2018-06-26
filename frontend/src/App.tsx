@@ -14,11 +14,13 @@ import OrderList from "./components/container/mobile/orderlist";
 import Profile from "./components/container/mobile/profile";
 import Request from "./components/container/mobile/request";
 import Setting from "./components/container/mobile/setting";
+import Payment from "./components/container/mobile/payment";
 
 // Importing desktop containers
 import AdminLogin from "./components/container/desktop/adminlogin";
 import StockManagement from "./components/container/desktop/stockmanagement";
 import CurrentOrders from "./components/container/desktop/currentorders";
+import PendingOrders from "./components/container/desktop/pendingorders";
 // import StockManageModal from "./components/ui/desktop/stockadditemcard";
 
 // import redux and friends
@@ -58,10 +60,12 @@ class PureApp extends React.Component<{}, {}> {
           <Route path="/display" component={Display} />
           <Route path="/request" component={Request} />
           <Route path="/initialize" component={Initialize} />
+          <Route path="/payment" component={Payment} />
           {/* Routes to admin/desktop screens */}
           <Route exact={true} path="/admin/login" component={AdminLogin}/>
           <Route exact={true} path="/admin/stock/" component={StockManagement}/>
           <Route exact={true} path="/admin/currentorders" component={CurrentOrders}/>
+          <Route exact={true} path="/admin/pendingorders" component={PendingOrders}/>
         </Switch>
       </div>
       // </Router>

@@ -33,6 +33,14 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use("/api", apiRouter.getRouter());
 
+<<<<<<< HEAD
+=======
+// @Andrew do not use this one, it will break the socket
+// app.listen(config.port, () => {
+//   console.log(`Application started at port: ${config.port}`);
+// });
+
+>>>>>>> 012fb54fc5bf08f1b2ad8736aa7d4de75c61e4cf
 import * as http from "http";
 const server = http.createServer(app);
 server.listen(8080);
@@ -45,35 +53,8 @@ io.on("connection", (socket: any) => {
   console.log("socket connected: ", socket.id);
   io.to(socket.id).emit("action", { type: "SOCKET_CONNECT_SUCCESS", socketID: socket.id });
 
-  socket.on("action", (action: any) => {
-    // if (action.type === "POST/buy") {
-    //   // console.log("buy ok:", action.data, "update price now");
-    //   const choosenID = 1;
-    //   const quantity = 10;
-    //   const newBeerPriceArray = beerPrice.items.map((beer: any) => {
-    //     console.log(beer.items_id, choosenID);
-    //     if (beer.items_id === choosenID) {
-    //       return {
-    //         items_id: choosenID,
-    //         itemStock: beer.itemStock - quantity,
-    //         currentPrice: (parseFloat(beer.currentPrice) + 1*quantity).toString(10),
-    //       }
-    //     } else {
-    //       return {
-    //         items_id: beer.items_id,
-    //         itemStock: beer.itemStock,
-    //         currentPrice: (Math.round((parseFloat(beer.currentPrice) - 0.1*quantity)*1000)/1000).toString(10),
-    //       }
-    //     }
-    //   });
-    //   beerPrice = { ...beerPrice, items: newBeerPriceArray };
-    //   console.log(beerPrice);
-
-    // io.local.emit("action", { type: "SOCKET_UPDATE_ITEM_PRICE", socketData: beerPrice });
-    // } else {
-    //   console.log("no such action");
-    // }
-
-  });
+  // socket.on("action", (action: any) => {
+  //   // empty
+  // });
 });
 

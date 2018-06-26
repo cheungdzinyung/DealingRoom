@@ -16,6 +16,7 @@ interface IStockFilterProps {
   toggleStockManageModal: (
     stockManageModalState: IStockManageModalState
   ) => void;
+  openModal: () => void,
 }
 
 interface IStockFilterState {
@@ -54,10 +55,13 @@ export class PureStockFilter extends React.Component<
     switch (e.currentTarget.value) {
       case "true":
         choice = true;
+        break;
       case "false":
         choice = false;
+        break;
       default:
         choice = "all";
+        break;
     }
     this.setState({
       isActive: choice
@@ -70,10 +74,13 @@ export class PureStockFilter extends React.Component<
     switch (e.currentTarget.value) {
       case "true":
         choice = true;
+        break;
       case "false":
         choice = false;
+        break;
       default:
         choice = "all";
+        break;
     }
     this.setState({
       isSpecial: choice
@@ -83,6 +90,7 @@ export class PureStockFilter extends React.Component<
 
   public createItem = () => {
     this.props.toggleStockManageModal("create");
+    this.props.openModal();
   };
 
   public render() {

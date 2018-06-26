@@ -21,7 +21,7 @@ export default class ItemModalInfo extends React.Component<IItemModalInfoProps> 
 
   public render() {
     return (
-      <div className="edit-item-info">
+      <div className="edit-item-info-container">
         <input defaultValue={this.props.itemName} onChange={this.props.setName} className="edit-item-info-name" />
         <hr className="edit-item-info-breakline" />
         <div className="edit-item-value-container">

@@ -21,6 +21,7 @@ import {
   IUpdateMenuItem
 } from "src/modules";
 
+
 interface IStockManagementProps {
   menuReady: boolean;
   entireMenu: IMenuCategoryWithoutFlux[];
@@ -120,7 +121,7 @@ export class PureStockManagement extends React.Component<
     return (
       <div className="desktop-page-container">
         <AdminSideMenu />
-        <StockFilter filterChange={this.filterChange} />
+        <StockFilter filterChange={this.filterChange} openModal={this.openEditModal}/>
         <div className="page-container-center">
           <div className="page-container-center-content-wrapper">
             <PageHeader header="Stock Management" />
@@ -160,21 +161,9 @@ export class PureStockManagement extends React.Component<
   }
 }
 
-
-
 const StockManagement = connect(
   mapStateToProps,
   mapDispatchToProps
 )(PureStockManagement);
 
 export default StockManagement;
-
-// public goToAdd = (e: React.MouseEvent<HTMLDivElement>) => {
-//   trigger to open moddle or wtever page
-//   this.props.clickToAdd();
-// };
-
-// public goToEdit = (e: React.MouseEvent<HTMLDivElement>) => {
-//   trigger to open moddle or wtever page
-//   this.props.clickToEdit(this.props.item_id);
-// };

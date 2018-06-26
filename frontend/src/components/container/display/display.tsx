@@ -3,24 +3,25 @@ import * as React from "react";
 
 // Importing static assets
 // import downWhite from "../../assets/icons/down-white.svg";
-// import upWhite from "../../assets/icons/up-white.svg";
-import tempImg from "../../assets/images/categories/squarebeer.jpg";
+import upWhite from "../../assets/icons/up-white.svg";
+// import tempImg from "../../assets/images/categories/squarebeer.jpg";
 
 // Importing temporary data
 import { singleCategoryMenuItems } from "../../../fakedata";
 
 // Importing utility function and classes
-import { LineChart, XAxis, YAxis, CartesianGrid, Line } from "recharts";
+// import { LineChart, XAxis, YAxis, CartesianGrid, Line } from "recharts";
 // import { percentageChange } from '../../../util/utility';
 import { IMenuCategoryWithFlux } from "src/modules";
+import { AreaChart, Tooltip, Area, Line, ResponsiveContainer } from "recharts";
 
 
+
+// interface IDisplayProps {
+//     singleCategory: IMenuCategoryWithFlux
+// }
 
 interface IDisplayState {
-    // items : IPureMenuItemWithFluctuation[];
-    // categories : IPureMenuCategory;
-    // categoryName: string;
-
     singleCategory: IMenuCategoryWithFlux
 }
 
@@ -29,15 +30,67 @@ export default class Display extends React.Component<{}, IDisplayState> {
         super(props);
 
         this.state = {
-            //   Sorry Judith, I depleted the original fake data structure, this is the newest one
             singleCategory: singleCategoryMenuItems
         }
     }
 
     public render() {
+
+        const data = [
+            { name: 'Page A', uv: 4000 },
+            { name: 'Page B', uv: 3000 },
+            { name: 'Page C', uv: 2000 },
+            { name: 'Page D', uv: 2780 },
+            { name: 'Page E', uv: 1890 },
+            { name: 'Page F', uv: 2390 },
+            { name: 'Page G', uv: 3490 },
+        ];
         return (
             <div className="display-container">
-                <div className="category-display">
+                <div className="display-data-container">
+                    <div className="display-data-main-container">
+                        <div className="display-data-category-name-container"><h1 className="display-data-category-name-text">
+                            {this.state.singleCategory.categoryName}</h1>
+                        </div>
+                        <div className="display-data-category-price-fluctuation-container">
+                            <p className="price">$304</p>
+                            <p className="info">Today Increase Sales</p>
+                        </div>
+                        <div className="display-data-category-price-graph-container">
+                            <ResponsiveContainer>
+                                <AreaChart
+                                    data={data}
+                                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                                    {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                                    {/* <XAxis dataKey="name" /> */}
+                                    {/* <YAxis /> */}
+                                    <Tooltip />
+                                    <Area type='monotone' dataKey='uv' stroke='#8884d8' fill='#8884d8' />
+                                </AreaChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
+                    <div className="display-data-sub-container">12</div>
+                    <div className="display-data-info-container">12</div>
+                    <div className="display-data-prices-container">
+                        <div className="display-data-prices-flux-line">
+                            <img src={upWhite} alt="" className="display-data-arrow" />
+                            <span className="display-data-prices-flux-line-item-name">Alcohol</span>
+                            {/* Graph */}
+                            <div className="display-data-prices-flux-line-item-fluxchart">
+                                <ResponsiveContainer>
+                                    <AreaChart data={data}>
+                                        <Line type='monotone' dataKey='uv' stroke='#8884d8' fill='#8884d8' />
+                                    </AreaChart>
+                                </ResponsiveContainer>
+                            </div>
+                            {/* End of graph */}
+                            <span className="display-data-prices-flux-line-price">$123</span>
+                        </div>
+
+                    </div>
+                </div>
+                {/* <div className="category-display">
                     <img className="display-img" src={tempImg} alt="display-pic" />
                     <h2>{this.state.singleCategory.categoryName}</h2>
                 </div>
@@ -69,10 +122,10 @@ export default class Display extends React.Component<{}, IDisplayState> {
                         )
                     })
                     }
-                </div>
+                </div> */}
 
                 <div className="rss-feed">
-                <span className="feed-text">This round of discount is brought to you by dealingroom!</span>
+                    <span className="feed-text">This round of discount is brought to you by dealingroom!</span>
                 </div>
             </div>
         );

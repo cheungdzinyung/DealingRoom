@@ -20,6 +20,9 @@ export const rootReducer = combineReducers<IRootState>({
 // export const API_SERVER = process.env.REACT_APP_API_SERVER;
 export const API_SERVER = process.env.REACT_APP_API_DEV;
 
+// export const STRIPE_PUBLISHABLE = process.env.REACT_APP_STRIPE_PUBLISHABLE_REAL;
+export const STRIPE_PUBLISHABLE = process.env.REACT_APP_STRIPE_PUBLISHABLE_DEV;
+
 
 // socket.io
 import createSocketIoMiddleware from 'redux-socket.io';

@@ -161,7 +161,8 @@ export function updateItemFail(): IUpdateItemFailAction {
 export function updateItem(itemStatus: IUpdateMenuItem) {
 	const config = { headers: { Authorization: "Bearer " + localStorage.getItem("dealingRoomToken") } }
 	return (dispatch: Dispatch<IUpdateItemSuccessAction | IUpdateItemFailAction>) => {
-		axios.put(`${API_SERVER}/api/items/${itemStatus.items_id}`, itemStatus, config)
+		// axios.put(`${API_SERVER}/api/items/${itemStatus.items_id}`, itemStatus, config)
+		axios.put(`${API_SERVER}/api/items/${itemStatus.items_id}/?includeInActive="true"`, itemStatus, config)
 			.then((res: any) => {
 				if (res.status === 201) {
 					dispatch(updateItemSuccess(res.data));

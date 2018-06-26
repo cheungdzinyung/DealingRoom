@@ -6,7 +6,7 @@ import { withRouter } from "react-router";
 // Importing static assets
 import menu from "../../assets/icons/menu/menu.svg";
 import orders from "../../assets/icons/menu/bookmark.svg";
-import request from "../../assets/icons/menu/write.svg";
+import request from "../../assets/icons/menu/cart.svg";
 import setting from "../../assets/icons/menu/gear.svg";
 import profile from "../../assets/icons/menu/user.svg";
 

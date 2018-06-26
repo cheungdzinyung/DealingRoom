@@ -1,3 +1,40 @@
-.edit-item-info{
-    
+.edit-item-info-container {
+    // Location of the container
+    grid-row: 1/2;
+    grid-column: 2/3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10%;
+    .edit-item-info-name {
+        color: white;
+    }
+    .edit-item-info-breakline {
+        width: 100%;
+        border: 1px grey solid;
+    }
+    .edit-item-value-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        .edit-item-value-line-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            .warning {
+                color: yellow;
+            }
+            .alert {
+                color: red;
+            }
+            .info {
+                color: green;
+            }
+            .edit-item-value-line-text {}
+            .edit-item-value-line-numbers {}
+        }
+    }
 }

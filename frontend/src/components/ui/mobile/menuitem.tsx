@@ -27,8 +27,6 @@ interface IMenuItemProps {
     itemPhoto: "*.jpg" | "*.png" | "*.jpeg";
     detailIsOpen: boolean
     chartData: IItemPriceGraphData[]
-    // openDetail => cb
-    // add item => cb
 }
 
 interface IMenuItemState {

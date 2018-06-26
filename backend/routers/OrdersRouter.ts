@@ -90,6 +90,11 @@ export default class UsersRouter {
       return this.ordersService
         .update(req.params.id, req.body)
         .then((result: any) => {
+          // broadcast newOrderList
+          io.emit("action", {
+            type: "SOCKET_UPDATE_ORDER_LIST",
+            allOrders: [],
+          });
           res.status(201).json(result);
         })
         .catch((err: express.Errback) => {
