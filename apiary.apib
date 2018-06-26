@@ -458,7 +458,7 @@ A single order's information can be obtained through this route using the order'
         }
 
 ### Amending order information by id [PUT]
-Currently reserved for updating status of orders or to delete orders.
+Currently reserved for updating status of orders or to delete orders. ***IMPORTANT*** isPaid status is automatically changed upon payment. This method to amend the isPaid status is only reserved as a last resort (i.e. comp'd orders)
 + Request (application/json)
 
         {
