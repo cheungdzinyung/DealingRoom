@@ -6,15 +6,22 @@ export default class OrderCard extends React.Component<IOrder> {
     constructor(props: IOrder) {
         super(props)
     }
+    
     public render() {
         return (
             <div className="order-card-container">
                 <div className="order-header-container">
                     <span className="order-id">#{this.props.orders_id}</span>
                     <div className="order-button">
-                        <button className="order-confirmed">
+                        <button className="order-status-display">
                             <span className="button-order-text">{this.props.status}</span>
                         </button>
+                        <div className="payment-status">
+                            { this.props.isPaid === true ?
+                                <span className="order-payment-status-paid">paid</span> :
+                                <span className="order-payment-status-unpaid">unpaid</span>
+                            }
+                        </div>
                     </div>
                 </div>
                 <div className="order-item-container">

@@ -14,9 +14,22 @@
        .order-button {
            display: flex;
            align-items: center;
-            button.order-confirmed {
+            button.order-status-display {
                 background-color: rgba(238, 83, 83, 0.8);
                 border-radius: 5px;
+            }
+            .payment-status {
+                padding: 0 .5vh;
+                span.order-payment-status-unpaid {
+                    background-color: rgba(238, 83, 83, 0.8);
+                    border-radius: 5px;
+                    padding: .3vh .4vh
+                }
+                span.order-payment-status-paid {
+                    background-color: rgba(111, 207, 151, 1);
+                    border-radius: 5px;
+                    padding: .3vh .4vh
+                }
             }
         }
    }  

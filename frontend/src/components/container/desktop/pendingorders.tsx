@@ -6,12 +6,41 @@ import PageHeader from "../../ui/desktop/pageheader";
 import AdminSideMenu from "../../ui/desktop/sidemenu";
 import OrderCard from "../../ui/desktop/ordercard";
 
-import { IOrder } from "src/modules";
+// redux
+import { connect } from "react-redux";
+import { IRootState } from "../../../redux/store";
+import { getAllOrders, updateOrderStatusServed } from "../../../redux/desktop/actions/actions_waiter";
 
-import { pendingOrders } from "../../../fakedata";
 
-export default class PendingOrders extends React.Component<IOrder[]> {
-    constructor(props: IOrder[]) {
+interface IPendingOrdersProps {
+    allOrders: any,
+    allOrdersReady: boolean,
+    getAllOrders: () => void,
+    updateOrderStatusServed: (orderId: number) => void,
+}
+
+const mapStateToProps = (state: IRootState) => {
+    return {
+        allOrders: state.staff.bartender.allOrders,
+        allOrdersReady: state.staff.bartender.allOrdersReady,
+    };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        getAllOrders: () => {
+            dispatch(getAllOrders());
+        },
+        updateOrderStatusServed: (orderId: number) => {
+            dispatch(updateOrderStatusServed(orderId));
+        },
+    };
+};
+
+import { allOrders } from "../../../fakedata";
+
+class PurePendingOrders extends React.Component<IPendingOrdersProps> {
+    constructor(props: IPendingOrdersProps) {
         super(props);
 
         this.state = {
@@ -29,13 +58,20 @@ export default class PendingOrders extends React.Component<IOrder[]> {
                             <PageHeader header="Pending Orders" />
                         </div>
                         <div className="order-card-display">
-                            {pendingOrders.filter}
-                            {pendingOrders.map((oneOrder, index) => (<OrderCard {...oneOrder} key={index} />))}
+                            { allOrders
+                                .filter((each: any) => each.status === "confirmed" || each.status === "made")
+                                .map((oneOrder, index) => (<OrderCard {...oneOrder} key={index} />))}
                         </div>
                     </div>
                 </div>
             </div>
         )
     }
-
 }
+
+const PendingOrders = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(PurePendingOrders);
+
+export default PendingOrders;
