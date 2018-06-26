@@ -24,13 +24,13 @@ export const singleCategoryMenuItems: IMenuCategoryWithFlux = {
       minimumPrice: 15.0,
       // tslint:disable-next-line:object-literal-sort-keys
       chartData: [
-        { time: "", purchasePrice: 30 },
+        { time: "9", purchasePrice: 30 },
         { time: "", purchasePrice: 40 },
         { time: "", purchasePrice: 20 },
         { time: "", purchasePrice: 27 },
         { time: "", purchasePrice: 18 },
         { time: "", purchasePrice: 23 },
-        { time: "", purchasePrice: 34 }
+        { time: "Now", purchasePrice: 34 }
       ]
     },
     {

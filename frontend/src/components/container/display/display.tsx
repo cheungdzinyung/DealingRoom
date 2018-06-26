@@ -2,7 +2,7 @@
 import * as React from "react";
 
 // Importing temporary data
-// import { singleCategoryMenuItems, displayMenuItemListTest } from "src/fakedata";
+import { singleCategoryMenuItems } from "src/fakedata";
 
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
@@ -33,34 +33,37 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-export class PureDisplay extends React.Component<IDisplayProps, {}> {
+export class PureDisplay extends React.Component<
+  IDisplayProps,
+  { singleTestCat: IMenuCategoryWithFlux }
+> {
   constructor(props: IDisplayProps) {
     super(props);
+    this.props.getEntireMenu();
+
+    this.state = {
+      singleTestCat: singleCategoryMenuItems
+    };
   }
 
-  public componentDidMount() {
-    this.props.getEntireMenu();
-  }
+  //   public componentDidMount() {
+  //     this.props.getEntireMenu();
+  //   }
 
   public render() {
-    const data = [
-      { time: "9", purchasePrice: 13 },
-      { time: "10", purchasePrice: 26 },
-      { time: "11", purchasePrice: 19 },
-      { time: "12", purchasePrice: 28 },
-      { time: "13", purchasePrice: 33 },
-      { time: "14", purchasePrice: 29 },
-      { time: "15", purchasePrice: 18 },
-      { time: "16", purchasePrice: 36 }
-    ];
     return (
       <div className="display-container">
         <div className="display-data-container">
-          <DisplayMain singleCategory={this.props.singleCategory[0].categoryName} pirceChange={320} data={data} />
+          {/* FIXME: Forced the first array of the category into the chart data */}
+          <DisplayMain
+            singleCategory={this.state.singleTestCat.categoryName}
+            pirceChange={320}
+            data={this.state.singleTestCat.items[0].chartData}
+          />
           <div className="display-data-sub-container">12</div>
           <div className="display-data-info-container">12</div>
           <div className="display-data-prices-container">
-            {this.props.singleCategory[0].items.map((itemLine, index) => (
+            {this.state.singleTestCat.items.map((itemLine, index) => (
               <DisplayFlexItemLine {...itemLine} />
             ))}
           </div>
