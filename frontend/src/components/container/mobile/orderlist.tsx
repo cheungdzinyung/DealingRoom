@@ -8,7 +8,7 @@ import { Card, Elevation } from "@blueprintjs/core";
 import Usermenu from "../../ui/mobile/usermenu";
 
 // Importing static assets
-import checkIcon from "../../assets/icons/check.svg";
+import checkIcon from "../../assets/icons/orderlist/checkmark.svg";
 
 // import redux and friends
 import { connect } from "react-redux";
