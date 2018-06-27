@@ -1,7 +1,7 @@
 .pageHeader {
     width: 100%;
     padding: 0 2.5%;
-    margin-bottom: 8%;
+    margin-bottom: 2%;
     .header {
         font-weight: 700;
         letter-spacing: 2px;
@@ -9,6 +9,7 @@
         font-size: 1.5rem;
     }
     .subHeader {
+        
         color: $header-sub-text;
         font-weight: 500;
         font-size: 1.125rem;
