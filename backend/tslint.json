@@ -9,6 +9,7 @@
   },
   "rules":{
     "no-console" : [false, "log", "error"],
-    "object-literal-sort-keys": [false]
+    "object-literal-sort-keys": [false],
+    "prefer-for-of" : [false]
   }
 }

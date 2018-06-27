@@ -129,54 +129,6 @@ export default class OrdersService {
       .where("id", orderId[0]);
   }
 
-  // Working 07/06/18
-  // public getByOrderId(id: number) {
-  //   return this.knex("users")
-  //     .join("orders", "users.id", "=", "users_id")
-  //     .where("orders.id", id)
-  //     .select(
-  //       "users.id as usersId",
-  //       "users.username",
-  //       "users.displayName",
-  //       "orders.id",
-  //       "orders.table",
-  //       "orders.status",
-  //       "orders.isPaid",
-  //       "orders.created_at as orderingTime"
-  //     )
-  //     .then((order: Knex.QueryCallback) => {
-  //       return this.knex("orders_items")
-  //         .join("orders", "orders.id", "=", "orders_items.orders_id")
-  //         .join("items", "items.id", "=", "orders_items.items_id")
-  //         .select(
-  //           "items.id as item_id",
-  //           "items.itemName as itemName",
-  //           "orders_items.purchasePrice as purchasePrice",
-  //           "orders_items.ice as ice",
-  //           "orders_items.sweetness as sweetness",
-  //           "orders_items.garnish as garnish"
-  //         )
-  //         .where("orders.id", id)
-  //         .then((orderItemsList: Knex.QueryCallback) => {
-  //           const entireOrder = [
-  //             {
-  //               user_id: order[0].usersId,
-  //               // tslint:disable-next-line:object-literal-sort-keys
-  //               userName: order[0].username,
-  //               displayName: order[0].displayName,
-  //               orders_id: order[0].id,
-  //               table: order[0].table,
-  //               status: order[0].status,
-  //               isPaid: order[0].isPaid,
-  //               orderingTime: order[0].orderingTime,
-  //               orderItems: orderItemsList
-  //             }
-  //           ];
-  //           return entireOrder;
-  //         });
-  //     });
-  // }
-
   // Working 13/06/18
   public async getByUser(id: number) {
     // obtain the user name and display name of the user
@@ -313,6 +265,63 @@ export default class OrdersService {
 
   // Working 21/06/18 //
   public getAllOrders(id: number) {
+    //   const userRole = await this.knex("users")
+    //     .first()
+    //     .select("role")
+    //     .where("id", id);
+    //   console.log("this is the user role:", userRole);
+
+    //   if (
+    //     userRole.role === "manager" ||
+    //     userRole.role === "bartender" ||
+    //     userRole.role === "server"
+    //   ) {
+    //     const ordersList = await this.knex("orders")
+    //       .join("users", "users.id", "=", "orders.users_id")
+    //       .whereNot(this.knex.raw(`(status='served' AND "isPaid"=true)`))
+    //       .select(
+    //         "orders.id as orders_id",
+    //         "users.id as users_id",
+    //         "users.displayName",
+    //         "orders.table",
+    //         "orders.status",
+    //         "orders.isPaid"
+    //       )
+    //       .orderBy("orders_id");
+
+    //     const itemsList = BlueBirdPromise.map(ordersList, async (order: any) => {
+    //       const result = await this.knex("orders")
+    //         .join("orders_items", "orders_items.orders_id", "=", "orders.id")
+    //         .join("items", "items.id", "=", "orders_items.items_id")
+    //         .select(
+    //           "items.itemName",
+    //           "orders_items.ice",
+    //           "orders_items.sweetness",
+    //           "orders_items.garnish",
+    //           "orders_items.purchasePrice"
+    //         )
+    //         .where("orders.id", order.orders_id);
+    //       return result;
+    //     });
+
+    //     console.log("!!!!!!!!!!!!!!!!!!!!!this is the itemsList:", itemsList);
+
+    //     await BlueBirdPromise.map(ordersList, (orders: any, index: number) => {
+    //       const result = {
+    //         orders_id: orders.orders_id,
+    //         users_id: orders.users_id,
+    //         displayName: orders.displayName,
+    //         table: orders.table,
+    //         status: orders.status,
+    //         isPaid: orders.isPaid,
+    //         order: itemsList[index]
+    //       };
+    //       return result;
+    //     });
+    //   } else {
+    //     return userRole[0].role;
+    //   }
+    // }
     return this.knex("users")
       .select("role")
       .where("id", id)

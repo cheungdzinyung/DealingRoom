@@ -23,6 +23,7 @@ export default class ItemsRouter {
     router.get("/:id", this.get.bind(this));
     router.get("/", this.getAll.bind(this));
     router.get("/image/:id", this.getImage.bind(this));
+    router.get("/update/itemlog", this.updateLogPrice.bind(this));
 
     router.put("/:id", upload.single("itemPhoto"), this.update.bind(this));
 
@@ -106,6 +107,18 @@ export default class ItemsRouter {
         res.sendFile(path.join(__dirname, '../storage/items', `${name}.png`));
       })
       .catch((err: express.Errback) => {
+        res.status(500).json({ status: "failed" });
+      });
+  }
+
+  public updateLogPrice(req: express.Request, res: express.Response) {
+    return this.itemsService
+      .updateLogPrice()
+      .then((result: IItemData) => {
+        res.status(201).json(result);
+      })
+      .catch((err: express.Errback) => {
+        console.log(err);
         res.status(500).json({ status: "failed" });
       });
   }
