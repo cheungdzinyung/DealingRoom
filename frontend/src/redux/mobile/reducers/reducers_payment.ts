@@ -39,7 +39,7 @@ export const paymentReducer = (state: IPaymentState = initialState, action: Paym
             return { ...state, paymentTargetId: 0, totalAmount: 0, paymentResult: action.paymentResult[0] };
         }
         case PAY_WITH_STRIPE_FAIL: {
-            alert("payment failed: " + action.paymentResult);
+            // alert("payment failed: " + action.paymentResult);
             return { ...state, paymentResult: action.paymentResult };
         }
         case RESET_PAYMENT_RESULT: {

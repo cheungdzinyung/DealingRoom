@@ -2,7 +2,11 @@ import { Action, Dispatch } from "redux";
 import axios from "axios";
 
 import { API_SERVER } from "../../../redux/store";
-// import { ISignUpPackage, ILoginPackage } from "../../../modules";
+// import { ISignUpPackage, ILoginPackage } from "../../../modules";\
+
+// Import UI elements
+import { AppToaster } from "src/components/ui/mobile/toast";
+import { Intent } from "@blueprintjs/core";
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const SET_PAYMENT_TARGET_ID = "SET_PAYMENT_TARGET_ID";
@@ -73,15 +77,33 @@ export function payWithStripe(orderId: number, stripeToken: string) {
         axios.post(`${API_SERVER}/api/payment/stripe`, infoPackage)
             .then((res: any) => {
                 if (res.status === 201) {
-                    dispatch(payWithStripeSccess(res.data))
+                    dispatch(payWithStripeSccess(res.data));
+                    AppToaster.show({
+                        message: "Payment Successful, Thank You!",
+                        intent: Intent.SUCCESS,
+                        icon: "tick",
+                        timeout: 2000
+                    });
                 } else {
-                    alert("err, status: " + res.status);
+                    // alert("err, status: " + res.status);
                     dispatch(payWithStripeFail("not 201"));
+                    AppToaster.show({
+                        message: "Error, try again",
+                        intent: Intent.WARNING,
+                        icon: "cross",
+                        timeout: 2000
+                    });
                 }
             })
             .catch((err: any) => {
-                alert(err)
+                // alert(err)
                 dispatch(payWithStripeFail(err));
+                AppToaster.show({
+                    message: "Error, try again\n" + err,
+                    intent: Intent.WARNING,
+                    icon: "cross",
+                    timeout: 2000
+                });
             });
     }
 }
