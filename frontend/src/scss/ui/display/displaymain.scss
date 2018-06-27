@@ -1,0 +1,43 @@
+%clear-preset-margin-padding {
+    margin: 0;
+    padding: 0;
+}
+
+.display-data-main-container {
+    @extend %full-width-height-infocard;
+    grid-column: 1/3;
+    grid-row: 1/2;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 32.2% 67.8%;
+    grid-template-rows: 34.48% 65.52%;
+    .display-data-category-name-container {
+        .display-data-category-name-text {
+            @extend %clear-preset-margin-padding;
+            color: #FFCD44;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 2rem;
+        }
+    }
+    .display-data-category-price-fluctuation-container {
+        %flux-text-size {}
+        .price {
+            @extend %clear-preset-margin-padding;
+            font-weight: 600;
+            color: rgba(115, 237, 166, .8);
+            font-size: 3rem;
+        }
+        .info {
+            @extend %clear-preset-margin-padding;
+            font-size: 1.2rem;
+        }
+    }
+    .display-data-category-price-graph-container {
+        grid-column: 2/3;
+        grid-row: 1/3;
+        width: 100%;
+        height: 100%;
+    }
+}

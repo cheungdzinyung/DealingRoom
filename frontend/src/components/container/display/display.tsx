@@ -36,7 +36,7 @@ const mapDispatchToProps = (dispatch: any) => {
 export class PureDisplay extends React.Component<
   IDisplayProps,
   { singleTestCat: IMenuCategoryWithFlux }
-> {
+  > {
   constructor(props: IDisplayProps) {
     super(props);
     this.props.getEntireMenu();
@@ -57,11 +57,15 @@ export class PureDisplay extends React.Component<
           {/* FIXME: Forced the first array of the category into the chart data */}
           <DisplayMain
             singleCategory={this.state.singleTestCat.categoryName}
-            pirceChange={320}
+            pirceChange={420.69}
             data={this.state.singleTestCat.items[0].chartData}
           />
           <div className="display-data-sub-container">12</div>
-          <div className="display-data-info-container">12</div>
+          <div className="display-data-info-container">
+            <div className="youtube-container">
+              <iframe src="https://www.youtube.com/embed/i0p1bmr0EmE"  className="video"  frameBorder={0}/>
+            </div>
+          </div>
           <div className="display-data-prices-container">
             {this.state.singleTestCat.items.map((itemLine, index) => (
               <DisplayFlexItemLine {...itemLine} />
