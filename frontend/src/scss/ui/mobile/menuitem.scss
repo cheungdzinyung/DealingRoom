@@ -4,7 +4,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-end; // Card - top part of the item
+    align-items: center; // Card - top part of the item
     .menu-item-card-container {
         position: relative;
         width: 100%;
@@ -12,21 +12,14 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        .menu-item-img {
-            width: 20%;
-            border-radius: 50%;
-            position: relative;
-            left: 10%; // position: absolute;
-            // top: 15%;
-            // left: -25%;
-            filter: drop-shadow(0 4px 4px rgba(0, 0, 0, .25));
-        }
+        box-shadow: #16151a 0 1px 5px;
         .menu-item-card {
-            width: 80%;
+            position: relative;
+            width: 100%;
             height: auto;
             background-color: $item-card-bgc;
             display: grid;
-            grid-template-columns: repeat(4, 25%);
+            grid-template-columns: 34% 22% 22% 22%;
             grid-template-rows: repeat(5, 20%); // Absolute positioning
             .item-info {
                 position: absolute;
@@ -39,6 +32,17 @@
                 bottom: -15px;
                 right: 20px;
                 width: 30px;
+            } // Item Image
+            .menu-item-img {
+                background-color: #16151a;
+                border-radius: 7px;
+                justify-self: self-start;
+                align-self: center;
+                grid-row: 1/6;
+                grid-column: 1/2;
+                width: 90%;
+                position: relative; // left: 10%; 
+                filter: drop-shadow(0 4px 4px rgba(0, 0, 0, .25));
             }
             .menu-item-name {
                 font-size: 1.1rem;
@@ -88,7 +92,9 @@
         } // Collapse - the flex part of the item
     }
     .item-detail-collapse {
-        width: 80%;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        width: 95%;
         background-color: $item-detail-bgc;
         .item-detail-wrapper {
             width: 100%;

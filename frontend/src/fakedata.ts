@@ -1,14 +1,17 @@
 import {
-
   IOrder,
   // IItemWithMod,
   // ICustomerOrderList
-  IMenuCategoryWithFlux, IMenuItemWithoutFlux, IMenuItemWithFlux, IConsumptionGraphData
+  IMenuCategoryWithFlux,
+  IMenuItemWithoutFlux,
+  IMenuItemWithFlux,
+  IConsumptionGraphData
 } from "src/modules";
 
 export const singleCategoryMenuItems: IMenuCategoryWithFlux = {
   categoryName: "Beer",
-  categoryPhoto: "https://www.google.com.hk/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwi2-IaRrvHbAhXFULwKHQSjAiUQjRx6BAgBEAU&url=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F49458472%2Freact-native-image-with-token-and-ttl%3Fnoredirect%3D1%26lq%3D1&psig=AOvVaw3CM4Pw4ZoRdE9zQaPCxRG8&ust=1530103560191004",
+  categoryPhoto:
+    "https://www.google.com.hk/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwi2-IaRrvHbAhXFULwKHQSjAiUQjRx6BAgBEAU&url=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F49458472%2Freact-native-image-with-token-and-ttl%3Fnoredirect%3D1%26lq%3D1&psig=AOvVaw3CM4Pw4ZoRdE9zQaPCxRG8&ust=1530103560191004",
   items: [
     {
       categoryName: "Beer",
@@ -101,6 +104,144 @@ export const singleCategoryMenuItems: IMenuCategoryWithFlux = {
         { time: "", purchasePrice: 23 },
         { time: "", purchasePrice: 34 }
       ]
+    },
+    {
+      categoryName: "Beer",
+      currentPrice: 50.0,
+      isActive: true,
+      isSpecial: false,
+      itemDescription:
+        "ASAHI SUPER DRY’s uses carefully selected strains of yeast that not only facilitate outstanding fermentation.",
+      itemName: "Heineken",
+      itemPhoto: "../storage/items/asahi.jpeg",
+      itemStock: 100,
+      items_id: 2,
+      minimumPrice: 15.0,
+      // tslint:disable-next-line:object-literal-sort-keys
+      chartData: [
+        { time: "", purchasePrice: 40 },
+        { time: "", purchasePrice: 60 },
+        { time: "", purchasePrice: 20 },
+        { time: "", purchasePrice: 27 },
+        { time: "", purchasePrice: 28 },
+        { time: "", purchasePrice: 33 },
+        { time: "", purchasePrice: 34 }
+      ]
+    },
+    {
+      categoryName: "Beer",
+      currentPrice: 50.0,
+      isActive: true,
+      isSpecial: false,
+      itemDescription:
+        "ASAHI SUPER DRY’s uses carefully selected strains of yeast that not only facilitate outstanding fermentation.",
+      itemName: "Heineken",
+      itemPhoto: "../storage/items/asahi.jpeg",
+      itemStock: 100,
+      items_id: 2,
+      minimumPrice: 15.0,
+      // tslint:disable-next-line:object-literal-sort-keys
+      chartData: [
+        { time: "", purchasePrice: 40 },
+        { time: "", purchasePrice: 60 },
+        { time: "", purchasePrice: 20 },
+        { time: "", purchasePrice: 27 },
+        { time: "", purchasePrice: 28 },
+        { time: "", purchasePrice: 33 },
+        { time: "", purchasePrice: 34 }
+      ]
+    },
+    {
+      categoryName: "Beer",
+      currentPrice: 50.0,
+      isActive: true,
+      isSpecial: false,
+      itemDescription:
+        "ASAHI SUPER DRY’s uses carefully selected strains of yeast that not only facilitate outstanding fermentation.",
+      itemName: "Heineken",
+      itemPhoto: "../storage/items/asahi.jpeg",
+      itemStock: 100,
+      items_id: 2,
+      minimumPrice: 15.0,
+      // tslint:disable-next-line:object-literal-sort-keys
+      chartData: [
+        { time: "", purchasePrice: 30 },
+        { time: "", purchasePrice: 40 },
+        { time: "", purchasePrice: 20 },
+        { time: "", purchasePrice: 27 },
+        { time: "", purchasePrice: 18 },
+        { time: "", purchasePrice: 23 },
+        { time: "", purchasePrice: 34 }
+      ]
+    },
+    {
+      categoryName: "Beer",
+      currentPrice: 50.0,
+      isActive: true,
+      isSpecial: false,
+      itemDescription:
+        "ASAHI SUPER DRY’s uses carefully selected strains of yeast that not only facilitate outstanding fermentation.",
+      itemName: "Heineken",
+      itemPhoto: "../storage/items/asahi.jpeg",
+      itemStock: 100,
+      items_id: 2,
+      minimumPrice: 15.0,
+      // tslint:disable-next-line:object-literal-sort-keys
+      chartData: [
+        { time: "", purchasePrice: 40 },
+        { time: "", purchasePrice: 60 },
+        { time: "", purchasePrice: 20 },
+        { time: "", purchasePrice: 27 },
+        { time: "", purchasePrice: 28 },
+        { time: "", purchasePrice: 33 },
+        { time: "", purchasePrice: 34 }
+      ]
+    },
+    {
+      categoryName: "Beer",
+      currentPrice: 50.0,
+      isActive: true,
+      isSpecial: false,
+      itemDescription:
+        "ASAHI SUPER DRY’s uses carefully selected strains of yeast that not only facilitate outstanding fermentation.",
+      itemName: "Heineken",
+      itemPhoto: "../storage/items/asahi.jpeg",
+      itemStock: 100,
+      items_id: 2,
+      minimumPrice: 15.0,
+      // tslint:disable-next-line:object-literal-sort-keys
+      chartData: [
+        { time: "", purchasePrice: 30 },
+        { time: "", purchasePrice: 40 },
+        { time: "", purchasePrice: 20 },
+        { time: "", purchasePrice: 27 },
+        { time: "", purchasePrice: 18 },
+        { time: "", purchasePrice: 23 },
+        { time: "", purchasePrice: 34 }
+      ]
+    },
+    {
+      categoryName: "Beer",
+      currentPrice: 50.0,
+      isActive: true,
+      isSpecial: false,
+      itemDescription:
+        "ASAHI SUPER DRY’s uses carefully selected strains of yeast that not only facilitate outstanding fermentation.",
+      itemName: "Heineken",
+      itemPhoto: "../storage/items/asahi.jpeg",
+      itemStock: 100,
+      items_id: 2,
+      minimumPrice: 15.0,
+      // tslint:disable-next-line:object-literal-sort-keys
+      chartData: [
+        { time: "", purchasePrice: 40 },
+        { time: "", purchasePrice: 60 },
+        { time: "", purchasePrice: 20 },
+        { time: "", purchasePrice: 27 },
+        { time: "", purchasePrice: 28 },
+        { time: "", purchasePrice: 33 },
+        { time: "", purchasePrice: 34 }
+      ]
     }
   ]
 };
@@ -132,7 +273,8 @@ export const adminAllItemTest: IMenuItemWithoutFlux[] = [
     itemPhoto: "./assets/images/squarebeer.jpg",
     isSpecial: false,
     isActive: true
-  }, {
+  },
+  {
     items_id: 1,
     itemName: "Asahi",
     itemStock: 12,
@@ -144,7 +286,8 @@ export const adminAllItemTest: IMenuItemWithoutFlux[] = [
     itemPhoto: "../../assets/images/squarebeer.jpg",
     isSpecial: false,
     isActive: false
-  }, {
+  },
+  {
     items_id: 1,
     itemName: "Asahi",
     itemStock: 12,
@@ -156,7 +299,8 @@ export const adminAllItemTest: IMenuItemWithoutFlux[] = [
     itemPhoto: "../../assets/images/squarebeer.jpg",
     isSpecial: true,
     isActive: true
-  }, {
+  },
+  {
     items_id: 1,
     itemName: "Asahi",
     itemStock: 12,
@@ -168,7 +312,8 @@ export const adminAllItemTest: IMenuItemWithoutFlux[] = [
     itemPhoto: "../../assets/images/squarebeer.jpg",
     isSpecial: false,
     isActive: true
-  }, {
+  },
+  {
     items_id: 1,
     itemName: "Asahi",
     itemStock: 12,
@@ -180,7 +325,8 @@ export const adminAllItemTest: IMenuItemWithoutFlux[] = [
     itemPhoto: "../../assets/images/squarebeer.jpg",
     isSpecial: true,
     isActive: true
-  }, {
+  },
+  {
     items_id: 1,
     itemName: "Asahi",
     itemStock: 12,
@@ -193,8 +339,7 @@ export const adminAllItemTest: IMenuItemWithoutFlux[] = [
     isSpecial: false,
     isActive: false
   }
-]
-
+];
 
 export const displayMenuItemListTest: IMenuItemWithFlux[] = [
   {
@@ -219,7 +364,8 @@ export const displayMenuItemListTest: IMenuItemWithFlux[] = [
       { time: "15", purchasePrice: 18 },
       { time: "16", purchasePrice: 36 }
     ]
-  }, {
+  },
+  {
     items_id: 1,
     itemName: "Asahi",
     itemStock: 12,
@@ -241,7 +387,8 @@ export const displayMenuItemListTest: IMenuItemWithFlux[] = [
       { time: "15", purchasePrice: 18 },
       { time: "16", purchasePrice: 36 }
     ]
-  }, {
+  },
+  {
     items_id: 1,
     itemName: "Asahi",
     itemStock: 12,
@@ -263,7 +410,8 @@ export const displayMenuItemListTest: IMenuItemWithFlux[] = [
       { time: "15", purchasePrice: 18 },
       { time: "16", purchasePrice: 36 }
     ]
-  }, {
+  },
+  {
     items_id: 1,
     itemName: "Asahi",
     itemStock: 12,
@@ -285,7 +433,8 @@ export const displayMenuItemListTest: IMenuItemWithFlux[] = [
       { time: "15", purchasePrice: 18 },
       { time: "16", purchasePrice: 36 }
     ]
-  }, {
+  },
+  {
     items_id: 1,
     itemName: "Asahi",
     itemStock: 12,
@@ -307,7 +456,8 @@ export const displayMenuItemListTest: IMenuItemWithFlux[] = [
       { time: "15", purchasePrice: 18 },
       { time: "16", purchasePrice: 36 }
     ]
-  }, {
+  },
+  {
     items_id: 1,
     itemName: "Asahi",
     itemStock: 12,
@@ -330,7 +480,7 @@ export const displayMenuItemListTest: IMenuItemWithFlux[] = [
       { time: "16", purchasePrice: 36 }
     ]
   }
-]
+];
 
 export const allOrders: IOrder[] = [
   {
@@ -342,39 +492,40 @@ export const allOrders: IOrder[] = [
     status: "confirmed",
     isPaid: false,
     orderTotal: 300,
-    orderItems: [{
-      items_id: 6,
-      itemName: "Heineken",
-      purchasePrice: 60,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 12,
-      itemName: "Long Island Ice Tea",
-      purchasePrice: 80,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 15,
-      itemName: "Cosmopolitan",
-      purchasePrice: 120,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 13,
-      itemName: "Daiquiri",
-      purchasePrice: 100,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    ],
+    orderItems: [
+      {
+        items_id: 6,
+        itemName: "Heineken",
+        purchasePrice: 60,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 12,
+        itemName: "Long Island Ice Tea",
+        purchasePrice: 80,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 15,
+        itemName: "Cosmopolitan",
+        purchasePrice: 120,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 13,
+        itemName: "Daiquiri",
+        purchasePrice: 100,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      }
+    ]
   },
   {
     users_id: 3,
@@ -385,31 +536,32 @@ export const allOrders: IOrder[] = [
     status: "made",
     isPaid: false,
     orderTotal: 300,
-    orderItems: [{
-      items_id: 6,
-      itemName: "Heineken",
-      purchasePrice: 60,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 12,
-      itemName: "Long Island Ice Tea",
-      purchasePrice: 80,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 13,
-      itemName: "Daiquiri",
-      purchasePrice: 100,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    ],
+    orderItems: [
+      {
+        items_id: 6,
+        itemName: "Heineken",
+        purchasePrice: 60,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 12,
+        itemName: "Long Island Ice Tea",
+        purchasePrice: 80,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 13,
+        itemName: "Daiquiri",
+        purchasePrice: 100,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      }
+    ]
   },
   {
     users_id: 3,
@@ -420,39 +572,40 @@ export const allOrders: IOrder[] = [
     status: "confirmed",
     isPaid: false,
     orderTotal: 300,
-    orderItems: [{
-      items_id: 6,
-      itemName: "Heineken",
-      purchasePrice: 60,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 12,
-      itemName: "Long Island Ice Tea",
-      purchasePrice: 80,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 15,
-      itemName: "Cosmopolitan",
-      purchasePrice: 120,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 13,
-      itemName: "Daiquiri",
-      purchasePrice: 100,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    ],
+    orderItems: [
+      {
+        items_id: 6,
+        itemName: "Heineken",
+        purchasePrice: 60,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 12,
+        itemName: "Long Island Ice Tea",
+        purchasePrice: 80,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 15,
+        itemName: "Cosmopolitan",
+        purchasePrice: 120,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 13,
+        itemName: "Daiquiri",
+        purchasePrice: 100,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      }
+    ]
   },
   {
     users_id: 3,
@@ -463,31 +616,32 @@ export const allOrders: IOrder[] = [
     status: "served",
     isPaid: true,
     orderTotal: 300,
-    orderItems: [{
-      items_id: 6,
-      itemName: "Heineken",
-      purchasePrice: 60,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 12,
-      itemName: "Long Island Ice Tea",
-      purchasePrice: 80,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 15,
-      itemName: "Cosmopolitan",
-      purchasePrice: 120,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    ],
+    orderItems: [
+      {
+        items_id: 6,
+        itemName: "Heineken",
+        purchasePrice: 60,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 12,
+        itemName: "Long Island Ice Tea",
+        purchasePrice: 80,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 15,
+        itemName: "Cosmopolitan",
+        purchasePrice: 120,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      }
+    ]
   },
   {
     users_id: 3,
@@ -498,39 +652,40 @@ export const allOrders: IOrder[] = [
     status: "served",
     isPaid: false,
     orderTotal: 300,
-    orderItems: [{
-      items_id: 6,
-      itemName: "Heineken",
-      purchasePrice: 60,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 12,
-      itemName: "Long Island Ice Tea",
-      purchasePrice: 80,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 15,
-      itemName: "Cosmopolitan",
-      purchasePrice: 120,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 13,
-      itemName: "Daiquiri",
-      purchasePrice: 100,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    ],
+    orderItems: [
+      {
+        items_id: 6,
+        itemName: "Heineken",
+        purchasePrice: 60,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 12,
+        itemName: "Long Island Ice Tea",
+        purchasePrice: 80,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 15,
+        itemName: "Cosmopolitan",
+        purchasePrice: 120,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 13,
+        itemName: "Daiquiri",
+        purchasePrice: 100,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      }
+    ]
   },
   {
     users_id: 3,
@@ -541,47 +696,48 @@ export const allOrders: IOrder[] = [
     status: "served",
     isPaid: true,
     orderTotal: 300,
-    orderItems: [{
-      items_id: 6,
-      itemName: "Heineken",
-      purchasePrice: 60,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 16,
-      itemName: "Margarita",
-      purchasePrice: 120,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 16,
-      itemName: "Margarita",
-      purchasePrice: 120,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 15,
-      itemName: "Cosmopolitan",
-      purchasePrice: 120,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 15,
-      itemName: "Cosmopolitan",
-      purchasePrice: 120,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    ],
+    orderItems: [
+      {
+        items_id: 6,
+        itemName: "Heineken",
+        purchasePrice: 60,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 16,
+        itemName: "Margarita",
+        purchasePrice: 120,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 16,
+        itemName: "Margarita",
+        purchasePrice: 120,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 15,
+        itemName: "Cosmopolitan",
+        purchasePrice: 120,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 15,
+        itemName: "Cosmopolitan",
+        purchasePrice: 120,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      }
+    ]
   },
   {
     users_id: 3,
@@ -593,31 +749,31 @@ export const allOrders: IOrder[] = [
     isPaid: false,
     orderTotal: 300,
     orderItems: [
-    {
-      items_id: 12,
-      itemName: "Long Island Ice Tea",
-      purchasePrice: 80,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 15,
-      itemName: "Cosmopolitan",
-      purchasePrice: 120,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 13,
-      itemName: "Daiquiri",
-      purchasePrice: 100,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    ],
+      {
+        items_id: 12,
+        itemName: "Long Island Ice Tea",
+        purchasePrice: 80,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 15,
+        itemName: "Cosmopolitan",
+        purchasePrice: 120,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 13,
+        itemName: "Daiquiri",
+        purchasePrice: 100,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      }
+    ]
   },
   {
     users_id: 3,
@@ -628,53 +784,51 @@ export const allOrders: IOrder[] = [
     status: "made",
     isPaid: false,
     orderTotal: 300,
-    orderItems: [{
-      items_id: 19,
-      itemName: "Old Fashion",
-      purchasePrice: 100,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 16,
-      itemName: "Margarita",
-      purchasePrice: 120,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 16,
-      itemName: "Margarita",
-      purchasePrice: 120,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    {
-      items_id: 15,
-      itemName: "Cosmopolitan",
-      purchasePrice: 120,
-      ice: "normal",
-      sweetness: "normal",
-      garnish: "normal",
-    },
-    ],
-  },
-]
-
+    orderItems: [
+      {
+        items_id: 19,
+        itemName: "Old Fashion",
+        purchasePrice: 100,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 16,
+        itemName: "Margarita",
+        purchasePrice: 120,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 16,
+        itemName: "Margarita",
+        purchasePrice: 120,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      },
+      {
+        items_id: 15,
+        itemName: "Cosmopolitan",
+        purchasePrice: 120,
+        ice: "normal",
+        sweetness: "normal",
+        garnish: "normal"
+      }
+    ]
+  }
+];
 
 export const profileConsumptionGraphTest: IConsumptionGraphData[] = [
-  {category:"beer", you: 100, everyone: 200, maxPrice: 250},
-  {category:"shake", you: 190, everyone: 180, maxPrice: 250},
-  {category:"love", you: 100, everyone: 250, maxPrice: 250},
-  {category:"hate", you: 170, everyone: 182, maxPrice: 250},
-  {category:"smart", you: 230, everyone: 100, maxPrice: 250},
-  {category:"power", you: 100, everyone: 90, maxPrice: 250}
-]
-
-
+  { category: "beer", you: 100, everyone: 200, maxPrice: 250 },
+  { category: "shake", you: 190, everyone: 180, maxPrice: 250 },
+  { category: "love", you: 100, everyone: 250, maxPrice: 250 },
+  { category: "hate", you: 170, everyone: 182, maxPrice: 250 },
+  { category: "smart", you: 230, everyone: 100, maxPrice: 250 },
+  { category: "power", you: 100, everyone: 90, maxPrice: 250 }
+];
 
 // used at first for the OrderCard but change into [allOrders]
 // export const orderItems: IOrder = {
@@ -720,7 +874,6 @@ export const profileConsumptionGraphTest: IConsumptionGraphData[] = [
 //   },
 // ],
 // };
-
 
 // export const chartOption = {
 //   layout: {

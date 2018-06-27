@@ -12,6 +12,7 @@ import { IMenuCategoryWithFlux } from "src/modules";
 
 import { DisplayFlexItemLine } from "src/components/ui/display/displayfluxitemline";
 import { DisplayMain } from "src/components/ui/display/displaymain";
+import { DisplayInfo } from "src/components/ui/display/displayinfo";
 
 interface IDisplayProps {
   singleCategory: IMenuCategoryWithFlux[];
@@ -36,7 +37,7 @@ const mapDispatchToProps = (dispatch: any) => {
 export class PureDisplay extends React.Component<
   IDisplayProps,
   { singleTestCat: IMenuCategoryWithFlux }
-  > {
+> {
   constructor(props: IDisplayProps) {
     super(props);
     this.props.getEntireMenu();
@@ -61,11 +62,7 @@ export class PureDisplay extends React.Component<
             data={this.state.singleTestCat.items[0].chartData}
           />
           <div className="display-data-sub-container">12</div>
-          <div className="display-data-info-container">
-            <div className="youtube-container">
-              <iframe src="https://www.youtube.com/embed/i0p1bmr0EmE"  className="video"  frameBorder={0}/>
-            </div>
-          </div>
+          <DisplayInfo />
           <div className="display-data-prices-container">
             {this.state.singleTestCat.items.map((itemLine, index) => (
               <DisplayFlexItemLine {...itemLine} />

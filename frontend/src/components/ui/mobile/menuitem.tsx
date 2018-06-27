@@ -22,7 +22,7 @@ interface IMenuItemProps {
   itemDescription: string;
   minimumPrice: number;
   currentPrice: number;
-  itemPhoto: string,
+  itemPhoto: string;
   isSpecial: boolean;
   isActive: boolean;
   chartData: IItemPriceGraphData[];
@@ -34,14 +34,14 @@ interface IMenuItemProps {
 }
 
 interface IMenuItemState {
-  detailIsOpen: boolean
-  priceDelta: number
+  detailIsOpen: boolean;
+  priceDelta: number;
 }
 
 export default class MenuItem extends React.Component<
   IMenuItemProps,
   IMenuItemState
-  > {
+> {
   constructor(props: IMenuItemProps) {
     super(props);
 
@@ -81,18 +81,17 @@ export default class MenuItem extends React.Component<
       { time: "", purchasePrice: 18 },
       { time: "", purchasePrice: 23 },
       { time: "", purchasePrice: 34 }
-    ]
+    ];
 
     // const firstPrice = this.props.chartData[0].purchasePrice;
     // const lastPrice = this.props.chartData[(this.props.chartData.length - 1)].purchasePrice
-    // const percentage = percentageChange(firstPrice, lastPrice)
-
+    // const percentage = percentageChange(lastPrice, firstPrice)
 
     return (
       <div className="menu-item-container">
         <div className="menu-item-card-container">
           {/* Product images */}
-          <img src={this.props.itemPhoto} className="menu-item-img" alt="" />
+
           <Card
             className="menu-item-card rd-corner"
             elevation={Elevation.ONE}
@@ -112,6 +111,7 @@ export default class MenuItem extends React.Component<
               alt=""
               onClick={this.addToCurrentOrder}
             />
+            <img src={this.props.itemPhoto} className="menu-item-img" alt="" />
             <span className="menu-item-name">{this.props.itemName}</span>
             <div className="menu-item-bot">
               {/* Divider */}
@@ -125,7 +125,11 @@ export default class MenuItem extends React.Component<
                   </span>
                 </div>
                 <div className="item-flucutation-container">
-                  <img className="flux-img" src={this.state.priceDelta > 0 ? upArrowImg : downArrowImg} alt="" />
+                  <img
+                    className="flux-img"
+                    src={this.state.priceDelta > 0 ? upArrowImg : downArrowImg}
+                    alt=""
+                  />
                   <span className="item-fluctuation-display">
                     {this.state.priceDelta}&#37;
                   </span>
@@ -137,7 +141,7 @@ export default class MenuItem extends React.Component<
 
         {/* Expandable bottom card */}
         <Collapse
-          className="item-detail-collapse rd-corner"
+          className="item-detail-collapse"
           isOpen={this.state.detailIsOpen}
         >
           <div className="item-detail-wrapper">
