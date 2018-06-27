@@ -1,0 +1,14 @@
+.edit-item-info {
+    @extend %grid-self-justify-align;
+    position: relative;
+    top: -20%;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    width: 76.67%;
+    height: 128.19%;
+    .edit-item-info-img {
+        border-radius: 10px;
+        width: 100%;
+        box-shadow: black 0px 1px 5px;
+    }
+}
