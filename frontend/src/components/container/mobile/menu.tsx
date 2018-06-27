@@ -3,7 +3,7 @@ import * as React from "react";
 
 // menu filter
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 // import MenuSlider from "./menuSlider";
 
@@ -98,12 +98,10 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
       });
     });
 
-
-
     this.state = {
       searchBoxEntry: "",
       displayCategoryIndex: 0,
-      isItemDetailsOpen: tempisItemDetailsOpen,
+      isItemDetailsOpen: tempisItemDetailsOpen
     };
   }
 
@@ -157,14 +155,13 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
   }
 
   public onCategoryChange = (index: number) => {
-      this.setState({
-        displayCategoryIndex: index
-      });
-  }
+    this.setState({
+      displayCategoryIndex: index
+    });
+  };
 
   // TODO: to fix the next and Previous of the carousel
   public render() {
-
     // https://react-slick.neostack.com/docs/api
     const sliderOneSettings = {
       dots: false,
@@ -178,7 +175,9 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
       draggable: true,
       swipeToSlide: true,
       focusOnSelect: true,
-      afterChange: (index: number) => { this.onCategoryChange(index) },
+      afterChange: (index: number) => {
+        this.onCategoryChange(index);
+      }
     };
 
     return (
@@ -186,17 +185,20 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
         <PageHeader header={"Menu"} subHeader={"Column A, or try column B"} />
 
         <Slider {...sliderOneSettings} className="menu-display">
-          {
-            this.props.categories.map((cat: string) => {
-              return (
-                <div key={`cat_${cat}`}>
-                  <img
-                    src={require(`./../../assets/images/tempcat/${cat}.jpg`)} alt="" className="rd-corner display-img" />
-                    <h4>{cat}</h4>
-                </div>
-              )
-            })
-          }
+          {this.props.categories.map((cat: string) => {
+            return (
+              <div key={`cat_${cat}`}>
+                {/* <div className="caroulos-category-name-wrapper">
+                  <span className="caroulos-category-name-text">{cat}</span>
+                </div> */}
+                <img
+                  src={require(`./../../assets/images/tempcat/${cat}.jpg`)}
+                  alt=""
+                  className="rd-corner display-img"
+                />
+              </div>
+            );
+          })}
         </Slider>
 
         {/* <MenuSlider categories={this.props.categories} displayCategoryIndex={this.state.displayCategoryIndex}/> */}
@@ -226,7 +228,7 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
                   ) !== -1 &&
                 /* v match selected category */
                 category.categoryName ===
-                this.props.categories[this.state.displayCategoryIndex] &&
+                  this.props.categories[this.state.displayCategoryIndex] &&
                 /* v check stock > 0 */
                 item.itemStock > 0 && (
                   <MenuItem
