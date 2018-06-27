@@ -7,45 +7,48 @@ import { AreaChart, Area, ResponsiveContainer } from "recharts";
 // import static icons
 import wallet from "../../assets/icons/item/wallet.svg";
 import info from "../../assets/icons/item/info.svg";
-import up from "../../assets/icons/item/up.svg";
-// import down from "../icons/item/down.svg";
+import upArrowImg from "../../assets/icons/item/up.svg";
+import downArrowImg from "../../assets/icons/item/down.svg";
 import plus from "../../assets/icons/item/plus.svg";
 
 // Import types
 import { IItemPriceGraphData } from "src/modules";
+// import { percentageChange } from "src/util/utility";
 
 interface IMenuItemProps {
-  // key: number;
-  // details: string;
+  items_id: number;
+  itemName: string;
+  categoryName: string;
+  itemDescription: string;
+  minimumPrice: number;
+  currentPrice: number;
+  itemPhoto: "*.jpg" | "*.png" | "*.jpeg";
+  isSpecial: boolean;
+  isActive: boolean;
+  chartData: IItemPriceGraphData[];
   addToCurrentOrder: (
     itemID: number,
     itemName: string,
     currentPrice: number
   ) => void;
-  item_id: number;
-  categoryName: string;
-  itemName: string;
-  currentPrice: number;
-  priceDelta: number;
-  itemDescription: string;
-  itemPhoto: "*.jpg" | "*.png" | "*.jpeg";
-  detailIsOpen: boolean;
-  chartData: IItemPriceGraphData[];
 }
 
 interface IMenuItemState {
-  detailIsOpen: boolean;
+  detailIsOpen: boolean
+  priceDelta: number
 }
 
 export default class MenuItem extends React.Component<
   IMenuItemProps,
   IMenuItemState
-> {
+  > {
   constructor(props: IMenuItemProps) {
     super(props);
 
     this.state = {
-      detailIsOpen: false
+      detailIsOpen: false,
+      // temp state
+      priceDelta: -3
     };
   }
 
@@ -56,7 +59,7 @@ export default class MenuItem extends React.Component<
     // if (itemid !== undefined && itemName !== undefined) {
     //   const currentPrice = this.props.entireMenu[this.state.displayCategoryIndex].items.find((element: any) => (parseFloat(itemid) === element.items_id)).currentPrice;
     this.props.addToCurrentOrder(
-      this.props.item_id,
+      this.props.items_id,
       this.props.itemName,
       this.props.currentPrice
     );
@@ -70,15 +73,21 @@ export default class MenuItem extends React.Component<
   };
 
   public render() {
-    const tempChartData= [
-        { time: "", purchasePrice: 30 },
-        { time: "", purchasePrice: 40 },
-        { time: "", purchasePrice: 20 },
-        { time: "", purchasePrice: 27 },
-        { time: "", purchasePrice: 18 },
-        { time: "", purchasePrice: 23 },
-        { time: "", purchasePrice: 34 }
-      ]
+    const tempChartData = [
+      { time: "", purchasePrice: 30 },
+      { time: "", purchasePrice: 40 },
+      { time: "", purchasePrice: 20 },
+      { time: "", purchasePrice: 27 },
+      { time: "", purchasePrice: 18 },
+      { time: "", purchasePrice: 23 },
+      { time: "", purchasePrice: 34 }
+    ]
+
+    // const firstPrice = this.props.chartData[0].purchasePrice;
+    // const lastPrice = this.props.chartData[(this.props.chartData.length - 1)].purchasePrice
+    // const percentage = percentageChange(firstPrice, lastPrice)
+
+
     return (
       <div className="menu-item-container">
         <div className="menu-item-card-container">
@@ -87,10 +96,8 @@ export default class MenuItem extends React.Component<
           <Card
             className="menu-item-card rd-corner"
             elevation={Elevation.ONE}
-            data-productId={this.props.item_id}
+            data-productId={this.props.items_id}
           >
-            {/* Absolute location */}
-
             {/* Info button  */}
             <img
               className="item-info"
@@ -98,6 +105,7 @@ export default class MenuItem extends React.Component<
               alt=""
               onClick={this.toggle}
             />
+            {/* Add item button */}
             <img
               className="add-item"
               src={plus}
@@ -117,9 +125,9 @@ export default class MenuItem extends React.Component<
                   </span>
                 </div>
                 <div className="item-flucutation-container">
-                  <img className="flux-img" src={up} alt="" />
+                  <img className="flux-img" src={this.state.priceDelta > 0 ? upArrowImg : downArrowImg} alt="" />
                   <span className="item-fluctuation-display">
-                    {this.props.priceDelta}&#37;
+                    {this.state.priceDelta}&#37;
                   </span>
                 </div>
               </div>

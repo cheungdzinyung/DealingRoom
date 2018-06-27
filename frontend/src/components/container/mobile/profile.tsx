@@ -20,7 +20,7 @@ interface IUserProfileState {
 export default class PureProfile extends React.Component<
   {},
   IUserProfileState
-> {
+  > {
   constructor(props: {}) {
     super(props);
     this.state = {
@@ -33,7 +33,11 @@ export default class PureProfile extends React.Component<
       <div className="page-content-container">
         <PageHeader header={"Profile"} subHeader={"You are what you eat"} />
         <UserProfileGraph data={this.state.userConsumption} />
-        <div className="cardd rd-corner">temp</div>
+        <div className="cardd rd-corner">
+          <p>
+            This is just trying out haha.You are what you eat and that's a hell lot of food you are actually eatting with that face hahahahahaha
+            </p>
+        </div>
         <UserMenu />
       </div>
     );
