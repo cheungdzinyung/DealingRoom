@@ -70,8 +70,20 @@ class PurePendingOrders extends React.Component<IPendingOrdersProps> {
                         </div>
                         <div className="order-card-display">
                             { allOrders
-                                .filter((each: any) => each.status === "confirmed" || each.status === "made")
-                                .map((oneOrder, index) => (<OrderCard {...oneOrder} key={index} />))}
+                                .filter((each: any) => each.status === "made")
+                                // .filter((each: any) => each.isPaid || !each.isPaid) 
+                                .map((oneOrder, index) => (
+                                <OrderCard
+                                users_id={oneOrder.users_id}
+                                userName={oneOrder.userName} 
+                                displayName={oneOrder.displayName}
+                                orders_id={oneOrder.orders_id} 
+                                table={oneOrder.table} 
+                                status={oneOrder.status} 
+                                // isPaid?={} boolean;
+                                orderTotal={oneOrder.orderTotal}
+                                orderItems={oneOrder.orderItems} 
+                                key={index} />))}
                         </div>
                     </div>
                 </div>

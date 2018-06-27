@@ -67,7 +67,7 @@ class PureCurrentOrders extends React.Component<ICurrentOrdersProps> {
                         <div className="order-card-display">
                             {allOrders
                                 .filter((each: any) => each.status === "made" || each.status === "served")
-                                .filter((each: any) => each.isPaid || !each.isPaid)  
+                                // .filter((each: any) => each.isPaid && undefined)  
                                 .map((oneOrder, index) => (<OrderCard {...oneOrder} key={index}/>))
                             }              
                         </div>

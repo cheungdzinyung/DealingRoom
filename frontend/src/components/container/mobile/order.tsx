@@ -90,7 +90,7 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
   public render() {
     return (
       <div className="page-content-container">
-        <PageHeader header={`Order ${this.state.orderId}`} subHeader="Your wish is our command" />
+        <PageHeader header={`Order #${this.state.orderId}`} subHeader="Your wish is our command" />
         {
           this.state.thisOrder.orderItems !== "empty" ?
             <div>
@@ -106,20 +106,25 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
               ))}
 
               <Card className="order-summary" elevation={Elevation.TWO}>
-                <button className="payment-button">
-                  <span className="payment-header">Pay With Your Prefered Method</span>
+
+                <button className="payment-button rd-corner">
+                  <span className="payment-header rd-corner">Click To Choose Your Prefered Payment Method</span>
                   <span className="payment-amount">HK&#36; {this.state.amount}</span>
                 </button>
+
+                <div className="payment-method rd-corner">
+                  <MySrtipeComponent
+                    paymentInfo={{
+                      userName: this.props.userName,
+                      orderId: this.props.match.params.orderId,
+                      amount: this.state.amount
+                    }}
+                    history={this.props.history}
+                  />
+                </div>
               </Card>
 
-              <MySrtipeComponent
-                paymentInfo={{
-                  userName: this.props.userName,
-                  orderId: this.props.match.params.orderId,
-                  amount: this.state.amount
-                }}
-                history={this.props.history}
-              />
+
 
             </div> : <div />
         }

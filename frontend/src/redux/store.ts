@@ -5,14 +5,19 @@ import thunk from 'redux-thunk';
 import { combineReducers } from 'redux';
 import { ICustomerState, customerReducer } from "./mobile/reducers/index";
 import { IStaffState, staffReducer } from "./desktop/reducers/index";
+import { IDisplayState, displayReducer } from "src/redux/display/reducers/reducers_display";
+
 
 export interface IRootState {
     customer: ICustomerState,
     staff: IStaffState,
+    display: IDisplayState
+    
 }
 export const rootReducer = combineReducers<IRootState>({
     customer: customerReducer,
     staff: staffReducer,
+    display: displayReducer
 });
 
 
@@ -31,6 +36,7 @@ const socket = io(`${API_SERVER}`);
 const socketIoMiddleware = createSocketIoMiddleware(socket, ["GET", "POST", "PUT"]);
 
 import logger from 'redux-logger';
+
 declare global {
     // tslint:disable-next-line:interface-name
     interface Window {

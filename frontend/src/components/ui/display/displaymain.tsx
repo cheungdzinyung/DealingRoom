@@ -18,8 +18,10 @@ export class DisplayMain extends React.Component<IDisplayMainProps, {}>{
     public render() {
         return (
             <div className="display-data-main-container">
-                <div className="display-data-category-name-container"><h1 className="display-data-category-name-text">
-                    {this.props.singleCategory}</h1>
+                <div className="display-data-category-name-container">
+                    <h1 className="display-data-category-name-text">
+                        {this.props.singleCategory}
+                    </h1>
                 </div>
                 <div className="display-data-category-price-fluctuation-container">
                     <p className="price">&#36;{this.props.pirceChange}</p>
@@ -30,9 +32,25 @@ export class DisplayMain extends React.Component<IDisplayMainProps, {}>{
                         <AreaChart
                             data={this.props.data}
                             margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
-                            <XAxis dataKey="time" />
-                            {/* <YAxis /> */}
-                            <Area type='monotone' dataKey="purchasePrice" stroke='#8884d8' fill='#8884d8' />
+
+                            <defs>
+                                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="#EB5757" stopOpacity={0.8} />
+                                    <stop
+                                        offset="95%"
+                                        stopColor="#2D9CDB"
+                                        stopOpacity={0.3}
+                                    />
+                                </linearGradient>
+                            </defs>
+                            <Area
+                                type="monotone"
+                                dataKey="purchasePrice"
+                                stroke="#8884d8"
+                                fillOpacity={1}
+                                fill="url(#colorUv)"
+                            />
+                            <XAxis dataKey="time" tick={{ stroke: '#8884d8', strokeWidth: 1 }} />
                         </AreaChart>
                     </ResponsiveContainer>
                 </div>

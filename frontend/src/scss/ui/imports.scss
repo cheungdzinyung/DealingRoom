@@ -7,6 +7,7 @@
 @import './mobile/orderbanner';
 @import './mobile/topbanner';
 @import './mobile/usermenu';
+@import './mobile/profilegraph';
 //--> Desktop
 @import './desktop/sidemenu';
 @import './desktop/stockfilter';
@@ -18,3 +19,5 @@
 @import './desktop/stockitem/additemmodal/itemImage';
 @import './desktop/stockitem/additemmodal/itemInfo';
 @import './desktop/stockitem/additemmodal/itemStatus';
+
+@import './display/displaymain';
