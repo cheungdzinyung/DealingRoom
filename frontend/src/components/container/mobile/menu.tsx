@@ -1,6 +1,11 @@
 // Importing modules from library
 import * as React from "react";
 
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+// import MenuSlider from "./menuSlider";
+
 // redux
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
@@ -14,8 +19,8 @@ import { AppToaster } from "src/components/ui/mobile/toast";
 import { Intent } from "@blueprintjs/core";
 import UserMenu from "../../ui/mobile/usermenu";
 import MenuItem from "../../ui/mobile/menuitem";
-import tempImg from "src/components/assets/images/categories/squarebeer.jpg";
-import tempImgLong from "src/components/assets/images/categories/beer.jpg";
+
+// import { API_SERVER } from "../../../redux/store";
 
 // Importing interfaces
 import {
@@ -27,9 +32,6 @@ import {
 // socket
 import { store } from "../../../redux/store";
 import PageHeader from "../../ui/mobile/pageheader";
-import CategoryFilter from "../../ui/mobile/categoryfilter";
-
-
 
 // Props and States
 interface IMenuProps {
@@ -74,7 +76,7 @@ const mapDispatchToProps = (dispatch: any) => {
         message: "Item added to order!",
         intent: Intent.SUCCESS,
         icon: "tick",
-        timeout: 500
+        timeout: 2000
       });
     }
   };
@@ -95,10 +97,12 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
       });
     });
 
+
+
     this.state = {
       searchBoxEntry: "",
       displayCategoryIndex: 0,
-      isItemDetailsOpen: tempisItemDetailsOpen
+      isItemDetailsOpen: tempisItemDetailsOpen,
     };
   }
 
@@ -151,20 +155,51 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
     }
   }
 
+  public onCategoryChange = (index: number) => {
+      this.setState({
+        displayCategoryIndex: index
+      });
+  }
+
   // TODO: to fix the next and Previous of the carousel
   public render() {
+
+    // https://react-slick.neostack.com/docs/api
+    const sliderOneSettings = {
+      dots: false,
+      arrows: false,
+      infinite: true,
+      speed: 500,
+      initialSlide: 0,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      adaptiveHeight: true,
+      draggable: true,
+      swipeToSlide: true,
+      focusOnSelect: true,
+      afterChange: (index: number) => { this.onCategoryChange(index) },
+    };
+
     return (
       <div className="page-content-container">
         <PageHeader header={"Menu"} subHeader={"Column A, or try column B"} />
-        {/* Hard coding for now */}
-        <CategoryFilter categories={["All", "Beer", "Cocktails", "Drinks"]} />
 
-        {/* Category image */}
-        <div className="rd-corner menu-display">
-          {/* {alert(JSON.stringify(this.props.entireMenu[0]))} */}
-          <img src={tempImgLong} alt="" className="rd-corner display-img" />
-        </div>
-        {/* Search item bar */}
+        <Slider {...sliderOneSettings} className="menu-display">
+          {
+            this.props.categories.map((cat: string) => {
+              return (
+                <div key={`cat_${cat}`}>
+                  <img
+                    src={require(`./../../assets/images/tempcat/${cat}.jpg`)} alt="" className="rd-corner display-img" />
+                    <h4>{cat}</h4>
+                </div>
+              )
+            })
+          }
+        </Slider>
+
+        {/* <MenuSlider categories={this.props.categories} displayCategoryIndex={this.state.displayCategoryIndex}/> */}
+
         <input
           className="searchbar rd-corner"
           type="text"
@@ -194,15 +229,17 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
                 /* v check stock > 0 */
                 item.itemStock > 0 && (
                   <MenuItem
-                    item_id={item.items_id}
-                    categoryName={category.categoryName}
-                    itemName={item.itemName}
-                    currentPrice={item.currentPrice}
-                    priceDelta={3}
-                    itemDescription={item.itemDescription}
-                    itemPhoto={tempImg}
-                    detailIsOpen={true}
-                    chartData={item.chartData}
+                    // item_id={item.items_id}
+                    // categoryName={category.categoryName}
+                    // itemName={item.itemName}
+                    // currentPrice={item.currentPrice}
+                    // priceDelta={3}
+                    // itemDescription={item.itemDescription}
+                    // // itemPhoto={tempImg}
+                    // itemPhoto={`${API_SERVER}/api/items/image/${item.items_id}`}
+                    // detailIsOpen={true}
+                    // chartData={item.chartData}
+                    {...item}
                     addToCurrentOrder={this.props.addToCurrentOrder}
                   />
                 )
