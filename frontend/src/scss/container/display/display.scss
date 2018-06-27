@@ -19,11 +19,7 @@
         grid-row-gap: 3%;
         grid-template-columns: 25% 43% 28%;
         grid-template-rows: 44% 53%;
-        .display-data-sub-container {
-            @extend %full-width-height-infocard;
-            grid-column: 1/2;
-            grid-row: 2/3;
-        }
+        
         .display-data-info-container {
             @extend %full-width-height-infocard;
             grid-column: 2/3;

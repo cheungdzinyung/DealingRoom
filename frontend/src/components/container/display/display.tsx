@@ -4,15 +4,19 @@ import * as React from "react";
 // Importing temporary data
 import { singleCategoryMenuItems } from "src/fakedata";
 
+// Redux
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
 import { getEntireMenu } from "src/redux/display/actions/actions_display";
 
+// Importing interfaces
 import { IMenuCategoryWithFlux } from "src/modules";
 
-import { DisplayFlexItemLine } from "src/components/ui/display/displayfluxitemline";
+// Importing UI components
 import { DisplayMain } from "src/components/ui/display/displaymain";
 import { DisplayInfo } from "src/components/ui/display/displayinfo";
+import { DisplayFluxContainer } from "src/components/ui/display/displayflux";
+import { DisplayDataSub } from "src/components/ui/display/displaydatasub";
 
 interface IDisplayProps {
   singleCategory: IMenuCategoryWithFlux[];
@@ -61,13 +65,9 @@ export class PureDisplay extends React.Component<
             pirceChange={420.69}
             data={this.state.singleTestCat.items[0].chartData}
           />
-          <div className="display-data-sub-container">12</div>
+          <DisplayDataSub />
           <DisplayInfo />
-          <div className="display-data-prices-container">
-            {this.state.singleTestCat.items.map((itemLine, index) => (
-              <DisplayFlexItemLine {...itemLine} />
-            ))}
-          </div>
+          <DisplayFluxContainer {...this.state.singleTestCat} />
         </div>
         <div className="rss-feed">
           <span className="feed-text">
