@@ -280,6 +280,7 @@ export default class UsersService {
                   .avg("itemsLog.itemsLogPrice")
                   .whereRaw("??::date = ?", ["created_at", dateOfQuery])
                   .where("items.itemName", itemList[j].itemName)
+                  // add another where condition so that it is between noon and midnight
                   .groupBy("itemName")
                   .groupByRaw(`extract('hour' from "itemsLog".created_at)`)
                   .then((itemLogSummary: any) => {
