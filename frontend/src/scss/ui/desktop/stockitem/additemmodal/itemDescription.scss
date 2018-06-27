@@ -1,14 +1,17 @@
 .edit-item-description {
     grid-row: 2/3;
     grid-column: 2/3;
-    display: flex;
-    // justify-content: space-around;
-    padding: 2% 8%;
+    justify-self: center;
+    align-self: center;
+    width: 84.8%;
+    height: 70.56%;
     textarea {
-        background-color: transparent;
-        width: 100vw;
+        @extend %width-height-hundred;
+        padding: 2%;
+        background-color: rgba(141, 141, 141, .05);
         border: 1px #C4C4C4 solid;
         color: #C4C4C4;
         border-radius: 5px;
+        font-size: 1rem;
     }
 }

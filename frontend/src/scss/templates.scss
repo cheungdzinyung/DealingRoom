@@ -82,3 +82,28 @@ $header-sub-text: rgba(233, 219, 204, .3);
 %clickable {
     cursor: pointer;
 }
+
+%small-text {
+    font-size: 0.8rem;
+}
+
+%flex-cnt-cnt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+%width-height-hundred {
+    width: 100%;
+    height: 100%;
+}
+
+%clear-preset-margin-padding {
+    margin: 0;
+    padding: 0;
+}
+
+%grid-self-justify-align {
+    justify-self: center;
+    align-self: center;
+}
