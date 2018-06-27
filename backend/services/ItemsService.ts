@@ -1,4 +1,4 @@
-// import { Promise as BlueBirdPromise } from "bluebird";
+import { Promise as BlueBirdPromise } from "bluebird";
 import * as fs from "fs-extra";
 import * as Knex from "knex";
 import { IItemData } from "../interfaces";
@@ -25,6 +25,7 @@ export default class UsersService {
       });
   }
 
+  // Working 25/06/2018
   public getItemImage(id: number) {
     return this.knex("items")
       .where("id", id)
@@ -177,6 +178,55 @@ export default class UsersService {
           );
         });
       });
+  }
+
+  public async updateLogPrice() {
+    // get the current date and hour
+    const currentYear = await new Date().getFullYear();
+    const currentMonth = (await new Date().getMonth()) + 1;
+    const currentDate = await new Date().getDate();
+    const currentHour = await new Date().getHours();
+
+    // obtain the list of category id's in the category table
+    const categoryList = await this.knex("categories").select(
+      "id as categories_id"
+    );
+
+    // look through the itemLog and see which categories has been recorded in the last hour
+    let list = await this.knex.raw(
+      `SELECT "items"."categories_id" FROM "itemsLog" JOIN "items" ON "itemsLog"."items_id" = "items"."id" WHERE "created_at" BETWEEN '${currentYear}-${currentMonth}-${currentDate} ${currentHour}:00:00' AND '${currentYear}-${currentMonth}-${currentDate} ${currentHour}:59:59.999999+08' ORDER BY "items"."categories_id"`
+    );
+    list = list.rows;
+    for (let i = 1; i < list.length; ) {
+      list[i - 1].categories_id === list[i].categories_id
+        ? list.splice(i, 1)
+        : i++;
+    }
+
+    // remove category id's that exist in the list from the category list
+    for (let i = 0; i < list.length; i++) {
+      for (let j = 0; j < categoryList.length; j++) {
+        if (list[i].categories_id === categoryList[j].categories_id) {
+          categoryList.splice(j, 1);
+        }
+      }
+    }
+
+    // loop through list of remaining category list to update the price as per current price in items table
+    await BlueBirdPromise.map(categoryList, async (category: any) => {
+      const itemList = await this.knex("items")
+        .select("id", "currentPrice")
+        .where("categories_id", category.categories_id);
+      // loop through all items in the category and insert the current price into the itemsLog table
+        await BlueBirdPromise.map(itemList, async (item: any) => {
+        await this.knex("itemsLog").insert({
+          items_id: item.id,
+          itemsLogPrice: item.currentPrice,
+          created_at: `${currentYear}-${currentMonth}-${currentDate} ${currentHour}:59:59.999999+08`
+        });
+      });
+    });
+    return categoryList;
   }
 
   // Working 23/06/18
