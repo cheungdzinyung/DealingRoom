@@ -18,13 +18,14 @@ interface IUserProfileGraphProps {
   data: IConsumptionGraphData[];
 }
 
-export default class UserProfileGraph extends React.Component<
-  IUserProfileGraphProps,
-  {}
-> {
+export default class UserProfileGraph extends React.Component<IUserProfileGraphProps, {}> {
   constructor(props: IUserProfileGraphProps) {
     super(props);
   }
+
+  public fakerTickFunction = () => {
+    return null;
+  };
 
   public render() {
     return (
@@ -42,8 +43,8 @@ export default class UserProfileGraph extends React.Component<
               </linearGradient>
             </defs>
             <PolarGrid />
-            <PolarAngleAxis dataKey="purchasePrice" />
-            <PolarRadiusAxis angle={30} domain={[0, 250]} />
+            <PolarAngleAxis tickFormatter={this.fakerTickFunction} dataKey="purchasePrice" />
+            <PolarRadiusAxis tickFormatter={this.fakerTickFunction} angle={30} domain={[0, 250]} />
             <Radar
               //   name="Mike"
               dataKey="you"
