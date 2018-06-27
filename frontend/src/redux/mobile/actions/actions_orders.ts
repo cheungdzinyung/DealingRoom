@@ -118,7 +118,7 @@ export function getEntireMenuFail(): IGetEntireMenuFailAction {
 export function getEntireMenu() {
     return (dispatch: Dispatch<IGetEntireMenuSuccessAction | IGetEntireMenuFailAction>) => {
         // axios.get("${process.env.REACT_APP_API_DEV}/api/items")
-        axios.get(`${API_SERVER}/api/items`)
+        axios.get(`${API_SERVER}/api/items/?isActive=true`)
             .then((res: any) => {
                 if (res.status === 200) {
                     // alert(Object.keys(res.data));

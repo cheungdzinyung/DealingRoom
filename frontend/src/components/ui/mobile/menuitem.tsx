@@ -22,7 +22,7 @@ interface IMenuItemProps {
   itemDescription: string;
   minimumPrice: number;
   currentPrice: number;
-  itemPhoto: "*.jpg" | "*.png" | "*.jpeg";
+  itemPhoto: string,
   isSpecial: boolean;
   isActive: boolean;
   chartData: IItemPriceGraphData[];
