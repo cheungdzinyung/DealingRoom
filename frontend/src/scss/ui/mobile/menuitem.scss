@@ -16,8 +16,7 @@
             width: 20%;
             border-radius: 50%;
             position: relative;
-            left: 10%;
-            // position: absolute;
+            left: 10%; // position: absolute;
             // top: 15%;
             // left: -25%;
             filter: drop-shadow(0 4px 4px rgba(0, 0, 0, .25));
@@ -29,7 +28,6 @@
             display: grid;
             grid-template-columns: repeat(4, 25%);
             grid-template-rows: repeat(5, 20%); // Absolute positioning
-            
             .item-info {
                 position: absolute;
                 top: 10px;
@@ -73,12 +71,14 @@
                         flex-direction: row;
                         justify-content: flex-start;
                         align-items: center;
-                        // padding-right: 15%;
+                        text-align: center;
                         .flux-img {
                             width: 15%;
                         }
                         .item-fluctuation-display {
                             text-align: center;
+                            display: flex;
+                            justify-items: center;
                             font-size: .8rem;
                             margin-left: 8%;
                         }
