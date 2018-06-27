@@ -4,6 +4,10 @@ import axios from "axios";
 import { API_SERVER } from "../../../redux/store";
 import { ISignUpPackage, ILoginPackage } from "../../../modules";
 
+// Import UI elements
+import { AppToaster } from "src/components/ui/mobile/toast";
+import { Intent } from "@blueprintjs/core";
+
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const CHANGE_PAGE = "CHANGE_PAGE";
 export type CHANGE_PAGE = typeof CHANGE_PAGE;
@@ -154,8 +158,14 @@ export function localLogin(username: string, password: string) {
                 }
             })
             .catch((err: any) => {
-                alert(err.response.data || err);
+                // alert(err.response.data || err);
                 dispatch(localLoginFail(err.response.data || err));
+                AppToaster.show({
+                    message: "Error, try again\n" + err.response.data || err,
+                    intent: Intent.WARNING,
+                    icon: "cross",
+                    timeout: 2000
+                });
             });
     }
 }
@@ -175,7 +185,7 @@ export function localSignUpFail(errMsg: any): ILocalSignUpFailAction {
     }
 }
 
-// REAL
+// manual login after sign up
 // export function localSignUp(username: string, password: string) {
 //     return (dispatch: Dispatch<ILocalSignUpSuccessAction | ILocalSignUpFailAction>) => {
 //         const signUpPackage: ISignUpPackage = {
@@ -201,7 +211,7 @@ export function localSignUpFail(errMsg: any): ILocalSignUpFailAction {
 //     }
 // }
 
-// WORK AROUND 
+// auto login after sign up
 export function localSignUp(username: string, password: string) {
     return (dispatch: Dispatch<ILocalSignUpSuccessAction | ILocalSignUpFailAction | ILocalLoginSuccessAction | ILocalLoginFailAction>) => {
         const signUpPackage: ISignUpPackage = {
@@ -225,22 +235,46 @@ export function localSignUp(username: string, password: string) {
                             if (resp.status === 200) {
                                 dispatch(localLoginSuccess(resp.data));
                             } else {
-                                alert("status: " + resp.status);
+                                // alert("status: " + resp.status);
                                 dispatch(localLoginFail(resp.status));
+                                AppToaster.show({
+                                    message: "Login failed, try again\n",
+                                    intent: Intent.WARNING,
+                                    icon: "cross",
+                                    timeout: 2000
+                                });
                             }
                         })
                         .catch((err: any) => {
-                            alert("login fail" + err);
+                            // alert("login fail" + err);
                             dispatch(localLoginFail(err));
+                            AppToaster.show({
+                                message: "Login failed, try again\n",
+                                intent: Intent.WARNING,
+                                icon: "cross",
+                                timeout: 2000
+                            });
                         });
                 } else {
-                    alert("sign up fail: " + res.status);
+                    // alert("sign up fail: " + res.status);
                     dispatch(localSignUpFail(res.status));
+                    AppToaster.show({
+                        message: "Login failed, try again\n",
+                        intent: Intent.WARNING,
+                        icon: "cross",
+                        timeout: 2000
+                    });
                 }
             })
             .catch((err: any) => {
-                alert(err.response.data || err);
+                // alert(err.response.data || err);
                 dispatch(localSignUpFail(err.response.data || err));
+                AppToaster.show({
+                    message: "Error, try again\n" + err.response.data || err,
+                    intent: Intent.WARNING,
+                    icon: "cross",
+                    timeout: 2000
+                });
             });
     }
 }

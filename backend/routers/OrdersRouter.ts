@@ -27,9 +27,11 @@ export default class UsersRouter {
   }
 
   public add(req: express.Request, res: express.Response) {
-    if (req.user !== undefined) {
+    const user = req.user;
+    // vvv it was req.user , but the req.user.id keeps say it could be undefined so i work around it for now
+    if (user !== undefined) {
       return this.ordersService
-        .add(req.user.id, req.body)
+        .add(user.id, req.body)
         .then((result: any) => {
           const isActive = true;
           return this.itemsService
@@ -43,6 +45,18 @@ export default class UsersRouter {
                 type: "SOCKET_UPDATE_ITEM_PRICE",
                 entireMenu: finalResult
               });
+
+              // broadcast to staff
+              // not the best place to put the code but it's here for now
+              this.ordersService
+                .getAllOrders(user.id)
+                .then((allOrders: any) => {
+                  io.emit("action", {
+                    type: "SOCKET_UPDATE_ORDER_LIST",
+                    allOrders
+                  });
+                });
+
               res.status(201).json(result);
             });
         })
@@ -78,7 +92,7 @@ export default class UsersRouter {
           res.status(200).json(result);
         })
         .catch((err: express.Errback) => {
-          res.status(500).json({ status: "failed"});
+          res.status(500).json({ status: "failed" });
         });
     } else {
       return res.status(401).json({ status: "unauthorized " });
