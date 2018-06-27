@@ -27,9 +27,31 @@ interface IOrdersProps {
   getUserProfileByUserToken: () => void;
 }
 
+const mapStateToProps = (state: IRootState) => {
+  return {
+    userProfileReady: state.customer.user.userProfileReady,
+    ordersList: state.customer.orders.ordersList,
+  }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    getOrdersByUserToken: () => {
+      dispatch(getOrdersByUserToken());
+    },
+    getUserProfileByUserToken: () => {
+      dispatch(getUserProfileByUserToken());
+    },
+  }
+}
+
 class PureOrderList extends React.Component<IOrdersProps, {}> {
   constructor(props: IOrdersProps) {
     super(props);
+    if (!this.props.userProfileReady) {
+      this.props.getUserProfileByUserToken();
+    }
+    this.props.getOrdersByUserToken();
   }
 
   public openSingleOrder = (orderNumber: number) => {
@@ -46,12 +68,12 @@ class PureOrderList extends React.Component<IOrdersProps, {}> {
   public render() {
     return (
       <div className="page-content-container">
-      <PageHeader header="Order" subHeader="Your wish is our command"/>
+        <PageHeader header="Order" subHeader="Your wish is our command" />
         { /* check if new customer has no history to display */
           (this.props.ordersList.orders.length === 0) ?
-            ( <div className="order-header-container">
-                <h3 className="order-header">Your order history is empty, get a drink</h3>
-              </div>) : <div />
+            (<div className="order-header-container">
+              <h3 className="order-header">Your order history is empty, get a drink</h3>
+            </div>) : <div />
         }
 
         {this.props.ordersList.orders.filter((each: any) => !each.isPaid).length > 0 && (
@@ -120,23 +142,7 @@ class PureOrderList extends React.Component<IOrdersProps, {}> {
   }
 }
 
-const mapStateToProps = (state: IRootState) => {
-  return {
-    userProfileReady: state.customer.user.userProfileReady,
-    ordersList: state.customer.orders.ordersList,
-  }
-}
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    getOrdersByUserToken: () => {
-      dispatch(getOrdersByUserToken());
-    },
-    getUserProfileByUserToken: () => {
-      dispatch(getUserProfileByUserToken());
-    },
-  }
-}
 
 const OrderList = connect(mapStateToProps, mapDispatchToProps)(PureOrderList);
 

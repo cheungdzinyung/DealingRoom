@@ -2,5 +2,13 @@
     grid-row: 2/3;
     grid-column: 2/3;
     display: flex;
-    justify-content: center;
+    // justify-content: space-around;
+    padding: 2% 8%;
+    textarea {
+        background-color: transparent;
+        width: 100vw;
+        border: 1px #C4C4C4 solid;
+        color: #C4C4C4;
+        border-radius: 5px;
+    }
 }

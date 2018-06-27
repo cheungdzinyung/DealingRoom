@@ -1,9 +1,20 @@
 // Importing modules
 import * as React from "react";
-import { IOrder } from "src/modules";
+import { OrderStatus, IItemWithMod } from "src/modules";
 
-export default class OrderCard extends React.Component<IOrder> {
-    constructor(props: IOrder) {
+interface IOrderCardProps {
+    users_id: number;
+    userName: string;
+    displayName: string;
+    orders_id: number;
+    table: number;
+    status: OrderStatus;
+    isPaid?: boolean;
+    orderTotal: number;
+    orderItems: IItemWithMod[];
+}
+export default class OrderCard extends React.Component<IOrderCardProps> {
+    constructor(props: IOrderCardProps) {
         super(props)
     }
     
@@ -16,12 +27,14 @@ export default class OrderCard extends React.Component<IOrder> {
                         <button className="order-status-display">
                             <span className="button-order-text">{this.props.status}</span>
                         </button>
+                        { (this.props.isPaid === !undefined) &&
                         <div className="payment-status">
                             { this.props.isPaid === true ?
                                 <span className="order-payment-status-paid">paid</span> :
                                 <span className="order-payment-status-unpaid">unpaid</span>
                             }
                         </div>
+                        }
                     </div>
                 </div>
                 <div className="order-item-container">

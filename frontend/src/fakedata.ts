@@ -3,7 +3,7 @@ import {
   IOrder,
   // IItemWithMod,
   // ICustomerOrderList
-  IMenuCategoryWithFlux, IMenuItemWithoutFlux, IMenuItemWithFlux
+  IMenuCategoryWithFlux, IMenuItemWithoutFlux, IMenuItemWithFlux, IConsumptionGraphData
 } from "src/modules";
 
 export const singleCategoryMenuItems: IMenuCategoryWithFlux = {
@@ -24,13 +24,13 @@ export const singleCategoryMenuItems: IMenuCategoryWithFlux = {
       minimumPrice: 15.0,
       // tslint:disable-next-line:object-literal-sort-keys
       chartData: [
-        { time: "", purchasePrice: 30 },
+        { time: "9", purchasePrice: 30 },
         { time: "", purchasePrice: 40 },
         { time: "", purchasePrice: 20 },
         { time: "", purchasePrice: 27 },
         { time: "", purchasePrice: 18 },
         { time: "", purchasePrice: 23 },
-        { time: "", purchasePrice: 34 }
+        { time: "Now", purchasePrice: 34 }
       ]
     },
     {
@@ -583,7 +583,97 @@ export const allOrders: IOrder[] = [
     },
     ],
   },
+  {
+    users_id: 3,
+    userName: "judith",
+    displayName: "Juju",
+    orders_id: 3,
+    table: 12,
+    status: "made",
+    isPaid: false,
+    orderTotal: 300,
+    orderItems: [
+    {
+      items_id: 12,
+      itemName: "Long Island Ice Tea",
+      purchasePrice: 80,
+      ice: "normal",
+      sweetness: "normal",
+      garnish: "normal",
+    },
+    {
+      items_id: 15,
+      itemName: "Cosmopolitan",
+      purchasePrice: 120,
+      ice: "normal",
+      sweetness: "normal",
+      garnish: "normal",
+    },
+    {
+      items_id: 13,
+      itemName: "Daiquiri",
+      purchasePrice: 100,
+      ice: "normal",
+      sweetness: "normal",
+      garnish: "normal",
+    },
+    ],
+  },
+  {
+    users_id: 3,
+    userName: "judith",
+    displayName: "Juju",
+    orders_id: 5,
+    table: 12,
+    status: "made",
+    isPaid: false,
+    orderTotal: 300,
+    orderItems: [{
+      items_id: 19,
+      itemName: "Old Fashion",
+      purchasePrice: 100,
+      ice: "normal",
+      sweetness: "normal",
+      garnish: "normal",
+    },
+    {
+      items_id: 16,
+      itemName: "Margarita",
+      purchasePrice: 120,
+      ice: "normal",
+      sweetness: "normal",
+      garnish: "normal",
+    },
+    {
+      items_id: 16,
+      itemName: "Margarita",
+      purchasePrice: 120,
+      ice: "normal",
+      sweetness: "normal",
+      garnish: "normal",
+    },
+    {
+      items_id: 15,
+      itemName: "Cosmopolitan",
+      purchasePrice: 120,
+      ice: "normal",
+      sweetness: "normal",
+      garnish: "normal",
+    },
+    ],
+  },
 ]
+
+
+export const profileConsumptionGraphTest: IConsumptionGraphData[] = [
+  {category:"beer", you: 100, everyone: 200, maxPrice: 250},
+  {category:"shake", you: 190, everyone: 180, maxPrice: 250},
+  {category:"love", you: 100, everyone: 250, maxPrice: 250},
+  {category:"hate", you: 170, everyone: 182, maxPrice: 250},
+  {category:"smart", you: 230, everyone: 100, maxPrice: 250},
+  {category:"power", you: 100, everyone: 90, maxPrice: 250}
+]
+
 
 
 // used at first for the OrderCard but change into [allOrders]

@@ -187,12 +187,14 @@ export interface IItemPriceGraphData {
   purchasePrice: number;
 }
 
-export interface IConsumptionGraphData{
-  category: string
-  you: number
-  everyone: number
-  maxPrice: number
+export interface IConsumptionGraphData {
+  category: string;
+  you: number;
+  everyone: number;
+  maxPrice: number;
 }
+// Sample:
+// {category:"beer", you: 12, everyone: 100, makPrice: 120}
 
 /* 
 Corresponding API path POST: api/orders/user/:id

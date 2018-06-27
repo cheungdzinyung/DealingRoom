@@ -9,18 +9,14 @@
         align-items: center;
     }
 }
-.payment-method{
-    width: 100%;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
+
 .order-summary {
-    width: 100%;
-    padding: 5%;
+    width: 100%; // padding: 5%;
+    padding: 0;
     margin-bottom: 5%;
     background-color: rgba(141, 141, 141, .75);
-
     .payment-button {
+        // margin: 0 5% 5% 5%;
         width: 100%;
         background-color: #EE5353;
         border-bottom-left-radius: 5px;
@@ -31,11 +27,17 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        .payment-header{
+        .payment-header {
+            width: 80%;
+            text-align: center;
             color: $font-color-light;
         }
-        .payment-amount{
+        .payment-amount {
+            font-size: 1.3rem;
             color: $warning-orange;
         }
+    }
+    .payment-method {
+        margin: 5% 5% 0 5%;
     }
 }

@@ -20,7 +20,7 @@ import { Intent } from "@blueprintjs/core";
 import UserMenu from "../../ui/mobile/usermenu";
 import MenuItem from "../../ui/mobile/menuitem";
 
-import { API_SERVER } from "../../../redux/store";
+// import { API_SERVER } from "../../../redux/store";
 
 // Importing interfaces
 import {
@@ -76,7 +76,7 @@ const mapDispatchToProps = (dispatch: any) => {
         message: "Item added to order!",
         intent: Intent.SUCCESS,
         icon: "tick",
-        timeout: 500
+        timeout: 2000
       });
     }
   };
@@ -167,7 +167,7 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
     // https://react-slick.neostack.com/docs/api
     const sliderOneSettings = {
       dots: false,
-      arrows: true,
+      arrows: false,
       infinite: true,
       speed: 500,
       initialSlide: 0,
@@ -229,16 +229,17 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
                 /* v check stock > 0 */
                 item.itemStock > 0 && (
                   <MenuItem
-                    item_id={item.items_id}
-                    categoryName={category.categoryName}
-                    itemName={item.itemName}
-                    currentPrice={item.currentPrice}
-                    priceDelta={3}
-                    itemDescription={item.itemDescription}
-                    // itemPhoto={tempImg}
-                    itemPhoto={`${API_SERVER}/api/items/image/${item.items_id}`}
-                    detailIsOpen={true}
-                    chartData={item.chartData}
+                    // item_id={item.items_id}
+                    // categoryName={category.categoryName}
+                    // itemName={item.itemName}
+                    // currentPrice={item.currentPrice}
+                    // priceDelta={3}
+                    // itemDescription={item.itemDescription}
+                    // // itemPhoto={tempImg}
+                    // itemPhoto={`${API_SERVER}/api/items/image/${item.items_id}`}
+                    // detailIsOpen={true}
+                    // chartData={item.chartData}
+                    {...item}
                     addToCurrentOrder={this.props.addToCurrentOrder}
                   />
                 )
