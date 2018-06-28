@@ -164,18 +164,20 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
   public render() {
     // https://react-slick.neostack.com/docs/api
     const sliderOneSettings = {
-      dots: false,
+      dots: true,
+      // dotsClass: "filterDots",
       arrows: false,
       infinite: true,
-      speed: 500,
-      initialSlide: 0,
+      speed: 1000,
+      // initialSlide: 0,
       slidesToShow: 1,
       slidesToScroll: 1,
-      adaptiveHeight: true,
+      // adaptiveHeight: true,
       draggable: true,
       swipeToSlide: true,
       focusOnSelect: true,
       afterChange: (index: number) => {
+        // alert(index);
         this.onCategoryChange(index);
       }
     };
@@ -188,11 +190,8 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
           {this.props.categories.map((cat: string) => {
             return (
               <div key={`cat_${cat}`}>
-                {/* <div className="caroulos-category-name-wrapper">
-                  <span className="caroulos-category-name-text">{cat}</span>
-                </div> */}
                 <img
-                  src={require(`./../../assets/images/tempcat/${cat}.jpg`)}
+                  src={require(`./../../assets/images/categories/${cat}.jpg`)}
                   alt=""
                   className="rd-corner display-img"
                 />
@@ -200,9 +199,7 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
             );
           })}
         </Slider>
-
-        {/* <MenuSlider categories={this.props.categories} displayCategoryIndex={this.state.displayCategoryIndex}/> */}
-
+  
         <input
           className="searchbar rd-corner"
           type="text"
@@ -228,20 +225,10 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
                   ) !== -1 &&
                 /* v match selected category */
                 category.categoryName ===
-                  this.props.categories[this.state.displayCategoryIndex] &&
+                this.props.categories[this.state.displayCategoryIndex] &&
                 /* v check stock > 0 */
                 item.itemStock > 0 && (
                   <MenuItem
-                    // item_id={item.items_id}
-                    // categoryName={category.categoryName}
-                    // itemName={item.itemName}
-                    // currentPrice={item.currentPrice}
-                    // priceDelta={3}
-                    // itemDescription={item.itemDescription}
-                    // // itemPhoto={tempImg}
-                    // itemPhoto={`${API_SERVER}/api/items/image/${item.items_id}`}
-                    // detailIsOpen={true}
-                    // chartData={item.chartData}
                     {...item}
                     addToCurrentOrder={this.props.addToCurrentOrder}
                   />

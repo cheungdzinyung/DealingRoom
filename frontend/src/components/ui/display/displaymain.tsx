@@ -1,12 +1,12 @@
 // Importing modules from library
 import * as React from "react"
-import { AreaChart, Area, ResponsiveContainer, XAxis } from "recharts";
+import { AreaChart, Area, ResponsiveContainer } from "recharts";
 import { IItemPriceGraphData } from "src/modules"
 
 
 export interface IDisplayMainProps {
     singleCategory: string
-    pirceChange: number
+    averagePrice: number
     data: IItemPriceGraphData[]
 }
 
@@ -24,8 +24,8 @@ export class DisplayMain extends React.Component<IDisplayMainProps, {}>{
                     </h1>
                 </div>
                 <div className="display-data-category-price-fluctuation-container">
-                    <p className="price">&#36;{this.props.pirceChange}</p>
-                    <p className="info">Today Increase Sales</p>
+                    <p className="price">&#36;{this.props.averagePrice}</p>
+                    <p className="info">Average Price</p>
                 </div>
                 <div className="display-data-category-price-graph-container">
                     <ResponsiveContainer>
@@ -50,7 +50,6 @@ export class DisplayMain extends React.Component<IDisplayMainProps, {}>{
                                 fillOpacity={1}
                                 fill="url(#colorUv)"
                             />
-                            <XAxis dataKey="time" tick={{ stroke: '#8884d8', strokeWidth: 1 }} />
                         </AreaChart>
                     </ResponsiveContainer>
                 </div>

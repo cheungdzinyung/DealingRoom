@@ -35,7 +35,7 @@ export default class PureProfile extends React.Component<
         <UserProfileGraph data={this.state.userConsumption} />
         <div className="cardd rd-corner">
           <p>
-            This is just trying out haha.You are what you eat and that's a hell lot of food you are actually eatting with that face hahahahahaha
+            This is just trying out haha. Thanks for joining us here.
             </p>
         </div>
         <UserMenu />

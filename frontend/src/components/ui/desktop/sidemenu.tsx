@@ -19,9 +19,7 @@ import { changePage } from "../../../redux/mobile/actions/actions_user";
 
 interface IUserMenuProps {
     history: History.History,
-    // unpaidOrders: number,
     changePage: (targetPage: string) => void,
-
 }
 
 class AdminSideMenu extends React.Component<IUserMenuProps, {}> {
@@ -41,16 +39,13 @@ class AdminSideMenu extends React.Component<IUserMenuProps, {}> {
         this.props.changePage(`/admin/pendingorders`);
         this.props.history.push(`/admin/pendingorders`);
     };
+    public toUnPaidOrders = () => {
+        this.props.changePage(`/admin/unpaidorders`);
+        this.props.history.push(`/admin/unpaidorders`);
+    };
     //   public toStaffManagement = () => {
     //     this.props.history.push(`/order`);
     //   };
-    //   public toCurrentOrder = () => {
-    //     this.props.history.push(`/payment`);
-    //   };
-    //   public toPendingOrder = () => {
-    //     this.props.history.push(`/setting`);
-    //   };
-
 
     public render() {
         return (
@@ -95,6 +90,16 @@ class AdminSideMenu extends React.Component<IUserMenuProps, {}> {
                             </div>
                         </div>
                     </div>
+                    <div className="menu-section">
+                        <span className="section-header">Payment</span>
+                        <div className="section-pages">
+                            <div className="section-page-line" onClick={this.toUnPaidOrders}>
+                                <img src={info} alt="" className="page-line-icon" />
+                                <span className="page-line-text">
+                                    Unpaid Orders</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
@@ -102,9 +107,7 @@ class AdminSideMenu extends React.Component<IUserMenuProps, {}> {
 }
 
 const mapStateToProps = (state: IRootState) => {
-  return {
-    // unpaidOrders: state.orders.unpaidOrders,
-  }
+  return {}
 }
 
 const mapDispatchToProps = (dispatch: any) => {

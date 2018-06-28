@@ -25,7 +25,7 @@ import paymentTest from "../../assets/images/payment/stripe.png"
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
 import PageHeader from "src/components/ui/mobile/pageheader";
-import MySrtipeComponent from "./myStripeComponent";
+import MySrtipeComponent from "../../ui/mobile/myStripeComponent";
 
 interface IOrderProps {
   match: match<{ orderId: number }>;
@@ -77,7 +77,7 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
     // setState for Card to render
     if (thisOrder !== undefined) {
       const tableNumber = thisOrder.table;
-      const amount = thisOrder.orderItems.reduce((accu: number, curr: any) => (accu + parseFloat(curr.purchasePrice)), 0);
+      const amount = thisOrder.orderItems.reduce((accu: number, curr: any) => (accu + parseFloat(curr.purchasePrice)), 0).toFixed(2);
       this.setState({
         userName, orderId, tableNumber, thisOrder, amount
       });

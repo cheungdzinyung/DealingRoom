@@ -17,7 +17,7 @@ import UnfilledStar from "src/components/assets/icons/desktop/stocklist/starunfi
 import Menu from "src/components/assets/icons/desktop/stocklist/menu.svg";
 
 // Importing temp fake images
-import img from "src/components/assets/images/categories/squarebeer.jpg";
+// import img from "src/components/assets/images/categories/squarebeer.jpg";
 
 // redux
 import { connect } from "react-redux";
@@ -56,7 +56,7 @@ class PureStockItemLine extends React.Component<
         className="stock-item-card rd-corner"
         data-productid={this.props.singleItem.items_id}
       >
-        <img src={img} alt="" className="stock-item-img rd-corner" />
+        <img src={(this.props.singleItem.itemPhoto)} alt="" className="stock-item-img rd-corner" />
         <div className="stock-item-info">
           <span className="stock-item-category">
             {firstLetterCaps(this.props.singleItem.categoryName)}
