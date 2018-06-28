@@ -27,15 +27,18 @@ export default class UsersRouter {
   }
 
   public add(req: express.Request, res: express.Response) {
+    const currentYear = new Date().getUTCFullYear();
+    const currentMonth = new Date().getUTCMonth() + 1;
+    const currentDate = new Date().getUTCDate();
+    const dateOfQuery = `${currentYear}-${currentMonth}-${currentDate}`;
     const user = req.user;
-    // vvv it was req.user , but the req.user.id keeps say it could be undefined so i work around it for now
+
     if (user !== undefined) {
       return this.ordersService
         .add(user.id, req.body)
         .then((result: any) => {
-          const isActive = true;
           return this.itemsService
-            .getAll(isActive)
+            .getAllWithFluctuatingPrices(dateOfQuery)
             .then(orderList => {
               return (result[0].entireMenu = orderList);
             })
