@@ -12,6 +12,7 @@ interface IOrderCardProps {
     order: IOrderItemWithMod[];
     confirmMade?: (ordersId: number) => void;
     confirmServed?: (ordersId: number) => void;
+    paymentPage?: boolean;
 }
 export default class OrderCard extends React.Component<IOrderCardProps> {
     constructor(props: IOrderCardProps) {
@@ -30,8 +31,67 @@ export default class OrderCard extends React.Component<IOrderCardProps> {
         }
     }
 
-    public componentDidUpdate () {
+    public componentDidUpdate() {
         this.render();
+    }
+
+    public button = () => {
+        if (this.props.paymentPage !== true) {
+            if (this.props.status === "confirmed") {
+                return (
+                    <button className="order-status-display" onClick={this.made}>
+                        <span className="button-order-text">To Make</span>
+                    </button>
+                )
+            } else {
+                return (
+                    <button className="order-status-display" onClick={this.served}>
+                        <span className="button-order-text">To Serve</span>
+                    </button>
+                )
+            }
+        } else {
+            return (
+                <button className="order-status-display">
+                    <span className="button-order-text">
+                        To Collect ${this.props.order.reduce((accu, curr) => (accu + parseFloat(curr.purchasePrice)),0)}
+                    </span>
+                </button>
+            )
+        }
+    }
+
+    public content = () => {
+        if (this.props.paymentPage !== true) {
+            return (
+                this.props.order.map((item, index) => (
+                    <div className="order-item-line" key={index}>
+                        <div className="order-item-name-container">
+                            <span className="order-item-name">{item.itemName}</span>
+                        </div>
+                        <div className="item-mods-container">
+                            <div className="mods-icon">I</div>
+                            <div className="mods-icon">S</div>
+                            <div className="mods-icon">G</div>
+                        </div>
+                    </div>
+                ))
+            )
+        } else {
+            return (
+                // change to price  
+                this.props.order.map((item, index) => (
+                    <div className="order-item-line" key={index}>
+                        <div className="order-item-name-container">
+                            <span className="order-item-name">{item.itemName}</span>
+                        </div>
+                        <div className="item-mods-container">
+                            <div className="mods-icon">{item.purchasePrice}</div>
+                        </div>
+                    </div>
+                ))
+            )
+        }
     }
 
     public render() {
@@ -40,41 +100,15 @@ export default class OrderCard extends React.Component<IOrderCardProps> {
                 <div className="order-header-container">
                     <span className="order-id">#{this.props.orders_id}</span>
                     <div className="order-button">
-                        {   // it is either 
-                            (this.props.status === "confirmed")
-                            ?   <button className="order-status-display" onClick={this.made}>
-                                {/* <span className="button-order-text">To Be {this.props.status}</span> */}
-                                    <span className="button-order-text">To Make</span>
-                                </button>
-                            :   <button className="order-status-display" onClick={this.served}>
-                                {/* <span className="button-order-text">To Be {this.props.status}</span> */}
-                                    <span className="button-order-text">To Serve</span>
-                                </button>
+                        {
+                            this.button()
                         }
-
-                        {/* { (this.props.isPaid === !undefined) &&
-                        <div className="payment-status">
-                            { this.props.isPaid === true ?
-                                <span className="order-payment-status-paid">paid</span> :
-                                <span className="order-payment-status-unpaid">unpaid</span>
-                            }
-                        </div>} */}
-                        
                     </div>
                 </div>
                 <div className="order-item-container">
-                    {this.props.order.map((item, index) => (
-                        <div className="order-item-line" key={index}>
-                            <div className="order-item-name-container">
-                                <span className="order-item-name">{item.itemName}</span>
-                            </div>
-                            <div className="item-mods-container">
-                                <div className="mods-icon">I</div>
-                                <div className="mods-icon">S</div>
-                                <div className="mods-icon">G</div>
-                            </div>
-                        </div>
-                    ))}
+                    {
+                        this.content()
+                    }
                 </div>
             </div>
         )
