@@ -1,6 +1,6 @@
 // Importing modules from library
 import * as React from "react"
-import { AreaChart, Area, ResponsiveContainer, XAxis } from "recharts";
+import { AreaChart, Area, ResponsiveContainer } from "recharts";
 import { IItemPriceGraphData } from "src/modules"
 
 
@@ -50,7 +50,6 @@ export class DisplayMain extends React.Component<IDisplayMainProps, {}>{
                                 fillOpacity={1}
                                 fill="url(#colorUv)"
                             />
-                            <XAxis dataKey="time" tick={{ stroke: '#8884d8', strokeWidth: 1 }} />
                         </AreaChart>
                     </ResponsiveContainer>
                 </div>
