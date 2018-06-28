@@ -117,7 +117,7 @@ class PureRequest extends React.Component<IRequestProps, {}> {
         >
           <div className="request-top">
             <h3 className="request-header">Total Amount:</h3>
-            <span className="request-amount">${this.props.currentTotal}</span>
+            <span className="request-amount">${this.props.currentTotal.toFixed(2)}</span>
           </div>
 
           {/*hide button when list is empty*/}

@@ -77,7 +77,7 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
     // setState for Card to render
     if (thisOrder !== undefined) {
       const tableNumber = thisOrder.table;
-      const amount = thisOrder.orderItems.reduce((accu: number, curr: any) => (accu + parseFloat(curr.purchasePrice)), 0);
+      const amount = thisOrder.orderItems.reduce((accu: number, curr: any) => (accu + parseFloat(curr.purchasePrice)), 0).toFixed(2);
       this.setState({
         userName, orderId, tableNumber, thisOrder, amount
       });
