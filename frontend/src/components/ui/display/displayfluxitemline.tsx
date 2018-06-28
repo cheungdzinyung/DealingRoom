@@ -7,29 +7,40 @@ import downArrow from "src/components/assets/icons/item/down.svg";
 
 import { ResponsiveContainer, LineChart, Line } from "recharts";
 
-import { IMenuItemWithFlux } from "src/modules";
+import { IMenuItemWithFlux, IItemPriceGraphData } from "src/modules";
 import { percentageChange } from "src/util/utility";
+
+
 
 export class DisplayFlexItemLine extends React.Component<
   IMenuItemWithFlux,
-  {}
-> {
+  { delta: number }
+  > {
   constructor(props: IMenuItemWithFlux) {
     super(props);
+
+    const percentage = (chartData: IItemPriceGraphData[]) => {
+      if (chartData.length !== 0) {
+        const firstPrice = chartData[0].purchasePrice;
+        const lastPrice = chartData[(this.props.chartData.length - 1)].purchasePrice
+        return percentageChange(lastPrice, firstPrice)
+      }
+      return 0;
+    }
+    this.state = {
+      delta: percentage(this.props.chartData)
+    }
   }
 
   public render() {
-    const firstPrice = this.props.chartData[0].purchasePrice;
-    const lastPrice = this.props.chartData[this.props.chartData.length - 1]
-      .purchasePrice;
-    const percentage = percentageChange(lastPrice, firstPrice);
+
     return (
       <div className="display-data-prices-flux-line">
-        {percentage < 0 ? (
+        {this.state.delta < 0 ? (
           <img src={downArrow} alt="" className="display-data-arrow" />
         ) : (
-          <img src={upArrow} alt="" className="display-data-arrow" />
-        )}
+            <img src={upArrow} alt="" className="display-data-arrow" />
+          )}
         <span className="display-data-prices-flux-line-item-name">
           {this.props.itemName}
         </span>
@@ -39,7 +50,7 @@ export class DisplayFlexItemLine extends React.Component<
               <Line
                 type="monotone"
                 dataKey="purchasePrice"
-                stroke={percentage < 0 ? "#F46868" : "#73EDA6"}
+                stroke={this.state.delta < 0 ? "#F46868" : "#73EDA6"}
                 strokeWidth={1}
                 dot={false}
               />
