@@ -1,9 +1,6 @@
 // Importing modules from library
 import * as React from "react";
 
-// Importing temporary data
-import { singleCategoryMenuItems } from "src/fakedata";
-
 // Redux
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
@@ -18,15 +15,19 @@ import { DisplayInfo } from "src/components/ui/display/displayinfo";
 import { DisplayFluxContainer } from "src/components/ui/display/displayflux";
 import { DisplayDataSub } from "src/components/ui/display/displaydatasub";
 
+interface IDisplayState {
+  categoryIndexCount: number
+}
+
 interface IDisplayProps {
-  singleCategory: IMenuCategoryWithFlux[];
+  entireMenu: IMenuCategoryWithFlux[];
   getEntireMenu: () => void;
 }
 
 // Redux
 const mapStateToProps = (state: IRootState) => {
   return {
-    singleCategory: state.display.entireMenu
+    entireMenu: state.display.entireMenu
   };
 };
 
@@ -40,34 +41,57 @@ const mapDispatchToProps = (dispatch: any) => {
 
 export class PureDisplay extends React.Component<
   IDisplayProps,
-  { singleTestCat: IMenuCategoryWithFlux }
-> {
+  IDisplayState
+  > {
   constructor(props: IDisplayProps) {
     super(props);
     this.props.getEntireMenu();
 
+
+
     this.state = {
-      singleTestCat: singleCategoryMenuItems
-    };
+      categoryIndexCount: 0
+    }
+
   }
 
-  //   public componentDidMount() {
-  //     this.props.getEntireMenu();
-  //   }
+
+  public loopingArrayCount = () => {
+    if (this.state.categoryIndexCount === this.props.entireMenu.length - 1) {
+      this.setState({
+        categoryIndexCount: 0
+      })
+    }
+    else {
+      this.setState({
+        categoryIndexCount: this.state.categoryIndexCount + 1
+      })
+    }
+  }
+
+  public componentDidMount() {
+    setInterval(this.loopingArrayCount, 5000);
+  }
 
   public render() {
+    // const avgP =
+    //   this.props.entireMenu[this.state.categoryIndexCount].items.reduce((accum, currentValue) => {
+    //     return accum + currentValue.currentPrice;
+    //   }, 0);
+
+    // / this.props.entireMenu[this.state.categoryIndexCount].items.length
+
     return (
       <div className="display-container">
         <div className="display-data-container">
-          {/* FIXME: Forced the first array of the category into the chart data */}
           <DisplayMain
-            singleCategory={this.state.singleTestCat.categoryName}
-            pirceChange={420.69}
-            data={this.state.singleTestCat.items[0].chartData}
+            singleCategory={this.props.entireMenu[this.state.categoryIndexCount].categoryName}
+            averagePrice={this.props.entireMenu[this.state.categoryIndexCount].items[0].currentPrice}
+            data={this.props.entireMenu[this.state.categoryIndexCount].items[0].chartData}
           />
           <DisplayDataSub />
           <DisplayInfo />
-          <DisplayFluxContainer {...this.state.singleTestCat} />
+          <DisplayFluxContainer {...this.props.entireMenu[this.state.categoryIndexCount]} />
         </div>
         <div className="rss-feed">
           <span className="feed-text">

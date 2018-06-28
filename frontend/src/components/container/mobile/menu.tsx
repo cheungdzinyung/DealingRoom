@@ -188,9 +188,6 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
           {this.props.categories.map((cat: string) => {
             return (
               <div key={`cat_${cat}`}>
-                {/* <div className="caroulos-category-name-wrapper">
-                  <span className="caroulos-category-name-text">{cat}</span>
-                </div> */}
                 <img
                   src={require(`./../../assets/images/tempcat/${cat}.jpg`)}
                   alt=""
@@ -200,9 +197,7 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
             );
           })}
         </Slider>
-
-        {/* <MenuSlider categories={this.props.categories} displayCategoryIndex={this.state.displayCategoryIndex}/> */}
-
+  
         <input
           className="searchbar rd-corner"
           type="text"
@@ -228,7 +223,7 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
                   ) !== -1 &&
                 /* v match selected category */
                 category.categoryName ===
-                  this.props.categories[this.state.displayCategoryIndex] &&
+                this.props.categories[this.state.displayCategoryIndex] &&
                 /* v check stock > 0 */
                 item.itemStock > 0 && (
                   <MenuItem
