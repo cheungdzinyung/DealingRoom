@@ -9,6 +9,8 @@ import { redirectPage, resetTargetPage } from "../../../redux/mobile/actions/act
 import { setPaymentTargetId } from "../../../redux/mobile/actions/actions_payment";
 // Importing UI elements
 import { Card, Elevation } from "@blueprintjs/core";
+import { AppToaster } from "src/components/ui/mobile/toast";
+import { Intent } from "@blueprintjs/core";
 
 // Importing components
 import Usermenu from "../../ui/mobile/usermenu";
@@ -81,7 +83,13 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
       });
     } else {
       // either err or F5
-      alert("opps, sth wrong, redirecting to order history page");
+      // alert("opps, sth wrong, redirecting to order history page");
+      AppToaster.show({
+        message: "opps, sth wrong, redirecting to order history page",
+        intent: Intent.WARNING,
+        icon: "cross",
+        timeout: 2000
+    });
       this.props.history.push("/order");
     }
 
