@@ -44,7 +44,7 @@ yarn install
 ## Project at a glance
 
 
-![UI flow](img/UI-flow.png) 
+![UI flow](img/UI-Flow.png) 
 
 ## Project Update Log
 
