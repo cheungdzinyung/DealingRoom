@@ -25,7 +25,7 @@ import paymentTest from "../../assets/images/payment/stripe.png"
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
 import PageHeader from "src/components/ui/mobile/pageheader";
-import MySrtipeComponent from "./myStripeComponent";
+import MySrtipeComponent from "../../ui/mobile/myStripeComponent";
 
 interface IOrderProps {
   match: match<{ orderId: number }>;
