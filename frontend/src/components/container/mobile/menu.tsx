@@ -164,18 +164,20 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
   public render() {
     // https://react-slick.neostack.com/docs/api
     const sliderOneSettings = {
-      dots: false,
+      dots: true,
+      // dotsClass: "filterDots",
       arrows: false,
       infinite: true,
-      speed: 500,
-      initialSlide: 0,
+      speed: 1000,
+      // initialSlide: 0,
       slidesToShow: 1,
       slidesToScroll: 1,
-      adaptiveHeight: true,
+      // adaptiveHeight: true,
       draggable: true,
       swipeToSlide: true,
       focusOnSelect: true,
       afterChange: (index: number) => {
+        // alert(index);
         this.onCategoryChange(index);
       }
     };
@@ -189,7 +191,7 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
             return (
               <div key={`cat_${cat}`}>
                 <img
-                  src={require(`./../../assets/images/tempcat/${cat}.jpg`)}
+                  src={require(`./../../assets/images/categories/${cat}.jpg`)}
                   alt=""
                   className="rd-corner display-img"
                 />
