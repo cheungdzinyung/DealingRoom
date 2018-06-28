@@ -167,15 +167,16 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
       dots: false,
       arrows: false,
       infinite: true,
-      speed: 500,
-      initialSlide: 0,
+      speed: 1000,
+      // initialSlide: 0,
       slidesToShow: 1,
       slidesToScroll: 1,
-      adaptiveHeight: true,
+      // adaptiveHeight: true,
       draggable: true,
       swipeToSlide: true,
       focusOnSelect: true,
       afterChange: (index: number) => {
+        // alert(index);
         this.onCategoryChange(index);
       }
     };
@@ -188,9 +189,6 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
           {this.props.categories.map((cat: string) => {
             return (
               <div key={`cat_${cat}`}>
-                {/* <div className="caroulos-category-name-wrapper">
-                  <span className="caroulos-category-name-text">{cat}</span>
-                </div> */}
                 <img
                   src={require(`./../../assets/images/tempcat/${cat}.jpg`)}
                   alt=""
@@ -200,8 +198,6 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
             );
           })}
         </Slider>
-
-        {/* <MenuSlider categories={this.props.categories} displayCategoryIndex={this.state.displayCategoryIndex}/> */}
 
         <input
           className="searchbar rd-corner"

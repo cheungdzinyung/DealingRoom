@@ -62,12 +62,12 @@ export default class MenuItem extends React.Component<
   }
 
   public addToCurrentOrder = (e: React.MouseEvent<HTMLImageElement>) => {
+    // also fix price for user
     this.props.addToCurrentOrder(
       this.props.items_id,
       this.props.itemName,
       this.props.currentPrice
     );
-    // }
   };
 
   public toggle = () => {
@@ -77,10 +77,6 @@ export default class MenuItem extends React.Component<
   };
 
   public render() {
-
-
-
-
     return (
       <div className="menu-item-container">
         <div className="menu-item-card-container">

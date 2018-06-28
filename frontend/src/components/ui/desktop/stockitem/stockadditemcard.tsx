@@ -215,7 +215,7 @@ class RealStockManageModal extends React.Component<
         canOutsideClickClose={true}
         onClose={this.props.closeEditModal}>
         <div className="edit-item-grid">
-          <ItemModalImage />
+          <ItemModalImage imageSrc={this.state.itemPhoto} />
           <ItemModalInfo
             itemName={this.state.itemName}
             itemStock={this.state.itemStock}
@@ -235,6 +235,16 @@ class RealStockManageModal extends React.Component<
           <ItemModalDescription
             descriptionText={this.state.itemDescription}
             onChange={this.setItemDescription} />
+          {/* <div className="pt-dialog-footer">
+            <div className="pt-dialog-footer-actions">
+              <Button text="Secondary" />
+              <Button
+                intent={Intent.PRIMARY}
+                onClick={this.update}
+                text="Primary"
+              />
+            </div>
+          </div> */}
         </div>
       </Dialog>
     );

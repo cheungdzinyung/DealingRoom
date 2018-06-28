@@ -46,7 +46,7 @@ const mapDispatchToProps = (dispatch: any) => {
 export class PureDisplay extends React.Component<
   IDisplayProps,
   IDisplayState
-> {
+  > {
   constructor(props: IDisplayProps) {
     super(props);
     // this.props.getEntireMenu();
@@ -56,15 +56,11 @@ export class PureDisplay extends React.Component<
     };
   }
 
-    public componentDidMount() {
-      this.props.getEntireMenu();
-    }
-
-    public componentDidUpdate(){
-      this.setState({
-        singleCategory: this.props.entireMenu[0]
-      })
-    }
+  public componentDidUpdate() {
+    this.setState({
+      singleCategory: this.props.entireMenu[0]
+    })
+  }
 
   public render() {
     return (
