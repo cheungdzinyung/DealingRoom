@@ -45,13 +45,18 @@ export default class MenuItem extends React.Component<
   constructor(props: IMenuItemProps) {
     super(props);
 
-    const firstPrice = this.props.chartData[0].purchasePrice;
-    const lastPrice = this.props.chartData[(this.props.chartData.length - 1)].purchasePrice
-    const percentage = percentageChange(lastPrice, firstPrice)
+    const percentage = (chartData: IItemPriceGraphData[]) => {
+      if (chartData.length !== 0) {
+        const firstPrice = chartData[0].purchasePrice;
+        const lastPrice = chartData[(this.props.chartData.length - 1)].purchasePrice
+        return percentageChange(lastPrice, firstPrice)
+      }
+      return 0;
+    }
 
     this.state = {
       detailIsOpen: false,
-      delta: percentage
+      delta: percentage(this.props.chartData)
     };
 
   }
