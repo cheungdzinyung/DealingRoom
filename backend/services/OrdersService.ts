@@ -222,7 +222,6 @@ export default class OrdersService {
       .select("categories.categoryName")
       .avg("orders_items.purchasePrice")
       .whereRaw("??::date = ?", ["created_at", dateOfQuery])
-      .whereNot("users.id", id)
       .groupBy("categoryName");
 
     // combine all other users' values in the agreed upon format
