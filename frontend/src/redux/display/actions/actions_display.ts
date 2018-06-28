@@ -40,14 +40,16 @@ export function getEntireMenuFail(): IGetEntireMenuFailAction {
 }
 
 export function getEntireMenu() {
-  return (
-    dispatch: Dispatch<IGetEntireMenuSuccessAction | IGetEntireMenuFailAction>
-  ) => {
+  return (dispatch: Dispatch<IGetEntireMenuSuccessAction | IGetEntireMenuFailAction>) => {
     // axios.get("${process.env.REACT_APP_API_DEV}/api/items")
-    axios
-      .get(`${API_SERVER}/api/items`)
+    const year = (new Date(Date.now())).getFullYear();
+    const month = (new Date(Date.now())).getMonth() + 1;
+    const date = (new Date(Date.now())).getDate();
+    // axios.get(`${API_SERVER}/api/items/?`)
+    axios.get(`${API_SERVER}/api/items/?isActive=true&fluctuatingPrices=${year}-${month}-${date}`)
       .then((res: any) => {
         if (res.status === 200) {
+          // alert(Object.keys(res.data));
           dispatch(getEntireMenuSuccess(res.data));
         } else {
           alert("error, status code not match: " + res.status);
@@ -58,5 +60,5 @@ export function getEntireMenu() {
         alert(err);
         dispatch(getEntireMenuFail());
       });
-  };
+  }
 }

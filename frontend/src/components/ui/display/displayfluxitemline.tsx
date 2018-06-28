@@ -57,8 +57,7 @@ export class DisplayFlexItemLine extends React.Component<
             </LineChart>
           </ResponsiveContainer>
         </div>
-
-        <span className="display-data-prices-flux-line-price">$123</span>
+        <span className="display-data-prices-flux-line-price">&#36;{this.props.currentPrice}</span>
       </div>
     );
   }
