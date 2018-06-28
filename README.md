@@ -1,12 +1,13 @@
-<span style="display:block;text-align:center">
+<p align="center">
+  <img src="img/logo.png" width="200"/>
+</p>
+  <!-- ![DealingRoom Temporary Logo](img/logo.png)  -->
 
-![DealingRoom Temporary Logo](img/logo.png)   
+<!-- <span style="display:block;text-align:center">
 
-</span>
   
-  <div style="text-align:center">
- </div> 
- 
+
+</span> -->
  
  # Objective
 State the mission of the web app here!
@@ -44,7 +45,7 @@ yarn install
 ## Project at a glance
 
 
-![UI flow](img/UI-Flow.png) 
+![UI flow](img/UI-flow.png) 
 
 ## Project Update Log
 
@@ -107,7 +108,8 @@ Jun 26 | Backend: Created route for obtaining photo
 
 
 ## Deployment
-The project will be deployed on AWS.
+Frontend deployment is done using CircleCI.
+Backend is deployed with AWS (EC2).
 
 
 ## Links
