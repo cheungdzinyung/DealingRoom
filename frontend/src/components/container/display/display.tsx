@@ -2,7 +2,7 @@
 import * as React from "react";
 
 // Importing temporary data
-import { singleCategoryMenuItems } from "src/fakedata";
+// import { singleCategoryMenuItems } from "src/fakedata";
 
 // Redux
 import { connect } from "react-redux";
@@ -19,14 +19,19 @@ import { DisplayFluxContainer } from "src/components/ui/display/displayflux";
 import { DisplayDataSub } from "src/components/ui/display/displaydatasub";
 
 interface IDisplayProps {
-  singleCategory: IMenuCategoryWithFlux[];
+  singleCategory: IMenuCategoryWithFlux;
+  entireMenu: IMenuCategoryWithFlux[];
   getEntireMenu: () => void;
+}
+
+interface IDisplayState {
+  singleCategory: IMenuCategoryWithFlux;
 }
 
 // Redux
 const mapStateToProps = (state: IRootState) => {
   return {
-    singleCategory: state.display.entireMenu
+    entireMenu: state.display.entireMenu
   };
 };
 
@@ -40,20 +45,26 @@ const mapDispatchToProps = (dispatch: any) => {
 
 export class PureDisplay extends React.Component<
   IDisplayProps,
-  { singleTestCat: IMenuCategoryWithFlux }
+  IDisplayState
 > {
   constructor(props: IDisplayProps) {
     super(props);
-    this.props.getEntireMenu();
+    // this.props.getEntireMenu();
 
     this.state = {
-      singleTestCat: singleCategoryMenuItems
+      singleCategory: this.props.entireMenu[0]
     };
   }
 
-  //   public componentDidMount() {
-  //     this.props.getEntireMenu();
-  //   }
+    public componentDidMount() {
+      this.props.getEntireMenu();
+    }
+
+    public componentDidUpdate(){
+      this.setState({
+        singleCategory: this.props.entireMenu[0]
+      })
+    }
 
   public render() {
     return (
@@ -61,13 +72,13 @@ export class PureDisplay extends React.Component<
         <div className="display-data-container">
           {/* FIXME: Forced the first array of the category into the chart data */}
           <DisplayMain
-            singleCategory={this.state.singleTestCat.categoryName}
+            singleCategory={this.state.singleCategory.categoryName}
             pirceChange={420.69}
-            data={this.state.singleTestCat.items[0].chartData}
+            data={this.state.singleCategory.items[0].chartData}
           />
           <DisplayDataSub />
           <DisplayInfo />
-          <DisplayFluxContainer {...this.state.singleTestCat} />
+          <DisplayFluxContainer {...this.state.singleCategory} />
         </div>
         <div className="rss-feed">
           <span className="feed-text">
