@@ -5,7 +5,7 @@ import { API_SERVER } from "../../../redux/store";
 import {
   ISignUpPackage,
   ILoginPackage,
-  IConsumptionGraphData
+  // IConsumptionGraphData
 } from "../../../modules";
 
 // Import UI elements
