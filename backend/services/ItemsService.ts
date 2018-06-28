@@ -155,7 +155,7 @@ export default class UsersService {
                           // assigning the fluctuating data to the item object
                           return (itemList[
                             j
-                          ].charData = itemLogSummaryFormatted);
+                          ].chartData = itemLogSummaryFormatted);
                         });
                       });
                   })
@@ -295,7 +295,7 @@ export default class UsersService {
                       })
                     ).then((itemLogSummaryFormatted: any) => {
                       // assigning the fluctuating data to the item object
-                      return (itemList[j].charData = itemLogSummaryFormatted);
+                      return (itemList[j].chartData = itemLogSummaryFormatted);
                     });
                   });
               })

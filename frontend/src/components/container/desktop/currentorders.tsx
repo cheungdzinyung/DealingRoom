@@ -6,18 +6,18 @@ import PageHeader from "../../ui/desktop/pageheader";
 import AdminSideMenu from "../../ui/desktop/sidemenu";
 import OrderCard from "../../ui/desktop/ordercard";
 
-import { allOrders } from "../../../fakedata";
+import { IOrderListStaff } from "src/modules";
 
 // redux
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
-import { getAllOrders, updateOrderStatusMade } from "../../../redux/desktop/actions/actions_bartender";
+import { getAllOrders, updateOrderStatusServed } from "../../../redux/desktop/actions/actions_waiter";
 
 interface ICurrentOrdersProps {
-    allOrders: any,
+    allOrders: IOrderListStaff[],
     allOrdersReady: boolean,
     getAllOrders: () => void,
-    updateOrderStatusMade: (orderId: number) => void,
+    updateOrderStatusServed: (orderId: number) => void,
 }
 
 const mapStateToProps = (state: IRootState) => {
@@ -32,8 +32,8 @@ const mapDispatchToProps = (dispatch: any) => {
         getAllOrders: () => {
             dispatch(getAllOrders());
         },
-        updateOrderStatusMade: (orderId: number) => {
-            dispatch(updateOrderStatusMade(orderId));
+        updateOrderStatusServed: (orderId: number) => {
+            dispatch(updateOrderStatusServed(orderId));
         },
     };
 };
@@ -49,10 +49,6 @@ class PureCurrentOrders extends React.Component<ICurrentOrdersProps> {
         }
     }
 
-    public made = (e: React.MouseEvent<HTMLButtonElement>) => {
-        this.props.updateOrderStatusMade(4);
-    }
-
     public render() {
         return (
             // tslint:disable-next-line:no-unused-expression
@@ -62,13 +58,18 @@ class PureCurrentOrders extends React.Component<ICurrentOrdersProps> {
                     <div className="currentorder-wrapper">
                         <div className="currentorder-header">
                             <PageHeader header="Current Orders" />
-                            <button className="test-socket" onClick={this.made}>TEST SOCKET</button>
+                            {/* <button className="test-socket" onClick={this.made}>TEST SOCKET</button> */}
                         </div>
                         <div className="order-card-display">
-                            {allOrders
-                                .filter((each: any) => each.status === "made" || each.status === "served")
+                            {this.props.allOrders
+                                .filter((each: IOrderListStaff) => each.status === "made")
                                 // .filter((each: any) => each.isPaid && undefined)  
-                                .map((oneOrder, index) => (<OrderCard {...oneOrder} key={index}/>))
+                                .map((oneOrder: IOrderListStaff, index: number) => (
+                                    <OrderCard 
+                                        {...oneOrder} 
+                                        key={index}
+                                        confirmServed={this.props.updateOrderStatusServed}/>
+                                ))
                             }              
                         </div>
                     </div>
