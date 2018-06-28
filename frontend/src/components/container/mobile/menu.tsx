@@ -191,7 +191,7 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
             return (
               <div key={`cat_${cat}`}>
                 <img
-                  src={require(`./../../assets/images/tempcat/${cat}.jpg`)}
+                  src={require(`./../../assets/images/categories/${cat}.jpg`)}
                   alt=""
                   className="rd-corner display-img"
                 />
