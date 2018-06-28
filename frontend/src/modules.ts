@@ -108,9 +108,9 @@ export interface IOrderItemWithMod {
 }
 
 export interface IOrderListStaff {
+  orders_id: number;
   users_id: number;
   displayName: string;
-  orders_id: number;
   table: number;
   status: OrderStatus;
   isPaid: boolean;

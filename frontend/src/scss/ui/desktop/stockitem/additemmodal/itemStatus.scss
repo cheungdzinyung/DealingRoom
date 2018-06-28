@@ -1,14 +1,15 @@
 .edit-item-status {
     grid-column: 1/2; // Styling for child grid
-    grid-row: 2/3;
-    // Location from parent grid
-    width: 76.62%;
-    height: 90.33%;
+    grid-row: 2/3; // Location from parent grid
+    width: 76.67%;
+    height: 70.56%;
     justify-self: center;
+    align-self: center;
     display: grid;
-    grid-row-gap: 11.42%;
-    grid-template-columns: 18.73% 1fr;
-    grid-template-rows: repeat(2, 44.29%);
+    grid-row-gap: 10.8%;
+    grid-column-gap: 4.52%;
+    grid-template-columns: 18.67% 1fr;
+    grid-template-rows: repeat(2, 44.6%);
     grid-template-areas: "select select" "star switch";
     .edit-item-filter-select {
         grid-area: select;
@@ -19,19 +20,34 @@
         text-align: center;
         text-align-last: center;
         border: 1px #C4C4C4 solid;
-        color: red;
         background-color: rgba(141, 141, 141, .5);
+        color: #E9DBCC;
+        font-size: 1.2rem;
         option {
+            color: #E9DBCC;
+            font-size: 1.2rem;
             background-color: rgba(141, 141, 141, .5);
         }
     }
     .edit-item-star-container {
         grid-area: star;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
         height: 100%;
-        .edit-item-star-img {}
+        background-color: #333333;
+        border: 2px solid rgba(23, 22, 25, .3);
+        border-radius: 5px;
+        .edit-item-star-img {
+            width: 50%;
+        }
     }
     .edit-item-status-switch {
         grid-area: switch;
-        background-color: red;
+        background-color: rgba(238, 83, 83, .8);
+        border-radius: 5px;
+        color: #E9DBCC;
+        font-size: 1.5rem;
     }
 }

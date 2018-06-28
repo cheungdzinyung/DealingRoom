@@ -164,7 +164,7 @@ export default class OrdersService {
           "orders_items.purchasePrice"
         )
         .where("orders.id", order.orders_id);
-      order.orders = orderItems;
+      order.orderItems = orderItems;
     });
 
     // combine the information into the agreed upon format and returned

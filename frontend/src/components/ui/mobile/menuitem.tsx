@@ -13,7 +13,7 @@ import plus from "../../assets/icons/item/plus.svg";
 
 // Import types
 import { IItemPriceGraphData } from "src/modules";
-// import { percentageChange } from "src/util/utility";
+import { percentageChange } from "src/util/utility";
 
 interface IMenuItemProps {
   items_id: number;
@@ -22,7 +22,7 @@ interface IMenuItemProps {
   itemDescription: string;
   minimumPrice: number;
   currentPrice: number;
-  itemPhoto: "*.jpg" | "*.png" | "*.jpeg";
+  itemPhoto: string;
   isSpecial: boolean;
   isActive: boolean;
   chartData: IItemPriceGraphData[];
@@ -35,7 +35,7 @@ interface IMenuItemProps {
 
 interface IMenuItemState {
   detailIsOpen: boolean
-  priceDelta: number
+  delta: number
 }
 
 export default class MenuItem extends React.Component<
@@ -45,19 +45,23 @@ export default class MenuItem extends React.Component<
   constructor(props: IMenuItemProps) {
     super(props);
 
+    const percentage = (chartData: IItemPriceGraphData[]) => {
+      if (chartData.length !== 0) {
+        const firstPrice = chartData[0].purchasePrice;
+        const lastPrice = chartData[(this.props.chartData.length - 1)].purchasePrice
+        return percentageChange(lastPrice, firstPrice)
+      }
+      return 0;
+    }
+
     this.state = {
       detailIsOpen: false,
-      // temp state
-      priceDelta: -3
+      delta: percentage(this.props.chartData)
     };
+
   }
 
   public addToCurrentOrder = (e: React.MouseEvent<HTMLImageElement>) => {
-    // public addToCurrentOrder = (e: React.MouseEvent<HTMLDivElement>) => {
-    // const itemid = e.currentTarget.dataset.itemid;
-    // const itemName = e.currentTarget.dataset.itemname;    // dataset attr are all lowercase
-    // if (itemid !== undefined && itemName !== undefined) {
-    //   const currentPrice = this.props.entireMenu[this.state.displayCategoryIndex].items.find((element: any) => (parseFloat(itemid) === element.items_id)).currentPrice;
     this.props.addToCurrentOrder(
       this.props.items_id,
       this.props.itemName,
@@ -73,26 +77,15 @@ export default class MenuItem extends React.Component<
   };
 
   public render() {
-    const tempChartData = [
-      { time: "", purchasePrice: 30 },
-      { time: "", purchasePrice: 40 },
-      { time: "", purchasePrice: 20 },
-      { time: "", purchasePrice: 27 },
-      { time: "", purchasePrice: 18 },
-      { time: "", purchasePrice: 23 },
-      { time: "", purchasePrice: 34 }
-    ]
 
-    // const firstPrice = this.props.chartData[0].purchasePrice;
-    // const lastPrice = this.props.chartData[(this.props.chartData.length - 1)].purchasePrice
-    // const percentage = percentageChange(firstPrice, lastPrice)
+
 
 
     return (
       <div className="menu-item-container">
         <div className="menu-item-card-container">
           {/* Product images */}
-          <img src={this.props.itemPhoto} className="menu-item-img" alt="" />
+
           <Card
             className="menu-item-card rd-corner"
             elevation={Elevation.ONE}
@@ -112,6 +105,7 @@ export default class MenuItem extends React.Component<
               alt=""
               onClick={this.addToCurrentOrder}
             />
+            <img src={this.props.itemPhoto} className="menu-item-img" alt="" />
             <span className="menu-item-name">{this.props.itemName}</span>
             <div className="menu-item-bot">
               {/* Divider */}
@@ -125,9 +119,13 @@ export default class MenuItem extends React.Component<
                   </span>
                 </div>
                 <div className="item-flucutation-container">
-                  <img className="flux-img" src={this.state.priceDelta > 0 ? upArrowImg : downArrowImg} alt="" />
+                  <img
+                    className="flux-img"
+                    src={this.state.delta > 0 ? upArrowImg : downArrowImg}
+                    alt=""
+                  />
                   <span className="item-fluctuation-display">
-                    {this.state.priceDelta}&#37;
+                    {this.state.delta}&#37;
                   </span>
                 </div>
               </div>
@@ -137,7 +135,7 @@ export default class MenuItem extends React.Component<
 
         {/* Expandable bottom card */}
         <Collapse
-          className="item-detail-collapse rd-corner"
+          className="item-detail-collapse"
           isOpen={this.state.detailIsOpen}
         >
           <div className="item-detail-wrapper">
@@ -148,7 +146,7 @@ export default class MenuItem extends React.Component<
             <hr className="item-performance-split" />
             <div className="menu-item-detail-graph-container">
               <ResponsiveContainer>
-                <AreaChart data={tempChartData}>
+                <AreaChart data={this.props.chartData}>
                   <defs>
                     <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#EB5757" stopOpacity={0.8} />

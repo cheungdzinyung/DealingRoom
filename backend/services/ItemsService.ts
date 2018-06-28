@@ -155,7 +155,7 @@ export default class UsersService {
                           // assigning the fluctuating data to the item object
                           return (itemList[
                             j
-                          ].charData = itemLogSummaryFormatted);
+                          ].chartData = itemLogSummaryFormatted);
                         });
                       });
                   })
@@ -182,10 +182,10 @@ export default class UsersService {
 
   public async updateLogPrice() {
     // get the current date and hour
-    const currentYear = await new Date().getFullYear();
-    const currentMonth = (await new Date().getMonth()) + 1;
-    const currentDate = await new Date().getDate();
-    const currentHour = await new Date().getHours();
+    const currentYear = await new Date().getUTCFullYear();
+    const currentMonth = (await new Date().getUTCMonth()) + 1;
+    const currentDate = await new Date().getUTCDate();
+    const currentHour = await new Date().getUTCHours();
 
     // obtain the list of category id's in the category table
     const categoryList = await this.knex("categories").select(
@@ -222,7 +222,7 @@ export default class UsersService {
         await this.knex("itemsLog").insert({
           items_id: item.id,
           itemsLogPrice: item.currentPrice,
-          created_at: `${currentYear}-${currentMonth}-${currentDate} ${currentHour}:59:59.999999+08`
+          created_at: `${currentYear}-${currentMonth}-${currentDate} ${currentHour}:59:59.999999`
         });
       });
     });
@@ -280,6 +280,7 @@ export default class UsersService {
                   .avg("itemsLog.itemsLogPrice")
                   .whereRaw("??::date = ?", ["created_at", dateOfQuery])
                   .where("items.itemName", itemList[j].itemName)
+                  // add another where condition so that it is between noon and midnight
                   .groupBy("itemName")
                   .groupByRaw(`extract('hour' from "itemsLog".created_at)`)
                   .then((itemLogSummary: any) => {
@@ -294,7 +295,7 @@ export default class UsersService {
                       })
                     ).then((itemLogSummaryFormatted: any) => {
                       // assigning the fluctuating data to the item object
-                      return (itemList[j].charData = itemLogSummaryFormatted);
+                      return (itemList[j].chartData = itemLogSummaryFormatted);
                     });
                   });
               })

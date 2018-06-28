@@ -3,6 +3,10 @@ import axios from "axios";
 
 import { API_SERVER } from "../../store";
 
+// Import UI elements
+import { AppToaster } from "src/components/ui/mobile/toast";
+import { Intent } from "@blueprintjs/core";
+
 import {
     IOrderListStaff,
 } from "../../../modules";
@@ -85,13 +89,25 @@ export function getAllOrders() {
                     // alert(Object.keys(res.data));
                     dispatch(getAllOrdersSuccess(res.data));
                 } else {
-                    alert("error, status code not match: " + res.status);
+                    // alert("error, status code not match: " + res.status);
                     dispatch(getAllOrdersFail(res.status));
+                    AppToaster.show({
+                        message: "Error, try again\nstatu code does not match: " + res.status,
+                        intent: Intent.WARNING,
+                        icon: "cross",
+                        timeout: 2000
+                    });
                 }
             })
             .catch((err: any) => {
-                alert(err);
+                // alert(err);
                 dispatch(getAllOrdersFail(err));
+                AppToaster.show({
+                    message: "Error, try again\n" + err,
+                    intent: Intent.WARNING,
+                    icon: "cross",
+                    timeout: 2000
+                });
             });
     }
 }
@@ -114,20 +130,37 @@ export function updateOrderStatusServedFail(errMsg: any): IUpdateOrderStatusServ
 export function updateOrderStatusServed(orderID: number) {
     return (dispatch: Dispatch<IUpdateOrderStatuServedSuccessAction | IUpdateOrderStatusServedFailAction>) => {
         const config = { headers: { Authorization: "Bearer " + localStorage.getItem("dealingRoomToken") } }
-        axios.put(`${API_SERVER}/api/orders/${orderID}`, {status: "served"}, config)
+        axios.put(`${API_SERVER}/api/orders/${orderID}`, { status: "served" }, config)
             .then((res: any) => {
                 if (res.status === 201) {
-                    alert(res.data[0].status + " updated");
                     // res.data = [{"order_id": 6,"status": "made","isPaid": false}]
                     dispatch(updateOrderStatusServedSuccess(res.data[0]));
+                    AppToaster.show({
+                        message: "Tip well?",
+                        intent: Intent.SUCCESS,
+                        icon: "tick",
+                        timeout: 2000
+                    });
                 } else {
-                    alert("error, status code not match: " + res.status);
+                    // alert("error, status code not match: " + res.status);
                     dispatch(updateOrderStatusServedFail(res.data));
+                    AppToaster.show({
+                        message: "Error, try again",
+                        intent: Intent.WARNING,
+                        icon: "cross",
+                        timeout: 2000
+                    });
                 }
             })
             .catch((err: any) => {
-                alert(err);
-                dispatch(updateOrderStatusServedFail(err))
+                // alert(err);
+                dispatch(updateOrderStatusServedFail(err));
+                AppToaster.show({
+                    message: "Error, try again\n" + err,
+                    intent: Intent.WARNING,
+                    icon: "cross",
+                    timeout: 2000
+                });
             });
     }
 }

@@ -9,14 +9,14 @@ import OrderCard from "../../ui/desktop/ordercard";
 // redux
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
-import { getAllOrders, updateOrderStatusServed } from "../../../redux/desktop/actions/actions_waiter";
+import { getAllOrders, updateOrderStatusMade } from "../../../redux/desktop/actions/actions_bartender";
 
 
 interface IPendingOrdersProps {
     allOrders: any,
     allOrdersReady: boolean,
     getAllOrders: () => void,
-    updateOrderStatusServed: (orderId: number) => void,
+    updateOrderStatusMade: (orderId: number) => void,
 }
 
 const mapStateToProps = (state: IRootState) => {
@@ -31,31 +31,21 @@ const mapDispatchToProps = (dispatch: any) => {
         getAllOrders: () => {
             dispatch(getAllOrders());
         },
-        updateOrderStatusServed: (orderId: number) => {
-            dispatch(updateOrderStatusServed(orderId));
+        updateOrderStatusMade: (orderId: number) => {
+            dispatch(updateOrderStatusMade(orderId));
         },
     };
 };
 
-import { allOrders } from "../../../fakedata";
-
 class PurePendingOrders extends React.Component<IPendingOrdersProps> {
     constructor(props: IPendingOrdersProps) {
         super(props);
-
-        this.state = {
-
-        }
     }
 
     public componentDidMount() {
         if(!this.props.allOrdersReady){
             this.props.getAllOrders();
         }
-    }
-
-    public served = (e: React.MouseEvent<HTMLButtonElement>) => {
-        this.props.updateOrderStatusServed(1);
     }
 
     public render() {
@@ -69,20 +59,21 @@ class PurePendingOrders extends React.Component<IPendingOrdersProps> {
                             <PageHeader header="Pending Orders" />
                         </div>
                         <div className="order-card-display">
-                            { allOrders
-                                .filter((each: any) => each.status === "made")
+                            { this.props.allOrders
+                                .filter((each: any) => each.status === "confirmed")
                                 // .filter((each: any) => each.isPaid || !each.isPaid) 
-                                .map((oneOrder, index) => (
-                                <OrderCard
-                                users_id={oneOrder.users_id}
-                                userName={oneOrder.userName} 
-                                displayName={oneOrder.displayName}
-                                orders_id={oneOrder.orders_id} 
-                                table={oneOrder.table} 
-                                status={oneOrder.status} 
-                                // isPaid?={} boolean;
-                                orderTotal={oneOrder.orderTotal}
-                                orderItems={oneOrder.orderItems} 
+                                .map((oneOrder: any, index: number) => (
+                                <OrderCard {...oneOrder}
+                                confirmMade={this.props.updateOrderStatusMade}
+                                // users_id={oneOrder.users_id}
+                                // userName={oneOrder.userName} 
+                                // displayName={oneOrder.displayName}
+                                // orders_id={oneOrder.orders_id} 
+                                // table={oneOrder.table} 
+                                // status={oneOrder.status} 
+                                // // isPaid?={} boolean;
+                                // orderTotal={oneOrder.orderTotal}
+                                // orderItems={oneOrder.orderItems} 
                                 key={index} />))}
                         </div>
                     </div>
