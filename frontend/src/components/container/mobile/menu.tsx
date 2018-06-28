@@ -164,7 +164,8 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
   public render() {
     // https://react-slick.neostack.com/docs/api
     const sliderOneSettings = {
-      dots: false,
+      dots: true,
+      // dotsClass: "filterDots",
       arrows: false,
       infinite: true,
       speed: 1000,
@@ -198,7 +199,7 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
             );
           })}
         </Slider>
-
+  
         <input
           className="searchbar rd-corner"
           type="text"
@@ -224,7 +225,7 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
                   ) !== -1 &&
                 /* v match selected category */
                 category.categoryName ===
-                  this.props.categories[this.state.displayCategoryIndex] &&
+                this.props.categories[this.state.displayCategoryIndex] &&
                 /* v check stock > 0 */
                 item.itemStock > 0 && (
                   <MenuItem
