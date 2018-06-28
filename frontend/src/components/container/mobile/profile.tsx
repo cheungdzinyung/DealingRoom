@@ -10,12 +10,36 @@ import UserProfileGraph from "src/components/ui/mobile/profilegraph";
 // Importing fake data
 import { profileConsumptionGraphTest } from "src/fakedata";
 
+// Redux
+// import { connect } from "react-redux";
+// import { IRootState } from "../../../redux/store";
+// import {
+//   getUserConsumptionByUserToken
+// } from "../../../redux/mobile/actions/actions_users";
+
 // interface IUserProfileProps {
-//   userConsumption: IConsumptionGraphData[];
+//   userConsumptionComparison: IConsumptionGraphData[],
+// getConsumption:()=>void;
 // }
 interface IUserProfileState {
   userConsumption: IConsumptionGraphData[];
 }
+
+
+// Redux
+// const mapStateToProps = (state: IRootState) => {
+//   return {
+//     userConsumptionComparison: state.customer.user.userConsumptionComparison,
+//   };
+// };
+
+// const mapDispatchToProps = (dispatch: any) => {
+//   return {
+//     getConsumption: () => {
+//       dispatch(getUserConsumptionByUserToken());
+//     }
+//   };
+// };
 
 export default class PureProfile extends React.Component<
   {},
@@ -43,3 +67,12 @@ export default class PureProfile extends React.Component<
     );
   }
 }
+
+
+
+// const Profile = connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(PureProfile);
+
+// export default Profile;

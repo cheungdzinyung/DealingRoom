@@ -24,6 +24,7 @@ export interface IUserState {
     userProfile: IUserProfile,
     userProfileReady: boolean,
     userAPIErr: string,
+    // userConsumptionComparison: IConsumptionGraphData[]
 }
 
 const initialState = {
@@ -42,6 +43,7 @@ const initialState = {
     },
     userProfileReady: false,
     userAPIErr: "none",
+    // userConsumptionComparison: IConsumptionGraphData[]
 }
 
 export const userReducer = (state: IUserState = initialState, action: UserActions): IUserState => {
@@ -85,6 +87,14 @@ export const userReducer = (state: IUserState = initialState, action: UserAction
         case GET_USER_PROFILE_BY_USER_TOKEN_FAIL: {
             return { ...state, userAPIErr: "GET_USER_PROFILE_BY_USER_TOKEN_FAIL" };
         }
+        // case GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS :{
+        //     return { ...state,  userConsumptionComparison: };
+        // }
+
+        // case GET_USER_CONSUMPTIONS_BY_USER_TOKEN_FAIL :{
+        //     return { ...state, userAPIErr: "GET_USER_PROFILE_BY_USER_TOKEN_FAIL" };
+        // }
+
         default: {
             return state;
         }
