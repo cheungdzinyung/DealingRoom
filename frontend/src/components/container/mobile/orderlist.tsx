@@ -94,9 +94,9 @@ class PureOrderList extends React.Component<IOrdersProps, {}> {
             >
               <div className="top">
                 <div className="order-details">
-                  <h3 className="order-number">Order #{indOrd.orders_id}</h3>
+                  <h3 className="order-number">Order #{indOrd.orders_id}</h3> 
                   <p className="order-amount">
-                    Total Amount: ${indOrd.orderItems.reduce((accu: number, curr: any) => (accu + parseFloat(curr.purchasePrice)), 0)}
+                    Total Amount: ${indOrd.orderItems.reduce((accu: number, curr: any) => (accu + parseFloat(curr.purchasePrice)), 0).toFixed(2)}
                   </p>
                   <p className="order-time">
                     Ordering time: {indOrd.orderingTime}
