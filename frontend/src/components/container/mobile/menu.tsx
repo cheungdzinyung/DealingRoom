@@ -232,16 +232,6 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
                 /* v check stock > 0 */
                 item.itemStock > 0 && (
                   <MenuItem
-                    // item_id={item.items_id}
-                    // categoryName={category.categoryName}
-                    // itemName={item.itemName}
-                    // currentPrice={item.currentPrice}
-                    // priceDelta={3}
-                    // itemDescription={item.itemDescription}
-                    // // itemPhoto={tempImg}
-                    // itemPhoto={`${API_SERVER}/api/items/image/${item.items_id}`}
-                    // detailIsOpen={true}
-                    // chartData={item.chartData}
                     {...item}
                     addToCurrentOrder={this.props.addToCurrentOrder}
                   />
