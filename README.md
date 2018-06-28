@@ -8,6 +8,8 @@
  <p align="center" border="1px solid black">
  Dealingroom is reinterpreting the ebb and flow of the stock market into a brand new dining and drinking experience. 
 </p>
+
+
 ## Contributors
 
  CAPSTONE PROJECT (Cohort 6) :
