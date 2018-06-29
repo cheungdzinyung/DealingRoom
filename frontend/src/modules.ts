@@ -193,8 +193,20 @@ export interface IConsumptionGraphData {
   everyone: number;
   maxPrice: number;
 }
-// Sample:
-// {category:"beer", you: 12, everyone: 100, makPrice: 120}
+
+
+// Temp feature working on the shape of the category
+export interface IConsumpGraphDataDeceiveAll {
+  user: IConsumptionGraphDataReceiveFromServerOneCat[],
+  all: IConsumptionGraphDataReceiveFromServerOneCat[]
+}
+
+export interface IConsumptionGraphDataReceiveFromServerOneCat {
+  category: string;
+  price: number;
+  max: number;
+}
+
 
 /* 
 Corresponding API path POST: api/orders/user/:id
@@ -214,7 +226,6 @@ export interface ICurrentOrder {
 
 /* 
 Corresponding API path GET: api/users/
-
 */
 export interface IUserProfile {
   users_id: number;

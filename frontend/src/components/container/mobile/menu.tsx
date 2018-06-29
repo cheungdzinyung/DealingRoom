@@ -199,7 +199,6 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
             );
           })}
         </Slider>
-  
         <input
           className="searchbar rd-corner"
           type="text"

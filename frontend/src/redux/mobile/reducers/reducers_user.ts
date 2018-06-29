@@ -11,9 +11,11 @@ import {
     FB_LOGIN_FAIL,
     GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS,
     GET_USER_PROFILE_BY_USER_TOKEN_FAIL,
+    GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS,
+    GET_USER_CONSUMPTIONS_BY_USER_TOKEN_FAIL
 } from "../actions/actions_user";
 
-import { IUserProfile } from "../../../modules";
+import { IUserProfile, IConsumptionGraphData } from "../../../modules";
 
 export interface IUserState {
     // role: string,
@@ -24,7 +26,7 @@ export interface IUserState {
     userProfile: IUserProfile,
     userProfileReady: boolean,
     userAPIErr: string,
-    // userConsumptionComparison: IConsumptionGraphData[]
+    userConsumptionComparison: IConsumptionGraphData[]
 }
 
 const initialState = {
@@ -43,7 +45,7 @@ const initialState = {
     },
     userProfileReady: false,
     userAPIErr: "none",
-    // userConsumptionComparison: IConsumptionGraphData[]
+    userConsumptionComparison: []
 }
 
 export const userReducer = (state: IUserState = initialState, action: UserActions): IUserState => {
@@ -79,21 +81,21 @@ export const userReducer = (state: IUserState = initialState, action: UserAction
             // return state;
         }
         case FB_LOGIN_FAIL: {
-            return { ...state, userAPIErr: action.errMsg ||"FB_LOGIN_FAIL" };
-        }        
+            return { ...state, userAPIErr: action.errMsg || "FB_LOGIN_FAIL" };
+        }
         case GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS: {
             return { ...state, userProfile: action.userProfile, userProfileReady: true, userAPIErr: "none" };
         }
         case GET_USER_PROFILE_BY_USER_TOKEN_FAIL: {
             return { ...state, userAPIErr: "GET_USER_PROFILE_BY_USER_TOKEN_FAIL" };
         }
-        // case GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS :{
-        //     return { ...state,  userConsumptionComparison: };
-        // }
+        case GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS: {
+            return { ...state, userConsumptionComparison: action.userConsumptionComparison};
+        }
 
-        // case GET_USER_CONSUMPTIONS_BY_USER_TOKEN_FAIL :{
-        //     return { ...state, userAPIErr: "GET_USER_PROFILE_BY_USER_TOKEN_FAIL" };
-        // }
+        case GET_USER_CONSUMPTIONS_BY_USER_TOKEN_FAIL: {
+            return { ...state, userAPIErr: "GET_USER_PROFILE_BY_USER_TOKEN_FAIL" };
+        }
 
         default: {
             return state;
