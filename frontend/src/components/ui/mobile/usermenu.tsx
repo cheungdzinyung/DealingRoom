@@ -8,7 +8,7 @@ import menu from "../../assets/icons/menu/menu.svg";
 import orders from "../../assets/icons/menu/bookmark.svg";
 import request from "../../assets/icons/menu/cart.svg";
 import setting from "../../assets/icons/menu/gear.svg";
-import profile from "../../assets/icons/menu/user.svg";
+import chart from "../../assets/icons/menu/chart.svg";
 
 // import redux and friends
 import { connect } from "react-redux";
@@ -26,9 +26,9 @@ class PureUserMenu extends React.Component<IUserMenuProps, {}> {
     super(props);
   }
 
-  public toProfile = () => {
-    this.props.changePage(`/profile`);
-    this.props.history.push(`/profile`);
+  public toPerformance = () => {
+    this.props.changePage(`/performance`);
+    this.props.history.push(`/performance`);
   };
   public toOrder = () => {
     this.props.changePage(`/order`);
@@ -54,8 +54,8 @@ class PureUserMenu extends React.Component<IUserMenuProps, {}> {
   public render() {
     return (
       <div className="user-menu">
-        <div className="menu-item" onClick={this.toProfile}>
-        <img className="user-menu-icon" src={profile} alt="receipt icon" />
+        <div className="menu-item" onClick={this.toPerformance}>
+          <img className="user-menu-icon" src={chart} alt="receipt icon" />
           <span className="menu-name">Profile</span>
         </div>
         <div className="menu-item" onClick={this.toOrder}>

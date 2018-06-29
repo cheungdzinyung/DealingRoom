@@ -1,7 +1,7 @@
 import { Action, Dispatch } from "redux";
 import axios from "axios";
 
-import { API_SERVER } from "../../store";
+// import { API_SERVER } from "../../store";
 
 import {
     IMenuCategoryWithFlux,
@@ -61,7 +61,7 @@ export function getEntireMenu() {
         const year = (new Date(Date.now())).getFullYear();
         const month = (new Date(Date.now())).getMonth() + 1;
         const date = (new Date(Date.now())).getDate();
-        axios.get(`${API_SERVER}/api/items/?fluctuatingPrices=${year}-${month}-${date}`)
+        axios.get(`https://api.dealingroom.live/api/items/?fluctuatingPrices=${year}-${month}-${date}`)
             .then((res: any) => {
                 if (res.status === 200) {
                     // alert(Object.keys(res.data));

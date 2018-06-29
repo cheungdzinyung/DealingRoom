@@ -6,7 +6,11 @@ import PageHeader from "../../ui/desktop/pageheader";
 import AdminSideMenu from "../../ui/desktop/sidemenu";
 import OrderCard from "../../ui/desktop/ordercard";
 
-import { IOrderListStaff } from "src/modules";
+// for redir
+import * as History from "history";
+import { withRouter } from "react-router";
+
+import { IOrderListStaff, IUserProfile } from "src/modules";
 
 // redux
 import { connect } from "react-redux";
@@ -18,12 +22,16 @@ interface ICurrentOrdersProps {
     allOrdersReady: boolean,
     getAllOrders: () => void,
     updateOrderStatusServed: (orderId: number) => void,
+    // handling redirect
+    customerProfile: IUserProfile,
+    history: History.History,
 }
 
 const mapStateToProps = (state: IRootState) => {
     return {
         allOrders: state.staff.bartender.allOrders,
         allOrdersReady: state.staff.bartender.allOrdersReady,
+        customerProfile: state.customer.user.userProfile,
     };
 };
 
@@ -41,6 +49,19 @@ const mapDispatchToProps = (dispatch: any) => {
 class PureCurrentOrders extends React.Component<ICurrentOrdersProps> {
     constructor(props: ICurrentOrdersProps) {
         super(props)
+    }
+
+    public componentWillMount() {
+        // const isStaff = (
+        //     this.props.customerProfile.role === "manager" ||
+        //     this.props.customerProfile.role === "bartender" ||
+        //     this.props.customerProfile.role === "waiter"
+        // );
+        // allow access b4 staff login is ok
+        // const isStaff = false;
+        // if (!isStaff) {
+        //     this.props.history.push("/menu");
+        // }
     }
 
     public componentDidMount() {
@@ -65,12 +86,12 @@ class PureCurrentOrders extends React.Component<ICurrentOrdersProps> {
                                 .filter((each: IOrderListStaff) => each.status === "made")
                                 // .filter((each: any) => each.isPaid && undefined)  
                                 .map((oneOrder: IOrderListStaff, index: number) => (
-                                    <OrderCard 
-                                        {...oneOrder} 
+                                    <OrderCard
+                                        {...oneOrder}
                                         key={index}
-                                        confirmServed={this.props.updateOrderStatusServed}/>
+                                        confirmServed={this.props.updateOrderStatusServed} />
                                 ))
-                            }              
+                            }
                         </div>
                     </div>
                 </div>
@@ -84,4 +105,4 @@ const CurrentOrders = connect(
     mapDispatchToProps
 )(PureCurrentOrders);
 
-export default CurrentOrders;
+export default withRouter(CurrentOrders as any);

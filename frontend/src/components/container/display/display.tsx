@@ -47,14 +47,10 @@ export class PureDisplay extends React.Component<
     super(props);
     this.props.getEntireMenu();
 
-
-
     this.state = {
       categoryIndexCount: 0
-    }
-
+    };
   }
-
 
   public loopingArrayCount = () => {
     if (this.state.categoryIndexCount === this.props.entireMenu.length - 1) {

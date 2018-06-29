@@ -6,6 +6,12 @@ import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
 import { getEntireMenu, toggleStockManageModal } from "../../../redux/desktop/actions/actions_manager";
 
+// for redir
+import * as History from "history";
+import { withRouter } from "react-router";
+
+import { IUserProfile } from "src/modules";
+
 // Importing UI components
 import AdminSideMenu from "../../ui/desktop/sidemenu";
 import StockFilter from "../../ui/desktop/stockfilter";
@@ -34,6 +40,12 @@ interface IStockManagementProps {
     stockManageModalState: IStockManageModalState,
     targetItem?: IUpdateMenuItem
   ) => void;
+  createItemSuccess: boolean;
+  editItemSuccess: boolean;
+
+  // handling redirect
+  customerProfile: IUserProfile,
+  history: History.History,
 }
 
 interface IStockManagementState {
@@ -50,7 +62,10 @@ const mapStateToProps = (state: IRootState) => {
     targetItem: state.staff.manager.targetItem,
     categories: state.staff.manager.categories,
     menuReady: state.staff.manager.menuReady,
-    stockManageModalState: state.staff.manager.stockManageModalState
+    stockManageModalState: state.staff.manager.stockManageModalState,
+    customerProfile: state.customer.user.userProfile,
+    createItemSuccess: state.staff.manager.createItemSuccess,
+    editItemSuccess: state.staff.manager.editItemSuccess,
   };
 };
 
@@ -111,8 +126,27 @@ export class PureStockManagement extends React.Component<
     this.props.toggleStockManageModal("discard");
   }
 
+  public componentWillMount() {
+    // const isStaff = (
+    //   this.props.customerProfile.role === "manager" ||
+    //   this.props.customerProfile.role === "bartender" ||
+    //   this.props.customerProfile.role === "waiter"
+    // );
+    // allow access b4 staff login is ok
+    // const isStaff = false;
+    // if (!isStaff) {
+    //   this.props.history.push("/menu");
+    // }
+  }
+
   public componentDidMount() {
     if (!this.props.menuReady) {
+      this.props.getEntireMenu();
+    }
+  }
+
+  public componentDidUpdate() {
+    if (this.props.createItemSuccess || this.props.editItemSuccess) {
       this.props.getEntireMenu();
     }
   }
@@ -121,7 +155,7 @@ export class PureStockManagement extends React.Component<
     return (
       <div className="desktop-page-container">
         <AdminSideMenu />
-        <StockFilter filterChange={this.filterChange} openModal={this.openEditModal}/>
+        <StockFilter filterChange={this.filterChange} openModal={this.openEditModal} />
         <div className="page-container-center">
           <div className="page-container-center-content-wrapper">
             <PageHeader header="Stock Management" />
@@ -166,4 +200,4 @@ const StockManagement = connect(
   mapDispatchToProps
 )(PureStockManagement);
 
-export default StockManagement;
+export default withRouter(StockManagement as any);

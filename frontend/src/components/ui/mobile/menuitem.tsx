@@ -15,6 +15,9 @@ import plus from "../../assets/icons/item/plus.svg";
 import { IItemPriceGraphData } from "src/modules";
 import { percentageChange } from "src/util/utility";
 
+// Import util
+import { sortGraphDataArray } from "src/util/utility";
+
 interface IMenuItemProps {
   items_id: number;
   itemName: string;
@@ -62,12 +65,12 @@ export default class MenuItem extends React.Component<
   }
 
   public addToCurrentOrder = (e: React.MouseEvent<HTMLImageElement>) => {
+    // also fix price for user
     this.props.addToCurrentOrder(
       this.props.items_id,
       this.props.itemName,
       this.props.currentPrice
     );
-    // }
   };
 
   public toggle = () => {
@@ -77,10 +80,6 @@ export default class MenuItem extends React.Component<
   };
 
   public render() {
-
-
-
-
     return (
       <div className="menu-item-container">
         <div className="menu-item-card-container">
@@ -146,7 +145,7 @@ export default class MenuItem extends React.Component<
             <hr className="item-performance-split" />
             <div className="menu-item-detail-graph-container">
               <ResponsiveContainer>
-                <AreaChart data={this.props.chartData}>
+                <AreaChart data={sortGraphDataArray(this.props.chartData)}>
                   <defs>
                     <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#EB5757" stopOpacity={0.8} />

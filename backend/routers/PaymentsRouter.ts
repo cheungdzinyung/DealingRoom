@@ -1,6 +1,8 @@
 import * as express from "express";
 import * as multer from "multer";
 
+import { io } from "../app";
+
 import OrdersService from "../services/OrdersService";
 import PaymentsService from "../services/PaymentsService";
 
@@ -37,6 +39,16 @@ export default class PaymentsRouter {
           return this.ordersService
             .update(req.body.orderId, data)
             .then((paymentResult: any) => {
+
+              this.ordersService
+              .getAllOrders(1)
+              .then((allOrders: any) => {
+                io.emit("action", {
+                  type: "SOCKET_UPDATE_ORDER_LIST",
+                  allOrders
+                });
+              });
+
               res.status(201).json(paymentResult);
             })
             .catch((err: express.Errback) => {

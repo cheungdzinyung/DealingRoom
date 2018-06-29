@@ -117,6 +117,7 @@ export default class UsersService {
                 "items.isActive"
               )
               .where("items.categories_id", categoryList[i].categories_id)
+              .where("items.isActive", true)
               .orderBy("items.id", "ase")
               .then((itemList: any) => {
                 // loop through the list of items and obtain all the fluctuating information for the specified date while separating it by hours

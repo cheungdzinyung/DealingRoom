@@ -1,7 +1,8 @@
 // Importing modules from library
 import * as React from "react"
-import { AreaChart, Area, ResponsiveContainer, XAxis } from "recharts";
+import { AreaChart, Area, ResponsiveContainer } from "recharts";
 import { IItemPriceGraphData } from "src/modules"
+import { sortGraphDataArray } from "../../../util/utility";
 
 
 export interface IDisplayMainProps {
@@ -30,7 +31,7 @@ export class DisplayMain extends React.Component<IDisplayMainProps, {}>{
                 <div className="display-data-category-price-graph-container">
                     <ResponsiveContainer>
                         <AreaChart
-                            data={this.props.data}
+                            data={sortGraphDataArray(this.props.data)}
                             margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
 
                             <defs>
@@ -50,7 +51,6 @@ export class DisplayMain extends React.Component<IDisplayMainProps, {}>{
                                 fillOpacity={1}
                                 fill="url(#colorUv)"
                             />
-                            <XAxis dataKey="time" tick={{ stroke: '#8884d8', strokeWidth: 1 }} />
                         </AreaChart>
                     </ResponsiveContainer>
                 </div>

@@ -213,17 +213,32 @@ export default class OrdersService {
       }
     );
 
-    // obtain the values for all other users
-    const allResult = await this.knex("categories")
-      .join("items", "items.categories_id", "=", "categories.id")
-      .join("orders_items", "items.id", "=", "orders_items.items_id")
-      .join("orders", "orders.id", "=", "orders_items.orders_id")
-      .join("users", "users.id", "=", "orders.users_id")
-      .select("categories.categoryName")
-      .avg("orders_items.purchasePrice")
-      .whereRaw("??::date = ?", ["created_at", dateOfQuery])
-      .whereNot("users.id", id)
-      .groupBy("categoryName");
+    // obtain the list of category in the user result
+    const catList: any = [];
+    await BlueBirdPromise.map(userResult, async (result: any) => {
+      const categoryList = await this.knex("categories")
+        .select("id")
+        .first()
+        .where("categoryName", result.categoryName);
+      catList.push(categoryList.id);
+    });
+
+    // obtain the values for all other users for the same categories as the user
+    const allResult: any = [];
+    await BlueBirdPromise.map(catList, async (cat: any) => {
+      const catResult = await this.knex("categories")
+        .join("items", "items.categories_id", "=", "categories.id")
+        .join("orders_items", "items.id", "=", "orders_items.items_id")
+        .join("orders", "orders.id", "=", "orders_items.orders_id")
+        .join("users", "users.id", "=", "orders.users_id")
+        .select("categories.categoryName")
+        .avg("orders_items.purchasePrice")
+        .first()
+        .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+        .where("categories.id", cat)
+        .groupBy("categoryName");
+      allResult.push(catResult);
+    });
 
     // combine all other users' values in the agreed upon format
     const otherOrderList = await BlueBirdPromise.map(
