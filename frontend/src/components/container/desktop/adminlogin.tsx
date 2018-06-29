@@ -11,19 +11,13 @@ import google from "../../assets/icons/signup/google.svg";
 import logo from "../../assets/icons/all/logo.svg";
 
 // redux
-<<<<<<< HEAD
 // import { connect } from "react-redux";
-import { connect } from "react-redux";
-import { IRootState } from "../../../redux/store";
-import { localLogin, localSignUp, loginFacebook } from "../../../redux/mobile/actions/actions_user";
 
 import ReactFacebookLogin, { ReactFacebookLoginInfo } from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
-=======
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
 import { localLogin } from "../../../redux/mobile/actions/actions_user";
->>>>>>> 011d47c590d00f8cf902472e4265e4413a2576ad
 
 interface ILoginState {
   username: string,
@@ -41,11 +35,7 @@ interface ILoginProps {
   loginFacebook: (token: string) => void,
 }
 
-<<<<<<< HEAD
-class AdminLogin extends React.Component<ILoginProps, ILoginState> {
-=======
 class PureAdminLogin extends React.Component<ILoginProps, ILoginState> {
->>>>>>> 011d47c590d00f8cf902472e4265e4413a2576ad
   constructor(props: ILoginProps) {
     super(props);
 
@@ -68,7 +58,6 @@ class PureAdminLogin extends React.Component<ILoginProps, ILoginState> {
     this.props.localLogin(this.state.username, this.state.password);
   };
 
-<<<<<<< HEAD
   public toLocalSignUp = () => {
     this.props.localSignUp(this.state.username, this.state.password);
   }
@@ -100,28 +89,18 @@ class PureAdminLogin extends React.Component<ILoginProps, ILoginState> {
   public responseGoogle = (response: any) => {
     // alert(response);
   }
-
-  public componentDidUpdate() {
-    // actually should check if token is valid
-    if (localStorage.getItem("dealingRoomToken")) {
-      this.props.history.push("/initialize");
-=======
+  
   public componentDidUpdate() {
     // actually should check if token is valid
     if (localStorage.getItem("dealingRoomToken")) {
       this.props.history.push("/admin/initializeStaff");
->>>>>>> 011d47c590d00f8cf902472e4265e4413a2576ad
     }
   }
 
   public componentDidMount() {
     // actually should check if token is valid
     if (localStorage.getItem("dealingRoomToken")) {
-<<<<<<< HEAD
-      this.props.history.push("/initialize");
-=======
       this.props.history.push("/admin/initializeStaff");
->>>>>>> 011d47c590d00f8cf902472e4265e4413a2576ad
     }
   }
 
@@ -162,16 +141,6 @@ class PureAdminLogin extends React.Component<ILoginProps, ILoginState> {
               <img className="banner-img" src={facebook} alt="" />
             </div> */}
             </div>
-<<<<<<< HEAD
-            <div className="desktop-divider">
-              <hr className="divider-break" />
-              <span className="divider-text">OR</span>
-              <hr className="divider-break" />
-            </div>
-          </div>
-          <div className="desktop-login-bottom">
-            <Card className="login-card rd-corner">
-=======
           </div>
           <div className="divider">
             <hr className="divider-break" />
@@ -207,7 +176,6 @@ class PureAdminLogin extends React.Component<ILoginProps, ILoginState> {
                 onChange={this.password}
               />
             </form>
->>>>>>> 011d47c590d00f8cf902472e4265e4413a2576ad
 
               {/* <div className="status-switch"> */}
               {
@@ -268,7 +236,6 @@ class PureAdminLogin extends React.Component<ILoginProps, ILoginState> {
             </Card>
           </div>
         </div>
-      </div>
     );
   }
 }
@@ -284,24 +251,10 @@ const mapDispatchToProps = (dispatch: any) => {
     localLogin: (username: string, password: string) => {
       dispatch(localLogin(username, password));
     },
-<<<<<<< HEAD
-    localSignUp: (username: string, password: string) => {
-      dispatch(localSignUp(username, password));
-    },
-    loginFacebook: (token: string) => {
-      dispatch(loginFacebook(token));
-    }
   }
 }
 
-const Login = connect(mapStateToProps, mapDispatchToProps)(AdminLogin);
-
-export default Login;
-=======
-  }
-}
 
 const AdminLogin = connect(mapStateToProps, mapDispatchToProps)(PureAdminLogin);
 
 export default AdminLogin;
->>>>>>> 011d47c590d00f8cf902472e4265e4413a2576ad
