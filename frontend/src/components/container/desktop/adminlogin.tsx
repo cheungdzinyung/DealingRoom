@@ -11,7 +11,9 @@ import google from "../../assets/icons/signup/google.svg";
 import logo from "../../assets/icons/all/logo.svg";
 
 // redux
-// import { connect } from "react-redux";
+import { connect } from "react-redux";
+import { IRootState } from "../../../redux/store";
+import { localLogin } from "../../../redux/mobile/actions/actions_user";
 
 interface ILoginState {
   username: string,
@@ -25,7 +27,7 @@ interface ILoginProps {
   localLogin: (username: string, password: string) => void,
 }
 
-export default class AdminLogin extends React.Component<ILoginProps, ILoginState> {
+class PureAdminLogin extends React.Component<ILoginProps, ILoginState> {
   constructor(props: ILoginProps) {
     super(props);
 
@@ -46,18 +48,18 @@ export default class AdminLogin extends React.Component<ILoginProps, ILoginState
   public toLocalLogin = () => {
     this.props.localLogin(this.state.username, this.state.password);
   };
-  
-  public componentDidUpdate () {
+
+  public componentDidUpdate() {
     // actually should check if token is valid
-    if(localStorage.getItem("dealingRoomToken")) {
-      this.props.history.push("/initialize");
+    if (localStorage.getItem("dealingRoomToken")) {
+      this.props.history.push("/admin/initializeStaff");
     }
   }
 
-  public componentDidMount () {
+  public componentDidMount() {
     // actually should check if token is valid
-    if(localStorage.getItem("dealingRoomToken")) {
-      this.props.history.push("/initialize");
+    if (localStorage.getItem("dealingRoomToken")) {
+      this.props.history.push("/admin/initializeStaff");
     }
   }
 
@@ -88,7 +90,7 @@ export default class AdminLogin extends React.Component<ILoginProps, ILoginState
             <div className="status-switch">
               <div className="status">
                 <span className="status-text">LOGIN</span>
-              </div> 
+              </div>
               <div className="status">
                 <span className="status-text">SIGNUP</span>
               </div>
@@ -100,7 +102,7 @@ export default class AdminLogin extends React.Component<ILoginProps, ILoginState
                 type="text"
                 placeholder="Username"
                 value={this.state.username}
-                onChange = {this.username}
+                onChange={this.username}
               />
               <input
                 className="form-input rd-corner"
@@ -108,7 +110,7 @@ export default class AdminLogin extends React.Component<ILoginProps, ILoginState
                 name="password"
                 type="password"
                 value={this.state.password}
-                onChange = {this.password}
+                onChange={this.password}
               />
             </form>
 
@@ -123,3 +125,21 @@ export default class AdminLogin extends React.Component<ILoginProps, ILoginState
     );
   }
 }
+
+const mapStateToProps = (state: IRootState) => {
+  return {
+    isAuth: state.customer.user.isAuth,
+  }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    localLogin: (username: string, password: string) => {
+      dispatch(localLogin(username, password));
+    },
+  }
+}
+
+const AdminLogin = connect(mapStateToProps, mapDispatchToProps)(PureAdminLogin);
+
+export default AdminLogin;

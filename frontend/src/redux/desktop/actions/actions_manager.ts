@@ -66,6 +66,13 @@ export interface IToggleStockManageModalAction extends Action {
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export const RESET_SUCCESS_STATUS = "RESET_SUCCESS_STATUS";
+export type RESET_SUCCESS_STATUS = typeof RESET_SUCCESS_STATUS;
+export interface IResetSuccessStatusAction extends Action {
+	type: RESET_SUCCESS_STATUS,
+}
+
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 // Combined types
 export type ManagerActions =
 	IGetEntireMenuSuccessAction |
@@ -74,7 +81,8 @@ export type ManagerActions =
 	ICreateItemFailAction |
 	IUpdateItemSuccessAction |
 	IUpdateItemFailAction |
-	IToggleStockManageModalAction;
+	IToggleStockManageModalAction |
+	IResetSuccessStatusAction;
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function getEntireMenuSuccess(entireMenu: IMenuCategoryWithoutFlux[]): IGetEntireMenuSuccessAction {
@@ -184,5 +192,12 @@ export function toggleStockManageModal(stockManageModalState: IStockManageModalS
 		type: TOGGLE_STOCK_MANAGE_MODAL,
 		stockManageModalState,
 		targetItem,
+	}
+}
+
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export function resetSuccessState(): IResetSuccessStatusAction {
+	return {
+		type: RESET_SUCCESS_STATUS,
 	}
 }
