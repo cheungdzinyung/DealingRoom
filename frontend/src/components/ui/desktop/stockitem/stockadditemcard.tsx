@@ -7,6 +7,7 @@ import ItemModalDescription from "./additemmodal/itemDescription";
 import ItemModalInfo from "./additemmodal/itemInfo";
 import ItemModalStatus from "./additemmodal/itemStatus";
 import ItemModalImage from "./additemmodal/itemImage";
+import PlusButton from "src/components/assets/icons/item/plus.svg";
 
 // Importing Interfaces
 import {
@@ -41,7 +42,6 @@ interface IStockManageModalProps {
 
   isModalOpen: boolean;
   closeEditModal: () => void;
-
 }
 
 interface IStockManageModalStates {
@@ -83,11 +83,10 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-
 class RealStockManageModal extends React.Component<
   IStockManageModalProps,
   IStockManageModalStates
-  > {
+> {
   constructor(props: IStockManageModalProps) {
     super(props);
 
@@ -152,7 +151,6 @@ class RealStockManageModal extends React.Component<
     this.props.updateItem(updateItemStatus);
   };
 
-
   public setCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
     this.setState({
       categoryName: e.currentTarget.value
@@ -213,7 +211,8 @@ class RealStockManageModal extends React.Component<
         className="edit-item-container"
         canEscapeKeyClose={true}
         canOutsideClickClose={true}
-        onClose={this.props.closeEditModal}>
+        onClose={this.props.closeEditModal}
+      >
         <div className="edit-item-grid">
           <ItemModalImage imageSrc={this.state.itemPhoto} />
           <ItemModalInfo
@@ -224,17 +223,22 @@ class RealStockManageModal extends React.Component<
             setName={this.setItemName}
             setStock={this.setItemQuantity}
             setMinimunPrice={this.setItemMinPrice}
-            setCurrentPrice={this.setItemStartPrice} />
+            setCurrentPrice={this.setItemStartPrice}
+          />
           <ItemModalStatus
             categories={this.props.categories}
             isActive={this.state.isActive}
             isSpecial={this.state.isSpecial}
             setCategories={this.setCategory}
             toggleActive={this.toggleActive}
-            toggleSpecial={this.toggleSpecial} />
+            toggleSpecial={this.toggleSpecial}
+          />
           <ItemModalDescription
             descriptionText={this.state.itemDescription}
-            onChange={this.setItemDescription} />
+            onChange={this.setItemDescription}
+          />
+          {/* Little Adding button for confirmation */}
+          <img src={PlusButton} alt="Plus button" className="stockadd-button" onClick={this.update}/>
           {/* <div className="pt-dialog-footer">
             <div className="pt-dialog-footer-actions">
               <Button text="Secondary" />
@@ -250,7 +254,6 @@ class RealStockManageModal extends React.Component<
     );
   }
 }
-
 
 // Redux connect and export
 const StockManageModal = connect(
