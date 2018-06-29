@@ -5,7 +5,7 @@ import { API_SERVER } from "../../../redux/store";
 import {
   ISignUpPackage,
   ILoginPackage,
-  // IConsumptionGraphData
+  IConsumptionGraphData
 } from "../../../modules";
 
 // Import UI elements
@@ -97,21 +97,21 @@ export interface IGetUserProfileByUserTokenFailAction extends Action {
 }
 
 // /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-// export const GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS =
-//   "GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS";
-// export type GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS = typeof GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS;
-// export interface IGetUserConsumptionsByUserTokenSuccess extends Action {
-//   type: GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS;
-//   userConsumptionComparison: IConsumptionGraphData[];
-// }
+export const GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS =
+  "GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS";
+export type GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS = typeof GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS;
+export interface IGetUserConsumptionsByUserTokenSuccess extends Action {
+  type: GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS;
+  userConsumptionComparison: IConsumptionGraphData[];
+}
 
-// export const GET_USER_CONSUMPTIONS_BY_USER_TOKEN_FAIL =
-//   "GET_USER_CONSUMPTIONS_BY_USER_TOKEN_FAIL";
-// export type GET_USER_CONSUMPTIONS_BY_USER_TOKEN_FAIL = typeof GET_USER_CONSUMPTIONS_BY_USER_TOKEN_FAIL;
-// export interface IGetUserConsumptionsByUserTokenFail extends Action {
-//   type: GET_USER_CONSUMPTIONS_BY_USER_TOKEN_FAIL;
-//   errMsg: string;
-// }
+export const GET_USER_CONSUMPTIONS_BY_USER_TOKEN_FAIL =
+  "GET_USER_CONSUMPTIONS_BY_USER_TOKEN_FAIL";
+export type GET_USER_CONSUMPTIONS_BY_USER_TOKEN_FAIL = typeof GET_USER_CONSUMPTIONS_BY_USER_TOKEN_FAIL;
+export interface IGetUserConsumptionsByUserTokenFail extends Action {
+  type: GET_USER_CONSUMPTIONS_BY_USER_TOKEN_FAIL;
+  errMsg: string;
+}
 
 // /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 
@@ -127,8 +127,8 @@ export type UserActions =
   | IFBLoginFailAction
   | IGetUserProfileByUserTokenSuccessAction
   | IGetUserProfileByUserTokenFailAction
-//   | GET_USER_CONSUMPTIONS_BY_USER_TOKEN_FAIL
-//   | GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS
+  | IGetUserConsumptionsByUserTokenSuccess
+  | IGetUserConsumptionsByUserTokenFail
   ;
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
@@ -256,7 +256,7 @@ export function localSignUp(username: string, password: string) {
       | ILocalSignUpFailAction
       | ILocalLoginSuccessAction
       | ILocalLoginFailAction
-    >
+      >
   ) => {
     const signUpPackage: ISignUpPackage = {
       username,
@@ -390,11 +390,7 @@ export function getUserProfileByUserToken() {
       Authorization: "Bearer " + localStorage.getItem("dealingRoomToken")
     }
   };
-  return (
-    dispatch: Dispatch<
-      | IGetUserProfileByUserTokenSuccessAction
-      | IGetUserProfileByUserTokenFailAction
-    >
+  return (dispatch: Dispatch<IGetUserProfileByUserTokenSuccessAction | IGetUserProfileByUserTokenFailAction>
   ) => {
     axios
       .get(`${API_SERVER}/api/users`, config)
@@ -416,52 +412,48 @@ export function getUserProfileByUserToken() {
 }
 
 // /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-// export function getUserConsumptionByUserTokenSuccess(
-//   userConsumptionComparison: IConsumptionGraphData[]
-// ): IGetUserConsumptionsByUserTokenSuccess {
-//   return {
-//     type: GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS,
-//     userConsumptionComparison
-//   };
-// }
+export function getUserConsumptionByUserTokenSuccess(
+  userConsumptionComparison: IConsumptionGraphData[]
+): IGetUserConsumptionsByUserTokenSuccess {
+  return {
+    type: GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS,
+    userConsumptionComparison
+  };
+}
 
-// export function getUserConsumptionByUserTokenFail(
-//   errMsg: string
-// ): IGetUserConsumptionsByUserTokenFail {
-//   return {
-//     type: GET_USER_CONSUMPTIONS_BY_USER_TOKEN_FAIL,
-//     errMsg
-//   };
-// }
+export function getUserConsumptionByUserTokenFail(
+  errMsg: string
+): IGetUserConsumptionsByUserTokenFail {
+  return {
+    type: GET_USER_CONSUMPTIONS_BY_USER_TOKEN_FAIL,
+    errMsg
+  };
+}
 
-// export function getUserConsumptionByUserToken() {
-//   const config = {
-//     headers: {
-//       Authorization: "Bearer " + localStorage.getItem("dealingRoomToken")
-//     }
-//   };
-//   return (
-//     dispatch: Dispatch<
-//       | IGetUserConsumptionsByUserTokenSuccess
-//       | IGetUserConsumptionsByUserTokenFail
-//     >
-//   ) => {
-//     //   
-//     axios
-//       .get(`${API_SERVER}/api/orders/quantities/`, config)
-//       .then((res: any) => {
-//         if (res.status === 200) {
-//           dispatch(getUserProfileByUserTokenSuccess(res.data[0]));
-//           // auto redir to order list page ===> moved to init page
-//           // dispatch(changePage(OrderList));
-//         } else {
-//           alert("status: " + res.status);
-//           dispatch(getUserProfileByUserTokenFail(""));
-//         }
-//       })
-//       .catch((err: any) => {
-//         alert(err);
-//         dispatch(getUserProfileByUserTokenFail(""));
-//       });
-//   };
-// }
+export function getUserConsumptionByUserToken() {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("dealingRoomToken")
+    }
+  };
+  return (dispatch: Dispatch<IGetUserConsumptionsByUserTokenSuccess | IGetUserConsumptionsByUserTokenFail>
+  ) => {
+
+    axios
+      .get(`${API_SERVER}/api/orders/quantities/`, config)
+      .then((res: any) => {
+        if (res.status === 200) {
+          dispatch(getUserConsumptionByUserTokenSuccess(res.data[0]));
+          // auto redir to order list page ===> moved to init page
+          // dispatch(changePage(OrderList));
+        } else {
+          alert("status: " + res.status);
+          dispatch(getUserConsumptionByUserTokenFail(""));
+        }
+      })
+      .catch((err: any) => {
+        alert(err);
+        dispatch(getUserConsumptionByUserTokenFail(""));
+      });
+  };
+}
