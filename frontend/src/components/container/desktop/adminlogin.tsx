@@ -60,13 +60,7 @@ class PureAdminLogin extends React.Component<ILoginProps, ILoginState> {
 
   public toLocalSignUp = () => {
     this.props.localSignUp(this.state.username, this.state.password);
-  }
-
-  public chooseLogin = () => {
-    this.setState({
-      localLoginType: "login"
-    })
-  }
+  };
 
   public chooseSignUp = () => {
     this.setState({
@@ -89,7 +83,7 @@ class PureAdminLogin extends React.Component<ILoginProps, ILoginState> {
   public responseGoogle = (response: any) => {
     // alert(response);
   }
-  
+
   public componentDidUpdate() {
     // actually should check if token is valid
     if (localStorage.getItem("dealingRoomToken")) {
@@ -141,64 +135,23 @@ class PureAdminLogin extends React.Component<ILoginProps, ILoginState> {
               <img className="banner-img" src={facebook} alt="" />
             </div> */}
             </div>
-          </div>
-          <div className="divider">
-            <hr className="divider-break" />
-            <span className="divider-text">OR</span>
-            <hr className="divider-break" />
-          </div>
-        </div>
-        <div className="login-bottom">
-          <Card className="login-card rd-corner">
-            <div className="status-switch">
-              <div className="status">
-                <span className="status-text">LOGIN</span>
-              </div>
-              <div className="status">
-                <span className="status-text">SIGNUP</span>
-              </div>
+
+            <div className="divider">
+              <hr className="divider-break" />
+              <span className="divider-text">OR</span>
+              <hr className="divider-break" />
             </div>
-            <form className="form" action="">
-              <input
-                className="form-input rd-corner"
-                name="username"
-                type="text"
-                placeholder="Username"
-                value={this.state.username}
-                onChange={this.username}
-              />
-              <input
-                className="form-input rd-corner"
-                placeholder="Passwords"
-                name="password"
-                type="password"
-                value={this.state.password}
-                onChange={this.password}
-              />
-            </form>
-
-              {/* <div className="status-switch"> */}
-              {
-                (this.state.localLoginType === "login") ?
-                  <div className="status-switch">
-                    <div className="status-chosen" onClick={this.chooseLogin}>
-                      <span className="status-text">LOGIN</span>
-                    </div>
-                    <div className="status" onClick={this.chooseSignUp}>
-                      <span className="status-text">SIGNUP</span>
-                    </div>
-                  </div> :
-                  <div className="status-switch">
-                    <div className="status" onClick={this.chooseLogin}>
-                      <span className="status-text">LOGIN</span>
-                    </div>
-                    <div className="status-chosen" onClick={this.chooseSignUp}>
-                      <span className="status-text">SIGNUP</span>
-                    </div>
-                  </div>
-              }
-              {/* </div> */}
-
+          </div>
+          <div className="login-bottom">
+            <Card className="login-card rd-corner">
+              <div className="status-switch">
+                <div className="status">
+                  <span className="status-text">LOGIN</span>
+                </div>
+                <div className="status">
+                  <span className="status-text">SIGNUP</span>
+                </div>
+              </div>
               <form className="form" action="">
                 <input
                   className="form-input rd-corner"
@@ -232,10 +185,10 @@ class PureAdminLogin extends React.Component<ILoginProps, ILoginState> {
                     </button>
                   </div>
               }
-
             </Card>
           </div>
         </div>
+      </div>
     );
   }
 }

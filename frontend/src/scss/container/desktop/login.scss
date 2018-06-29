@@ -68,7 +68,7 @@
                 }
             }
         }
-        .desktop-divider {
+        .divider {
             grid-area: divider;
             display: flex;
             justify-content: space-around;
@@ -83,7 +83,7 @@
             }
         }
     }
-    .desktop-login-bottom {
+    .login-bottom {
         width: 100%;
         padding: 0 5vw;
         // padding: 0 4vw;
