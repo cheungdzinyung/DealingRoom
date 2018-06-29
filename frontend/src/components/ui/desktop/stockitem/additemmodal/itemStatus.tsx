@@ -49,7 +49,11 @@ export default class ItemModalStatus extends React.Component<
         </div>
         <button
           onClick={this.props.toggleActive}
-          className="edit-item-status-switch"
+          className={
+            this.props.isActive
+              ? "edit-item-status-switch-green"
+              : "edit-item-status-switch-red"
+          }
         >
           {this.props.isActive === true ? "Active" : "Inactive"}
         </button>

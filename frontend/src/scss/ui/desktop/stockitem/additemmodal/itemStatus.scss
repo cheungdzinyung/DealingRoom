@@ -43,11 +43,19 @@
             width: 50%;
         }
     }
-    .edit-item-status-switch {
+    .edit-item-status-switch-red {
         grid-area: switch;
         background-color: rgba(238, 83, 83, .8);
         border-radius: 5px;
         color: #E9DBCC;
         font-size: 1.5rem;
     }
+    .edit-item-status-switch-green {
+        grid-area: switch;
+        background-color: rgba(115, 237, 166, .8);
+        border-radius: 5px;
+        color: #E9DBCC;
+        font-size: 1.5rem;
+    }
+    
 }

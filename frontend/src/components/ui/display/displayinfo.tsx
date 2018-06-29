@@ -11,7 +11,7 @@ export class DisplayInfo extends React.Component<{}, {}> {
       <div className="display-data-info-container">
         <div className="youtube-container">
           <iframe
-            src="https://www.youtube.com/embed/i0p1bmr0EmE"
+            src="https://www.youtube.com/embed/MEePYLF9Uzs"
             className="video"
             frameBorder={0}
           />
