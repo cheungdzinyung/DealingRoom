@@ -56,10 +56,10 @@ class PureUnpaidOrders extends React.Component<IPendingOrdersProps> {
         //     this.props.customerProfile.role === "waiter"
         // );
         // allow access b4 staff login is ok
-        const isStaff = false;
-        if (!isStaff) {
-            this.props.history.push("/menu");
-        }
+        // const isStaff = false;
+        // if (!isStaff) {
+        //     this.props.history.push("/menu");
+        // }
     }
 
     public componentDidMount() {

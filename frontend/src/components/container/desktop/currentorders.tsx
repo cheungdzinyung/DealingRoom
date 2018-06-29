@@ -58,10 +58,10 @@ class PureCurrentOrders extends React.Component<ICurrentOrdersProps> {
         //     this.props.customerProfile.role === "waiter"
         // );
         // allow access b4 staff login is ok
-        const isStaff = false;
-        if (!isStaff) {
-            this.props.history.push("/menu");
-        }
+        // const isStaff = false;
+        // if (!isStaff) {
+        //     this.props.history.push("/menu");
+        // }
     }
 
     public componentDidMount() {
