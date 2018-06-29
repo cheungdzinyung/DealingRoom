@@ -15,11 +15,11 @@ import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
 import { getUserConsumptionByUserToken } from "src/redux/mobile/actions/actions_user";
 
-interface IUserProfileProps {
+interface IUserPerformanceProps {
   userConsumptionComparison: IConsumpGraphDataDeceiveAll,
   getConsumption: () => void;
 }
-interface IUserProfileState {
+interface IUserPerformanceState {
   processedData: IConsumptionGraphData[];
 } 
 
@@ -38,11 +38,11 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-class PureProfile extends React.Component<
-  IUserProfileProps,
-  IUserProfileState
+class PurePerformance extends React.Component<
+  IUserPerformanceProps,
+  IUserPerformanceState
   > {
-  constructor(props: IUserProfileProps) {
+  constructor(props: IUserPerformanceProps) {
     super(props);
 
     this.state = {
@@ -75,9 +75,9 @@ class PureProfile extends React.Component<
 
 
 
-const Profile = connect(
+const Performance = connect(
   mapStateToProps,
   mapDispatchToProps
-)(PureProfile);
+)(PurePerformance);
 
-export default Profile;
+export default Performance;
