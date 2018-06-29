@@ -17,11 +17,27 @@ export type GET_ENTIRE_MENU_FAIL = typeof GET_ENTIRE_MENU_FAIL;
 export interface IGetEntireMenuFailAction extends Action {
   type: GET_ENTIRE_MENU_FAIL;
 }
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export const SOCKET_CONNECT_SUCCESS = "SOCKET_CONNECT_SUCCESS";
+export type SOCKET_CONNECT_SUCCESS = typeof SOCKET_CONNECT_SUCCESS;
+export interface ISocketConnectSuccess extends Action {
+    type: SOCKET_CONNECT_SUCCESS,
+    socketID: any,
+}
+
+export const SOCKET_UPDATE_ITEM_PRICE = "SOCKET_UPDATE_ITEM_PRICE";
+export type SOCKET_UPDATE_ITEM_PRICE = typeof SOCKET_UPDATE_ITEM_PRICE;
+export interface ISocketUpdateItemPrice extends Action {
+    type: SOCKET_UPDATE_ITEM_PRICE,
+    entireMenu: any,
+}
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export type DisplayActions =
   | IGetEntireMenuSuccessAction
-  | IGetEntireMenuFailAction;
+  | IGetEntireMenuFailAction |
+  ISocketConnectSuccess |
+  ISocketUpdateItemPrice;
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function getEntireMenuSuccess(
@@ -60,5 +76,20 @@ export function getEntireMenu() {
         alert(err);
         dispatch(getEntireMenuFail());
       });
+  }
+}
+
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export function socketConnect(socketID: any): ISocketConnectSuccess {
+  return {
+      type: SOCKET_CONNECT_SUCCESS,
+      socketID,
+  }
+}
+
+export function socketUpdateItemPrice(entireMenu: IMenuCategoryWithFlux[]): ISocketUpdateItemPrice {
+  return {
+      type: SOCKET_UPDATE_ITEM_PRICE,
+      entireMenu,
   }
 }
