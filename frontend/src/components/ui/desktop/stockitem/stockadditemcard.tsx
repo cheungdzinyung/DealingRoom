@@ -22,7 +22,8 @@ import { IRootState } from "src/redux/store";
 import {
   createItem,
   updateItem,
-  toggleStockManageModal
+  toggleStockManageModal,
+  resetSuccessState
 } from "src/redux/desktop/actions/actions_manager";
 
 // Props and States
@@ -39,9 +40,12 @@ interface IStockManageModalProps {
     stockManageModalState: IStockManageModalState,
     targetItem?: IUpdateMenuItem
   ) => void;
-
+  
   isModalOpen: boolean;
   closeEditModal: () => void;
+  createItemSuccess: boolean;
+  editItemSuccess: boolean;
+  resetSuccessState: () => void,
 }
 
 interface IStockManageModalStates {
@@ -62,7 +66,9 @@ const mapStateToProps = (state: IRootState) => {
   return {
     targetItem: state.staff.manager.targetItem,
     stockManageModalState: state.staff.manager.stockManageModalState,
-    categories: state.staff.manager.categories
+    categories: state.staff.manager.categories,
+    createItemSuccess: state.staff.manager.createItemSuccess,
+    editItemSuccess: state.staff.manager.editItemSuccess,
   };
 };
 
@@ -79,6 +85,9 @@ const mapDispatchToProps = (dispatch: any) => {
       targetItem?: IUpdateMenuItem
     ) => {
       dispatch(toggleStockManageModal(stockManageModalState, targetItem));
+    },
+    resetSuccessState: () => {
+      dispatch(resetSuccessState());
     }
   };
 };
@@ -86,7 +95,7 @@ const mapDispatchToProps = (dispatch: any) => {
 class RealStockManageModal extends React.Component<
   IStockManageModalProps,
   IStockManageModalStates
-> {
+  > {
   constructor(props: IStockManageModalProps) {
     super(props);
 
@@ -110,6 +119,13 @@ class RealStockManageModal extends React.Component<
     }
   }
 
+  public componentDidUpdate() {
+    if (this.props.createItemSuccess || this.props.editItemSuccess) {
+      this.props.toggleStockManageModal("discard");
+      this.props.resetSuccessState();
+    }
+  }
+
   public discard = () => {
     // MODAL_ACTION_DISCARD
     this.props.toggleStockManageModal("discard");
@@ -127,7 +143,7 @@ class RealStockManageModal extends React.Component<
       itemDescription: this.state.itemDescription,
       minimumPrice: this.state.minimumPrice,
       currentPrice: this.state.currentPrice,
-      itemPhoto: "",
+      itemPhoto: this.state.itemPhoto,
       isSpecial: this.state.isSpecial,
       isActive: this.state.isActive
     };
@@ -144,7 +160,7 @@ class RealStockManageModal extends React.Component<
       categoryName: this.state.categoryName,
       itemDescription: this.state.itemDescription,
       minimumPrice: this.state.minimumPrice,
-      itemPhoto: "",
+      itemPhoto: this.state.itemPhoto,
       isSpecial: this.state.isSpecial,
       isActive: this.state.isActive
     };
@@ -238,7 +254,7 @@ class RealStockManageModal extends React.Component<
             onChange={this.setItemDescription}
           />
           {/* Little Adding button for confirmation */}
-          <img src={PlusButton} alt="Plus button" className="stockadd-button" onClick={this.update}/>
+          <img src={PlusButton} alt="Plus button" className="stockadd-button" onClick={this.update} />
           {/* <div className="pt-dialog-footer">
             <div className="pt-dialog-footer-actions">
               <Button text="Secondary" />

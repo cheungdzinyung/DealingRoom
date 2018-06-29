@@ -7,6 +7,12 @@ import AdminSideMenu from "../../ui/desktop/sidemenu";
 import OrderCard from "../../ui/desktop/ordercard";
 // import bell from "../../assets/icons/desktop/sidemenu/bell.svg"
 
+// for redir
+import * as History from "history";
+import { withRouter } from "react-router";
+
+import { IUserProfile } from "src/modules";
+
 // redux
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
@@ -17,13 +23,16 @@ interface IPendingOrdersProps {
     allOrders: any,
     allOrdersReady: boolean,
     getAllOrders: () => void,
-    // updateOrderStatusMade: (orderId: number) => void,
+    // handling redirect
+    customerProfile: IUserProfile,
+    history: History.History,
 }
 
 const mapStateToProps = (state: IRootState) => {
     return {
         allOrders: state.staff.bartender.allOrders,
         allOrdersReady: state.staff.bartender.allOrdersReady,
+        customerProfile: state.customer.user.userProfile,
     };
 };
 
@@ -32,15 +41,25 @@ const mapDispatchToProps = (dispatch: any) => {
         getAllOrders: () => {
             dispatch(getAllOrders());
         },
-        // updateOrderStatusMade: (orderId: number) => {
-        //     dispatch(updateOrderStatusMade(orderId));
-        // },
     };
 };
 
 class PureUnpaidOrders extends React.Component<IPendingOrdersProps> {
     constructor(props: IPendingOrdersProps) {
         super(props);
+    }
+
+    public componentWillMount() {
+        // const isStaff = (
+        //     this.props.customerProfile.role === "manager" ||
+        //     this.props.customerProfile.role === "bartender" ||
+        //     this.props.customerProfile.role === "waiter"
+        // );
+        // allow access b4 staff login is ok
+        const isStaff = false;
+        if (!isStaff) {
+            this.props.history.push("/menu");
+        }
     }
 
     public componentDidMount() {
@@ -82,4 +101,4 @@ const UnpaidOrders = connect(
     mapDispatchToProps
 )(PureUnpaidOrders);
 
-export default UnpaidOrders;
+export default withRouter(UnpaidOrders as any);
