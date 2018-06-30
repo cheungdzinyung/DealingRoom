@@ -17,6 +17,7 @@ export default class UsersRouter {
 
     router.post("/", this.add.bind(this));
 
+    router.get("/maxmin/", this.getMaxMin.bind(this));
     router.get("/prices/", this.getAllPrice.bind(this));
     router.get("/user/", this.getByUser.bind(this));
     router.get("/", this.getAllOrders.bind(this));
@@ -146,5 +147,16 @@ export default class UsersRouter {
     } else {
       return res.status(401).json({ status: "unauthorized" });
     }
+  }
+
+  public getMaxMin(req: express.Request, res: express.Response) {
+    return this.ordersService
+      .getMaxMin(req.query.dateOfQuery)
+      .then((result: any) => {
+        res.status(201).json(result);
+      })
+      .catch((err: express.Errback) => {
+        res.status(500).json({ status: "failed" });
+      });
   }
 }

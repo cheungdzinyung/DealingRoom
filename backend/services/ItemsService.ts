@@ -219,7 +219,7 @@ export default class UsersService {
         .select("id", "currentPrice")
         .where("categories_id", category.categories_id);
       // loop through all items in the category and insert the current price into the itemsLog table
-        await BlueBirdPromise.map(itemList, async (item: any) => {
+      await BlueBirdPromise.map(itemList, async (item: any) => {
         await this.knex("itemsLog").insert({
           items_id: item.id,
           itemsLogPrice: item.currentPrice,
@@ -264,41 +264,45 @@ export default class UsersService {
           .then((itemList: any) => {
             return Promise.all(
               itemList.map((item: object, j: number) => {
-                return this.knex("itemsLog")
-                  .join("items", "itemsLog.items_id", "=", "items.id")
-                  .join(
-                    "categories",
-                    "items.categories_id",
-                    "=",
-                    "categories.id"
-                  )
-                  .select("items.itemName")
-                  .select(
-                    this.knex.raw(
-                      `extract(hour from "itemsLog".created_at) as hour`
+                return (
+                  this.knex("itemsLog")
+                    .join("items", "itemsLog.items_id", "=", "items.id")
+                    .join(
+                      "categories",
+                      "items.categories_id",
+                      "=",
+                      "categories.id"
                     )
-                  )
-                  .avg("itemsLog.itemsLogPrice")
-                  .whereRaw("??::date = ?", ["created_at", dateOfQuery])
-                  .where("items.itemName", itemList[j].itemName)
-                  // add another where condition so that it is between noon and midnight
-                  .groupBy("itemName")
-                  .groupByRaw(`extract('hour' from "itemsLog".created_at)`)
-                  .then((itemLogSummary: any) => {
-                    // reorganizing the data into the agreed upon format for chart package to read
-                    return Promise.all(
-                      itemLogSummary.map((order: object, k: number) => {
-                        const itemLogSummaryPerItem = {
-                          time: itemLogSummary[k].hour.toString(),
-                          purchasePrice: parseInt(itemLogSummary[k].avg, 10)
-                        };
-                        return itemLogSummaryPerItem;
-                      })
-                    ).then((itemLogSummaryFormatted: any) => {
-                      // assigning the fluctuating data to the item object
-                      return (itemList[j].chartData = itemLogSummaryFormatted);
-                    });
-                  });
+                    .select("items.itemName")
+                    .select(
+                      this.knex.raw(
+                        `extract(hour from "itemsLog".created_at) as hour`
+                      )
+                    )
+                    .avg("itemsLog.itemsLogPrice")
+                    .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+                    .where("items.itemName", itemList[j].itemName)
+                    // add another where condition so that it is between noon and midnight
+                    .groupBy("itemName")
+                    .groupByRaw(`extract('hour' from "itemsLog".created_at)`)
+                    .then((itemLogSummary: any) => {
+                      // reorganizing the data into the agreed upon format for chart package to read
+                      return Promise.all(
+                        itemLogSummary.map((order: object, k: number) => {
+                          const itemLogSummaryPerItem = {
+                            time: itemLogSummary[k].hour.toString(),
+                            purchasePrice: parseInt(itemLogSummary[k].avg, 10)
+                          };
+                          return itemLogSummaryPerItem;
+                        })
+                      ).then((itemLogSummaryFormatted: any) => {
+                        // assigning the fluctuating data to the item object
+                        return (itemList[
+                          j
+                        ].chartData = itemLogSummaryFormatted);
+                      });
+                    })
+                );
               })
             ).then(() => {
               return itemList;
@@ -475,5 +479,43 @@ export default class UsersService {
             "items.isActive"
           );
       });
+  }
+
+  public async priceDrop(discount: number) {
+    // set discount into decimal
+    discount = discount / 100;
+
+    // obtain the full item list with id and minimum price
+    const itemList = await this.knex("items").select("id", "minimumPrice");
+
+    // set a counter for the total discount provided
+    let totalDiscount: number = 0;
+
+    // loop through each item to apply the discount
+    await BlueBirdPromise.map(itemList, async (itemId: any) => {
+      // select each item's current price
+      const price = await this.knex("items")
+        .select("currentPrice")
+        .first()
+        .where("id", itemId.id);
+
+      // check if the current price of the item is less than or equal to the minimum price, if so, remove any discounts
+      price.currentPrice <= itemList.minimumPrice
+        ? (discount = 0)
+        : (discount = discount);
+
+      // calculate and apply the discount
+      price.currentPrice = parseFloat(price.currentPrice);
+      totalDiscount += price.currentPrice * discount;
+      price.currentPrice = price.currentPrice - price.currentPrice * discount;
+
+      // update the discounted price in the database
+      await this.knex("items")
+        .update("currentPrice", price.currentPrice)
+        .where("id", itemId.id);
+    });
+
+    // return the total amount of discount applied
+    return totalDiscount;
   }
 }

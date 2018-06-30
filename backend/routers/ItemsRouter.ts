@@ -1,6 +1,6 @@
 import * as express from "express";
 import * as multer from "multer";
-import * as path from "path"
+import * as path from "path";
 
 import { IItemData } from "../interfaces";
 import ItemsService from "../services/ItemsService";
@@ -24,6 +24,7 @@ export default class ItemsRouter {
     router.get("/", this.getAll.bind(this));
     router.get("/image/:id", this.getImage.bind(this));
     router.get("/update/itemlog", this.updateLogPrice.bind(this));
+    router.get("/event/pricedrop", this.priceDrop.bind(this));
 
     router.put("/:id", upload.single("itemPhoto"), this.update.bind(this));
 
@@ -103,8 +104,10 @@ export default class ItemsRouter {
     return this.itemsService
       .getItemImage(req.params.id)
       .then((result: any) => {
-        const name = result[0].itemName.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()
-        res.sendFile(path.join(__dirname, '../storage/items', `${name}.png`));
+        const name = result[0].itemName
+          .replace(/[^a-zA-Z0-9]/g, "")
+          .toLowerCase();
+        res.sendFile(path.join(__dirname, "../storage/items", `${name}.png`));
       })
       .catch((err: express.Errback) => {
         res.status(500).json({ status: "failed" });
@@ -128,6 +131,24 @@ export default class ItemsRouter {
       .update(req.params.id, req.body, req.file)
       .then((result: IItemData) => {
         res.status(201).json(result);
+      })
+      .catch((err: express.Errback) => {
+        console.log(err);
+        res.status(500).json({ status: "failed" });
+      });
+  }
+
+  public priceDrop(req: express.Request, res: express.Response) {
+    return this.itemsService
+      .priceDrop(req.query.discount)
+      .then((totalDiscount: number) => {
+        return this.itemsService.getAll(req.query.isActive)
+          .then((result: any) => {
+            res.status(200).json(result);
+          })
+          .catch((err: express.Errback) => {
+            res.status(500).json({ status: "failed" });
+          });
       })
       .catch((err: express.Errback) => {
         console.log(err);
