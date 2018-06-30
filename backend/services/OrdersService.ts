@@ -263,31 +263,6 @@ export default class OrdersService {
     return finalResult;
   }
 
-  public async getMaxMin(dateOfQuery: any) {
-    // obtain the list of categories id
-    const catList = await this.knex("categories").select("id");
-
-    // Loop through the catList and find the max and min price for the specified date
-    await BlueBirdPromise.map(catList, async (cat: any) => {
-      const max = await this.knex("itemsLog")
-        .join("items", "items.id", "=", "itemsLog.items_id")
-        .max("itemsLog.itemsLogPrice")
-        .first()
-        .whereRaw("??::date = ?", ["created_at", dateOfQuery])
-        .andWhere("items.categories_id", cat.id);
-      const min = await this.knex("itemsLog")
-        .join("items", "items.id", "=", "itemsLog.items_id")
-        .min("itemsLog.itemsLogPrice")
-        .first()
-        .whereRaw("??::date = ?", ["created_at", dateOfQuery])
-        .andWhere("items.categories_id", cat.id);
-      console.log(`The max value for ${cat.id} is : ${max.max}`);
-      console.log(`The max value for ${cat.id} is : ${min.min}`);
-    });
-
-    return catList;
-  }
-
   // Working 08/06/18
   public async update(id: number, data: any) {
     const orderId = await this.knex("orders")

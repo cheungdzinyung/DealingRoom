@@ -94,7 +94,76 @@ export default class UsersService {
   }
 
   // Working 23/06/18
-  public getAllWithFluctuatingPrices(dateOfQuery: string) {
+  public async getAllWithFluctuatingPrices(dateOfQuery: string) {
+    // // Obtain the list of categories in the database
+    // const categoryList = await this.knex("categories").select(
+    //   "id as categories_id",
+    //   "categoryName",
+    //   "categoryPhoto"
+    // );
+
+    // // loop through each category and obtain the list of items in the category
+    // const result = await BlueBirdPromise.map(categoryList, async (category: any) => {
+    //   const itemList = await this.knex("items")
+    //     .join("categories", "items.categories_id", "=", "categories.id")
+    //     .select(
+    //       "items.id as items_id",
+    //       "items.itemName",
+    //       "categories.categoryName",
+    //       "items.itemStock",
+    //       "items.minimumPrice",
+    //       "items.currentPrice",
+    //       "items.itemPhoto",
+    //       "items.itemDescription",
+    //       "items.isSpecial",
+    //       "items.isActive"
+    //     )
+    //     .where("items.categories_id", category.categories_id)
+    //     .where("items.isActive", true)
+    //     .orderBy("items.id", "ase");
+
+    //   // loop through the list of items and obtain all the fluctuating information for the specified date while separating it by hours
+    //   await BlueBirdPromise.map(itemList, async (item: any) => {
+    //     const itemLogSummary = await this.knex("itemsLog")
+    //       .join("items", "itemsLog.items_id", "=", "items.id")
+    //       .join("categories", "items.categories_id", "=", "categories.id")
+    //       .select("items.itemName")
+    //       .select(
+    //         this.knex.raw(`extract(hour from "itemsLog".created_at) as hour`)
+    //       )
+    //       .avg("itemsLog.itemsLogPrice")
+    //       .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+    //       .where("items.itemName", item.itemName)
+    //       .groupBy("itemName")
+    //       .groupByRaw(`extract('hour' from "itemsLog".created_at)`);
+
+    //       return itemLogSummary
+    //   //   // reorganizing the data into the agreed upon format for chart package to read
+    //   //   await BlueBirdPromise.map(itemLogSummary, async (order: any) => {
+    //   //     const itemLogSummaryPerItem = {
+    //   //       time: order.hour.toString(),
+    //   //       purchasePrice: parseInt(order.avg, 10)
+    //   //     };
+    //   //     // assigning the fluctuating data to the item object
+    //   //     item.chartData = itemLogSummaryPerItem;
+    //   //   });
+    //   });
+    // })
+    // return result;
+    // // .then((result: any) => {
+    // //   // inserting the items' information into the final result object which is then returned
+    // //   return Promise.all(
+    // //     categoryList.map((category: object, j: number) => {
+    // //       const finalResult = {
+    // //         categoryName: categoryList[j].categoryName,
+    // //         categoryPhoto: categoryList[j].categoryPhoto,
+    // //         items: result[j]
+    // //       };
+    // //       return finalResult;
+    // //     })
+    // //   );
+    // // });
+
     // Obtain the list of categories in the database
     return this.knex("categories")
       .select("id as categories_id", "categoryName", "categoryPhoto")
@@ -517,5 +586,30 @@ export default class UsersService {
 
     // return the total amount of discount applied
     return totalDiscount;
+  }
+
+  public async getMaxMin(dateOfQuery: any) {
+    // obtain the list of categories id
+    const catList = await this.knex("categories").select("id");
+
+    // Loop through the catList and find the max and min price for the specified date
+    await BlueBirdPromise.map(catList, async (cat: any) => {
+      const max = await this.knex("itemsLog")
+        .join("items", "items.id", "=", "itemsLog.items_id")
+        .max("itemsLog.itemsLogPrice")
+        .first()
+        .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+        .andWhere("items.categories_id", cat.id);
+      const min = await this.knex("itemsLog")
+        .join("items", "items.id", "=", "itemsLog.items_id")
+        .min("itemsLog.itemsLogPrice")
+        .first()
+        .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+        .andWhere("items.categories_id", cat.id);
+      console.log(`The max value for ${cat.id} is : ${max.max}`);
+      console.log(`The max value for ${cat.id} is : ${min.min}`);
+    });
+
+    return catList;
   }
 }
