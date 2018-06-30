@@ -207,7 +207,6 @@ export interface IConsumptionGraphDataReceiveFromServerOneCat {
   max: number;
 }
 
-
 /* 
 Corresponding API path POST: api/orders/user/:id
 */

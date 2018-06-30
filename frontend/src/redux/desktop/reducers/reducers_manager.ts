@@ -7,6 +7,7 @@ import {
 	UPDATE_ITEM_SUCCESS,
     UPDATE_ITEM_FAIL,
     TOGGLE_STOCK_MANAGE_MODAL,
+    RESET_SUCCESS_STATUS,
 } from "../actions/actions_manager";
 
 import { IMenuCategoryWithoutFlux, IStockManageModalState, IUpdateMenuItem } from "../../../modules";
@@ -17,6 +18,8 @@ export interface IManagerState {
     menuReady: boolean,
     stockManageModalState: IStockManageModalState,
     targetItem?: IUpdateMenuItem,
+    createItemSuccess: boolean,
+    editItemSuccess: boolean,
 }
 
 const initialState: IManagerState = {
@@ -35,6 +38,8 @@ const initialState: IManagerState = {
         isSpecial: false,
         isActive: true,
     },
+    createItemSuccess: false,
+    editItemSuccess: false,
 }
 
 export const managerReducer = (state: IManagerState = initialState, action: ManagerActions): IManagerState => {
@@ -48,19 +53,22 @@ export const managerReducer = (state: IManagerState = initialState, action: Mana
         }
         case CREATE_ITEM_SUCCESS: {
             const categories = action.entireMenu.map((category: any) => (category.categoryName));
-            return { ...state, entireMenu: action.entireMenu, categories };
+            return { ...state, entireMenu: action.entireMenu, categories, createItemSuccess: true };
         }
         case CREATE_ITEM_FAIL: {
-            return state;
+            return { ...state, createItemSuccess: false};
         }
         case UPDATE_ITEM_SUCCESS: {
-            return state;
+            return { ...state, editItemSuccess: true};
         }
         case UPDATE_ITEM_FAIL: {
-            return state;
+            return { ...state, editItemSuccess: false};
         }
         case TOGGLE_STOCK_MANAGE_MODAL: {
             return { ...state, stockManageModalState: action.stockManageModalState, targetItem: action.targetItem };
+        }
+        case RESET_SUCCESS_STATUS: {
+            return { ...state, createItemSuccess: false, editItemSuccess: false };
         }
         default: {
             return state;

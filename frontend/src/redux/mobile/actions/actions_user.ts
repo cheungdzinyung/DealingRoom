@@ -5,7 +5,7 @@ import { API_SERVER } from "../../../redux/store";
 import {
   ISignUpPackage,
   ILoginPackage,
-  IConsumptionGraphData
+  IConsumpGraphDataDeceiveAll
 } from "../../../modules";
 
 // Import UI elements
@@ -102,7 +102,7 @@ export const GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS =
 export type GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS = typeof GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS;
 export interface IGetUserConsumptionsByUserTokenSuccess extends Action {
   type: GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS;
-  userConsumptionComparison: IConsumptionGraphData[];
+  userConsumptionComparison: IConsumpGraphDataDeceiveAll;
 }
 
 export const GET_USER_CONSUMPTIONS_BY_USER_TOKEN_FAIL =
@@ -413,7 +413,7 @@ export function getUserProfileByUserToken() {
 
 // /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function getUserConsumptionByUserTokenSuccess(
-  userConsumptionComparison: IConsumptionGraphData[]
+  userConsumptionComparison: IConsumpGraphDataDeceiveAll
 ): IGetUserConsumptionsByUserTokenSuccess {
   return {
     type: GET_USER_CONSUMPTIONS_BY_USER_TOKEN_SUCCESS,

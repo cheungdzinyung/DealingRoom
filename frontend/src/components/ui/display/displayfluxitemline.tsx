@@ -1,10 +1,6 @@
 // Importing modules from library
 import * as React from "react";
 
-// Importing static assets
-// import upArrow from "src/components/assets/icons/item/up.svg";
-// import downArrow from "src/components/assets/icons/item/down.svg";
-
 import { ResponsiveContainer, LineChart, Line } from "recharts";
 
 import { IMenuItemWithFlux, IItemPriceGraphData } from "src/modules";
@@ -36,11 +32,6 @@ export class DisplayFlexItemLine extends React.Component<
 
     return (
       <div className="display-data-prices-flux-line">
-        {/* {this.state.delta < 0 ? (
-          <img src={downArrow} alt="" className="display-data-arrow" />
-        ) : (
-            <img src={upArrow} alt="" className="display-data-arrow" />
-          )} */}
         <span className="display-data-prices-flux-line-item-name">
           {this.props.itemName}
         </span>
