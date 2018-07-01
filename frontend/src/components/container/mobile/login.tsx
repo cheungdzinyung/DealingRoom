@@ -6,9 +6,11 @@ import * as React from "react";
 import { Card } from "@blueprintjs/core";
 
 // Importing static assets
-import facebook from "../../assets/icons/signup/facebook.svg";
-import google from "../../assets/icons/signup/google.svg";
-import logo from "../../assets/icons/all/logo.svg";
+import facebook from "src/components/assets/icons/signup/facebook.svg";
+import google from "src/components//assets/icons/signup/google.svg";
+import logo from "src/components/assets/icons/all/logo.svg";
+
+
 
 // redux
 import { connect } from "react-redux";
@@ -42,8 +44,8 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
     super(props);
 
     this.state = {
-      username: "Andrew",
-      password: "123456",
+      username: "",
+      password: "",
       localLoginType: "login",
     }
   }
@@ -95,14 +97,14 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
   public componentDidUpdate() {
     // actually shld check if token is valid
     if (localStorage.getItem("dealingRoomToken")) {
-      this.props.history.push(`${this.props.match.url}/initialize`);
+      this.props.history.push(`${this.props.match.url}initialize`);
     }
   }
 
   public componentDidMount() {
     // actually shld check if token is valid
     if (localStorage.getItem("dealingRoomToken")) {
-      this.props.history.push(`${this.props.match.url}/initialize`);
+      this.props.history.push(`${this.props.match.url}initialize`);
     }
   }
 
@@ -116,7 +118,6 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
           </div>
           <div className="social-login">
 
-            {/* <div> */}
               <ReactFacebookLogin
                 appId={process.env.REACT_APP_FACEBOOK_APP_ID || ""}
                 autoLoad={false}
@@ -126,9 +127,7 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
                 textButton=""
                 icon={<img className="banner-img-fb" src={facebook} alt="" />}
               />
-            {/* </div> */}
 
-            {/* <div> */}
               <span className="banner rd-corner">
                 <GoogleLogin
                   clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
@@ -139,13 +138,7 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
                   children={<img className="banner-img-google" src={google} alt="" />}
                 />
               </span>
-            {/* </div> */}
 
-            {/* <div className="banner rd-corner google">
-              <span>
-                <img className="banner-img" src={google} alt="" />
-              </span>
-            </div> */}
 
           </div>
           <div className="divider">
