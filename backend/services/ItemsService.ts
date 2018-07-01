@@ -33,45 +33,43 @@ export default class UsersService {
   }
 
   // Working 10/06/18
-  public add(data: IItemData, file: Express.Multer.File) {
-    return this.knex("categories")
+  public async add(data: IItemData, file: Express.Multer.File) {
+    const catId = await this.knex("categories")
       .where("categoryName", data.categoryName)
-      .select("id")
-      .then((catId: Knex.QueryCallback) => {
-        return this.knex("items")
-          .insert({
-            categories_id: catId[0].id,
-            currentPrice: data.currentPrice,
-            isActive: true,
-            isSpecial: data.isSpecial,
-            itemDescription: data.itemDescription,
-            itemName: data.itemName,
-            itemPhoto: data.itemPhoto,
-            itemStock: data.itemStock,
-            minimumPrice: data.minimumPrice
-          })
-          .returning("id")
-          .then(async (itemId: Knex.QueryCallback) => {
-            if (file !== undefined) {
-              await this.saveUpdateItemImage(itemId[0], file, data.itemName);
-            }
-            return this.knex("categories")
-              .join("items", "categories.id", "=", "items.categories_id")
-              .where("items.id", itemId[0])
-              .select(
-                "items.id as items_id",
-                "items.itemName",
-                "items.itemStock",
-                "categories.categoryName",
-                "items.minimumPrice",
-                "items.currentPrice",
-                "items.itemPhoto",
-                "items.itemDescription",
-                "items.isSpecial",
-                "items.isActive"
-              );
-          });
-      });
+      .select("id");
+
+    const itemId = await this.knex("items")
+      .insert({
+        categories_id: catId[0].id,
+        currentPrice: data.currentPrice,
+        isActive: true,
+        isSpecial: data.isSpecial,
+        itemDescription: data.itemDescription,
+        itemName: data.itemName,
+        itemPhoto: data.itemPhoto,
+        itemStock: data.itemStock,
+        minimumPrice: data.minimumPrice
+      })
+      .returning("id");
+
+    if (file !== undefined) {
+      await this.saveUpdateItemImage(itemId[0], file, data.itemName);
+    }
+    return await this.knex("categories")
+      .join("items", "categories.id", "=", "items.categories_id")
+      .where("items.id", itemId[0])
+      .select(
+        "items.id as items_id",
+        "items.itemName",
+        "items.itemStock",
+        "categories.categoryName",
+        "items.minimumPrice",
+        "items.currentPrice",
+        "items.itemPhoto",
+        "items.itemDescription",
+        "items.isSpecial",
+        "items.isActive"
+      );
   }
 
   // Working 06/06/18
@@ -95,159 +93,72 @@ export default class UsersService {
 
   // Working 23/06/18
   public async getAllWithFluctuatingPrices(dateOfQuery: string) {
-    // // Obtain the list of categories in the database
-    // const categoryList = await this.knex("categories").select(
-    //   "id as categories_id",
-    //   "categoryName",
-    //   "categoryPhoto"
-    // );
-
-    // // loop through each category and obtain the list of items in the category
-    // const result = await BlueBirdPromise.map(categoryList, async (category: any) => {
-    //   const itemList = await this.knex("items")
-    //     .join("categories", "items.categories_id", "=", "categories.id")
-    //     .select(
-    //       "items.id as items_id",
-    //       "items.itemName",
-    //       "categories.categoryName",
-    //       "items.itemStock",
-    //       "items.minimumPrice",
-    //       "items.currentPrice",
-    //       "items.itemPhoto",
-    //       "items.itemDescription",
-    //       "items.isSpecial",
-    //       "items.isActive"
-    //     )
-    //     .where("items.categories_id", category.categories_id)
-    //     .where("items.isActive", true)
-    //     .orderBy("items.id", "ase");
-
-    //   // loop through the list of items and obtain all the fluctuating information for the specified date while separating it by hours
-    //   await BlueBirdPromise.map(itemList, async (item: any) => {
-    //     const itemLogSummary = await this.knex("itemsLog")
-    //       .join("items", "itemsLog.items_id", "=", "items.id")
-    //       .join("categories", "items.categories_id", "=", "categories.id")
-    //       .select("items.itemName")
-    //       .select(
-    //         this.knex.raw(`extract(hour from "itemsLog".created_at) as hour`)
-    //       )
-    //       .avg("itemsLog.itemsLogPrice")
-    //       .whereRaw("??::date = ?", ["created_at", dateOfQuery])
-    //       .where("items.itemName", item.itemName)
-    //       .groupBy("itemName")
-    //       .groupByRaw(`extract('hour' from "itemsLog".created_at)`);
-
-    //       return itemLogSummary
-    //   //   // reorganizing the data into the agreed upon format for chart package to read
-    //   //   await BlueBirdPromise.map(itemLogSummary, async (order: any) => {
-    //   //     const itemLogSummaryPerItem = {
-    //   //       time: order.hour.toString(),
-    //   //       purchasePrice: parseInt(order.avg, 10)
-    //   //     };
-    //   //     // assigning the fluctuating data to the item object
-    //   //     item.chartData = itemLogSummaryPerItem;
-    //   //   });
-    //   });
-    // })
-    // return result;
-    // // .then((result: any) => {
-    // //   // inserting the items' information into the final result object which is then returned
-    // //   return Promise.all(
-    // //     categoryList.map((category: object, j: number) => {
-    // //       const finalResult = {
-    // //         categoryName: categoryList[j].categoryName,
-    // //         categoryPhoto: categoryList[j].categoryPhoto,
-    // //         items: result[j]
-    // //       };
-    // //       return finalResult;
-    // //     })
-    // //   );
-    // // });
-
     // Obtain the list of categories in the database
-    return this.knex("categories")
-      .select("id as categories_id", "categoryName", "categoryPhoto")
-      .then((categoryList: any) => {
-        // loop through each category and obtain the list of items in the category
-        return Promise.all(
-          categoryList.map((category: object, i: number) => {
-            return this.knex("items")
-              .join("categories", "items.categories_id", "=", "categories.id")
-              .select(
-                "items.id as items_id",
-                "items.itemName",
-                "categories.categoryName",
-                "items.itemStock",
-                "items.minimumPrice",
-                "items.currentPrice",
-                "items.itemPhoto",
-                "items.itemDescription",
-                "items.isSpecial",
-                "items.isActive"
-              )
-              .where("items.categories_id", categoryList[i].categories_id)
-              .where("items.isActive", true)
-              .orderBy("items.id", "ase")
-              .then((itemList: any) => {
-                // loop through the list of items and obtain all the fluctuating information for the specified date while separating it by hours
-                return Promise.all(
-                  itemList.map((item: object, j: number) => {
-                    return this.knex("itemsLog")
-                      .join("items", "itemsLog.items_id", "=", "items.id")
-                      .join(
-                        "categories",
-                        "items.categories_id",
-                        "=",
-                        "categories.id"
-                      )
-                      .select("items.itemName")
-                      .select(
-                        this.knex.raw(
-                          `extract(hour from "itemsLog".created_at) as hour`
-                        )
-                      )
-                      .avg("itemsLog.itemsLogPrice")
-                      .whereRaw("??::date = ?", ["created_at", dateOfQuery])
-                      .where("items.itemName", itemList[j].itemName)
-                      .groupBy("itemName")
-                      .groupByRaw(`extract('hour' from "itemsLog".created_at)`)
-                      .then((itemLogSummary: any) => {
-                        // reorganizing the data into the agreed upon format for chart package to read
-                        return Promise.all(
-                          itemLogSummary.map((order: object, k: number) => {
-                            const itemLogSummaryPerItem = {
-                              time: itemLogSummary[k].hour.toString(),
-                              purchasePrice: parseInt(itemLogSummary[k].avg, 10)
-                            };
-                            return itemLogSummaryPerItem;
-                          })
-                        ).then((itemLogSummaryFormatted: any) => {
-                          // assigning the fluctuating data to the item object
-                          return (itemList[
-                            j
-                          ].chartData = itemLogSummaryFormatted);
-                        });
-                      });
-                  })
-                ).then(() => {
-                  return itemList;
-                });
-              });
-          })
-        ).then((result: any) => {
-          // inserting the items' information into the final result object which is then returned
-          return Promise.all(
-            categoryList.map((category: object, j: number) => {
-              const finalResult = {
-                categoryName: categoryList[j].categoryName,
-                categoryPhoto: categoryList[j].categoryPhoto,
-                items: result[j]
-              };
-              return finalResult;
-            })
-          );
+    const categoryList = await this.knex("categories").select(
+      "id as categories_id",
+      "categoryName",
+      "categoryPhoto"
+    );
+
+    // loop through each category and obtain the list of items in the category
+    const result = await BlueBirdPromise.map(
+      categoryList,
+      async (category: any) => {
+        const itemList = await this.knex("items")
+          .join("categories", "items.categories_id", "=", "categories.id")
+          .select(
+            "items.id as items_id",
+            "items.itemName",
+            "categories.categoryName",
+            "items.itemStock",
+            "items.minimumPrice",
+            "items.currentPrice",
+            "items.itemPhoto",
+            "items.itemDescription",
+            "items.isSpecial",
+            "items.isActive"
+          )
+          .where("items.categories_id", category.categories_id)
+          .where("items.isActive", true)
+          .orderBy("items.id", "ase");
+
+        // loop through the list of items and obtain all the fluctuating information for the specified date while separating it by hours
+        return await BlueBirdPromise.map(itemList, async (item: any) => {
+          const itemLogSummary = await this.knex("itemsLog")
+            .join("items", "itemsLog.items_id", "=", "items.id")
+            .join("categories", "items.categories_id", "=", "categories.id")
+            .select("items.itemName")
+            .select(
+              this.knex.raw(`extract(hour from "itemsLog".created_at) as hour`)
+            )
+            .avg("itemsLog.itemsLogPrice")
+            .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+            .where("items.itemName", item.itemName)
+            .groupBy("itemName")
+            .groupByRaw(`extract('hour' from "itemsLog".created_at)`);
+
+          // reorganizing the data into the agreed upon format for chart package to read
+          const itemLogSummaryPerItems = itemLogSummary.map((element: any) => {
+            const itemLogSummaryPerItem: any = {
+              time: element.hour.toString(),
+              purchasePrice: parseInt(element.avg, 10)
+            };
+            return itemLogSummaryPerItem;
+          });
+          // assigning the fluctuating data to the item object
+          item.chartData = itemLogSummaryPerItems;
+          return item;
         });
-      });
+      }
+    );
+    return categoryList.map((category: any, index: number) => {
+      const finalResult = {
+        categoryName: category.categoryName,
+        categoryPhoto: category.categoryPhoto,
+        items: result[index]
+      };
+      return finalResult;
+    });
   }
 
   public async updateLogPrice() {
