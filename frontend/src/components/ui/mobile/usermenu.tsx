@@ -27,28 +27,28 @@ class PureUserMenu extends React.Component<IUserMenuProps, {}> {
   }
 
   public toPerformance = () => {
-    this.props.changePage(`/performance`);
-    this.props.history.push(`/performance`);
+    this.props.changePage(`/customer/performance`);
+    this.props.history.push(`/customer/performance`);
   };
   public toOrder = () => {
-    this.props.changePage(`/order`);
-    this.props.history.push(`/order`);
+    this.props.changePage(`/customer/order`);
+    this.props.history.push(`/customer/order`);
   };
   public toPayment = () => {
-    this.props.changePage(`/payment`);
-    this.props.history.push(`/payment`);
+    this.props.changePage(`/customer/payment`);
+    this.props.history.push(`/customer/payment`);
   };
   public toSetting = () => {
-    this.props.changePage(`/setting`);
-    this.props.history.push(`/setting`);
+    this.props.changePage(`/customer/setting`);
+    this.props.history.push(`/customer/setting`);
   };
   public toMenu = () => {
-    this.props.changePage(`/menu`);
-    this.props.history.push(`/menu`);
+    this.props.changePage(`/customer/menu`);
+    this.props.history.push(`/customer/menu`);
   };
   public toRequest = () => {
-    this.props.changePage(`/request`);
-    this.props.history.push(`/request`);
+    this.props.changePage(`/customer/request`);
+    this.props.history.push(`/customer/request`);
   };
 
   public render() {

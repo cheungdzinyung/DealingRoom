@@ -17,6 +17,8 @@ import { localLogin, localSignUp, loginFacebook } from "../../../redux/mobile/ac
 
 import ReactFacebookLogin, { ReactFacebookLoginInfo } from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
+import { match } from "react-router-dom";
+// import { BrowserRouter as Router } from "react-router-dom";
 
 interface ILoginState {
   username: string,
@@ -26,6 +28,7 @@ interface ILoginState {
 
 interface ILoginProps {
   history: History.History,
+  match: match<{url: string}>;
   isAuth: boolean,
   // user_id: number,
   localLogin: (username: string, password: string) => void,
@@ -92,14 +95,14 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
   public componentDidUpdate() {
     // actually shld check if token is valid
     if (localStorage.getItem("dealingRoomToken")) {
-      this.props.history.push("/initialize");
+      this.props.history.push(`${this.props.match.url}/initialize`);
     }
   }
 
   public componentDidMount() {
     // actually shld check if token is valid
     if (localStorage.getItem("dealingRoomToken")) {
-      this.props.history.push("/initialize");
+      this.props.history.push(`${this.props.match.url}/initialize`);
     }
   }
 

@@ -9,10 +9,12 @@ import { getUserProfileByUserToken } from "../../../redux/mobile/actions/actions
 
 // for redir
 import * as History from "history";
+import { match } from "react-router-dom";
 
 interface IInitializeProps {
     // handling redirect
     history: History.History,
+    match: match<{url: string}>;
     // init
     isAuth: boolean,
 
@@ -53,7 +55,7 @@ class PureInitialize extends React.Component<IInitializeProps, {}> {
             this.props.getUserProfileByUserToken();
         }
         if (this.props.menuReady && this.props.userProfileReady && this.props.orderListReady) {
-            this.props.history.push("/menu");
+            this.props.history.push(`/customer/menu`);
         }
     }
 
