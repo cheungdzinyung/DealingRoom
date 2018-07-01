@@ -20,26 +20,11 @@ export default class UsersRouter {
   public router() {
     const router = express.Router();
 
-    // router.post("/", upload.single("userPhoto"), this.add.bind(this));
-
     router.get("/", this.get.bind(this));
-
     router.put("/", upload.single("userPhoto"), this.update.bind(this));
 
     return router;
   }
-
-  // public add(req: express.Request, res: express.Response) {
-  //   return this.usersService
-  //     .add(req.body, req.file)
-  //     .then((result: IUserData) => {
-  //       res.status(201).json(result);
-  //     })
-  //     .catch((err: express.Errback) => {
-  //       console.log(err)
-  //       res.status(500).json({ status: "failed" });
-  //     });
-  // }
 
   public get(req: express.Request, res: express.Response) {
     if (req.user !== undefined) {
@@ -75,7 +60,7 @@ export default class UsersRouter {
           });
         })
         .catch((err: any) => {
-          res.status(500).json({ status: "failed" });
+          res.status(500).json(err);
         });
     } else {
       return res.status(401).json({ status: "unauthorized" });

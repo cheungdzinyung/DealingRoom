@@ -39,32 +39,20 @@ export default class PaymentsService {
     }
 
     if (token === null) {
-      throw new Error ("No credit card information in system");
+      throw new Error("No credit card information in system");
     } else {
-      return this.knex("orders")
+      const bill = await this.knex("orders")
+        .first()
         .select("id", "orderTotal")
-        .where("id", orderId)
-        .then((bill: any) => {
-          return stripe.charges.create({
-            amount: bill[0].orderTotal * 100,
-            currency: "hkd",
-            description: "Dealing Room",
-            source: token,
-            statement_descriptor: `order number: ${bill[0].id}`
-          });
-        });
+        .where("id", orderId);
+
+      return stripe.charges.create({
+        amount: bill.orderTotal * 100,
+        currency: "hkd",
+        description: "Dealing Room",
+        source: token,
+        statement_descriptor: `order number: ${bill.id}`
+      });
     }
   }
 }
-// return this.knex("orders")
-//   .select("id", "orderTotal")
-//   .where("id", orderId)
-//   .then((bill: any) => {
-//     return stripe.charges.create({
-//       amount: bill[0].orderTotal * 100,
-//       currency: "hkd",
-//       description: "Dealing Room",
-//       source: token,
-//       statement_descriptor: `order number: ${bill[0].id}`
-//     });
-//   });
