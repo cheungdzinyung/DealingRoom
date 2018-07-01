@@ -43,7 +43,7 @@ class PureRequest extends React.Component<IRequestProps, {}> {
 
   public componentDidMount() {
     if (this.props.currentOrder.length === 0) {
-      this.props.redirectPage("/menu", this.props.history);
+      this.props.redirectPage("/customer/menu", this.props.history);
       this.props.resetTargetPage();
       AppToaster.show({
         message: "Empty Basket",
@@ -56,7 +56,7 @@ class PureRequest extends React.Component<IRequestProps, {}> {
 
   public componentDidUpdate() {
     if (this.props.currentOrder.length === 0 && this.props.confirmOrderStatus === "confirmed") {
-      this.props.redirectPage("/order", this.props.history);
+      this.props.redirectPage("/customer/order", this.props.history);
       this.props.resetTargetPage();
       this.props.resetConfirmOrderStatus();
       AppToaster.show({
@@ -66,7 +66,7 @@ class PureRequest extends React.Component<IRequestProps, {}> {
         timeout: 2000
       })
     } else if (this.props.currentOrder.length === 0) {
-      this.props.redirectPage("/menu", this.props.history);
+      this.props.redirectPage("/customer/menu", this.props.history);
       this.props.resetTargetPage();
       AppToaster.show({
         message: "Your basket is empty!",

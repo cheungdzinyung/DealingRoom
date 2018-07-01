@@ -9,17 +9,16 @@ import PendingOrders from "src/components/container/desktop/pendingorders";
 import UnpaidOrders from "src/components/container/desktop/unpaidorders";
 
 export default class DesktopRoutes extends React.Component {
-    public render() {
-        return (
-            <Switch>
-                <Route exact={true} path="/admin/login" component={AdminLogin} />
-                <Route exact={true} path="/admin/initializeStaff" component={Initialize} />
-                <Route exact={true} path="/admin/stock/" component={StockManagement} />
-                <Route exact={true} path="/admin/currentorders" component={CurrentOrders} />
-                <Route exact={true} path="/admin/pendingorders" component={PendingOrders} />
-                <Route exact={true} path="/admin/unpaidorders" component={UnpaidOrders} />
-            </Switch>
-
-        );
-    }
+  public render() {
+    return (
+      <Switch>
+        <Route exact={true} path="/admin" component={AdminLogin} />>
+        <Route exact={true} path="/initializeStaff" component={Initialize} />
+        <Route exact={true} path="/stock/" component={StockManagement} />
+        <Route exact={true} path="/currentorders" component={CurrentOrders} />
+        <Route exact={true} path="/pendingorders" component={PendingOrders} />
+        <Route exact={true} path="/unpaidorders" component={UnpaidOrders} />
+      </Switch>
+    );
+  }
 }

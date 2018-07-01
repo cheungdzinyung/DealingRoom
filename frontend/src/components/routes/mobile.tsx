@@ -17,27 +17,15 @@ export default class MobileRoutes extends React.Component {
   public render() {
     return (
       <Switch>
-        <Route path="/" exact={true} component={Login} />
-        <Route path="/performance" component={Performance} />
-        <Route path="/order" exact={true} component={OrderList} />
-        <Route path="/order/:orderId" component={Order} />
-        <Route path="/menu" component={Menu} />
-        <Route path="/request" component={Request} />
-        <Route path="/setting" component={Setting} />
-        <Route path="/request" component={Request} />
-        <Route path="/initialize" component={Initialize} />
-        {/* <AnimatedRoute
-          path="/menu"
-          component={Menu}
-          atEnter={{ offset: -100 }}
-          atLeave={{ offset: -100 }}
-          atActive={{ offset: 0 }}
-          // tslint:disable-next-line:jsx-no-lambda
-        //   mapStyles={styles => ({
-          //     transform: `translateX(${styles.offset}%)`
-        //   })}
-        /> */}
-        {/* <AnimatedRoute path="/order/:orderId" component={Order} /> */}
+        <Route path="/customer" exact={true} component={Login} />
+        <Route path="/customer/initialize" component={Initialize} />
+        <Route path="/customer/performance" component={Performance} />
+        <Route path="/customer/order" exact={true} component={OrderList} />
+        <Route path="/customer/order/:orderId" component={Order} />
+        <Route path="/customer/menu" component={Menu} />
+        <Route path="/customer/request" component={Request} />
+        <Route path="/customer/setting" component={Setting} />
+        <Route path="/customer/request" component={Request} />
       </Switch>
     );
   }
