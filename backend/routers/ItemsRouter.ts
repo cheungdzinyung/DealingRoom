@@ -32,7 +32,7 @@ export default class ItemsRouter {
     return router;
   }
 
-  public add(req: express.Request, res: express.Response) {
+  public async add(req: express.Request, res: express.Response) {
     return this.itemsService
       .add(req.body, req.file)
       .then((result: IItemData) => {
