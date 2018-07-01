@@ -18,19 +18,12 @@ interface IPureIntroductionProps {
   history: History.History;
 }
 
-interface IPureIntroductionState {
-  activeSlide: number;
-}
-
 export default class PureIntroduction extends React.Component<
   IPureIntroductionProps,
-  IPureIntroductionState
+  {}
 > {
   constructor(props: IPureIntroductionProps) {
     super(props);
-    this.state = {
-      activeSlide: 0
-    };
   }
 
   public toMenu = () => {

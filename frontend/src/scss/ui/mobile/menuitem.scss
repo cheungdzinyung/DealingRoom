@@ -34,9 +34,8 @@
                 width: 20%;
                 padding: 5%;
                 bottom: -25%;
-                right: 5%;    
-            } 
-            // Item Image
+                right: 5%;
+            } // Item Image
             .menu-item-img {
                 background-color: #16151a;
                 border-radius: 7px;
@@ -100,6 +99,7 @@
         border-bottom-left-radius: 10px;
         width: 95%;
         background-color: $item-detail-bgc;
+        padding-bottom: 2%;
         .item-detail-wrapper {
             width: 100%;
             padding: 12% 10%;
