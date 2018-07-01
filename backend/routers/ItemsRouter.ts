@@ -25,7 +25,6 @@ export default class ItemsRouter {
     router.get("/image/:id", this.getImage.bind(this));
     router.get("/update/itemlog", this.updateLogPrice.bind(this));
     router.get("/event/pricedrop", this.priceDrop.bind(this));
-    router.get("/maxmin", this.getMaxMin.bind(this));
 
     router.put("/:id", upload.single("itemPhoto"), this.update.bind(this));
 
@@ -70,7 +69,7 @@ export default class ItemsRouter {
           });
       } else {
         return this.itemsService
-          .getAllWithFluctuatingPrices(req.query.fluctuatingPrices)
+          .getAllWithFluctuatingPrices(req.query.fluctuatingPrices, req.query.maxmin)
           .then((result: any) => {
             res.status(200).json(result);
           })
@@ -153,17 +152,6 @@ export default class ItemsRouter {
       })
       .catch((err: express.Errback) => {
         console.log(err);
-        res.status(500).json({ status: "failed" });
-      });
-  }
-
-  public getMaxMin(req: express.Request, res: express.Response) {
-    return this.itemsService
-      .getMaxMin(req.query.dateOfQuery)
-      .then((result: any) => {
-        res.status(201).json(result);
-      })
-      .catch((err: express.Errback) => {
         res.status(500).json({ status: "failed" });
       });
   }

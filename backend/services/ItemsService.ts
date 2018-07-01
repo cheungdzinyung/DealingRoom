@@ -92,7 +92,11 @@ export default class UsersService {
   }
 
   // Working 23/06/18
-  public async getAllWithFluctuatingPrices(dateOfQuery: string) {
+  public async getAllWithFluctuatingPrices(
+    dateOfQuery: string,
+    maxmin: string
+  ) {
+
     // Obtain the list of categories in the database
     const categoryList = await this.knex("categories").select(
       "id as categories_id",
@@ -151,63 +155,31 @@ export default class UsersService {
         });
       }
     );
-    return categoryList.map((category: any, index: number) => {
-      const finalResult = {
-        categoryName: category.categoryName,
-        categoryPhoto: category.categoryPhoto,
-        items: result[index]
-      };
-      return finalResult;
-    });
-  }
-
-  public async updateLogPrice() {
-    // get the current date and hour
-    const currentYear = await new Date().getUTCFullYear();
-    const currentMonth = (await new Date().getUTCMonth()) + 1;
-    const currentDate = await new Date().getUTCDate();
-    const currentHour = await new Date().getUTCHours();
-
-    // obtain the list of category id's in the category table
-    const categoryList = await this.knex("categories").select(
-      "id as categories_id"
-    );
-
-    // look through the itemLog and see which categories has been recorded in the last hour
-    let list = await this.knex.raw(
-      `SELECT "items"."categories_id" FROM "itemsLog" JOIN "items" ON "itemsLog"."items_id" = "items"."id" WHERE "created_at" BETWEEN '${currentYear}-${currentMonth}-${currentDate} ${currentHour}:00:00' AND '${currentYear}-${currentMonth}-${currentDate} ${currentHour}:59:59.999999+08' ORDER BY "items"."categories_id"`
-    );
-    list = list.rows;
-    for (let i = 1; i < list.length; ) {
-      list[i - 1].categories_id === list[i].categories_id
-        ? list.splice(i, 1)
-        : i++;
-    }
-
-    // remove category id's that exist in the list from the category list
-    for (let i = 0; i < list.length; i++) {
-      for (let j = 0; j < categoryList.length; j++) {
-        if (list[i].categories_id === categoryList[j].categories_id) {
-          categoryList.splice(j, 1);
+    return await Promise.all(
+      categoryList.map(async (category: any, index: number) => {
+        if (maxmin === "true") {
+          const maxMinResult = await this.getMaxMin(
+            dateOfQuery,
+            category.categories_id
+          );
+          const finalResult: any = {
+            categoryName: category.categoryName,
+            categoryPhoto: category.categoryPhoto,
+            todayMax: maxMinResult.todayMax,
+            todayMin: maxMinResult.todayMin,
+            items: result[index]
+          };
+          return finalResult;
+        } else {
+          const finalResult: any = {
+            categoryName: category.categoryName,
+            categoryPhoto: category.categoryPhoto,
+            items: result[index]
+          };
+          return finalResult;
         }
-      }
-    }
-
-    // loop through list of remaining category list to update the price as per current price in items table
-    await BlueBirdPromise.map(categoryList, async (category: any) => {
-      const itemList = await this.knex("items")
-        .select("id", "currentPrice")
-        .where("categories_id", category.categories_id);
-      // loop through all items in the category and insert the current price into the itemsLog table
-      await BlueBirdPromise.map(itemList, async (item: any) => {
-        await this.knex("itemsLog").insert({
-          items_id: item.id,
-          itemsLogPrice: item.currentPrice,
-          created_at: `${currentYear}-${currentMonth}-${currentDate} ${currentHour}:59:59.999999`
-        });
-      });
-    });
-    return categoryList;
+      })
+    )
   }
 
   // Working 23/06/18
@@ -267,7 +239,7 @@ export default class UsersService {
       item.chartData = itemLogSummaryPerItems;
       return item;
     });
-    
+
     const finalResult = [
       {
         categoryName: catName,
@@ -478,28 +450,71 @@ export default class UsersService {
     return totalDiscount;
   }
 
-  public async getMaxMin(dateOfQuery: any) {
-    // obtain the list of categories id
-    const catList = await this.knex("categories").select("id");
+  public async getMaxMin(dateOfQuery: any, catId: number) {
+    const max = await this.knex("itemsLog")
+      .join("items", "items.id", "=", "itemsLog.items_id")
+      .max("itemsLog.itemsLogPrice")
+      .first()
+      .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+      .andWhere("items.categories_id", catId);
+    const min = await this.knex("itemsLog")
+      .join("items", "items.id", "=", "itemsLog.items_id")
+      .min("itemsLog.itemsLogPrice")
+      .first()
+      .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+      .andWhere("items.categories_id", catId);
+    return {
+      todayMax: max.max,
+      todayMin: min.min
+    };
+  }
 
-    // Loop through the catList and find the max and min price for the specified date
-    await BlueBirdPromise.map(catList, async (cat: any) => {
-      const max = await this.knex("itemsLog")
-        .join("items", "items.id", "=", "itemsLog.items_id")
-        .max("itemsLog.itemsLogPrice")
-        .first()
-        .whereRaw("??::date = ?", ["created_at", dateOfQuery])
-        .andWhere("items.categories_id", cat.id);
-      const min = await this.knex("itemsLog")
-        .join("items", "items.id", "=", "itemsLog.items_id")
-        .min("itemsLog.itemsLogPrice")
-        .first()
-        .whereRaw("??::date = ?", ["created_at", dateOfQuery])
-        .andWhere("items.categories_id", cat.id);
-      console.log(`The max value for ${cat.id} is : ${max.max}`);
-      console.log(`The max value for ${cat.id} is : ${min.min}`);
+  public async updateLogPrice() {
+    // get the current date and hour
+    const currentYear = await new Date().getUTCFullYear();
+    const currentMonth = (await new Date().getUTCMonth()) + 1;
+    const currentDate = await new Date().getUTCDate();
+    const currentHour = await new Date().getUTCHours();
+
+    // obtain the list of category id's in the category table
+    const categoryList = await this.knex("categories").select(
+      "id as categories_id"
+    );
+
+    // look through the itemLog and see which categories has been recorded in the last hour
+    let list = await this.knex.raw(
+      `SELECT "items"."categories_id" FROM "itemsLog" JOIN "items" ON "itemsLog"."items_id" = "items"."id" WHERE "created_at" BETWEEN '${currentYear}-${currentMonth}-${currentDate} ${currentHour}:00:00' AND '${currentYear}-${currentMonth}-${currentDate} ${currentHour}:59:59.999999+08' ORDER BY "items"."categories_id"`
+    );
+    list = list.rows;
+    for (let i = 1; i < list.length; ) {
+      list[i - 1].categories_id === list[i].categories_id
+        ? list.splice(i, 1)
+        : i++;
+    }
+
+    // remove category id's that exist in the list from the category list
+    for (let i = 0; i < list.length; i++) {
+      for (let j = 0; j < categoryList.length; j++) {
+        if (list[i].categories_id === categoryList[j].categories_id) {
+          categoryList.splice(j, 1);
+        }
+      }
+    }
+
+    // loop through list of remaining category list to update the price as per current price in items table
+    await BlueBirdPromise.map(categoryList, async (category: any) => {
+      const itemList = await this.knex("items")
+        .select("id", "currentPrice")
+        .where("categories_id", category.categories_id);
+      // loop through all items in the category and insert the current price into the itemsLog table
+      await BlueBirdPromise.map(itemList, async (item: any) => {
+        await this.knex("itemsLog").insert({
+          items_id: item.id,
+          itemsLogPrice: item.currentPrice,
+          created_at: `${currentYear}-${currentMonth}-${currentDate} ${currentHour}:59:59.999999`
+        });
+      });
     });
-
-    return catList;
+    return categoryList;
   }
 }
