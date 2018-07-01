@@ -211,92 +211,71 @@ export default class UsersService {
   }
 
   // Working 23/06/18
-  public getAllInCatWithFluctuatingPrices(
+  public async getAllInCatWithFluctuatingPrices(
     catName: string,
     dateOfQuery: string
   ) {
-    let catPhoto: string;
-    this.knex("categories")
+    const catPhoto = (await this.knex("categories")
+      .first()
       .select("categoryPhoto")
-      .where("categoryName", catName)
-      .then((photos: Knex.QueryCallback) => {
-        return (catPhoto = photos[0].categoryPhoto);
+      .where("categoryName", catName)).categoryPhoto;
+
+    const catId = await this.knex("categories")
+      .first()
+      .select("id")
+      .where("categoryName", catName);
+
+    const itemList = await this.knex("items")
+      .select(
+        "id as items_id",
+        "itemName",
+        "itemStock",
+        "minimumPrice",
+        "currentPrice",
+        "itemPhoto",
+        "itemDescription",
+        "isActive",
+        "isSpecial"
+      )
+      .where("categories_id", catId.id)
+      .orderBy("id", "ase");
+
+    const result = await BlueBirdPromise.map(itemList, async (item: any) => {
+      const itemLogSummary = await this.knex("itemsLog")
+        .join("items", "itemsLog.items_id", "=", "items.id")
+        .join("categories", "items.categories_id", "=", "categories.id")
+        .select("items.itemName")
+        .select(
+          this.knex.raw(`extract(hour from "itemsLog".created_at) as hour`)
+        )
+        .avg("itemsLog.itemsLogPrice")
+        .whereRaw("??::date = ?", ["created_at", dateOfQuery])
+        .where("items.itemName", item.itemName)
+        .groupBy("itemName")
+        .groupByRaw(`extract('hour' from "itemsLog".created_at)`);
+
+      // reorganizing the data into the agreed upon format for chart package to read
+      const itemLogSummaryPerItems = itemLogSummary.map((element: any) => {
+        const itemLogSummaryPerItem: any = {
+          time: element.hour.toString(),
+          purchasePrice: parseInt(element.avg, 10)
+        };
+        return itemLogSummaryPerItem;
       });
 
-    return this.knex("categories")
-      .select("id")
-      .where("categoryName", catName)
-      .then((catId: Knex.QueryCallback) => {
-        return this.knex("items")
-          .select(
-            "id as items_id",
-            "itemName",
-            "itemStock",
-            "minimumPrice",
-            "currentPrice",
-            "itemPhoto",
-            "itemDescription",
-            "isActive",
-            "isSpecial"
-          )
-          .where("categories_id", catId[0].id)
-          .orderBy("id", "ase")
-          .then((itemList: any) => {
-            return Promise.all(
-              itemList.map((item: object, j: number) => {
-                return (
-                  this.knex("itemsLog")
-                    .join("items", "itemsLog.items_id", "=", "items.id")
-                    .join(
-                      "categories",
-                      "items.categories_id",
-                      "=",
-                      "categories.id"
-                    )
-                    .select("items.itemName")
-                    .select(
-                      this.knex.raw(
-                        `extract(hour from "itemsLog".created_at) as hour`
-                      )
-                    )
-                    .avg("itemsLog.itemsLogPrice")
-                    .whereRaw("??::date = ?", ["created_at", dateOfQuery])
-                    .where("items.itemName", itemList[j].itemName)
-                    // add another where condition so that it is between noon and midnight
-                    .groupBy("itemName")
-                    .groupByRaw(`extract('hour' from "itemsLog".created_at)`)
-                    .then((itemLogSummary: any) => {
-                      // reorganizing the data into the agreed upon format for chart package to read
-                      return Promise.all(
-                        itemLogSummary.map((order: object, k: number) => {
-                          const itemLogSummaryPerItem = {
-                            time: itemLogSummary[k].hour.toString(),
-                            purchasePrice: parseInt(itemLogSummary[k].avg, 10)
-                          };
-                          return itemLogSummaryPerItem;
-                        })
-                      ).then((itemLogSummaryFormatted: any) => {
-                        // assigning the fluctuating data to the item object
-                        return (itemList[
-                          j
-                        ].chartData = itemLogSummaryFormatted);
-                      });
-                    })
-                );
-              })
-            ).then(() => {
-              return itemList;
-            });
-            const result = [
-              {
-                categoryName: catName,
-                categoryPhoto: catPhoto,
-                items: itemList
-              }
-            ];
-            return result;
-          });
-      });
+      // assigning the fluctuating data to the item object
+      item.chartData = itemLogSummaryPerItems;
+      return item;
+    });
+    
+    const finalResult = [
+      {
+        categoryName: catName,
+        categoryPhoto: catPhoto,
+        items: result
+      }
+    ];
+    return finalResult;
   }
 
   // Working 15/06/18
