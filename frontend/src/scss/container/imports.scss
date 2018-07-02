@@ -1,4 +1,5 @@
 //--> Mobile
+@import './mobile/initialize';
 @import './mobile/login';
 @import './mobile/profile';
 @import './mobile/setting';
@@ -7,6 +8,7 @@
 @import './mobile/order';
 @import './mobile/orderlist';
 @import './mobile/request';
+@import './mobile/introduction';
 //--> Desktop
 @import './desktop/stockmanagement';
 @import './desktop/currentorders';

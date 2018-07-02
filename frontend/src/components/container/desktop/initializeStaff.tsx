@@ -62,7 +62,7 @@ class PureInitialize extends React.Component<IInitializeProps, {}> {
             this.props.getUserProfileByUserToken();
         }
         if (this.props.menuReady && this.props.userProfileReady && this.props.allOrdersReady && this.props.userProfile.role !== "customer") {
-            this.props.history.push("/staff/pendingorders");
+            this.props.history.push("/admin/pendingorders");
         }
     }
 

@@ -22,9 +22,9 @@ export default class UsersService {
   }
 
   // Working 10/06/18
-  public add(data: IUserData, file: Express.Multer.File) {
+  public async add(data: IUserData, file: Express.Multer.File) {
     const hash = bcrypt.hashSync(data.password, 10);
-    return this.knex("users")
+    const id = (await this.knex("users")
       .insert({
         displayName: data.displayName,
         facebookToken: data.facebookToken,
@@ -33,15 +33,14 @@ export default class UsersService {
         role: data.role,
         username: data.username
       })
-      .returning("id")
-      .then(async (id: Knex.QueryCallback) => {
-        if (file !== undefined) {
-          await this.saveUpdateUserImage(id[0], file);
-        }
-        return this.knex("users")
-          .where("id", id[0])
-          .select("id", "password", "displayName", "userPhoto");
-      });
+      .returning("id"))[0];
+
+    if (file !== undefined) {
+      await this.saveUpdateUserImage(id, file);
+    }
+    return this.knex("users")
+      .where("id", id)
+      .select("id", "password", "displayName", "userPhoto");
   }
 
   // Working 06/06/18
@@ -52,9 +51,12 @@ export default class UsersService {
   }
 
   // Working 10/06/18
-  public update(id: number, data: IUserData, file: Express.Multer.File) {
+  public async update(id: number, data: IUserData, file: Express.Multer.File) {
+    console.log(id)
+    console.log(data)
+
     const hash = bcrypt.hashSync(data.password, 10);
-    return this.knex("users")
+    const userId = (await this.knex("users")
       .where("id", id)
       .update({
         displayName: data.displayName,
@@ -66,14 +68,13 @@ export default class UsersService {
         stripeToken: data.stripeToken,
         googleToken: data.googleToken
       })
-      .returning("id")
-      .then(async (userId: Knex.QueryCallback) => {
-        if (file !== undefined) {
-          await this.saveUpdateUserImage(id[0], file);
-        }
-        return this.knex("users")
-          .where("id", userId[0])
-          .select("id",  "password", "displayName", "userPhoto");
-      });
+      .returning("id"))[0];
+
+    if (file !== undefined) {
+      await this.saveUpdateUserImage(id, file);
+    }
+    return this.knex("users")
+      .where("id", userId)
+      .select("id", "password", "displayName", "userPhoto");
   }
 }

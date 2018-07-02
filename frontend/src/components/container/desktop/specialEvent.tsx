@@ -7,16 +7,12 @@ import AdminSideMenu from "../../ui/desktop/sidemenu";
 // import OrderCard from "../../ui/desktop/ordercard";
 import { TimePicker } from "@blueprintjs/datetime";
 
-// for redir
-import * as History from "history";
-import { withRouter } from "react-router";
-
 // import { ISpecialEvent } from "src/modules";
 
 // redux
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
-// import { specialEventTrigger } from "../../../redux/desktop/actions/actions_manager";
+import { triggerSpEvent } from "../../../redux/desktop/actions/actions_manager";
 
 export interface ISpecialEvent {
     sponsor: string,
@@ -26,10 +22,7 @@ export interface ISpecialEvent {
 }
 
 interface ICurrentOrdersProps {
-    specialEventTrigger: (eventDetails: ISpecialEvent) => void,
-    // handling redirect
-    // customerProfile: IUserProfile,
-    history: History.History,
+    triggerSpEvent: (eventDetails: ISpecialEvent) => void,
 }
 
 const mapStateToProps = (state: IRootState) => {
@@ -38,9 +31,9 @@ const mapStateToProps = (state: IRootState) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        // specialEventTrigger: () => {
-        //     dispatch(specialEventTrigger());
-        // },
+        triggerSpEvent: (eventInfo: ISpecialEventState) => {
+            dispatch(triggerSpEvent(eventInfo));
+        },
     };
 };
 
@@ -62,10 +55,6 @@ class PureSpecialEvent extends React.Component<ICurrentOrdersProps, ISpecialEven
             eventTime: new Date,
         }
     }
-
-    // public componentWillMount() {    }
-
-    // public componentDidMount() {}
 
     public sponsor = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
@@ -92,6 +81,16 @@ class PureSpecialEvent extends React.Component<ICurrentOrdersProps, ISpecialEven
         this.setState({
             eventTime: newTime
         })
+    }
+
+    public onSubmit = () => {
+        const eventInfo = {
+            sponsor: this.state.sponsor,
+            percentage: this.state.percentage,
+            description: this.state.description,
+            eventTime: this.state.eventTime,
+        }
+        this.props.triggerSpEvent(eventInfo);
     }
 
     public render() {
@@ -156,4 +155,4 @@ const SpecialEvent = connect(
     mapDispatchToProps
 )(PureSpecialEvent);
 
-export default withRouter(SpecialEvent as any);
+export default SpecialEvent;

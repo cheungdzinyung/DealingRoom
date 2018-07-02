@@ -35,8 +35,7 @@
             }
         }
         .social-login {
-            filter: grayscale(80%);
-            pointer-events: none;
+            @extend %disable;
             grid-area: social;
             width: 100%; // height: 100%;
             display: flex;

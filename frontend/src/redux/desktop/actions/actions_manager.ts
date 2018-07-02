@@ -73,6 +73,21 @@ export interface IResetSuccessStatusAction extends Action {
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export const TRIGGER_SP_EVENT_SUCCESS = "TRIGGER_SP_EVENT_SUCCESS";
+export type TRIGGER_SP_EVENT_SUCCESS = typeof TRIGGER_SP_EVENT_SUCCESS;
+export interface ITriggerSpEventSuccessAction extends Action {
+	type: TRIGGER_SP_EVENT_SUCCESS,
+}
+
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export const TRIGGER_SP_EVENT_FAIL = "TRIGGER_SP_EVENT_FAIL";
+export type TRIGGER_SP_EVENT_FAIL = typeof TRIGGER_SP_EVENT_FAIL;
+export interface ITriggerSpEventFailAction extends Action {
+	type: TRIGGER_SP_EVENT_FAIL,
+	errMsg: any,
+}
+
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 // Combined types
 export type ManagerActions =
 	IGetEntireMenuSuccessAction |
@@ -82,7 +97,9 @@ export type ManagerActions =
 	IUpdateItemSuccessAction |
 	IUpdateItemFailAction |
 	IToggleStockManageModalAction |
-	IResetSuccessStatusAction;
+	IResetSuccessStatusAction |
+	ITriggerSpEventSuccessAction |
+	ITriggerSpEventFailAction;
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function getEntireMenuSuccess(entireMenu: IMenuCategoryWithoutFlux[]): IGetEntireMenuSuccessAction {
@@ -199,5 +216,38 @@ export function toggleStockManageModal(stockManageModalState: IStockManageModalS
 export function resetSuccessState(): IResetSuccessStatusAction {
 	return {
 		type: RESET_SUCCESS_STATUS,
+	}
+}
+
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export function triggerSpEventSuccess(): ITriggerSpEventSuccessAction {
+	return {
+		type: TRIGGER_SP_EVENT_SUCCESS,
+	}
+}
+
+export function triggerSpEventFail(errMsg: any): ITriggerSpEventFailAction {
+	return {
+		type: TRIGGER_SP_EVENT_FAIL,
+		errMsg,
+	}
+}
+
+export function triggerSpEvent(eventInfo: any) {
+	const config = { headers: { Authorization: "Bearer " + localStorage.getItem("dealingRoomToken") } }
+	return (dispatch: Dispatch<ITriggerSpEventSuccessAction | ITriggerSpEventFailAction>) => {
+		axios.put(`${API_SERVER}/api/price/event`, eventInfo, config)
+			.then((res: any) => {
+				if (res.status === 201) {
+					dispatch(triggerSpEventSuccess());
+				} else {
+					alert("update error, try again");
+					dispatch(triggerSpEventFail(res.status + "status not match"));
+				}
+			})
+			.catch((err: any) => {
+				alert(err);
+				dispatch(triggerSpEventFail(err));
+			})
 	}
 }

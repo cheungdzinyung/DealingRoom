@@ -13,13 +13,13 @@ export default class DesktopRoutes extends React.Component {
   public render() {
     return (
       <Switch>
-        <Route exact={true} path="/staff/initializeStaff" component={Initialize} />
-        <Route exact={true} path="/staff/stock/" component={StockManagement} />
-        <Route exact={true} path="/staff/specialEvent/" component={SpecialEvent} />
-        <Route exact={true} path="/staff/currentorders" component={CurrentOrders} />
-        <Route exact={true} path="/staff/pendingorders" component={PendingOrders} />
-        <Route exact={true} path="/staff/unpaidorders" component={UnpaidOrders} />
-        <Route path="/staff" component={AdminLogin} />>
+        <Route exact={true} path="/admin/initializeStaff" component={Initialize} />
+        <Route exact={true} path="/admin/stock/" component={StockManagement} />
+        <Route exact={true} path="/admin/specialEvent/" component={SpecialEvent} />
+        <Route exact={true} path="/admin/currentorders" component={CurrentOrders} />
+        <Route exact={true} path="/admin/pendingorders" component={PendingOrders} />
+        <Route exact={true} path="/admin/unpaidorders" component={UnpaidOrders} />
+        <Route path="/admin" component={AdminLogin} />
       </Switch>
     );
   }

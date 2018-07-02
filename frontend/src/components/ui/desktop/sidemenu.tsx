@@ -4,23 +4,21 @@ import * as React from "react";
 import { withRouter } from "react-router";
 
 // Importing static assets
-import logo from "../../assets/icons/all/logo.svg"
+import logo from "../../assets/icons/all/logo.svg";
 // Importing menu icons
-import glass from "../../assets/icons/desktop/sidemenu/glass.svg"
-import info from "../../assets/icons/desktop/sidemenu/info.svg"
-import bell from "../../assets/icons/desktop/sidemenu/bell.svg"
-import users from "../../assets/icons/desktop/sidemenu/users.svg"
-// import dollar from "../../assets/icons/desktop/sidemenu/dollar.png"
+import glass from "../../assets/icons/desktop/sidemenu/glass.svg";
+import info from "../../assets/icons/desktop/sidemenu/info.svg";
+import bell from "../../assets/icons/desktop/sidemenu/bell.svg";
+import users from "../../assets/icons/desktop/sidemenu/users.svg";
 
 // import redux and friends
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
-import { changePage } from "../../../redux/mobile/actions/actions_user";    
-
+import { changePage } from "../../../redux/mobile/actions/actions_user";
 
 interface IUserMenuProps {
-    history: History.History,
-    changePage: (targetPage: string) => void,
+    history: History.History;
+    changePage: (targetPage: string) => void;
 }
 
 class AdminSideMenu extends React.Component<IUserMenuProps, {}> {
@@ -29,25 +27,25 @@ class AdminSideMenu extends React.Component<IUserMenuProps, {}> {
     }
 
     public toStockManagement = () => {
-        this.props.changePage(`/staff/stock`);
-        this.props.history.push(`/staff/stock`);
+        this.props.changePage(`/admin/stock`);
+        this.props.history.push(`/admin/stock`);
     };
     public toCurrentOrders = () => {
-        this.props.changePage(`/staff/currentorders`);
-        this.props.history.push(`/staff/currentorders`);
+        this.props.changePage(`/admin/currentorders`);
+        this.props.history.push(`/admin/currentorders`);
     };
     public toPendingOrders = () => {
-        this.props.changePage(`/staff/pendingorders`);
-        this.props.history.push(`/staff/pendingorders`);
+        this.props.changePage(`/admin/pendingorders`);
+        this.props.history.push(`/admin/pendingorders`);
     };
     public toUnPaidOrders = () => {
-        this.props.changePage(`/staff/unpaidorders`);
-        this.props.history.push(`/staff/unpaidorders`);
+        this.props.changePage(`/admin/unpaidorders`);
+        this.props.history.push(`/admin/unpaidorders`);
     };
-      public toSpecialEvent = () => {
-        this.props.changePage(`/staff/specialEvent`);
-        this.props.history.push(`/staff/specialEvent`);
-      };
+    public toSpecialEvent = () => {
+        this.props.changePage(`/admin/specialEvent`);
+        this.props.history.push(`/admin/specialEvent`);
+    };
 
     public render() {
         return (
@@ -90,7 +88,7 @@ class AdminSideMenu extends React.Component<IUserMenuProps, {}> {
                     <div className="menu-section">
                         <span className="section-header">Bar/Kitchen</span>
                         <div className="section-pages">
-                            <div className="section-page-line"  onClick={this.toPendingOrders}>
+                            <div className="section-page-line" onClick={this.toPendingOrders}>
                                 <img src={bell} alt="" className="page-line-icon" />
                                 <span className="page-line-text">
                                     Pending Orders</span>
@@ -114,17 +112,20 @@ class AdminSideMenu extends React.Component<IUserMenuProps, {}> {
 }
 
 const mapStateToProps = (state: IRootState) => {
-  return {}
-}
+    return {};
+};
 
 const mapDispatchToProps = (dispatch: any) => {
-  return {
-    changePage: (targetPage: string) => {
-      dispatch(changePage(targetPage));
-    },
-  }
-}
+    return {
+        changePage: (targetPage: string) => {
+            dispatch(changePage(targetPage));
+        }
+    };
+};
 
-const SideMenu = connect(mapStateToProps, mapDispatchToProps)(AdminSideMenu);
+const SideMenu = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(AdminSideMenu);
 
 export default withRouter(SideMenu as any);
