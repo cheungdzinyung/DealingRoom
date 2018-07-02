@@ -2,7 +2,7 @@
 import * as React from "react";
 import QR from 'src/components/assets/images/qr/homepage.jpg';
 
-export class DisplayDataSub extends React.Component<{}, {}> {
+export class DisplayCategoryList extends React.Component<{}, {}> {
   constructor(props: {}) {
     super(props);
   }
