@@ -6,20 +6,15 @@ import PageHeader from "../../ui/desktop/pageheader";
 import AdminSideMenu from "../../ui/desktop/sidemenu";
 // import OrderCard from "../../ui/desktop/ordercard";
 import { TimePicker } from "@blueprintjs/datetime";
+// import { FormGroup } from "@blueprintjs/core";
 
-// import { ISpecialEvent } from "src/modules";
+import { ISpecialEvent } from "src/modules";
 
 // redux
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
 import { triggerSpEvent } from "../../../redux/desktop/actions/actions_manager";
 
-export interface ISpecialEvent {
-    sponsor: string,
-    percentage: number,
-    description: string,
-    eventTime: Date,          // date.now()
-}
 
 interface ICurrentOrdersProps {
     triggerSpEvent: (eventDetails: ISpecialEvent) => void,
@@ -39,7 +34,7 @@ const mapDispatchToProps = (dispatch: any) => {
 
 interface ISpecialEventState {
     sponsor: string,
-    percentage: number,
+    discount: number,
     description: string,
     eventTime: Date,
 }
@@ -49,9 +44,9 @@ class PureSpecialEvent extends React.Component<ICurrentOrdersProps, ISpecialEven
         super(props);
 
         this.state = {
-            sponsor: "",
-            percentage: 0,
-            description: "",
+            sponsor: "House",
+            discount: 0,
+            description: "Discount on the house!",
             eventTime: new Date,
         }
     }
@@ -62,12 +57,12 @@ class PureSpecialEvent extends React.Component<ICurrentOrdersProps, ISpecialEven
         })
     }
 
-    public percentage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    public discount = (e: React.ChangeEvent<HTMLInputElement>) => {
         let num = parseInt(e.target.value, 10);
         if (num > 100) { num = 100 }
         if (num < 0) { num = 0 }
         this.setState({
-            percentage: num
+            discount: num
         })
     }
 
@@ -83,13 +78,14 @@ class PureSpecialEvent extends React.Component<ICurrentOrdersProps, ISpecialEven
         })
     }
 
-    public onSubmit = () => {
+    public confirm = () => {
         const eventInfo = {
             sponsor: this.state.sponsor,
-            percentage: this.state.percentage,
+            discount: this.state.discount,
             description: this.state.description,
             eventTime: this.state.eventTime,
         }
+        // alert(JSON.stringify(eventInfo));
         this.props.triggerSpEvent(eventInfo);
     }
 
@@ -100,6 +96,17 @@ class PureSpecialEvent extends React.Component<ICurrentOrdersProps, ISpecialEven
                 <AdminSideMenu />
                 <div className="currentorder-container-center">
                     <div className="currentorder-wrapper">
+                        {/* <FormGroup
+                            helperText="Helper text with details..."
+                            label="Label A"
+                            labelFor="text-input"
+                            inline={true}
+                            requiredLabel={true}
+                        >
+                            <input id="text-input" placeholder="Placeholder text" />
+                        </FormGroup> */}
+
+
                         <div className="currentorder-header">
                             <PageHeader header="Special Event" />
                         </div>
@@ -114,15 +121,15 @@ class PureSpecialEvent extends React.Component<ICurrentOrdersProps, ISpecialEven
                                     onChange={this.sponsor} />
                             </div>
                             <div className="box">
-                                <h5>Discount percentage (%)</h5>
+                                <h5>Discount (%)</h5>
                                 <input
                                     type="number"
                                     className="event-box event-box-text"
-                                    placeholder="percentage"
+                                    placeholder="discount"
                                     max="100"
                                     min="0"
-                                    value={this.state.percentage}
-                                    onChange={this.percentage} />
+                                    value={this.state.discount}
+                                    onChange={this.discount} />
                             </div>
                             <div className="box">
                                 <h5>Event Message</h5>
@@ -137,10 +144,18 @@ class PureSpecialEvent extends React.Component<ICurrentOrdersProps, ISpecialEven
                                 <h5>Trigger Time</h5>
                                 <TimePicker
                                     className="event-box event-box-time"
-                                    showArrowButtons={true}
+                                    showArrowButtons={false}
                                     useAmPm={false}
                                     value={this.state.eventTime}
                                     onChange={this.eventTime} />
+                            </div>
+                            <div className="box">
+                                {/* <h5>Confirm</h5> */}
+                                <input
+                                    type="button"
+                                    className="event-box event-box-text"
+                                    value="Confirm"
+                                    onClick={this.confirm} />
                             </div>
                         </div>
                     </div>

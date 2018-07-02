@@ -4,11 +4,16 @@ import axios from "axios";
 
 import { API_SERVER } from "../../store";
 
+// Import UI elements
+import { AppToaster } from "src/components/ui/mobile/toast";
+import { Intent } from "@blueprintjs/core";
+
 import { 
 	IMenuCategoryWithoutFlux,
 	ICreateMenuItem,
 	IUpdateMenuItem,
 	IStockManageModalState,
+	ISpecialEvent,
 } from "../../../modules";
 
 // Type creation
@@ -156,14 +161,31 @@ export function createItem(itemStatus: ICreateMenuItem) {
 			.then((res: any) => {
 				if (res.status === 201) {
 					dispatch(createItemSuccess(res.data));
+					AppToaster.show({
+                        message: "success",
+                        intent: Intent.SUCCESS,
+                        icon: "tick",
+                        timeout: 2000
+                    });
 				} else {
 					alert("create item error, try again");
 					dispatch(createItemFail());
+					AppToaster.show({
+                        message: "Error, try again",
+                        intent: Intent.WARNING,
+                        icon: "cross",
+                        timeout: 2000
+                    });
 				}
 			})
 			.catch((err: any) => {
-				alert(err);
 				dispatch(createItemFail());
+				AppToaster.show({
+					message: "Error, try again",
+					intent: Intent.WARNING,
+					icon: "cross",
+					timeout: 2000
+				});
 			})
 	}
 }
@@ -191,14 +213,30 @@ export function updateItem(itemStatus: IUpdateMenuItem) {
 			.then((res: any) => {
 				if (res.status === 201) {
 					dispatch(updateItemSuccess(res.data));
+					AppToaster.show({
+                        message: "success",
+                        intent: Intent.SUCCESS,
+                        icon: "tick",
+                        timeout: 2000
+                    });
 				} else {
-					alert("update error, try again");
 					dispatch(updateItemFail());
+					AppToaster.show({
+                        message: "Error, try again",
+                        intent: Intent.WARNING,
+                        icon: "cross",
+                        timeout: 2000
+                    });
 				}
 			})
 			.catch((err: any) => {
-				alert(err);
 				dispatch(updateItemFail());
+				AppToaster.show({
+					message: "Error, try again",
+					intent: Intent.WARNING,
+					icon: "cross",
+					timeout: 2000
+				});
 			})
 	}
 }
@@ -233,21 +271,39 @@ export function triggerSpEventFail(errMsg: any): ITriggerSpEventFailAction {
 	}
 }
 
-export function triggerSpEvent(eventInfo: any) {
+export function triggerSpEvent(eventInfo: ISpecialEvent) {
 	const config = { headers: { Authorization: "Bearer " + localStorage.getItem("dealingRoomToken") } }
 	return (dispatch: Dispatch<ITriggerSpEventSuccessAction | ITriggerSpEventFailAction>) => {
-		axios.put(`${API_SERVER}/api/price/event`, eventInfo, config)
+		axios.post(`http://localhost:8080/api/items/event/pricedrop`, eventInfo, config)
+		// axios.post(`${API_SERVER}/api/items/event/pricedrop`, eventInfo, config)
 			.then((res: any) => {
-				if (res.status === 201) {
+				if (res.status === 200) {
 					dispatch(triggerSpEventSuccess());
+					AppToaster.show({
+                        message: "event triggered",
+                        intent: Intent.SUCCESS,
+                        icon: "tick",
+                        timeout: 2000
+                    });
 				} else {
-					alert("update error, try again");
+					// alert("update error, try again");
 					dispatch(triggerSpEventFail(res.status + "status not match"));
+					AppToaster.show({
+                        message: "Error, try again",
+                        intent: Intent.WARNING,
+                        icon: "cross",
+                        timeout: 2000
+                    });
 				}
 			})
 			.catch((err: any) => {
-				alert(err);
 				dispatch(triggerSpEventFail(err));
+				AppToaster.show({
+					message: "Error, try again",
+					intent: Intent.WARNING,
+					icon: "cross",
+					timeout: 2000
+				});
 			})
 	}
 }

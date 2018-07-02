@@ -1,6 +1,7 @@
 import * as express from "express";
 import * as multer from "multer";
 import * as path from "path";
+import { io } from "../app";
 
 import { IItemData } from "../interfaces";
 import ItemsService from "../services/ItemsService";
@@ -24,7 +25,7 @@ export default class ItemsRouter {
     router.get("/", this.getAll.bind(this));
     router.get("/image/:id", this.getImage.bind(this));
     router.get("/update/itemlog", this.updateLogPrice.bind(this));
-    router.get("/event/pricedrop", this.priceDrop.bind(this));
+    router.post("/event/pricedrop", this.priceDrop.bind(this));
 
     router.put("/:id", upload.single("itemPhoto"), this.update.bind(this));
 
@@ -144,6 +145,21 @@ export default class ItemsRouter {
       .then((totalDiscount: number) => {
         return this.itemsService.getAll(req.query.isActive)
           .then((result: any) => {
+            // emit new menu to everyone 
+            io.emit("action", {
+              type: "SOCKET_UPDATE_ITEM_PRICE",
+              entireMenu: result
+            });
+            // emit event info
+            io.emit("action", {
+              type: "SOCKET_SP_EVENT_INFO",
+              eventInfo: {
+                sponsor: req.body.sponsor,
+                discount: req.body.discount,
+                description: req.body.description,
+                eventTime: req.body.eventTime,
+              }
+            });
             res.status(200).json(result);
           })
           .catch((err: express.Errback) => {
