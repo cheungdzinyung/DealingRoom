@@ -254,12 +254,10 @@ export default class OrdersService {
     );
 
     // combine all values in the agreed upon format and return the results
-    const finalResult = [
-      {
-        user: userOrderList,
-        all: otherOrderList
-      }
-    ];
+    const finalResult = {
+      user: userOrderList,
+      all: otherOrderList
+    };
     return finalResult;
   }
 
