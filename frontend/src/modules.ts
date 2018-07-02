@@ -256,21 +256,3 @@ export interface ISpecialEvent {
 }
 
 
-
-
-
-// store state for ref
-// interface IUserState {
-//   role: string,
-//   isAuth: boolean,
-//   currentPage: string,
-//   redirectTarget: string,
-//   settings: string,
-// }
-
-// interface IOrdersState {
-//   ordersList: any,
-//   unpaidOrders: number,
-//   currentOrder: IRequestItem[],
-//   currentTotal: number,
-// }

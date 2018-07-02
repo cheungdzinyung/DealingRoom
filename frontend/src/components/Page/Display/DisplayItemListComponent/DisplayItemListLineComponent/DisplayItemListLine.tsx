@@ -1,28 +1,28 @@
 // Importing modules from library
 import * as React from "react";
 
-import { ResponsiveContainer, LineChart, Line } from "recharts";
+// Importing styling and static assets
+import "./DisplayItemListLine.scss";
 
+// Importing presentation components
+import { ResponsiveContainer, LineChart, Line } from "recharts";
+// Importing interfaces from module
 import { IMenuItemWithFlux, IItemPriceGraphData } from "src/modules";
+// Importing assisting utility functions
 import { percentageChange, sortGraphDataArray } from "src/util/utility";
 
-
-
-export class DisplayFlexItemLine extends React.Component<
+export class DisplayItemListLine extends React.Component<
   IMenuItemWithFlux,
-  { delta: number, graphDisplayData: IItemPriceGraphData[] }
-  > {
+  { delta: number; graphDisplayData: IItemPriceGraphData[] }
+> {
   constructor(props: IMenuItemWithFlux) {
     super(props);
 
-    const percentage = (
-      chartData: IItemPriceGraphData[],
-      currentPrice: number
-    ) => {
+    const percentage = (chartData: IItemPriceGraphData[]) => {
       const sortedData = sortGraphDataArray(chartData);
       if (chartData.length > 0) {
         const firstPrice = sortedData[0].purchasePrice;
-        const lastPrice = currentPrice;
+        const lastPrice = sortedData[sortedData.length - 1].purchasePrice;
         return percentageChange(lastPrice, firstPrice);
       }
       return 0;
@@ -40,17 +40,17 @@ export class DisplayFlexItemLine extends React.Component<
         return chartData;
       }
     };
+
     this.state = {
-      delta: percentage(this.props.chartData, this.props.currentPrice),
+      delta: percentage(this.props.chartData),
       graphDisplayData: cleanGraphData(
         this.props.chartData,
         this.props.currentPrice
       )
-    }
+    };
   }
 
   public render() {
-
     return (
       <div className="display-data-prices-flux-line">
         <span className="display-data-prices-flux-line-item-name">
@@ -69,10 +69,15 @@ export class DisplayFlexItemLine extends React.Component<
             </LineChart>
           </ResponsiveContainer>
         </div>
-        <span className={
-          this.state.delta > 0 ? "display-data-prices-flux-line-price increase-price" :
-            "display-data-prices-flux-line-price decrease-price"
-        }>&#36;{this.props.currentPrice}</span>
+        <span
+          className={
+            this.state.delta > 0
+              ? "display-data-prices-flux-line-price increase-price"
+              : "display-data-prices-flux-line-price decrease-price"
+          }
+        >
+          &#36;{this.props.currentPrice}
+        </span>
       </div>
     );
   }

@@ -1,10 +1,16 @@
 // Importing modules from library
 import * as React from "react";
 
-import { IMenuCategoryWithFlux } from "src/modules";
-import { DisplayFlexItemLine } from "src/components/ui/display/displayfluxitemline";
+// Importing styling and static assets
+import "./DisplayItemList.scss"
 
-export class DisplayFluxContainer extends React.Component<
+// Importing interfaces from module
+import { IMenuCategoryWithFlux } from "src/modules";
+
+// Importing presentation components
+import { DisplayItemListLine } from "./DisplayItemListLineComponent/DisplayItemListLine";
+
+export class DisplayItemList extends React.Component<
 IMenuCategoryWithFlux,
   {}
 > {
@@ -16,7 +22,7 @@ IMenuCategoryWithFlux,
     return (
       <div className="display-data-prices-container">
         {this.props.items.map((itemLine, index) => (
-          <DisplayFlexItemLine {...itemLine} />
+          <DisplayItemListLine {...itemLine} />
         ))}
       </div>
     );

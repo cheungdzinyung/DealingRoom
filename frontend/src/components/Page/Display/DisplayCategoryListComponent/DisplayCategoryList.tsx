@@ -1,6 +1,9 @@
 // Importing modules from library
 import * as React from "react";
-import QR from 'src/components/assets/images/qr/homepage.jpg';
+
+// Importing styling and static assets
+import "./DisplayCategoryList.scss";
+import QR from "./img/qrcode.jpg";
 
 export class DisplayCategoryList extends React.Component<{}, {}> {
   constructor(props: {}) {
@@ -10,7 +13,7 @@ export class DisplayCategoryList extends React.Component<{}, {}> {
   public render() {
     return (
       <div className="display-data-sub-container">
-        <img src={QR} className="display-data-sub-image"/>
+        <img src={QR} className="display-data-sub-image" />
       </div>
     );
   }

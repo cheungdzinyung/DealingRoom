@@ -1,7 +1,7 @@
 // Importing modules from library
 import * as React from "react";
 
-export class DisplayInfo extends React.Component<{}, {}> {
+export class DisplayVideo extends React.Component<{}, {}> {
   constructor(props: {}) {
     super(props);
   }
