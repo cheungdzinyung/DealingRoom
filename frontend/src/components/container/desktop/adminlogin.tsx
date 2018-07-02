@@ -93,9 +93,9 @@ class PureAdminLogin extends React.Component<ILoginProps, ILoginState> {
 
   public componentDidMount() {
     // actually should check if token is valid
-    if (localStorage.getItem("dealingRoomToken")) {
-      this.props.history.push("/admin/initializeStaff");
-    }
+    // if (localStorage.getItem("dealingRoomToken")) {
+    //   this.props.history.push("/admin/initializeStaff");
+    // }
   }
 
   public render() {

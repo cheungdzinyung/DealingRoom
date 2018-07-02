@@ -61,12 +61,13 @@ export const displayReducer = (state: IDisplayState = initialState, action: Disp
         case GET_ENTIRE_MENU_SUCCESS: {
             const categories = action.entireMenu.map((category: any) => (category.categoryName));
             // process flux array
-            return { ...state,
-                    entireMenu: action.entireMenu,
-                    categories,
-                    menuReady: true,
-                    displayAPIErr: "none"
-                };
+            return {
+                ...state,
+                entireMenu: action.entireMenu,
+                categories,
+                menuReady: true,
+                displayAPIErr: "none"
+            };
         }
         case GET_ENTIRE_MENU_FAIL: {
             return { ...state, displayAPIErr: "GET_ENTIRE_MENU_FAIL" };
@@ -75,8 +76,12 @@ export const displayReducer = (state: IDisplayState = initialState, action: Disp
             return { ...state, socketID: action.socketID };
         }
         case SOCKET_UPDATE_ITEM_PRICE: {
-            // alert(JSON.stringify(action.entireMenu))
             return { ...state, entireMenu: action.entireMenu };
+            // if (action.entireMenu.hasOwnProperty("chartData")) {
+            //     return { ...state, entireMenu: action.entireMenu };
+            // } else {
+            //     return state;
+            // }
         }
         default: {
             return state;
