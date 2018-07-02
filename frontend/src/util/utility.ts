@@ -33,8 +33,8 @@ export const switchUp = (
   if (data.all.length > 6) {
     newArray = data.all.slice(0, 6).map((single, index) => ({
       category: single.category,
-      everyone: single.price,
-      maxPrice: single.max,
+      everyone: parseInt(single.price, 10),
+      maxPrice: parseInt(single.max, 10),
       you: 0
     }));
 
@@ -42,13 +42,13 @@ export const switchUp = (
       const indicator = newArray.findIndex(
         eachArray => eachArray.category === single.category
       );
-      Object.assign(newArray[indicator], { you: single.price });
+      Object.assign(newArray[indicator], { you: parseInt(single.price, 10) });
     });
   } else {
     newArray = data.all.map((single, index) => ({
       category: single.category,
-      everyone: single.price,
-      maxPrice: single.max,
+      everyone: parseInt(single.price, 10),
+      maxPrice: parseInt(single.max, 10),
       you: 0
     }));
 
@@ -56,7 +56,7 @@ export const switchUp = (
       const indicator = newArray.findIndex(
         eachArray => eachArray.category === single.category
       );
-      Object.assign(newArray[indicator], { you: single.price });
+      Object.assign(newArray[indicator], { you: parseInt(single.price, 10) });
     });
   }
 
