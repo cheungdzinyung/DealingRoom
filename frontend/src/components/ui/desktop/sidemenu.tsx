@@ -10,6 +10,7 @@ import glass from "../../assets/icons/desktop/sidemenu/glass.svg"
 import info from "../../assets/icons/desktop/sidemenu/info.svg"
 import bell from "../../assets/icons/desktop/sidemenu/bell.svg"
 import users from "../../assets/icons/desktop/sidemenu/users.svg"
+// import dollar from "../../assets/icons/desktop/sidemenu/dollar.png"
 
 // import redux and friends
 import { connect } from "react-redux";
@@ -28,24 +29,25 @@ class AdminSideMenu extends React.Component<IUserMenuProps, {}> {
     }
 
     public toStockManagement = () => {
-        this.props.changePage(`/admin/stock`);
-        this.props.history.push(`/admin/stock`);
+        this.props.changePage(`/staff/stock`);
+        this.props.history.push(`/staff/stock`);
     };
     public toCurrentOrders = () => {
-        this.props.changePage(`/admin/currentorders`);
-        this.props.history.push(`/admin/currentorders`);
+        this.props.changePage(`/staff/currentorders`);
+        this.props.history.push(`/staff/currentorders`);
     };
     public toPendingOrders = () => {
-        this.props.changePage(`/admin/pendingorders`);
-        this.props.history.push(`/admin/pendingorders`);
+        this.props.changePage(`/staff/pendingorders`);
+        this.props.history.push(`/staff/pendingorders`);
     };
     public toUnPaidOrders = () => {
-        this.props.changePage(`/admin/unpaidorders`);
-        this.props.history.push(`/admin/unpaidorders`);
+        this.props.changePage(`/staff/unpaidorders`);
+        this.props.history.push(`/staff/unpaidorders`);
     };
-    //   public toStaffManagement = () => {
-    //     this.props.history.push(`/order`);
-    //   };
+      public toSpecialEvent = () => {
+        this.props.changePage(`/staff/specialEvent`);
+        this.props.history.push(`/staff/specialEvent`);
+      };
 
     public render() {
         return (
@@ -67,6 +69,11 @@ class AdminSideMenu extends React.Component<IUserMenuProps, {}> {
                                 <img src={users} alt="" className="page-line-icon" />
                                 <span className="page-line-text">
                                     Staff Management</span>
+                            </div>
+                            <div className="section-page-line" onClick={this.toSpecialEvent}>
+                                <img src={bell} alt="" className="page-line-icon" />
+                                <span className="page-line-text">
+                                    Special Event</span>
                             </div>
                         </div>
                     </div>
@@ -94,7 +101,7 @@ class AdminSideMenu extends React.Component<IUserMenuProps, {}> {
                         <span className="section-header">Payment</span>
                         <div className="section-pages">
                             <div className="section-page-line" onClick={this.toUnPaidOrders}>
-                                <img src={info} alt="" className="page-line-icon" />
+                                <img src={bell} alt="" className="page-line-icon" />
                                 <span className="page-line-text">
                                     Unpaid Orders</span>
                             </div>

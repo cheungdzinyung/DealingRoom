@@ -52,17 +52,17 @@ class PureInitialize extends React.Component<IInitializeProps, {}> {
     }
 
     public componentDidUpdate() {
-        if (this.props.staffAPIErr === "GET_ENTIRE_MENU_FAIL") {
+        if (this.props.staffAPIErr !== "GET_ENTIRE_MENU_SUCCESS") {
             this.props.getEntireMenu();
         }
-        if (this.props.staffAPIErr === "GET_ORDERS_BY_USER_TOKEN_FAIL") {
+        if (this.props.staffAPIErr !== "GET_ORDERS_BY_USER_TOKEN_SUCCESS") {
             this.props.getAllOrders();
         }
-        if (this.props.staffAPIErr === "GET_USER_PROFILE_BY_USER_TOKEN_FAIL") {
+        if (this.props.staffAPIErr !== "GET_USER_PROFILE_BY_USER_TOKEN_SUCCESS") {
             this.props.getUserProfileByUserToken();
         }
         if (this.props.menuReady && this.props.userProfileReady && this.props.allOrdersReady && this.props.userProfile.role !== "customer") {
-            this.props.history.push("/admin/pendingorders");
+            this.props.history.push("/staff/pendingorders");
         }
     }
 
