@@ -39,7 +39,7 @@ export default class UsersRouter {
         .add(user.id, req.body)
         .then((result: any) => {
           return this.itemsService
-            .getAllWithFluctuatingPrices(dateOfQuery)
+            .getAllWithFluctuatingPrices(dateOfQuery, "true")
             .then(orderList => {
               return (result[0].entireMenu = orderList);
             })
