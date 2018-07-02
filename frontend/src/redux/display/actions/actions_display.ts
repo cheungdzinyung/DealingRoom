@@ -39,13 +39,20 @@ export interface ISocketSpEventInfo extends Action {
   eventInfo: ISpecialEvent,
 }
 
+export const TOGGLE_EVENT_BELL_RING = "TOGGLE_EVENT_BELL_RING";
+export type TOGGLE_EVENT_BELL_RING = typeof TOGGLE_EVENT_BELL_RING;
+export interface IToggleEventBellRing extends Action {
+  type: TOGGLE_EVENT_BELL_RING,
+}
+
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export type DisplayActions =
   IGetEntireMenuSuccessAction |
   IGetEntireMenuFailAction |
   ISocketConnectSuccess |
   ISocketUpdateItemPrice |
-  ISocketSpEventInfo;
+  ISocketSpEventInfo |
+  IToggleEventBellRing;
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function getEntireMenuSuccess(
@@ -106,5 +113,12 @@ export function socketSpEventInfo(eventInfo: ISpecialEvent): ISocketSpEventInfo 
   return {
     type: SOCKET_SP_EVENT_INFO,
     eventInfo,
+  }
+}
+
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export function toggleEventBellRing(): IToggleEventBellRing {
+  return {
+    type: TOGGLE_EVENT_BELL_RING,
   }
 }
