@@ -43,6 +43,26 @@ interface ILoginProps {
   loginFacebook: (token: string) => void;
 }
 
+const mapStateToProps = (state: IRootState) => {
+  return {
+    isAuth: state.customer.user.isAuth
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    localLogin: (username: string, password: string) => {
+      dispatch(localLogin(username, password));
+    },
+    localSignUp: (username: string, password: string) => {
+      dispatch(localSignUp(username, password));
+    },
+    loginFacebook: (token: string) => {
+      dispatch(loginFacebook(token));
+    }
+  };
+};
+
 class PureLogin extends React.Component<ILoginProps, ILoginState> {
   constructor(props: ILoginProps) {
     super(props);
@@ -103,14 +123,14 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
   public componentDidUpdate() {
     // actually shld check if token is valid
     if (localStorage.getItem("dealingRoomToken")) {
-      this.props.history.push(`${this.props.match.url}initialize`);
+      this.props.history.push(`/customer/initialize`);
     }
   }
 
   public componentDidMount() {
     // actually shld check if token is valid
     if (localStorage.getItem("dealingRoomToken")) {
-      this.props.history.push(`${this.props.match.url}initialize`);
+      this.props.history.push(`/customer/initialize`);
     }
   }
 
@@ -221,25 +241,7 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
   }
 }
 
-const mapStateToProps = (state: IRootState) => {
-  return {
-    isAuth: state.customer.user.isAuth
-  };
-};
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    localLogin: (username: string, password: string) => {
-      dispatch(localLogin(username, password));
-    },
-    localSignUp: (username: string, password: string) => {
-      dispatch(localSignUp(username, password));
-    },
-    loginFacebook: (token: string) => {
-      dispatch(loginFacebook(token));
-    }
-  };
-};
 
 const Login = connect(
   mapStateToProps,

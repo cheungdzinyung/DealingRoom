@@ -37,31 +37,52 @@ interface IMenuItemProps {
 }
 
 interface IMenuItemState {
-  detailIsOpen: boolean
-  delta: number
+  detailIsOpen: boolean;
+  delta: number;
+  graphDisplayData: IItemPriceGraphData[];
 }
 
 export default class MenuItem extends React.Component<
   IMenuItemProps,
   IMenuItemState
-  > {
+> {
   constructor(props: IMenuItemProps) {
     super(props);
 
-    const percentage = (chartData: IItemPriceGraphData[]) => {
-      if (chartData.length !== 0) {
-        const firstPrice = chartData[0].purchasePrice;
-        const lastPrice = chartData[(this.props.chartData.length - 1)].purchasePrice
-        return percentageChange(lastPrice, firstPrice)
+    const percentage = (
+      chartData: IItemPriceGraphData[],
+      currentPrice: number
+    ) => {
+      const sortedData = sortGraphDataArray(chartData);
+      if (chartData.length > 0) {
+        const firstPrice = sortedData[0].purchasePrice;
+        const lastPrice = currentPrice;
+        return percentageChange(lastPrice, firstPrice);
       }
       return 0;
-    }
+    };
+
+    const cleanGraphData = (
+      chartData: IItemPriceGraphData[],
+      currentPrice: number
+    ) => {
+      if (chartData.length < 2) {
+        const newChartData = [...chartData];
+        newChartData.push({ time: "now", purchasePrice: currentPrice });
+        return newChartData;
+      } else {
+        return chartData;
+      }
+    };
 
     this.state = {
       detailIsOpen: false,
-      delta: percentage(this.props.chartData)
+      delta: percentage(this.props.chartData, this.props.currentPrice),
+      graphDisplayData: cleanGraphData(
+        this.props.chartData,
+        this.props.currentPrice
+      )
     };
-
   }
 
   public addToCurrentOrder = (e: React.MouseEvent<HTMLImageElement>) => {
@@ -145,7 +166,7 @@ export default class MenuItem extends React.Component<
             <hr className="item-performance-split" />
             <div className="menu-item-detail-graph-container">
               <ResponsiveContainer>
-                <AreaChart data={sortGraphDataArray(this.props.chartData)}>
+                <AreaChart data={this.state.graphDisplayData}>
                   <defs>
                     <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#EB5757" stopOpacity={0.8} />
