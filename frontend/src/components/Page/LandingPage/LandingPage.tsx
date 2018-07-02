@@ -2,12 +2,12 @@ import * as React from "react";
 
 // import "font-awesome/css/font-awesome.css";
 
-import { FooterComponent } from "src/components/container/homepage/FooterComponent/FooterComponent";
-import { SocialComponent } from "src/components/container/homepage/SocialComponent/SocialComponent";
-import { HowItWorksComponent } from "src/components/container/homepage/HowItWorksComponent/HowItWorksComponent";
-import { FeaturesComponent } from "src/components/container/homepage/FeaturesComponent/FeaturesComponent";
-import { DiscoverComponent } from "src/components/container/homepage/DiscoverComponent/DiscoverComponent";
-import { HeroComponent } from "src/components/container/homepage/HeroComponent/HeroComponent";
+import { FooterComponent } from "./FooterComponent/FooterComponent";
+import { SocialComponent } from "./SocialComponent/SocialComponent";
+import { HowItWorksComponent } from "./HowItWorksComponent/HowItWorksComponent";
+import { FeaturesComponent } from "./FeaturesComponent/FeaturesComponent";
+import { DiscoverComponent } from "./DiscoverComponent/DiscoverComponent";
+import { HeroComponent } from "./HeroComponent/HeroComponent";
 // import NavBarComponent from "src/components/container/homepage/NavBarComponent/NavBarComponent";
 
 export class LandingPage extends React.Component<{}, { navBarShrink: string }> {

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Switch, Route } from "react-router-dom";
 
-import { LandingPage } from "../container/homepage/landingpage";
+import { LandingPage } from "../Page/LandingPage/LandingPage";
 
 export default class HomepageRoutes extends React.Component {
   public render() {
