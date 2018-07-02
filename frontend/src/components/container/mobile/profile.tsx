@@ -45,6 +45,46 @@ class PurePerformance extends React.Component<
   constructor(props: IUserPerformanceProps) {
     super(props);
 
+  //   [
+  //     {
+  //         "user": [
+  //             {
+  //                 "category": "cocktail",
+  //                 "price": "100.0000000000000000",
+  //                 "max": "214.46"
+  //             }
+  //         ],
+  //         "all": [
+  //             {
+  //                 "category": "beer",
+  //                 "price": "124.8304166666666667",
+  //                 "max": "214.46"
+  //             },
+  //             {
+  //                 "category": "champagne",
+  //                 "price": "100.0000000000000000",
+  //                 "max": "214.46"
+  //             },
+  //             {
+  //                 "category": "cocktail",
+  //                 "price": "100.0000000000000000",
+  //                 "max": "214.46"
+  //             },
+  //             {
+  //                 "category": "tequila",
+  //                 "price": "80.0000000000000000",
+  //                 "max": "214.46"
+  //             },
+  //             {
+  //                 "category": "dessert",
+  //                 "price": "60.0000000000000000",
+  //                 "max": "214.46"
+  //             }
+  //         ]
+  //     }
+  // ]
+
+
     this.state = {
       processedData: [
         { category: "beer", you: 100, everyone: 200, maxPrice: 250 },

@@ -4,27 +4,48 @@ import * as React from "react";
 import { ResponsiveContainer, LineChart, Line } from "recharts";
 
 import { IMenuItemWithFlux, IItemPriceGraphData } from "src/modules";
-import { percentageChange } from "src/util/utility";
+import { percentageChange, sortGraphDataArray } from "src/util/utility";
 
 
 
 export class DisplayFlexItemLine extends React.Component<
   IMenuItemWithFlux,
-  { delta: number }
+  { delta: number, graphDisplayData: IItemPriceGraphData[] }
   > {
   constructor(props: IMenuItemWithFlux) {
     super(props);
 
-    const percentage = (chartData: IItemPriceGraphData[]) => {
-      if (chartData.length !== 0) {
-        const firstPrice = chartData[0].purchasePrice;
-        const lastPrice = chartData[(this.props.chartData.length - 1)].purchasePrice
-        return percentageChange(lastPrice, firstPrice)
+    const percentage = (
+      chartData: IItemPriceGraphData[],
+      currentPrice: number
+    ) => {
+      const sortedData = sortGraphDataArray(chartData);
+      if (chartData.length > 0) {
+        const firstPrice = sortedData[0].purchasePrice;
+        const lastPrice = currentPrice;
+        return percentageChange(lastPrice, firstPrice);
       }
       return 0;
-    }
+    };
+
+    const cleanGraphData = (
+      chartData: IItemPriceGraphData[],
+      currentPrice: number
+    ) => {
+      if (chartData.length < 2) {
+        const newChartData = [...chartData];
+        newChartData.push({ time: "now", purchasePrice: currentPrice });
+        return newChartData;
+      } else {
+        return chartData;
+      }
+    };
     this.state = {
-      delta: percentage(this.props.chartData)
+      delta: percentage(this.props.chartData, this.props.currentPrice),
+      graphDisplayData: cleanGraphData(
+        this.props.chartData,
+        this.props.currentPrice
+      )
     }
   }
 
@@ -37,7 +58,7 @@ export class DisplayFlexItemLine extends React.Component<
         </span>
         <div className="display-data-prices-flux-line-item-fluxchart">
           <ResponsiveContainer>
-            <LineChart data={this.props.chartData}>
+            <LineChart data={this.state.graphDisplayData}>
               <Line
                 type="monotone"
                 dataKey="purchasePrice"

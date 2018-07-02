@@ -60,7 +60,7 @@ class PureMySrtipeComponent extends React.Component<IPurePaymentProps, {}> {
     public componentDidUpdate() {
         if (this.props.paymentResult.isPaid) {
             // alert("Payment successful :)");
-            this.props.history.push(`/order`);
+            this.props.history.push(`/customer/order`);
             this.props.resetPaymentResult();
         }
     }

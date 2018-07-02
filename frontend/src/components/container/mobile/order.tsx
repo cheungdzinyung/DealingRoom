@@ -90,7 +90,7 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
         icon: "cross",
         timeout: 2000
     });
-      this.props.history.push("/order");
+      this.props.history.push("/customer/order");
     }
 
   }

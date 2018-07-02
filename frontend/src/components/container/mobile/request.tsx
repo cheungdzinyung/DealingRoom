@@ -46,10 +46,10 @@ class PureRequest extends React.Component<IRequestProps, {}> {
       this.props.redirectPage("/customer/menu", this.props.history);
       this.props.resetTargetPage();
       AppToaster.show({
-        message: "Empty Basket",
+        message: "Try grabbing something to drink first!",
         intent: Intent.WARNING,
         icon: "issue",
-        timeout: 2000
+        timeout: 1500
       });
     }
   }

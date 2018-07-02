@@ -107,3 +107,8 @@ $header-sub-text: rgba(233, 219, 204, .3);
     justify-self: center;
     align-self: center;
 }
+
+%disable{
+    filter: grayscale(80%);
+    pointer-events: none;
+}
