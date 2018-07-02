@@ -18,12 +18,15 @@ interface IUserProfileGraphProps {
   data: IConsumptionGraphData[];
 }
 
-export default class UserProfileGraph extends React.Component<IUserProfileGraphProps, {}> {
+export default class UserProfileGraph extends React.Component<
+  IUserProfileGraphProps,
+  {}
+> {
   constructor(props: IUserProfileGraphProps) {
     super(props);
   }
 
-  public fakerTickFunction = () => {
+  public fakerTickFunction = (a: any) => {
     return null;
   };
 
@@ -33,30 +36,38 @@ export default class UserProfileGraph extends React.Component<IUserProfileGraphP
         <ResponsiveContainer>
           <RadarChart data={this.props.data}>
             <defs>
-              <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#EB5757" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="#EB5757" stopOpacity={0.2} />
-              </linearGradient>
               <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#2D9CDB" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="#2D9CDB" stopOpacity={0.2} />
+                <stop offset="5%" stopColor="#EE5353" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#EE5353" stopOpacity={0.2} />
+              </linearGradient>
+              <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#1174ac" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#1174ac" stopOpacity={0.2} />
               </linearGradient>
             </defs>
             <PolarGrid />
-            <PolarAngleAxis tickFormatter={this.fakerTickFunction} dataKey="purchasePrice" />
-            <PolarRadiusAxis tickFormatter={this.fakerTickFunction} angle={30} domain={[0, 250]} />
+            <PolarAngleAxis
+              tickFormatter={this.fakerTickFunction}
+              dataKey="category"
+              // axisLine={false}
+            />
+            <PolarRadiusAxis
+              tickFormatter={this.fakerTickFunction}
+              angle={30}
+              // axisLine={false}
+            />
+            {/* Draw second */}
             <Radar
-              //   name="Mike"
-              dataKey="you"
-              stroke="#EB5757"
-              fill="url(#colorUv)"
+              dataKey="everyone"
+              stroke="#EE5353"
+              fill="url(#colorPv)"
               fillOpacity={1}
             />
+            {/* Draw first */}
             <Radar
-              // name="Lily"
-              dataKey="everyone"
-              stroke="#2D9CDB"
-              fill="url(#colorPv)"
+              dataKey="you"
+              stroke="#1174ac"
+              fill="url(#colorUv)"
               fillOpacity={1}
             />
             <Legend />
