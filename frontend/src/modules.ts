@@ -203,8 +203,8 @@ export interface IConsumpGraphDataDeceiveAll {
 
 export interface IConsumptionGraphDataReceiveFromServerOneCat {
   category: string;
-  price: number;
-  max: number;
+  price: string;
+  max: string;
 }
 
 /* 

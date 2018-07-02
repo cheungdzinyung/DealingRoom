@@ -4,7 +4,10 @@ import * as React from "react";
 // Importing UI elements
 import UserMenu from "../../ui/mobile/usermenu";
 import PageHeader from "src/components/ui/mobile/pageheader";
-import { IConsumptionGraphData, IConsumpGraphDataDeceiveAll } from "src/modules";
+import {
+  IConsumptionGraphData,
+  IConsumpGraphDataDeceiveAll
+} from "src/modules";
 import UserProfileGraph from "src/components/ui/mobile/profilegraph";
 
 // Importing fake data
@@ -14,19 +17,20 @@ import UserProfileGraph from "src/components/ui/mobile/profilegraph";
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
 import { getUserConsumptionByUserToken } from "src/redux/mobile/actions/actions_user";
+import { switchUp } from "src/util/utility";
 
 interface IUserPerformanceProps {
-  userConsumptionComparison: IConsumpGraphDataDeceiveAll,
+  userConsumptionComparison: IConsumpGraphDataDeceiveAll;
   getConsumption: () => void;
 }
 interface IUserPerformanceState {
   processedData: IConsumptionGraphData[];
-} 
+}
 
 // Redux
 const mapStateToProps = (state: IRootState) => {
   return {
-    userConsumptionComparison: state.customer.user.userConsumptionComparison,
+    userConsumptionComparison: state.customer.user.userConsumptionComparison
   };
 };
 
@@ -41,59 +45,12 @@ const mapDispatchToProps = (dispatch: any) => {
 class PurePerformance extends React.Component<
   IUserPerformanceProps,
   IUserPerformanceState
-  > {
+> {
   constructor(props: IUserPerformanceProps) {
     super(props);
-
-  //   [
-  //     {
-  //         "user": [
-  //             {
-  //                 "category": "cocktail",
-  //                 "price": "100.0000000000000000",
-  //                 "max": "214.46"
-  //             }
-  //         ],
-  //         "all": [
-  //             {
-  //                 "category": "beer",
-  //                 "price": "124.8304166666666667",
-  //                 "max": "214.46"
-  //             },
-  //             {
-  //                 "category": "champagne",
-  //                 "price": "100.0000000000000000",
-  //                 "max": "214.46"
-  //             },
-  //             {
-  //                 "category": "cocktail",
-  //                 "price": "100.0000000000000000",
-  //                 "max": "214.46"
-  //             },
-  //             {
-  //                 "category": "tequila",
-  //                 "price": "80.0000000000000000",
-  //                 "max": "214.46"
-  //             },
-  //             {
-  //                 "category": "dessert",
-  //                 "price": "60.0000000000000000",
-  //                 "max": "214.46"
-  //             }
-  //         ]
-  //     }
-  // ]
-
-
+    this.props.getConsumption();
     this.state = {
-      processedData: [
-        { category: "beer", you: 100, everyone: 200, maxPrice: 250 },
-        { category: "shake", you: 190, everyone: 180, maxPrice: 250 },
-        { category: "love", you: 100, everyone: 250, maxPrice: 250 },
-        { category: "hate", you: 170, everyone: 182, maxPrice: 250 },
-        { category: "smart", you: 230, everyone: 100, maxPrice: 250 },
-        { category: "power", you: 100, everyone: 90, maxPrice: 250 }
-      ]
+      processedData: switchUp(this.props.userConsumptionComparison)
     };
   }
 
@@ -101,19 +58,17 @@ class PurePerformance extends React.Component<
     return (
       <div className="page-content-container">
         <PageHeader header={"Profile"} subHeader={"You are what you eat"} />
-        <UserProfileGraph data={this.state.processedData} />
+        <UserProfileGraph
+          data={switchUp(this.props.userConsumptionComparison)}
+        />
         <div className="cardd rd-corner">
-          <p>
-            This is just trying out haha. Thanks for joining us here.
-            </p>
+          <p>This is just trying out haha. Thanks for joining us here.</p>
         </div>
         <UserMenu />
       </div>
     );
   }
 }
-
-
 
 const Performance = connect(
   mapStateToProps,
