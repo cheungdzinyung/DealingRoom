@@ -1,9 +1,9 @@
-import React from 'react';
+import * as React from "react";
 import './style.css';
-import '../../device-mockups/device-mockups.css'
-import demoScreen1 from '../../demo-screen-1.jpg';
+import '../device-mockups/device-mockups.css'
+import demoScreen1 from './demo-screen-1.jpg';
 
-export const HeroComponent = (props)=>{
+export const HeroComponent = ()=>{
   return <header className="masthead">
     <div className="container h-100">
       <div className="row h-100">
@@ -20,8 +20,7 @@ export const HeroComponent = (props)=>{
                 <div className="screen">
                   <img src={demoScreen1} className="img-fluid" alt="" />
                 </div>
-                <div className="button">
-                </div>
+                <div className="button"/>
               </div>
             </div>
           </div>

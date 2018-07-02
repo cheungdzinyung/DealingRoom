@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from "react";
 import './style.css';
 
-export const FooterComponent = (props)=>{
+export const FooterComponent = ()=>{
   return <footer>
     <div className="container">
       <p>&copy; 2018 Dealing Room. All Rights Reserved.</p>

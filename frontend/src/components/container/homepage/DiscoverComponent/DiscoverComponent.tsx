@@ -1,8 +1,8 @@
-import React from "react";
+import * as React from "react";
 import "./style.css";
 import QRCode from "./img/QRCode.png";
 
-export const DiscoverComponent = props => {
+export const DiscoverComponent = () => {
   return (
     <section className="discover bg-primary text-center" id="discover">
       <div className="container">
