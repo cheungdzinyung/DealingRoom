@@ -15,6 +15,8 @@ import { DisplayInfo } from "src/components/ui/display/displayinfo";
 import { DisplayFluxContainer } from "src/components/ui/display/displayflux";
 import { DisplayDataSub } from "src/components/ui/display/displaydatasub";
 
+// import Sound from "react-sound";
+
 interface IDisplayState {
   categoryIndexCount: number
 }
@@ -93,7 +95,7 @@ export class PureDisplay extends React.Component<
         </div>
         <div className="rss-feed">
           <span className="feed-text">
-            This round of discount is brought to you by {(this.props.eventInfo.sponsor !== "")?this.props.eventInfo.sponsor : "dealingroom.live"}!
+            This round of discount is brought to you by {(this.props.eventInfo.sponsor !== "") ? this.props.eventInfo.sponsor : "dealingroom.live"}!
           </span>
         </div>
       </div>
