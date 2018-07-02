@@ -15,7 +15,11 @@ import { DisplayInfo } from "src/components/ui/display/displayinfo";
 import { DisplayFluxContainer } from "src/components/ui/display/displayflux";
 import { DisplayDataSub } from "src/components/ui/display/displaydatasub";
 
-// import Sound from "react-sound";
+// import { PlayButton, Timer } from 'react-soundplayer/components';
+// import { withSoundCloudAudio } from 'react-soundplayer/addons';
+
+// const clientId = 'YOUR CLIENT ID';
+// const resolveUrl = 'https://soundcloud.com/ksmtk/chronemics';
 
 interface IDisplayState {
   categoryIndexCount: number

@@ -56,12 +56,12 @@ export const displayReducer = (
       return { ...state, socketID: action.socketID };
     }
     case SOCKET_UPDATE_ITEM_PRICE: {
-      // alert(action.entireMenu.hasOwnProperty("chartData"))
-      if (action.entireMenu.hasOwnProperty("chartData")) {
-        return { ...state, entireMenu: action.entireMenu };
-      } else {
-        return state;
-      }
+      return { ...state, entireMenu: action.entireMenu };
+      // if (action.entireMenu.hasOwnProperty("chartData")) {
+      //   return { ...state, entireMenu: action.entireMenu };
+      // } else {
+      //   return state;
+      // }
     }
     case SOCKET_SP_EVENT_INFO: {
       // ring ring ring
