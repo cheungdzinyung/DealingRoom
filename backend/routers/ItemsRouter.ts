@@ -69,7 +69,10 @@ export default class ItemsRouter {
           });
       } else {
         return this.itemsService
-          .getAllWithFluctuatingPrices(req.query.fluctuatingPrices, req.query.maxmin)
+          .getAllWithFluctuatingPrices(
+            req.query.fluctuatingPrices,
+            req.query.maxmin
+          )
           .then((result: any) => {
             res.status(200).json(result);
           })
@@ -139,10 +142,16 @@ export default class ItemsRouter {
   }
 
   public priceDrop(req: express.Request, res: express.Response) {
+    const currentYear = new Date().getUTCFullYear();
+    const currentMonth = new Date().getUTCMonth() + 1;
+    const currentDate = new Date().getUTCDate();
+    const dateOfQuery = `${currentYear}-${currentMonth}-${currentDate}`;
+
     return this.itemsService
       .priceDrop(req.body.discount)
       .then((totalDiscount: number) => {
-        return this.itemsService.getAll(req.query.isActive)
+        return this.itemsService
+          .getAllWithFluctuatingPrices(dateOfQuery, "true")
           .then((result: any) => {
             res.status(200).json(result);
           })

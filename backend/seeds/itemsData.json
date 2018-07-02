@@ -1,7 +1,7 @@
 [
 	{
 		"itemName": "Asahi",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "beer",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
@@ -12,7 +12,7 @@
 	},
 	{
 		"itemName": "Carlsberg",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "beer",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
@@ -23,7 +23,7 @@
 	},
 	{
 		"itemName": "Corona",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "beer",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
@@ -34,7 +34,7 @@
 	},
 	{
 		"itemName": "Guinness",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "beer",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -45,7 +45,7 @@
 	},
 	{
 		"itemName": "Gweilo",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "beer",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
@@ -56,7 +56,7 @@
 	},
 	{
 		"itemName": "Heineken",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "beer",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
@@ -67,7 +67,7 @@
 	},
 	{
 		"itemName": "Hoegaarden",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "beer",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -78,7 +78,7 @@
 	},
 	{
 		"itemName": "Peroni",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "beer",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
@@ -89,7 +89,7 @@
 	},
 	{
 		"itemName": "Stella Artois",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "beer",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
@@ -100,7 +100,7 @@
 	},
 	{
 		"itemName": "Tsingtao",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "beer",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
@@ -111,7 +111,7 @@
 	},
 	{
 		"itemName": "Bloody Mary",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "cocktail",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
@@ -122,7 +122,7 @@
 	},
 	{
 		"itemName": "Cosmopolitan",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "cocktail",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
@@ -133,7 +133,7 @@
 	},
 	{
 		"itemName": "Daiquiri",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "cocktail",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
@@ -144,7 +144,7 @@
 	},
 	{
 		"itemName": "Long Island Ice Tea",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "cocktail",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
@@ -155,7 +155,7 @@
 	},
 	{
 		"itemName": "Manhattan",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "cocktail",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
@@ -166,7 +166,7 @@
 	},
 	{
 		"itemName": "Margarita",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "cocktail",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
@@ -177,7 +177,7 @@
 	},
 	{
 		"itemName": "Mojito",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "cocktail",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
@@ -188,7 +188,7 @@
 	},
 	{
 		"itemName": "Negroni",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "cocktail",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
@@ -199,7 +199,7 @@
 	},
 	{
 		"itemName": "Old Fashion",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "cocktail",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
@@ -210,7 +210,7 @@
 	},
 	{
 		"itemName": "Sex on the Beach",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "cocktail",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
@@ -221,7 +221,7 @@
 	},
 	{
 		"itemName": "Cabernet Sauvignon",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "redWine",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -232,7 +232,7 @@
 	},
 	{
 		"itemName": "Pinot Noir",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "redWine",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -243,7 +243,7 @@
 	},
 	{
 		"itemName": "Shiraz",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "redWine",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -254,7 +254,7 @@
 	},
 	{
 		"itemName": "Malbec",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "redWine",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -265,7 +265,7 @@
 	},
 	{
 		"itemName": "Merlot",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "redWine",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -276,7 +276,7 @@
 	},
 	{
 		"itemName": "Sauvignon Blanc",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "whiteWine",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -287,7 +287,7 @@
 	},
 	{
 		"itemName": "Chardonnay",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "whiteWine",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -298,7 +298,7 @@
 	},
 	{
 		"itemName": "Chablis",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "whiteWine",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -309,7 +309,7 @@
 	},
 	{
 		"itemName": "Riesling",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "whiteWine",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -320,7 +320,7 @@
 	},
 	{
 		"itemName": "Pinot Blanc",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "whiteWine",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -331,7 +331,7 @@
 	},
 	{
 		"itemName": "Moet & Chandon",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "champagne",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
@@ -342,7 +342,7 @@
 	},
 	{
 		"itemName": "Veuve Clicquot",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "champagne",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
@@ -353,7 +353,7 @@
 	},
 	{
 		"itemName": "Krug",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "champagne",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
@@ -364,7 +364,7 @@
 	},
 	{
 		"itemName": "Perrier Jouet",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "champagne",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
@@ -375,7 +375,7 @@
 	},
 	{
 		"itemName": "Taittinger",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "champagne",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
@@ -386,7 +386,7 @@
 	},
 	{
 		"itemName": "Grey Goose",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "vodka",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
@@ -397,7 +397,7 @@
 	},
 	{
 		"itemName": "Ketel One",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "vodka",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
@@ -408,7 +408,7 @@
 	},
 	{
 		"itemName": "Belvedere",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "vodka",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
@@ -419,7 +419,7 @@
 	},
 	{
 		"itemName": "Absolut",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "vodka",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -430,7 +430,7 @@
 	},
 	{
 		"itemName": "Smirnoff",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "vodka",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -441,7 +441,7 @@
 	},
 	{
 		"itemName": "Patron Silver",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "tequila",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -452,7 +452,7 @@
 	},
 	{
 		"itemName": "Don Julio Blanco",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "tequila",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -463,7 +463,7 @@
 	},
 	{
 		"itemName": "Don Julio Reposado",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "tequila",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
@@ -474,7 +474,7 @@
 	},
 	{
 		"itemName": "Don Julio Anejo",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "tequila",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
@@ -485,7 +485,7 @@
 	},
 	{
 		"itemName": "Don Julio 1942",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "tequila",
 		"minimumPrice": 50.00,
 		"currentPrice": 200.00,
@@ -496,7 +496,7 @@
 	},
 	{
 		"itemName": "Glenfiddich 15",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "whiskey",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -507,7 +507,7 @@
 	},
 	{
 		"itemName": "Glenfiddich 18",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "whiskey",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
@@ -518,7 +518,7 @@
 	},
 	{
 		"itemName": "Glenfiddich 21",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "whiskey",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
@@ -529,7 +529,7 @@
 	},
 	{
 		"itemName": "Jameson",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "whiskey",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -540,7 +540,7 @@
 	},
 	{
 		"itemName": "Jack Daniel's",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "whiskey",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -551,7 +551,7 @@
 	},
 	{
 		"itemName": "Tanqueray",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "gin",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -562,7 +562,7 @@
 	},
 	{
 		"itemName": "Bombay Sapphire",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "gin",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -573,7 +573,7 @@
 	},
 	{
 		"itemName": "Hendrick's",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "gin",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -584,7 +584,7 @@
 	},
 	{
 		"itemName": "Botanist",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "gin",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
@@ -595,7 +595,7 @@
 	},
 	{
 		"itemName": "Monkey 47",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "gin",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
@@ -606,7 +606,7 @@
 	},
 	{
 		"itemName": "Havana Club",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "rum",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -617,7 +617,7 @@
 	},
 	{
 		"itemName": "Captain Morgan",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "rum",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -628,7 +628,7 @@
 	},
 	{
 		"itemName": "Bacardi",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "rum",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -639,7 +639,7 @@
 	},
 	{
 		"itemName": "Foursquare",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "rum",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
@@ -650,7 +650,7 @@
 	},
 	{
 		"itemName": "Bacardi 151",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "rum",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
@@ -661,7 +661,7 @@
 	},
 	{
 		"itemName": "Hennessy VS",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "brandy",
 		"minimumPrice": 20.00,
 		"currentPrice": 80.00,
@@ -672,7 +672,7 @@
 	},
 	{
 		"itemName": "Hennessy VSOP",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "brandy",
 		"minimumPrice": 25.00,
 		"currentPrice": 100.00,
@@ -683,7 +683,7 @@
 	},
 	{
 		"itemName": "Hennessy XO",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "brandy",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
@@ -694,7 +694,7 @@
 	},
 	{
 		"itemName": "Hennessy Paradis",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "brandy",
 		"minimumPrice": 50.00,
 		"currentPrice": 200.00,
@@ -705,7 +705,7 @@
 	},
 	{
 		"itemName": "Hennessy Paradis Imperial",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "brandy",
 		"minimumPrice": 100.00,
 		"currentPrice": "400.00",
@@ -716,7 +716,7 @@
 	},
 	{
 		"itemName": "Evian",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "non-alcoholic",
 		"minimumPrice": 10.00,
 		"currentPrice": 40.00,
@@ -727,7 +727,7 @@
 	},
 	{
 		"itemName": "San Pellegrino",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "non-alcoholic",
 		"minimumPrice": 10.00,
 		"currentPrice": 40.00,
@@ -738,7 +738,7 @@
 	},
 	{
 		"itemName": "Coca Cola",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "non-alcoholic",
 		"minimumPrice": 10.00,
 		"currentPrice": 40.00,
@@ -749,7 +749,7 @@
 	},
 	{
 		"itemName": "Diet Coke",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "non-alcoholic",
 		"minimumPrice": 10.00,
 		"currentPrice": 40.00,
@@ -760,7 +760,7 @@
 	},
 	{
 		"itemName": "Sprite",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "non-alcoholic",
 		"minimumPrice": 10.00,
 		"currentPrice": 40.00,
@@ -771,7 +771,7 @@
 	},
 	{
 		"itemName": "Orange Juice",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "non-alcoholic",
 		"minimumPrice": 10.00,
 		"currentPrice": 40.00,
@@ -782,7 +782,7 @@
 	},
 	{
 		"itemName": "Cranberry Juice",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "non-alcoholic",
 		"minimumPrice": 10.00,
 		"currentPrice": 40.00,
@@ -793,7 +793,7 @@
 	},
 	{
 		"itemName": "Soda Water",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "non-alcoholic",
 		"minimumPrice": 10.00,
 		"currentPrice": 40.00,
@@ -804,7 +804,7 @@
 	},
 	{
 		"itemName": "Tonic Water",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "non-alcoholic",
 		"minimumPrice": 10.00,
 		"currentPrice": 40.00,
@@ -815,7 +815,7 @@
 	},
 	{
 		"itemName": "Red Bull",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "non-alcoholic",
 		"minimumPrice": 10.00,
 		"currentPrice": 40.00,
@@ -826,7 +826,7 @@
 	},
 	{
 		"itemName": "French Fries",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "snack",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
@@ -837,7 +837,7 @@
 	},
 	{
 		"itemName": "Onion Rings",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "snack",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
@@ -848,7 +848,7 @@
 	},
 	{
 		"itemName": "Fried Calamaries",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "snack",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
@@ -859,7 +859,7 @@
 	},
 	{
 		"itemName": "Spinach Dip",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "snack",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
@@ -870,7 +870,7 @@
 	},
 	{
 		"itemName": "Mixed Olives",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "snack",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
@@ -881,7 +881,7 @@
 	},
 	{
 		"itemName": "Buffalo Wings",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "main",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
@@ -892,7 +892,7 @@
 	},
 	{
 		"itemName": "Beef Burger",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "main",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
@@ -903,7 +903,7 @@
 	},
 	{
 		"itemName": "Taco Platter",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "main",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
@@ -914,7 +914,7 @@
 	},
 	{
 		"itemName": "Beef Slider Platter",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "main",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
@@ -925,7 +925,7 @@
 	},
 	{
 		"itemName": "Fish and Chips",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "main",
 		"minimumPrice": 30.00,
 		"currentPrice": 120.00,
@@ -936,7 +936,7 @@
 	},
 	{
 		"itemName": "Apple Pie",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "dessert",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
@@ -947,7 +947,7 @@
 	},
 	{
 		"itemName": "Chocolate Cake",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "dessert",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
@@ -958,7 +958,7 @@
 	},
 	{
 		"itemName": "Cheese Cake",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "dessert",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
@@ -969,7 +969,7 @@
 	},
 	{
 		"itemName": "Brownies",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "dessert",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
@@ -980,7 +980,7 @@
 	},
 	{
 		"itemName": "Cheese Platter",
-		"itemStock": 100,
+		"itemStock": 1000,
 		"category": "dessert",
 		"minimumPrice": 15.00,
 		"currentPrice": 60.00,
