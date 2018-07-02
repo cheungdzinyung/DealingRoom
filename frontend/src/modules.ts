@@ -247,6 +247,18 @@ export interface ILoginPackage {
   password: string;
 }
 
+// sp event
+export interface ISpecialEvent {
+  sponsor: string,
+  discount: number,
+  description: string,
+  eventTime: Date,          // date.now()
+}
+
+
+
+
+
 // store state for ref
 // interface IUserState {
 //   role: string,

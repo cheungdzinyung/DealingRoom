@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@blueprintjs/core": "^2.3.1",
+    "@blueprintjs/datetime": "^2.0.3",
     "@types/axios": "^0.14.0",
     "@types/chart.js": "^2.7.20",
     "@types/nuka-carousel": "^4.2.0",
@@ -46,6 +47,7 @@
     "postcss-loader": "2.0.8",
     "promise": "8.0.1",
     "raf": "3.4.0",
+    "rc-time-picker": "^3.3.1",
     "react": "^16.4.0",
     "react-chartjs-2": "^2.7.2",
     "react-dev-utils": "^5.0.1",

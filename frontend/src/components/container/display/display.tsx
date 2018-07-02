@@ -7,7 +7,7 @@ import { IRootState } from "../../../redux/store";
 import { getEntireMenu } from "src/redux/display/actions/actions_display";
 
 // Importing interfaces
-import { IMenuCategoryWithFlux } from "src/modules";
+import { IMenuCategoryWithFlux, ISpecialEvent } from "src/modules";
 
 // Importing UI components
 import { DisplayMain } from "src/components/ui/display/displaymain";
@@ -15,19 +15,23 @@ import { DisplayInfo } from "src/components/ui/display/displayinfo";
 import { DisplayFluxContainer } from "src/components/ui/display/displayflux";
 import { DisplayDataSub } from "src/components/ui/display/displaydatasub";
 
+// import Sound from "react-sound";
+
 interface IDisplayState {
   categoryIndexCount: number
 }
 
 interface IDisplayProps {
   entireMenu: IMenuCategoryWithFlux[];
+  eventInfo: ISpecialEvent;
   getEntireMenu: () => void;
 }
 
 // Redux
 const mapStateToProps = (state: IRootState) => {
   return {
-    entireMenu: state.display.entireMenu
+    entireMenu: state.display.entireMenu,
+    eventInfo: state.display.eventInfo,
   };
 };
 
@@ -91,7 +95,7 @@ export class PureDisplay extends React.Component<
         </div>
         <div className="rss-feed">
           <span className="feed-text">
-            This round of discount is brought to you by dealingroom!
+            This round of discount is brought to you by {(this.props.eventInfo.sponsor !== "") ? this.props.eventInfo.sponsor : "dealingroom.live"}!
           </span>
         </div>
       </div>
