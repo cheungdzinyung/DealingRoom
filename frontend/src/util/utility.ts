@@ -28,20 +28,39 @@ export const switchUp = (
   data: IConsumpGraphDataDeceiveAll
 ): IConsumptionGraphData[] => {
   // get everything from all
-  const newArray = data.all.map((single, index) => ({
-    category: single.category,
-    everyone: single.price,
-    maxPrice: single.max,
-    you: 0
-  }));
+  let newArray: IConsumptionGraphData[];
+  // Restricting the length of the return chart
+  if (data.all.length > 6) {
+    newArray = data.all.slice(0, 6).map((single, index) => ({
+      category: single.category,
+      everyone: single.price,
+      maxPrice: single.max,
+      you: 0
+    }));
+
+    data.user.slice(0, 6).forEach((single, index) => {
+      const indicator = newArray.findIndex(
+        eachArray => eachArray.category === single.category
+      );
+      Object.assign(newArray[indicator], { you: single.price });
+    });
+  } else {
+    newArray = data.all.map((single, index) => ({
+      category: single.category,
+      everyone: single.price,
+      maxPrice: single.max,
+      you: 0
+    }));
+
+    data.user.forEach((single, index) => {
+      const indicator = newArray.findIndex(
+        eachArray => eachArray.category === single.category
+      );
+      Object.assign(newArray[indicator], { you: single.price });
+    });
+  }
 
   // Find category, update with user's price
-  data.user.forEach((single, index) => {
-    const indicator = newArray.findIndex(
-      eachArray => eachArray.category === single.category
-    );
-    Object.assign(newArray[indicator], { you: single.price });
-  });
 
   return newArray;
 };

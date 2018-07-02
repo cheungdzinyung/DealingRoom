@@ -48,21 +48,19 @@ class PurePerformance extends React.Component<
 > {
   constructor(props: IUserPerformanceProps) {
     super(props);
-
+    this.props.getConsumption();
     this.state = {
       processedData: switchUp(this.props.userConsumptionComparison)
     };
-  }
-
-  public componentDidMount() {
-    this.props.getConsumption();
   }
 
   public render() {
     return (
       <div className="page-content-container">
         <PageHeader header={"Profile"} subHeader={"You are what you eat"} />
-        <UserProfileGraph data={this.state.processedData} />
+        <UserProfileGraph
+          data={switchUp(this.props.userConsumptionComparison)}
+        />
         <div className="cardd rd-corner">
           <p>This is just trying out haha. Thanks for joining us here.</p>
         </div>
