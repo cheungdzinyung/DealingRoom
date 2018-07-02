@@ -13,12 +13,12 @@ class NavBarComponent extends Component{
 
   componentDidMount() {
     Events.scrollEvent.register('begin', ()=> {
-      console.log("begin", arguments);
+      // console.log("begin", arguments);
       this.closeMnu();
     });
 
     Events.scrollEvent.register('end', function() {
-      console.log("end", arguments);
+      // console.log("end", arguments);
     });
     scrollSpy.update();
   }
