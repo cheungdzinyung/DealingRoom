@@ -5,12 +5,11 @@ import {
   SOCKET_CONNECT_SUCCESS,
   SOCKET_UPDATE_ITEM_PRICE,
   SOCKET_SP_EVENT_INFO,
+  TOGGLE_EVENT_BELL_RING,
 } from "src/redux/display/actions/actions_display";
 
 import {
-  //   IRequestItem,
   IMenuCategoryWithFlux,
-  //   ICustomerOrderList,
   ISpecialEvent
 } from "../../../modules";
 
@@ -18,11 +17,12 @@ import { singleCategoryMenuItems } from "src/fakedata"
 
 export interface IDisplayState {
   entireMenu: IMenuCategoryWithFlux[];
-
   // socket.io on load? isAuth?
   socketID: string,
   socketData: any,
+  // sp event and bell
   eventInfo: ISpecialEvent, 
+  bellRinging: boolean,
 }
 
 const initialState: IDisplayState = {
@@ -35,7 +35,8 @@ const initialState: IDisplayState = {
     discount: 0,
     description: "",
     eventTime: new Date,
-  }
+  },
+  bellRinging: false,
 };
 
 export const displayReducer = (
@@ -56,16 +57,15 @@ export const displayReducer = (
       return { ...state, socketID: action.socketID };
     }
     case SOCKET_UPDATE_ITEM_PRICE: {
-      // alert(action.entireMenu.hasOwnProperty("chartData"))
-      if (action.entireMenu.hasOwnProperty("chartData")) {
-        return { ...state, entireMenu: action.entireMenu };
-      } else {
-        return state;
-      }
+      return { ...state, entireMenu: action.entireMenu };
     }
     case SOCKET_SP_EVENT_INFO: {
       // ring ring ring
-      return { ...state, eventInfo: action.eventInfo };
+      return { ...state, eventInfo: action.eventInfo, bellRinging: true };
+    }
+    case TOGGLE_EVENT_BELL_RING: {
+      // ring ring ring
+      return { ...state, bellRinging: false };
     }
     default: {
       return state;
