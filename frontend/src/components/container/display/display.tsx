@@ -1,10 +1,11 @@
 // Importing modules from library
 import * as React from "react";
+import ReactPlayer from 'react-player'
 
 // Redux
 import { connect } from "react-redux";
 import { IRootState } from "../../../redux/store";
-import { getEntireMenu } from "src/redux/display/actions/actions_display";
+import { getEntireMenu, toggleEventBellRing } from "src/redux/display/actions/actions_display";
 
 // Importing interfaces
 import { IMenuCategoryWithFlux, ISpecialEvent } from "src/modules";
@@ -15,20 +16,17 @@ import { DisplayInfo } from "src/components/ui/display/displayinfo";
 import { DisplayFluxContainer } from "src/components/ui/display/displayflux";
 import { DisplayDataSub } from "src/components/ui/display/displaydatasub";
 
-// import { PlayButton, Timer } from 'react-soundplayer/components';
-// import { withSoundCloudAudio } from 'react-soundplayer/addons';
-
-// const clientId = 'YOUR CLIENT ID';
-// const resolveUrl = 'https://soundcloud.com/ksmtk/chronemics';
 
 interface IDisplayState {
-  categoryIndexCount: number
+  categoryIndexCount: number,
 }
 
 interface IDisplayProps {
   entireMenu: IMenuCategoryWithFlux[];
-  eventInfo: ISpecialEvent;
   getEntireMenu: () => void;
+  eventInfo: ISpecialEvent;
+  bellRinging: boolean,
+  toggleEventBellRing: () => void;
 }
 
 // Redux
@@ -36,6 +34,7 @@ const mapStateToProps = (state: IRootState) => {
   return {
     entireMenu: state.display.entireMenu,
     eventInfo: state.display.eventInfo,
+    bellRinging: state.display.bellRinging,
   };
 };
 
@@ -43,6 +42,9 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     getEntireMenu: () => {
       dispatch(getEntireMenu());
+    },
+    toggleEventBellRing: () => {
+      dispatch(toggleEventBellRing());
     }
   };
 };
@@ -56,7 +58,7 @@ export class PureDisplay extends React.Component<
     this.props.getEntireMenu();
 
     this.state = {
-      categoryIndexCount: 0
+      categoryIndexCount: 0,
     };
   }
 
@@ -77,14 +79,25 @@ export class PureDisplay extends React.Component<
     setInterval(this.loopingArrayCount, 5000);
   }
 
+  public componentDidUpdate(){
+    if (this.props.bellRinging) {
+      setTimeout(()=>{this.props.toggleEventBellRing()}, 12000)
+    }
+  }
+
+  public soundPlayer = () => {
+    return (
+      <ReactPlayer
+        url='https://www.youtube.com/watch?v=wK9Wvxi1cE8'
+        playing={this.props.bellRinging}
+        loop={this.props.bellRinging}
+        width="0"
+        height="0"
+      />
+    )
+  }
+
   public render() {
-    // const avgP =
-    //   this.props.entireMenu[this.state.categoryIndexCount].items.reduce((accum, currentValue) => {
-    //     return accum + currentValue.currentPrice;
-    //   }, 0);
-
-    // / this.props.entireMenu[this.state.categoryIndexCount].items.length
-
     return (
       <div className="display-container">
         <div className="display-data-container">
@@ -102,6 +115,9 @@ export class PureDisplay extends React.Component<
             This round of discount is brought to you by {(this.props.eventInfo.sponsor !== "") ? this.props.eventInfo.sponsor : "dealingroom.live"}!
           </span>
         </div>
+        {
+          this.soundPlayer()
+        }
       </div>
     );
   }
