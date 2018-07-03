@@ -35,15 +35,15 @@ export const switchUp = (
   // get everything from all
   let newArray: IConsumptionGraphData[];
   let cleanAll: IConsumptionGraphDataReceiveFromServerOneCat[];
-  let cleanUser: IConsumptionGraphDataReceiveFromServerOneCat[];
+  // let cleanUser: IConsumptionGraphDataReceiveFromServerOneCat[];
 
   // Restricting the length of the return chart
   if (data.all.length > 6) {
     cleanAll = data.all.slice(0, 6);
-    cleanUser = data.user.slice(0, 6);
+    // cleanUser = data.user.slice(0, 6);
   } else {
     cleanAll = data.all;
-    cleanUser = data.user;
+    // cleanUser = data.user;
   }
 
   // Start sorting from all
@@ -55,7 +55,7 @@ export const switchUp = (
   }));
 
   // Fill in data from user
-  cleanUser.forEach((single, index) => {
+  data.user.forEach((single, index) => {
     const indicator = newArray.findIndex(
       eachArray => eachArray.category === single.category
     );
