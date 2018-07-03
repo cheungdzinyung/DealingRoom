@@ -1,0 +1,452 @@
+[
+    {
+        "itemName": "Asahi",
+        "itemStock": 996,
+        "currentPrice": 74.47
+    },
+    {
+        "itemName": "Carlsberg",
+        "itemStock": 998,
+        "currentPrice": 52.25
+    },
+    {
+        "itemName": "Corona",
+        "itemStock": 998,
+        "currentPrice": 52.25
+    },
+    {
+        "itemName": "Gweilo",
+        "itemStock": 995,
+        "currentPrice": 85.58
+    },
+    {
+        "itemName": "Guinness",
+        "itemStock": 999,
+        "currentPrice": 61.14
+    },
+    {
+        "itemName": "Heineken",
+        "itemStock": 998,
+        "currentPrice": 52.25
+    },
+    {
+        "itemName": "Hoegaarden",
+        "itemStock": 999,
+        "currentPrice": 61.14
+    },
+    {
+        "itemName": "Peroni",
+        "itemStock": 997,
+        "currentPrice": 63.36
+    },
+    {
+        "itemName": "Stella Artois",
+        "itemStock": 997,
+        "currentPrice": 63.36
+    },
+    {
+        "itemName": "Tsingtao",
+        "itemStock": 996,
+        "currentPrice": 74.47
+    },
+    {
+        "itemName": "Cosmopolitan",
+        "itemStock": 999,
+        "currentPrice": 101.14
+    },
+    {
+        "itemName": "Bloody Mary",
+        "itemStock": 999,
+        "currentPrice": 81.14
+    },
+    {
+        "itemName": "Manhattan",
+        "itemStock": 997,
+        "currentPrice": 123.36
+    },
+    {
+        "itemName": "Long Island Ice Tea",
+        "itemStock": 998,
+        "currentPrice": 112.25
+    },
+    {
+        "itemName": "Daiquiri",
+        "itemStock": 998,
+        "currentPrice": 112.25
+    },
+    {
+        "itemName": "Mojito",
+        "itemStock": 997,
+        "currentPrice": 123.36
+    },
+    {
+        "itemName": "Negroni",
+        "itemStock": 997,
+        "currentPrice": 123.36
+    },
+    {
+        "itemName": "Margarita",
+        "itemStock": 997,
+        "currentPrice": 123.36
+    },
+    {
+        "itemName": "Sex on the Beach",
+        "itemStock": 995,
+        "currentPrice": 145.58
+    },
+    {
+        "itemName": "Old Fashion",
+        "itemStock": 996,
+        "currentPrice": 134.47
+    },
+    {
+        "itemName": "Cabernet Sauvignon",
+        "itemStock": 997,
+        "currentPrice": 82.5
+    },
+    {
+        "itemName": "Pinot Noir",
+        "itemStock": 997,
+        "currentPrice": 82.5
+    },
+    {
+        "itemName": "Merlot",
+        "itemStock": 998,
+        "currentPrice": 70.0
+    },
+    {
+        "itemName": "Sauvignon Blanc",
+        "itemStock": 999,
+        "currentPrice": 77.5
+    },
+    {
+        "itemName": "Chardonnay",
+        "itemStock": 999,
+        "currentPrice": 77.5
+    },
+    {
+        "itemName": "Malbec",
+        "itemStock": 997,
+        "currentPrice": 82.5
+    },
+    {
+        "itemName": "Shiraz",
+        "itemStock": 997,
+        "currentPrice": 82.5
+    },
+    {
+        "itemName": "Chablis",
+        "itemStock": 999,
+        "currentPrice": 77.5
+    },
+    {
+        "itemName": "Riesling",
+        "itemStock": 998,
+        "currentPrice": 90.0
+    },
+    {
+        "itemName": "Moet & Chandon",
+        "itemStock": 996,
+        "currentPrice": 115.0
+    },
+    {
+        "itemName": "Veuve Clicquot",
+        "itemStock": 996,
+        "currentPrice": 115.0
+    },
+    {
+        "itemName": "Pinot Blanc",
+        "itemStock": 999,
+        "currentPrice": 77.5
+    },
+    {
+        "itemName": "Krug",
+        "itemStock": 998,
+        "currentPrice": 90.0
+    },
+    {
+        "itemName": "Perrier Jouet",
+        "itemStock": 998,
+        "currentPrice": 90.0
+    },
+    {
+        "itemName": "Taittinger",
+        "itemStock": 998,
+        "currentPrice": 90.0
+    },
+    {
+        "itemName": "Grey Goose",
+        "itemStock": 997,
+        "currentPrice": 105.0
+    },
+    {
+        "itemName": "Ketel One",
+        "itemStock": 997,
+        "currentPrice": 105.0
+    },
+    {
+        "itemName": "Belvedere",
+        "itemStock": 998,
+        "currentPrice": 92.5
+    },
+    {
+        "itemName": "Absolut",
+        "itemStock": 997,
+        "currentPrice": 85.0
+    },
+    {
+        "itemName": "Smirnoff",
+        "itemStock": 998,
+        "currentPrice": 72.5
+    },
+    {
+        "itemName": "Patron Silver",
+        "itemStock": 998,
+        "currentPrice": 77.5
+    },
+    {
+        "itemName": "Don Julio Blanco",
+        "itemStock": 996,
+        "currentPrice": 102.5
+    },
+    {
+        "itemName": "Don Julio Reposado",
+        "itemStock": 998,
+        "currentPrice": 97.5
+    },
+    {
+        "itemName": "Don Julio Anejo",
+        "itemStock": 999,
+        "currentPrice": 105.0
+    },
+    {
+        "itemName": "Don Julio 1942",
+        "itemStock": 998,
+        "currentPrice": 197.5
+    },
+    {
+        "itemName": "Glenfiddich 15",
+        "itemStock": 996,
+        "currentPrice": 92.5
+    },
+    {
+        "itemName": "Glenfiddich 18",
+        "itemStock": 996,
+        "currentPrice": 112.5
+    },
+    {
+        "itemName": "Glenfiddich 21",
+        "itemStock": 997,
+        "currentPrice": 120.0
+    },
+    {
+        "itemName": "Jameson",
+        "itemStock": 999,
+        "currentPrice": 55.0
+    },
+    {
+        "itemName": "Jack Daniel's",
+        "itemStock": 997,
+        "currentPrice": 80.0
+    },
+    {
+        "itemName": "Tanqueray",
+        "itemStock": 998,
+        "currentPrice": 85.0
+    },
+    {
+        "itemName": "Bombay Sapphire",
+        "itemStock": 999,
+        "currentPrice": 72.5
+    },
+    {
+        "itemName": "Hendrick's",
+        "itemStock": 997,
+        "currentPrice": 97.5
+    },
+    {
+        "itemName": "Botanist",
+        "itemStock": 999,
+        "currentPrice": 92.5
+    },
+    {
+        "itemName": "Monkey 47",
+        "itemStock": 999,
+        "currentPrice": 92.5
+    },
+    {
+        "itemName": "Havana Club",
+        "itemStock": 999,
+        "currentPrice": 72.5
+    },
+    {
+        "itemName": "Captain Morgan",
+        "itemStock": 998,
+        "currentPrice": 85.0
+    },
+    {
+        "itemName": "Bacardi",
+        "itemStock": 998,
+        "currentPrice": 85.0
+    },
+    {
+        "itemName": "Foursquare",
+        "itemStock": 998,
+        "currentPrice": 105.0
+    },
+    {
+        "itemName": "Bacardi 151",
+        "itemStock": 999,
+        "currentPrice": 112.5
+    },
+    {
+        "itemName": "Hennessy VS",
+        "itemStock": 998,
+        "currentPrice": 82.5
+    },
+    {
+        "itemName": "Hennessy VSOP",
+        "itemStock": 998,
+        "currentPrice": 102.5
+    },
+    {
+        "itemName": "Hennessy XO",
+        "itemStock": 999,
+        "currentPrice": 110.0
+    },
+    {
+        "itemName": "Hennessy Paradis",
+        "itemStock": 998,
+        "currentPrice": 202.5
+    },
+    {
+        "itemName": "Hennessy Paradis Imperial",
+        "itemStock": 998,
+        "currentPrice": 402.5
+    },
+    {
+        "itemName": "Evian",
+        "itemStock": 998,
+        "currentPrice": 38.91
+    },
+    {
+        "itemName": "San Pellegrino",
+        "itemStock": 998,
+        "currentPrice": 38.91
+    },
+    {
+        "itemName": "Coca Cola",
+        "itemStock": 995,
+        "currentPrice": 72.24
+    },
+    {
+        "itemName": "Diet Coke",
+        "itemStock": 998,
+        "currentPrice": 38.91
+    },
+    {
+        "itemName": "Sprite",
+        "itemStock": 998,
+        "currentPrice": 38.91
+    },
+    {
+        "itemName": "Orange Juice",
+        "itemStock": 998,
+        "currentPrice": 38.91
+    },
+    {
+        "itemName": "Cranberry Juice",
+        "itemStock": 999,
+        "currentPrice": 27.8
+    },
+    {
+        "itemName": "Soda Water",
+        "itemStock": 999,
+        "currentPrice": 27.8
+    },
+    {
+        "itemName": "Tonic Water",
+        "itemStock": 998,
+        "currentPrice": 38.91
+    },
+    {
+        "itemName": "Red Bull",
+        "itemStock": 998,
+        "currentPrice": 38.91
+    },
+    {
+        "itemName": "French Fries",
+        "itemStock": 999,
+        "currentPrice": 42.5
+    },
+    {
+        "itemName": "Onion Rings",
+        "itemStock": 994,
+        "currentPrice": 105.0
+    },
+    {
+        "itemName": "Fried Calamaries",
+        "itemStock": 997,
+        "currentPrice": 67.5
+    },
+    {
+        "itemName": "Spinach Dip",
+        "itemStock": 999,
+        "currentPrice": 42.5
+    },
+    {
+        "itemName": "Mixed Olives",
+        "itemStock": 999,
+        "currentPrice": 42.5
+    },
+    {
+        "itemName": "Buffalo Wings",
+        "itemStock": 999,
+        "currentPrice": 107.5
+    },
+    {
+        "itemName": "Beef Burger",
+        "itemStock": 995,
+        "currentPrice": 157.5
+    },
+    {
+        "itemName": "Taco Platter",
+        "itemStock": 999,
+        "currentPrice": 107.5
+    },
+    {
+        "itemName": "Beef Slider Platter",
+        "itemStock": 998,
+        "currentPrice": 120.0
+    },
+    {
+        "itemName": "Fish and Chips",
+        "itemStock": 999,
+        "currentPrice": 107.5
+    },
+    {
+        "itemName": "Apple Pie",
+        "itemStock": 998,
+        "currentPrice": 47.5
+    },
+    {
+        "itemName": "Chocolate Cake",
+        "itemStock": 997,
+        "currentPrice": 60.0
+    },
+    {
+        "itemName": "Cheese Cake",
+        "itemStock": 995,
+        "currentPrice": 85.0
+    },
+    {
+        "itemName": "Brownies",
+        "itemStock": 997,
+        "currentPrice": 60.0
+    },
+    {
+        "itemName": "Cheese Platter",
+        "itemStock": 998,
+        "currentPrice": 47.5
+    }
+]

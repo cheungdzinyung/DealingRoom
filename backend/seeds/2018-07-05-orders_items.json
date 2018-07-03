@@ -1,0 +1,1682 @@
+[
+    {
+        "orders_id": 1,
+        "items_id": 1,
+        "purchasePrice": 60.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 1,
+        "items_id": 53,
+        "purchasePrice": 80.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 2,
+        "items_id": 1,
+        "purchasePrice": 70.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 2,
+        "items_id": 54,
+        "purchasePrice": 97.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 3,
+        "items_id": 8,
+        "purchasePrice": 57.78,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 3,
+        "items_id": 9,
+        "purchasePrice": 57.78,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 3,
+        "items_id": 19,
+        "purchasePrice": 120.0,
+        "ice": "normal",
+        "sweetness": "extra",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 4,
+        "items_id": 14,
+        "purchasePrice": 118.89,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "extra"
+    },
+    {
+        "orders_id": 4,
+        "items_id": 19,
+        "purchasePrice": 130.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 5,
+        "items_id": 22,
+        "purchasePrice": 80.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "extra"
+    },
+    {
+        "orders_id": 5,
+        "items_id": 28,
+        "purchasePrice": 80.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 6,
+        "items_id": 22,
+        "purchasePrice": 90.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "extra"
+    },
+    {
+        "orders_id": 6,
+        "items_id": 29,
+        "purchasePrice": 77.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 6,
+        "items_id": 31,
+        "purchasePrice": 100.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 7,
+        "items_id": 76,
+        "purchasePrice": 60.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 7,
+        "items_id": 77,
+        "purchasePrice": 60.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 8,
+        "items_id": 87,
+        "purchasePrice": 60.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 8,
+        "items_id": 90,
+        "purchasePrice": 60.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 9,
+        "items_id": 36,
+        "purchasePrice": 100.0,
+        "ice": "extra",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 9,
+        "items_id": 44,
+        "purchasePrice": 120.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 10,
+        "items_id": 45,
+        "purchasePrice": 197.5,
+        "ice": "extra",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 10,
+        "items_id": 66,
+        "purchasePrice": 40.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 11,
+        "items_id": 14,
+        "purchasePrice": 127.78,
+        "ice": "extra",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 11,
+        "items_id": 19,
+        "purchasePrice": 138.89,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 12,
+        "items_id": 81,
+        "purchasePrice": 120.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 12,
+        "items_id": 82,
+        "purchasePrice": 120.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 12,
+        "items_id": 86,
+        "purchasePrice": 55.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 13,
+        "items_id": 79,
+        "purchasePrice": 55.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 13,
+        "items_id": 82,
+        "purchasePrice": 127.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 13,
+        "items_id": 86,
+        "purchasePrice": 65.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 14,
+        "items_id": 23,
+        "purchasePrice": 75.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 14,
+        "items_id": 25,
+        "purchasePrice": 75.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 14,
+        "items_id": 26,
+        "purchasePrice": 75.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 15,
+        "items_id": 30,
+        "purchasePrice": 97.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 15,
+        "items_id": 31,
+        "purchasePrice": 110.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 15,
+        "items_id": 77,
+        "purchasePrice": 65.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 16,
+        "items_id": 1,
+        "purchasePrice": 77.78,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 16,
+        "items_id": 4,
+        "purchasePrice": 55.56,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 16,
+        "items_id": 9,
+        "purchasePrice": 66.67,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 17,
+        "items_id": 2,
+        "purchasePrice": 52.23,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 17,
+        "items_id": 10,
+        "purchasePrice": 52.23,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 17,
+        "items_id": 46,
+        "purchasePrice": 80.0,
+        "ice": "extra",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 18,
+        "items_id": 68,
+        "purchasePrice": 38.89,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 18,
+        "items_id": 80,
+        "purchasePrice": 50.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 18,
+        "items_id": 82,
+        "purchasePrice": 137.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 19,
+        "items_id": 3,
+        "purchasePrice": 50.01,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 19,
+        "items_id": 6,
+        "purchasePrice": 50.01,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 19,
+        "items_id": 16,
+        "purchasePrice": 114.45,
+        "ice": "normal",
+        "sweetness": "extra",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 20,
+        "items_id": 88,
+        "purchasePrice": 50.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 20,
+        "items_id": 89,
+        "purchasePrice": 50.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 20,
+        "items_id": 63,
+        "purchasePrice": 120.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 21,
+        "items_id": 2,
+        "purchasePrice": 58.9,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 21,
+        "items_id": 3,
+        "purchasePrice": 58.9,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 21,
+        "items_id": 48,
+        "purchasePrice": 117.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 22,
+        "items_id": 17,
+        "purchasePrice": 113.34,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 22,
+        "items_id": 18,
+        "purchasePrice": 113.34,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 22,
+        "items_id": 55,
+        "purchasePrice": 95.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 23,
+        "items_id": 8,
+        "purchasePrice": 56.68,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 23,
+        "items_id": 6,
+        "purchasePrice": 56.68,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 23,
+        "items_id": 60,
+        "purchasePrice": 120.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 24,
+        "items_id": 5,
+        "purchasePrice": 63.35,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 24,
+        "items_id": 8,
+        "purchasePrice": 65.57,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 24,
+        "items_id": 20,
+        "purchasePrice": 112.12,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 25,
+        "items_id": 16,
+        "purchasePrice": 121.12,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 25,
+        "items_id": 20,
+        "purchasePrice": 121.12,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 25,
+        "items_id": 46,
+        "purchasePrice": 87.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 26,
+        "items_id": 4,
+        "purchasePrice": 52.24,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 26,
+        "items_id": 16,
+        "purchasePrice": 130.01,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 26,
+        "items_id": 37,
+        "purchasePrice": 97.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 27,
+        "items_id": 12,
+        "purchasePrice": 86.68,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 27,
+        "items_id": 20,
+        "purchasePrice": 128.9,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 27,
+        "items_id": 73,
+        "purchasePrice": 37.78,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 28,
+        "items_id": 22,
+        "purchasePrice": 95.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 28,
+        "items_id": 29,
+        "purchasePrice": 85.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 28,
+        "items_id": 35,
+        "purchasePrice": 92.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 29,
+        "items_id": 24,
+        "purchasePrice": 70.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 29,
+        "items_id": 27,
+        "purchasePrice": 67.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 29,
+        "items_id": 31,
+        "purchasePrice": 115.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 30,
+        "items_id": 30,
+        "purchasePrice": 100.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 30,
+        "items_id": 23,
+        "purchasePrice": 77.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 30,
+        "items_id": 66,
+        "purchasePrice": 47.78,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 31,
+        "items_id": 11,
+        "purchasePrice": 104.46,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 31,
+        "items_id": 21,
+        "purchasePrice": 62.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 31,
+        "items_id": 83,
+        "purchasePrice": 110.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 32,
+        "items_id": 32,
+        "purchasePrice": 67.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 32,
+        "items_id": 31,
+        "purchasePrice": 122.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 32,
+        "items_id": 35,
+        "purchasePrice": 97.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 33,
+        "items_id": 47,
+        "purchasePrice": 92.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 33,
+        "items_id": 53,
+        "purchasePrice": 85.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 33,
+        "items_id": 61,
+        "purchasePrice": 77.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 34,
+        "items_id": 7,
+        "purchasePrice": 60.02,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 34,
+        "items_id": 46,
+        "purchasePrice": 95.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 34,
+        "items_id": 61,
+        "purchasePrice": 87.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 35,
+        "items_id": 9,
+        "purchasePrice": 61.13,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 35,
+        "items_id": 37,
+        "purchasePrice": 107.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 35,
+        "items_id": 47,
+        "purchasePrice": 100.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 36,
+        "items_id": 49,
+        "purchasePrice": 65.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 36,
+        "items_id": 52,
+        "purchasePrice": 70.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 36,
+        "items_id": 56,
+        "purchasePrice": 77.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 37,
+        "items_id": 68,
+        "purchasePrice": 46.67,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 37,
+        "items_id": 77,
+        "purchasePrice": 72.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 37,
+        "items_id": 85,
+        "purchasePrice": 107.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 38,
+        "items_id": 4,
+        "purchasePrice": 60.02,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 38,
+        "items_id": 13,
+        "purchasePrice": 103.35,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 38,
+        "items_id": 46,
+        "purchasePrice": 100.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 39,
+        "items_id": 77,
+        "purchasePrice": 82.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 39,
+        "items_id": 82,
+        "purchasePrice": 142.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 39,
+        "items_id": 90,
+        "purchasePrice": 57.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 40,
+        "items_id": 10,
+        "purchasePrice": 47.8,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 40,
+        "items_id": 39,
+        "purchasePrice": 72.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 40,
+        "items_id": 50,
+        "purchasePrice": 60.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 41,
+        "items_id": 10,
+        "purchasePrice": 57.8,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 41,
+        "items_id": 39,
+        "purchasePrice": 82.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 41,
+        "items_id": 50,
+        "purchasePrice": 70.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 42,
+        "items_id": 10,
+        "purchasePrice": 67.8,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 42,
+        "items_id": 39,
+        "purchasePrice": 92.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 42,
+        "items_id": 50,
+        "purchasePrice": 80.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 43,
+        "items_id": 1,
+        "purchasePrice": 66.69,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 43,
+        "items_id": 45,
+        "purchasePrice": 207.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 43,
+        "items_id": 68,
+        "purchasePrice": 56.67,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 44,
+        "items_id": 20,
+        "purchasePrice": 135.57,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 44,
+        "items_id": 37,
+        "purchasePrice": 110.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 44,
+        "items_id": 53,
+        "purchasePrice": 92.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 45,
+        "items_id": 72,
+        "purchasePrice": 33.34,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 45,
+        "items_id": 78,
+        "purchasePrice": 42.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 45,
+        "items_id": 82,
+        "purchasePrice": 152.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 46,
+        "items_id": 13,
+        "purchasePrice": 112.24,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 46,
+        "items_id": 26,
+        "purchasePrice": 72.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 46,
+        "items_id": 64,
+        "purchasePrice": 192.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 47,
+        "items_id": 13,
+        "purchasePrice": 122.24,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 47,
+        "items_id": 26,
+        "purchasePrice": 82.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 47,
+        "items_id": 64,
+        "purchasePrice": 202.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 48,
+        "items_id": 15,
+        "purchasePrice": 98.91,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 48,
+        "items_id": 42,
+        "purchasePrice": 72.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 48,
+        "items_id": 59,
+        "purchasePrice": 95.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 49,
+        "items_id": 15,
+        "purchasePrice": 108.91,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 49,
+        "items_id": 42,
+        "purchasePrice": 82.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 49,
+        "items_id": 59,
+        "purchasePrice": 105.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 50,
+        "items_id": 67,
+        "purchasePrice": 32.23,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 50,
+        "items_id": 78,
+        "purchasePrice": 52.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 50,
+        "items_id": 88,
+        "purchasePrice": 55.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 51,
+        "items_id": 67,
+        "purchasePrice": 42.23,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 51,
+        "items_id": 78,
+        "purchasePrice": 62.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 51,
+        "items_id": 88,
+        "purchasePrice": 65.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 52,
+        "items_id": 19,
+        "purchasePrice": 130.02,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 52,
+        "items_id": 34,
+        "purchasePrice": 80.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 52,
+        "items_id": 51,
+        "purchasePrice": 65.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 53,
+        "items_id": 19,
+        "purchasePrice": 140.02,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 53,
+        "items_id": 34,
+        "purchasePrice": 90.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 53,
+        "items_id": 51,
+        "purchasePrice": 75.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 54,
+        "items_id": 68,
+        "purchasePrice": 63.34,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 54,
+        "items_id": 77,
+        "purchasePrice": 85.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 54,
+        "items_id": 87,
+        "purchasePrice": 50.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 55,
+        "items_id": 68,
+        "purchasePrice": 73.34,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 55,
+        "items_id": 77,
+        "purchasePrice": 95.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 55,
+        "items_id": 87,
+        "purchasePrice": 60.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 56,
+        "items_id": 18,
+        "purchasePrice": 105.58,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 56,
+        "items_id": 33,
+        "purchasePrice": 75.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 56,
+        "items_id": 38,
+        "purchasePrice": 82.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 57,
+        "items_id": 18,
+        "purchasePrice": 115.58,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 57,
+        "items_id": 33,
+        "purchasePrice": 85.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 57,
+        "items_id": 38,
+        "purchasePrice": 92.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 58,
+        "items_id": 40,
+        "purchasePrice": 57.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 58,
+        "items_id": 41,
+        "purchasePrice": 67.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 58,
+        "items_id": 57,
+        "purchasePrice": 70.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 59,
+        "items_id": 40,
+        "purchasePrice": 67.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 59,
+        "items_id": 41,
+        "purchasePrice": 77.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 59,
+        "items_id": 57,
+        "purchasePrice": 80.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 60,
+        "items_id": 43,
+        "purchasePrice": 82.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 60,
+        "items_id": 58,
+        "purchasePrice": 65.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 60,
+        "items_id": 65,
+        "purchasePrice": 387.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 61,
+        "items_id": 43,
+        "purchasePrice": 92.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 61,
+        "items_id": 58,
+        "purchasePrice": 75.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 61,
+        "items_id": 65,
+        "purchasePrice": 397.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 62,
+        "items_id": 62,
+        "purchasePrice": 82.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 62,
+        "items_id": 69,
+        "purchasePrice": 27.79,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 62,
+        "items_id": 84,
+        "purchasePrice": 100.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 63,
+        "items_id": 62,
+        "purchasePrice": 92.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 63,
+        "items_id": 69,
+        "purchasePrice": 37.79,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 63,
+        "items_id": 84,
+        "purchasePrice": 110.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 64,
+        "items_id": 27,
+        "purchasePrice": 67.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 64,
+        "items_id": 36,
+        "purchasePrice": 85.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 64,
+        "items_id": 70,
+        "purchasePrice": 25.57,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 65,
+        "items_id": 27,
+        "purchasePrice": 77.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 65,
+        "items_id": 36,
+        "purchasePrice": 95.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 65,
+        "items_id": 70,
+        "purchasePrice": 35.57,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 66,
+        "items_id": 30,
+        "purchasePrice": 95.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 66,
+        "items_id": 71,
+        "purchasePrice": 23.35,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 66,
+        "items_id": 88,
+        "purchasePrice": 70.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 67,
+        "items_id": 30,
+        "purchasePrice": 105.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 67,
+        "items_id": 71,
+        "purchasePrice": 33.35,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 67,
+        "items_id": 88,
+        "purchasePrice": 80.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 68,
+        "items_id": 21,
+        "purchasePrice": 62.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 68,
+        "items_id": 74,
+        "purchasePrice": 21.13,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 68,
+        "items_id": 89,
+        "purchasePrice": 40.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 69,
+        "items_id": 21,
+        "purchasePrice": 72.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 69,
+        "items_id": 74,
+        "purchasePrice": 31.13,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 69,
+        "items_id": 89,
+        "purchasePrice": 50.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 70,
+        "items_id": 4,
+        "purchasePrice": 65.58,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 70,
+        "items_id": 47,
+        "purchasePrice": 97.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 70,
+        "items_id": 75,
+        "purchasePrice": 18.91,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 71,
+        "items_id": 4,
+        "purchasePrice": 75.58,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 71,
+        "items_id": 47,
+        "purchasePrice": 107.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 71,
+        "items_id": 75,
+        "purchasePrice": 28.91,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 72,
+        "items_id": 17,
+        "purchasePrice": 103.36,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 72,
+        "items_id": 42,
+        "purchasePrice": 82.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 72,
+        "items_id": 48,
+        "purchasePrice": 100.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 73,
+        "items_id": 17,
+        "purchasePrice": 113.36,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 73,
+        "items_id": 42,
+        "purchasePrice": 92.5,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    },
+    {
+        "orders_id": 73,
+        "items_id": 48,
+        "purchasePrice": 110.0,
+        "ice": "normal",
+        "sweetness": "normal",
+        "garnish": "normal"
+    }
+]
