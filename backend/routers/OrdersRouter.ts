@@ -17,6 +17,7 @@ export default class UsersRouter {
 
     router.post("/", this.add.bind(this));
 
+
     router.get("/prices/", this.getAllPrice.bind(this));
     router.get("/user/", this.getByUser.bind(this));
     router.get("/", this.getAllOrders.bind(this));
@@ -38,7 +39,7 @@ export default class UsersRouter {
         .add(user.id, req.body)
         .then((result: any) => {
           return this.itemsService
-            .getAllWithFluctuatingPrices(dateOfQuery)
+            .getAllWithFluctuatingPrices(dateOfQuery, "true")
             .then(orderList => {
               return (result[0].entireMenu = orderList);
             })
@@ -147,4 +148,6 @@ export default class UsersRouter {
       return res.status(401).json({ status: "unauthorized" });
     }
   }
+
+
 }

@@ -8,9 +8,11 @@ import {
     UPDATE_ITEM_FAIL,
     TOGGLE_STOCK_MANAGE_MODAL,
     RESET_SUCCESS_STATUS,
+    TRIGGER_SP_EVENT_SUCCESS,
+    TRIGGER_SP_EVENT_FAIL
 } from "../actions/actions_manager";
 
-import { IMenuCategoryWithoutFlux, IStockManageModalState, IUpdateMenuItem } from "../../../modules";
+import { IMenuCategoryWithoutFlux, IStockManageModalState, IUpdateMenuItem } from "src/modules";
 
 export interface IManagerState {
     entireMenu: IMenuCategoryWithoutFlux[],
@@ -20,6 +22,7 @@ export interface IManagerState {
     targetItem?: IUpdateMenuItem,
     createItemSuccess: boolean,
     editItemSuccess: boolean,
+    errMsg: string,
 }
 
 const initialState: IManagerState = {
@@ -40,6 +43,7 @@ const initialState: IManagerState = {
     },
     createItemSuccess: false,
     editItemSuccess: false,
+    errMsg: "",
 }
 
 export const managerReducer = (state: IManagerState = initialState, action: ManagerActions): IManagerState => {
@@ -69,6 +73,12 @@ export const managerReducer = (state: IManagerState = initialState, action: Mana
         }
         case RESET_SUCCESS_STATUS: {
             return { ...state, createItemSuccess: false, editItemSuccess: false };
+        }
+        case TRIGGER_SP_EVENT_SUCCESS: {
+            return { ...state, errMsg: ""} ;
+        }
+        case TRIGGER_SP_EVENT_FAIL: {
+            return { ...state, errMsg: action.errMsg };
         }
         default: {
             return state;

@@ -1,0 +1,59 @@
+.order-card-container {
+    // width: (100vw * .25);
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: (100vh * .025);
+    .order-header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 3% 5%;
+        background-color: rgba(233, 219, 204, .55);
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        .order-button {
+            display: flex;
+            align-items: center;
+            button.order-status-display {
+                background-color: rgba(238, 83, 83, 0.8);
+                border-radius: 5px;
+            }
+            .payment-status {
+                padding: 0 .5vh;
+                span.order-payment-status-unpaid {
+                    background-color: rgba(238, 83, 83, 0.8);
+                    border-radius: 5px;
+                    padding: .3vh .4vh
+                }
+                span.order-payment-status-paid {
+                    background-color: rgba(111, 207, 151, 1);
+                    border-radius: 5px;
+                    padding: .3vh .4vh
+                }
+            }
+        }
+    }
+    .order-item-container {
+        padding: 5% 5%;
+        background-color: #4B4A51;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        .order-item-line {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 2% 0;
+            .item-mods-container {
+                color: #E9DBCC;
+                display: flex;
+                justify-content: flex-end;
+                .mods-icon {
+                    // display: flex;
+                    // justify-content: space-evenly;
+                    padding: 0 8%;
+                }
+            }
+        }
+    }
+}

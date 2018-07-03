@@ -5,7 +5,7 @@ import axios from "axios";
 
 import {
     IMenuCategoryWithFlux,
-} from "../../../modules";
+} from "src/modules";
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const GET_ENTIRE_MENU_SUCCESS = "GET_ENTIRE_MENU_SUCCESS";

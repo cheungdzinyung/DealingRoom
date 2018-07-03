@@ -1,6 +1,7 @@
 import * as express from "express";
 import * as multer from "multer";
-import * as path from "path"
+import * as path from "path";
+import { io } from "../app";
 
 import { IItemData } from "../interfaces";
 import ItemsService from "../services/ItemsService";
@@ -24,13 +25,14 @@ export default class ItemsRouter {
     router.get("/", this.getAll.bind(this));
     router.get("/image/:id", this.getImage.bind(this));
     router.get("/update/itemlog", this.updateLogPrice.bind(this));
+    router.post("/event/pricedrop", this.priceDrop.bind(this));
 
     router.put("/:id", upload.single("itemPhoto"), this.update.bind(this));
 
     return router;
   }
 
-  public add(req: express.Request, res: express.Response) {
+  public async add(req: express.Request, res: express.Response) {
     return this.itemsService
       .add(req.body, req.file)
       .then((result: IItemData) => {
@@ -68,7 +70,10 @@ export default class ItemsRouter {
           });
       } else {
         return this.itemsService
-          .getAllWithFluctuatingPrices(req.query.fluctuatingPrices)
+          .getAllWithFluctuatingPrices(
+            req.query.fluctuatingPrices,
+            req.query.maxmin
+          )
           .then((result: any) => {
             res.status(200).json(result);
           })
@@ -103,8 +108,10 @@ export default class ItemsRouter {
     return this.itemsService
       .getItemImage(req.params.id)
       .then((result: any) => {
-        const name = result[0].itemName.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()
-        res.sendFile(path.join(__dirname, '../storage/items', `${name}.png`));
+        const name = result[0].itemName
+          .replace(/[^a-zA-Z0-9]/g, "")
+          .toLowerCase();
+        res.sendFile(path.join(__dirname, "../storage/items", `${name}.png`));
       })
       .catch((err: express.Errback) => {
         res.status(500).json({ status: "failed" });
@@ -128,6 +135,45 @@ export default class ItemsRouter {
       .update(req.params.id, req.body, req.file)
       .then((result: IItemData) => {
         res.status(201).json(result);
+      })
+      .catch((err: express.Errback) => {
+        console.log(err);
+        res.status(500).json({ status: "failed" });
+      });
+  }
+
+  public priceDrop(req: express.Request, res: express.Response) {
+    const currentYear = new Date().getUTCFullYear();
+    const currentMonth = new Date().getUTCMonth() + 1;
+    const currentDate = new Date().getUTCDate();
+    const dateOfQuery = `${currentYear}-${currentMonth}-${currentDate}`;
+
+    return this.itemsService
+      .priceDrop(req.body.discount)
+      .then((totalDiscount: number) => {
+        return this.itemsService
+          .getAllWithFluctuatingPrices(dateOfQuery, "true")
+          .then((result: any) => {
+            // emit new menu to everyone 
+            io.emit("action", {
+              type: "SOCKET_UPDATE_ITEM_PRICE",
+              entireMenu: result
+            });
+            // emit event info
+            io.emit("action", {
+              type: "SOCKET_SP_EVENT_INFO",
+              eventInfo: {
+                sponsor: req.body.sponsor,
+                discount: req.body.discount,
+                description: req.body.description,
+                eventTime: req.body.eventTime,
+              }
+            });
+            res.status(200).json(result);
+          })
+          .catch((err: express.Errback) => {
+            res.status(500).json({ status: "failed" });
+          });
       })
       .catch((err: express.Errback) => {
         console.log(err);

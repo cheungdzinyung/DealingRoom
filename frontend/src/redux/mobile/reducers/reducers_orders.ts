@@ -17,7 +17,7 @@ import {
     IRequestItem,
     IMenuCategoryWithFlux,
     ICustomerOrderList,
-} from "../../../modules";
+} from "src/modules";
 
 export interface IOrdersState {
     // socket.io on load? isAuth?

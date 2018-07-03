@@ -254,12 +254,10 @@ export default class OrdersService {
     );
 
     // combine all values in the agreed upon format and return the results
-    const finalResult = [
-      {
-        user: userOrderList,
-        all: otherOrderList
-      }
-    ];
+    const finalResult = {
+      user: userOrderList,
+      all: otherOrderList
+    };
     return finalResult;
   }
 
@@ -279,125 +277,59 @@ export default class OrdersService {
   }
 
   // Working 21/06/18 //
-  public getAllOrders(id: number) {
-    //   const userRole = await this.knex("users")
-    //     .first()
-    //     .select("role")
-    //     .where("id", id);
-    //   console.log("this is the user role:", userRole);
-
-    //   if (
-    //     userRole.role === "manager" ||
-    //     userRole.role === "bartender" ||
-    //     userRole.role === "server"
-    //   ) {
-    //     const ordersList = await this.knex("orders")
-    //       .join("users", "users.id", "=", "orders.users_id")
-    //       .whereNot(this.knex.raw(`(status='served' AND "isPaid"=true)`))
-    //       .select(
-    //         "orders.id as orders_id",
-    //         "users.id as users_id",
-    //         "users.displayName",
-    //         "orders.table",
-    //         "orders.status",
-    //         "orders.isPaid"
-    //       )
-    //       .orderBy("orders_id");
-
-    //     const itemsList = BlueBirdPromise.map(ordersList, async (order: any) => {
-    //       const result = await this.knex("orders")
-    //         .join("orders_items", "orders_items.orders_id", "=", "orders.id")
-    //         .join("items", "items.id", "=", "orders_items.items_id")
-    //         .select(
-    //           "items.itemName",
-    //           "orders_items.ice",
-    //           "orders_items.sweetness",
-    //           "orders_items.garnish",
-    //           "orders_items.purchasePrice"
-    //         )
-    //         .where("orders.id", order.orders_id);
-    //       return result;
-    //     });
-
-    //     console.log("!!!!!!!!!!!!!!!!!!!!!this is the itemsList:", itemsList);
-
-    //     await BlueBirdPromise.map(ordersList, (orders: any, index: number) => {
-    //       const result = {
-    //         orders_id: orders.orders_id,
-    //         users_id: orders.users_id,
-    //         displayName: orders.displayName,
-    //         table: orders.table,
-    //         status: orders.status,
-    //         isPaid: orders.isPaid,
-    //         order: itemsList[index]
-    //       };
-    //       return result;
-    //     });
-    //   } else {
-    //     return userRole[0].role;
-    //   }
-    // }
-    return this.knex("users")
+  public async getAllOrders(id: number) {
+    const userRole = await this.knex("users")
+      .first()
       .select("role")
-      .where("id", id)
-      .then(userRole => {
-        if (
-          userRole[0].role === "manager" ||
-          userRole[0].role === "bartender" ||
-          userRole[0].role === "server"
-        ) {
-          return this.knex("orders")
-            .join("users", "users.id", "=", "orders.users_id")
-            .whereNot(this.knex.raw(`(status='served' AND "isPaid"=true)`))
-            .select(
-              "orders.id as orders_id",
-              "users.id as users_id",
-              "users.displayName",
-              "orders.table",
-              "orders.status",
-              "orders.isPaid"
-            )
-            .orderBy("orders_id")
-            .then(ordersList => {
-              return Promise.all(
-                ordersList.map((order: object, i: number) => {
-                  return this.knex("orders")
-                    .join(
-                      "orders_items",
-                      "orders_items.orders_id",
-                      "=",
-                      "orders.id"
-                    )
-                    .join("items", "items.id", "=", "orders_items.items_id")
-                    .select(
-                      "items.itemName",
-                      "orders_items.ice",
-                      "orders_items.sweetness",
-                      "orders_items.garnish",
-                      "orders_items.purchasePrice"
-                    )
-                    .where("orders.id", ordersList[i].orders_id);
-                })
-              ).then(itemsList => {
-                return Promise.all(
-                  ordersList.map((category: object, j: number) => {
-                    const result = {
-                      orders_id: ordersList[j].orders_id,
-                      users_id: ordersList[j].users_id,
-                      displayName: ordersList[j].displayName,
-                      table: ordersList[j].table,
-                      status: ordersList[j].status,
-                      isPaid: ordersList[j].isPaid,
-                      order: itemsList[j]
-                    };
-                    return result;
-                  })
-                );
-              });
-            });
-        } else {
-          return userRole[0].role;
-        }
+      .where("id", id);
+
+    if (
+      userRole.role === "manager" ||
+      userRole.role === "bartender" ||
+      userRole.role === "server"
+    ) {
+      const ordersList = await this.knex("orders")
+        .join("users", "users.id", "=", "orders.users_id")
+        .whereNot(this.knex.raw(`(status='served' AND "isPaid"=true)`))
+        .select(
+          "orders.id as orders_id",
+          "users.id as users_id",
+          "users.displayName",
+          "orders.table",
+          "orders.status",
+          "orders.isPaid"
+        )
+        .orderBy("orders_id");
+
+      const itemsList = await BlueBirdPromise.map(ordersList, async (order: any) => {
+        const result = await this.knex("orders")
+          .join("orders_items", "orders_items.orders_id", "=", "orders.id")
+          .join("items", "items.id", "=", "orders_items.items_id")
+          .select(
+            "items.itemName",
+            "orders_items.ice",
+            "orders_items.sweetness",
+            "orders_items.garnish",
+            "orders_items.purchasePrice"
+          )
+          .where("orders.id", order.orders_id);
+        return result;
       });
+
+      return await ordersList.map((orders: any, index: number) => {
+        const result = {
+          orders_id: orders.orders_id,
+          users_id: orders.users_id,
+          displayName: orders.displayName,
+          table: orders.table,
+          status: orders.status,
+          isPaid: orders.isPaid,
+          order: itemsList[index]
+        };
+        return result;
+      });
+    } else {
+      return userRole.role;
+    }
   }
 }

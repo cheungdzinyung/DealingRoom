@@ -1,0 +1,140 @@
+@import "src/scss/templates";
+.menu-item-container {
+    position: relative;
+    margin: 5% 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Card - top part of the item
+    .menu-item-card-container {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: #16151a 0 1px 5px;
+        .menu-item-card {
+            position: relative;
+            padding: 5%;
+            width: 100%;
+            height: auto;
+            background-color: $item-card-bgc;
+            display: grid;
+            grid-template-columns: 34% 22% 22% 22%;
+            grid-template-rows: repeat(5, 20%); // Absolute positioning
+            .item-info {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                width: 10%;
+                padding: 2.5%;
+            }
+            .add-item {
+                position: absolute;
+                width: 20%;
+                padding: 5%;
+                bottom: -25%;
+                right: 5%;
+            } // Item Image
+            .menu-item-img {
+                background-color: #16151a;
+                border-radius: 7px;
+                justify-self: self-start;
+                align-self: center;
+                grid-row: 1/6;
+                grid-column: 1/2;
+                width: 90%;
+                position: relative; // left: 10%; 
+                filter: drop-shadow(0 4px 4px rgba(0, 0, 0, .25));
+            }
+            .menu-item-name {
+                font-size: 1.1rem;
+                flex-wrap: wrap;
+                grid-column: 2/4;
+                grid-row: 1/4;
+                font-weight: 500;
+                color: $item-card-text;
+            }
+            .menu-item-bot {
+                width: 100%;
+                grid-column: 2/5;
+                grid-row: 4/6;
+                .item-split {
+                    margin: 7% 0;
+                    width: 20%;
+                    border-radius: 20%;
+                    border: 2px solid rgba(255, 205, 68, .75);
+                }
+                .item-fluctuation {
+                    // grid-column: 2/5;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-around;
+                    align-items: center;
+                    .item-flucutation-container {
+                        width: 50%;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: flex-start;
+                        align-items: center;
+                        text-align: center;
+                        .flux-img {
+                            width: 15%;
+                        }
+                        .item-fluctuation-display {
+                            text-align: center;
+                            display: flex;
+                            justify-items: center;
+                            font-size: .8rem;
+                            margin-left: 8%;
+                        }
+                    }
+                }
+            }
+        } // Collapse - the flex part of the item
+    }
+    .item-detail-collapse {
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        width: 95%;
+        background-color: $item-detail-bgc;
+        padding-bottom: 2%;
+        .item-detail-wrapper {
+            width: 100%;
+            padding: 12% 10%;
+            .item-detail-subheader {
+                color: $item-detail-subheaders;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                font-size: .8rem;
+                font-weight: 600;
+                padding: 0;
+                margin: 0;
+            }
+            .item-detail {
+                color: $item-detail-text;
+                font-size: .7rem;
+                letter-spacing: .05rem;
+                margin-bottom: 12%;
+            }
+            %item-details-breakline {
+                width: 9.59%;
+                margin: 3% 0 7% 0;
+            }
+            .item-deatils-split {
+                @extend %item-details-breakline;
+                border: solid rgba(255, 205, 68, .75) 1px;
+            }
+            .item-performance-split {
+                @extend %item-details-breakline;
+                border: solid rgba(115, 237, 166, .75) 1px;
+            }
+            .menu-item-detail-graph-container {
+                width: 100%;
+                height: 10vh;
+            }
+        }
+    }
+}

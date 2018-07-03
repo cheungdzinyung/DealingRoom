@@ -2,7 +2,7 @@ import { Action, Dispatch } from "redux";
 import axios from "axios";
 
 import { API_SERVER } from "../../store";
-import { IMenuCategoryWithFlux } from "src/modules";
+import { IMenuCategoryWithFlux, ISpecialEvent } from "src/modules";
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const GET_ENTIRE_MENU_SUCCESS = "GET_ENTIRE_MENU_SUCCESS";
@@ -21,23 +21,38 @@ export interface IGetEntireMenuFailAction extends Action {
 export const SOCKET_CONNECT_SUCCESS = "SOCKET_CONNECT_SUCCESS";
 export type SOCKET_CONNECT_SUCCESS = typeof SOCKET_CONNECT_SUCCESS;
 export interface ISocketConnectSuccess extends Action {
-    type: SOCKET_CONNECT_SUCCESS,
-    socketID: any,
+  type: SOCKET_CONNECT_SUCCESS,
+  socketID: any,
 }
 
 export const SOCKET_UPDATE_ITEM_PRICE = "SOCKET_UPDATE_ITEM_PRICE";
 export type SOCKET_UPDATE_ITEM_PRICE = typeof SOCKET_UPDATE_ITEM_PRICE;
 export interface ISocketUpdateItemPrice extends Action {
-    type: SOCKET_UPDATE_ITEM_PRICE,
-    entireMenu: any,
+  type: SOCKET_UPDATE_ITEM_PRICE,
+  entireMenu: any,
+}
+
+export const SOCKET_SP_EVENT_INFO = "SOCKET_SP_EVENT_INFO";
+export type SOCKET_SP_EVENT_INFO = typeof SOCKET_SP_EVENT_INFO;
+export interface ISocketSpEventInfo extends Action {
+  type: SOCKET_SP_EVENT_INFO,
+  eventInfo: ISpecialEvent,
+}
+
+export const TOGGLE_EVENT_BELL_RING = "TOGGLE_EVENT_BELL_RING";
+export type TOGGLE_EVENT_BELL_RING = typeof TOGGLE_EVENT_BELL_RING;
+export interface IToggleEventBellRing extends Action {
+  type: TOGGLE_EVENT_BELL_RING,
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export type DisplayActions =
-  | IGetEntireMenuSuccessAction
-  | IGetEntireMenuFailAction |
+  IGetEntireMenuSuccessAction |
+  IGetEntireMenuFailAction |
   ISocketConnectSuccess |
-  ISocketUpdateItemPrice;
+  ISocketUpdateItemPrice |
+  ISocketSpEventInfo |
+  IToggleEventBellRing;
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function getEntireMenuSuccess(
@@ -82,14 +97,28 @@ export function getEntireMenu() {
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function socketConnect(socketID: any): ISocketConnectSuccess {
   return {
-      type: SOCKET_CONNECT_SUCCESS,
-      socketID,
+    type: SOCKET_CONNECT_SUCCESS,
+    socketID,
   }
 }
 
 export function socketUpdateItemPrice(entireMenu: IMenuCategoryWithFlux[]): ISocketUpdateItemPrice {
   return {
-      type: SOCKET_UPDATE_ITEM_PRICE,
-      entireMenu,
+    type: SOCKET_UPDATE_ITEM_PRICE,
+    entireMenu,
+  }
+}
+
+export function socketSpEventInfo(eventInfo: ISpecialEvent): ISocketSpEventInfo {
+  return {
+    type: SOCKET_SP_EVENT_INFO,
+    eventInfo,
+  }
+}
+
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+export function toggleEventBellRing(): IToggleEventBellRing {
+  return {
+    type: TOGGLE_EVENT_BELL_RING,
   }
 }

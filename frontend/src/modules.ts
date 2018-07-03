@@ -203,8 +203,8 @@ export interface IConsumpGraphDataDeceiveAll {
 
 export interface IConsumptionGraphDataReceiveFromServerOneCat {
   category: string;
-  price: number;
-  max: number;
+  price: string;
+  max: string;
 }
 
 /* 
@@ -247,18 +247,12 @@ export interface ILoginPackage {
   password: string;
 }
 
-// store state for ref
-// interface IUserState {
-//   role: string,
-//   isAuth: boolean,
-//   currentPage: string,
-//   redirectTarget: string,
-//   settings: string,
-// }
+// sp event
+export interface ISpecialEvent {
+  sponsor: string,
+  discount: number,
+  description: string,
+  eventTime: Date,          // date.now()
+}
 
-// interface IOrdersState {
-//   ordersList: any,
-//   unpaidOrders: number,
-//   currentOrder: IRequestItem[],
-//   currentTotal: number,
-// }
+
