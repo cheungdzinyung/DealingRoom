@@ -19,7 +19,7 @@ import {
 //     IOrderListStaff,
 //     IUserProfile,
 //     IMenuCategoryWithoutFlux
-// } from "../../../modules";
+// } from "src/modules";
 
 export interface IStaffInitState {
     // socket.io on load? isAuth?
