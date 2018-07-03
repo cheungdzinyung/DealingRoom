@@ -11,7 +11,7 @@ import {
 import {
   IMenuCategoryWithFlux,
   ISpecialEvent
-} from "../../../modules";
+} from "src/modules";
 
 import { singleCategoryMenuItems } from "src/fakedata"
 

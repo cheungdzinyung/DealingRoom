@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { API_SERVER } from "../../store";
 
-import { ICurrentOrder, IMenuCategoryWithFlux } from "../../../modules";
+import { ICurrentOrder, IMenuCategoryWithFlux } from "src/modules";
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const GET_ENTIRE_MENU_SUCCESS = "GET_ENTIRE_MENU_SUCCESS";

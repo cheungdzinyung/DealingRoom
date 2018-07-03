@@ -2,13 +2,13 @@
 import * as React from "react";
 
 // Importing UI elements
-import UserMenu from "../../ui/mobile/usermenu";
-import PageHeader from "src/Components/ui/mobile/pageheader";
+import UserMenu from "src/Components/CustomerAccessMenu/usermenu";
+import PageHeader from "src/Components/CustomerPageHeader/pageheader";
 import {
   IConsumptionGraphData,
   IConsumpGraphDataDeceiveAll
 } from "src/modules";
-import UserProfileGraph from "src/Components/ui/mobile/profilegraph";
+import UserProfileGraph from "./Graph/CustomerPerformanceGraph";
 
 // Importing fake data
 // import { profileConsumptionGraphTest } from "src/fakedata";
@@ -45,7 +45,7 @@ const mapDispatchToProps = (dispatch: any) => {
 class PurePerformance extends React.Component<
   IUserPerformanceProps,
   IUserPerformanceState
-> {
+  > {
   constructor(props: IUserPerformanceProps) {
     super(props);
     this.props.getConsumption();

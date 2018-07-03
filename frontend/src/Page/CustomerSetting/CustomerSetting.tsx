@@ -2,10 +2,10 @@ import { FormGroup } from "@blueprintjs/core";
 import * as React from "react";
 
 // Component import
-import Usermenu from "../../ui/mobile/usermenu";
+import Usermenu from "src/Components/CustomerAccessMenu/usermenu";
 
 // Media asset import
-import PageHeader from "src/Components/ui/mobile/pageheader";
+import PageHeader from "src/Components/CustomerPageHeader/pageheader";
 
 export default class Setting extends React.Component {
   constructor(props: {}) {

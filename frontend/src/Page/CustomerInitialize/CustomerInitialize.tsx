@@ -7,8 +7,8 @@ import { IRootState } from "src/redux/store";
 import {
   getEntireMenu,
   getOrdersByUserToken
-} from "../../../redux/mobile/actions/actions_orders";
-import { getUserProfileByUserToken } from "../../../redux/mobile/actions/actions_user";
+} from "src/redux/mobile/actions/actions_orders";
+import { getUserProfileByUserToken } from "src/redux/mobile/actions/actions_user";
 
 // for redir
 import * as History from "history";

@@ -10,7 +10,7 @@ import { DiscoverComponent } from "./DiscoverComponent/DiscoverComponent";
 import { HeroComponent } from "./HeroComponent/HeroComponent";
 // import NavBarComponent from "src/Components/container/homepage/NavBarComponent/NavBarComponent";
 
-export class LandingPage extends React.Component<{}, { navBarShrink: string }> {
+export default class LandingPage extends React.Component<{}, { navBarShrink: string }> {
   constructor(props: { navBarShrink: string }) {
     super(props);
     this.state = { navBarShrink: "" };

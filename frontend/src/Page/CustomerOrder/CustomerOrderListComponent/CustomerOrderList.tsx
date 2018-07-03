@@ -5,17 +5,17 @@ import * as React from "react";
 
 // Importing UI components
 import { Card, Elevation } from "@blueprintjs/core";
-import Usermenu from "../../ui/mobile/usermenu";
+import Usermenu from "src/Components/CustomerAccessMenu/usermenu";
 
 // Importing static assets
-import checkIcon from "../../assets/icons/orderlist/checkmark.svg";
+import checkIcon from "./img/checkmark.svg";
 
 // import redux and friends
 import { connect } from "react-redux";
 import { IRootState } from "src/redux/store";
-import { getOrdersByUserToken } from "../../../redux/mobile/actions/actions_orders";
-import { getUserProfileByUserToken } from "../../../redux/mobile/actions/actions_user";
-import PageHeader from "src/Components/ui/mobile/pageheader";
+import { getOrdersByUserToken } from "src/redux/mobile/actions/actions_orders";
+import { getUserProfileByUserToken } from "src/redux/mobile/actions/actions_user";
+import PageHeader from "src/Components/CustomerPageHeader/pageheader";
 
 interface IOrdersProps {
   history: History.History,
@@ -86,15 +86,15 @@ class PureOrderList extends React.Component<IOrdersProps, {}> {
           .filter((each: any) => !each.isPaid)
           .map((indOrd: any, index: any) => (
             <Card
-            className="order-cards"
-            interactive={true}
-            elevation={Elevation.TWO}
-            key={`unpaid_${index}`}
-            onClick={this.openSingleOrder.bind(this, indOrd.orders_id)}
+              className="order-cards"
+              interactive={true}
+              elevation={Elevation.TWO}
+              key={`unpaid_${index}`}
+              onClick={this.openSingleOrder.bind(this, indOrd.orders_id)}
             >
               <div className="top">
                 <div className="order-details">
-                  <h3 className="order-number">Order #{indOrd.orders_id}</h3> 
+                  <h3 className="order-number">Order #{indOrd.orders_id}</h3>
                   <p className="order-amount">
                     Total Amount: ${indOrd.orderItems.reduce((accu: number, curr: any) => (accu + parseFloat(curr.purchasePrice)), 0).toFixed(2)}
                   </p>

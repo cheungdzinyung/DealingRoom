@@ -5,18 +5,18 @@ import { match } from "react-router-dom";
 // for redir
 import * as History from "history";
 import { withRouter } from "react-router";
-import { redirectPage, resetTargetPage } from "../../../redux/mobile/actions/actions_user";
-import { setPaymentTargetId } from "../../../redux/mobile/actions/actions_payment";
+import { redirectPage, resetTargetPage } from "src/redux/mobile/actions/actions_user";
+import { setPaymentTargetId } from "src/redux/mobile/actions/actions_payment";
 // Importing UI elements
 import { Card, Elevation } from "@blueprintjs/core";
-import { AppToaster } from "src/Components/ui/mobile/toast";
+import { AppToaster } from "src/Components/ToastAlert/toast";
 import { Intent } from "@blueprintjs/core";
 
 // Importing components
-import Usermenu from "../../ui/mobile/usermenu";
+import Usermenu from "src/Components/CustomerAccessMenu/usermenu";
 
 // Importing static assets
-import paymentTest from "../../assets/images/payment/stripe.png"
+import paymentTest from "./img/stripe.png"
 
 // Importing types
 // import { IOrder } from "../../modules";
@@ -24,8 +24,8 @@ import paymentTest from "../../assets/images/payment/stripe.png"
 // import redux and friends
 import { connect } from "react-redux";
 import { IRootState } from "src/redux/store";
-import PageHeader from "src/Components/ui/mobile/pageheader";
-import MySrtipeComponent from "../../ui/mobile/myStripeComponent";
+import PageHeader from "src/Components/CustomerPageHeader/pageheader";
+import MySrtipeComponent from "src/Components/StripePayment/myStripeComponent";
 
 interface IOrderProps {
   match: match<{ orderId: number }>;
@@ -89,7 +89,7 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
         intent: Intent.WARNING,
         icon: "cross",
         timeout: 2000
-    });
+      });
       this.props.history.push("/customer/order");
     }
 

@@ -5,11 +5,11 @@ import { Card, Elevation, Collapse } from "@blueprintjs/core";
 import { AreaChart, Area, ResponsiveContainer } from "recharts";
 
 // import static icons
-import wallet from "../../assets/icons/item/wallet.svg";
-import info from "../../assets/icons/item/info.svg";
-import upArrowImg from "../../assets/icons/item/up.svg";
-import downArrowImg from "../../assets/icons/item/down.svg";
-import plus from "../../assets/icons/item/plus.svg";
+import wallet from "./img/wallet.svg";
+import info from "./img/info.svg";
+import upArrowImg from "./img/up.svg";
+import downArrowImg from "./img/down.svg";
+import plus from "./img/plus.svg";
 
 // Import types
 import { IItemPriceGraphData } from "src/modules";

@@ -4,21 +4,21 @@ import * as React from "react";
 // import redux and friends
 import { connect } from "react-redux";
 import { IRootState } from "src/redux/store";
-import { removeFromCurrentOrder, confirmOrder, resetConfirmOrderStatus } from "../../../redux/mobile/actions/actions_orders";
+import { removeFromCurrentOrder, confirmOrder, resetConfirmOrderStatus } from "src/redux/mobile/actions/actions_orders";
 
 // for redir
 import * as History from "history";
 import { withRouter } from "react-router";
-import { redirectPage, resetTargetPage } from "../../../redux/mobile/actions/actions_user";
+import { redirectPage, resetTargetPage } from "src/redux/mobile/actions/actions_user";
 
 // Importing UI
-import UserMenu from "../../ui/mobile/usermenu";
+import UserMenu from "src/Components/CustomerAccessMenu/usermenu";
 import { Button, Card, Elevation, Intent } from "@blueprintjs/core";
-import { AppToaster } from "src/Components/ui/mobile/toast";
+import { AppToaster } from "src/Components/ToastAlert/toast";
 
 // Importing interfaces
-import { IRequestItem, ICurrentOrder } from "../../../modules";
-import PageHeader from "src/Components/ui/mobile/pageheader";
+import { IRequestItem, ICurrentOrder } from "src/modules";
+import PageHeader from "src/Components/CustomerPageHeader/pageheader";
 
 interface IRequestProps {
   // handling orders

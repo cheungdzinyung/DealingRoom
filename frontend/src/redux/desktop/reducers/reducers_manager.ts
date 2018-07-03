@@ -12,7 +12,7 @@ import {
     TRIGGER_SP_EVENT_FAIL
 } from "../actions/actions_manager";
 
-import { IMenuCategoryWithoutFlux, IStockManageModalState, IUpdateMenuItem } from "../../../modules";
+import { IMenuCategoryWithoutFlux, IStockManageModalState, IUpdateMenuItem } from "src/modules";
 
 export interface IManagerState {
     entireMenu: IMenuCategoryWithoutFlux[],

@@ -6,9 +6,9 @@ import * as React from "react";
 import { Card } from "@blueprintjs/core";
 
 // Importing static assets
-import facebook from "src/Components/assets/icons/signup/facebook.svg";
-import google from "src/Components//assets/icons/signup/google.svg";
-import logo from "src/Components/assets/icons/all/logo.svg";
+import facebook from "./img/facebook.svg";
+import google from "./img/google.svg";
+import logo from "./img/logo.svg";
 
 // redux
 import { connect } from "react-redux";
@@ -17,7 +17,7 @@ import {
   localLogin,
   localSignUp,
   loginFacebook
-} from "../../../redux/mobile/actions/actions_user";
+} from "src/redux/mobile/actions/actions_user";
 
 import ReactFacebookLogin, {
   ReactFacebookLoginInfo

@@ -13,13 +13,13 @@ import { IRootState } from "src/redux/store";
 import {
   addToCurrentOrder,
   getEntireMenu
-} from "../../../redux/mobile/actions/actions_orders";
+} from "src/redux/mobile/actions/actions_orders";
 
 // Import UI elements
-import { AppToaster } from "src/Components/ui/mobile/toast";
+import { AppToaster } from "src/Components/ToastAlert/toast";
 import { Intent } from "@blueprintjs/core";
-import UserMenu from "../../ui/mobile/usermenu";
-import MenuItem from "../../ui/mobile/menuitem";
+import UserMenu from "src/Components/CustomerAccessMenu/usermenu";
+import MenuItem from "./ItemCard/menuitem";
 
 // import { API_SERVER } from "src/redux/store";
 
@@ -32,7 +32,7 @@ import {
 
 // socket
 import { store } from "src/redux/store";
-import PageHeader from "../../ui/mobile/pageheader";
+import PageHeader from "src/Components/CustomerPageHeader/pageheader";
 
 // Props and States
 interface IMenuProps {
@@ -191,7 +191,7 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
             return (
               <div key={`cat_${cat}`}>
                 <img
-                  src={require(`./../../assets/images/categories/${cat}.jpg`)}
+                  src={require(`./img/categories/${cat}.jpg`)}
                   alt=""
                   className="rd-corner display-img"
                 />
@@ -224,7 +224,7 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
                   ) !== -1 &&
                 /* v match selected category */
                 category.categoryName ===
-                  this.props.categories[this.state.displayCategoryIndex] &&
+                this.props.categories[this.state.displayCategoryIndex] &&
                 /* v check stock > 0 */
                 item.itemStock > 0 && (
                   <MenuItem

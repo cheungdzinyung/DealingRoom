@@ -1,10 +1,10 @@
 import * as React from "react";
 
 // Media asset import
-import Stripe from "../../assets/images/payment/stripe.png";
+import Stripe from "./img/stripe.png";
 
 // Importing interfaces
-import { OrderStatus } from "../../../modules";
+import { OrderStatus } from "src/modules";
 
 import StripeCheckout from 'react-stripe-checkout';
 
@@ -13,7 +13,7 @@ import { STRIPE_PUBLISHABLE } from "src/redux/store";
 // import redux and friends
 import { connect } from "react-redux";
 import { IRootState } from "src/redux/store";
-import { payWithStripe, resetPaymentResult } from "../../../redux/mobile/actions/actions_payment";
+import { payWithStripe, resetPaymentResult } from "src/redux/mobile/actions/actions_payment";
 
 // for redir
 import * as History from "history";
@@ -33,7 +33,7 @@ interface IPaymentResult {
 interface IPurePaymentProps {
     // handle payment
     paymentInfo: IPaymentInfo,
-    
+
     paymentResult: IPaymentResult,
     payWithStripe: (orderId: number, token?: any) => void,
     // handling redirect

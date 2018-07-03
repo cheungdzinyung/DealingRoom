@@ -4,16 +4,16 @@ import * as React from "react";
 import { withRouter } from "react-router";
 
 // Importing static assets
-import menu from "../../assets/icons/menu/menu.svg";
-import orders from "../../assets/icons/menu/bookmark.svg";
-import request from "../../assets/icons/menu/cart.svg";
-import setting from "../../assets/icons/menu/gear.svg";
-import chart from "../../assets/icons/menu/chart.svg";
+import menu from "./img/menu.svg";
+import orders from "./img/bookmark.svg";
+import request from "./img/cart.svg";
+import setting from "./img/gear.svg";
+import chart from "./img/chart.svg";
 
 // import redux and friends
 import { connect } from "react-redux";
 import { IRootState } from "src/redux/store";
-import { changePage } from "../../../redux/mobile/actions/actions_user";
+import { changePage } from "src/redux/mobile/actions/actions_user";
 
 interface IUserMenuProps {
   history: History.History,
