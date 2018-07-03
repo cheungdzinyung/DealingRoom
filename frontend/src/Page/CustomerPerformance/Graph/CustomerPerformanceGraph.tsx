@@ -1,6 +1,9 @@
 // Importing modules
 import * as React from "react";
 
+// Importing styling and static assets
+import "./CustomerPerformanceGraph.scss";
+
 // Importing UI elements
 import {
   RadarChart,
@@ -21,7 +24,7 @@ interface IUserProfileGraphProps {
 export default class UserProfileGraph extends React.Component<
   IUserProfileGraphProps,
   {}
-> {
+  > {
   constructor(props: IUserProfileGraphProps) {
     super(props);
   }
@@ -49,12 +52,12 @@ export default class UserProfileGraph extends React.Component<
             <PolarAngleAxis
               tickFormatter={this.fakerTickFunction}
               dataKey="category"
-              // axisLine={false}
+            // axisLine={false}
             />
             <PolarRadiusAxis
               tickFormatter={this.fakerTickFunction}
               angle={30}
-              // axisLine={false}
+            // axisLine={false}
             />
             {/* Draw second */}
             <Radar

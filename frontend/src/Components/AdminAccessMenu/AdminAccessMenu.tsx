@@ -3,7 +3,8 @@ import * as History from "history";
 import * as React from "react";
 import { withRouter } from "react-router";
 
-// Importing static assets
+// Importing styling and static assets
+import './AdminAccessMenu.scss';
 import logo from "./img/logo.svg";
 // Importing menu icons
 import glass from "./img/glass.svg";

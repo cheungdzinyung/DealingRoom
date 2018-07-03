@@ -1,4 +1,6 @@
 import * as React from "react";
+// Importing styling and static assets
+import "./CustomerMenuCategoryFilter.scss";
 
 interface ICategoryFilterProps {
     categories: string[];

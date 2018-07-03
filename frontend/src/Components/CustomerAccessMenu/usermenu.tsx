@@ -4,7 +4,7 @@ import * as React from "react";
 import { withRouter } from "react-router";
 
 // Importing styling and static assets
-import "./AdminAccessMenu.scss";
+import "./CustomerAccessMenu.scss";
 import menu from "./img/menu.svg";
 import orders from "./img/bookmark.svg";
 import request from "./img/cart.svg";
