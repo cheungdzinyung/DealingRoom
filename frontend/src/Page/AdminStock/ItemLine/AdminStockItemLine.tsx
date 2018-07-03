@@ -1,6 +1,9 @@
 // Importing modules
 import * as React from "react";
 
+// Importing styling and static assets
+import "./AdminStockItemLine.scss";
+
 // Importing Interfaces
 import {
   IMenuItemWithoutFlux,
@@ -40,7 +43,7 @@ interface IStockItemStates {
 class PureStockItemLine extends React.Component<
   IPureStockItemLineProps,
   IStockItemStates
-> {
+  > {
   constructor(props: IPureStockItemLineProps) {
     super(props);
   }
@@ -95,10 +98,10 @@ class PureStockItemLine extends React.Component<
                 <span className="isActive-button-text">Active</span>
               </button>
             ) : (
-              <button className="active-button rd-corner isNotActive">
-                <span className="isActive-button-text">Inactive</span>
-              </button>
-            )}
+                <button className="active-button rd-corner isNotActive">
+                  <span className="isActive-button-text">Inactive</span>
+                </button>
+              )}
           </div>
           <div className="item-edit-menu">
             <img

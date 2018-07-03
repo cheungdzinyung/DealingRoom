@@ -2,6 +2,8 @@
 import * as History from "history";
 import * as React from "react";
 
+// Importing styling and static assets
+import "./CustomerOrderList.scss";
 
 // Importing UI components
 import { Card, Elevation } from "@blueprintjs/core";
