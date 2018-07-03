@@ -1,11 +1,11 @@
 // Importing modules
 import * as React from "react";
+// import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 
 // Importing UI components
 import PageHeader from "src/Components/AdminPageHeader/AdminPageHeader";
 import AdminSideMenu from "src/Components/AdminAccessMenu/AdminAccessMenu";
 import OrderCard from "src/Components/AdminOrderCard/AdminOrderCard";
-// import bell from "../../assets/icons/desktop/sidemenu/bell.svg"
 
 // for redir
 import * as History from "history";
@@ -18,12 +18,7 @@ import { connect } from "react-redux";
 import { IRootState } from "src/redux/store";
 import { getAllOrders } from "src/redux/desktop/actions/actions_bartender";
 
-
-// Using an ES6 transpiler like Babel
-import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
-
-
-interface IPendingOrdersProps {
+interface IUnpaidOrdersProps {
     allOrders: any,
     allOrdersReady: boolean,
     getAllOrders: () => void,
@@ -48,9 +43,17 @@ const mapDispatchToProps = (dispatch: any) => {
     };
 };
 
-class PureUnpaidOrders extends React.Component<IPendingOrdersProps> {
-    constructor(props: IPendingOrdersProps) {
+interface IUnpaidOrdersState {
+    allOrders: any,
+}
+
+class PureUnpaidOrders extends React.Component<IUnpaidOrdersProps, IUnpaidOrdersState> {
+    constructor(props: IUnpaidOrdersProps) {
         super(props);
+
+        this.state = {
+            allOrders: {},
+        }
     }
 
     public componentWillMount() {
@@ -61,11 +64,46 @@ class PureUnpaidOrders extends React.Component<IPendingOrdersProps> {
         this.props.getAllOrders();
     }
 
-    // public refresh = () => {
-    //     this.props.getAllOrders();
-    // }
+    public componentDidUpdate() {
+        this.setState({
+            allOrders: this.props.allOrders
+        })
+    }
+
+    // public onSortEnd = ({ oldIndex, newIndex }:{ oldIndex:number, newIndex: number}) => {
+    //     this.setState({
+    //         allOrders: arrayMove(this.state.allOrders, oldIndex, newIndex),
+    //     });
+    // };
 
     public render() {
+        // const SortableItem = SortableElement(({ oneOrder, index }) =>
+        //     <li>
+        //         <OrderCard
+        //             {...oneOrder}
+        //             paymentPage={true}
+        //             key={index} />
+        //     </li>
+        // )
+
+        // const SortableList = SortableContainer(() => {
+        //     return (
+        //         <ul>
+        //             {this.state.allOrders
+        //                 .filter((each: any) => each.isPaid === false)
+        //                 .map((oneOrder: any, index: number) => (
+        //                     <SortableItem
+        //                         key={`item-${index}`}
+        //                         index={index}
+        //                         {...oneOrder}
+        //                     // sortIndex={index}
+        //                     // value={value}
+        //                     />
+        //                 ))}
+        //         </ul>
+        //     );
+        // })
+
         return (
             <div className="desktop-page-container">
                 <AdminSideMenu />
@@ -73,7 +111,6 @@ class PureUnpaidOrders extends React.Component<IPendingOrdersProps> {
                     <div className="currentorder-wrapper">
                         <div className="currentorder-header">
                             <PageHeader header="Unpaid Orders" />
-                            {/* <span><img src={bell} onClick={this.refresh} className="refresh" /></span> */}
                         </div>
                         <div className="order-card-display">
                             {this.props.allOrders
@@ -83,6 +120,7 @@ class PureUnpaidOrders extends React.Component<IPendingOrdersProps> {
                                         {...oneOrder}
                                         paymentPage={true}
                                         key={index} />))}
+                            {/* <SortableList onSortEnd={this.onSortEnd} /> */}
                         </div>
                     </div>
                 </div>
