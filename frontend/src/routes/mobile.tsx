@@ -10,23 +10,29 @@ import Performance from "src/Page/CustomerPerformance/CustomerPerformance";
 import Request from "src/Page/CustomerRequest/CustomerRequest";
 import Setting from "src/Page/CustomerSetting/CustomerSetting";
 import PureIntroduction from "src/Page/CustomerWelcomeScreen/introduction";
+import UserMenu from "src/Components/CustomerAccessMenu/usermenu";
 
 export default class MobileRoutes extends React.Component {
   public render() {
     return (
-      <Switch>
-        {/* Testing route */}
-        <Route path="/customer/welcome" exact={true} component={PureIntroduction} />
-        <Route path="/customer/initialize" exact={true} component={Initialize} />
-        <Route path="/customer/performance" exact={true} component={Performance} />
-        <Route path="/customer/order" exact={true} component={OrderList} />
-        <Route path="/customer/order/:orderId" exact={true} component={Order} />
-        <Route path="/customer/menu" exact={true} component={Menu} />
-        <Route path="/customer/request" exact={true} component={Request} />
-        <Route path="/customer/setting" exact={true} component={Setting} />
-        <Route path="/customer/request" exact={true} component={Request} />
-        <Route path="/customer"  component={Login} />
-      </Switch>
+      <div>
+        <Switch>
+          {/* Testing route */}
+          <Route path="/customer/welcome" exact={true} component={PureIntroduction}/>
+          <Route path="/customer/initialize" exact={true} component={Initialize} />
+          <Route path="/customer/performance" exact={true} component={Performance} />
+          <Route path="/customer/order" exact={true} component={OrderList} />
+          <Route path="/customer/order/:orderId" exact={true} component={Order} />
+          <Route path="/customer/menu" exact={true} component={Menu} />
+          <Route path="/customer/request" exact={true} component={Request} />
+          <Route path="/customer/setting" exact={true} component={Setting} />
+          <Route path="/customer/request" exact={true} component={Request} />
+          <Route path="/customer" component={Login} />
+        </Switch>
+        {
+          <UserMenu />
+        }
+      </div>
     );
   }
 }

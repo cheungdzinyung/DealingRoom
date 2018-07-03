@@ -15,7 +15,7 @@ import { AppToaster } from "src/Components/ToastAlert/toast";
 import { Intent } from "@blueprintjs/core";
 
 // Importing components
-import Usermenu from "src/Components/CustomerAccessMenu/usermenu";
+// import Usermenu from "src/Components/CustomerAccessMenu/usermenu";
 
 // Importing styling and static assets
 import "./CustomerOrder.scss";
@@ -139,7 +139,7 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
 
             </div> : <div />
         }
-        <Usermenu />
+        {/* <Usermenu /> */}
       </div>
     );
   }

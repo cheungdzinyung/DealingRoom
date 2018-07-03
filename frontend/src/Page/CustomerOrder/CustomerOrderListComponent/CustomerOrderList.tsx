@@ -5,7 +5,7 @@ import * as React from "react";
 
 // Importing UI components
 import { Card, Elevation } from "@blueprintjs/core";
-import Usermenu from "src/Components/CustomerAccessMenu/usermenu";
+// import Usermenu from "src/Components/CustomerAccessMenu/usermenu";
 
 // Importing static assets
 import checkIcon from "./img/checkmark.svg";
@@ -138,7 +138,7 @@ class PureOrderList extends React.Component<IOrdersProps, {}> {
             </Card>
           ))}
         {/* End of Dynamic content*/}
-        <Usermenu />
+        {/* <Usermenu /> */}
 
       </div>
     );

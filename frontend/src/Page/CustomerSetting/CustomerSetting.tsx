@@ -5,7 +5,7 @@ import * as React from "react";
 import "./CustomerSetting.scss";
 
 // Component import
-import Usermenu from "src/Components/CustomerAccessMenu/usermenu";
+// import Usermenu from "src/Components/CustomerAccessMenu/usermenu";
 
 // Media asset import
 import PageHeader from "src/Components/CustomerPageHeader/pageheader";
@@ -42,7 +42,7 @@ export default class Setting extends React.Component {
         <button className="conf-button" type="submit">
           <span>Confirm</span>
         </button>
-        <Usermenu />
+        {/* <Usermenu /> */}
       </div>
     );
   }
