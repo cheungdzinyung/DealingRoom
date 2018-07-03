@@ -98,6 +98,25 @@ Jun 25    | Backend: Added isActive option for getAll items and error check in p
 Jun 25    | Frontend: admin page /pending Orders implementation 
 Jun 26    | Backend: Bug fixes (double-checked photo names, updated seed file)
 Jun 26    | Backend: Created route for obtaining photo
+Jun 27    | Backend: Working on fluctuating prices algorithm
+Jun 27    | Backend: Changing backend to async/await format
+Jun 27    | Backend: Bug fixes (error in renaming items for respond value)
+Jun 28    | Backend: Auto insert into itemLog using chronjob and new route
+Jun 28    | Backend: Renamed 'chardata' to 'chartdata' in fluctuating route to match graph plugin
+Jun 28    | Backend: Cleaned up all item photo size to be 300 x 300 and cat photo to 339 x 175
+Jun 28    | Backend: Fluctuating price now returns with each add order request
+Jun 29    | Backend: Performance graph for all will include user data as well
+Jun 29    | Backend: Performance graph will only include categories where the user has ordered
+Jun 30    | Backend: Added maxMin and priceDrop route for new functions
+Jul 01    | Backend: Cleaned up all backend service files to use await/async
+Jul 02    | Backend: Updated all item photos (better quality, new margin requirement)
+Jul 02    | Backend: Created data and seed file for mock data
+
+
+
+
+
+
 
 
 
