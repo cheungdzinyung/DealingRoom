@@ -15,7 +15,7 @@ import {
   GET_USER_CONSUMPTIONS_BY_USER_TOKEN_FAIL
 } from "../actions/actions_user";
 
-import { IUserProfile, IConsumpGraphDataDeceiveAll } from "../../../modules";
+import { IUserProfile, IConsumpGraphDataDeceiveAll } from "src/modules";
 
 export interface IUserState {
   // role: string,
@@ -88,6 +88,7 @@ export const userReducer = (
       return { ...state, userAPIErr: action.errMsg };
     }
     case LOCAL_SIGNUP_SUCCESS: {
+      localStorage.setItem("welcomeOnSignup", "true");
       localStorage.setItem("dealingRoomToken", action.userInfoPackage.password);
       return { ...state, userAPIErr: "none" };
     }

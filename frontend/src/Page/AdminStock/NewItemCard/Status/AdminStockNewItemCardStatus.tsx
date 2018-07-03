@@ -1,7 +1,8 @@
 // Importing modules
 import * as React from "react";
 
-// Importing static asset
+// Importing styling and static assets
+import "./AdminStockNewItemCardStatus.scss";
 import solidStar from "./img/starfilled.svg";
 import hollowStar from "./img/starunfilled.svg";
 // Import util function
@@ -18,7 +19,7 @@ export interface ItemModalStatusProps {
 
 export default class ItemModalStatus extends React.Component<
   ItemModalStatusProps
-> {
+  > {
   constructor(props: ItemModalStatusProps) {
     super(props);
   }

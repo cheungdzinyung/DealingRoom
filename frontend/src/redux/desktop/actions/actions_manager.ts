@@ -5,7 +5,7 @@ import axios from "axios";
 import { API_SERVER } from "../../store";
 
 // Import UI elements
-import { AppToaster } from "src/Components/ui/mobile/toast";
+import { AppToaster } from "src/Components/ToastAlert/toast";
 import { Intent } from "@blueprintjs/core";
 
 import { 
@@ -14,7 +14,7 @@ import {
 	IUpdateMenuItem,
 	IStockManageModalState,
 	ISpecialEvent,
-} from "../../../modules";
+} from "src/modules";
 
 // Type creation
 export const CREATE_ITEM_SUCCESS = "CREATE_ITEM_SUCCESS";

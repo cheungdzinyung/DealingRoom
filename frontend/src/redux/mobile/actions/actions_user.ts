@@ -6,10 +6,10 @@ import {
   ISignUpPackage,
   ILoginPackage,
   IConsumpGraphDataDeceiveAll
-} from "../../../modules";
+} from "src/modules";
 
 // Import UI elements
-import { AppToaster } from "src/Components/ui/mobile/toast";
+import { AppToaster } from "src/Components/ToastAlert/toast";
 import { Intent } from "@blueprintjs/core";
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */

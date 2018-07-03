@@ -1,6 +1,9 @@
 // Importing modules
 import * as React from "react";
 
+// Importing styling and static assets
+import "./AdminPageHeader.scss";
+
 interface IPageHeaderProps {
   header: string;
 }

@@ -1,0 +1,52 @@
+@import "src/scss/templates";
+.setting-img {
+    width: 35%;
+    border-radius: 5px;
+}
+
+.user-info-form {
+    margin-top: 5%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.input-field {
+    width: 100%;
+    margin: .5vmin 0;
+    padding: 3% 5%;
+    border-radius: 5px;
+    background-color: $search-bar-bgc;
+    color: $search-bar-font;
+    font-size: 120%;
+    *::-moz-placeholder,
+    *::-ms-input-placeholder,
+    *::-webkit-input-placeholder {
+        color: $placebolder-color;
+    }
+}
+
+*::-moz-placeholder,
+*::-ms-input-placeholder,
+*::-webkit-input-placeholder {
+    color: $placebolder-color;
+}
+
+.conf-button {
+    width: 100%;
+    background-color: #EE5353;
+    border-radius: 5px;
+    color: white;
+    padding: 3% 0%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-banner {
+    border-radius: 5px;
+    margin-bottom: 3%;
+    width: 100%;
+}

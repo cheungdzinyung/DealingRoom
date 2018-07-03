@@ -1,6 +1,10 @@
 // Importing modules
 import * as React from "react";
 
+// Importing styling and static assets
+import "./AdminStockNewItemCardInfo.scss";
+
+
 export interface IItemModalInfoProps {
   itemName: string;
   itemStock: number;
@@ -14,7 +18,7 @@ export interface IItemModalInfoProps {
 
 export default class ItemModalInfo extends React.Component<
   IItemModalInfoProps
-> {
+  > {
   constructor(props: IItemModalInfoProps) {
     super(props);
   }
@@ -34,7 +38,7 @@ export default class ItemModalInfo extends React.Component<
               Current Price
             </span>
             <div className="line-number-container">
-              
+
               <input
                 type="number"
                 defaultValue={this.props.currentPrice.toString()}
@@ -46,7 +50,7 @@ export default class ItemModalInfo extends React.Component<
           <div className="edit-item-value-line-container">
             <span className="edit-item-value-line-text alert">Price Floor</span>
             <div className="line-number-container">
-              
+
               <input
                 type="number"
                 defaultValue={this.props.minimumPrice.toString()}

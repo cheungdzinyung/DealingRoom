@@ -10,7 +10,7 @@ import {
 
 import {
     IOrderListStaff,
-} from "../../../modules";
+} from "src/modules";
 
 export interface IWaiterState {
     // socket.io on load? isAuth?
