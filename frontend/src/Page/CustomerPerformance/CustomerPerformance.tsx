@@ -52,20 +52,14 @@ class PurePerformance extends React.Component<
   constructor(props: IUserPerformanceProps) {
     super(props);
     // this.props.getConsumption();
-    this.state = {
-      processedData: switchUp(this.props.userConsumptionComparison)
-    };
+    // this.state = {
+    //   processedData: switchUp(this.props.userConsumptionComparison)
+    // };
   }
 
-  // public componentDidMount () {
-  //   this.props.getConsumption();
-  // }
-
-  // public componentDidUpdate () {
-  //   this.setState({
-  //     processedData: switchUp(this.props.userConsumptionComparison)
-  //   })
-  // }
+  public componentDidMount () {
+    this.props.getConsumption();
+  }
  
   public render() {
     return (

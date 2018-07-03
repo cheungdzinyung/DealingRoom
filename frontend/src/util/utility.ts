@@ -59,7 +59,7 @@ export const switchUp = (
     const indicator = newArray.findIndex(
       eachArray => eachArray.category === single.category
     );
-    Object.assign(newArray[indicator], { you: parseInt(single.price, 10) });
+    Object.assign({},newArray[indicator], { you: parseInt(single.price, 10) });
   });
 
   return newArray;
