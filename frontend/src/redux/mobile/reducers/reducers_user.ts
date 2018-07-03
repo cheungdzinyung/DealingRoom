@@ -81,6 +81,7 @@ export const userReducer = (
       return { ...state, redirectTarget: "none" };
     }
     case LOCAL_LOGIN_SUCCESS: {
+      localStorage.removeItem("welcomeOnSignup");
       localStorage.setItem("dealingRoomToken", action.userInfoPackage.token);
       return { ...state, isAuth: true, userAPIErr: "none" };
     }
@@ -89,8 +90,8 @@ export const userReducer = (
     }
     case LOCAL_SIGNUP_SUCCESS: {
       localStorage.setItem("welcomeOnSignup", "true");
-      localStorage.setItem("dealingRoomToken", action.userInfoPackage.password);
-      return { ...state, userAPIErr: "none" };
+      localStorage.setItem("dealingRoomToken", action.userInfoPackage.token);
+      return { ...state, userAPIErr: "none", isAuth: true };
     }
     case LOCAL_SIGNUP_FAIL: {
       return { ...state, userAPIErr: action.errMsg };

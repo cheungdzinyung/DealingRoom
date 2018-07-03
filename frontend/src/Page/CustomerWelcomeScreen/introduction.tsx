@@ -27,7 +27,7 @@ export default class PureIntroduction extends React.Component<
   }
 
   public toMenu = () => {
-    this.props.history.push("/customer/menu");
+    this.props.history.push("/customer/initialize");
   };
 
   public render() {
