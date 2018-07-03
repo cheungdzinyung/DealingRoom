@@ -17,7 +17,7 @@ export default class Setting extends React.Component {
   public render() {
     return (
       <div className="page-content-container">
-        <PageHeader header="Setting" subHeader="Column A, or try column B" />
+        <PageHeader header="Setting" subHeader="Set it and forget it" />
         <FormGroup
           className="user-info-form"
           labelFor="login"

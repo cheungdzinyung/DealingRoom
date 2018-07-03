@@ -7,7 +7,7 @@ import "./CustomerPerformance.scss";
 // Importing UI elements
 import UserMenu from "src/Components/CustomerAccessMenu/usermenu";
 import PageHeader from "src/Components/CustomerPageHeader/pageheader";
-import { IConsumpGraphDataDeceiveAll } from "src/modules";
+import {   IConsumpGraphDataDeceiveAll } from "src/modules";
 import UserProfileGraph from "./Graph/CustomerPerformanceGraph";
 
 // Importing fake data
@@ -63,7 +63,7 @@ class PurePerformance extends React.Component<IUserPerformanceProps, {}> {
           data={switchUp(this.props.userConsumptionComparison)}
         />
         <div className="cardd rd-corner">
-          <p>This is just trying out haha. Thanks for joining us here.</p>
+          <p>Thank you for enjoying our product. We hope to see you again soon.</p>
         </div>
         <UserMenu />
       </div>
