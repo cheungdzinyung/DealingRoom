@@ -5,7 +5,7 @@ import axios from "axios";
 import { API_SERVER } from "../../store";
 
 // Import UI elements
-import { AppToaster } from "src/components/ui/mobile/toast";
+import { AppToaster } from "src/Components/ui/mobile/toast";
 import { Intent } from "@blueprintjs/core";
 
 import {
