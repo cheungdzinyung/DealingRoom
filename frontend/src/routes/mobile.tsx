@@ -9,14 +9,14 @@ import OrderList from "src/Page/CustomerOrder/CustomerOrderListComponent/Custome
 import Performance from "src/Page/CustomerPerformance/CustomerPerformance";
 import Request from "src/Page/CustomerRequest/CustomerRequest";
 import Setting from "src/Page/CustomerSetting/CustomerSetting";
-import LandingPage from "src/Page/LandingPage/LandingPage";
+import PureIntroduction from "src/Page/CustomerWelcomeScreen/introduction";
 
 export default class MobileRoutes extends React.Component {
   public render() {
     return (
       <Switch>
         {/* Testing route */}
-        <Route path="/customer/welcome" exact={true} component={LandingPage} />
+        <Route path="/customer/welcome" exact={true} component={PureIntroduction} />
         <Route path="/customer/initialize" exact={true} component={Initialize} />
         <Route path="/customer/performance" exact={true} component={Performance} />
         <Route path="/customer/order" exact={true} component={OrderList} />
@@ -25,7 +25,7 @@ export default class MobileRoutes extends React.Component {
         <Route path="/customer/request" exact={true} component={Request} />
         <Route path="/customer/setting" exact={true} component={Setting} />
         <Route path="/customer/request" exact={true} component={Request} />
-        <Route path="/customer" component={Login} />
+        <Route path="/customer"  component={Login} />
       </Switch>
     );
   }

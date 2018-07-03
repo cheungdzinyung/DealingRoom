@@ -122,15 +122,23 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
 
   public componentDidUpdate() {
     // actually shld check if token is valid
-    if (localStorage.getItem("dealingRoomToken")) {
-      this.props.history.push(`/customer/initialize`);
+    if (localStorage.getItem("welcomeOnSignup") === "true") {
+      this.props.history.push('/customer/welcome');
+    } else {
+      if (localStorage.getItem("dealingRoomToken")) {
+        this.props.history.push(`/customer/initialize`);
+      }
     }
   }
 
   public componentDidMount() {
     // actually shld check if token is valid
-    if (localStorage.getItem("dealingRoomToken")) {
-      this.props.history.push(`/customer/initialize`);
+    if (localStorage.getItem("welcomeOnSignup") === "true") {
+      this.props.history.push('/customer/welcome');
+    } else {
+      if (localStorage.getItem("dealingRoomToken")) {
+        this.props.history.push(`/customer/initialize`);
+      }
     }
   }
 
@@ -185,15 +193,15 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
                 </div>
               </div>
             ) : (
-              <div className="status-switch">
-                <div className="status" onClick={this.chooseLogin}>
-                  <span className="status-text">LOGIN</span>
+                <div className="status-switch">
+                  <div className="status" onClick={this.chooseLogin}>
+                    <span className="status-text">LOGIN</span>
+                  </div>
+                  <div className="status-chosen" onClick={this.chooseSignUp}>
+                    <span className="status-text">SIGNUP</span>
+                  </div>
                 </div>
-                <div className="status-chosen" onClick={this.chooseSignUp}>
-                  <span className="status-text">SIGNUP</span>
-                </div>
-              </div>
-            )}
+              )}
             {/* </div> */}
 
             <form className="form" action="">
@@ -225,15 +233,15 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
                 </button>
               </div>
             ) : (
-              <div className="login-button ">
-                <button
-                  className="submit rd-corner"
-                  onClick={this.toLocalSignUp}
-                >
-                  <span className="submit-text">SIGN UP</span>
-                </button>
-              </div>
-            )}
+                <div className="login-button ">
+                  <button
+                    className="submit rd-corner"
+                    onClick={this.toLocalSignUp}
+                  >
+                    <span className="submit-text">SIGN UP</span>
+                  </button>
+                </div>
+              )}
           </Card>
         </div>
       </div>
