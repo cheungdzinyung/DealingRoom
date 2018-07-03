@@ -144,6 +144,12 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-sortable-hoc@^0.6.3":
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/@types/react-sortable-hoc/-/react-sortable-hoc-0.6.3.tgz#b9d034ab2728691ef3270ede5f4b4fd1cead52bd"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-transition-group@^2.0.9":
   version "2.0.9"
   resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-2.0.9.tgz#ed6a71fb711e524345844defec2a861c1a222a03"

@@ -19,6 +19,10 @@ import { IRootState } from "../../../redux/store";
 import { getAllOrders } from "../../../redux/desktop/actions/actions_bartender";
 
 
+// Using an ES6 transpiler like Babel
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
+
+
 interface IPendingOrdersProps {
     allOrders: any,
     allOrdersReady: boolean,
@@ -50,25 +54,16 @@ class PureUnpaidOrders extends React.Component<IPendingOrdersProps> {
     }
 
     public componentWillMount() {
-        // const isStaff = (
-        //     this.props.customerProfile.role === "manager" ||
-        //     this.props.customerProfile.role === "bartender" ||
-        //     this.props.customerProfile.role === "waiter"
-        // );
-        // allow access b4 staff login is ok
-        // const isStaff = false;
-        // if (!isStaff) {
-        //     this.props.history.push("/menu");
-        // }
+        // TODO: check user role, redir if un-auth
     }
 
     public componentDidMount() {
         this.props.getAllOrders();
     }
 
-    public refresh = () => {
-        this.props.getAllOrders();
-    }
+    // public refresh = () => {
+    //     this.props.getAllOrders();
+    // }
 
     public render() {
         return (
