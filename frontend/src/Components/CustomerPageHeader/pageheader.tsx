@@ -1,5 +1,8 @@
 import * as React from "react";
 
+// Importing styling and static assets
+import "./CustomerPageHeader.scss";
+
 interface IPageHeaderProps {
     header: string;
     subHeader: string;

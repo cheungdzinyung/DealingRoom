@@ -1,5 +1,8 @@
 import * as React from "react";
 
+// Importing styling and static assets
+import "./AdminStockFilter.scss";
+
 // redux
 import { connect } from "react-redux";
 import { IRootState } from "src/redux/store";
@@ -28,7 +31,7 @@ interface IStockFilterState {
 export class PureStockFilter extends React.Component<
   IStockFilterProps,
   IStockFilterState
-> {
+  > {
   constructor(props: IStockFilterProps) {
     super(props);
 

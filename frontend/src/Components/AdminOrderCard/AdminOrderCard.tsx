@@ -2,6 +2,9 @@
 import * as React from "react";
 import { OrderStatus, IOrderItemWithMod } from "src/modules";
 
+// Importing styling and static assets
+import "./AdminOrderCard.scss";
+
 interface IOrderCardProps {
     orders_id: number;
     users_id: number;
@@ -54,7 +57,7 @@ export default class OrderCard extends React.Component<IOrderCardProps> {
             return (
                 <button className="order-status-display">
                     <span className="button-order-text">
-                        To Collect ${this.props.order.reduce((accu, curr) => (accu + parseFloat(curr.purchasePrice)), 0).toFixed(2) }
+                        To Collect ${this.props.order.reduce((accu, curr) => (accu + parseFloat(curr.purchasePrice)), 0).toFixed(2)}
                     </span>
                 </button>
             )

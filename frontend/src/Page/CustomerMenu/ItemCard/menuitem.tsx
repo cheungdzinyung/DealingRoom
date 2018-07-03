@@ -4,7 +4,8 @@ import * as React from "react";
 import { Card, Elevation, Collapse } from "@blueprintjs/core";
 import { AreaChart, Area, ResponsiveContainer } from "recharts";
 
-// import static icons
+// Importing styling and static assets
+import "./CustomerMenuItemCard.scss";
 import wallet from "./img/wallet.svg";
 import info from "./img/info.svg";
 import upArrowImg from "./img/up.svg";
@@ -45,7 +46,7 @@ interface IMenuItemState {
 export default class MenuItem extends React.Component<
   IMenuItemProps,
   IMenuItemState
-> {
+  > {
   constructor(props: IMenuItemProps) {
     super(props);
 

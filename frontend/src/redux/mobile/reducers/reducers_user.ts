@@ -88,6 +88,7 @@ export const userReducer = (
       return { ...state, userAPIErr: action.errMsg };
     }
     case LOCAL_SIGNUP_SUCCESS: {
+      localStorage.setItem("welcomeOnSignup", "true");
       localStorage.setItem("dealingRoomToken", action.userInfoPackage.password);
       return { ...state, userAPIErr: "none" };
     }

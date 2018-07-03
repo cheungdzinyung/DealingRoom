@@ -52,9 +52,6 @@ export default class UsersService {
 
   // Working 10/06/18
   public async update(id: number, data: IUserData, file: Express.Multer.File) {
-    console.log(id)
-    console.log(data)
-
     const hash = bcrypt.hashSync(data.password, 10);
     const userId = (await this.knex("users")
       .where("id", id)

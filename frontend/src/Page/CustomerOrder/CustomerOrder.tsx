@@ -2,6 +2,8 @@
 import * as React from "react";
 import { match } from "react-router-dom";
 
+
+
 // for redir
 import * as History from "history";
 import { withRouter } from "react-router";
@@ -15,7 +17,8 @@ import { Intent } from "@blueprintjs/core";
 // Importing components
 import Usermenu from "src/Components/CustomerAccessMenu/usermenu";
 
-// Importing static assets
+// Importing styling and static assets
+import "./CustomerOrder.scss";
 import paymentTest from "./img/stripe.png"
 
 // Importing types

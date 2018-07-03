@@ -94,7 +94,7 @@ export default class UsersService {
   // Working 23/06/18
   public async getAllWithFluctuatingPrices(
     dateOfQuery: string,
-    maxmin: string
+    maxmin: string = "true"
   ) {
 
     // Obtain the list of categories in the database

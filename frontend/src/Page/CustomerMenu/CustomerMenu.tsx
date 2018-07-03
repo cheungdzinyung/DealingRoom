@@ -7,6 +7,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 // import MenuSlider from "./menuSlider";
 
+// Importing styling and static assets
+import "./CustomerMenu.scss";
+
 // redux
 import { connect } from "react-redux";
 import { IRootState } from "src/redux/store";

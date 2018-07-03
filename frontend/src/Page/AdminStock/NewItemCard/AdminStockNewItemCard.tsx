@@ -1,6 +1,9 @@
 // Importing modules
 import * as React from "react";
 
+// Importing styling and static assets
+import "./AdminStockNewItemCard.scss";
+
 // Importing UI elements
 import { Dialog } from "@blueprintjs/core";
 import ItemModalDescription from "./Description/AdminStockNewItemCardDescription";
@@ -40,7 +43,7 @@ interface IStockManageModalProps {
     stockManageModalState: IStockManageModalState,
     targetItem?: IUpdateMenuItem
   ) => void;
-  
+
   isModalOpen: boolean;
   closeEditModal: () => void;
   createItemSuccess: boolean;

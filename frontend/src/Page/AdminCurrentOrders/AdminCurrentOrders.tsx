@@ -1,6 +1,9 @@
 // Importing modules
 import * as React from "react";
 
+// Importing styling and static assets
+import "./AdminCurrentOrders.scss";
+
 // Importing UI components
 import PageHeader from "src/Components/AdminPageHeader/AdminPageHeader";
 import AdminSideMenu from "src/Components/AdminAccessMenu/AdminAccessMenu";

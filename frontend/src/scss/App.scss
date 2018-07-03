@@ -3,12 +3,8 @@
 @import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
 @import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,500,600,700|Proza+Libre:400,500|IBM+Plex+Mono');
 // Imports, internal SCSS modules
-@import './templates';
-@import './ui/imports';
-@import './container/imports';
-
-
 // Top level reset
+@import "src/scss/templates";
 html,
 body {
     background-color: $bgc;
