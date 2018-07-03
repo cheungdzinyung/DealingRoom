@@ -275,7 +275,6 @@ export function triggerSpEvent(eventInfo: ISpecialEvent) {
 	const config = { headers: { Authorization: "Bearer " + localStorage.getItem("dealingRoomToken") } }
 	return (dispatch: Dispatch<ITriggerSpEventSuccessAction | ITriggerSpEventFailAction>) => {
 		axios.post(`${API_SERVER}/api/items/event/pricedrop`, eventInfo, config)
-		// axios.post(`${API_SERVER}/api/items/event/pricedrop`, eventInfo, config)
 			.then((res: any) => {
 				if (res.status === 200) {
 					dispatch(triggerSpEventSuccess());
