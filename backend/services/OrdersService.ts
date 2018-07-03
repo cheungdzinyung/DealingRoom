@@ -301,7 +301,7 @@ export default class OrdersService {
         )
         .orderBy("orders_id");
 
-      const itemsList = BlueBirdPromise.map(ordersList, async (order: any) => {
+      const itemsList = await BlueBirdPromise.map(ordersList, async (order: any) => {
         const result = await this.knex("orders")
           .join("orders_items", "orders_items.orders_id", "=", "orders.id")
           .join("items", "items.id", "=", "orders_items.items_id")
@@ -316,7 +316,7 @@ export default class OrdersService {
         return result;
       });
 
-      return ordersList.map((orders: any, index: number) => {
+      return await ordersList.map((orders: any, index: number) => {
         const result = {
           orders_id: orders.orders_id,
           users_id: orders.users_id,

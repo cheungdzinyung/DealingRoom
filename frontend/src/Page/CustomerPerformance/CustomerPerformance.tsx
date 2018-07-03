@@ -5,7 +5,7 @@ import * as React from "react";
 import "./CustomerPerformance.scss";
 
 // Importing UI elements
-import UserMenu from "src/Components/CustomerAccessMenu/usermenu";
+// import UserMenu from "src/Components/CustomerAccessMenu/usermenu";
 import PageHeader from "src/Components/CustomerPageHeader/pageheader";
 import {
   IConsumptionGraphData,
@@ -67,7 +67,7 @@ class PurePerformance extends React.Component<
         <div className="cardd rd-corner">
           <p>This is just trying out haha. Thanks for joining us here.</p>
         </div>
-        <UserMenu />
+        {/* <UserMenu /> */}
       </div>
     );
   }
