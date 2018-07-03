@@ -54,7 +54,7 @@ export default class UsersRouter {
           const token = jwtSimple.encode(payload, config.jwtSecret);
           res.json({
             token,
-            user_id: result[0].id,
+            users_id: result[0].id,
             displayName: result[0].displayName,
             userPhoto: result[0].userPhoto
           });
