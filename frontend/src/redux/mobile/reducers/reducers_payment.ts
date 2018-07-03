@@ -6,7 +6,7 @@ import {
     RESET_PAYMENT_RESULT,
 } from "../actions/actions_payment";
 
-// import { OrderStatus } from "../../../modules";
+// import { OrderStatus } from "src/modules";
 
 export interface IPaymentState {
     paymentTargetId: number,

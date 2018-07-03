@@ -2,10 +2,10 @@ import { Action, Dispatch } from "redux";
 import axios from "axios";
 
 import { API_SERVER } from "src/redux/store";
-// import { ISignUpPackage, ILoginPackage } from "../../../modules";\
+// import { ISignUpPackage, ILoginPackage } from "src/modules";\
 
 // Import UI elements
-import { AppToaster } from "src/Components/ui/mobile/toast";
+import { AppToaster } from "src/Components/ToastAlert/toast";
 import { Intent } from "@blueprintjs/core";
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */

@@ -8,7 +8,7 @@ import { IRootState } from "src/redux/store";
 //     getEntireMenu,
 //     getUserProfileByUserToken,
 //     getAllOrders
-// } from "../../../redux/desktop/actions/actions_staffInit";
+// } from "src/redux/desktop/actions/actions_staffInit";
 import { getUserProfileByUserToken } from "src/redux/mobile/actions/actions_user";
 import { getAllOrders } from "src/redux/desktop/actions/actions_bartender";
 import { getEntireMenu } from "src/redux/desktop/actions/actions_manager";

@@ -8,7 +8,7 @@ import {
 
 import {
     IMenuCategoryWithFlux,
-} from "../../../modules";
+} from "src/modules";
 
 export interface IDisplayState {
     // socket.io on load? isAuth?

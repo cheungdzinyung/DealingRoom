@@ -26,7 +26,7 @@
 //     createItem,
 //     updateItem,
 //     toggleStockManageModal,
-// } from "../../../redux/desktop/actions/actions_manager";
+// } from "src/redux/desktop/actions/actions_manager";
 
 // interface IStockManageModalProps {
 //     stockManageModalState: IStockManageModalState,
