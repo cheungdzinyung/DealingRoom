@@ -1,9 +1,10 @@
+@import "src/scss/templates";
 .login-container {
     padding: 5%;
     text-align: center;
     width: 100vw;
     height: 100vh;
-    background-image: linear-gradient($bgc-shaded, $bgc-shaded), url("../Components/assets/images/landingpage.jpg");
+    background-image: linear-gradient($bgc-shaded, $bgc-shaded), url("./img/landingpage.jpg");
     background-size: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat;
