@@ -1,6 +1,9 @@
 // Importing modules
 import * as React from "react";
 
+// Importing styling and static assets
+import "./AdminStockNewItemCardImage.scss";
+
 // import squareBeer from "src/Components/assets/images/categories/squarebeer.jpg";
 
 interface ItemModalImageProps {
@@ -8,7 +11,7 @@ interface ItemModalImageProps {
 }
 
 export default class ItemModalImage extends React.Component<ItemModalImageProps> {
-  constructor(props: ItemModalImageProps){
+  constructor(props: ItemModalImageProps) {
     super(props)
   }
 

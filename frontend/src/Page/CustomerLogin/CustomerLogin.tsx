@@ -5,7 +5,8 @@ import * as React from "react";
 // Importing UI elements
 import { Card } from "@blueprintjs/core";
 
-// Importing static assets
+// Importing styling and static assets
+import "./CustomerLogin.scss";
 import facebook from "./img/facebook.svg";
 import google from "./img/google.svg";
 import logo from "./img/logo.svg";

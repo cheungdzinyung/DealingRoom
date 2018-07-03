@@ -1,3 +1,4 @@
+@import "src/scss/templates";
 .edit-item-container {
     width: 62.5vw;
     height: 31.67vw;
@@ -12,11 +13,11 @@
         position: relative;
         grid-template-rows: 56.8% 43.20%;
         grid-template-columns: 48.11% 51.89%;
-        .stockadd-button{
+        .stockadd-button {
             position: absolute;
             width: 8%;
             padding: 0;
-            right:  10%;
+            right: 10%;
             bottom: -20%;
         }
     }

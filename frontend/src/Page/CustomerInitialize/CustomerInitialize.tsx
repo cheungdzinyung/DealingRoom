@@ -1,6 +1,9 @@
 // Importing modules from library
 import * as React from "react";
 
+// Importing styling and static assets
+import "./CustomerInitialize.scss";
+
 // redux
 import { connect } from "react-redux";
 import { IRootState } from "src/redux/store";
@@ -33,30 +36,30 @@ interface IInitializeProps {
 }
 
 const mapStateToProps = (state: IRootState) => {
-    return {
-      isAuth: state.customer.user.isAuth,
-      menuReady: state.customer.orders.menuReady,
-      userProfileReady: state.customer.user.userProfileReady,
-      orderListReady: state.customer.orders.orderListReady,
-      userProfile: state.customer.user.userProfile,
-      userAPIErr: state.customer.user.userAPIErr,
-      orderAPIErr: state.customer.orders.orderAPIErr
-    };
+  return {
+    isAuth: state.customer.user.isAuth,
+    menuReady: state.customer.orders.menuReady,
+    userProfileReady: state.customer.user.userProfileReady,
+    orderListReady: state.customer.orders.orderListReady,
+    userProfile: state.customer.user.userProfile,
+    userAPIErr: state.customer.user.userAPIErr,
+    orderAPIErr: state.customer.orders.orderAPIErr
   };
-  
-  const mapDispatchToProps = (dispatch: any) => {
-    return {
-      getEntireMenu: () => {
-        dispatch(getEntireMenu());
-      },
-      getUserProfileByUserToken: () => {
-        dispatch(getUserProfileByUserToken());
-      },
-      getOrdersByUserToken: () => {
-        dispatch(getOrdersByUserToken());
-      }
-    };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    getEntireMenu: () => {
+      dispatch(getEntireMenu());
+    },
+    getUserProfileByUserToken: () => {
+      dispatch(getUserProfileByUserToken());
+    },
+    getOrdersByUserToken: () => {
+      dispatch(getOrdersByUserToken());
+    }
   };
+};
 
 class PureInitialize extends React.Component<IInitializeProps, {}> {
   constructor(props: IInitializeProps) {

@@ -1,6 +1,9 @@
 // Importing modules
 import * as React from "react";
 
+// Importing styling and static assets
+import "./AdminStockNewItemCardDescription.scss";
+
 interface IItemModalDescriptionProps {
   descriptionText?: string
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void

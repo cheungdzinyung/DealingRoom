@@ -1,6 +1,9 @@
 // Importing modules
 import * as React from "react";
 
+// Importing styling and static assets
+import "./CustomerPerformance.scss";
+
 // Importing UI elements
 import UserMenu from "src/Components/CustomerAccessMenu/usermenu";
 import PageHeader from "src/Components/CustomerPageHeader/pageheader";

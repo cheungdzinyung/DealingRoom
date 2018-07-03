@@ -1,12 +1,12 @@
 // Importing modules from library
-// import * as History from "history";
 import * as React from "react";
 import * as History from "history";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-// Importing static assets
+// Importing styling and static assets
+import "./CustomerWelcomeScreen.scss";
 import menu from "src/Components/assets/images/introduction/menu.png";
 import fullmenu from "src/Components/assets/images/introduction/fullmenu.png";
 import payment from "src/Components/assets/images/introduction/payment.png";
@@ -21,7 +21,7 @@ interface IPureIntroductionProps {
 export default class PureIntroduction extends React.Component<
   IPureIntroductionProps,
   {}
-> {
+  > {
   constructor(props: IPureIntroductionProps) {
     super(props);
   }

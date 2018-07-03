@@ -1,6 +1,9 @@
 // Importing modules
 import * as React from "react";
 
+// Importing styling and static assets
+import "./AdminStock.scss";
+
 // redux
 import { connect } from "react-redux";
 import { IRootState } from "src/redux/store";

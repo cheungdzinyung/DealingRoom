@@ -1,6 +1,9 @@
 import { FormGroup } from "@blueprintjs/core";
 import * as React from "react";
 
+// Importing styling and static assets
+import "./CustomerSetting.scss";
+
 // Component import
 import Usermenu from "src/Components/CustomerAccessMenu/usermenu";
 
