@@ -21,7 +21,7 @@ import {
 // Import UI elements
 import { AppToaster } from "src/Components/ToastAlert/toast";
 import { Intent } from "@blueprintjs/core";
-// import UserMenu from "src/Components/CustomerAccessMenu/usermenu";
+import UserMenu from "src/Components/CustomerAccessMenu/usermenu";
 import MenuItem from "./ItemCard/menuitem";
 
 // import { API_SERVER } from "src/redux/store";
@@ -237,7 +237,7 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
                 )
             )
         )}
-        {/* <UserMenu /> */}
+        <UserMenu />
       </div>
     );
   }

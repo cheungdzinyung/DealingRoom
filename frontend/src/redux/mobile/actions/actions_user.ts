@@ -264,42 +264,42 @@ export function localSignUp(username: string, password: string) {
       displayName: username
     };
 
-    const loginPackage = {
-      username,
-      password
-    };
+    // const loginPackage = {
+    //   username,
+    //   password
+    // };
 
     axios
       .post(`${API_SERVER}/api/auth/signup`, signUpPackage)
       .then((res: any) => {
         if (res.status === 200) {
-          // dispatch(localSignUpSuccess(res.data));
-          axios
-            .post(`${API_SERVER}/api/auth/login`, loginPackage)
-            .then((resp: any) => {
-              if (resp.status === 200) {
-                dispatch(localLoginSuccess(resp.data));
-              } else {
-                // alert("status: " + resp.status);
-                dispatch(localLoginFail(resp.status));
-                AppToaster.show({
-                  message: "Login failed, try again\n",
-                  intent: Intent.WARNING,
-                  icon: "cross",
-                  timeout: 2000
-                });
-              }
-            })
-            .catch((err: any) => {
-              // alert("login fail" + err);
-              dispatch(localLoginFail(err));
-              AppToaster.show({
-                message: "Login failed, try again\n",
-                intent: Intent.WARNING,
-                icon: "cross",
-                timeout: 2000
-              });
-            });
+          dispatch(localSignUpSuccess(res.data));
+          // axios
+          //   .post(`${API_SERVER}/api/auth/login`, loginPackage)
+          //   .then((resp: any) => {
+          //     if (resp.status === 200) {
+          //       dispatch(localLoginSuccess(resp.data));
+          //     } else {
+          //       // alert("status: " + resp.status);
+          //       dispatch(localLoginFail(resp.status));
+          //       AppToaster.show({
+          //         message: "Login failed, try again\n",
+          //         intent: Intent.WARNING,
+          //         icon: "cross",
+          //         timeout: 2000
+          //       });
+          //     }
+          //   })
+          //   .catch((err: any) => {
+          //     // alert("login fail" + err);
+          //     dispatch(localLoginFail(err));
+          //     AppToaster.show({
+          //       message: "Login failed, try again\n",
+          //       intent: Intent.WARNING,
+          //       icon: "cross",
+          //       timeout: 2000
+          //     });
+          //   });
         } else {
           // alert("sign up fail: " + res.status);
           dispatch(localSignUpFail(res.status));
