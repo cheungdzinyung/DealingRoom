@@ -45,7 +45,7 @@ const mapDispatchToProps = (dispatch: any) => {
 class PurePerformance extends React.Component<IUserPerformanceProps, {}> {
   constructor(props: IUserPerformanceProps) {
     super(props);
-    // this.props.getConsumption();
+    this.props.getConsumption();
     // this.state = {
     //   processedData: switchUp(this.props.userConsumptionComparison)
     // };
