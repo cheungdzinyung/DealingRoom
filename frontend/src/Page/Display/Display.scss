@@ -51,4 +51,17 @@
             letter-spacing: 1px;
         }
     }
+    .rss-feed-flick {
+        grid-row: 2/3;
+        background-color: rgb(255, 23, 23);
+        width: 100%;
+        padding: 0 3%;
+        display: flex;
+        align-items: center;
+        .feed-text {
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+    }
 }

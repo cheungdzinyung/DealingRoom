@@ -11,10 +11,30 @@
     grid-column: 1/2;
     grid-row: 2/3;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     .display-data-sub-image {
         width: 80%;
         border-radius: 10px;
     }
+    .display-data-high-low {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+        span {
+            font-size: 2rem;
+        }
+        .high-low {
+            color: #FFCD44;
+        }
+        .high {
+            color: rgba(115, 237, 166, .9)
+        }
+        .low {
+            color: rgba(244, 104, 104, 1)
+        }
+    }
+
 }

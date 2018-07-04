@@ -159,6 +159,12 @@ export interface IMenuCategoryWithoutFlux extends IMenuCategory {
   items: IMenuItemWithoutFlux[];
 }
 
+export interface IMenuCategoryWithFluxWithMaxMin extends IMenuCategory {
+  todayMax: string,
+  todayMin: string,
+  items: IMenuItemWithFlux[];
+}
+
 /*
 Corresponding API path: api/items/?fluctuation=YYYY-MM-DD&category=<category>
 URL: https://dealingroom.docs.apiary.io/#reference/0/5bapiitems5d/obtaining-all-item's-information

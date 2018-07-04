@@ -14,7 +14,7 @@ import {
 } from "src/redux/display/actions/actions_display";
 
 // Importing interfaces
-import { IMenuCategoryWithFlux, ISpecialEvent } from "src/modules";
+import { IMenuCategoryWithFluxWithMaxMin, ISpecialEvent } from "src/modules";
 
 // Importing UI components
 import { DisplayMain } from "./DisplayMainComponent/DisplayMain";
@@ -22,12 +22,14 @@ import { DisplayVideo } from "./DisplayVideoComponent/DisplayVideo";
 import { DisplayItemList } from "./DisplayItemListComponent/DisplayItemList";
 import { DisplayCategoryList } from "./DisplayCategoryListComponent/DisplayCategoryList";
 
+
 interface IDisplayState {
   categoryIndexCount: number;
+  colorChange: boolean;
 }
 
 interface IDisplayProps {
-  entireMenu: IMenuCategoryWithFlux[];
+  entireMenu: IMenuCategoryWithFluxWithMaxMin[];
   getEntireMenu: () => void;
   eventInfo: ISpecialEvent;
   bellRinging: boolean;
@@ -55,12 +57,15 @@ const mapDispatchToProps = (dispatch: any) => {
 };
 
 export class PureDisplay extends React.Component<IDisplayProps, IDisplayState> {
+  private toggleColor: any;
+  // private audioElement: any;
   constructor(props: IDisplayProps) {
     super(props);
     this.props.getEntireMenu();
 
     this.state = {
-      categoryIndexCount: 0
+      categoryIndexCount: 0,
+      colorChange: false,
     };
   }
 
@@ -82,23 +87,51 @@ export class PureDisplay extends React.Component<IDisplayProps, IDisplayState> {
 
   public componentDidUpdate() {
     if (this.props.bellRinging) {
+      if (typeof (this.toggleColor) === "undefined") {
+        this.toggleColor = setInterval(() => {
+          this.setState({
+            colorChange: !this.state.colorChange
+          });
+        }, 1000)
+      }
       setTimeout(() => {
         this.props.toggleEventBellRing();
+        clearInterval(this.toggleColor);
       }, 12000);
     }
   }
 
-  public soundPlayer = () => {
-    return (
-      <ReactPlayer
-        url="https://www.youtube.com/watch?v=wK9Wvxi1cE8"
-        playing={this.props.bellRinging}
-        loop={this.props.bellRinging}
-        width="0"
-        height="0"
-      />
-    );
-  };
+  public rssFeed = () => {
+    if (this.props.eventInfo.discount === 0) {
+      return (
+        <div className="rss-feed" />
+      )
+    } else {
+      if (this.state.colorChange) {
+        return (
+          <div className="rss-feed-flick">
+            <span className="feed-text">
+              This round of {this.props.eventInfo.discount}% discount is brought to you by
+              {this.props.eventInfo.sponsor !== ""
+                ? this.props.eventInfo.sponsor
+                : "dealingroom.live"}!
+            </span>
+          </div>
+        )
+      } else {
+        return (
+          <div className="rss-feed">
+            <span className="feed-text">
+              This round of {this.props.eventInfo.discount}% discount is brought to you by
+              {this.props.eventInfo.sponsor !== ""
+                ? this.props.eventInfo.sponsor
+                : "dealingroom.live"}!
+            </span>
+          </div >
+        )
+      }
+    }
+  }
 
   public render() {
     return (
@@ -117,23 +150,28 @@ export class PureDisplay extends React.Component<IDisplayProps, IDisplayState> {
                 .chartData
             }
           />
-          <DisplayCategoryList />
+          <DisplayCategoryList
+            category={this.props.entireMenu[this.state.categoryIndexCount].categoryName}
+            max={this.props.entireMenu[this.state.categoryIndexCount].todayMax}
+            min={this.props.entireMenu[this.state.categoryIndexCount].todayMin}
+          />
           <DisplayVideo />
           <DisplayItemList
             {...this.props.entireMenu[this.state.categoryIndexCount]}
           />
         </div>
-        <div className="rss-feed">
-          <span className="feed-text">
-            This round of discount is brought to you by{" "}
-            {this.props.eventInfo.sponsor !== ""
-              ? this.props.eventInfo.sponsor
-              : "dealingroom.live"}!
-          </span>
-        </div>
-        {this.soundPlayer()}
+        <ReactPlayer
+          url="https://www.youtube.com/watch?v=wK9Wvxi1cE8"
+          // url="https://drive.google.com/file/d/0B7J1yeBD6ckEYUFTbkVaNGpvZkU/view"
+          playing={this.props.bellRinging}
+          loop={this.props.bellRinging}
+          controls={false}
+          width="0"
+          height="0"
+        />
+        {this.rssFeed()}
       </div>
-    );
+    )
   }
 }
 
