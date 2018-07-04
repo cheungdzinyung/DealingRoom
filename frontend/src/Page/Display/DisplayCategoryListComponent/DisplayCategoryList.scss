@@ -23,17 +23,16 @@
         flex-direction: column;
         text-align: center;
         padding: 1rem;
-        span {
-            font-size: 2rem;
-        }
         .high-low {
-            color: #FFCD44;
+            font-size: 1.7rem;
         }
         .high {
-            color: rgba(115, 237, 166, .9)
+            color: rgba(115, 237, 166, .9);
+            font-size: 1.5rem;
         }
         .low {
-            color: rgba(244, 104, 104, 1)
+            color: rgba(244, 104, 104, 1);
+            font-size: 1.5rem;
         }
     }
 
