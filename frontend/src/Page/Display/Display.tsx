@@ -97,6 +97,7 @@ export class PureDisplay extends React.Component<IDisplayProps, IDisplayState> {
       setTimeout(() => {
         this.props.toggleEventBellRing();
         clearInterval(this.toggleColor);
+        this.toggleColor = undefined;
       }, 12000);
     }
   }
