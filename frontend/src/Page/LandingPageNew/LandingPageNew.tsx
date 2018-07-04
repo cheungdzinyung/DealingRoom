@@ -28,27 +28,27 @@ import Screen3 from "./images/screen3.jpg";
 // <script src="js/script.js"></script>
 
 export default class LandingPage extends React.Component {
-  public componentDidMount() {
-    const bootstrap = document.createElement("script");
-    bootstrap.src = "./scripts/bootstrap.bundle.min.js";
-    bootstrap.async = true;
-    document.body.appendChild(bootstrap);
+//   public componentDidMount() {
+//     const bootstrap = document.createElement("script");
+//     bootstrap.src = "./static/scripts/bootstrap.bundle.min.js";
+//     bootstrap.async = true;
+//     document.body.appendChild(bootstrap);
 
-    const owl = document.createElement("script");
-    owl.src = "./scripts/owl.carousel.min.js";
-    owl.async = true;
-    document.body.appendChild(owl);
+//     const owl = document.createElement("script");
+//     owl.src = "./static/scripts/owl.carousel.min.js";
+//     owl.async = true;
+//     document.body.appendChild(owl);
 
-    const script = document.createElement("script");
-    script.src = "./scripts/script.js";
-    script.async = true;
-    document.body.appendChild(script);
+//     const script = document.createElement("script");
+//     script.src = "./static/scripts/script.js";
+//     script.async = true;
+//     document.body.appendChild(script);
 
-    const jquery = document.createElement("script");
-    jquery.src = "./scripts/jquery-3.2.1.min.js";
-    jquery.async = true;
-    document.body.appendChild(jquery);
-  }
+//     const jquery = document.createElement("script");
+//     jquery.src = "./static/scripts/jquery-3.2.1.min.js";
+//     jquery.async = true;
+//     document.body.appendChild(jquery);
+//   }
   public render() {
     return (
       <body data-spy="scroll" data-target="#navbar" data-offset="30">
