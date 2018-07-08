@@ -21,8 +21,8 @@ import {
 // Import UI elements
 import { AppToaster } from "src/Components/ToastAlert/toast";
 import { Intent } from "@blueprintjs/core";
-import UserMenu from "src/Components/CustomerAccessMenu/usermenu";
-import MenuItem from "./ItemCard/menuitem";
+import UserMenu from "src/Components/CustomerAccessMenu/CustomerAccessMenu";
+import MenuItem from "./ItemCard/CustomerMenuItemCard";
 
 // import { API_SERVER } from "src/redux/store";
 

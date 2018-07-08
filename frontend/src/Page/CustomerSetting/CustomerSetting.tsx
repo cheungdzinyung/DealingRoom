@@ -1,21 +1,20 @@
-import { FormGroup } from "@blueprintjs/core";
+// Importing modules from library
 import * as React from "react";
 import * as History from "history";
+
 // Importing styling and static assets
 import "./CustomerSetting.scss";
 
-// Component import
-import Usermenu from "src/Components/CustomerAccessMenu/usermenu";
-
-// Media asset import
+// Importing presentation components
+import { FormGroup } from "@blueprintjs/core";
 import PageHeader from "src/Components/CustomerPageHeader/pageheader";
+import Usermenu from "src/Components/CustomerAccessMenu/CustomerAccessMenu";
+import SubmitButton from "../../Components/SubmitButton/SubmitButton";
 
-export default class Setting extends React.Component<{
+export default class CustomerSetting extends React.Component<{
   history: History.History;
 }> {
-  constructor(props: {
-    history: History.History;
-  }) {
+  constructor(props: { history: History.History }) {
     super(props);
   }
   public logout = () => {
@@ -47,9 +46,7 @@ export default class Setting extends React.Component<{
         <button className="conf-button" type="submit">
           <span>Confirm</span>
         </button>
-        <button className="conf-button" onClick={this.logout} type="button">
-          <span>Logout</span>
-        </button>
+        <SubmitButton displayText="Logout" onClick={this.logout} />
         <Usermenu />
       </div>
     );

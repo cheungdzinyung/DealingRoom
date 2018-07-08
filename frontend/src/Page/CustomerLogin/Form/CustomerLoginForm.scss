@@ -1,0 +1,16 @@
+@import "src/scss/templates";
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .form-input {
+        margin-top: 3%;
+        width: 100%;
+        background-color: $login-form-input;
+        color: $font-color-light;
+        padding: 5%;
+        font-size: 1.125rem;
+    }
+}

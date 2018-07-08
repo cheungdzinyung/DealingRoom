@@ -1,8 +1,13 @@
 // Importing modules from library
 import * as React from "react";
+import * as History from "history";
+import { match } from "react-router-dom";
 
 // Importing styling and static assets
 import "./CustomerInitialize.scss";
+
+// Importing presentation components
+import { Spinner, Intent } from "@blueprintjs/core";
 
 // redux
 import { connect } from "react-redux";
@@ -13,10 +18,7 @@ import {
 } from "src/redux/mobile/actions/actions_orders";
 import { getUserProfileByUserToken } from "src/redux/mobile/actions/actions_user";
 
-// for redir
-import * as History from "history";
-import { match } from "react-router-dom";
-import { Spinner, Intent } from "@blueprintjs/core";
+
 
 interface IInitializeProps {
   // handling redirect
@@ -102,7 +104,6 @@ class PureInitialize extends React.Component<IInitializeProps, {}> {
     );
   }
 }
-
 
 
 const Initialize = connect(

@@ -36,6 +36,9 @@ export interface IOrdersState {
     currentTotal: number,
     orderAPIErr: string,
     confirmOrderStatus: "null" | "confirmed" | "failed",
+    // Added June, 8 ,2018
+    // Item count of currentOrder
+    currentOrderCount: number
 }
 
 const initialState: IOrdersState = {
@@ -98,6 +101,7 @@ const initialState: IOrdersState = {
     currentTotal: 0,
     orderAPIErr: "none",
     confirmOrderStatus: "null",
+    currentOrderCount: 0
 }
 
 export const ordersReducer = (state: IOrdersState = initialState, action: OrdersActions): IOrdersState => {
@@ -130,7 +134,8 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
             const newTotal = (state.currentTotal * 1000 + newItem.purchasePrice * 1000) / 1000;
             return { ...state, 
                     currentOrder: state.currentOrder.concat([newItem]),
-                    currentTotal: newTotal
+                    currentTotal: newTotal, 
+                    currentOrderCount: state.currentOrder.length + 1
                 };
         }
         case REMOVE_ITEM: {
@@ -139,7 +144,8 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
             const newTotal = newArray.reduce((accu, e: IRequestItem) => (accu + e.purchasePrice * 1000), 0) / 1000;
             return { ...state,
                     currentOrder: newArray,
-                    currentTotal: newTotal
+                    currentTotal: newTotal, 
+                    currentOrderCount: state.currentOrder.length - 1
                 };
         }
         case CONFIRM_ORDER_SUCCESS: {
@@ -151,6 +157,7 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
                     entireMenu: action.result.entireMenu,
                     orderAPIErr: "none",
                     confirmOrderStatus: "confirmed",
+                    currentOrderCount: 0
                 };
         }
         case CONFIRM_ORDER_FAIL: {
