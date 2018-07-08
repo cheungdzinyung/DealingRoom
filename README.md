@@ -1,48 +1,73 @@
 <p align="center">
-  <img src="img/logo.png" width="200"/>
+  <img src="https://github.com/cheungdzinyung/DealingRoom/blob/development/img/banner.png?raw=true" />
 </p>
-  <!-- ![DealingRoom Temporary Logo](img/logo.png)  -->
-
  
  # Objective
  <p align="center" border="1px solid black">
  Dealingroom is reinterpreting the ebb and flow of the stock market into a brand new dining and drinking experience. 
 </p>
 
+<div align="center">
+  <!-- Stability -->
+  <a href="#">
+    <img src="https://img.shields.io/badge/Frontend%20Framework-React-blue.svg"
+      alt="Frontend Framework" />
+  </a>
+  <!-- NPM version -->
+  <a href="https://dealingroom.docs.apiary.io/#">
+    <img src="https://img.shields.io/badge/API%20documentation-Apiary-brightgreen.svg"
+      alt="Dealing Room API" />
+  </a>
+  <!-- Build Status -->
+  <a href="https://circleci.com/gh/cheungdzinyung/DealingRoom">
+    <img src="https://img.shields.io/circleci/project/github/cheungdzinyung/DealingRoom/master.svg"
+      alt="Build Status" />
+  </a>
 
-## Contributors
+</div>
 
- CAPSTONE PROJECT (Cohort 6) :
+<div align="center">
+  <h3>
+    <a href="https://www.dealingroom.live">
+      Website
+    </a>
+    <span> | </span>
+    <a href="https://dealingroom.docs.apiary.io/">
+      Documentary
+    </a>
+    <span> | </span>
+    <a href="https://www.figma.com/file/YVFLSEHk7bOFMU7ZxMLdcRau/Dealingroom">
+      Prototype
+    </a>
+    <span> | </span>
+    <a href="https://drive.google.com/file/d/1STR5Tw0yYQmC_WD9KtSvPOsSfuFEPscl/view">
+      Wireframe
+    </a>
+    <span> | </span>
+    <a href="https://trello.com/b/Mm9p1WzS">
+      Trello Progress
+    </a>
+  </h3>
+</div>
 
-  [Ivan Oung](https://github.com/ivanoung) 
+## Project Team Linkedin Contact
 
-  [Andrew Cheung](https://github.com/cheungdzinyung) 
+- [Andrew Cheung](https://www.linkedin.com/in/dzinyungandrewcheung/) 
+- [Harisson Chan](https://www.linkedin.com/in/harrison-chan-3796b7163/) 
+- [Ivan Oung](https://www.linkedin.com/in/ivanoung/) 
+- [Judith Curtit](https://www.linkedin.com/in/judith-curtit-182b0357/)
 
-  [Harisson Chan](https://github.com/harrixon) 
 
-  [Judith Curtit](https://github.com/judithcurtit)
+## Directions
+1. Clone the repo ```git clone https://github.com/cheungdzinyung/DealingRoom.git```
 
+2. Change directory ```cd DealingRoom```
 
-## Tools
-![Frontend Framework](https://img.shields.io/badge/Frontend%20Framework-React-blue.svg) 
-![Database design](https://img.shields.io/badge/database%20design-lucidchart-green.svg)
-![Wireframe](https://img.shields.io/badge/wireframe-draw.io-yellow.svg)
-![UI toolkit](https://img.shields.io/badge/UI%20toolkit-Blueprint-green.svg)
-![Apiary API documentation](https://img.shields.io/badge/API%20documentation-Apiary-brightgreen.svg)
-![Trello collaboration tool](https://img.shields.io/badge/Trello%20-Collaboration%20tool-yellow.svg)
+3. Run the application in both *frontend* and *backend* ```yarn install```
 
-## Prerequisites: 
-![GitHub](https://img.shields.io/badge/github--brightgreen.svg)
-
-There are things you need to install for the project. Follow below instructions to get started.
-
-```
-yarn install
-```
-
+4. Stock up!
 
 ## Project at a glance
-
 
 ![UI flow](img/UI-flow.png) 
 
@@ -112,31 +137,12 @@ Jul 01    | Backend: Cleaned up all backend service files to use await/async
 Jul 02    | Backend: Updated all item photos (better quality, new margin requirement)
 Jul 02    | Backend: Created data and seed file for mock data
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Deployment
 Frontend deployment is done using CircleCI.
 Backend is deployed with AWS (EC2).
 
 
-## Links
-
-- link to dealingroom website
-
-
 ## Contributing
-
 Please feel free to contact us if you're interested in contributing!
 
 ### Pending Features
