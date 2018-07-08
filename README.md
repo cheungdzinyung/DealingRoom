@@ -2,13 +2,21 @@
   <img src="https://github.com/cheungdzinyung/DealingRoom/blob/development/img/banner.png?raw=true" />
 </p>
  
- # Objective
- <p align="center" border="1px solid black">
- Dealingroom is reinterpreting the ebb and flow of the stock market into a brand new dining and drinking experience. 
-</p>
+ # What is "Dealing Room"
+Dealing room is a web application that focuses on improving turnover rate of slow moving goods, and greatly reduced the loss caused by delay in service sequences by combining concepts of a trading floor and restaurant / bar setting.
+
+In other words, food and beverages' prices fluctuate according to demand as in a free market.
+
+From customers using QR code to order their beloved food and drinks without installing a single app, to sending customers’ order immediately to the staffs at the bar and kitchen without any middleman. With the help of React framework and Socket.io, everything is now Amazon Prime: streamlined and spontaneous. 
+
+Graphical plugins such as Rechart and D3 plays a crucial role as well. Performances of your favorite liquid lunch are now available at the tip of your finger without tripping. 
+
+Also, we are able to sparkle customers’ interest and increase their on-site time whilst capturing their attention with dynamic updates and instant display of results, thus greatly increases upselling opportunities and earnings.
+
+
 
 <div align="center">
-  <!-- Stability -->
+  <!-- Framework -->
   <a href="#">
     <img src="https://img.shields.io/badge/Frontend%20Framework-React-blue.svg"
       alt="Frontend Framework" />
