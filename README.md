@@ -1,19 +1,6 @@
 <p align="center">
   <img src="https://github.com/cheungdzinyung/DealingRoom/blob/development/img/banner.png?raw=true" />
 </p>
- 
- # What is "Dealing Room"
-Dealing room is a web application that focuses on improving turnover rate of slow moving goods, and greatly reduced the loss caused by delay in service sequences by combining concepts of a trading floor and restaurant / bar setting.
-
-In other words, food and beverages' prices fluctuate according to demand as in a free market.
-
-From customers using QR code to order their beloved food and drinks without installing a single app, to sending customers’ order immediately to the staffs at the bar and kitchen without any middleman. With the help of React framework and Socket.io, everything is now Amazon Prime: streamlined and spontaneous. 
-
-Graphical plugins such as Rechart and D3 plays a crucial role as well. Performances of your favorite liquid lunch are now available at the tip of your finger without tripping. 
-
-Also, we are able to sparkle customers’ interest and increase their on-site time whilst capturing their attention with dynamic updates and instant display of results, thus greatly increases upselling opportunities and earnings.
-
-
 
 <div align="center">
   <!-- Framework -->
@@ -58,12 +45,17 @@ Also, we are able to sparkle customers’ interest and increase their on-site ti
   </h3>
 </div>
 
-## Project Team Linkedin Contact
+ 
+ # What is "Dealing Room"
+Dealing room is a web application that focuses on improving turnover rate of slow moving goods, and greatly reduced the loss caused by delay in service sequences by combining concepts of a trading floor and restaurant / bar setting.
 
-- [Andrew Cheung](https://www.linkedin.com/in/dzinyungandrewcheung/) 
-- [Harisson Chan](https://www.linkedin.com/in/harrison-chan-3796b7163/) 
-- [Ivan Oung](https://www.linkedin.com/in/ivanoung/) 
-- [Judith Curtit](https://www.linkedin.com/in/judith-curtit-182b0357/)
+In other words, food and beverages' prices fluctuate according to demand as in a free market.
+
+From customers using QR code to order their beloved food and drinks without installing a single app, to sending customers’ order immediately to the staffs at the bar and kitchen without any middleman. With the help of React framework and Socket.io, everything is now Amazon Prime: streamlined and spontaneous. 
+
+Graphical plugins such as Rechart and D3 plays a crucial role as well. Performances of your favorite liquid lunch are now available at the tip of your finger without tripping. 
+
+Also, we are able to sparkle customers’ interest and increase their on-site time whilst capturing their attention with dynamic updates and instant display of results, thus greatly increases upselling opportunities and earnings.
 
 
 ## Directions
@@ -78,6 +70,14 @@ Also, we are able to sparkle customers’ interest and increase their on-site ti
 ## Project at a glance
 
 ![UI flow](img/UI-flow.png) 
+
+## Project Team Contact Us
+
+- [Andrew Cheung](https://www.linkedin.com/in/dzinyungandrewcheung/) 
+- [Harisson Chan](https://www.linkedin.com/in/harrison-chan-3796b7163/) 
+- [Ivan Oung](https://www.linkedin.com/in/ivanoung/) 
+- [Judith Curtit](https://www.linkedin.com/in/judith-curtit-182b0357/)
+
 
 ## Project Update Log
 
