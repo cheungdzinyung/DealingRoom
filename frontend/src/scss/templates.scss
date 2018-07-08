@@ -34,6 +34,66 @@ $submit-bgc:rgba(238, 83, 83, .85);
 $submit-text: rgba(242, 242, 242, 1);
 $header-text: rgba(233, 219, 204, 1);
 $header-sub-text: rgba(233, 219, 204, .3);
+
+
+html,
+body {
+    background-color: $bgc;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    // margin: 1.414em 0 0.5em;
+    font-weight: inherit;
+    line-height: 1.2;
+    font-family: 'Proza Libre', sans-serif;
+    font-weight: 400;
+    color: $font-color-light;
+}
+
+h1 {
+    font-size: 3.998rem;
+}
+
+h2 {
+    font-size: 2.827rem;
+}
+
+h3 {
+    font-size: 1.999rem;
+}
+
+h4 {
+    font-size: 1.414rem;
+}
+
+span,
+p {
+    font-family: 'Proza Libre', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.45;
+    color: $font-color-light;
+    vertical-align: middle;
+}
+
+small,
+.font_small {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.707rem;
+    color: $font-color-light;
+}
+
+button,
+input {
+    border: 0;
+}
 // Mobile
 .page-content-container {
     width: 100%;
@@ -79,6 +139,8 @@ $header-sub-text: rgba(233, 219, 204, .3);
     grid-gap: 5px;
 }
 
+
+// Repeatable SCSS component
 %clickable {
     cursor: pointer;
 }

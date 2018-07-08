@@ -1,9 +1,11 @@
 // Importing modules from library
 import * as History from "history";
 import * as React from "react";
-
-// Importing UI elements
-import { Card } from "@blueprintjs/core";
+import ReactFacebookLogin, {
+  ReactFacebookLoginInfo
+} from "react-facebook-login";
+import { GoogleLogin } from "react-google-login";
+import { match } from "react-router-dom";
 
 // Importing styling and static assets
 import "./CustomerLogin.scss";
@@ -11,7 +13,13 @@ import facebook from "./img/facebook.svg";
 import google from "./img/google.svg";
 import logo from "./img/logo.svg";
 
-// redux
+// Importing presentation components
+import { Card } from "@blueprintjs/core";
+import SubmitButton from "../../Components/SubmitButton/SubmitButton";
+import CustomerLoginForm from "./Form/CustomerLoginForm";
+import CustomerLoginSelector from "./Selector/CustomerLoginSelector";
+
+// Redux
 import { connect } from "react-redux";
 import { IRootState } from "src/redux/store";
 import {
@@ -19,13 +27,6 @@ import {
   localSignUp,
   loginFacebook
 } from "src/redux/mobile/actions/actions_user";
-
-import ReactFacebookLogin, {
-  ReactFacebookLoginInfo
-} from "react-facebook-login";
-import { GoogleLogin } from "react-google-login";
-import { match } from "react-router-dom";
-// import { BrowserRouter as Router } from "react-router-dom";
 
 interface ILoginState {
   username: string;
@@ -40,7 +41,6 @@ interface ILoginProps {
   // user_id: number,
   localLogin: (username: string, password: string) => void;
   localSignUp: (username: string, password: string) => void;
-
   loginFacebook: (token: string) => void;
 }
 
@@ -75,6 +75,7 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
     };
   }
 
+  // Handling state change of the form
   public username = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ username: e.target.value });
   };
@@ -83,6 +84,7 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
     this.setState({ password: e.target.value });
   };
 
+  // Recall methods from props to signup or login
   public toLocalLogin = () => {
     this.props.localLogin(this.state.username, this.state.password);
   };
@@ -91,6 +93,7 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
     this.props.localSignUp(this.state.username, this.state.password);
   };
 
+  // Handing the status of the form, whether it's signup or login
   public chooseLogin = () => {
     this.setState({
       localLoginType: "login"
@@ -103,6 +106,7 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
     });
   };
 
+  // Social login
   public FBLogin = () => {
     return null;
   };
@@ -121,26 +125,24 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
     // alert(response);
   };
 
-  public componentDidUpdate() {
-    // actually shld check if token is valid
+  // To check which page should the application redirect the user to, base on token stored within the browser
+  public redirectingPage = () => {
     if (localStorage.getItem("welcomeOnSignup") === "true") {
-      this.props.history.push('/customer/welcome');
+      this.props.history.push("/customer/welcome");
     } else {
       if (localStorage.getItem("dealingRoomToken")) {
         this.props.history.push(`/customer/initialize`);
       }
     }
+  };
+
+  // To redirect page whenever the component has updated/mounted
+  public componentDidUpdate() {
+    this.redirectingPage();
   }
 
   public componentDidMount() {
-    // actually shld check if token is valid
-    if (localStorage.getItem("welcomeOnSignup") === "true") {
-      this.props.history.push('/customer/welcome');
-    } else {
-      if (localStorage.getItem("dealingRoomToken")) {
-        this.props.history.push(`/customer/initialize`);
-      }
-    }
+    this.redirectingPage();
   }
 
   public render() {
@@ -183,74 +185,33 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
         </div>
         <div className="login-bottom">
           <Card className="login-card rd-corner">
-            {/* <div className="status-switch"> */}
-            {this.state.localLoginType === "login" ? (
-              <div className="status-switch">
-                <div className="status-chosen" onClick={this.chooseLogin}>
-                  <span className="status-text">LOGIN</span>
-                </div>
-                <div className="status" onClick={this.chooseSignUp}>
-                  <span className="status-text">SIGNUP</span>
-                </div>
-              </div>
-            ) : (
-                <div className="status-switch">
-                  <div className="status" onClick={this.chooseLogin}>
-                    <span className="status-text">LOGIN</span>
-                  </div>
-                  <div className="status-chosen" onClick={this.chooseSignUp}>
-                    <span className="status-text">SIGNUP</span>
-                  </div>
-                </div>
-              )}
-            {/* </div> */}
-
-            <form className="form" action="">
-              <input
-                className="form-input rd-corner"
-                name="username"
-                type="text"
-                placeholder="Username"
-                value={this.state.username}
-                onChange={this.username}
-              />
-              <input
-                className="form-input rd-corner"
-                placeholder="Passwords"
-                name="password"
-                type="password"
-                value={this.state.password}
-                onChange={this.password}
-              />
-            </form>
-
-            {this.state.localLoginType === "login" ? (
-              <div className="login-button ">
-                <button
-                  className="submit rd-corner"
-                  onClick={this.toLocalLogin}
-                >
-                  <span className="submit-text">LOGIN</span>
-                </button>
-              </div>
-            ) : (
-                <div className="login-button ">
-                  <button
-                    className="submit rd-corner"
-                    onClick={this.toLocalSignUp}
-                  >
-                    <span className="submit-text">SIGN UP</span>
-                  </button>
-                </div>
-              )}
+            <CustomerLoginSelector
+              localLoginType={this.state.localLoginType}
+              chooseLogin={this.chooseLogin}
+              chooseSignup={this.chooseSignUp}
+            />
+            <CustomerLoginForm
+              username={this.state.username}
+              password={this.state.password}
+              usernameChange={this.username}
+              passwordChange={this.password}
+            />
+            <SubmitButton
+              onClick={
+                this.state.localLoginType === "login"
+                  ? this.toLocalLogin
+                  : this.toLocalSignUp
+              }
+              displayText={
+                this.state.localLoginType === "login" ? "LOGIN" : "SIGN UP"
+              }
+            />
           </Card>
         </div>
       </div>
     );
   }
 }
-
-
 
 const Login = connect(
   mapStateToProps,

@@ -4,36 +4,33 @@ import * as React from "react";
 // Importing styling and static assets
 import "./CustomerPerformance.scss";
 
-// Importing UI elements
-import UserMenu from "src/Components/CustomerAccessMenu/usermenu";
-import PageHeader from "src/Components/CustomerPageHeader/pageheader";
-import {   IConsumpGraphDataDeceiveAll } from "src/modules";
-import UserProfileGraph from "./Graph/CustomerPerformanceGraph";
+// Importing interfaces from module
+import { IConsumpGraphDataDeceiveAll } from "src/modules";
 
-// Importing fake data
-// import { profileConsumptionGraphTest } from "src/fakedata";
+// Importing presentation components
+import PageHeader from "src/Components/CustomerPageHeader/pageheader";
+import UserProfileGraph from "./Graph/CustomerPerformanceGraph";
+import Dialog from "./Dialog/CustomerPerformanceDialog";
+import UserMenu from "src/Components/CustomerAccessMenu/CustomerAccessMenu";
 
 // Redux
 import { connect } from "react-redux";
 import { IRootState } from "src/redux/store";
 import { getUserConsumptionByUserToken } from "src/redux/mobile/actions/actions_user";
+
+// Importing assisting utility functions
 import { switchUp } from "src/util/utility";
 
+// States and Props
 interface IUserPerformanceProps {
   userConsumptionComparison: IConsumpGraphDataDeceiveAll;
   getConsumption: () => void;
 }
-// interface IUserPerformanceState {
-//   processedData: IConsumptionGraphData[];
-// }
-
-// Redux
 const mapStateToProps = (state: IRootState) => {
   return {
     userConsumptionComparison: state.customer.user.userConsumptionComparison
   };
 };
-
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getConsumption: () => {
@@ -42,16 +39,11 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
+// Component
 class PurePerformance extends React.Component<IUserPerformanceProps, {}> {
   constructor(props: IUserPerformanceProps) {
     super(props);
-    this.props.getConsumption();
-    // this.state = {
-    //   processedData: switchUp(this.props.userConsumptionComparison)
-    // };
-  }
-
-  public componentDidMount() {
+    // To init the consumption data before rendering the graph
     this.props.getConsumption();
   }
 
@@ -62,9 +54,7 @@ class PurePerformance extends React.Component<IUserPerformanceProps, {}> {
         <UserProfileGraph
           data={switchUp(this.props.userConsumptionComparison)}
         />
-        <div className="cardd rd-corner">
-          <p>Thank you for enjoying our product. We hope to see you again soon.</p>
-        </div>
+        <Dialog />
         <UserMenu />
       </div>
     );

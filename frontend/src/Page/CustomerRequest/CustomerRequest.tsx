@@ -15,7 +15,7 @@ import { withRouter } from "react-router";
 import { redirectPage, resetTargetPage } from "src/redux/mobile/actions/actions_user";
 
 // Importing UI
-import UserMenu from "src/Components/CustomerAccessMenu/usermenu";
+import UserMenu from "src/Components/CustomerAccessMenu/CustomerAccessMenu";
 import { Button, Card, Elevation, Intent } from "@blueprintjs/core";
 import { AppToaster } from "src/Components/ToastAlert/toast";
 

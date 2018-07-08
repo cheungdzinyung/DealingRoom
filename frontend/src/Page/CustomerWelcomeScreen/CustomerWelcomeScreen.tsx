@@ -14,6 +14,9 @@ import expandedItem from "./img/expandedItem.png";
 import warning from "./img/warning.png";
 import welcome from "./img/welcome.png";
 
+// Importing presentation components
+import SubmitButton from "../../Components/SubmitButton/SubmitButton";
+
 interface IPureIntroductionProps {
   history: History.History;
 }
@@ -21,7 +24,7 @@ interface IPureIntroductionProps {
 export default class PureIntroduction extends React.Component<
   IPureIntroductionProps,
   {}
-  > {
+> {
   constructor(props: IPureIntroductionProps) {
     super(props);
   }
@@ -83,9 +86,8 @@ export default class PureIntroduction extends React.Component<
           <div className="intro-content">
             <img src={welcome} alt="" className="intro-content-image" />
             <h1 className="intro-header">Enjoy!</h1>
-            <button className="intro-skip" onClick={this.toMenu}>
-              Start Ordering
-            </button>
+
+            <SubmitButton onClick={this.toMenu} displayText="Start Ordering" />
           </div>
         </Slider>
       </div>

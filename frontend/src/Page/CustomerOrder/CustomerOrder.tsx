@@ -15,7 +15,7 @@ import { AppToaster } from "src/Components/ToastAlert/toast";
 import { Intent } from "@blueprintjs/core";
 
 // Importing components
-import Usermenu from "src/Components/CustomerAccessMenu/usermenu";
+import Usermenu from "src/Components/CustomerAccessMenu/CustomerAccessMenu";
 
 // Importing styling and static assets
 import "./CustomerOrder.scss";

@@ -57,19 +57,6 @@ class PureCurrentOrders extends React.Component<ICurrentOrdersProps> {
     super(props);
   }
 
-  public componentWillMount() {
-    // const isStaff = (
-    //     this.props.customerProfile.role === "manager" ||
-    //     this.props.customerProfile.role === "bartender" ||
-    //     this.props.customerProfile.role === "waiter"
-    // );
-    // allow access b4 staff login is ok
-    // const isStaff = false;
-    // if (!isStaff) {
-    //     this.props.history.push("/menu");
-    // }
-  }
-
   public componentDidMount() {
     if (!this.props.allOrdersReady) {
       this.props.getAllOrders();
@@ -78,19 +65,16 @@ class PureCurrentOrders extends React.Component<ICurrentOrdersProps> {
 
   public render() {
     return (
-      // tslint:disable-next-line:no-unused-expression
       <div className="desktop-page-container">
         <AdminSideMenu />
         <div className="currentorder-container-center">
           <div className="currentorder-wrapper">
             <div className="currentorder-header">
               <PageHeader header="Current Orders" />
-              {/* <button className="test-socket" onClick={this.made}>TEST SOCKET</button> */}
             </div>
             <div className="order-card-display">
               {this.props.allOrders
                 .filter((each: IOrderListStaff) => each.status === "made")
-                // .filter((each: any) => each.isPaid && undefined)
                 .map((oneOrder: IOrderListStaff, index: number) => (
                   <OrderCard
                     {...oneOrder}

@@ -7,7 +7,7 @@ import "./CustomerOrderList.scss";
 
 // Importing UI components
 import { Card, Elevation } from "@blueprintjs/core";
-import Usermenu from "src/Components/CustomerAccessMenu/usermenu";
+import Usermenu from "src/Components/CustomerAccessMenu/CustomerAccessMenu";
 
 // Importing static assets
 import checkIcon from "./img/checkmark.svg";
