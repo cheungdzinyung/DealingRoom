@@ -19,6 +19,7 @@ export default class CustomerSetting extends React.Component<{
   }
   public logout = () => {
     localStorage.removeItem("dealingRoomToken");
+    localStorage.removeItem("welcomeOnSignup");
     this.props.history.push("/customer");
   };
   public render() {
