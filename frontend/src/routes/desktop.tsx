@@ -14,8 +14,8 @@ export default class DesktopRoutes extends React.Component {
     return (
       <Switch>
         <Route exact={true} path="/admin/initializeStaff" component={Initialize} />
-        <Route exact={true} path="/admin/stock/" component={StockManagement} />
-        <Route exact={true} path="/admin/specialEvent/" component={SpecialEvent} />
+        <Route exact={true} path="/admin/stock" component={StockManagement} />
+        <Route exact={true} path="/admin/specialEvent" component={SpecialEvent} />
         <Route exact={true} path="/admin/currentorders" component={CurrentOrders} />
         <Route exact={true} path="/admin/pendingorders" component={PendingOrders} />
         <Route exact={true} path="/admin/unpaidorders" component={UnpaidOrders} />

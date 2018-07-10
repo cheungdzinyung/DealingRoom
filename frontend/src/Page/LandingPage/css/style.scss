@@ -181,6 +181,11 @@ p.lead {
     padding: 1rem 0;
     transition: all 0.3s ease;
     background-color: #171619;
+    position: relative;
+}
+
+.collpase {
+    transition: all 0.4s ease-in-out
 }
 
 .nav-menu.is-scrolling,
@@ -257,7 +262,7 @@ p.lead {
 ----------------------*/
 
 header {
-    padding: 100px 0 0;
+    padding: 10px 0 0;
     text-align: center;
     color: #FFCD44;
 }
@@ -542,7 +547,8 @@ header {
 /*  PRICING
 ----------------------*/
 
-@media (max-width:992px) {
+@media (max-width:767px) {
+// @media (max-width:992px) {
     .card-deck {
         -ms-flex-direction: column;
         flex-direction: column;

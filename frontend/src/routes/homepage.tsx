@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 
 // import LandingPage from "src/Page/LandingPage/LandingPage";
 // import LandingPage from "src/Page/LandingPage/LandingPage";
-// import LandingPageNew from "src/Page/LandingPageNew/LandingPageNew";
+// import LandingPageNew from "src/Page/LandingPage/LandingPage";
 import Login from "src/Page/CustomerLogin/CustomerLogin";
 
 export default class HomepageRoutes extends React.Component {

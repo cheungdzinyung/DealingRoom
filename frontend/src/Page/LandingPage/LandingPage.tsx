@@ -1,6 +1,15 @@
 import * as React from "react";
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+} from "reactstrap";
 
-// import "./css/bootstrap.min.css";
+import "./css/bootstrap.min.css";
 import "./css/owl.carousel.min.css";
 import "./css/style.scss";
 import "./css/themify-icons.css";
@@ -10,19 +19,41 @@ import PlayIcon from "./images/playicon.png";
 import Logo from "./images/logo.svg";
 import MainScreen from "./images/mainscreen.png";
 
-export default class LandingPageNew extends React.Component {
+export default class LandingPageNew extends React.Component<{}, { openNavBar: boolean }> {
+  constructor(props: {}) {
+    super(props);
+
+    this.state = {
+      openNavBar: false
+    }
+  }
+
+  public toggleNavBar = () => {
+    this.setState({
+      openNavBar: !this.state.openNavBar
+    })
+  }
+
   public render() {
     return (
-      <div data-spy="scroll" data-target="#navbar" data-offset="30">
+      <div data-spy="scroll" data-target="#navbar" data-offset="30" className="bg-gradient">
         <div className="nav-menu fixed-top">
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <nav className="navbar navbar-dark navbar-expand-lg">
-                  <a className="navbar-brand" href="index.html">
+                <Navbar
+                  className={"navbar navbar-dark navbar-expand-lg"}
+                  light={true}
+                  color="faded"
+                >
+                  <NavbarBrand
+                    className="navbar-brand"
+                    href="index.html"
+                  >
                     <img src={Logo} className="img-fluid" alt="logo" />
-                  </a>{" "}
-                  <button
+                  </NavbarBrand >
+                  {" "}
+                  <NavbarToggler
                     className="navbar-toggler"
                     type="button"
                     data-toggle="collapse"
@@ -30,53 +61,60 @@ export default class LandingPageNew extends React.Component {
                     aria-controls="navbar"
                     aria-expanded="false"
                     aria-label="Toggle navigation"
+                    onClick={this.toggleNavBar}
                   >
                     {" "}
                     <span className="navbar-toggler-icon" />{" "}
-                  </button>
-                  <div className="collapse navbar-collapse" id="navbar">
-                    <ul className="navbar-nav ml-auto">
-                      <li className="nav-item">
+                  </NavbarToggler>
+                  <Collapse
+                    isOpen={this.state.openNavBar}
+                    className="navbar-collapse"
+                    id="navbar"
+                    navbar={true}
+                  >
+                    <Nav className="navbar-nav ml-auto" navbar={true}>
+                      <NavItem className="nav-item">
                         {" "}
-                        <a className="nav-link" href="#home">
+                        <NavLink className="nav-link" href="#home" onClick={this.toggleNavBar}>
                           HOME <span className="sr-only">(current)</span>
-                        </a>{" "}
-                      </li>
-                      <li className="nav-item">
+                        </NavLink >{" "}
+                      </NavItem>
+                      <NavItem className="nav-item">
                         {" "}
-                        <a className="nav-link" href="#features">
+                        <NavLink className="nav-link" href="#features" onClick={this.toggleNavBar}>
                           FEATURES
-                        </a>{" "}
-                      </li>
+                        </NavLink >{" "}
+                      </NavItem>
                       {/* <li className="nav-item">
                         {" "}
                         <a className="nav-link" href="#gallery">
                           GALLERY
                         </a>{" "}
                       </li> */}
-                      <li className="nav-item">
+                      <NavItem className="nav-item">
                         {" "}
-                        <a className="nav-link" href="#contact">
+                        <NavLink className="nav-link" href="#contact" onClick={this.toggleNavBar}>
                           CONTACT
-                        </a>{" "}
-                      </li>
-                      <li className="nav-item">
-                        <a
+                        </NavLink >{" "}
+                      </NavItem>
+                      <NavItem className="nav-item">
+                        <NavLink
                           href="https://www.dealingroom.live/customer"
                           className="btn btn-outline-light my-3 my-sm-0 ml-lg-3"
+                          onClick={this.toggleNavBar}
                         >
                           Start Ordering
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </nav>
+                        </NavLink >
+                      </NavItem>
+                    </Nav >
+                  </Collapse>
+                </Navbar>
               </div>
             </div>
           </div>
         </div>
 
-        <header className="bg-gradient" id="home">
+        <header className="" id="home">
           <div className="container mt-5">
             <h1>Dealing Room</h1>
             <p className="tagline">
@@ -373,7 +411,7 @@ export default class LandingPageNew extends React.Component {
                   <p className="mb-2">
                     <span className="ti-email mr-2" />{" "}
                     <a className="mr-4" href="mailto:info@dealingroom.live">
-                    info@dealingroom.live
+                      info@dealingroom.live
                     </a>
                   </p>
                 </div>

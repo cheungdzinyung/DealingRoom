@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@types/reactstrap": "^6.0.0",
+    "reactstrap": "^6.2.0"
+  }
+}
