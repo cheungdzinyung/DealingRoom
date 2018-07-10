@@ -11,8 +11,6 @@ import {
     IOrderListStaff,
 } from "src/modules";
 
-// import { allOrders } from "../../../fakedata";
-
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const UPDATE_STATUS_MADE_SUCCESS = "UPDATE_STATUS_MADE_SUCCESS";
 export type UPDATE_STATUS_MADE_SUCCESS = typeof UPDATE_STATUS_MADE_SUCCESS;
@@ -83,15 +81,12 @@ export function getAllOrdersFail(errMsg: any): IGetAllOrdersFailAction {
 
 export function getAllOrders() {
     return (dispatch: Dispatch<IGetAllOrdersSuccessAction | IGetAllOrdersFailAction>) => {
-        // axios.get("${process.env.REACT_APP_API_DEV}/api/items")
         const config = { headers: { Authorization: "Bearer " + localStorage.getItem("dealingRoomToken") } }
         axios.get(`${API_SERVER}/api/orders`, config)
             .then((res: any) => {
                 if (res.status === 201) {
-                    // alert(Object.keys(res.data));
                     dispatch(getAllOrdersSuccess(res.data));
                 } else {
-                    // alert("error, status code not match: " + res.status);
                     dispatch(getAllOrdersFail(res.status));
                     AppToaster.show({
                         message: "Error, try again\nstatu code does not match: " + res.status,
@@ -102,7 +97,6 @@ export function getAllOrders() {
                 }
             })
             .catch((err: any) => {
-                // alert(err);
                 dispatch(getAllOrdersFail(err));
                 AppToaster.show({
                     message: "Error, try again\n" + err,
@@ -144,7 +138,6 @@ export function updateOrderStatusMade(orderID: number) {
                         timeout: 2000
                     });
                 } else {
-                    // alert("error, status code not match: " + res.status);
                     dispatch(updateOrderStatusMadeFail(res.data));
                     AppToaster.show({
                         message: "Error, try again",
@@ -155,7 +148,6 @@ export function updateOrderStatusMade(orderID: number) {
                 }
             })
             .catch((err: any) => {
-                // alert(err);
                 dispatch(updateOrderStatusMadeFail(err));
                 AppToaster.show({
                     message: "Error, try again\n" + err,

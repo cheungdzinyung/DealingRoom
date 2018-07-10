@@ -4,6 +4,10 @@ import axios from "axios";
 import { API_SERVER } from "../../store";
 import { IMenuCategoryWithFlux, ISpecialEvent } from "src/modules";
 
+// Import UI elements
+import { AppToaster } from "src/Components/ToastAlert/toast";
+import { Intent } from "@blueprintjs/core";
+
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export const GET_ENTIRE_MENU_SUCCESS = "GET_ENTIRE_MENU_SUCCESS";
 export type GET_ENTIRE_MENU_SUCCESS = typeof GET_ENTIRE_MENU_SUCCESS;
@@ -72,24 +76,31 @@ export function getEntireMenuFail(): IGetEntireMenuFailAction {
 
 export function getEntireMenu() {
   return (dispatch: Dispatch<IGetEntireMenuSuccessAction | IGetEntireMenuFailAction>) => {
-    // axios.get("${process.env.REACT_APP_API_DEV}/api/items")
     const year = (new Date(Date.now())).getFullYear();
     const month = (new Date(Date.now())).getMonth() + 1;
     const date = (new Date(Date.now())).getDate();
-    // axios.get(`${API_SERVER}/api/items/?`)
     axios.get(`${API_SERVER}/api/items/?isActive=true&fluctuatingPrices=${year}-${month}-${date}`)
       .then((res: any) => {
         if (res.status === 200) {
-          // alert(Object.keys(res.data));
           dispatch(getEntireMenuSuccess(res.data));
         } else {
-          alert("error, status code not match: " + res.status);
           dispatch(getEntireMenuFail());
+          AppToaster.show({
+            message: "Error, try again\nstatus: " + res.status,
+            intent: Intent.WARNING,
+            icon: "cross",
+            timeout: 2000
+          });
         }
       })
       .catch((err: any) => {
-        alert(err);
         dispatch(getEntireMenuFail());
+        AppToaster.show({
+          message: "Error, try again\n" + err,
+          intent: Intent.WARNING,
+          icon: "cross",
+          timeout: 2000
+        });
       });
   }
 }

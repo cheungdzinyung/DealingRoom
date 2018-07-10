@@ -18,11 +18,11 @@ import {
 import { IUserProfile, IConsumpGraphDataDeceiveAll } from "src/modules";
 
 export interface IUserState {
-  // role: string,
+  // role: string;            TODO
   isAuth: boolean;
   currentPage: string;
   redirectTarget: string;
-  // settings: string,
+  // settings: string;        TODO
   userProfile: IUserProfile;
   userProfileReady: boolean;
   userAPIErr: string;
@@ -31,10 +31,10 @@ export interface IUserState {
 
 const initialState = {
   // role: "customer",
-  isAuth: false, // wrong after F5
+  isAuth: false,              // is lost after F5
   currentPage: "profile",
-  redirectTarget: "none", // for redir
-  // settings: "nth yet",
+  redirectTarget: "none",     // for redir
+  // settings: "nth yet",     // future dev
   userProfile: {
     users_id: 0,
     username: "string",
@@ -99,8 +99,6 @@ export const userReducer = (
     case FB_LOGIN_SUCCESS: {
       localStorage.setItem("dealingRoomToken", action.FBtoken);
       return { ...state, isAuth: true, userAPIErr: "none" };
-      // alert(`FB login ok ;) ${action.FBtoken}`)
-      // return state;
     }
     case FB_LOGIN_FAIL: {
       return { ...state, userAPIErr: action.errMsg || "FB_LOGIN_FAIL" };
@@ -122,11 +120,9 @@ export const userReducer = (
         userConsumptionComparison: action.userConsumptionComparison
       };
     }
-
     case GET_USER_CONSUMPTIONS_BY_USER_TOKEN_FAIL: {
       return { ...state, userAPIErr: "GET_USER_PROFILE_BY_USER_TOKEN_FAIL" };
     }
-
     default: {
       return state;
     }

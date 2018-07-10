@@ -27,7 +27,6 @@ export interface IDisplayState {
 
 const initialState: IDisplayState = {
   entireMenu: [singleCategoryMenuItems],
-
   socketID: "",
   socketData: {},
   eventInfo: {

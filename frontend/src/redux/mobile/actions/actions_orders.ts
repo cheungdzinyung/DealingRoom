@@ -56,8 +56,7 @@ export interface IResetConfirmOrderStatusAction extends Action {
   type: RESET_CONFIRM_ORDER_STATUS;
 }
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-export const GET_ORDERS_BY_USER_TOKEN_SUCCESS =
-  "GET_ORDERS_BY_USER_TOKEN_SUCCESS";
+export const GET_ORDERS_BY_USER_TOKEN_SUCCESS = "GET_ORDERS_BY_USER_TOKEN_SUCCESS";
 export type GET_ORDERS_BY_USER_TOKEN_SUCCESS = typeof GET_ORDERS_BY_USER_TOKEN_SUCCESS;
 export interface IGetOrdersByUserTokenSuccessAction extends Action {
   type: GET_ORDERS_BY_USER_TOKEN_SUCCESS;
@@ -122,15 +121,12 @@ export function getEntireMenu() {
     const year = new Date(Date.now()).getFullYear();
     const month = new Date(Date.now()).getMonth() + 1;
     const date = new Date(Date.now()).getDate();
-    // axios.get(`${API_SERVER}/api/items/?`)
-    // axios.get(`https://api.dealingroom.live/api/items/?isActive=true&fluctuatingPrices=${2018}-${6}-${29}`)
     axios
       .get(
         `https://api.dealingroom.live/api/items/?isActive=true&fluctuatingPrices=${year}-${month}-${date}`
       )
       .then((res: any) => {
         if (res.status === 200) {
-          // alert(Object.keys(res.data));
           dispatch(getEntireMenuSuccess(res.data));
         } else {
           alert("error, status code not match: " + res.status);
@@ -191,13 +187,10 @@ export function confirmOrder(orderToConfirm: ICurrentOrder) {
   return (
     dispatch: Dispatch<IConfirmOrderSuccessAction | IConfirmOrderFailAction>
   ) => {
-    // axios.post(`${process.env.REACT_APP_API_DEV}/api/orders/${orderToConfirm.users_id}`, orderToConfirm, config)
     axios
       .post(`${API_SERVER}/api/orders/`, orderToConfirm, config)
       .then((res: any) => {
         if (res.status === 201) {
-          // alert(res.data[0].status + " now redirect to order list");
-          // alert(JSON.stringify(res.data))
           dispatch(confirmOrderSuccess(res.data[0], orderToConfirm));
         } else {
           alert("error, status code not match: " + res.status);
@@ -244,7 +237,6 @@ export function getOrdersByUserToken() {
       IGetOrdersByUserTokenSuccessAction | IGetOrdersByUserTokenFailAction
     >
   ) => {
-    // axios.get(`${process.env.REACT_APP_API_DEV}/api/orders/user/${userID}`, config)
     axios
       .get(`${API_SERVER}/api/orders/user/`, config)
       .then((res: any) => {

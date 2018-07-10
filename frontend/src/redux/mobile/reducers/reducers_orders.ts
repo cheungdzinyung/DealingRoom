@@ -119,16 +119,14 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
             return { ...state, orderAPIErr: "GET_ENTIRE_MENU_FAIL" };
         }
         case ADD_ITEM: {
-            // onclick: add item to current order []
             const newItem: IRequestItem = {
                 thisItemID: Date.now(),                 // only for current order
-                items_id: action.item_id,                // from db
+                items_id: action.item_id,               // from db
                 itemName: action.itemName,              // from db
                 ice: "normal",                          // allow mods when btn is ready
                 sweetness: "normal",
                 garnish: "normal",
                 purchasePrice: action.currentPrice,     // from db
-                // status: "confirmed",
             };
             // new total price: x1000 to avoid overflow
             const newTotal = (state.currentTotal * 1000 + newItem.purchasePrice * 1000) / 1000;
@@ -149,7 +147,7 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
                 };
         }
         case CONFIRM_ORDER_SUCCESS: {
-            // write to db ok, clear current order n current total, redir by action
+            // write to db ok, clear current order n current total, redir to orderlist
             // action.result = { users_id: num, status: str, orders_id: num, entireMenu }
             return { ...state,
                     currentOrder: [],
@@ -168,7 +166,7 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
             return { ...state, confirmOrderStatus: "null" };
         }
         case GET_ORDERS_BY_USER_TOKEN_SUCCESS: {
-            // need to change data type
+            // filter out (un)paid orders
             const unpaidOrders = action.allOrdersByOneUser.orders.filter((e: any) => (e.isPaid === false)).length;
             return { ...state,
                     ordersList: action.allOrdersByOneUser,
@@ -178,14 +176,13 @@ export const ordersReducer = (state: IOrdersState = initialState, action: Orders
                 };
         }
         case GET_ORDERS_BY_USER_TOKEN_FAIL: {
-            // get fail, F5?
+            // get fail, F5
             return { ...state, orderAPIErr: "GET_ORDERS_BY_USER_TOKEN_FAIL" };
         }
         case SOCKET_CONNECT_SUCCESS: {
             return { ...state, socketID: action.socketID };
         }
         case SOCKET_UPDATE_ITEM_PRICE: {
-            // alert(JSON.stringify(action.entireMenu))
             return { ...state, entireMenu: action.entireMenu };
         }
         default: {

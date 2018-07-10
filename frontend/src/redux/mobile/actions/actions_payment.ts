@@ -2,7 +2,6 @@ import { Action, Dispatch } from "redux";
 import axios from "axios";
 
 import { API_SERVER } from "src/redux/store";
-// import { ISignUpPackage, ILoginPackage } from "src/modules";\
 
 // Import UI elements
 import { AppToaster } from "src/Components/ToastAlert/toast";
@@ -46,7 +45,6 @@ export type PaymentActions =
     IPayWithStripeFailAction |
     IResetPaymentResultAction;
 
-
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 export function setPaymentTargetId(paymentTargetId: number, totalAmount: number): ISetPaymentTargetIdAction {
     return {
@@ -85,7 +83,6 @@ export function payWithStripe(orderId: number, stripeToken: string) {
                         timeout: 2000
                     });
                 } else {
-                    // alert("err, status: " + res.status);
                     dispatch(payWithStripeFail("not 201"));
                     AppToaster.show({
                         message: "Error, try again",
@@ -96,7 +93,6 @@ export function payWithStripe(orderId: number, stripeToken: string) {
                 }
             })
             .catch((err: any) => {
-                // alert(err)
                 dispatch(payWithStripeFail(err));
                 AppToaster.show({
                     message: "Error, try again\n" + err,

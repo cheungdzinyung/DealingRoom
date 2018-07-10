@@ -28,7 +28,6 @@ export const CREATE_ITEM_FAIL = "CREATE_ITEM_FAIL";
 export type CREATE_ITEM_FAIL = typeof CREATE_ITEM_FAIL;
 export interface ICreateItemFailAction extends Action {
 	type: CREATE_ITEM_FAIL,
-	// result: any,
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
@@ -44,7 +43,6 @@ export const UPDATE_ITEM_FAIL = "UPDATE_ITEM_FAIL";
 export type UPDATE_ITEM_FAIL = typeof UPDATE_ITEM_FAIL;
 export interface IUpdateItemFailAction extends Action {
 	type: UPDATE_ITEM_FAIL,
-	// result: any,
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
@@ -122,20 +120,28 @@ export function getEntireMenuFail(): IGetEntireMenuFailAction {
 
 export function getEntireMenu() {
     return (dispatch: Dispatch<IGetEntireMenuSuccessAction | IGetEntireMenuFailAction>) => {
-        // axios.get("${process.env.REACT_APP_API_DEV}/api/items")
         axios.get(`${API_SERVER}/api/items`)
             .then((res: any) => {
                 if (res.status === 200) {
-                    // alert(Object.keys(res.data));
                     dispatch(getEntireMenuSuccess(res.data));
                 } else {
-                    alert("error not 200");
-                    dispatch(getEntireMenuFail());
+					dispatch(getEntireMenuFail());
+					AppToaster.show({
+                        message: "Error, try again\nstatus: " + res.status,
+                        intent: Intent.WARNING,
+                        icon: "cross",
+                        timeout: 2000
+                    });
                 }
             })
             .catch((err: any) => {
-                alert(err);
-                dispatch(getEntireMenuFail());
+				dispatch(getEntireMenuFail());
+				AppToaster.show({
+					message: "Error, try again\n" + err,
+					intent: Intent.WARNING,
+					icon: "cross",
+					timeout: 2000
+				});
             });
     }
 }
@@ -150,7 +156,6 @@ export function createItemSuccess(entireMenu: IMenuCategoryWithoutFlux[]): ICrea
 export function createItemFail(): ICreateItemFailAction {
 	return {
 		type: CREATE_ITEM_FAIL,
-		// result,
 	}
 }
 
@@ -168,7 +173,6 @@ export function createItem(itemStatus: ICreateMenuItem) {
                         timeout: 2000
                     });
 				} else {
-					alert("create item error, try again");
 					dispatch(createItemFail());
 					AppToaster.show({
                         message: "Error, try again",
@@ -201,14 +205,12 @@ export function updateItemSuccess(entireMenu: IMenuCategoryWithoutFlux[]): IUpda
 export function updateItemFail(): IUpdateItemFailAction {
 	return {
 		type: UPDATE_ITEM_FAIL,
-		// result,
 	}
 }
 
 export function updateItem(itemStatus: IUpdateMenuItem) {
 	const config = { headers: { Authorization: "Bearer " + localStorage.getItem("dealingRoomToken") } }
 	return (dispatch: Dispatch<IUpdateItemSuccessAction | IUpdateItemFailAction>) => {
-		// axios.put(`${API_SERVER}/api/items/${itemStatus.items_id}`, itemStatus, config)
 		axios.put(`${API_SERVER}/api/items/${itemStatus.items_id}/?includeInActive="true"`, itemStatus, config)
 			.then((res: any) => {
 				if (res.status === 201) {
@@ -285,7 +287,6 @@ export function triggerSpEvent(eventInfo: ISpecialEvent) {
                         timeout: 2000
                     });
 				} else {
-					// alert("update error, try again");
 					dispatch(triggerSpEventFail(res.status + "status not match"));
 					AppToaster.show({
                         message: "Error, try again",

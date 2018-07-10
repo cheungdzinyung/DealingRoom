@@ -113,7 +113,7 @@ export interface IGetUserConsumptionsByUserTokenFail extends Action {
   errMsg: string;
 }
 
-// /* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 
 export type UserActions =
   | IChangePageAction
@@ -192,7 +192,6 @@ export function localLogin(username: string, password: string) {
         }
       })
       .catch((err: any) => {
-        // alert(err.response.data || err);
         dispatch(localLoginFail(err.response.data || err));
         AppToaster.show({
           message: "Error, try again\n" + err.response.data || err,
@@ -230,7 +229,6 @@ export function localSignUpFail(errMsg: any): ILocalSignUpFailAction {
 //             role: "customer",
 //             displayName: username,
 //         };
-
 //         axios.post(`${API_SERVER}/api/auth/signup`, signUpPackage)
 //             .then((res: any) => {
 //                 if (res.status === 201) {
@@ -247,7 +245,7 @@ export function localSignUpFail(errMsg: any): ILocalSignUpFailAction {
 //     }
 // }
 
-// auto login after sign up
+// auto login (by BE) after sign up
 export function localSignUp(username: string, password: string) {
   return (
     dispatch: Dispatch<
@@ -264,44 +262,12 @@ export function localSignUp(username: string, password: string) {
       displayName: username
     };
 
-    // const loginPackage = {
-    //   username,
-    //   password
-    // };
-
     axios
       .post(`${API_SERVER}/api/auth/signup`, signUpPackage)
       .then((res: any) => {
         if (res.status === 200) {
           dispatch(localSignUpSuccess(res.data));
-          // axios
-          //   .post(`${API_SERVER}/api/auth/login`, loginPackage)
-          //   .then((resp: any) => {
-          //     if (resp.status === 200) {
-          //       dispatch(localLoginSuccess(resp.data));
-          //     } else {
-          //       // alert("status: " + resp.status);
-          //       dispatch(localLoginFail(resp.status));
-          //       AppToaster.show({
-          //         message: "Login failed, try again\n",
-          //         intent: Intent.WARNING,
-          //         icon: "cross",
-          //         timeout: 2000
-          //       });
-          //     }
-          //   })
-          //   .catch((err: any) => {
-          //     // alert("login fail" + err);
-          //     dispatch(localLoginFail(err));
-          //     AppToaster.show({
-          //       message: "Login failed, try again\n",
-          //       intent: Intent.WARNING,
-          //       icon: "cross",
-          //       timeout: 2000
-          //     });
-          //   });
         } else {
-          // alert("sign up fail: " + res.status);
           dispatch(localSignUpFail(res.status));
           AppToaster.show({
             message: "Login failed, try again\n",
@@ -312,7 +278,6 @@ export function localSignUp(username: string, password: string) {
         }
       })
       .catch((err: any) => {
-        // alert(err.response.data || err);
         dispatch(localSignUpFail(err.response.data || err));
         AppToaster.show({
           message: "Error, try again\n" + err.response.data || err,
@@ -400,16 +365,24 @@ export function getUserProfileByUserToken() {
       .then((res: any) => {
         if (res.status === 200) {
           dispatch(getUserProfileByUserTokenSuccess(res.data[0]));
-          // auto redir to order list page ===> moved to init page
-          // dispatch(changePage(OrderList));
         } else {
-          alert("status: " + res.status);
           dispatch(getUserProfileByUserTokenFail(""));
+          AppToaster.show({
+            message: "Error, try again\nstatus: " + res.status,
+            intent: Intent.WARNING,
+            icon: "cross",
+            timeout: 2000
+          });
         }
       })
       .catch((err: any) => {
-        alert(err);
         dispatch(getUserProfileByUserTokenFail(""));
+        AppToaster.show({
+          message: "Error, try again\n" + err,
+          intent: Intent.WARNING,
+          icon: "cross",
+          timeout: 2000
+        });
       });
   };
 }
@@ -454,13 +427,23 @@ export function getUserConsumptionByUserToken() {
         if (res.status === 200) {
           dispatch(getUserConsumptionByUserTokenSuccess(res.data));
         } else {
-          alert("status: " + res.status);
           dispatch(getUserConsumptionByUserTokenFail(""));
+          AppToaster.show({
+            message: "Error, try again\nstatus: " + res.status,
+            intent: Intent.WARNING,
+            icon: "cross",
+            timeout: 2000
+          });
         }
       })
       .catch((err: any) => {
-        alert(err);
         dispatch(getUserConsumptionByUserTokenFail(""));
+        AppToaster.show({
+          message: "Error, try again\n" + err,
+          intent: Intent.WARNING,
+          icon: "cross",
+          timeout: 2000
+        });
       });
   };
 }
