@@ -13,7 +13,7 @@ export default class App extends React.Component {
     // ReactGA.initialize("UA-74343046-8");
     // ReactGA.pageview(window.location.pathname + window.location.search);
     return (
-      <div className="full-page">
+      <div>
         <HomepageRoutes />
         <MobileRoutes />
         <DesktopRoutes />
