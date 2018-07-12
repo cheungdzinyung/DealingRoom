@@ -42,6 +42,10 @@
     <a href="https://trello.com/b/Mm9p1WzS">
       Trello Progress
     </a>
+    <span> | </span>
+    <a href="https://www.youtube.com/watch?v=273V21nY3Us">
+      Pitching Presentation
+    </a>
   </h3>
 </div>
 
