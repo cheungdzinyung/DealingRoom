@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 256.64583 66.145835"
+   height="250"
+   width="970">
+  <defs
+     id="defs2" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(0,-230.85415)"
+     id="layer1">
+    <g
+       style="stroke-width:0.58035666"
+       id="layer1-0"
+       transform="matrix(1.7226151,0,0,1.7235417,22.491703,-224.79532)">
+      <g
+         transform="translate(7.065324,-0.65157427)"
+         id="g4549">
+        <g
+           id="g4537"
+           transform="matrix(1.6545758,0,0,1.6553553,-114.25123,-195.5213)"
+           style="stroke-width:0.48247173;stroke-miterlimit:4;stroke-dasharray:none">
+          <g
+             transform="matrix(0.58051274,0,0,0.58020065,69.200588,125.51114)"
+             id="g4622"
+             style="stroke-width:0.83133656;stroke-miterlimit:4;stroke-dasharray:none">
+            <path
+               style="fill:none;stroke:#e9dbcc;stroke-width:0.83133656;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+               d="m 13.216293,283.49955 c -1.730565,-1.67013 -2.697881,-2.784 -4.4284457,-4.45413"
+               id="path4598" />
+            <path
+               style="fill:none;stroke:#e9dbcc;stroke-width:0.83133656;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+               d="M 6.2153783,276.47295 C 4.7988359,274.99308 3.2877664,273.60868 1.871229,272.1288 h 18.099304"
+               id="path4596" />
+            <path
+               id="path4594"
+               d="m 21.498793,272.1288 h 3.08831 l -5.173389,4.95081 c -1.469871,1.37902 -2.978118,1.17752 -4.557045,0.035 -1.671388,-1.11347 -2.873725,-1.63513 -4.290861,-1.42155 -2.0285876,0.30689 -2.9233559,1.66395 -3.8770286,3.29392 -0.8091662,1.3027 -1.4566772,2.69684 -2.2277111,4.02144"
+               style="display:inline;fill:none;stroke:#ee5353;stroke-width:0.83133656;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+            <path
+               style="fill:none;stroke:#e9dbcc;stroke-width:0.83133656;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+               d="m 16.860195,279.85571 c -1.009168,1.03442 -2.634734,2.60948 -3.643902,3.6439 v 8.20347 l -3.045919,2.50207 h 6.170235"
+               id="path4507" />
+          </g>
+        </g>
+      </g>
+      <text
+         transform="scale(1.0002689,0.99973117)"
+         id="text4541"
+         y="288.20786"
+         x="42.593441"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.22842157px;line-height:25.04999924;font-family:'Proza Libre';-inkscape-font-specification:'Proza Libre';letter-spacing:0px;word-spacing:0px;fill:#e9dbcc;fill-opacity:1;stroke:none;stroke-width:0.08911533;"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.46526814px;line-height:2.45000005;font-family:'Proza Libre';-inkscape-font-specification:'Proza Libre';fill:#e9dbcc;fill-opacity:1;stroke-width:0.08911533;"
+           y="288.20786"
+           x="42.593441"
+           id="tspan4539">Dealing Room</tspan></text>
+    </g>
+  </g>
+</svg>
