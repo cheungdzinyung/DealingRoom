@@ -34,7 +34,7 @@ export default class ItemModalInfo extends React.Component<
         <hr className="edit-item-info-breakline" />
         <div className="edit-item-value-container">
           <div className="edit-item-value-line-container">
-            <span className="edit-item-value-line-text warning">
+            <span className="currentprice">
               Current Price
             </span>
             <div className="line-number-container">
@@ -48,7 +48,7 @@ export default class ItemModalInfo extends React.Component<
             </div>
           </div>
           <div className="edit-item-value-line-container">
-            <span className="edit-item-value-line-text alert">Price Floor</span>
+            <span className="pricefloor">Price Floor</span>
             <div className="line-number-container">
 
               <input
@@ -60,7 +60,7 @@ export default class ItemModalInfo extends React.Component<
             </div>
           </div>
           <div className="edit-item-value-line-container">
-            <span className="edit-item-value-line-text info">Quantity</span>
+            <span className="quantity">Quantity</span>
             <div className="line-number-container">
               <input
                 type="number"

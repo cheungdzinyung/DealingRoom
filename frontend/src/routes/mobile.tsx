@@ -17,7 +17,6 @@ export default class MobileRoutes extends React.Component {
     return (
       <div>
         <Switch>
-          {/* Testing route */}
           <Route path="/customer/" exact={true} component={Login} />
           <Route path="/customer/welcome" exact={true} component={PureIntroduction} />
           <Route path="/customer/initialize" exact={true} component={Initialize} />

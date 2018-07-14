@@ -13,6 +13,7 @@ Copyright © All rights Reserved
 /*------------------------
 [TABLE OF CONTENTS]
     
+0. VARIABLES
 1. GLOBAL STYLES
 2. NAVBAR
 3. HERO
@@ -23,8 +24,20 @@ Copyright © All rights Reserved
 8. CALL TO ACTION
 9. FOOTER
 
+
+
+
+
+
 ------------------------*/
 
+/* VARIABLES
+----------------------*/
+
+$moz-linear: -moz-linear-gradient(to right top, #3b2743, #7d3951, #b05b44, #bc9231);
+$webkit-linear: -webkit-linear-gradient(to right top, #3b2743, #7d3951, #b05b44, #bc9231);
+$ms-linear: linear-gradient(to right top, #3b2743, #7d3951, #b05b44, #bc9231);
+$linear: linear-gradient(to right top, #3b2743, #7d3951, #b05b44, #bc9231);
 /* GLOBAL
 ----------------------*/
 
@@ -233,30 +246,29 @@ p.lead {
     }
 }
 
-@media (min-width: 992px){
+@media (min-width: 992px) {
     .img-fluid {
         width: 30%;
     }
 }
-@media (max-width:991px){
+
+@media (max-width:991px) {
     .img-fluid {
         width: 50%;
     }
 }
 
-
-@media (min-width: 992px){
-    .img-fluid-small {
-        width: 100%;
-    }
-}
-@media (max-width:991px){
+@media (min-width: 992px) {
     .img-fluid-small {
         width: 100%;
     }
 }
 
-
+@media (max-width:991px) {
+    .img-fluid-small {
+        width: 100%;
+    }
+}
 
 /* HERO
 ----------------------*/
@@ -268,15 +280,10 @@ header {
 }
 
 .bg-gradient {
-    /* background-image: -moz-linear-gradient( 135deg, rgba(60, 8, 118, 0.8) 0%, rgba(250, 0, 118, 0.8) 100%);
-    background-image: -webkit-linear-gradient( 135deg, rgba(60, 8, 118, 0.8) 0%, rgba(250, 0, 118, 0.8) 100%);
-    background-image: -ms-linear-gradient( 135deg, rgba(60, 8, 118, 0.8) 0%, rgba(250, 0, 118, 0.8) 100%);
-    background-image: linear-gradient( 135deg, rgba(60, 8, 118, 0.8) 0%, rgba(250, 0, 118, 0.8) 100%); */
-    background-image: -moz-linear-gradient(to right top, #051937, #002c4b, #00405c, #00546b, #046977);
-    background-image: -webkit-linear-gradient(to right top, #051937, #002c4b, #00405c, #00546b, #046977);
-    background-image: -ms-linear-gradient(to right top, #051937, #002c4b, #00405c, #00546b, #046977);
-    background-image: linear-gradient(to right top, #051937, #002c4b, #00405c, #00546b, #046977);
-    background-image: linear-gradient(to right top, #051937, #221b36, #322033, #3b2631, #402e32);
+    background-image: -moz-linear-gradient(to right top, #09101c, #3b2743, #7d3951, #b05b44, #bc9231);
+    background-image: -webkit-linear-gradient(to right top, #09101c, #3b2743, #7d3951, #b05b44, #bc9231);
+    background-image: -ms-linear-gradient(to right top, #09101c, #3b2743, #7d3951, #b05b44, #bc9231);
+    background-image: linear-gradient(to right top, #09101c, #3b2743, #7d3951, #b05b44, #bc9231);
 }
 
 .tagline {
@@ -312,10 +319,14 @@ header {
 ----------------------*/
 
 .gradient-fill:before {
-    color: #fc73b4;
-    background: -moz-linear-gradient(top, #9477b4 0%, #fc73b4 100%);
-    background: -webkit-linear-gradient(top, #9477b4 0%, #fc73b4 100%);
-    background: linear-gradient(to bottom, #9477b4 0%, #fc73b4 100%);
+    // color: #fc73b4;
+    // background: -moz-linear-gradient(top, #9477b4 0%, #fc73b4 100%);
+    // background: -webkit-linear-gradient(top, #9477b4 0%, #fc73b4 100%);
+    // background: linear-gradient(to bottom, #9477b4 0%, #fc73b4 100%);
+    color: #b05b44;
+    background: -moz-linear-gradient(to right top, #3b2743, #7d3951, #b05b44, #bc9231);
+    background: -webkit-linear-gradient(to right top, #3b2743, #7d3951, #b05b44, #bc9231);
+    background: linear-gradient(to right top, #3b2743, #7d3951, #b05b44, #bc9231);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -341,10 +352,13 @@ header {
     content: "";
     position: absolute;
     width: 3px;
-    color: #fc73b4;
-    background: -moz-linear-gradient(top, #9477b4 0%, #fc73b4 100%);
-    background: -webkit-linear-gradient(top, #9477b4 0%, #fc73b4 100%);
-    background: linear-gradient(to bottom, #9477b4 0%, #fc73b4 100%);
+    color: #b05b44;
+    background: -moz-linear-gradient(to right top, #3b2743, #7d3951, #b05b44, #bc9231);
+    background: -webkit-linear-gradient(to right top, #3b2743, #7d3951, #b05b44, #bc9231);
+    background: linear-gradient(to right top, #3b2743, #7d3951, #b05b44, #bc9231); // color: #fc73b4;
+    // background: -moz-linear-gradient(top, #9477b4 0%, #fc73b4 100%);
+    // background: -webkit-linear-gradient(top, #9477b4 0%, #fc73b4 100%);
+    // background: linear-gradient(to bottom, #9477b4 0%, #fc73b4 100%);
     top: 0;
     bottom: 0;
     left: 0;
@@ -378,7 +392,7 @@ header {
     border-radius: 50%;
     margin-bottom: 1.5rem;
     background-color: #FFF;
-    color: #f5378e;
+    color: #3b2743;
     font-size: 48px;
     text-align: center;
     line-height: 80px;
@@ -396,10 +410,10 @@ header {
 }
 
 .ui-steps li:hover .circle-icon {
-    background-image: -moz-linear-gradient( 122deg, #e6388e 0%, #fb378e 100%);
-    background-image: -webkit-linear-gradient( 122deg, #e6388e 0%, #fb378e 100%);
-    background-image: -ms-linear-gradient( 122deg, #e6388e 0%, #fb378e 100%);
-    background-image: linear-gradient( 122deg, #e6388e 0%, #fb378e 100%);
+    background-image: $moz-linear;
+    background-image: $webkit-linear;
+    background-image: $ms-linear;
+    background-image: $linear;
     box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.09);
     color: #FFF;
 }
@@ -548,7 +562,7 @@ header {
 ----------------------*/
 
 @media (max-width:767px) {
-// @media (max-width:992px) {
+    // @media (max-width:992px) {
     .card-deck {
         -ms-flex-direction: column;
         flex-direction: column;
@@ -578,7 +592,7 @@ header {
     display: block;
     font-size: 45px;
     font-weight: 300;
-    color: #633991;
+    color: #FFCD44;
 }
 
 .card.pricing .card-head .price sub {
@@ -640,20 +654,22 @@ header {
 
 .social-icons {
     text-align: right;
-}
-
-.social-icons a {
-    background-color: #FFF;
-    box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.05);
-    width: 50px;
-    height: 50px;
-    display: inline-block;
-    text-align: center;
-    line-height: 50px;
-    margin: 0 0.3rem;
-    border-radius: 5px;
-    color: #f4c9e2;
-    transition: all 0.3s ease;
+    a {
+        background-color: #E9DBCC;
+        box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.05);
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+        text-align: center;
+        line-height: 50px;
+        margin: 0 0.3rem;
+        border-radius: 5px;
+        color: #f4c9e2;
+        transition: all 0.3s ease;
+        span {
+            color: black;
+        }
+    }
 }
 
 .social-icons a:hover {
