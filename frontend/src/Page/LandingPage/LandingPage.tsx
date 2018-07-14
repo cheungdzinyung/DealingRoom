@@ -1,3 +1,4 @@
+// Importing modules from library
 import * as React from "react";
 import {
   Collapse,
@@ -8,6 +9,12 @@ import {
   NavItem,
   NavLink
 } from "reactstrap";
+
+// Importing styling and static assets
+// Importing presentation components
+import LandingPageHeader from "./Header/LandingPageHeader";
+// Importing assisting utility functions
+// Importing interfaces from module
 
 
 // import { library } from '@fortawesome/fontawesome-svg-core'
@@ -20,15 +27,15 @@ import "./css/owl.carousel.min.css";
 import "./css/style.scss";
 import "./css/themify-icons.css";
 
-import AppleIcon from "./images/appleicon.png";
-import PlayIcon from "./images/playicon.png";
+// import AppleIcon from "./images/appleicon.png";
+// import PlayIcon from "./images/playicon.png";
 import Logo from "./images/logo.svg";
 import MainScreen from "./images/mainscreen.png";
 
 export default class LandingPageNew extends React.Component<
   {},
   { openNavBar: boolean }
-> {
+  > {
   constructor(props: {}) {
     super(props);
 
@@ -131,18 +138,19 @@ export default class LandingPageNew extends React.Component<
           </div>
         </div>
 
-        <header className="" id="home">
-          <div className="container mt-5">
-            <h1>Dealing Room</h1>
-            <p className="tagline">
-              The only scalable web-based POS to your bar/restaurant for your slow moving
-              stock and lack of upsale opportunities problem.
-            </p>
-          </div>
-          <div className="img-holder mt-3">
-            <img src={MainScreen} alt="phone" className="img-fluid" />
-          </div>
-        </header>
+        {/* <header className="" id="home">
+            <div className="container mt-5">
+              <h1>Dealing Room</h1>
+              <p className="tagline">
+                The only scalable web-based POS to your bar/restaurant for your slow moving
+                stock and lack of upsale opportunities problem.
+              </p>
+            </div>
+            <div className="img-holder mt-3">
+              <img src={MainScreen} alt="phone" className="img-fluid" />
+            </div>
+          </header> */}
+        <LandingPageHeader backgroundImage={MainScreen} />
 
         <div className="section light-bg" id="features">
           <div className="container">
@@ -156,12 +164,11 @@ export default class LandingPageNew extends React.Component<
                 <div className="card features">
                   <div className="card-body">
                     <div className="media">
-                      <span className="ti-face-smile gradient-fill ti-3x mr-3" />
+                      <span className="ti-plug gradient-fill ti-3x mr-3" />
                       <div className="media-body">
                         <h4 className="card-title">Simple</h4>
                         <p className="card-text">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Integer rutrum, urna eu pellentesque{" "}
+                          No install, no plugin, everything is plug-and-play. All you need is a web-browser.
                         </p>
                       </div>
                     </div>
@@ -172,12 +179,11 @@ export default class LandingPageNew extends React.Component<
                 <div className="card features">
                   <div className="card-body">
                     <div className="media">
-                      <span className="ti-settings gradient-fill ti-3x mr-3" />
+                      <span className="ti-server gradient-fill ti-3x mr-3" />
                       <div className="media-body">
-                        <h4 className="card-title">Customize</h4>
+                        <h4 className="card-title">Zero Infastructure Cost</h4>
                         <p className="card-text">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Integer rutrum, urna eu pellentesque{" "}
+                        We host the server, database, and even the application. Literally, 0 infractructure cost.
                         </p>
                       </div>
                     </div>
@@ -188,12 +194,11 @@ export default class LandingPageNew extends React.Component<
                 <div className="card features">
                   <div className="card-body">
                     <div className="media">
-                      <span className="ti-lock gradient-fill ti-3x mr-3" />
+                      <span className="ti-pulse gradient-fill ti-3x mr-3" />
                       <div className="media-body">
-                        <h4 className="card-title">Secure</h4>
+                        <h4 className="card-title">Risk Free</h4>
                         <p className="card-text">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Integer rutrum, urna eu pellentesque{" "}
+                          Subscribe to our service on a monthly-based, no initial investment required.
                         </p>
                       </div>
                     </div>
@@ -337,7 +342,7 @@ export default class LandingPageNew extends React.Component<
           </div>
         </div>
 
-        <div className="section pt-0">
+        {/* <div className="section pt-0">
           <div className="container">
             <div className="section-title">
               <small>FAQ</small>
@@ -379,7 +384,7 @@ export default class LandingPageNew extends React.Component<
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="section bg-gradient">
           <div className="container">
@@ -393,14 +398,14 @@ export default class LandingPageNew extends React.Component<
                 Rapidiously visualize optimal ROI rather than enterprise-wide
                 methods of empowerment.{" "}
               </p>
-              <div className="my-4">
+              {/* <div className="my-4">
                 <a href="#" className="btn btn-light">
                   <img src={AppleIcon} alt="icon" /> App Store
                 </a>
                 <a href="#" className="btn btn-light">
                   <img src={PlayIcon} alt="icon" /> Google play
                 </a>
-              </div>
+              </div> */}
               <p className="text-primary">
                 <small>
                   <i>*Works on iOS 10.0.5+, Android Kitkat and above. </i>
@@ -430,24 +435,21 @@ export default class LandingPageNew extends React.Component<
                 <div className="d-block d-sm-inline-block">
                   <p className="mb-0">
                     <span className="ti-headphone-alt mr-2" />{" "}
-                    <a href="tel:51836362800">+852 6883 8583</a>
+                    <a href="tel:85268838583">+852 6883 8583</a>
                   </p>
                 </div>
               </div>
               <div className="col-lg-6">
                 <div className="social-icons">
-                  <a href="#">
-                    <span className="ti-facebook" />
+                  <a href="https://github.com/cheungdzinyung/DealingRoom">
+                    <span className="ti-github" />
                   </a>
-                  <a href="#">
-                    <span className="ti-twitter-alt" />
+                  <a href="https://www.dealingroom.live/">
+                    <span className="ti-desktop" />
                   </a>
-                  <a href="#">
-                    <span className="ti-instagram" />
+                  <a href="https://www.dealingroom.live/customer">
+                    <span className="ti-mobile" />
                   </a>
-                  {/* <a href="#">
-                    <FontAwesomeIcon icon="github"/>
-                  </a> */}
                 </div>
               </div>
             </div>
