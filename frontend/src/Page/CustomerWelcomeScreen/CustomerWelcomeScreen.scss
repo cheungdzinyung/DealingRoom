@@ -1,3 +1,5 @@
+@import "src/scss/templates";
+
 .intro-container {
     width: 100vw;
     height: 100vh;
@@ -18,6 +20,7 @@
                 font-weight: 600;
                 letter-spacing: 1px;
                 text-align: center;
+                color: $font-color-light;
             }
             .intro-text {
                 font-size: 100%;

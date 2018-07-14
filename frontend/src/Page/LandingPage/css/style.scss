@@ -268,15 +268,10 @@ header {
 }
 
 .bg-gradient {
-    /* background-image: -moz-linear-gradient( 135deg, rgba(60, 8, 118, 0.8) 0%, rgba(250, 0, 118, 0.8) 100%);
-    background-image: -webkit-linear-gradient( 135deg, rgba(60, 8, 118, 0.8) 0%, rgba(250, 0, 118, 0.8) 100%);
-    background-image: -ms-linear-gradient( 135deg, rgba(60, 8, 118, 0.8) 0%, rgba(250, 0, 118, 0.8) 100%);
-    background-image: linear-gradient( 135deg, rgba(60, 8, 118, 0.8) 0%, rgba(250, 0, 118, 0.8) 100%); */
-    background-image: -moz-linear-gradient(to right top, #051937, #002c4b, #00405c, #00546b, #046977);
-    background-image: -webkit-linear-gradient(to right top, #051937, #002c4b, #00405c, #00546b, #046977);
-    background-image: -ms-linear-gradient(to right top, #051937, #002c4b, #00405c, #00546b, #046977);
-    background-image: linear-gradient(to right top, #051937, #002c4b, #00405c, #00546b, #046977);
-    background-image: linear-gradient(to right top, #051937, #221b36, #322033, #3b2631, #402e32);
+    background-image: -moz-linear-gradient(to right top, #09101c, #3b2743, #7d3951, #b05b44, #bc9231);
+    background-image: -webkit-linear-gradient(to right top, #09101c, #3b2743, #7d3951, #b05b44, #bc9231);
+    background-image: -ms-linear-gradient(to right top, #09101c, #3b2743, #7d3951, #b05b44, #bc9231);
+    background-image: linear-gradient(to right top, #09101c, #3b2743, #7d3951, #b05b44, #bc9231);
 }
 
 .tagline {
@@ -640,21 +635,25 @@ header {
 
 .social-icons {
     text-align: right;
+    a {
+        background-color: #E9DBCC;
+        box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.05);
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+        text-align: center;
+        line-height: 50px;
+        margin: 0 0.3rem;
+        border-radius: 5px;
+        color: #f4c9e2;
+        transition: all 0.3s ease;
+        span{
+            color: black;
+        }
+    }
 }
 
-.social-icons a {
-    background-color: #FFF;
-    box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.05);
-    width: 50px;
-    height: 50px;
-    display: inline-block;
-    text-align: center;
-    line-height: 50px;
-    margin: 0 0.3rem;
-    border-radius: 5px;
-    color: #f4c9e2;
-    transition: all 0.3s ease;
-}
+
 
 .social-icons a:hover {
     text-decoration: none;

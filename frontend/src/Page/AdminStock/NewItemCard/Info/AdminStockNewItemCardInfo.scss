@@ -26,20 +26,21 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        
         .edit-item-value-line-container {
+            width: 100%;
             display: flex;
             justify-content: space-between;
-            .edit-item-value-line-text {
+            align-items: center;
+            .currentprice {
                 font-size: 1.625rem;
-            }
-            .warning {
                 color: #FFCD44;
             }
-            .alert {
+            .pricefloor {
+                font-size: 1.625rem;
                 color: #EE5353;
             }
-            .info {
+            .quantity {
+                font-size: 1.625rem;
                 color: #73EDA6;
             }
             .line-number-container {
