@@ -7,7 +7,7 @@ export default class LandingPageRoutes extends React.Component {
   public render() {
     return (
       <Switch>
-        <Route path="/" component={LandingPage} />
+        <Route exact={true} path="/" component={LandingPage} />
       </Switch>
     );
   }
