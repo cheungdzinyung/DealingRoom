@@ -47,7 +47,7 @@
 
  
  # What is "Dealing Room"
-Dealing room is a web application that focuses on improving turnover rate of slow moving goods, and greatly reduced the loss caused by delay in service sequences by combining concepts of a trading floor and restaurant / bar setting.
+Dealing room is the only scalable web-based POS that focuses on improving turnover rate of slow moving goods, and greatly reduced the loss caused by delay in service sequences by combining concepts of a trading floor and restaurant / bar setting.
 
 In other words, food and beverages' prices fluctuate according to demand as in a free market.
 
