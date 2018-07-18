@@ -17,10 +17,10 @@ import {
 import { IMenuCategoryWithFluxWithMaxMin, ISpecialEvent } from "src/modules";
 
 // Importing UI components
-import { DisplayMain } from "./DisplayMainComponent/DisplayMain";
-import { DisplayVideo } from "./DisplayVideoComponent/DisplayVideo";
-import { DisplayItemList } from "./DisplayItemListComponent/DisplayItemList";
-import { DisplayCategoryList } from "./DisplayCategoryListComponent/DisplayCategoryList";
+import { DisplayMain } from "./Main/DisplayMain";
+import { DisplayVideo } from "./Video/DisplayVideo";
+import { DisplayItemList } from "./ItemList/DisplayItemList";
+import { DisplayCategoryList } from "./CategoryList/DisplayCategoryList";
 
 
 interface IDisplayState {

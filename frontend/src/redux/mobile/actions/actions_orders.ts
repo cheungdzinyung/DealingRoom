@@ -185,12 +185,14 @@ export function confirmOrder(orderToConfirm: ICurrentOrder) {
     }
   };
   return (
+    // fx as argument, TYPE
     dispatch: Dispatch<IConfirmOrderSuccessAction | IConfirmOrderFailAction>
   ) => {
     axios
       .post(`${API_SERVER}/api/orders/`, orderToConfirm, config)
       .then((res: any) => {
         if (res.status === 201) {
+          // v dispatch()      vvv arg.
           dispatch(confirmOrderSuccess(res.data[0], orderToConfirm));
         } else {
           alert("error, status code not match: " + res.status);
