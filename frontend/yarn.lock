@@ -80,6 +80,13 @@
   dependencies:
     axios "*"
 
+"@types/bootstrap@^4.1.2":
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/@types/bootstrap/-/bootstrap-4.1.2.tgz#3d6a3ea111e88ca926803a0e02b1f3d4c9913a5b"
+  dependencies:
+    "@types/jquery" "*"
+    popper.js "^1.14.1"
+
 "@types/chart.js@^2.7.20":
   version "2.7.25"
   resolved "https://registry.yarnpkg.com/@types/chart.js/-/chart.js-2.7.25.tgz#f5b10bee5cca4e8bddebe49d4c6ed24b4017c184"
@@ -1338,7 +1345,7 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
-bootstrap@^4.1.1:
+bootstrap@4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.1.1.tgz#3aec85000fa619085da8d2e4983dfd67cf2114cb"
 
