@@ -9,6 +9,14 @@ import "./CustomerOrderList.scss";
 import { Card, Elevation } from "@blueprintjs/core";
 import Usermenu from "src/Components/CustomerAccessMenu/CustomerAccessMenu";
 
+// plugin for device checking
+import {
+  // BrowserView,
+  // MobileView,
+  isBrowser,
+  // isMobile
+} from "react-device-detect";
+
 // Importing static assets
 import checkIcon from "./img/checkmark.svg";
 
@@ -69,7 +77,7 @@ class PureOrderList extends React.Component<IOrdersProps, {}> {
 
   public render() {
     return (
-      <div className="page-content-container">
+      <div className={`${isBrowser ? "desktop-customer" : "page-content-container"}`}>
         <PageHeader header="Order" subHeader="Your wish is our command" />
         { /* check if new customer has no history to display */
           (this.props.ordersList.orders.length === 0) ?

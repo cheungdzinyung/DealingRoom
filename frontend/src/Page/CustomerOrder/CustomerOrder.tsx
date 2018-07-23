@@ -2,8 +2,6 @@
 import * as React from "react";
 import { match } from "react-router-dom";
 
-
-
 // for redir
 import * as History from "history";
 import { withRouter } from "react-router";
@@ -20,6 +18,14 @@ import Usermenu from "src/Components/CustomerAccessMenu/CustomerAccessMenu";
 // Importing styling and static assets
 import "./CustomerOrder.scss";
 import paymentTest from "./img/stripe.png"
+
+// plugin for device checking
+import {
+  // BrowserView,
+  // MobileView,
+  isBrowser,
+  // isMobile
+} from "react-device-detect";
 
 // Importing types
 // import { IOrder } from "../../modules";
@@ -100,7 +106,7 @@ class PureOrder extends React.Component<IOrderProps, IOrderState> {
 
   public render() {
     return (
-      <div className="page-content-container">
+      <div className={`${isBrowser ? "desktop-customer" : "page-content-container"}`}>
         <PageHeader header={`Order #${this.state.orderId}`} subHeader="Your wish is our command" />
         {
           this.state.thisOrder.orderItems !== "empty" ?

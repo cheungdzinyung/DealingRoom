@@ -11,6 +11,14 @@ import request from "./img/cart.svg";
 import setting from "./img/gear.svg";
 import chart from "./img/chart.svg";
 
+// plugin for device checking
+import {
+  // BrowserView,
+  // MobileView,
+  isBrowser,
+  // isMobile
+} from "react-device-detect";
+
 // import redux and friends
 import { connect } from "react-redux";
 import { IRootState } from "src/redux/store";
@@ -70,7 +78,7 @@ class PureUserMenu extends React.Component<IUserMenuProps, {}> {
 
   public render() {
     return (
-      <div className="user-menu">
+      <div className={`${isBrowser ? "desktop-user-menu" : "user-menu"}`}>
         <div className="menu-item" onClick={this.toPerformance}>
           <img className="user-menu-icon" src={chart} alt="receipt icon" />
           <span className="menu-name">Profile</span>

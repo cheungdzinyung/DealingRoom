@@ -11,6 +11,14 @@ import PageHeader from "src/Components/CustomerPageHeader/pageheader";
 import Usermenu from "src/Components/CustomerAccessMenu/CustomerAccessMenu";
 import SubmitButton from "../../Components/SubmitButton/SubmitButton";
 
+// plugin for device checking
+import {
+  // BrowserView,
+  // MobileView,
+  isBrowser,
+  // isMobile
+} from "react-device-detect";
+
 export default class CustomerSetting extends React.Component<{
   history: History.History;
 }> {
@@ -24,7 +32,7 @@ export default class CustomerSetting extends React.Component<{
   };
   public render() {
     return (
-      <div className="page-content-container">
+      <div className={`${isBrowser ? "desktop-customer" : "page-content-container"}`}>
         <PageHeader header="Setting" subHeader="Set it and forget it" />
         <FormGroup className="user-info-form" labelFor="login">
           <input

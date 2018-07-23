@@ -13,6 +13,14 @@ import UserProfileGraph from "./Graph/CustomerPerformanceGraph";
 import Dialog from "./Dialog/CustomerPerformanceDialog";
 import UserMenu from "src/Components/CustomerAccessMenu/CustomerAccessMenu";
 
+// plugin for device checking
+import {
+  // BrowserView,
+  // MobileView,
+  isBrowser,
+  // isMobile
+} from "react-device-detect";
+
 // Redux
 import { connect } from "react-redux";
 import { IRootState } from "src/redux/store";
@@ -49,7 +57,7 @@ class PurePerformance extends React.Component<IUserPerformanceProps, {}> {
 
   public render() {
     return (
-      <div className="page-content-container">
+      <div className={`${isBrowser ? "desktop-customer" : "page-content-container"}`}>
         <PageHeader header={"Profile"} subHeader={"You are what you eat"} />
         <UserProfileGraph
           data={switchUp(this.props.userConsumptionComparison)}
