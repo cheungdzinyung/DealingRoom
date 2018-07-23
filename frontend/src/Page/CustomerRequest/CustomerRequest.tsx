@@ -19,6 +19,14 @@ import UserMenu from "src/Components/CustomerAccessMenu/CustomerAccessMenu";
 import { Button, Card, Elevation, Intent } from "@blueprintjs/core";
 import { AppToaster } from "src/Components/ToastAlert/toast";
 
+// plugin for device checking
+import {
+  // BrowserView,
+  // MobileView,
+  isBrowser,
+  // isMobile
+} from "react-device-detect";
+
 // Importing interfaces
 import { IRequestItem, ICurrentOrder } from "src/modules";
 import PageHeader from "src/Components/CustomerPageHeader/pageheader";
@@ -100,7 +108,7 @@ class PureRequest extends React.Component<IRequestProps, {}> {
 
   public render() {
     return (
-      <div className="page-content-container">
+      <div className={`${isBrowser ? "desktop-customer" : "page-content-container"}`}>
         <PageHeader header="Request" subHeader="Make up your mind" />
         {this.props.currentOrder.map((item, i) => (
           <Card key={i}

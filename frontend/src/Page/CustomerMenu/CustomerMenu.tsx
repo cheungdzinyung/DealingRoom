@@ -24,6 +24,14 @@ import { Intent } from "@blueprintjs/core";
 import UserMenu from "src/Components/CustomerAccessMenu/CustomerAccessMenu";
 import MenuItem from "./ItemCard/CustomerMenuItemCard";
 
+// plugin for device checking
+import {
+  // BrowserView,
+  // MobileView,
+  isBrowser,
+  // isMobile
+} from "react-device-detect";
+
 // import { API_SERVER } from "src/redux/store";
 
 // Importing interfaces
@@ -186,7 +194,7 @@ export class PureMenu extends React.Component<IMenuProps, IMenuState> {
     };
 
     return (
-      <div className="page-content-container">
+      <div className={`${isBrowser ? "desktop-customer" : "page-content-container"}`}>
         <PageHeader header={"Menu"} subHeader={"Explore the art of stock-picking"} />
 
         <Slider {...sliderOneSettings} className="menu-display">
