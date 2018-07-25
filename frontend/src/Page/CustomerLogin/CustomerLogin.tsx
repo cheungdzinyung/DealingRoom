@@ -13,6 +13,14 @@ import facebook from "./img/facebook.svg";
 import google from "./img/google.svg";
 import logo from "./img/logo.svg";
 
+// plugin for device checking
+import {
+  // BrowserView,
+  // MobileView,
+  isBrowser,
+  // isMobile
+} from "react-device-detect";
+
 // Importing presentation components
 import { Card } from "@blueprintjs/core";
 import SubmitButton from "../../Components/SubmitButton/SubmitButton";
@@ -147,7 +155,7 @@ class PureLogin extends React.Component<ILoginProps, ILoginState> {
 
   public render() {
     return (
-      <div className="login-container">
+      <div className={`${isBrowser ? "desktop-customer-login-container" : "login-container"}`}>
         <div className="login-top">
           <div className="logo-container">
             <img src={logo} alt="Dealing Room Logo" className="logo" />
