@@ -90,3 +90,97 @@
         }
     }
 }
+
+.desktop-customer-login-container {
+    margin-left: 25vw;
+    margin-right: -25vw;
+    padding: 5%;
+    text-align: center;
+    width: 50vw;
+    height: 100vh;
+    background-image: linear-gradient($bgc-shaded, $bgc-shaded), url("./img/landingpage.jpg");
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+    display: grid;
+    grid-template-rows: 50% 50%;
+    .login-top {
+        width: 100%;
+        display: grid;
+        grid-template-rows: 30% 30% 25% 1fr;
+        grid-template-columns: 100%;
+        grid-template-areas: "..." "logo" "social" "divider";
+        .omg {
+            grid-area: uh
+        }
+        .logo-container {
+            grid-area: logo;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .logo {
+                width: 15%;
+            }
+            .logo-name {
+                font-size: 1.3rem;
+            }
+        }
+        .social-login {
+            @extend %disable;
+            grid-area: social;
+            width: 100%; // height: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center; // .banner {
+            span {
+                transition: opacity 0.5s;
+                width: max;
+                button {
+                    width: 80%;
+                    border-radius: 10px;
+                    padding: 3%;
+                    .banner-img-google {
+                        width: 90%;
+                    }
+                    .banner-img-fb {
+                        width: 90%;
+                    }
+                }
+                .google-white {
+                    background: white;
+                }
+            }
+        }
+        .divider {
+            grid-area: divider;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            .divider-break {
+                border: 1px solid #828282;
+                display: inline-block;
+                width: 35%;
+            }
+        }
+    }
+    .login-bottom {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .login-card {
+            background-color: $login-form-bgc;
+            width: 100%;
+            height: 95%;
+            display: grid;
+            grid-template-rows: 15% 60% 1fr;
+            
+            
+            
+        }
+    }
+}
