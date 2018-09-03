@@ -123,7 +123,7 @@ export function getEntireMenu() {
     const date = new Date(Date.now()).getDate();
     axios
       .get(
-        `https://api.dealingroom.live/api/items/?isActive=true&fluctuatingPrices=${year}-${month}-${date}`
+        `${API_SERVER}/api/items/?isActive=true&fluctuatingPrices=${year}-${month}-${date}`
       )
       .then((res: any) => {
         if (res.status === 200) {
